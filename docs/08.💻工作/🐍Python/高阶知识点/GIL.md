@@ -1,0 +1,17 @@
+---
+title: Python 中的GIL
+
+tags: 
+  - Python
+  - GIL
+  - StackOverflow
+  - TODO
+categories: 
+  - 💻 工作
+  - 🐍Python
+  - 高阶知识点
+date: 2020-12-10 12:27:56
+permalink: /pages/2a0ef4/
+---
+[:Understanding the Python GIL](http://www.dabeaz.com/GIL/)
+[Inside the Python GIL. - Programming video lectures, tutorials & courses - Brainiac](http://brainiac.io/videos/91/inside-the-python-gil)

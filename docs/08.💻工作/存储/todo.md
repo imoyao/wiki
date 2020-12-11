@@ -1,0 +1,13 @@
+---
+title: 待办事务
+tags: others
+categories: 
+  - 💻 工作
+  - 存储
+date: 2020-05-26 12:27:56
+permalink: /pages/ec2b52/
+---
+[DRBD - DWIKI](https://wiki.dhits.nl/index.php/DRBD)
+[DRBD vs Ceph - a technical comparison » LINBIT](https://www.linbit.com/drbd-linstor-vs-ceph/)
+CEPH 有对象存储、DRBD 块存储速度快。
+## 参考链接
