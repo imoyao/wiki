@@ -1,0 +1,14 @@
+# python
+*.py[cow]
+
+# apple temp file of dir
+*.DS_Store
+
+# vim temp file
+*.swp
+
+# PyCharm .idea
+.idea/
+
+# dirs
+temps/
