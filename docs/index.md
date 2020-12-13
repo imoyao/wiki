@@ -13,7 +13,7 @@ features: # 可选的
     imgUrl: /img/web.png # 可选
   - title: 理财
     details: 财富给我自由
-    link: /ui/
+    link: /finance/
     imgUrl: /img/ui.png
   - title: 工具
     details: 工欲善其事，必先利其器

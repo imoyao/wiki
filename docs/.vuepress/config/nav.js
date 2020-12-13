@@ -2,36 +2,43 @@ module.exports = [
   { text: '首页', link: '/' },
   {
     text: 'Python',
-    link: '/Python/', //目录页链接，此处link是vdoing主题新增的配置项，有二级导航时，可以点击一级导航跳到目录页
+    // link: '/Python/', //目录页链接，此处link是vdoing主题新增的配置项，有二级导航时，可以点击一级导航跳到目录页
     items: [
       // 说明：以下所有link的值只是在相应md文件定义的永久链接（不是什么特殊生成的编码）。另外，注意结尾是有斜杠的
       {
         text: '基础',
         items: [
-          { text: 'JavaScript', link: '/wiki/8143cc480faf9a11/' },
-          { text: 'Vue', link: '/wiki/802a1ca6f7b71c59/' },
+          { text: '全栈之路', link: '/pages/f0a728/' },
+          { text: 'Git 参考手册', link: '/pages/a1a0b3/' },
         ],
       },
       {
         text: '进阶',
         items: [
           { text: 'Python 工匠系列', link: '/pythonisa/' },
-          { text: '高阶知识点', link: '/advance/' },
+          { text: '高阶知识点', link: '/advance/decorator/' },
         ],
       },
       {
-        text: '指南',
+        text: '指南教程',
         items: [
           { text: 'Socket 编程', link: '/socket/' },
-          { text: '异步编程', link: '/async/' },
+          { text: '异步编程', link: '/async/3258b7/' },
+        ],
+      },
+      {
+        text: '理财',
+        items: [
+          { text: '基金', link: '/funds/04a189/' },
         ],
       },
     ],
   },
   {
-    text: '规范',
+    text: '理财',
     items: [
-      { text: 'PEP', link: '/peps/' },
+      { text: '基金知识', link: '/funds/04a189/' },
+      { text: '基金经理', link: '/mgr/635a97/' },
     ],
   },
   {
