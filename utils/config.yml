@@ -3,6 +3,9 @@
 # 需要批量处理的路径，docs文件夹内的文件夹  (数组，映射路径：path[0]/path[1]/path[2] ... )
 path:
   - docs # 第一个成员必须是docs
+  - 💻工作
+  - 01.🐍Python
+  - Python工匠系列
 
 # 要删除的字段 (数组)
 delete:
@@ -10,8 +13,7 @@ delete:
 
  # 要添加、修改front matter的数据 （front matter中没有的数据则添加，已有的数据则覆盖）
 data:
-data:
-  sidebar: true
-  # author:
-  #   name: xugaoyi
-  #   link: https://github.com/xugaoyi
+  # sidebar: true
+  author:
+    name: piglei
+    link: https://github.com/piglei/one-python-craftsman
