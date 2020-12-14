@@ -3,7 +3,7 @@ const nav = require('./config/nav.js');
 module.exports = {
   title: "别院牧志知识库",
   description:
-    'JavaScript,vue,Python,git,github等技术文章。', // 描述,以 <meta> 标签渲染到页面html中
+    '深深别院，潜潜牧志，一个 Python 开发者的个人wiki。', // 描述,以 <meta> 标签渲染到页面html中
   // base: '/', // '/<github仓库名>/'， 默认'/'
   head: [
     // 注入到页面<head> 中的标签，格式[tagName, { attrName: attrValue }, innerHTML?]
@@ -13,7 +13,7 @@ module.exports = {
       {
         name: 'keywords',
         content:
-          'JavaScript,vue,Python,git,github等技术文章',
+          '别院牧志, imoyao, idealyard, 张牧志, 牧志, Python, 编程, Python开发',
       },
     ],
     ['meta', { name: 'baidu-site-verification', content: '7F55weZDDc' }], // 百度统计的站点拥有者验证
@@ -71,8 +71,8 @@ module.exports = {
 
     author: {
       // 文章默认的作者信息，可在md文件中单独配置此信息 String | {name: String, link: String}
-      name: 'imoyao', // 必需
-      link: 'https://github.com/imoyao', // 可选的
+      name: '佚名', // 必需
+      link: '/', // 可选的
     },
     // blogger: {
     //   // 博主信息，显示在首页侧边栏
