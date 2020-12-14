@@ -15,8 +15,8 @@ module.exports = [
       {
         text: '进阶',
         items: [
-          { text: 'Python 工匠系列', link: '/pythonisa/' },
-          { text: '高阶知识点', link: '/advance/decorator/' },
+          { text: 'Python 工匠系列', link: '/craftsman/738f09/' },
+          { text: '高阶知识点', link: '/python/GIL/' },
         ],
       },
       {
@@ -24,12 +24,6 @@ module.exports = [
         items: [
           { text: 'Socket 编程', link: '/socket/' },
           { text: '异步编程', link: '/async/3258b7/' },
-        ],
-      },
-      {
-        text: '理财',
-        items: [
-          { text: '基金', link: '/funds/04a189/' },
         ],
       },
     ],
