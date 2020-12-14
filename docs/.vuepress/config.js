@@ -93,12 +93,17 @@ module.exports = {
         {
           iconClass: 'icon-github',
           title: 'GitHub',
-          link: 'https://github.com/imoyao',
+          link: 'https://github.com/imoyao/wiki',
         },
         {
-          iconClass: 'icon-erji',
-          title: '听音乐',
-          link: 'https://music.163.com/#/playlist?id=755597173',
+          iconClass: 'icon-bokeyuan',
+          title: '博客',
+          link: 'https://www.masantu.com',
+        },
+        {
+          iconClass: 'icon-juejin',
+          title: '旧版',
+          link: 'https://vk.masantu.com',
         },
       ],
     },
@@ -205,9 +210,9 @@ module.exports = {
       {
         choosen: 'gitalk',
         options: {
-          clientID: 'a6e1355287947096b88b',
-          clientSecret: 'f0e77d070fabfcd5af95bebb82b2d574d7248d71',
-          repo: 'blog-gitalk-comment', // GitHub 仓库
+          clientID: '5dd2493bd694060f4ccb',
+          clientSecret: 'a615756250d2dfeb50e9fbd306774d0563cf55d4',
+          repo: 'gitalk-comment', // GitHub 仓库
           owner: 'imoyao', // GitHub仓库所有者
           admin: ['imoyao'], // 对仓库有写权限的人
           // distractionFreeMode: true,
