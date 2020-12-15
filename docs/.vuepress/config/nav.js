@@ -9,7 +9,6 @@ module.exports = [
         text: '基础',
         items: [
           { text: '全栈之路', link: '/pages/f0a728/' },
-          { text: 'Git 参考手册', link: '/pages/a1a0b3/' },
         ],
       },
       {
@@ -26,6 +25,12 @@ module.exports = [
           { text: '异步编程', link: '/async/3258b7/' },
         ],
       },
+    ],
+  },
+  {
+    text: '其他',
+    items: [
+      { text: 'Git 参考手册', link: '/pages/a1a0b3/' },
     ],
   },
   {
