@@ -1,1 +1,0 @@
-lint-md docs\ -f
