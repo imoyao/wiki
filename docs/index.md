@@ -14,7 +14,7 @@ features: # 可选的
   - title: 理财
     details: 财富给我自由
     link: /finance/
-    imgUrl: /img/ui.png
+    imgUrl: /img/invest.png
   - title: 工具
     details: 工欲善其事，必先利其器
     link: /tools/
@@ -26,7 +26,7 @@ features: # 可选的
   - title: 屠龙术
     details: 温故而知新
     link: /how/
-    imgUrl: /img/more.png
+    imgUrl: /img/forward.png
 
 # 文章列表显示方式: detailed 默认，显示详细版文章列表（包括作者、分类、标签、摘要、分页等）| simple => 显示简约版文章列表（仅标题和日期）| none 不显示文章列表
 # postList: detailed
