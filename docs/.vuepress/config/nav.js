@@ -8,21 +8,22 @@ module.exports = [
       {
         text: '基础',
         items: [
-          { text: '全栈之路', link: '/pages/f0a728/' },
+          { text: '全栈之路', link: '/python/fullstack/index/' },
+          { text: '😎Awesome资源', link: '/python/awesome/index/' },
         ],
       },
       {
         text: '进阶',
         items: [
-          { text: 'Python 工匠系列', link: '/craftsman/738f09/' },
+          { text: 'Python 工匠系列', link: '/craftsman/index/' },
           { text: '高阶知识点', link: '/python/GIL/' },
         ],
       },
       {
         text: '指南教程',
         items: [
-          { text: 'Socket 编程', link: '/socket/' },
-          { text: '异步编程', link: '/async/3258b7/' },
+          { text: 'Socket 编程', link: '/socket/index/' },
+          { text: '异步编程', link: '/python/async/index/' },
         ],
       },
     ],
@@ -30,7 +31,7 @@ module.exports = [
   {
     text: '其他',
     items: [
-      { text: 'Git 参考手册', link: '/pages/a1a0b3/' },
+      { text: 'Git 参考手册', link: '/git/reference/' },
     ],
   },
   {
