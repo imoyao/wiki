@@ -120,12 +120,7 @@ module.exports = {
     //   color: '#11a8cd', // 爱心颜色，默认随机色
     //   excludeClassName: 'theme-vdoing-content' // 要排除元素的class, 默认空''
     // }],
-    // [
-    //   'vuepress-plugin-auto-sidebar',   // 自动侧边栏
-    //   {
-    //     titleMode: "titlecase",
-    //   }
-    // ],
+
     [
       'thirdparty-search',
       {
