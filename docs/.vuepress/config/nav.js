@@ -9,7 +9,7 @@ module.exports = [
         text: '基础',
         items: [
           { text: '全栈之路', link: '/python/fullstack/index/' },
-          { text: '😎Awesome资源', link: '/python/awesome/index/' },
+          { text: '😎Awesome资源', link: '/python/awesome/' },
         ],
       },
       {
