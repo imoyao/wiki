@@ -131,9 +131,7 @@ clear or delete all the rows in a database:
 
         **bind**[¶](#sqlalchemy.engine.reflection.Inspector.params.bind)
         – a [`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable"),
-        which is typically an instance of [`Engine`{.xref .py .py-class
-        .docutils
-        .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
+        which is typically an instance of [`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
         or [`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection").
 
         对于[`Inspector`](#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")的特定于方言的实例，请参阅[`Inspector.from_engine()`](#sqlalchemy.engine.reflection.Inspector.from_engine "sqlalchemy.engine.reflection.Inspector.from_engine")
@@ -141,8 +139,7 @@ clear or delete all the rows in a database:
     ` default_schema_name  T0> ¶ T1>`{.descname}
     :   返回当前引擎的数据库用户的方言提供的默认模式名称。
 
-        例如。对于SQL Server，这通常是Postgresql和`dbo`{.docutils
-        .literal}的`public`。
+        例如。对于SQL Server，这通常是Postgresql和`dbo`的`public`。
 
      *classmethod*`from_engine`{.descname}(*bind*)[¶](#sqlalchemy.engine.reflection.Inspector.from_engine "Permalink to this definition")
     :   从给定的引擎或连接构造一个新的特定于方言的Inspector对象。
@@ -151,14 +148,10 @@ clear or delete all the rows in a database:
 
         **bind**[¶](#sqlalchemy.engine.reflection.Inspector.from_engine.params.bind)
         – a [`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable"),
-        which is typically an instance of [`Engine`{.xref .py .py-class
-        .docutils
-        .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
+        which is typically an instance of [`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
         or [`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection").
 
-        此方法不同于直接构造函数调用[`Inspector`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")，因为[`Dialect`{.xref
+        此方法不同于直接构造函数调用[`Inspector`](#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")，因为[`Dialect`{.xref
         .py .py-class .docutils
         .literal}](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")有机会提供特定于方言的[`Inspector`{.xref
         .py .py-class .docutils
@@ -180,9 +173,7 @@ clear or delete all the rows in a database:
 
         -   **table\_name**[¶](#sqlalchemy.engine.reflection.Inspector.get_check_constraints.params.table_name)
             – string name of the table.
-            对于特殊引用，请使用[`quoted_name`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
         -   **架构**
             [](#sqlalchemy.engine.reflection.Inspector.get_check_constraints.params.schema)
             -
@@ -212,9 +203,7 @@ clear or delete all the rows in a database:
 
         -   **table\_name**[¶](#sqlalchemy.engine.reflection.Inspector.get_columns.params.table_name)
             – string name of the table.
-            对于特殊引用，请使用[`quoted_name`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
         -   **架构**
             [](#sqlalchemy.engine.reflection.Inspector.get_columns.params.schema)
             -
@@ -242,9 +231,7 @@ clear or delete all the rows in a database:
 
         -   **table\_name**[¶](#sqlalchemy.engine.reflection.Inspector.get_foreign_keys.params.table_name)
             – string name of the table.
-            对于特殊引用，请使用[`quoted_name`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
         -   **架构**
             [](#sqlalchemy.engine.reflection.Inspector.get_foreign_keys.params.schema)
             -
@@ -272,9 +259,7 @@ clear or delete all the rows in a database:
 
         -   **table\_name**[¶](#sqlalchemy.engine.reflection.Inspector.get_indexes.params.table_name)
             – string name of the table.
-            对于特殊引用，请使用[`quoted_name`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
         -   **架构**
             [](#sqlalchemy.engine.reflection.Inspector.get_indexes.params.schema)
             -
@@ -296,9 +281,7 @@ clear or delete all the rows in a database:
 
         -   **table\_name**[¶](#sqlalchemy.engine.reflection.Inspector.get_pk_constraint.params.table_name)
             – string name of the table.
-            对于特殊引用，请使用[`quoted_name`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
         -   **架构**
             [](#sqlalchemy.engine.reflection.Inspector.get_pk_constraint.params.schema)
             -
@@ -319,11 +302,9 @@ clear or delete all the rows in a database:
     ` get_sorted_table_and_fkc_names  T0> （ T1> 架构=无 T2> ） T3> ¶ T4>`{.descname}
     :   返回特定模式中引用的依赖关系排序表和外键约束名称。
 
-        这将产生`（tablename， [（tname， fkname）， （tname， t4）的2元组> fkname）， ...]）`{.docutils
-        .literal}由CREATE顺序中的表名组成，它们与未检测为属于周期的外键约束名称。The
+        这将产生`（tablename， [（tname， fkname）， （tname， t4）的2元组> fkname）， ...]）`由CREATE顺序中的表名组成，它们与未检测为属于周期的外键约束名称。The
         final element will be
-        `(None, [(tname, fkname), (tname, fkname), ..])`{.docutils
-        .literal} which will consist of remaining foreign key constraint
+        `(None, [(tname, fkname), (tname, fkname), ..])` which will consist of remaining foreign key constraint
         names that would require a separate CREATE step after-the-fact,
         based on dependencies between tables.
 
@@ -386,9 +367,7 @@ clear or delete all the rows in a database:
 
         -   **table\_name**[¶](#sqlalchemy.engine.reflection.Inspector.get_table_options.params.table_name)
             – string name of the table.
-            对于特殊引用，请使用[`quoted_name`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
         -   **架构**
             [](#sqlalchemy.engine.reflection.Inspector.get_table_options.params.schema)
             -
@@ -424,9 +403,7 @@ clear or delete all the rows in a database:
 
         -   **table\_name**[¶](#sqlalchemy.engine.reflection.Inspector.get_unique_constraints.params.table_name)
             – string name of the table.
-            对于特殊引用，请使用[`quoted_name`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
         -   **架构**
             [](#sqlalchemy.engine.reflection.Inspector.get_unique_constraints.params.schema)
             -

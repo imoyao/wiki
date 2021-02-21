@@ -585,9 +585,7 @@ API参考[¶](#api-reference "Permalink to this headline")
     `比较 T0> （ T1> 比较 T2> ） T3> ¶ T4>`{.descname}
     :   提供定义自定义比较器生成方法的修改装饰器。
 
-        装饰方法的返回值应该是[`Comparator`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.ext.hybrid.Comparator "sqlalchemy.ext.hybrid.Comparator")的一个实例。
+        装饰方法的返回值应该是[`Comparator`](#sqlalchemy.ext.hybrid.Comparator "sqlalchemy.ext.hybrid.Comparator")的一个实例。
 
     `删除器 T0> （ T1>  FDEL  T2> ） T3> ¶ T4>`{.descname}
     :   提供定义值删除方法的修改装饰器。

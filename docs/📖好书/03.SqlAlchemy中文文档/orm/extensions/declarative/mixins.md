@@ -405,9 +405,7 @@ class in the hierarchy**, just like it does for
         primary_language = Column(String(50))
         __mapper_args__ = {'polymorphic_identity': 'engineer'}
 
-版本1.0.0新增：新增[`declared_attr.cascading`{.xref .py .py-attr
-.docutils
-.literal}](api.html#sqlalchemy.ext.declarative.declared_attr.cascading "sqlalchemy.ext.declarative.declared_attr.cascading")。
+版本1.0.0新增：新增[`declared_attr.cascading`](api.html#sqlalchemy.ext.declarative.declared_attr.cascading "sqlalchemy.ext.declarative.declared_attr.cascading")。
 
 结合来自多个Mixin的Table / Mapper参数[¶](#combining-table-mapper-arguments-from-multiple-mixins "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------

@@ -42,9 +42,7 @@ tags:
         此方法在内部用于将泛型与特定于特定方言的“实现”类型相关联。
 
     ` TypeEngine。 T0>  bind_expression  T1> （ T2>  bindvalue  T3> ） T4> ¶ T5>`{.descclassname}
-    :   “给定一个绑定值（即一个[`BindParameter`{.xref .py .py-class
-        .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")实例），在它的位置返回一个SQL表达式。
+    :   “给定一个绑定值（即一个[`BindParameter`](sqlelement.html#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")实例），在它的位置返回一个SQL表达式。
 
         这通常是一个包含语句中现有绑定参数的SQL函数。它用于特殊数据类型，这些数据类型需要文字被封装在某些特殊的数据库函数中，以便将应用程序级别的值强制转换为数据库特定的格式。它是[`TypeEngine.bind_processor()`](#sqlalchemy.types.TypeEngine.bind_processor "sqlalchemy.types.TypeEngine.bind_processor")方法的SQL模拟。
 
@@ -126,8 +124,7 @@ tags:
     `TypeEngine`{.descclassname} `compare_against_backend`{.descname} （ *方言*，*conn\_type* ） [¶ T6\>](#sqlalchemy.types.TypeEngine.compare_against_backend "Permalink to this definition")
     :   将此类型与给定的后端类型进行比较。
 
-        此函数目前尚未针对SQLAlchemy类型实现，对于所有内置类型，此函数将返回`None`{.docutils
-        .literal}。但是，它可以通过用户定义的类型实现，可以通过模式比较工具（如Alembic
+        此函数目前尚未针对SQLAlchemy类型实现，对于所有内置类型，此函数将返回`None`。但是，它可以通过用户定义的类型实现，可以通过模式比较工具（如Alembic
         autogenerate）使用它。
 
         未来的SQLAlchemy版本也可能会对这种内置类型的方法产生影响。
@@ -176,11 +173,9 @@ tags:
                     server_default='no value')
             )
 
-        ORM使用此标志来指示在INSERT语句中将`None`{.docutils
-        .literal}的正值传递到列，而不是从INSERT语句中省略列，该列具有触发列级缺省值的效果。它还允许具有与Python
+        ORM使用此标志来指示在INSERT语句中将`None`的正值传递到列，而不是从INSERT语句中省略列，该列具有触发列级缺省值的效果。它还允许具有与Python
         None值关联的特殊行为的类型指示该值不一定会转换为SQL
-        NULL；这是一个JSON类型的主要例子，它可能希望保存JSON值`'null'`{.docutils
-        .literal}。
+        NULL；这是一个JSON类型的主要例子，它可能希望保存JSON值`'null'`。
 
         在所有情况下，通过在INSERT语句中使用[`null`{.xref .py .py-obj
         .docutils
@@ -224,14 +219,11 @@ tags:
     ` TypeEngine。 T0>  python_type  T1> ¶ T2>`{.descclassname}
     :   如果已知，则返回预期由此类型的实例返回的Python类型对象。
 
-        基本上，对于那些强制执行返回类型的类型，或者在所有常见DBAPI（例如`int`{.docutils
-        .literal}）中都可以这样做的类型，将返回该类型。
+        基本上，对于那些强制执行返回类型的类型，或者在所有常见DBAPI（例如`int`）中都可以这样做的类型，将返回该类型。
 
-        如果未定义返回类型，则引发`NotImplementedError`{.docutils
-        .literal}。
+        如果未定义返回类型，则引发`NotImplementedError`。
 
-        请注意，任何类型也可以在SQL中容纳NULL，这意味着您在实践中也可以从任何类型获取`None`{.docutils
-        .literal}。
+        请注意，任何类型也可以在SQL中容纳NULL，这意味着您在实践中也可以从任何类型获取`None`。
 
     `TypeEngine。`{.descclassname} `result_processor`{.descname} （ *方言*，*coltype* ） [¶ T6\>](#sqlalchemy.types.TypeEngine.result_processor "Permalink to this definition")
     :   返回处理结果行值的转换函数。
@@ -249,11 +241,9 @@ tags:
             – DBAPI coltype argument received in cursor.description.
 
     `TypeEngine`{.descclassname} `should_evaluate_none`{.descname} *= False* [¶](#sqlalchemy.types.TypeEngine.should_evaluate_none "Permalink to this definition")
-    :   如果为True，则Python常量`None`{.docutils
-        .literal}被认为是由此类型明确处理的。
+    :   如果为True，则Python常量`None`被认为是由此类型明确处理的。
 
-        ORM使用此标志来指示在INSERT语句中将`None`{.docutils
-        .literal}的正值传递到列，而不是从INSERT语句中省略列，该列具有触发列级缺省值的效果。它还允许对Python有特殊行为的类型，例如JSON类型，表示他们想要明确处理None值。
+        ORM使用此标志来指示在INSERT语句中将`None`的正值传递到列，而不是从INSERT语句中省略列，该列具有触发列级缺省值的效果。它还允许对Python有特殊行为的类型，例如JSON类型，表示他们想要明确处理None值。
 
         要在现有类型上设置此标志，请使用[`TypeEngine.evaluates_none()`](#sqlalchemy.types.TypeEngine.evaluates_none "sqlalchemy.types.TypeEngine.evaluates_none")方法。
 
@@ -311,10 +301,8 @@ tags:
     determined, including:
 
     -   在表反射过程中，当[`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")不识别列的类型时
-    -   使用未知类型的纯Python对象（例如`somecolumn == my_special_object`{.docutils
-        .literal}）构造SQL表达式时，
-    -   当创建一个新的[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")，并且给定的类型作为`None`{.docutils
-        .literal}传递或根本不传递。
+    -   使用未知类型的纯Python对象（例如`somecolumn == my_special_object`）构造SQL表达式时，
+    -   当创建一个新的[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")，并且给定的类型作为`None`传递或根本不传递。
 
     可以在SQL表达式调用中毫无问题地使用[`NullType`](#sqlalchemy.types.NullType "sqlalchemy.types.NullType")，它只是在表达式构造级别或绑定参数/结果处理级别上没有任何行为。[`NullType`](#sqlalchemy.types.NullType "sqlalchemy.types.NullType")
     will result in a [`CompileError`{.xref .py .py-exc .docutils

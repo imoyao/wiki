@@ -44,8 +44,7 @@ subclasses).
         – any [`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
         subclass, such as a table, select statement, etc.
     -   **name**[¶](#sqlalchemy.sql.expression.alias.params.name) –
-        string name to be assigned as the alias. 如果`None`{.docutils
-        .literal}，则会在编译时确定性地生成名称。
+        string name to be assigned as the alias. 如果`None`，则会在编译时确定性地生成名称。
     -   **flat** [¶](#sqlalchemy.sql.expression.alias.params.flat) -
 
         如果给定的selectable是[`Join`](#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")的实例，请参阅[`Join.alias()`](#sqlalchemy.sql.expression.Join.alias "sqlalchemy.sql.expression.Join.alias")以获取详细信息。
@@ -237,8 +236,7 @@ subclasses).
     -   **whereclause**
         [¶](#sqlalchemy.sql.expression.select.params.whereclause) -
 
-        将用于形成`WHERE`{.docutils
-        .literal}子句的[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")表达式。通常最好将WHERE标准添加到与[`Select.where()`](#sqlalchemy.sql.expression.Select.where "sqlalchemy.sql.expression.Select.where")链接的现有[`Select`{.xref
+        将用于形成`WHERE`子句的[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")表达式。通常最好将WHERE标准添加到与[`Select.where()`](#sqlalchemy.sql.expression.Select.where "sqlalchemy.sql.expression.Select.where")链接的现有[`Select`{.xref
         .py .py-class .docutils
         .literal}](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")使用方法中。
 
@@ -249,8 +247,7 @@ subclasses).
     -   **from\_obj**
         [¶](#sqlalchemy.sql.expression.select.params.from_obj) -
 
-        将被添加到结果语句的`FROM`{.docutils
-        .literal}子句中的[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")对象的列表。这相当于在现有的[`Select`{.xref
+        将被添加到结果语句的`FROM`子句中的[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")对象的列表。这相当于在现有的[`Select`{.xref
         .py .py-class .docutils
         .literal}](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象上使用方法链接调用[`Select.select_from()`](#sqlalchemy.sql.expression.Select.select_from "sqlalchemy.sql.expression.Select.select_from")。
 
@@ -262,8 +259,7 @@ subclasses).
     -   **autocommit**
         [¶](#sqlalchemy.sql.expression.select.params.autocommit) -
 
-        已过时。使用`.execution_options(autocommit=<True|False>)`{.docutils
-        .literal}来设置自动提交选项。
+        已过时。使用`.execution_options(autocommit=<True|False>)`来设置自动提交选项。
 
         也可以看看
 
@@ -272,12 +268,8 @@ subclasses).
     -   **bind=None**[¶](#sqlalchemy.sql.expression.select.params.bind)
         – an [`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
         or [`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")
-        instance to which the resulting [`Select`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")
-        object will be bound. 否则[`Select`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象将自动绑定到`Connectable`{.xref
+        instance to which the resulting [`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")
+        object will be bound. 否则[`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象将自动绑定到`Connectable`{.xref
         .py .py-class .docutils
         .literal}实例可以位于其包含的[`ClauseElement`{.xref .py
         .py-class .docutils
@@ -301,17 +293,14 @@ subclasses).
     -   **distinct = False**
         [¶](#sqlalchemy.sql.expression.select.params.distinct) -
 
-        当`True`时，将`DISTINCT`{.docutils
-        .literal}限定符应用于结果语句的columns子句。
+        当`True`时，将`DISTINCT`限定符应用于结果语句的columns子句。
 
         布尔参数也可以是列表达式或列表达式的列表 -
-        这是一种特殊的调用形式，Postgresql方言可以理解为`DISTINCT ON （＆lt； columns＆gt；）`{.docutils
-        .literal}语法。
+        这是一种特殊的调用形式，Postgresql方言可以理解为`DISTINCT ON （＆lt； columns＆gt；）`语法。
 
         通过[`distinct()`](#sqlalchemy.sql.expression.Select.distinct "sqlalchemy.sql.expression.Select.distinct")方法，现有的[`Select`{.xref
         .py .py-class .docutils
-        .literal}](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象也可以使用`distinct`{.docutils
-        .literal}。
+        .literal}](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象也可以使用`distinct`。
 
         也可以看看
 
@@ -343,14 +332,12 @@ subclasses).
         也可以看看
 
         [`Select.with_for_update()`](#sqlalchemy.sql.expression.Select.with_for_update "sqlalchemy.sql.expression.Select.with_for_update")
-        - improved API for specifying the `FOR UPDATE`{.docutils
-        .literal} clause.
+        - improved API for specifying the `FOR UPDATE` clause.
 
     -   **group\_by**
         [¶](#sqlalchemy.sql.expression.select.params.group_by) -
 
-        将包含结果选择的`GROUP BY`{.docutils
-        .literal}子句的[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")对象的列表。This
+        将包含结果选择的`GROUP BY`子句的[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")对象的列表。This
         parameter is typically specified more naturally using the
         [`Select.group_by()`](#sqlalchemy.sql.expression.Select.group_by "sqlalchemy.sql.expression.Select.group_by")
         method on an existing [`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select").
@@ -363,10 +350,7 @@ subclasses).
 
         当`GROUP BY`时，[`ClauseElement`{.xref .py
         .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")将包含结果选择的`HAVING`{.docutils
-        .literal}用来。此参数通常在现有[`Select`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")中使用[`Select.having()`](#sqlalchemy.sql.expression.Select.having "sqlalchemy.sql.expression.Select.having")方法更自然地指定。
+        .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")将包含结果选择的`HAVING`用来。此参数通常在现有[`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")中使用[`Select.having()`](#sqlalchemy.sql.expression.Select.having "sqlalchemy.sql.expression.Select.having")方法更自然地指定。
 
         也可以看看
 
@@ -375,9 +359,7 @@ subclasses).
     -   **限制=无** [¶](#sqlalchemy.sql.expression.select.params.limit)
         -
 
-        一个数值，通常在结果选择中呈现为`LIMIT`{.docutils
-        .literal}表达式。不支持`LIMIT`{.docutils
-        .literal}的后端将尝试提供类似的功能。此参数通常在现有的[`Select`{.xref
+        一个数值，通常在结果选择中呈现为`LIMIT`表达式。不支持`LIMIT`的后端将尝试提供类似的功能。此参数通常在现有的[`Select`{.xref
         .py .py-class .docutils
         .literal}](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")中使用[`Select.limit()`](#sqlalchemy.sql.expression.Select.limit "sqlalchemy.sql.expression.Select.limit")方法来更自然地指定。
 
@@ -388,10 +370,8 @@ subclasses).
     -   **偏移量=无**
         [¶](#sqlalchemy.sql.expression.select.params.offset) -
 
-        a numeric value which usually renders as an `OFFSET`{.docutils
-        .literal} expression in the resulting select.
-        不支持`OFFSET`{.docutils
-        .literal}的后端将尝试提供类似的功能。此参数通常在现有[`Select`{.xref
+        a numeric value which usually renders as an `OFFSET` expression in the resulting select.
+        不支持`OFFSET`的后端将尝试提供类似的功能。此参数通常在现有[`Select`{.xref
         .py .py-class .docutils
         .literal}](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")中使用[`Select.offset()`](#sqlalchemy.sql.expression.Select.offset "sqlalchemy.sql.expression.Select.offset")方法更自然地指定。
 
@@ -402,10 +382,7 @@ subclasses).
     -   **order\_by**
         [¶](#sqlalchemy.sql.expression.select.params.order_by) -
 
-        一个标量或[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")对象的列表，它们将包含结果select的`ORDER BY`{.docutils
-        .literal}子句。此参数通常在现有的[`Select`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")中使用[`Select.order_by()`](#sqlalchemy.sql.expression.Select.order_by "sqlalchemy.sql.expression.Select.order_by")方法更自然地指定。
+        一个标量或[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")对象的列表，它们将包含结果select的`ORDER BY`子句。此参数通常在现有的[`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")中使用[`Select.order_by()`](#sqlalchemy.sql.expression.Select.order_by "sqlalchemy.sql.expression.Select.order_by")方法更自然地指定。
 
         也可以看看
 
@@ -414,8 +391,7 @@ subclasses).
     -   **use\_labels = False**
         [¶](#sqlalchemy.sql.expression.select.params.use_labels) -
 
-        当`True`{.docutils
-        .literal}时，将使用columns子句中每列的标签生成该语句，该列使用其父表的名称（或别名）限定每个列，以便不同表中的列之间的名称冲突不会发生。标签的格式是\_
+        当`True`时，将使用columns子句中每列的标签生成该语句，该列使用其父表的名称（或别名）限定每个列，以便不同表中的列之间的名称冲突不会发生。标签的格式是\_
         。 T1\> T0\>生成的[`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象的“c”集合也将使用这些名称来定位列成员。
 
         也可以使用[`Select.apply_labels()`](#sqlalchemy.sql.expression.Select.apply_labels "sqlalchemy.sql.expression.Select.apply_labels")方法在现有的[`Select`{.xref
@@ -590,12 +566,9 @@ subclasses).
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -613,9 +586,7 @@ subclasses).
         -   **dialect**[¶](#sqlalchemy.sql.expression.Alias.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.Alias.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -686,12 +657,9 @@ subclasses).
         返回一个根据[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")生成的SELECT
         COUNT。
 
-        从版本1.1开始弃用： `FromClause.count()`{.docutils
-        .literal}已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`{.docutils
-        .literal}表达式。
+        从版本1.1开始弃用： `FromClause.count()`已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`表达式。
 
-        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`{.docutils
-        .literal}应该是首选的：
+        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`应该是首选的：
 
             row_count = conn.scalar(
                 select([func.count('*')]).select_from(table)
@@ -736,9 +704,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.Alias.join.params.right) -
-            连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.Alias.join.params.onclause)
@@ -811,9 +777,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.Alias.outerjoin.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.Alias.outerjoin.params.onclause)
@@ -843,9 +807,7 @@ subclasses).
 
         返回带有[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素的副本。
 
-        返回此ClauseElement的一个副本，其中[`bindparam()`{.xref .py
-        .py-func .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
+        返回此ClauseElement的一个副本，其中[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
 
             >>> clause = column('x') + bindparam('foo')
             >>> print clause.compile().params
@@ -987,8 +949,7 @@ subclasses).
 
         将'autocommit'标志设置为True返回一个新的可选项。
 
-        从版本0.6开始弃用： `autocommit()`{.docutils
-        .literal}已弃用。使用带有'autocommit'标志的[`Executable.execution_options()`](#sqlalchemy.sql.expression.Executable.execution_options "sqlalchemy.sql.expression.Executable.execution_options")。
+        从版本0.6开始弃用： `autocommit()`已弃用。使用带有'autocommit'标志的[`Executable.execution_options()`](#sqlalchemy.sql.expression.Executable.execution_options "sqlalchemy.sql.expression.Executable.execution_options")。
 
     ` C  T0> ¶ T1>`{.descname}
     :   *inherited from the* [`c`{.xref .py .py-attr .docutils
@@ -1033,12 +994,9 @@ subclasses).
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -1056,9 +1014,7 @@ subclasses).
         -   **dialect**[¶](#sqlalchemy.sql.expression.CompoundSelect.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.CompoundSelect.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -1129,12 +1085,9 @@ subclasses).
         返回一个根据[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")生成的SELECT
         COUNT。
 
-        从版本1.1开始弃用： `FromClause.count()`{.docutils
-        .literal}已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`{.docutils
-        .literal}表达式。
+        从版本1.1开始弃用： `FromClause.count()`已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`表达式。
 
-        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`{.docutils
-        .literal}应该是首选的：
+        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`应该是首选的：
 
             row_count = conn.scalar(
                 select([func.count('*')]).select_from(table)
@@ -1309,9 +1262,7 @@ subclasses).
 
         为执行期间生效的语句设置非SQL选项。
 
-        执行选项可以在每个语句或每个[`Connection`{.xref .py .py-class
-        .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
+        执行选项可以在每个语句或每个[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
         .py .py-class .docutils
         .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")和ORM
         [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象提供对执行选项的访问，而这些执行选项在连接时进行配置。
@@ -1379,9 +1330,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.CompoundSelect.join.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.CompoundSelect.join.params.onclause)
@@ -1444,9 +1393,7 @@ subclasses).
 
         返回一个新的可选择的给定LIMIT标准。
 
-        这是一个数值，通常在结果选择中呈现为`LIMIT`{.docutils
-        .literal}表达式。不支持`LIMIT`{.docutils
-        .literal}的后端将尝试提供类似的功能。
+        这是一个数值，通常在结果选择中呈现为`LIMIT`表达式。不支持`LIMIT`的后端将尝试提供类似的功能。
 
         版本1.0.0更改： - [`Select.limit()`](#sqlalchemy.sql.expression.Select.limit "sqlalchemy.sql.expression.Select.limit")现在可以接受任意SQL表达式以及整数值。
 
@@ -1509,9 +1456,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.CompoundSelect.outerjoin.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.CompoundSelect.outerjoin.params.onclause)
@@ -1541,9 +1486,7 @@ subclasses).
 
         返回带有[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素的副本。
 
-        返回此ClauseElement的一个副本，其中[`bindparam()`{.xref .py
-        .py-func .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
+        返回此ClauseElement的一个副本，其中[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
 
             >>> clause = column('x') + bindparam('foo')
             >>> print clause.compile().params
@@ -1614,8 +1557,7 @@ subclasses).
     :   *inherited from the* [`with_for_update()`](#sqlalchemy.sql.expression.GenerativeSelect.with_for_update "sqlalchemy.sql.expression.GenerativeSelect.with_for_update")
         *method of* [`GenerativeSelect`](#sqlalchemy.sql.expression.GenerativeSelect "sqlalchemy.sql.expression.GenerativeSelect")
 
-        为[`GenerativeSelect`](#sqlalchemy.sql.expression.GenerativeSelect "sqlalchemy.sql.expression.GenerativeSelect")指定一个`FOR UPDATE`{.docutils
-        .literal}子句。
+        为[`GenerativeSelect`](#sqlalchemy.sql.expression.GenerativeSelect "sqlalchemy.sql.expression.GenerativeSelect")指定一个`FOR UPDATE`子句。
 
         例如。：
 
@@ -1629,8 +1571,7 @@ subclasses).
 
             SELECT table.a, table.b FROM table FOR UPDATE
 
-        当不带任何参数调用时，语句将以后缀`FOR UPDATE`{.docutils
-        .literal}进行呈现。然后可以提供其他参数，这些参数允许使用通用数据库特定的变体。
+        当不带任何参数调用时，语句将以后缀`FOR UPDATE`进行呈现。然后可以提供其他参数，这些参数允许使用通用数据库特定的变体。
 
         参数：
 
@@ -1727,12 +1668,9 @@ subclasses).
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -1750,9 +1688,7 @@ subclasses).
         -   **dialect**[¶](#sqlalchemy.sql.expression.CTE.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.CTE.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -1823,12 +1759,9 @@ subclasses).
         返回一个根据[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")生成的SELECT
         COUNT。
 
-        从版本1.1开始弃用： `FromClause.count()`{.docutils
-        .literal}已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`{.docutils
-        .literal}表达式。
+        从版本1.1开始弃用： `FromClause.count()`已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`表达式。
 
-        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`{.docutils
-        .literal}应该是首选的：
+        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`应该是首选的：
 
             row_count = conn.scalar(
                 select([func.count('*')]).select_from(table)
@@ -1873,9 +1806,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.CTE.join.params.right) -
-            连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.CTE.join.params.onclause)
@@ -1948,9 +1879,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.CTE.outerjoin.params.right) -
-            连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.CTE.outerjoin.params.onclause)
@@ -1979,9 +1908,7 @@ subclasses).
 
         返回带有[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素的副本。
 
-        返回此ClauseElement的一个副本，其中[`bindparam()`{.xref .py
-        .py-func .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
+        返回此ClauseElement的一个副本，其中[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
 
             >>> clause = column('x') + bindparam('foo')
             >>> print clause.compile().params
@@ -2097,9 +2024,7 @@ subclasses).
     ` execution_options  T0> （ T1>  **千瓦 T2> ） T3> ¶ T4>`{.descname}
     :   为执行期间生效的语句设置非SQL选项。
 
-        执行选项可以在每个语句或每个[`Connection`{.xref .py .py-class
-        .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
+        执行选项可以在每个语句或每个[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
         .py .py-class .docutils
         .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")和ORM
         [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象提供对执行选项的访问，而这些执行选项在连接时进行配置。
@@ -2133,10 +2058,7 @@ subclasses).
         .py .py-class .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")对象集合的每个名称的访问。
     -   一个[`primary_key`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.sql.expression.FromClause.primary_key "sqlalchemy.sql.expression.FromClause.primary_key")属性，它是指示`primary_key`{.docutils
-        .literal}标志的所有[`ColumnElement`{.xref .py .py-class
-        .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")对象的集合。
+        .literal}](#sqlalchemy.sql.expression.FromClause.primary_key "sqlalchemy.sql.expression.FromClause.primary_key")属性，它是指示`primary_key`标志的所有[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")对象的集合。
     -   Methods to generate various derivations of a “from” clause,
         including [`FromClause.alias()`](#sqlalchemy.sql.expression.FromClause.alias "sqlalchemy.sql.expression.FromClause.alias"),
         [`FromClause.join()`](#sqlalchemy.sql.expression.FromClause.join "sqlalchemy.sql.expression.FromClause.join"),
@@ -2199,12 +2121,9 @@ subclasses).
     :   返回一个根据[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")生成的SELECT
         COUNT。
 
-        从版本1.1开始弃用： `FromClause.count()`{.docutils
-        .literal}已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`{.docutils
-        .literal}表达式。
+        从版本1.1开始弃用： `FromClause.count()`已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`表达式。
 
-        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`{.docutils
-        .literal}应该是首选的：
+        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`应该是首选的：
 
             row_count = conn.scalar(
                 select([func.count('*')]).select_from(table)
@@ -2252,9 +2171,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.FromClause.join.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.FromClause.join.params.onclause)
@@ -2322,9 +2239,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.FromClause.outerjoin.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.FromClause.outerjoin.params.onclause)
@@ -2359,8 +2274,7 @@ subclasses).
     `架构`{.descname} *=无* [¶](#sqlalchemy.sql.expression.FromClause.schema "Permalink to this definition")
     :   为[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")定义'schema'属性。
 
-        除[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")以外的大多数对象，这通常是`None`{.docutils
-        .literal}，它被视为[`Table.schema`](metadata.html#sqlalchemy.schema.Table.params.schema "sqlalchemy.schema.Table")参数的值。
+        除[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")以外的大多数对象，这通常是`None`，它被视为[`Table.schema`](metadata.html#sqlalchemy.schema.Table.params.schema "sqlalchemy.schema.Table")参数的值。
 
     `选择`{.descname} （ *whereclause = None*，*\*\* params* ） [/ T5\>](#sqlalchemy.sql.expression.FromClause.select "Permalink to this definition")
     :   返回这个[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")的SELECT。
@@ -2447,8 +2361,7 @@ subclasses).
 
         将'autocommit'标志设置为True返回一个新的可选项。
 
-        从版本0.6开始弃用： `autocommit()`{.docutils
-        .literal}已弃用。使用带有'autocommit'标志的[`Executable.execution_options()`](#sqlalchemy.sql.expression.Executable.execution_options "sqlalchemy.sql.expression.Executable.execution_options")。
+        从版本0.6开始弃用： `autocommit()`已弃用。使用带有'autocommit'标志的[`Executable.execution_options()`](#sqlalchemy.sql.expression.Executable.execution_options "sqlalchemy.sql.expression.Executable.execution_options")。
 
     `结合 T0> ¶ T1>`{.descname}
     :   *继承自* [`bind`{.xref .py .py-attr .docutils
@@ -2506,12 +2419,9 @@ subclasses).
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -2529,9 +2439,7 @@ subclasses).
         -   **dialect**[¶](#sqlalchemy.sql.expression.GenerativeSelect.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.GenerativeSelect.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -2602,12 +2510,9 @@ subclasses).
         返回一个根据[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")生成的SELECT
         COUNT。
 
-        从版本1.1开始弃用： `FromClause.count()`{.docutils
-        .literal}已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`{.docutils
-        .literal}表达式。
+        从版本1.1开始弃用： `FromClause.count()`已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`表达式。
 
-        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`{.docutils
-        .literal}应该是首选的：
+        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`应该是首选的：
 
             row_count = conn.scalar(
                 select([func.count('*')]).select_from(table)
@@ -2782,9 +2687,7 @@ subclasses).
 
         为执行期间生效的语句设置非SQL选项。
 
-        执行选项可以在每个语句或每个[`Connection`{.xref .py .py-class
-        .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
+        执行选项可以在每个语句或每个[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
         .py .py-class .docutils
         .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")和ORM
         [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象提供对执行选项的访问，而这些执行选项在连接时进行配置。
@@ -2864,9 +2767,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.GenerativeSelect.join.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.GenerativeSelect.join.params.onclause)
@@ -2926,9 +2827,7 @@ subclasses).
     `限制 T0> （ T1> 限制 T2> ） T3> ¶ T4>`{.descname}
     :   返回一个新的可选择的给定LIMIT标准。
 
-        这是一个数值，通常在结果选择中呈现为`LIMIT`{.docutils
-        .literal}表达式。不支持`LIMIT`{.docutils
-        .literal}的后端将尝试提供类似的功能。
+        这是一个数值，通常在结果选择中呈现为`LIMIT`表达式。不支持`LIMIT`的后端将尝试提供类似的功能。
 
         版本1.0.0更改： - [`Select.limit()`](#sqlalchemy.sql.expression.Select.limit "sqlalchemy.sql.expression.Select.limit")现在可以接受任意SQL表达式以及整数值。
 
@@ -2985,9 +2884,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.GenerativeSelect.outerjoin.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.GenerativeSelect.outerjoin.params.onclause)
@@ -3017,9 +2914,7 @@ subclasses).
 
         返回带有[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素的副本。
 
-        返回此ClauseElement的一个副本，其中[`bindparam()`{.xref .py
-        .py-func .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
+        返回此ClauseElement的一个副本，其中[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
 
             >>> clause = column('x') + bindparam('foo')
             >>> print clause.compile().params
@@ -3111,8 +3006,7 @@ subclasses).
         True添加到受影响的绑定参数以便可以使用多个语句。
 
      `with_for_update`{.descname}(*nowait=False*, *read=False*, *of=None*, *skip\_locked=False*, *key\_share=False*)[¶](#sqlalchemy.sql.expression.GenerativeSelect.with_for_update "Permalink to this definition")
-    :   为[`GenerativeSelect`](#sqlalchemy.sql.expression.GenerativeSelect "sqlalchemy.sql.expression.GenerativeSelect")指定一个`FOR UPDATE`{.docutils
-        .literal}子句。
+    :   为[`GenerativeSelect`](#sqlalchemy.sql.expression.GenerativeSelect "sqlalchemy.sql.expression.GenerativeSelect")指定一个`FOR UPDATE`子句。
 
         例如。：
 
@@ -3126,8 +3020,7 @@ subclasses).
 
             SELECT table.a, table.b FROM table FOR UPDATE
 
-        当不带任何参数调用时，语句将以后缀`FOR UPDATE`{.docutils
-        .literal}进行呈现。然后可以提供其他参数，这些参数允许使用通用数据库特定的变体。
+        当不带任何参数调用时，语句将以后缀`FOR UPDATE`进行呈现。然后可以提供其他参数，这些参数允许使用通用数据库特定的变体。
 
         参数：
 
@@ -3384,9 +3277,7 @@ subclasses).
      `__init__`{.descname}(*left*, *right*, *onclause=None*, *isouter=False*, *full=False*)[¶](#sqlalchemy.sql.expression.Join.__init__ "Permalink to this definition")
     :   构建一个新的[`Join`](#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")。
 
-        这里通常的入口点是任何[`FromClause`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象的[`join()`{.xref
+        这里通常的入口点是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象的[`join()`{.xref
         .py .py-func .docutils
         .literal}](#sqlalchemy.sql.expression.join "sqlalchemy.sql.expression.join")函数或[`FromClause.join()`](#sqlalchemy.sql.expression.FromClause.join "sqlalchemy.sql.expression.FromClause.join")方法。
 
@@ -3411,8 +3302,7 @@ subclasses).
                 FROM table_a
                 JOIN table_b ON table_a.id = table_b.a_id) AS anon_1
 
-        给定一个[`Join`](#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")对象`j`{.docutils
-        .literal}，等价的长手形式是：
+        给定一个[`Join`](#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")对象`j`，等价的长手形式是：
 
             from sqlalchemy import select, alias
             j = alias(
@@ -3424,16 +3314,12 @@ subclasses).
             )
 
         由[`Join.alias()`](#sqlalchemy.sql.expression.Join.alias "sqlalchemy.sql.expression.Join.alias")生成的可选择列与以单个名称显示的两个单独可选列的列相同
-        - 各列为“自动标记”，即`.c.`{.docutils
-        .literal}所得到的[`Alias`](#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")的集合使用`<tablename>_<columname>`{.docutils
-        .literal}方案表示各个列的名称：
+        - 各列为“自动标记”，即`.c.`所得到的[`Alias`](#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")的集合使用`<tablename>_<columname>`方案表示各个列的名称：
 
             j.c.table_a_id
             j.c.table_b_a_id
 
-        [`Join.alias()`](#sqlalchemy.sql.expression.Join.alias "sqlalchemy.sql.expression.Join.alias")还具有替代选项，用于别名联接，不会产生封闭的SELECT，并且通常不会将标签应用于列名称。`flat=True`{.docutils
-        .literal}选项将分别针对左侧和右侧调用[`FromClause.alias()`](#sqlalchemy.sql.expression.FromClause.alias "sqlalchemy.sql.expression.FromClause.alias")。使用这个选项，不会产生新的`SELECT`{.docutils
-        .literal}；我们相反，从一个构造如下：
+        [`Join.alias()`](#sqlalchemy.sql.expression.Join.alias "sqlalchemy.sql.expression.Join.alias")还具有替代选项，用于别名联接，不会产生封闭的SELECT，并且通常不会将标签应用于列名称。`flat=True`选项将分别针对左侧和右侧调用[`FromClause.alias()`](#sqlalchemy.sql.expression.FromClause.alias "sqlalchemy.sql.expression.FromClause.alias")。使用这个选项，不会产生新的`SELECT`；我们相反，从一个构造如下：
 
             j = table_a.join(table_b, table_a.c.id == table_b.c.a_id)
             j = j.alias(flat=True)
@@ -3443,8 +3329,7 @@ subclasses).
             table_a AS table_a_1 JOIN table_b AS table_b_1 ON
             table_a_1.id = table_b_1.a_id
 
-        `flat=True`{.docutils
-        .literal}参数也会传播到包含的selectables，以便组合连接如：
+        `flat=True`参数也会传播到包含的selectables，以便组合连接如：
 
             j = table_a.join(
                     table_b.join(table_c,
@@ -3459,12 +3344,9 @@ subclasses).
                     ON table_b_1.id = table_c_1.b_id
             ) ON table_a_1.id = table_b_1.a_id
 
-        独立的[`alias()`](#sqlalchemy.sql.expression.alias "sqlalchemy.sql.expression.alias")函数以及基础的[`FromClause.alias()`](#sqlalchemy.sql.expression.FromClause.alias "sqlalchemy.sql.expression.FromClause.alias")方法也支持`flat=True`{.docutils
-        .literal}参数作为无操作，以便参数可以传递给任何可选择的`alias()`{.docutils
-        .literal}方法。
+        独立的[`alias()`](#sqlalchemy.sql.expression.alias "sqlalchemy.sql.expression.alias")函数以及基础的[`FromClause.alias()`](#sqlalchemy.sql.expression.FromClause.alias "sqlalchemy.sql.expression.FromClause.alias")方法也支持`flat=True`参数作为无操作，以便参数可以传递给任何可选择的`alias()`方法。
 
-        版本0.9.0新增：增加了`flat=True`{.docutils
-        .literal}选项来创建连接的“别名”，而不用在SELECT子查询内部进行封闭。
+        版本0.9.0新增：增加了`flat=True`选项来创建连接的“别名”，而不用在SELECT子查询内部进行封闭。
 
         参数：
 
@@ -3525,12 +3407,9 @@ subclasses).
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -3548,9 +3427,7 @@ subclasses).
         -   **dialect**[¶](#sqlalchemy.sql.expression.Join.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.Join.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -3621,12 +3498,9 @@ subclasses).
         返回一个根据[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")生成的SELECT
         COUNT。
 
-        从版本1.1开始弃用： `FromClause.count()`{.docutils
-        .literal}已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`{.docutils
-        .literal}表达式。
+        从版本1.1开始弃用： `FromClause.count()`已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`表达式。
 
-        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`{.docutils
-        .literal}应该是首选的：
+        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`应该是首选的：
 
             row_count = conn.scalar(
                 select([func.count('*')]).select_from(table)
@@ -3671,9 +3545,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.Join.join.params.right) -
-            连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.Join.join.params.onclause)
@@ -3746,9 +3618,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.Join.outerjoin.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.Join.outerjoin.params.onclause)
@@ -3777,9 +3647,7 @@ subclasses).
 
         返回带有[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素的副本。
 
-        返回此ClauseElement的一个副本，其中[`bindparam()`{.xref .py
-        .py-func .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
+        返回此ClauseElement的一个副本，其中[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
 
             >>> clause = column('x') + bindparam('foo')
             >>> print clause.compile().params
@@ -3807,8 +3675,7 @@ subclasses).
         .py .py-class .docutils
         .literal}](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")。
 
-        给定一个[`Join`](#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")对象`j`{.docutils
-        .literal}，等价的长手形式是：
+        给定一个[`Join`](#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")对象`j`，等价的长手形式是：
 
             from sqlalchemy import select
             j = select([j.left, j.right], **kw).\
@@ -3929,12 +3796,9 @@ subclasses).
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -3952,9 +3816,7 @@ subclasses).
         -   **dialect**[¶](#sqlalchemy.sql.expression.Lateral.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.Lateral.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -4025,12 +3887,9 @@ subclasses).
         返回一个根据[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")生成的SELECT
         COUNT。
 
-        从版本1.1开始弃用： `FromClause.count()`{.docutils
-        .literal}已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`{.docutils
-        .literal}表达式。
+        从版本1.1开始弃用： `FromClause.count()`已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`表达式。
 
-        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`{.docutils
-        .literal}应该是首选的：
+        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`应该是首选的：
 
             row_count = conn.scalar(
                 select([func.count('*')]).select_from(table)
@@ -4075,9 +3934,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.Lateral.join.params.right) -
-            连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.Lateral.join.params.onclause)
@@ -4150,9 +4007,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.Lateral.outerjoin.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.Lateral.outerjoin.params.onclause)
@@ -4182,9 +4037,7 @@ subclasses).
 
         返回带有[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素的副本。
 
-        返回此ClauseElement的一个副本，其中[`bindparam()`{.xref .py
-        .py-func .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
+        返回此ClauseElement的一个副本，其中[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
 
             >>> clause = column('x') + bindparam('foo')
             >>> print clause.compile().params
@@ -4366,8 +4219,7 @@ subclasses).
 
         将'autocommit'标志设置为True返回一个新的可选项。
 
-        从版本0.6开始弃用： `autocommit()`{.docutils
-        .literal}已弃用。使用带有'autocommit'标志的[`Executable.execution_options()`](#sqlalchemy.sql.expression.Executable.execution_options "sqlalchemy.sql.expression.Executable.execution_options")。
+        从版本0.6开始弃用： `autocommit()`已弃用。使用带有'autocommit'标志的[`Executable.execution_options()`](#sqlalchemy.sql.expression.Executable.execution_options "sqlalchemy.sql.expression.Executable.execution_options")。
 
     ` C  T0> ¶ T1>`{.descname}
     :   *inherited from the* [`c`{.xref .py .py-attr .docutils
@@ -4415,12 +4267,9 @@ subclasses).
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -4438,9 +4287,7 @@ subclasses).
         -   **dialect**[¶](#sqlalchemy.sql.expression.Select.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.Select.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -4507,9 +4354,7 @@ subclasses).
         [¶](#sqlalchemy.sql.expression.Select.correlate.params.*fromclauses)
         -
 
-        a list of one or more [`FromClause`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
+        a list of one or more [`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
         constructs, or other compatible constructs (i.e. ORM-mapped
         classes) to become part of the correlate collection.
 
@@ -4521,9 +4366,7 @@ subclasses).
         BY子句，HAVING子句或columns子句中一个封闭的`Select()`{.xref .py
         .py-meth .docutils .literal}。
 
-        在版本0.8.2中更改：显式关联通过[`Select`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象的任何级别嵌套进行；在以前的0.8版本中，相关只会发生在相对于立即封闭的[`Select`{.xref
+        在版本0.8.2中更改：显式关联通过[`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象的任何级别嵌套进行；在以前的0.8版本中，相关只会发生在相对于立即封闭的[`Select`{.xref
         .py .py-class .docutils
         .literal}](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")结构中。
 
@@ -4548,15 +4391,12 @@ subclasses).
         .py-class .docutils
         .literal}](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象将关联其所有FROM条目。
 
-        版本0.8.2更改：调用`correlate_except(None)`{.docutils
-        .literal}将正确地自动关联所有FROM子句。
+        版本0.8.2更改：调用`correlate_except(None)`将正确地自动关联所有FROM子句。
 
         参数：
 
         **\*fromclauses**[¶](#sqlalchemy.sql.expression.Select.correlate_except.params.*fromclauses)
-        – a list of one or more [`FromClause`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
+        – a list of one or more [`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
         constructs, or other compatible constructs (i.e. ORM-mapped
         classes) to become part of the correlate-exception collection.
 
@@ -4606,12 +4446,9 @@ subclasses).
         返回一个根据[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")生成的SELECT
         COUNT。
 
-        从版本1.1开始弃用： `FromClause.count()`{.docutils
-        .literal}已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`{.docutils
-        .literal}表达式。
+        从版本1.1开始弃用： `FromClause.count()`已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`表达式。
 
-        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`{.docutils
-        .literal}应该是首选的：
+        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`应该是首选的：
 
             row_count = conn.scalar(
                 select([func.count('*')]).select_from(table)
@@ -4781,8 +4618,7 @@ subclasses).
 
         **\* expr**
         [¶](#sqlalchemy.sql.expression.Select.distinct.params.*expr) -
-        可选的列表达式。当存在时，Postgresql方言将呈现`DISTINCT ON （＆lt；表达式＆gt；）`{.docutils
-        .literal}结构。
+        可选的列表达式。当存在时，Postgresql方言将呈现`DISTINCT ON （＆lt；表达式＆gt；）`结构。
 
      `except_`{.descname}(*other*, *\*\*kwargs*)[¶](#sqlalchemy.sql.expression.Select.except_ "Permalink to this definition")
     :   针对给定的selectable返回此select()构造的SQL EXCEPT。
@@ -4802,9 +4638,7 @@ subclasses).
 
         为执行期间生效的语句设置非SQL选项。
 
-        执行选项可以在每个语句或每个[`Connection`{.xref .py .py-class
-        .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
+        执行选项可以在每个语句或每个[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
         .py .py-class .docutils
         .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")和ORM
         [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象提供对执行选项的访问，而这些执行选项在连接时进行配置。
@@ -4890,9 +4724,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.Select.join.params.right) -
-            连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.Select.join.params.onclause)
@@ -4954,9 +4786,7 @@ subclasses).
 
         返回一个新的可选择的给定LIMIT标准。
 
-        这是一个数值，通常在结果选择中呈现为`LIMIT`{.docutils
-        .literal}表达式。不支持`LIMIT`{.docutils
-        .literal}的后端将尝试提供类似的功能。
+        这是一个数值，通常在结果选择中呈现为`LIMIT`表达式。不支持`LIMIT`的后端将尝试提供类似的功能。
 
         版本1.0.0更改： - [`Select.limit()`](#sqlalchemy.sql.expression.Select.limit "sqlalchemy.sql.expression.Select.limit")现在可以接受任意SQL表达式以及整数值。
 
@@ -4969,8 +4799,7 @@ subclasses).
      `locate_all_froms`{.descname}(*\*args*, *\*\*kw*)[¶](#sqlalchemy.sql.expression.Select.locate_all_froms "Permalink to this definition")
     :   返回此Select所引用的所有FromClause元素的集合。
 
-        这个集合是由`froms`{.docutils
-        .literal}属性返回的超集，这个属性专门用于那些实际将被渲染的FromClause元素。
+        这个集合是由`froms`属性返回的超集，这个属性专门用于那些实际将被渲染的FromClause元素。
 
     `偏移 T0> （ T1> 偏移 T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`offset()`](#sqlalchemy.sql.expression.GenerativeSelect.offset "sqlalchemy.sql.expression.GenerativeSelect.offset")
@@ -5025,9 +4854,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.Select.outerjoin.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.Select.outerjoin.params.onclause)
@@ -5057,9 +4884,7 @@ subclasses).
 
         返回带有[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素的副本。
 
-        返回此ClauseElement的一个副本，其中[`bindparam()`{.xref .py
-        .py-func .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
+        返回此ClauseElement的一个副本，其中[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
 
             >>> clause = column('x') + bindparam('foo')
             >>> print clause.compile().params
@@ -5240,8 +5065,7 @@ subclasses).
     :   *inherited from the* [`with_for_update()`](#sqlalchemy.sql.expression.GenerativeSelect.with_for_update "sqlalchemy.sql.expression.GenerativeSelect.with_for_update")
         *method of* [`GenerativeSelect`](#sqlalchemy.sql.expression.GenerativeSelect "sqlalchemy.sql.expression.GenerativeSelect")
 
-        为[`GenerativeSelect`](#sqlalchemy.sql.expression.GenerativeSelect "sqlalchemy.sql.expression.GenerativeSelect")指定一个`FOR UPDATE`{.docutils
-        .literal}子句。
+        为[`GenerativeSelect`](#sqlalchemy.sql.expression.GenerativeSelect "sqlalchemy.sql.expression.GenerativeSelect")指定一个`FOR UPDATE`子句。
 
         例如。：
 
@@ -5255,8 +5079,7 @@ subclasses).
 
             SELECT table.a, table.b FROM table FOR UPDATE
 
-        当不带任何参数调用时，语句将以后缀`FOR UPDATE`{.docutils
-        .literal}进行呈现。然后可以提供其他参数，这些参数允许使用通用数据库特定的变体。
+        当不带任何参数调用时，语句将以后缀`FOR UPDATE`进行呈现。然后可以提供其他参数，这些参数允许使用通用数据库特定的变体。
 
         参数：
 
@@ -5304,9 +5127,7 @@ subclasses).
 
         相对于给定的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或[`Alias`{.xref
         .py .py-class .docutils
-        .literal}](#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")作为`selectable`{.docutils
-        .literal}传递，提示文本呈现在正在使用的数据库后端的适当位置。论据。方言实现通常使用Python字符串替换语法和令牌`%(name)s`{.docutils
-        .literal}来呈现表或别名的名称。例如。在使用Oracle时，需要：
+        .literal}](#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")作为`selectable`传递，提示文本呈现在正在使用的数据库后端的适当位置。论据。方言实现通常使用Python字符串替换语法和令牌`%(name)s`来呈现表或别名的名称。例如。在使用Oracle时，需要：
 
             select([mytable]).\
                 with_hint(mytable, "index(%(name)s ix_mytable)")
@@ -5334,9 +5155,7 @@ subclasses).
         .py .py-func .docutils
         .literal}](#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")的FROM子句，并添加了新列；在0.7.3及更高版本中，它是在编译时计算的，解决了将列与父表后期绑定的问题。这改变了[`Select.with_only_columns()`](#sqlalchemy.sql.expression.Select.with_only_columns "sqlalchemy.sql.expression.Select.with_only_columns")的行为，因为删除了不再在新列表中表示的FROM子句，但是这种行为更一致，因为FROM子句始终从当前列子句派生。这种方法的最初意图是允许修剪现有列列表的列数比原来存在的列数少；在完全不同的列表中替换列表的用例在0.7.3发布之前一直没有预料到；下面的使用指南说明了这应该如何完成。
 
-        这个方法与使用给定的columns子句调用原始的[`select()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")完全等价。即一份声明：
+        这个方法与使用给定的columns子句调用原始的[`select()`](#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")完全等价。即一份声明：
 
             s = select([table1.c.a, table1.c.b])
             s = s.with_only_columns([table1.c.b])
@@ -5371,8 +5190,7 @@ subclasses).
         .py .py-func .docutils
         .literal}](#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造的那些，而不是那些可从[`select()`{.xref
         .py .py-func .docutils
-        .literal}](#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")的`.c`{.docutils
-        .literal}集合中获得的构造。那是：
+        .literal}](#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")的`.c`集合中获得的构造。那是：
 
             s = select([table1.c.a, table1.c.b]).select_from(table1)
             s = s.with_only_columns([table1.c.b])
@@ -5388,8 +5206,7 @@ subclasses).
             FROM (SELECT t1.a AS a, t1.b AS b
             FROM t1), t1
 
-        由于[`select()`](#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造基本上被要求从`table1`{.docutils
-        .literal}以及其自身中选择。
+        由于[`select()`](#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造基本上被要求从`table1`以及其自身中选择。
 
      `with_statement_hint`{.descname}(*text*, *dialect\_name='\*'*)[¶](#sqlalchemy.sql.expression.Select.with_statement_hint "Permalink to this definition")
     :   向此[`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")添加语句提示。
@@ -5426,8 +5243,7 @@ subclasses).
     `自动提交 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   将'autocommit'标志设置为True返回一个新的可选项。
 
-        从版本0.6开始弃用： `autocommit()`{.docutils
-        .literal}已弃用。使用带有'autocommit'标志的[`Executable.execution_options()`](#sqlalchemy.sql.expression.Executable.execution_options "sqlalchemy.sql.expression.Executable.execution_options")。
+        从版本0.6开始弃用： `autocommit()`已弃用。使用带有'autocommit'标志的[`Executable.execution_options()`](#sqlalchemy.sql.expression.Executable.execution_options "sqlalchemy.sql.expression.Executable.execution_options")。
 
     `标签 T0> （ T1> 名称 T2> ） T3> ¶ T4>`{.descname}
     :   返回这个可选择的“标量”表示，嵌入为带有标签的子查询。
@@ -5523,12 +5339,9 @@ subclasses).
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -5546,9 +5359,7 @@ subclasses).
         -   **dialect**[¶](#sqlalchemy.sql.expression.TableClause.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.TableClause.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -5619,12 +5430,9 @@ subclasses).
         返回一个根据[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")生成的SELECT
         COUNT。
 
-        从版本1.1开始弃用： `FromClause.count()`{.docutils
-        .literal}已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`{.docutils
-        .literal}表达式。
+        从版本1.1开始弃用： `FromClause.count()`已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`表达式。
 
-        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`{.docutils
-        .literal}应该是首选的：
+        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`应该是首选的：
 
             row_count = conn.scalar(
                 select([func.count('*')]).select_from(table)
@@ -5708,9 +5516,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.TableClause.join.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.TableClause.join.params.onclause)
@@ -5784,9 +5590,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.TableClause.outerjoin.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.TableClause.outerjoin.params.onclause)
@@ -5960,12 +5764,9 @@ subclasses).
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -5983,9 +5784,7 @@ subclasses).
         -   **dialect**[¶](#sqlalchemy.sql.expression.TableSample.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.TableSample.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -6056,12 +5855,9 @@ subclasses).
         返回一个根据[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")生成的SELECT
         COUNT。
 
-        从版本1.1开始弃用： `FromClause.count()`{.docutils
-        .literal}已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`{.docutils
-        .literal}表达式。
+        从版本1.1开始弃用： `FromClause.count()`已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`表达式。
 
-        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`{.docutils
-        .literal}应该是首选的：
+        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`应该是首选的：
 
             row_count = conn.scalar(
                 select([func.count('*')]).select_from(table)
@@ -6106,9 +5902,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.TableSample.join.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.TableSample.join.params.onclause)
@@ -6182,9 +5976,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.TableSample.outerjoin.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.TableSample.outerjoin.params.onclause)
@@ -6214,9 +6006,7 @@ subclasses).
 
         返回带有[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素的副本。
 
-        返回此ClauseElement的一个副本，其中[`bindparam()`{.xref .py
-        .py-func .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
+        返回此ClauseElement的一个副本，其中[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
 
             >>> clause = column('x') + bindparam('foo')
             >>> print clause.compile().params
@@ -6327,8 +6117,7 @@ subclasses).
 
         将'autocommit'标志设置为True返回一个新的可选项。
 
-        从版本0.6开始弃用： `autocommit()`{.docutils
-        .literal}已弃用。使用带有'autocommit'标志的[`Executable.execution_options()`](#sqlalchemy.sql.expression.Executable.execution_options "sqlalchemy.sql.expression.Executable.execution_options")。
+        从版本0.6开始弃用： `autocommit()`已弃用。使用带有'autocommit'标志的[`Executable.execution_options()`](#sqlalchemy.sql.expression.Executable.execution_options "sqlalchemy.sql.expression.Executable.execution_options")。
 
     `结合 T0> ¶ T1>`{.descname}
     :   *继承自* [`bind`{.xref .py .py-attr .docutils
@@ -6386,12 +6175,9 @@ subclasses).
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -6409,9 +6195,7 @@ subclasses).
         -   **dialect**[¶](#sqlalchemy.sql.expression.TextAsFrom.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.TextAsFrom.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -6482,12 +6266,9 @@ subclasses).
         返回一个根据[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")生成的SELECT
         COUNT。
 
-        从版本1.1开始弃用： `FromClause.count()`{.docutils
-        .literal}已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`{.docutils
-        .literal}表达式。
+        从版本1.1开始弃用： `FromClause.count()`已弃用。对行进行计数需要正确的列表达式和联接，DISTINCT等。必须提出，否则结果可能不是预期的结果。请直接使用适当的`func.count()`表达式。
 
-        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`{.docutils
-        .literal}应该是首选的：
+        该函数针对表的主键中的第一列或整个表中的第一列生成COUNT。显式使用`func.count()`应该是首选的：
 
             row_count = conn.scalar(
                 select([func.count('*')]).select_from(table)
@@ -6662,9 +6443,7 @@ subclasses).
 
         为执行期间生效的语句设置非SQL选项。
 
-        执行选项可以在每个语句或每个[`Connection`{.xref .py .py-class
-        .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
+        执行选项可以在每个语句或每个[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
         .py .py-class .docutils
         .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")和ORM
         [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象提供对执行选项的访问，而这些执行选项在连接时进行配置。
@@ -6736,9 +6515,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.TextAsFrom.join.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.TextAsFrom.join.params.onclause)
@@ -6822,9 +6599,7 @@ subclasses).
 
         -   **正确**
             [¶](#sqlalchemy.sql.expression.TextAsFrom.outerjoin.params.right)
-            - 连接的右侧；这是任何[`FromClause`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
+            - 连接的右侧；这是任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
             .py .py-class .docutils
             .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.sql.expression.TextAsFrom.outerjoin.params.onclause)
@@ -6854,9 +6629,7 @@ subclasses).
 
         返回带有[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素的副本。
 
-        返回此ClauseElement的一个副本，其中[`bindparam()`{.xref .py
-        .py-func .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
+        返回此ClauseElement的一个副本，其中[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
 
             >>> clause = column('x') + bindparam('foo')
             >>> print clause.compile().params

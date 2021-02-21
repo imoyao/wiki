@@ -238,9 +238,7 @@ valid since `addresses` is not in the FROM list.
     WHERE users.name = ? ORDER BY addresses.email_address
     ['jack']
 
-What we see above is that our usage of [`Query.join()`{.xref .py
-.py-meth .docutils
-.literal}](query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")
+What we see above is that our usage of [`Query.join()`](query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")
 is to supply JOIN clauses we’d like to use in subsequent query
 criterion, whereas our usage of [`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload") only
 concerns itself with the loading of the `User.addresses` collection, for each `User` in the result.

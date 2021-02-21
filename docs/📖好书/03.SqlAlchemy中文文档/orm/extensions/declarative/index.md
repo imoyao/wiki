@@ -20,8 +20,7 @@ Mappings](mapping_styles.html#classical-mapping)所述，Declarative实际上是
 [`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")结构之上的扩展。
 
 虽然文档通常提到了大多数示例的声明，但以下各节将提供有关声明API如何与基本[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")和Core
-[`Table`{.xref .py .py-class .docutils
-.literal}](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")系统交互的详细信息，如以及如何使用mixin等系统构建复杂模式。
+[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")系统交互的详细信息，如以及如何使用mixin等系统构建复杂模式。
 
 -   [基本使用](basic_use.html)
     -   [定义属性](basic_use.html#defining-attributes)

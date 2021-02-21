@@ -77,9 +77,7 @@ objects as new requests to emit SQL statements are received.
 
 ### 使用SAVEPOINT [¶](#using-savepoint "Permalink to this headline")
 
-如果底层引擎支持SAVEPOINT事务，可以使用[`begin_nested()`{.xref .py
-.py-meth .docutils
-.literal}](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")方法描述：
+如果底层引擎支持SAVEPOINT事务，可以使用[`begin_nested()`](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")方法描述：
 
     Session = sessionmaker()
     session = Session()
@@ -94,9 +92,7 @@ objects as new requests to emit SQL statements are received.
 
 [`begin_nested()`](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")
 may be called any number of times, which will issue a new SAVEPOINT with
-a unique identifier for each call. 对于每个[`begin_nested()`{.xref .py
-.py-meth .docutils
-.literal}](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")调用，必须发出相应的[`rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")或[`commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")。（但是请注意，如果返回值用作上下文管理器，即在with-statement中，则此退回/提交由上下文管理器在退出上下文时发出，因此不应显式添加。）
+a unique identifier for each call. 对于每个[`begin_nested()`](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")调用，必须发出相应的[`rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")或[`commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")。（但是请注意，如果返回值用作上下文管理器，即在with-statement中，则此退回/提交由上下文管理器在退出上下文时发出，因此不应显式添加。）
 
 当调用[`begin_nested()`](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")时，将无条件发布[`flush()`](session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")（不管`autoflush`设置如何）。这是为了当发生[`rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")时，会话的完整状态已过期，从而导致所有后续的属性/实例访问都引用[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的完整状态在[`begin_nested()`](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")之前被调用。
 
@@ -140,9 +136,7 @@ after results have been iterated. [`Session.flush()`](session_api.html#sqlalchem
 or [`Session.rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback"),
 connection and transaction resources are
 [released](glossary.html#term-released) and the [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
-goes back into “autocommit” mode, until [`Session.begin()`{.xref .py
-.py-meth .docutils
-.literal}](session_api.html#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")
+goes back into “autocommit” mode, until [`Session.begin()`](session_api.html#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")
 is called again:
 
     Session = sessionmaker(bind=engine, autocommit=True)
@@ -177,9 +171,7 @@ is called again:
 conjunction with autocommit, and is equivalent to the pattern described
 at [Nesting of Transaction
 Blocks](core_connections.html#connections-nested-transactions), where
-any number of functions can call [`Connection.begin()`{.xref .py
-.py-meth .docutils
-.literal}](core_connections.html#sqlalchemy.engine.Connection.begin "sqlalchemy.engine.Connection.begin")
+any number of functions can call [`Connection.begin()`](core_connections.html#sqlalchemy.engine.Connection.begin "sqlalchemy.engine.Connection.begin")
 and [`Transaction.commit()`](core_connections.html#sqlalchemy.engine.Transaction.commit "sqlalchemy.engine.Transaction.commit")
 as though they are the initiator of the transaction, but in fact may be
 participating in an already ongoing transaction:
@@ -260,9 +252,7 @@ Level](dialects_postgresql.html#postgresql-isolation-level)
 
 #### 设置隔离引擎范围[¶](#setting-isolation-engine-wide "Permalink to this headline")
 
-要在全局范围内设置具有特定隔离级别的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")或[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")，请使用[`create_engine.isolation_level`{.xref
-.py .py-paramref .docutils
-.literal}](core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")参数：
+要在全局范围内设置具有特定隔离级别的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")或[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")，请使用[`create_engine.isolation_level`](core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")参数：
 
     from sqlalchemy import create_engine
     from sqlalchemy.orm import sessionmaker
@@ -314,9 +304,7 @@ method:
 we are working with a [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 that has multiple binds or some other custom scheme for
 [`Session.get_bind()`](session_api.html#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind"),
-we can pass additional arguments to [`Session.connection()`{.xref .py
-.py-meth .docutils
-.literal}](session_api.html#sqlalchemy.orm.session.Session.connection "sqlalchemy.orm.session.Session.connection")
+we can pass additional arguments to [`Session.connection()`](session_api.html#sqlalchemy.orm.session.Session.connection "sqlalchemy.orm.session.Session.connection")
 in order to affect how the bind is procured:
 
     sess = my_sesssionmaker()
@@ -342,9 +330,7 @@ in order to affect how the bind is procured:
     sqlalchemy/orm_session.py:310: SAWarning: Connection is already established
     for the given bind; execution_options ignored
 
-版本0.9.9新增：将[`Session.connection.execution_options`{.xref .py
-.py-paramref .docutils
-.literal}](session_api.html#sqlalchemy.orm.session.Session.connection.params.execution_options "sqlalchemy.orm.session.Session.connection")参数添加到[`Session.connection()`](session_api.html#sqlalchemy.orm.session.Session.connection "sqlalchemy.orm.session.Session.connection")。
+版本0.9.9新增：将[`Session.connection.execution_options`(session_api.html#sqlalchemy.orm.session.Session.connection.params.execution_options "sqlalchemy.orm.session.Session.connection")参数添加到[`Session.connection()`](session_api.html#sqlalchemy.orm.session.Session.connection "sqlalchemy.orm.session.Session.connection")。
 
 ### 使用事件跟踪事务状态[¶](#tracking-transaction-state-with-events "Permalink to this headline")
 

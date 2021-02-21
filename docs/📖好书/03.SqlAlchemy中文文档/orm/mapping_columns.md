@@ -20,9 +20,7 @@ tags:
 默认情况下，映射与[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")共享与映射属性相同的名称
 - 具体而言，它匹配[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")上的`Column.key`属性，默认情况下它与`Column.name`相同。
 
-分配给映射到[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的Python属性的名称可以与`Column.name`或`Column.key`{.xref .py .py-attr
-.docutils
-.literal}不同，只需通过指定正如我们在声明性映射中所说明的那样：
+分配给映射到[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的Python属性的名称可以与`Column.name`或`Column.key`不同，只需通过指定正如我们在声明性映射中所说明的那样：
 
     class User(Base):
         __tablename__ = 'user'
@@ -144,8 +142,7 @@ Attributes](mapped_sql_expr.html#mapper-sql-expressions)中查看此用法的示
     -   **active\_history = False**
         [¶](#sqlalchemy.orm.column_property.params.active_history) -
 
-        当`True`{.docutils
-        .literal}时，表示标量属性的“上一个”值在替换时应加载，如果尚未加载。通常，简单的非主键标量值的历史跟踪逻辑只需要知道“新”值就可以执行刷新。此标志可用于使用[`attributes.get_history()`{.xref
+        当`True`时，表示标量属性的“上一个”值在替换时应加载，如果尚未加载。通常，简单的非主键标量值的历史跟踪逻辑只需要知道“新”值就可以执行刷新。此标志可用于使用[`attributes.get_history()`{.xref
         .py .py-func .docutils
         .literal}](session_api.html#sqlalchemy.orm.attributes.get_history "sqlalchemy.orm.attributes.get_history")或[`Session.is_modified()`](session_api.html#sqlalchemy.orm.session.Session.is_modified "sqlalchemy.orm.session.Session.is_modified")的应用程序，该应用程序还需要知道属性的“上一个”值。
 
@@ -170,8 +167,7 @@ Attributes](mapped_sql_expr.html#mapper-sql-expressions)中查看此用法的示
     -   **expire\_on\_flush = True**
         [¶](#sqlalchemy.orm.column_property.params.expire_on_flush) -
 
-        在刷新时禁用过期。引用SQL表达式（而不是单个表绑定列）的column\_property()被认为是“只读”属性；填充它对数据状态没有影响，它只能返回数据库状态。出于这个原因，只要父对象涉及到刷新，即在刷新中有任何种类的“脏”状态，column\_property()的值就会过期。将该参数设置为`False`{.docutils
-        .literal}将产生在刷新过程结束后保留​​现有值的效果。但请注意，具有默认到期设置的[`Session`{.xref
+        在刷新时禁用过期。引用SQL表达式（而不是单个表绑定列）的column\_property()被认为是“只读”属性；填充它对数据状态没有影响，它只能返回数据库状态。出于这个原因，只要父对象涉及到刷新，即在刷新中有任何种类的“脏”状态，column\_property()的值就会过期。将该参数设置为`False`将产生在刷新过程结束后保留​​现有值的效果。但请注意，具有默认到期设置的[`Session`{.xref
         .py .py-class .docutils
         .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")仍会在[`Session.commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")调用之后过期所有属性。
 

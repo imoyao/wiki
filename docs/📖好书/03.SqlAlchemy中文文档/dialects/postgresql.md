@@ -51,12 +51,8 @@ All Postgresql dialects support setting of transaction isolation level
 both via a dialect-specific parameter
 [`create_engine.isolation_level`](core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")
 accepted by [`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine"),
-as well as the [`Connection.execution_options.isolation_level`{.xref .py
-.py-paramref .docutils
-.literal}](core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")
-argument as passed to [`Connection.execution_options()`{.xref .py
-.py-meth .docutils
-.literal}](core_connections.html#sqlalchemy.engine.Connection.execution_options "sqlalchemy.engine.Connection.execution_options").
+as well as the [`Connection.execution_options.isolation_level`(core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")
+argument as passed to [`Connection.execution_options()`](core_connections.html#sqlalchemy.engine.Connection.execution_options "sqlalchemy.engine.Connection.execution_options").
 When using a non-psycopg2 dialect, this feature works by issuing the
 command
 `SET SESSION CHARACTERISTICS AS TRANSACTION ISOLATION LEVEL <level>` for each new connection.
@@ -93,11 +89,7 @@ command
 Remote-Schema Table Introspection和Postgresql search\_path [¶](#remote-schema-table-introspection-and-postgresql-search-path "Permalink to this headline")
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Postgresql方言可以反映来自任何模式的表格。[`Table.schema`{.xref .py
-.py-paramref .docutils
-.literal}](core_metadata.html#sqlalchemy.schema.Table.params.schema "sqlalchemy.schema.Table")参数或者[`MetaData.reflect.schema`{.xref
-.py .py-paramref .docutils
-.literal}](core_metadata.html#sqlalchemy.schema.MetaData.reflect.params.schema "sqlalchemy.schema.MetaData.reflect")参数可确定将为该表搜索哪个模式。反映的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象将在所有情况下保留此`.schema`属性。但是，对于这些[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象通过外键约束引用的表，必须确定`.schema`在这些远程表中的表示方式，该远程模式名称也是当前[Postgresql搜索路径](http://www.postgresql.org/docs/current/static/ddl-schemas.html#DDL-SCHEMAS-PATH)的成员。
+Postgresql方言可以反映来自任何模式的表格。[`Table.schema`(core_metadata.html#sqlalchemy.schema.Table.params.schema "sqlalchemy.schema.Table")参数或者[`MetaData.reflect.schema`](core_metadata.html#sqlalchemy.schema.MetaData.reflect.params.schema "sqlalchemy.schema.MetaData.reflect")参数可确定将为该表搜索哪个模式。反映的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象将在所有情况下保留此`.schema`属性。但是，对于这些[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象通过外键约束引用的表，必须确定`.schema`在这些远程表中的表示方式，该远程模式名称也是当前[Postgresql搜索路径](http://www.postgresql.org/docs/current/static/ddl-schemas.html#DDL-SCHEMAS-PATH)的成员。
 
 默认情况下，Postgresql方言模仿Postgresql自己的`pg_get_constraintdef()`内置过程鼓励的行为。此函数返回特定外键约束的样本定义，当该名称也位于Postgresql模式搜索路径中时，省略该定义中引用的模式名称。下面的交互说明了这种行为：
 
@@ -203,8 +195,7 @@ The dialect supports PG 8.2’s `INSERT..RETURNING`,
 `DELETE..RETURNING` syntaxes.
 `INSERT..RETURNING` is used by default for
 single-row INSERT statements in order to fetch newly generated primary
-key identifiers. 要指定明确的`RETURNING`子句，请在每个语句的基础上使用`_UpdateBase.returning()`{.xref
-.py .py-meth .docutils .literal}方法：
+key identifiers. 要指定明确的`RETURNING`子句，请在每个语句的基础上使用`_UpdateBase.returning()`方法：
 
     # INSERT..RETURNING
     result = table.insert().returning(table.c.col1, table.c.col2).\
@@ -315,9 +306,7 @@ and [`on_conflict_do_nothing()`](#sqlalchemy.dialects.postgresql.dml.Insert.on_c
 `ON CONFLICT...DO UPDATE` is used to perform an
 update of the already existing row, using any combination of new values
 as well as values from the proposed insertion.
-这些值是使用[`Insert.on_conflict_do_update.set_`{.xref .py .py-paramref
-.docutils
-.literal}](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.set_ "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")参数指定的。该参数接受由UPDATE的直接值组成的字典：
+这些值是使用[`Insert.on_conflict_do_update.set_`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.set_ "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")参数指定的。该参数接受由UPDATE的直接值组成的字典：
 
     from sqlalchemy.dialects.postgresql import insert
 
@@ -330,11 +319,7 @@ as well as values from the proposed insertion.
 
 警告
 
-[`Insert.on_conflict_do_update()`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")方法不考虑Python方面的默认UPDATE值或生成函数，例如****。例如那些使用[`Column.onupdate`{.xref
-.py .py-paramref .docutils
-.literal}](core_metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")指定的。除非在[`Insert.on_conflict_do_update.set_`{.xref
-.py .py-paramref .docutils
-.literal}](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.set_ "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")字典中手动指定这些值，否则这些值不会用于ON
+[`Insert.on_conflict_do_update()`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")方法不考虑Python方面的默认UPDATE值或生成函数，例如****。例如那些使用[`Column.onupdate`](core_metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")指定的。除非在[`Insert.on_conflict_do_update.set_`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.set_ "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")字典中手动指定这些值，否则这些值不会用于ON
 CONFLICT样式的UPDATE。
 
 为了引用建议的插入行，特殊别名[`excluded`](#sqlalchemy.dialects.postgresql.dml.Insert.excluded "sqlalchemy.dialects.postgresql.dml.Insert.excluded")可作为[`postgresql.dml.Insert`](#sqlalchemy.dialects.postgresql.dml.Insert "sqlalchemy.dialects.postgresql.dml.Insert")对象上的属性；这个对象是一个[`ColumnCollection`](core_sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")，这个别名包含目标表的所有列：
@@ -351,9 +336,7 @@ CONFLICT样式的UPDATE。
         )
     conn.execute(do_update_stmt)
 
-[`Insert.on_conflict_do_update()`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")方法还使用[`Insert.on_conflict_do_update.where`{.xref
-.py .py-paramref .docutils
-.literal}](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.where "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")参数接受WHERE子句，该参数将限制那些接收UPDATE的行：
+[`Insert.on_conflict_do_update()`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")方法还使用[`Insert.on_conflict_do_update.where`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.where "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")参数接受WHERE子句，该参数将限制那些接收UPDATE的行：
 
     from sqlalchemy.dialects.postgresql import insert
 
@@ -634,9 +617,7 @@ it is detected as corresponding to a unique constraint.
 
         -   **schema**[¶](#sqlalchemy.dialects.postgresql.base.PGInspector.get_view_names.params.schema)
             – Optional, retrieve names from a non-default schema.
-            对于特殊引用，请使用[`quoted_name`{.xref .py .py-class
-            .docutils
-            .literal}](core_sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            对于特殊引用，请使用[`quoted_name`](core_sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
         -   **include**
             [¶](#sqlalchemy.dialects.postgresql.base.PGInspector.get_view_names.params.include)
             -
@@ -993,9 +974,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
             – the numeric precision for use in DDL
             `CREATE TABLE`.
         -   **asdecimal**[¶](#sqlalchemy.dialects.postgresql.DOUBLE_PRECISION.params.asdecimal)
-            – the same flag as that of [`Numeric`{.xref .py .py-class
-            .docutils
-            .literal}](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric"),
+            – the same flag as that of [`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric"),
             but defaults to `False`.
             请注意，将此标志设置为`True`{.docutils
             .literal}会导致浮点转换。
@@ -1096,8 +1075,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
         `DROP TYPE` is emitted, unless
         [`create()`](#sqlalchemy.dialects.postgresql.ENUM.create "sqlalchemy.dialects.postgresql.ENUM.create")
         or [`drop()`](#sqlalchemy.dialects.postgresql.ENUM.drop "sqlalchemy.dialects.postgresql.ENUM.drop")
-        are called directly. 设置为`False`{.docutils
-        .literal}在创建方案调用SQL文件而不访问实际数据库时很有用 -
+        are called directly. 设置为`False`在创建方案调用SQL文件而不访问实际数据库时很有用 -
         [`create()`](#sqlalchemy.dialects.postgresql.ENUM.create "sqlalchemy.dialects.postgresql.ENUM.create")和[`drop()`](#sqlalchemy.dialects.postgresql.ENUM.drop "sqlalchemy.dialects.postgresql.ENUM.drop")方法可用于将SQL发送到目标绑定。
 
         New in version 0.7.4.
@@ -1253,9 +1231,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
         **text\_type**
         [¶](#sqlalchemy.dialects.postgresql.HSTORE.params.text_type) -
 
-        应该用于索引值的类型。默认为[`types.Text`{.xref .py .py-class
-        .docutils
-        .literal}](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")。
+        应该用于索引值的类型。默认为[`types.Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")。
 
         版本1.1.0中的新功能
 
@@ -1329,8 +1305,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
 
             data_table.c.data['some key'].astext == 'some value'
 
-    -   使用CAST进行索引操作（相当于`CAST（col  - >＆gt；>＆lt； / t2> ['some key' t4> AS ＆lt； type＆gt；）`{.docutils
-        .literal}）：
+    -   使用CAST进行索引操作（相当于`CAST（col  - >＆gt；>＆lt； / t2> ['some key' t4> AS ＆lt； type＆gt；）`）：
 
             data_table.c.data['some key'].astext.cast(Integer) == 5
 
@@ -1523,9 +1498,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
             – the numeric precision for use in DDL
             `CREATE TABLE`.
         -   **asdecimal**[¶](#sqlalchemy.dialects.postgresql.REAL.params.asdecimal)
-            – the same flag as that of [`Numeric`{.xref .py .py-class
-            .docutils
-            .literal}](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric"),
+            – the same flag as that of [`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric"),
             but defaults to `False`.
             请注意，将此标志设置为`True`{.docutils
             .literal}会导致浮点转换。
@@ -1770,8 +1743,7 @@ PostgreSQL DML构造[¶](#postgresql-dml-constructs "Permalink to this headline"
     :   为ON CONFLICT语句提供`excluded`名称空间
 
         PG的ON
-        CONFLICT子句允许引用将被插入的行，称为`excluded`{.docutils
-        .literal}。此属性提供此行中的所有列以供引用。
+        CONFLICT子句允许引用将被插入的行，称为`excluded`。此属性提供此行中的所有列以供引用。
 
         也可以看看
 
@@ -1782,8 +1754,7 @@ PostgreSQL DML构造[¶](#postgresql-dml-constructs "Permalink to this headline"
     `on_conflict_do_nothing`{.descname} （ *约束=无*，*index\_elements =无*，*index\_where =无* ） T5\> [¶ T6\>](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_nothing "Permalink to this definition")
     :   为ON CONFLICT子句指定DO NOTHING操作。
 
-        `constraint`和`index_elements`{.docutils
-        .literal}参数是可选的，但只能指定其中的一个参数。
+        `constraint`和`index_elements`参数是可选的，但只能指定其中的一个参数。
 
         参数：
 
@@ -1818,9 +1789,7 @@ PostgreSQL DML构造[¶](#postgresql-dml-constructs "Permalink to this headline"
      `on_conflict_do_update`{.descname}(*constraint=None*, *index\_elements=None*, *index\_where=None*, *set\_=None*, *where=None*)[¶](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update "Permalink to this definition")
     :   为ON CONFLICT子句指定DO UPDATE SET操作。
 
-        要么使用`constraint`{.docutils
-        .literal}或`index_elements`{.docutils
-        .literal}参数，而只能指定其中的一个参数。
+        要么使用`constraint`或`index_elements`参数，而只能指定其中的一个参数。
 
         参数：
 
@@ -1852,16 +1821,11 @@ PostgreSQL DML构造[¶](#postgresql-dml-constructs "Permalink to this headline"
         [¶](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.set_)
         -
 
-        必需的参数。字典或其他映射对象，列名称作为键和表达式或文字作为值，指定要采取的`SET`{.docutils
-        .literal}动作。
+        必需的参数。字典或其他映射对象，列名称作为键和表达式或文字作为值，指定要采取的`SET`动作。
 
         警告
 
-        这个字典不考虑Python指定的默认UPDATE值或生成函数，例如****。使用[`Column.onupdate`{.xref
-        .py .py-paramref .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")指定的那些。除非在[`Insert.on_conflict_do_update.set_`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.set_ "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")字典中手动指定这些值，否则这些值不会用于ON
+        这个字典不考虑Python指定的默认UPDATE值或生成函数，例如****。使用[`Column.onupdate`](core_metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")指定的那些。除非在[`Insert.on_conflict_do_update.set_`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.set_ "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")字典中手动指定这些值，否则这些值不会用于ON
         CONFLICT样式的UPDATE。
 
         参数：
@@ -1872,10 +1836,7 @@ PostgreSQL DML构造[¶](#postgresql-dml-constructs "Permalink to this headline"
 
         可选参数。If present, can be a literal SQL string or an
         acceptable expression for a `WHERE` clause
-        that restricts the rows affected by `DO UPDATE SET`{.docutils
-        .literal}. 不符合`WHERE`{.docutils
-        .literal}条件的行将不会被更新（对于这些行，实际上是一个`DO NOTHING`{.docutils
-        .literal}）。
+        that restricts the rows affected by `DO UPDATE SET`. 不符合`WHERE`条件的行将不会被更新（对于这些行，实际上是一个`DO NOTHING`）。
 
         版本1.1中的新功能
 
@@ -1978,9 +1939,7 @@ this way, the psycopg2 driver emits
 `SET client_encoding TO 'utf8'` on the connection
 explicitly, and works in all Postgresql versions.
 
-请注意，传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")的`client_encoding`设置与最近添加的`client_encoding`参数**不一样**现在直接由libpq支持。当将`client_encoding`直接传递给`psycopg2.connect()`，并使用[`create_engine.connect_args`{.xref .py .py-paramref
-.docutils
-.literal}](core_engines.html#sqlalchemy.create_engine.params.connect_args "sqlalchemy.create_engine")参数传递SQLAlchemy时，
+请注意，传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")的`client_encoding`设置与最近添加的`client_encoding`参数**不一样**现在直接由libpq支持。当将`client_encoding`直接传递给`psycopg2.connect()`，并使用[`create_engine.connect_args`](core_engines.html#sqlalchemy.create_engine.params.connect_args "sqlalchemy.create_engine")参数传递SQLAlchemy时，
 
     # libpq direct parameter setting;
     # only works for Postgresql **9.1 and above**
@@ -2002,9 +1961,7 @@ explicitly, and works in all Postgresql versions.
 
 psycopg2方言的默认参数样式是“pyformat”，其中SQL使用`%(paramname)s`样式呈现。这种格式的局限性在于它不能适应实际包含百分号或括号符号的参数名称的不寻常情况；因为SQLAlchemy在许多情况下会根据列的名称生成绑定参数名称，所以在列名中出现这些字符会导致问题。
 
-对于[`schema.Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的问题有两种解决方案，它包含名称中的这些字符之一。一种是为具有这种名称的列指定[`schema.Column.key`{.xref
-.py .py-paramref .docutils
-.literal}](core_metadata.html#sqlalchemy.schema.Column.params.key "sqlalchemy.schema.Column")：
+对于[`schema.Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的问题有两种解决方案，它包含名称中的这些字符之一。一种是为具有这种名称的列指定[`schema.Column.key`](core_metadata.html#sqlalchemy.schema.Column.params.key "sqlalchemy.schema.Column")：
 
     measurement = Table('measurement', metadata,
         Column('Size (meters)', Integer, key='size_meters')
@@ -2017,14 +1974,10 @@ bound parameter name from the `size_meters` key as
 well.
 
 版本1.0.0更改： -
-当SQL表达式中创建匿名绑定参数时，SQL表达式将使用`Column.key`作为命名的来源；此前，此行为仅适用于[`Table.insert()`{.xref .py
-.py-meth .docutils
-.literal}](core_metadata.html#sqlalchemy.schema.Table.insert "sqlalchemy.schema.Table.insert")和[`Table.update()`](core_metadata.html#sqlalchemy.schema.Table.update "sqlalchemy.schema.Table.update")参数名称。
+当SQL表达式中创建匿名绑定参数时，SQL表达式将使用`Column.key`作为命名的来源；此前，此行为仅适用于[`Table.insert()`](core_metadata.html#sqlalchemy.schema.Table.insert "sqlalchemy.schema.Table.insert")和[`Table.update()`](core_metadata.html#sqlalchemy.schema.Table.update "sqlalchemy.schema.Table.update")参数名称。
 
 另一种解决方案是使用位置格式；
-psycopg2允许使用“格式”参数样式，它可以传递给[`create_engine.paramstyle`{.xref
-.py .py-paramref .docutils
-.literal}](core_engines.html#sqlalchemy.create_engine.params.paramstyle "sqlalchemy.create_engine")：
+psycopg2允许使用“格式”参数样式，它可以传递给[`create_engine.paramstyle`](core_engines.html#sqlalchemy.create_engine.params.paramstyle "sqlalchemy.create_engine")：
 
     engine = create_engine(
         'postgresql://scott:tiger@localhost:5432/test', paramstyle='format')

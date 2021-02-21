@@ -127,8 +127,7 @@ ORM Event Interfaces](orm_deprecated.html)中描述。
     `checkin`{.descname} （ *dbapi\_con*，*con\_record* ） [¶](#sqlalchemy.interfaces.PoolListener.checkin "Permalink to this definition")
     :   连接返回到池时调用。
 
-        请注意，连接可能已关闭，如果连接已失效，则可能为无。`checkin`{.docutils
-        .literal} will not be called for detached connections.
+        请注意，连接可能已关闭，如果连接已失效，则可能为无。`checkin` will not be called for detached connections.
         （他们不回到游泳池。）
 
         dbapi\_con
@@ -147,12 +146,10 @@ ORM Event Interfaces](orm_deprecated.html)中描述。
         :   `_ConnectionFairy`{.docutils
             .literal}管理当前结帐范围的连接。
 
-        如果您引发`exc.DisconnectionError`{.docutils
-        .literal}，则将丢弃当前连接并检索新的连接。处理所有结帐侦听器将中止并使用新连接重新启动。
+        如果您引发`exc.DisconnectionError`，则将丢弃当前连接并检索新的连接。处理所有结帐侦听器将中止并使用新连接重新启动。
 
     `连接 tt> （ dbapi_con，con_record ） ¶`{.descname}
-    :   为每个新的DB-API连接或池的`creator()`{.docutils
-        .literal}调用一次。
+    :   为每个新的DB-API连接或池的`creator()`调用一次。
 
         dbapi\_con
         :   新连接的原始DB-API连接（不是SQLAlchemy

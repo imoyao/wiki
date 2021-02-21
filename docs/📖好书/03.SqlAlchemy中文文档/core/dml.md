@@ -101,13 +101,9 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
     -   **whereclause**
         [¶](#sqlalchemy.sql.expression.update.params.whereclause) -
 
-        可选SQL表达式，用于描述`UPDATE`{.docutils
-        .literal}语句的`WHERE`{.docutils
-        .literal}条件。现代应用程序可能更喜欢使用生成的[`where()`](#sqlalchemy.sql.expression.Update.where "sqlalchemy.sql.expression.Update.where")方法来指定`WHERE`{.docutils
-        .literal}子句。
+        可选SQL表达式，用于描述`UPDATE`语句的`WHERE`条件。现代应用程序可能更喜欢使用生成的[`where()`](#sqlalchemy.sql.expression.Update.where "sqlalchemy.sql.expression.Update.where")方法来指定`WHERE`子句。
 
-        WHERE子句可以引用多个表。对于支持这种情况的数据库，将生成一个`UPDATE FROM`{.docutils
-        .literal}子句，或者在MySQL上执行多表更新。该语句将在不支持多表更新语句的数据库上失败。引用WHERE子句中其他表的SQL标准方法是使用相关子查询：
+        WHERE子句可以引用多个表。对于支持这种情况的数据库，将生成一个`UPDATE FROM`子句，或者在MySQL上执行多表更新。该语句将在不支持多表更新语句的数据库上失败。引用WHERE子句中其他表的SQL标准方法是使用相关子查询：
 
             users.update().values(name='ed').where(
                     users.c.name==select([addresses.c.email_address]).\
@@ -120,18 +116,12 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
     -   **值** [¶](#sqlalchemy.sql.expression.update.params.values) -
 
-        可选字典，它指定`UPDATE`的`SET`{.docutils
-        .literal}条件。如果保留为`None`{.docutils
-        .literal}，则在执行和/或编译语句期间，根据传递给语句的那些参数确定`SET`{.docutils
-        .literal}条件。当没有任何参数的独立编译时，`SET`{.docutils
-        .literal}子句为所有列生成。
+        可选字典，它指定`UPDATE`的`SET`条件。如果保留为`None`，则在执行和/或编译语句期间，根据传递给语句的那些参数确定`SET`条件。当没有任何参数的独立编译时，`SET`子句为所有列生成。
 
         现代应用程序可能更喜欢使用生成的[`Update.values()`](#sqlalchemy.sql.expression.Update.values "sqlalchemy.sql.expression.Update.values")方法来设置UPDATE语句的值。
 
     -   **inline**[¶](#sqlalchemy.sql.expression.update.params.inline) –
-        if True, SQL defaults present on [`Column`{.xref .py .py-class
-        .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
+        if True, SQL defaults present on [`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
         objects via the `default` keyword will be
         compiled ‘inline’ into the statement and not pre-executed.
         这意味着它们的值在从[`ResultProxy.last_updated_params()`](connections.html#sqlalchemy.engine.ResultProxy.last_updated_params "sqlalchemy.engine.ResultProxy.last_updated_params")返回的字典中不可用。
@@ -140,8 +130,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
         -
 
         如果为True，则更新语句预期仅通过[`Update.values()`](#sqlalchemy.sql.expression.Update.values "sqlalchemy.sql.expression.Update.values")方法接收**参数**，并且它们必须作为Python
-        `list`{.docutils
-        .literal}呈现的UPDATE语句将为维持此顺序的每个引用列发出SET子句。
+        `list`呈现的UPDATE语句将为维持此顺序的每个引用列发出SET子句。
 
         版本1.0.10中的新功能
 
@@ -260,12 +249,9 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -283,9 +269,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
         -   **dialect**[¶](#sqlalchemy.sql.expression.Delete.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.Delete.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -466,13 +450,11 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`{.docutils
-        .literal}格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
         .py .py-attr .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
-        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`{.docutils
-        .literal}，其中值将被组合到选项列表中。
+        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
@@ -493,10 +475,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这是一个两级嵌套注册表，键入`<dialect_name>`{.docutils
-        .literal}和`<argument_name>`{.docutils
-        .literal}。例如，`postgresql_where`{.docutils
-        .literal}参数可以定位为：
+        这是一个两级嵌套注册表，键入`<dialect_name>`和`<argument_name>`。例如，`postgresql_where`参数可以定位为：
 
             arg = my_object.dialect_options['postgresql']['where']
 
@@ -520,9 +499,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         为执行期间生效的语句设置非SQL选项。
 
-        执行选项可以在每个语句或每个[`Connection`{.xref .py .py-class
-        .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
+        执行选项可以在每个语句或每个[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
         .py .py-class .docutils
         .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")和ORM
         [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象提供对执行选项的访问，而这些执行选项在连接时进行配置。
@@ -555,8 +532,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         设置语句的参数。
 
-        此方法在基类上引发`NotImplementedError`{.docutils
-        .literal}，并由[`ValuesBase`](#sqlalchemy.sql.expression.ValuesBase "sqlalchemy.sql.expression.ValuesBase")覆盖，以提供UPDATE和INSERT的SET
+        此方法在基类上引发`NotImplementedError`，并由[`ValuesBase`](#sqlalchemy.sql.expression.ValuesBase "sqlalchemy.sql.expression.ValuesBase")覆盖，以提供UPDATE和INSERT的SET
         / VALUES子句。
 
     `prefix_with`{.descname} （ *\* expr*，*\*\* kw* ） [T5\>](#sqlalchemy.sql.expression.Delete.prefix_with "Permalink to this definition")
@@ -795,12 +771,9 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -818,9 +791,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
         -   **dialect**[¶](#sqlalchemy.sql.expression.Insert.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.Insert.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -1001,13 +972,11 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`{.docutils
-        .literal}格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
         .py .py-attr .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
-        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`{.docutils
-        .literal}，其中值将被组合到选项列表中。
+        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
@@ -1028,10 +997,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这是一个两级嵌套注册表，键入`<dialect_name>`{.docutils
-        .literal}和`<argument_name>`{.docutils
-        .literal}。例如，`postgresql_where`{.docutils
-        .literal}参数可以定位为：
+        这是一个两级嵌套注册表，键入`<dialect_name>`和`<argument_name>`。例如，`postgresql_where`参数可以定位为：
 
             arg = my_object.dialect_options['postgresql']['where']
 
@@ -1055,9 +1021,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         为执行期间生效的语句设置非SQL选项。
 
-        执行选项可以在每个语句或每个[`Connection`{.xref .py .py-class
-        .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
+        执行选项可以在每个语句或每个[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
         .py .py-class .docutils
         .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")和ORM
         [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象提供对执行选项的访问，而这些执行选项在连接时进行配置。
@@ -1077,8 +1041,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
         [`Query.execution_options()`](orm_query.html#sqlalchemy.orm.query.Query.execution_options "sqlalchemy.orm.query.Query.execution_options")
 
      `from_select`{.descname}(*names*, *select*, *include\_defaults=True*)[¶](#sqlalchemy.sql.expression.Insert.from_select "Permalink to this definition")
-    :   返回一个代表`INSERT ... FROM SELECT`{.docutils
-        .literal}语句的新[`Insert`](#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")结构。
+    :   返回一个代表`INSERT ... FROM SELECT`语句的新[`Insert`](#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")结构。
 
         例如。：
 
@@ -1142,8 +1105,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         设置语句的参数。
 
-        此方法在基类上引发`NotImplementedError`{.docutils
-        .literal}，并由[`ValuesBase`](#sqlalchemy.sql.expression.ValuesBase "sqlalchemy.sql.expression.ValuesBase")覆盖，以提供UPDATE和INSERT的SET
+        此方法在基类上引发`NotImplementedError`，并由[`ValuesBase`](#sqlalchemy.sql.expression.ValuesBase "sqlalchemy.sql.expression.ValuesBase")覆盖，以提供UPDATE和INSERT的SET
         / VALUES子句。
 
     `prefix_with`{.descname} （ *\* expr*，*\*\* kw* ） [T5\>](#sqlalchemy.sql.expression.Insert.prefix_with "Permalink to this definition")
@@ -1189,8 +1151,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
         .py .py-attr .docutils
         .literal}](connections.html#sqlalchemy.engine.ResultProxy.returned_defaults "sqlalchemy.engine.ResultProxy.returned_defaults")存取器作为字典，结果可以在结果上使用列值，该值指的是键入[`Column`{.xref
         .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象及其`.key`{.docutils
-        .literal}
+        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象及其`.key`
 
         这种方法与[`UpdateBase.returning()`](#sqlalchemy.sql.expression.UpdateBase.returning "sqlalchemy.sql.expression.UpdateBase.returning")不同之处在于：
 
@@ -1362,9 +1323,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
                 users.update().values({"name": "some new name"})
 
-            对于任何一种形式，但对于[`Insert`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")构造更典型，也接受包含表中每列的条目的元组：
+            对于任何一种形式，但对于[`Insert`](#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")构造更典型，也接受包含表中每列的条目的元组：
 
                 users.insert().values((5, "some name"))
 
@@ -1407,9 +1366,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
             > defaults invoked for each row invidually when using a
             > multivalued insert](changelog_migration_10.html#bug-3288)
 
-            [`Update`](#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")结构支持一个特殊的形式，它是一个2元组的列表，当提供的时候必须和[`preserve_parameter_order`{.xref
-            .py .py-paramref .docutils
-            .literal}](#sqlalchemy.sql.expression.update.params.preserve_parameter_order "sqlalchemy.sql.expression.update")参数一起传递。这种形式导致UPDATE语句使用[`Update.values()`{.xref
+            [`Update`](#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")结构支持一个特殊的形式，它是一个2元组的列表，当提供的时候必须和[`preserve_parameter_order`](#sqlalchemy.sql.expression.update.params.preserve_parameter_order "sqlalchemy.sql.expression.update")参数一起传递。这种形式导致UPDATE语句使用[`Update.values()`{.xref
             .py .py-meth .docutils
             .literal}](#sqlalchemy.sql.expression.Update.values "sqlalchemy.sql.expression.Update.values")给出的参数顺序来呈现SET子句，而不是[`Table`{.xref
             .py .py-class .docutils
@@ -1566,12 +1523,9 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -1589,9 +1543,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
         -   **dialect**[¶](#sqlalchemy.sql.expression.Update.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.Update.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -1772,13 +1724,11 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`{.docutils
-        .literal}格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
         .py .py-attr .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
-        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`{.docutils
-        .literal}，其中值将被组合到选项列表中。
+        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
@@ -1799,10 +1749,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这是一个两级嵌套注册表，键入`<dialect_name>`{.docutils
-        .literal}和`<argument_name>`{.docutils
-        .literal}。例如，`postgresql_where`{.docutils
-        .literal}参数可以定位为：
+        这是一个两级嵌套注册表，键入`<dialect_name>`和`<argument_name>`。例如，`postgresql_where`参数可以定位为：
 
             arg = my_object.dialect_options['postgresql']['where']
 
@@ -1826,9 +1773,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         为执行期间生效的语句设置非SQL选项。
 
-        执行选项可以在每个语句或每个[`Connection`{.xref .py .py-class
-        .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
+        执行选项可以在每个语句或每个[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
         .py .py-class .docutils
         .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")和ORM
         [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象提供对执行选项的访问，而这些执行选项在连接时进行配置。
@@ -1861,8 +1806,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         设置语句的参数。
 
-        此方法在基类上引发`NotImplementedError`{.docutils
-        .literal}，并由[`ValuesBase`](#sqlalchemy.sql.expression.ValuesBase "sqlalchemy.sql.expression.ValuesBase")覆盖，以提供UPDATE和INSERT的SET
+        此方法在基类上引发`NotImplementedError`，并由[`ValuesBase`](#sqlalchemy.sql.expression.ValuesBase "sqlalchemy.sql.expression.ValuesBase")覆盖，以提供UPDATE和INSERT的SET
         / VALUES子句。
 
     `prefix_with`{.descname} （ *\* expr*，*\*\* kw* ） [T5\>](#sqlalchemy.sql.expression.Update.prefix_with "Permalink to this definition")
@@ -1908,8 +1852,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
         .py .py-attr .docutils
         .literal}](connections.html#sqlalchemy.engine.ResultProxy.returned_defaults "sqlalchemy.engine.ResultProxy.returned_defaults")存取器作为字典，结果可以在结果上使用列值，该值指的是键入[`Column`{.xref
         .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象及其`.key`{.docutils
-        .literal}
+        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象及其`.key`
 
         这种方法与[`UpdateBase.returning()`](#sqlalchemy.sql.expression.UpdateBase.returning "sqlalchemy.sql.expression.UpdateBase.returning")不同之处在于：
 
@@ -2081,9 +2024,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
                 users.update().values({"name": "some new name"})
 
-            对于任何一种形式，但对于[`Insert`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")构造更典型，也接受包含表中每列的条目的元组：
+            对于任何一种形式，但对于[`Insert`](#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")构造更典型，也接受包含表中每列的条目的元组：
 
                 users.insert().values((5, "some name"))
 
@@ -2126,9 +2067,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
             > defaults invoked for each row invidually when using a
             > multivalued insert](changelog_migration_10.html#bug-3288)
 
-            [`Update`](#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")结构支持一个特殊的形式，它是一个2元组的列表，当提供的时候必须和[`preserve_parameter_order`{.xref
-            .py .py-paramref .docutils
-            .literal}](#sqlalchemy.sql.expression.update.params.preserve_parameter_order "sqlalchemy.sql.expression.update")参数一起传递。这种形式导致UPDATE语句使用[`Update.values()`{.xref
+            [`Update`](#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")结构支持一个特殊的形式，它是一个2元组的列表，当提供的时候必须和[`preserve_parameter_order`](#sqlalchemy.sql.expression.update.params.preserve_parameter_order "sqlalchemy.sql.expression.update")参数一起传递。这种形式导致UPDATE语句使用[`Update.values()`{.xref
             .py .py-meth .docutils
             .literal}](#sqlalchemy.sql.expression.Update.values "sqlalchemy.sql.expression.Update.values")给出的参数顺序来呈现SET子句，而不是[`Table`{.xref
             .py .py-class .docutils
@@ -2281,12 +2220,9 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -2304,9 +2240,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
         -   **dialect**[¶](#sqlalchemy.sql.expression.UpdateBase.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.UpdateBase.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -2487,13 +2421,11 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`{.docutils
-        .literal}格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
         .py .py-attr .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
-        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`{.docutils
-        .literal}，其中值将被组合到选项列表中。
+        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
@@ -2514,10 +2446,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这是一个两级嵌套注册表，键入`<dialect_name>`{.docutils
-        .literal}和`<argument_name>`{.docutils
-        .literal}。例如，`postgresql_where`{.docutils
-        .literal}参数可以定位为：
+        这是一个两级嵌套注册表，键入`<dialect_name>`和`<argument_name>`。例如，`postgresql_where`参数可以定位为：
 
             arg = my_object.dialect_options['postgresql']['where']
 
@@ -2541,9 +2470,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
         为执行期间生效的语句设置非SQL选项。
 
-        执行选项可以在每个语句或每个[`Connection`{.xref .py .py-class
-        .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
+        执行选项可以在每个语句或每个[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的基础上设置。此外，[`Engine`{.xref
         .py .py-class .docutils
         .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")和ORM
         [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象提供对执行选项的访问，而这些执行选项在连接时进行配置。
@@ -2584,8 +2511,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
      `params`{.descname}(*\*arg*, *\*\*kw*)[¶](#sqlalchemy.sql.expression.UpdateBase.params "Permalink to this definition")
     :   设置语句的参数。
 
-        此方法在基类上引发`NotImplementedError`{.docutils
-        .literal}，并由[`ValuesBase`](#sqlalchemy.sql.expression.ValuesBase "sqlalchemy.sql.expression.ValuesBase")覆盖，以提供UPDATE和INSERT的SET
+        此方法在基类上引发`NotImplementedError`，并由[`ValuesBase`](#sqlalchemy.sql.expression.ValuesBase "sqlalchemy.sql.expression.ValuesBase")覆盖，以提供UPDATE和INSERT的SET
         / VALUES子句。
 
     `prefix_with`{.descname} （ *\* expr*，*\*\* kw* ） [T5\>](#sqlalchemy.sql.expression.UpdateBase.prefix_with "Permalink to this definition")
@@ -2747,8 +2673,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
         .py .py-attr .docutils
         .literal}](connections.html#sqlalchemy.engine.ResultProxy.returned_defaults "sqlalchemy.engine.ResultProxy.returned_defaults")存取器作为字典，结果可以在结果上使用列值，该值指的是键入[`Column`{.xref
         .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象及其`.key`{.docutils
-        .literal}
+        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象及其`.key`
 
         这种方法与[`UpdateBase.returning()`](#sqlalchemy.sql.expression.UpdateBase.returning "sqlalchemy.sql.expression.UpdateBase.returning")不同之处在于：
 
@@ -2841,9 +2766,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
 
                 users.update().values({"name": "some new name"})
 
-            对于任何一种形式，但对于[`Insert`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")构造更典型，也接受包含表中每列的条目的元组：
+            对于任何一种形式，但对于[`Insert`](#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")构造更典型，也接受包含表中每列的条目的元组：
 
                 users.insert().values((5, "some name"))
 
@@ -2886,9 +2809,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
             > defaults invoked for each row invidually when using a
             > multivalued insert](changelog_migration_10.html#bug-3288)
 
-            [`Update`](#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")结构支持一个特殊的形式，它是一个2元组的列表，当提供的时候必须和[`preserve_parameter_order`{.xref
-            .py .py-paramref .docutils
-            .literal}](#sqlalchemy.sql.expression.update.params.preserve_parameter_order "sqlalchemy.sql.expression.update")参数一起传递。这种形式导致UPDATE语句使用[`Update.values()`{.xref
+            [`Update`](#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")结构支持一个特殊的形式，它是一个2元组的列表，当提供的时候必须和[`preserve_parameter_order`](#sqlalchemy.sql.expression.update.params.preserve_parameter_order "sqlalchemy.sql.expression.update")参数一起传递。这种形式导致UPDATE语句使用[`Update.values()`{.xref
             .py .py-meth .docutils
             .literal}](#sqlalchemy.sql.expression.Update.values "sqlalchemy.sql.expression.Update.values")给出的参数顺序来呈现SET子句，而不是[`Table`{.xref
             .py .py-class .docutils

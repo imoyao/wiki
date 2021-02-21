@@ -148,9 +148,7 @@ deleted by the database.
     parent.children.append(Child())
     print(parent.children[0])
 
-集合不限于列表。通过在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中指定[`collection_class`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.collection_class "sqlalchemy.orm.relationship")选项，可以使用集合，可变序列和几乎任何其他可充当容器的Python对象来代替默认列表：
+集合不限于列表。通过在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中指定[`collection_class`](relationship_api.html#sqlalchemy.orm.relationship.params.collection_class "sqlalchemy.orm.relationship")选项，可以使用集合，可变序列和几乎任何其他可充当容器的Python对象来代替默认列表：
 
     class Parent(Base):
         __tablename__ = 'parent'
@@ -457,8 +455,7 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
 
             myobj.acollection = [newvalue1, newvalue2]
 
-        转换器方法将接收正在分配的对象，并且应该返回一个适用于`appender`{.docutils
-        .literal}方法的可迭代值。转换器不得分配值或改变集合，它唯一的工作就是将用户提供的值调整为ORM使用的可迭代值。
+        转换器方法将接收正在分配的对象，并且应该返回一个适用于`appender`方法的可迭代值。转换器不得分配值或改变集合，它唯一的工作就是将用户提供的值调整为ORM使用的可迭代值。
 
         默认的转换器实现将使用鸭子键入进行转换。类似dict的集合将被转换为字典值的迭代，而其他类型将被简单地迭代：
 
@@ -616,8 +613,7 @@ ORM理解`dict`接口就像列表和集合一样，如果您选择继承`dict`�
         keyfunc可以是接受对象并返回一个对象用作字典键的任何可调用对象。
 
         每次ORM需要按值添加成员（例如从数据库加载实例时）或删除成员时，都会调用keyfunc。关于字典键控应用的通常警告
-        - `keyfunc(object)`{.docutils
-        .literal}在集合的生命周期中应该返回相同的输出。基于可变属性的键控会导致集合中的“无法访问”实例“丢失”。
+        - `keyfunc(object)`在集合的生命周期中应该返回相同的输出。基于可变属性的键控会导致集合中的“无法访问”实例“丢失”。
 
     `清除`{.descname} （ ）→无。删除D. [¶](#sqlalchemy.orm.collections.MappedCollection.clear "Permalink to this definition")中的所有项目
     :   

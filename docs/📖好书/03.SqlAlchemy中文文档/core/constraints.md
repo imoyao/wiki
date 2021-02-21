@@ -107,9 +107,7 @@ MyISAM数据）。因此，这些方法将在这种循环中将约束分解为�
         )
     )
 
-当我们在后端（如Postgresql后端）上调用[`MetaData.create_all()`{.xref .py
-.py-meth .docutils
-.literal}](metadata.html#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")时，解析这两个表之间的循环并分别创建约束：
+当我们在后端（如Postgresql后端）上调用[`MetaData.create_all()`](metadata.html#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")时，解析这两个表之间的循环并分别创建约束：
 
     >>> with engine.connect() as conn:
     ...    metadata.create_all(conn, checkfirst=False)
@@ -150,11 +148,7 @@ CONSTRAINT，需要该约束具有名称。在上面的`'node'`表中，我们�
 这个错误只适用于DROP情况，因为我们可以在没有名字的CREATE情况下发出“ADD
 CONSTRAINT”；数据库通常自动分配一个。
 
-可以使用[`ForeignKeyConstraint.use_alter`{.xref .py .py-paramref
-.docutils
-.literal}](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")和[`ForeignKey.use_alter`{.xref
-.py .py-paramref .docutils
-.literal}](#sqlalchemy.schema.ForeignKey.params.use_alter "sqlalchemy.schema.ForeignKey")关键字参数来手动解决依赖关系周期。我们只能将这个标志添加到`'element'`表中，如下所示：
+可以使用[`ForeignKeyConstraint.use_alter`](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")和[`ForeignKey.use_alter`](#sqlalchemy.schema.ForeignKey.params.use_alter "sqlalchemy.schema.ForeignKey")关键字参数来手动解决依赖关系周期。我们只能将这个标志添加到`'element'`表中，如下所示：
 
     element = Table(
         'element', metadata,
@@ -204,9 +198,7 @@ objects, without the need to explicitly set the
 [`ForeignKeyConstraint.use_alter`](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")
 flag.
 
-版本1.0.0中已更改： - [`ForeignKeyConstraint.use_alter`{.xref .py
-.py-paramref .docutils
-.literal}](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")标志可与未命名的约束一起使用；实际调用时，只有DROP操作会发出特定的错误。
+版本1.0.0中已更改： - [`ForeignKeyConstraint.use_alter`(#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")标志可与未命名的约束一起使用；实际调用时，只有DROP操作会发出特定的错误。
 
 也可以看看
 
@@ -335,13 +327,7 @@ Configuration](orm_extensions_declarative_table_config.html#declarative-table-ar
 关系数据库通常为所有约束和索引分配显式名称。在通常情况下，使用`CREATE TABLE`创建表，其中CHECK，UNIQUE和PRIMARY
 KEY约束等约束与表定义时，数据库通常会有一个系统，在这个系统中，如果没有另外指定名称，名称会自动分配给这些约束。当使用诸如`ALTER TABLE`的命令在数据库中更改现有数据库表时，此命令通常需要为新约束指定明确的名称以及能够指定要删除或修改的现有约束的名称。
 
-可以使用[`Constraint.name`](#sqlalchemy.schema.Constraint.params.name "sqlalchemy.schema.Constraint")参数明确命名约束，并为索引[`Index.name`{.xref
-.py .py-paramref .docutils
-.literal}](#sqlalchemy.schema.Index.params.name "sqlalchemy.schema.Index")参数指定约束。但是，在约束条件下，该参数是可选的。还有一些使用[`Column.unique`{.xref
-.py .py-paramref .docutils
-.literal}](metadata.html#sqlalchemy.schema.Column.params.unique "sqlalchemy.schema.Column")和[`Column.index`{.xref
-.py .py-paramref .docutils
-.literal}](metadata.html#sqlalchemy.schema.Column.params.index "sqlalchemy.schema.Column")参数来创建[`UniqueConstraint`](#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")和[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")未指定明确名称的对象。
+可以使用[`Constraint.name`](#sqlalchemy.schema.Constraint.params.name "sqlalchemy.schema.Constraint")参数明确命名约束，并为索引[`Index.name`](#sqlalchemy.schema.Index.params.name "sqlalchemy.schema.Index")参数指定约束。但是，在约束条件下，该参数是可选的。还有一些使用[`Column.unique`](metadata.html#sqlalchemy.schema.Column.params.unique "sqlalchemy.schema.Column")和[`Column.index`](metadata.html#sqlalchemy.schema.Column.params.index "sqlalchemy.schema.Column")参数来创建[`UniqueConstraint`](#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")和[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")未指定明确名称的对象。
 
 更改现有表和约束的用例可以通过模式迁移工具（如[Alembic](http://alembic.zzzcomputing.com/)）来处理。然而，Alembic和SQLAlchemy目前都没有为其中未指定名称的约束对象创建名称，导致能够更改现有约束的情况意味着必须对关系数据库使用的命名系统进行反向工程以自动分配名称或者必须小心确保所有约束都被命名。
 
@@ -349,14 +335,10 @@ KEY约束等约束与表定义时，数据库通常会有一个系统，在这�
 approach has the advantage that constraints will get a consistent naming
 scheme without the need for explicit name parameters throughout the
 code, and also that the convention takes place just as well for those
-constraints and indexes produced by the [`Column.unique`{.xref .py
-.py-paramref .docutils
-.literal}](metadata.html#sqlalchemy.schema.Column.params.unique "sqlalchemy.schema.Column")
+constraints and indexes produced by the [`Column.unique`(metadata.html#sqlalchemy.schema.Column.params.unique "sqlalchemy.schema.Column")
 and [`Column.index`](metadata.html#sqlalchemy.schema.Column.params.index "sqlalchemy.schema.Column")
 parameters. 从SQLAlchemy
-0.9.2开始，这个基于事件的方法被包含在内，并且可以使用参数[`MetaData.naming_convention`{.xref
-.py .py-paramref .docutils
-.literal}](metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")进行配置。
+0.9.2开始，这个基于事件的方法被包含在内，并且可以使用参数[`MetaData.naming_convention`](metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")进行配置。
 
 [`MetaData.naming_convention`](metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")
 refers to a dictionary which accepts the [`Index`{.xref .py .py-class
@@ -405,14 +387,10 @@ collection. 例如，我们可以观察创建未命名的[`UniqueConstraint`](#s
 
 上面的`"uq_user_name"`字符串是从位于我们的元数据中的[`UniqueConstraint`](#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")对象中的`--autogenerate`复制的。
 
-The default value for [`MetaData.naming_convention`{.xref .py
-.py-paramref .docutils
-.literal}](metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")
+The default value for [`MetaData.naming_convention`(metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")
 handles the long-standing SQLAlchemy behavior of assigning a name to a
 [`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index") object
-that is created using the [`Column.index`{.xref .py .py-paramref
-.docutils
-.literal}](metadata.html#sqlalchemy.schema.Column.params.index "sqlalchemy.schema.Column")
+that is created using the [`Column.index`](metadata.html#sqlalchemy.schema.Column.params.index "sqlalchemy.schema.Column")
 parameter:
 
     >>> from sqlalchemy.sql.schema import DEFAULT_NAMING_CONVENTION
@@ -477,9 +455,7 @@ naming components.
 Constraints](http://alembic.zzzcomputing.com/en/latest/naming.html#tutorial-constraint-names "(in Alembic v0.8.7)")
 - 在Alembic文档中。
 
-版本0.9.2新增：添加了[`MetaData.naming_convention`{.xref .py
-.py-paramref .docutils
-.literal}](metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")参数。
+版本0.9.2新增：添加了[`MetaData.naming_convention`(metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")参数。
 
 ### 命名CHECK约束[¶](#naming-check-constraints "Permalink to this headline")
 
@@ -611,9 +587,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             。
         -   **info** [¶](#sqlalchemy.schema.Constraint.params.info) -
 
-            可选数据字典，将填充到此对象的[`SchemaItem.info`{.xref .py
-            .py-attr .docutils
-            .literal}](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")属性中。
+            可选数据字典，将填充到此对象的[`SchemaItem.info`](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")属性中。
 
             版本1.0.0中的新功能
 
@@ -637,9 +611,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
 *class* `sqlalchemy.schema。`{.descclassname} `ColumnCollectionMixin`{.descname} （ *\*列*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.schema.ColumnCollectionMixin "Permalink to this definition")*
 :   `列`{.descname} *=无* [¶](#sqlalchemy.schema.ColumnCollectionMixin.columns "Permalink to this definition")
-    :   [`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
-        .py .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
+    :   [`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
 
         此集合表示此对象引用的列。
 
@@ -715,8 +687,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
     ` contains_column  T0> （ T1>  COL  T2> ） T3> ¶ T4>`{.descname}
     :   如果此约束包含给定的列，则返回True。
 
-        请注意，此对象还包含属性`.columns`{.docutils
-        .literal}，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
+        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
         .py .py-class .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
 
@@ -727,13 +698,11 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`{.docutils
-        .literal}格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
         .py .py-attr .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
-        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`{.docutils
-        .literal}，其中值将被组合到选项列表中。
+        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
@@ -754,10 +723,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这是一个两级嵌套注册表，键入`<dialect_name>`{.docutils
-        .literal}和`<argument_name>`{.docutils
-        .literal}。例如，`postgresql_where`{.docutils
-        .literal}参数可以定位为：
+        这是一个两级嵌套注册表，键入`<dialect_name>`和`<argument_name>`。例如，`postgresql_where`参数可以定位为：
 
             arg = my_object.dialect_options['postgresql']['where']
 
@@ -803,9 +769,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         .literal}](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        对于具有`name`{.docutils
-        .literal}字段的模式项，返回传递给此模式对象的`quote`{.docutils
-        .literal}标志的值。
+        对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
 
         从版本0.9开始弃用：使用`<obj>.name.quote`
 
@@ -892,14 +856,11 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
     ` contains_column  T0> （ T1>  COL  T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`contains_column()`](#sqlalchemy.schema.ColumnCollectionConstraint.contains_column "sqlalchemy.schema.ColumnCollectionConstraint.contains_column")
-        *method of* [`ColumnCollectionConstraint`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
+        *method of* [`ColumnCollectionConstraint`](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
 
         如果此约束包含给定的列，则返回True。
 
-        请注意，此对象还包含属性`.columns`{.docutils
-        .literal}，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
+        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
         .py .py-class .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
 
@@ -910,13 +871,11 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`{.docutils
-        .literal}格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
         .py .py-attr .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
-        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`{.docutils
-        .literal}，其中值将被组合到选项列表中。
+        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
@@ -937,10 +896,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这是一个两级嵌套注册表，键入`<dialect_name>`{.docutils
-        .literal}和`<argument_name>`{.docutils
-        .literal}。例如，`postgresql_where`{.docutils
-        .literal}参数可以定位为：
+        这是一个两级嵌套注册表，键入`<dialect_name>`和`<argument_name>`。例如，`postgresql_where`参数可以定位为：
 
             arg = my_object.dialect_options['postgresql']['where']
 
@@ -986,9 +942,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         .literal}](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        对于具有`name`{.docutils
-        .literal}字段的模式项，返回传递给此模式对象的`quote`{.docutils
-        .literal}标志的值。
+        对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
 
         从版本0.9开始弃用：使用`<obj>.name.quote`
 
@@ -1025,18 +979,14 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         The [`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")
         object when constructed generates a
         [`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")
-        which is associated with the parent [`Table`{.xref .py .py-class
-        .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
+        which is associated with the parent [`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
         object’s collection of constraints.
 
         参数：
 
         -   **列** [¶](#sqlalchemy.schema.ForeignKey.params.column) -
 
-            关键关系的单个目标列。一个[`Column`{.xref .py .py-class
-            .docutils
-            .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象或列名称作为字符串：`tablename.columnkey`{.docutils
+            关键关系的单个目标列。一个[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象或列名称作为字符串：`tablename.columnkey`{.docutils
             .literal}或`schema.tablename.columnkey`{.docutils
             .literal}。`columnkey` is the
             `key` which has been assigned to the
@@ -1073,13 +1023,9 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         -   **use\_alter**
             [¶](#sqlalchemy.schema.ForeignKey.params.use_alter) -
 
-            传递给底层的[`ForeignKeyConstraint`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")以指示应该从CREATE
+            传递给底层的[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")以指示应该从CREATE
             TABLE / DROP
-            TABLE语句向外部生成/删除约束。有关详细说明，请参阅[`ForeignKeyConstraint.use_alter`{.xref
-            .py .py-paramref .docutils
-            .literal}](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")。
+            TABLE语句向外部生成/删除约束。有关详细说明，请参阅[`ForeignKeyConstraint.use_alter`](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")。
 
             也可以看看
 
@@ -1188,13 +1134,11 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`{.docutils
-        .literal}格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
         .py .py-attr .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
-        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`{.docutils
-        .literal}，其中值将被组合到选项列表中。
+        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
@@ -1215,10 +1159,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这是一个两级嵌套注册表，键入`<dialect_name>`{.docutils
-        .literal}和`<argument_name>`{.docutils
-        .literal}。例如，`postgresql_where`{.docutils
-        .literal}参数可以定位为：
+        这是一个两级嵌套注册表，键入`<dialect_name>`和`<argument_name>`。例如，`postgresql_where`参数可以定位为：
 
             arg = my_object.dialect_options['postgresql']['where']
 
@@ -1275,9 +1216,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         .literal}](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        对于具有`name`{.docutils
-        .literal}字段的模式项，返回传递给此模式对象的`quote`{.docutils
-        .literal}标志的值。
+        对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
 
         从版本0.9开始弃用：使用`<obj>.name.quote`
 
@@ -1362,9 +1301,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             methods will perform this resolution automatically, so the
             flag is normally not needed.
 
-            版本1.0.0中已更改：添加了外键循环的自动解析，无需在典型用例中使用[`ForeignKeyConstraint.use_alter`{.xref
-            .py .py-paramref .docutils
-            .literal}](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")。
+            版本1.0.0中已更改：添加了外键循环的自动解析，无需在典型用例中使用[`ForeignKeyConstraint.use_alter`](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")。
 
             也可以看看
 
@@ -1438,9 +1375,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
     ` column_keys  T0> ¶ T1>`{.descname}
     :   返回表示本[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")中本地列的字符串键列表。
 
-        该列表是发送给[`ForeignKeyConstraint`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")的构造函数的原始字符串参数，或者如果约束已使用[`Column`{.xref
+        该列表是发送给[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")的构造函数的原始字符串参数，或者如果约束已使用[`Column`{.xref
         .py .py-class .docutils
         .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象初始化，则为每个元素的字符串.key。
 
@@ -1448,14 +1383,11 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
     ` contains_column  T0> （ T1>  COL  T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`contains_column()`](#sqlalchemy.schema.ColumnCollectionConstraint.contains_column "sqlalchemy.schema.ColumnCollectionConstraint.contains_column")
-        *method of* [`ColumnCollectionConstraint`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
+        *method of* [`ColumnCollectionConstraint`](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
 
         如果此约束包含给定的列，则返回True。
 
-        请注意，此对象还包含属性`.columns`{.docutils
-        .literal}，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
+        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
         .py .py-class .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
 
@@ -1466,13 +1398,11 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`{.docutils
-        .literal}格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
         .py .py-attr .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
-        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`{.docutils
-        .literal}，其中值将被组合到选项列表中。
+        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
@@ -1493,10 +1423,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这是一个两级嵌套注册表，键入`<dialect_name>`{.docutils
-        .literal}和`<argument_name>`{.docutils
-        .literal}。例如，`postgresql_where`{.docutils
-        .literal}参数可以定位为：
+        这是一个两级嵌套注册表，键入`<dialect_name>`和`<argument_name>`。例如，`postgresql_where`参数可以定位为：
 
             arg = my_object.dialect_options['postgresql']['where']
 
@@ -1542,9 +1469,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         .literal}](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        对于具有`name`{.docutils
-        .literal}字段的模式项，返回传递给此模式对象的`quote`{.docutils
-        .literal}标志的值。
+        对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
 
         从版本0.9开始弃用：使用`<obj>.name.quote`
 
@@ -1659,14 +1584,11 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
     ` contains_column  T0> （ T1>  COL  T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`contains_column()`](#sqlalchemy.schema.ColumnCollectionConstraint.contains_column "sqlalchemy.schema.ColumnCollectionConstraint.contains_column")
-        *method of* [`ColumnCollectionConstraint`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
+        *method of* [`ColumnCollectionConstraint`](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
 
         如果此约束包含给定的列，则返回True。
 
-        请注意，此对象还包含属性`.columns`{.docutils
-        .literal}，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
+        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
         .py .py-class .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
 
@@ -1677,13 +1599,11 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`{.docutils
-        .literal}格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
         .py .py-attr .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
-        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`{.docutils
-        .literal}，其中值将被组合到选项列表中。
+        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
@@ -1704,10 +1624,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这是一个两级嵌套注册表，键入`<dialect_name>`{.docutils
-        .literal}和`<argument_name>`{.docutils
-        .literal}。例如，`postgresql_where`{.docutils
-        .literal}参数可以定位为：
+        这是一个两级嵌套注册表，键入`<dialect_name>`和`<argument_name>`。例如，`postgresql_where`参数可以定位为：
 
             arg = my_object.dialect_options['postgresql']['where']
 
@@ -1753,9 +1670,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         .literal}](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        对于具有`name`{.docutils
-        .literal}字段的模式项，返回传递给此模式对象的`quote`{.docutils
-        .literal}标志的值。
+        对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
 
         从版本0.9开始弃用：使用`<obj>.name.quote`
 
@@ -1768,9 +1683,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
     `__ init __`{.descname} （ *\*列*，*\*\* kw* ） [T5\>](#sqlalchemy.schema.UniqueConstraint.__init__ "Permalink to this definition")
     :   *inherited from the* [`__init__()`](#sqlalchemy.schema.ColumnCollectionConstraint.__init__ "sqlalchemy.schema.ColumnCollectionConstraint.__init__")
-        *method of* [`ColumnCollectionConstraint`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
+        *method of* [`ColumnCollectionConstraint`](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
         参数：
         -   **\*columns**[¶](#sqlalchemy.schema.UniqueConstraint.params.*columns)
             – A sequence of column names or Column objects.
@@ -1834,14 +1747,11 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
     ` contains_column  T0> （ T1>  COL  T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`contains_column()`](#sqlalchemy.schema.ColumnCollectionConstraint.contains_column "sqlalchemy.schema.ColumnCollectionConstraint.contains_column")
-        *method of* [`ColumnCollectionConstraint`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
+        *method of* [`ColumnCollectionConstraint`](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
 
         如果此约束包含给定的列，则返回True。
 
-        请注意，此对象还包含属性`.columns`{.docutils
-        .literal}，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
+        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
         .py .py-class .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
 
@@ -1852,13 +1762,11 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`{.docutils
-        .literal}格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
         .py .py-attr .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
-        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`{.docutils
-        .literal}，其中值将被组合到选项列表中。
+        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
@@ -1879,10 +1787,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这是一个两级嵌套注册表，键入`<dialect_name>`{.docutils
-        .literal}和`<argument_name>`{.docutils
-        .literal}。例如，`postgresql_where`{.docutils
-        .literal}参数可以定位为：
+        这是一个两级嵌套注册表，键入`<dialect_name>`和`<argument_name>`。例如，`postgresql_where`参数可以定位为：
 
             arg = my_object.dialect_options['postgresql']['where']
 
@@ -1928,9 +1833,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         .literal}](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        对于具有`name`{.docutils
-        .literal}字段的模式项，返回传递给此模式对象的`quote`{.docutils
-        .literal}标志的值。
+        对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
 
         从版本0.9开始弃用：使用`<obj>.name.quote`
 
@@ -2146,9 +2049,7 @@ INDEX”的DDL在表的create语句之后立即发布：
             [¶](#sqlalchemy.schema.Index.params.unique) -
             仅关键字参数；如果为True，则创建唯一索引。
         -   **quote =无 [¶](#sqlalchemy.schema.Index.params.quote) -
-            仅关键字参数；是否将引用应用于索引的名称。**以与[`Column.quote`{.xref
-            .py .py-paramref .docutils
-            .literal}](metadata.html#sqlalchemy.schema.Column.params.quote "sqlalchemy.schema.Column")相同的方式工作。
+            仅关键字参数；是否将引用应用于索引的名称。**以与[`Column.quote`](metadata.html#sqlalchemy.schema.Column.params.quote "sqlalchemy.schema.Column")相同的方式工作。
         -   **info =无** [¶](#sqlalchemy.schema.Index.params.info) -
 
             可选数据字典，将填充到此对象的[`SchemaItem.info`{.xref .py
@@ -2211,8 +2112,7 @@ INDEX”的DDL在表的create语句之后立即发布：
     `创建 T0> （ T1> 绑定=无 T2> ） T3> ¶ T4>`{.descname}
     :   使用给定的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")进行连接，为此[`Index`{.xref
         .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")发出`CREATE`{.docutils
-        .literal}语句。
+        .literal}](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")发出`CREATE`语句。
 
         也可以看看
 
@@ -2225,13 +2125,11 @@ INDEX”的DDL在表的create语句之后立即发布：
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`{.docutils
-        .literal}格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
         .py .py-attr .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
-        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`{.docutils
-        .literal}，其中值将被组合到选项列表中。
+        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
@@ -2252,10 +2150,7 @@ INDEX”的DDL在表的create语句之后立即发布：
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这是一个两级嵌套注册表，键入`<dialect_name>`{.docutils
-        .literal}和`<argument_name>`{.docutils
-        .literal}。例如，`postgresql_where`{.docutils
-        .literal}参数可以定位为：
+        这是一个两级嵌套注册表，键入`<dialect_name>`和`<argument_name>`。例如，`postgresql_where`参数可以定位为：
 
             arg = my_object.dialect_options['postgresql']['where']
 
@@ -2270,8 +2165,7 @@ INDEX”的DDL在表的create语句之后立即发布：
     `降 T0> （ T1> 绑定=无 T2> ） T3> ¶ T4>`{.descname}
     :   使用给定的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")进行连接，为此[`Index`{.xref
         .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")发出`DROP`{.docutils
-        .literal}语句。
+        .literal}](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")发出`DROP`语句。
 
         也可以看看
 
@@ -2311,9 +2205,7 @@ INDEX”的DDL在表的create语句之后立即发布：
         .literal}](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        对于具有`name`{.docutils
-        .literal}字段的模式项，返回传递给此模式对象的`quote`{.docutils
-        .literal}标志的值。
+        对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
 
         从版本0.9开始弃用：使用`<obj>.name.quote`
 

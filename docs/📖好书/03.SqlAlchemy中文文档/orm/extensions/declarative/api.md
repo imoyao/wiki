@@ -31,30 +31,24 @@ API参考[¶](#api-reference "Permalink to this headline")
         instance.
     -   **metadata**[¶](#sqlalchemy.ext.declarative.declarative_base.params.metadata)
         – An optional [`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
-        instance. 所有由基类的子类隐式声明的[`Table`{.xref .py .py-class
-        .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象将共享此元数据。如果没有提供MetaData实例，则会创建一个MetaData实例。The
+        instance. 所有由基类的子类隐式声明的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象将共享此元数据。如果没有提供MetaData实例，则会创建一个MetaData实例。The
         [`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
         instance will be available via the metadata attribute of the
         generated declarative base class.
     -   **mapper**[¶](#sqlalchemy.ext.declarative.declarative_base.params.mapper)
-        – An optional callable, defaults to [`mapper()`{.xref .py
-        .py-func .docutils
-        .literal}](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper").
+        – An optional callable, defaults to [`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper").
         将用于将子类映射到其表。
     -   **cls**
         [¶](#sqlalchemy.ext.declarative.declarative_base.params.cls) -
         默认为`object`。一种用作生成的声明式基类的基础的类型。可能是类或类的元组。
     -   **名称**
         [¶](#sqlalchemy.ext.declarative.declarative_base.params.name) -
-        默认为`Base`{.docutils
-        .literal}。生成的类的显示名称。自定义这不是必需的，但可以提高回溯和调试的清晰度。
+        默认为`Base`。生成的类的显示名称。自定义这不是必需的，但可以提高回溯和调试的清晰度。
     -   **constructor**[¶](#sqlalchemy.ext.declarative.declarative_base.params.constructor)
         – Defaults to `_declarative_constructor()`{.xref .py .py-func
         .docutils .literal}, an \_\_init\_\_ implementation that assigns
         \*\*kwargs for declared fields and relationships to an instance.
-        如果提供`None`{.docutils
-        .literal}，则不会提供\_\_init\_\_，并且构造会通过正常的Python语义回退到cls
+        如果提供`None`，则不会提供\_\_init\_\_，并且构造会通过正常的Python语义回退到cls
         .\_\_ init\_\_。
     -   **class\_registry**[¶](#sqlalchemy.ext.declarative.declarative_base.params.class_registry)
         – optional dictionary that will serve as the registry of class
@@ -140,8 +134,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 
         这是一个特殊用途修饰符，它指示基于列或MapperProperty的声明属性应该在映射继承方案内针对每个映射的子类明确配置。
 
-        下面，MyClass和MySubClass都将建立一个独立的`id`{.docutils
-        .literal} Column对象：
+        下面，MyClass和MySubClass都将建立一个独立的`id` Column对象：
 
             class HasSomeAttribute(object):
                 @declared_attr.cascading
@@ -400,9 +393,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 
 #### `__declare_last__()`[¶](#declare-last "Permalink to this headline")
 
-`__declare_last__()`钩子允许定义由[`MapperEvents.after_configured()`{.xref .py
-.py-meth .docutils
-.literal}](events.html#sqlalchemy.orm.events.MapperEvents.after_configured "sqlalchemy.orm.events.MapperEvents.after_configured")事件自动调用的类级别函数，该映射假定映射已完成，并且'configure'步骤已经完成：
+`__declare_last__()`钩子允许定义由[`MapperEvents.after_configured()`](events.html#sqlalchemy.orm.events.MapperEvents.after_configured "sqlalchemy.orm.events.MapperEvents.after_configured")事件自动调用的类级别函数，该映射假定映射已完成，并且'configure'步骤已经完成：
 
     class MyClass(Base):
         @classmethod

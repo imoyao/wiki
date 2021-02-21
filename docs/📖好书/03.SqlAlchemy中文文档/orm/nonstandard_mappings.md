@@ -111,9 +111,7 @@ including complex composites, and should be favored over the
 
 在现代的SQLAlchemy中，一个特定的类一次只能映射一个所谓的**primary**映​​射器。该映射器涉及三个主要功能领域：映射类的查询，持久性和检测。主要映射器的基本原理与[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")修改类本身的事实有关，不仅将它持久化为特定的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，而且[instrumenting](glossary.html#term-instrumenting)无法将多个映射器同等级地与一个类相关联，因为只有一个映射器可以真正对这个类进行测试。
 
-然而，有一类称为**非主映射器的映射器允许附加的映射器与类关联，但是使用范围有限。**此范围通常适用于能够从备用表或可选单元加载行，但仍会生成最终使用主映射持久化的类。非主映射器是使用古典风格的映射创建的，该映射对已使用主映射器映射的类进行映射，并涉及使用[`non_primary`{.xref
-.py .py-paramref .docutils
-.literal}](mapping_api.html#sqlalchemy.orm.mapper.params.non_primary "sqlalchemy.orm.mapper")标志。
+然而，有一类称为**非主映射器的映射器允许附加的映射器与类关联，但是使用范围有限。**此范围通常适用于能够从备用表或可选单元加载行，但仍会生成最终使用主映射持久化的类。非主映射器是使用古典风格的映射创建的，该映射对已使用主映射器映射的类进行映射，并涉及使用[`non_primary`](mapping_api.html#sqlalchemy.orm.mapper.params.non_primary "sqlalchemy.orm.mapper")标志。
 
 现代SQLAlchemy中非主要映射器的使用非常有限，因为可以直接使用[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象来完成从子查询或其他复合语句加载类的任务。
 

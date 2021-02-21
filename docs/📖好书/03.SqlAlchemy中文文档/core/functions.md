@@ -117,9 +117,7 @@ SQL函数API，工厂和内置函数。
             stmt = select([column('x'), column('y')]).                select_from(func.myfunction())
 
     `执行 T0> （ T1> ） T2> ¶ T3>`{.descname}
-    :   对嵌入的“绑定”执行[`FunctionElement`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")。
+    :   对嵌入的“绑定”执行[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")。
 
         这首先调用[`select()`](#sqlalchemy.sql.functions.FunctionElement.select "sqlalchemy.sql.functions.FunctionElement.select")来产生一个SELECT结构。
 
@@ -176,9 +174,7 @@ SQL函数API，工厂和内置函数。
     :   
 
     `标量 T0> （ T1> ） T2> ¶ T3>`{.descname}
-    :   对嵌入的“绑定”执行此[`FunctionElement`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")并返回标量值。
+    :   对嵌入的“绑定”执行此[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")并返回标量值。
 
         这首先调用[`select()`](#sqlalchemy.sql.functions.FunctionElement.select "sqlalchemy.sql.functions.FunctionElement.select")来产生一个SELECT结构。
 
@@ -221,8 +217,7 @@ SQL函数API，工厂和内置函数。
     :   对于根据由[`WithinGroup`](sqlelement.html#sqlalchemy.sql.expression.WithinGroup "sqlalchemy.sql.expression.WithinGroup")构造调用的WITHIN
         GROUP（ORDER BY）表达式中的条件定义其返回类型的类型。
 
-        默认返回None，在这种情况下使用函数的普通`.type`{.docutils
-        .literal}。
+        默认返回None，在这种情况下使用函数的普通`.type`。
 
  *class*`sqlalchemy.sql.functions.`{.descclassname}`GenericFunction`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.GenericFunction "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.Function`](#sqlalchemy.sql.functions.Function "sqlalchemy.sql.functions.Function")

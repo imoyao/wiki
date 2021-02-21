@@ -103,16 +103,10 @@ MySQL对区分大小写的标识符名称提供了不一致的支持，基于对
 --------------------------------------------------------------------------
 
 All MySQL dialects support setting of transaction isolation level both
-via a dialect-specific parameter [`create_engine.isolation_level`{.xref
-.py .py-paramref .docutils
-.literal}](core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")
+via a dialect-specific parameter [`create_engine.isolation_level`](core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")
 accepted by [`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine"),
-as well as the [`Connection.execution_options.isolation_level`{.xref .py
-.py-paramref .docutils
-.literal}](core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")
-argument as passed to [`Connection.execution_options()`{.xref .py
-.py-meth .docutils
-.literal}](core_connections.html#sqlalchemy.engine.Connection.execution_options "sqlalchemy.engine.Connection.execution_options").
+as well as the [`Connection.execution_options.isolation_level`(core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")
+argument as passed to [`Connection.execution_options()`](core_connections.html#sqlalchemy.engine.Connection.execution_options "sqlalchemy.engine.Connection.execution_options").
 This feature works by issuing the command
 `SET SESSION TRANSACTION ISOLATION LEVEL <level>`
 for each new connection.
@@ -159,9 +153,7 @@ AUTO\_INCREMENT行为[¶](#auto-increment-behavior "Permalink to this headline")
             PRIMARY KEY (id)
     )
 
-您可以通过将`False`传递给[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的[`autoincrement`{.xref
-.py .py-paramref .docutils
-.literal}](core_metadata.html#sqlalchemy.schema.Column.params.autoincrement "sqlalchemy.schema.Column")参数来禁用此行为。此标志还可用于启用某些存储引擎的多列键中辅助列的自动递增：
+您可以通过将`False`传递给[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的[`autoincrement`](core_metadata.html#sqlalchemy.schema.Column.params.autoincrement "sqlalchemy.schema.Column")参数来禁用此行为。此标志还可用于启用某些存储引擎的多列键中辅助列的自动递增：
 
     Table('mytable', metadata,
           Column('gid', Integer, primary_key=True, autoincrement=False),
@@ -639,10 +631,7 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
 
         注意
 
-        默认情况下，[`DOUBLE`](#sqlalchemy.dialects.mysql.DOUBLE "sqlalchemy.dialects.mysql.DOUBLE")类型将从float转换为Decimal，并使用默认为10位的截断。指定`scale=n`{.docutils
-        .literal}或`decimal_return_scale=n`{.docutils
-        .literal}以更改此比例，或`asdecimal=False`{.docutils
-        .literal}直接以Python浮点形式返回值。
+        默认情况下，[`DOUBLE`](#sqlalchemy.dialects.mysql.DOUBLE "sqlalchemy.dialects.mysql.DOUBLE")类型将从float转换为Decimal，并使用默认为10位的截断。指定`scale=n`或`decimal_return_scale=n`以更改此比例，或`asdecimal=False`直接以Python浮点形式返回值。
 
         参数：
 
@@ -933,10 +922,7 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
 
         注意
 
-        默认情况下，[`REAL`](#sqlalchemy.dialects.mysql.REAL "sqlalchemy.dialects.mysql.REAL")类型将从float转换为Decimal，并使用默认为10位的截断。指定`scale=n`{.docutils
-        .literal}或`decimal_return_scale=n`{.docutils
-        .literal}以更改此比例，或`asdecimal=False`{.docutils
-        .literal}直接以Python浮点形式返回值。
+        默认情况下，[`REAL`](#sqlalchemy.dialects.mysql.REAL "sqlalchemy.dialects.mysql.REAL")类型将从float转换为Decimal，并使用默认为10位的截断。指定`scale=n`或`decimal_return_scale=n`以更改此比例，或`asdecimal=False`直接以Python浮点形式返回值。
 
         参数：
 
@@ -964,9 +950,7 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
 
             Column('myset', SET("foo", "bar", "baz"))
 
-        如果此组将用于为表生成DDL，或者[`SET.retrieve_as_bitwise`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.dialects.mysql.SET.params.retrieve_as_bitwise "sqlalchemy.dialects.mysql.SET")标志设置为True，则需要使用潜在值列表。
+        如果此组将用于为表生成DDL，或者[`SET.retrieve_as_bitwise`](#sqlalchemy.dialects.mysql.SET.params.retrieve_as_bitwise "sqlalchemy.dialects.mysql.SET")标志设置为True，则需要使用潜在值列表。
 
         参数：
 

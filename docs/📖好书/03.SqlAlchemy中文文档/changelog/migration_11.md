@@ -56,9 +56,7 @@ Python环境现在还没有人听说过，为了更全面地支持Setuptools的�
 
 The [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 has long supported events that allow some degree of tracking of state
-changes to objects, including [`SessionEvents.before_attach()`{.xref .py
-.py-meth .docutils
-.literal}](orm_events.html#sqlalchemy.orm.events.SessionEvents.before_attach "sqlalchemy.orm.events.SessionEvents.before_attach"),
+changes to objects, including [`SessionEvents.before_attach()`](orm_events.html#sqlalchemy.orm.events.SessionEvents.before_attach "sqlalchemy.orm.events.SessionEvents.before_attach"),
 [`SessionEvents.after_attach()`](orm_events.html#sqlalchemy.orm.events.SessionEvents.after_attach "sqlalchemy.orm.events.SessionEvents.after_attach"),
 and [`SessionEvents.before_flush()`](orm_events.html#sqlalchemy.orm.events.SessionEvents.before_flush "sqlalchemy.orm.events.SessionEvents.before_flush").
 Session文档还在[Quickie Intro to Object
@@ -84,9 +82,7 @@ Events](orm_session_events.html#session-lifecycle-events)中。
 
 #### 强身份地图已弃用[¶](#strong-identity-map-is-deprecated "Permalink to this headline")
 
-新系列过渡事件的灵感之一是能够在物体进出身份地图时对物体进行防漏跟踪，以便可以保持物体移入和移出的“强参照物”地图。有了这个新功能，就不再需要[`Session.weak_identity_map`{.xref
-.py .py-paramref .docutils
-.literal}](orm_session_api.html#sqlalchemy.orm.session.Session.params.weak_identity_map "sqlalchemy.orm.session.Session")参数和相应的`StrongIdentityMap`对象。由于“强引用”行为曾经是唯一可用的行为，并且许多应用程序都是为了承担此行为而编写的，所以此选项在SQLAlchemy中保留了很多年。长久以来，建议对象的强参考跟踪不是[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的固有工作，而是应用程序需要构建的应用程序级构造；新的事件模型甚至可以复制强身份地图的确切行为。有关说明如何替换强身份映射的新配方，请参见[Session
+新系列过渡事件的灵感之一是能够在物体进出身份地图时对物体进行防漏跟踪，以便可以保持物体移入和移出的“强参照物”地图。有了这个新功能，就不再需要[`Session.weak_identity_map`](orm_session_api.html#sqlalchemy.orm.session.Session.params.weak_identity_map "sqlalchemy.orm.session.Session")参数和相应的`StrongIdentityMap`对象。由于“强引用”行为曾经是唯一可用的行为，并且许多应用程序都是为了承担此行为而编写的，所以此选项在SQLAlchemy中保留了很多年。长久以来，建议对象的强参考跟踪不是[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的固有工作，而是应用程序需要构建的应用程序级构造；新的事件模型甚至可以复制强身份地图的确切行为。有关说明如何替换强身份映射的新配方，请参见[Session
 Referencing
 Behavior](orm_session_state_management.html#session-referencing-behavior)。
 
@@ -321,9 +317,7 @@ MySQL的一个常见情况是当事务内发生死锁时，SAVEPOINT被取消。
 
 现在，由于[`Session.delete()`](orm_session_api.html#sqlalchemy.orm.session.Session.delete "sqlalchemy.orm.session.Session.delete")，连接表继承映射现在可以允许DELETE继续执行，它仅为基表发出DELETE，而不是子类表，允许配置ON
 DELETE
-CASCADE为配置的外键进行。这是使用[`orm.mapper.passive_deletes`{.xref .py
-.py-paramref .docutils
-.literal}](orm_mapping_api.html#sqlalchemy.orm.mapper.params.passive_deletes "sqlalchemy.orm.mapper")选项配置的：
+CASCADE为配置的外键进行。这是使用[`orm.mapper.passive_deletes`(orm_mapping_api.html#sqlalchemy.orm.mapper.params.passive_deletes "sqlalchemy.orm.mapper")选项配置的：
 
     from sqlalchemy import Column, Integer, String, ForeignKey, create_engine
     from sqlalchemy.orm import Session
@@ -354,9 +348,7 @@ CASCADE为配置的外键进行。这是使用[`orm.mapper.passive_deletes`{.xre
             'polymorphic_identity': 'b'
         }
 
-通过上面的映射，在基本映射器上配置[`orm.mapper.passive_deletes`{.xref
-.py .py-paramref .docutils
-.literal}](orm_mapping_api.html#sqlalchemy.orm.mapper.params.passive_deletes "sqlalchemy.orm.mapper")选项；它对于具有选项集的映射器的后代的所有非基本映射器都有效。对于`B`类型的对象，DELETE不再需要检索`b_table_id`的主键值（如果未加载），也不需要为表本身发出DELETE语句：
+通过上面的映射，在基本映射器上配置[`orm.mapper.passive_deletes`](orm_mapping_api.html#sqlalchemy.orm.mapper.params.passive_deletes "sqlalchemy.orm.mapper")选项；它对于具有选项集的映射器的后代的所有非基本映射器都有效。对于`B`类型的对象，DELETE不再需要检索`b_table_id`的主键值（如果未加载），也不需要为表本身发出DELETE语句：
 
     session.delete(some_b)
     session.commit()
@@ -709,9 +701,7 @@ Tracking](orm_extensions_mutable.html)扩展中，以补充现有的[`MutableDic
 ### Mapper.order\_by已弃用[¶](#mapper-order-by-is-deprecated "Permalink to this headline")
 
 来自SQLAlchemy最初版本的这个旧参数是ORM原始设计的一部分，它将[`Mapper`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象作为面向公众的查询结构。这个角色早已被[`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象取代，我们使用[`Query.order_by()`](orm_query.html#sqlalchemy.orm.query.Query.order_by "sqlalchemy.orm.query.Query.order_by")来指示结果的排序，以一种对任意组合SELECT语句，实体和SQL表达式。There
-are many areas in which [`Mapper.order_by`{.xref .py .py-paramref
-.docutils
-.literal}](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper.params.order_by "sqlalchemy.orm.mapper.Mapper")
+are many areas in which [`Mapper.order_by`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper.params.order_by "sqlalchemy.orm.mapper.Mapper")
 doesn’t work as expected (or what would be expected is not clear), such
 as when queries are combined into unions; these cases are not supported.
 
@@ -774,9 +764,7 @@ INSERT将现在将CTE呈现在整个语句的顶部，而不是像1.0中那样�
 
 ### 在窗口函数中支持RANGE和ROWS规范[¶](#support-for-range-and-rows-specification-within-window-functions "Permalink to this headline")
 
-新的[`expression.over.range_`](core_sqlelement.html#sqlalchemy.sql.expression.over.params.range_ "sqlalchemy.sql.expression.over")和[`expression.over.rows`{.xref
-.py .py-paramref .docutils
-.literal}](core_sqlelement.html#sqlalchemy.sql.expression.over.params.rows "sqlalchemy.sql.expression.over")参数允许窗口函数的RANGE和ROWS表达式：
+新的[`expression.over.range_`](core_sqlelement.html#sqlalchemy.sql.expression.over.params.range_ "sqlalchemy.sql.expression.over")和[`expression.over.rows`](core_sqlelement.html#sqlalchemy.sql.expression.over.params.rows "sqlalchemy.sql.expression.over")参数允许窗口函数的RANGE和ROWS表达式：
 
     >>> from sqlalchemy import func
 
@@ -789,9 +777,7 @@ INSERT将现在将CTE呈现在整个语句的顶部，而不是像1.0中那样�
     >>> print func.row_number().over(order_by='x', range_=(-2, None))
     row_number() OVER (ORDER BY x RANGE BETWEEN :param_1 PRECEDING AND UNBOUNDED FOLLOWING)
 
-[`expression.over.range_`](core_sqlelement.html#sqlalchemy.sql.expression.over.params.range_ "sqlalchemy.sql.expression.over")和[`expression.over.rows`{.xref
-.py .py-paramref .docutils
-.literal}](core_sqlelement.html#sqlalchemy.sql.expression.over.params.rows "sqlalchemy.sql.expression.over")指定为2元组，指定特定范围的负值和正值，“CURRENT
+[`expression.over.range_`](core_sqlelement.html#sqlalchemy.sql.expression.over.params.range_ "sqlalchemy.sql.expression.over")和[`expression.over.rows`](core_sqlelement.html#sqlalchemy.sql.expression.over.params.rows "sqlalchemy.sql.expression.over")指定为2元组，指定特定范围的负值和正值，“CURRENT
 ROW”为0，无对于UNBOUNDED。
 
 也可以看看
@@ -948,9 +934,7 @@ NOT”，它在SQLite上的工作方式与其他后端不同：
 
 ### 核心和ORM支持FULL OUTER JOIN [¶](#core-and-orm-support-for-full-outer-join "Permalink to this headline")
 
-The new flag [`FromClause.outerjoin.full`{.xref .py .py-paramref
-.docutils
-.literal}](core_selectable.html#sqlalchemy.sql.expression.FromClause.outerjoin.params.full "sqlalchemy.sql.expression.FromClause.outerjoin"),
+The new flag [`FromClause.outerjoin.full`](core_selectable.html#sqlalchemy.sql.expression.FromClause.outerjoin.params.full "sqlalchemy.sql.expression.FromClause.outerjoin"),
 available at the Core and ORM level, instructs the compiler to render
 `FULL OUTER JOIN` where it would normally render
 `LEFT OUTER JOIN`:
@@ -1105,9 +1089,7 @@ Python sequence, both in the pure Python and C-extension version.
 
 此验证在默认情况下处于关闭状态，因为已经存在用户不希望进行此类验证（例如字符串比较）的用例。对于非字符串类型，它必然发生在所有情况下。当返回来自数据库的值时，检查也无条件地发生在结果处理端。
 
-此验证除了使用非本机枚举类型时创建CHECK约束的现有行为外。现在可以使用新的[`Enum.create_constraint`{.xref
-.py .py-paramref .docutils
-.literal}](core_type_basics.html#sqlalchemy.types.Enum.params.create_constraint "sqlalchemy.types.Enum")标志禁止创建此CHECK约束。
+此验证除了使用非本机枚举类型时创建CHECK约束的现有行为外。现在可以使用新的[`Enum.create_constraint`](core_type_basics.html#sqlalchemy.types.Enum.params.create_constraint "sqlalchemy.types.Enum")标志禁止创建此CHECK约束。
 
 [＃3095 T0\>](http://www.sqlalchemy.org/trac/ticket/3095)
 
@@ -1230,9 +1212,7 @@ constant were used.
     session.add(obj)
     session.commit()   # would fire off default / server_default, not encode "'none'"
 
-The other is when the [`Session.bulk_insert_mappings()`{.xref .py
-.py-meth .docutils
-.literal}](orm_session_api.html#sqlalchemy.orm.session.Session.bulk_insert_mappings "sqlalchemy.orm.session.Session.bulk_insert_mappings")
+The other is when the [`Session.bulk_insert_mappings()`](orm_session_api.html#sqlalchemy.orm.session.Session.bulk_insert_mappings "sqlalchemy.orm.session.Session.bulk_insert_mappings")
 method were used, `None` would be ignored in all
 cases:
 
@@ -1240,9 +1220,7 @@ cases:
         MyObject,
         [{"json_value": None}])  # would insert SQL NULL and/or trigger defaults
 
-[`types.JSON`](core_type_basics.html#sqlalchemy.types.JSON "sqlalchemy.types.JSON")类型现在实现了[`TypeEngine.should_evaluate_none`](core_type_api.html#sqlalchemy.types.TypeEngine.should_evaluate_none "sqlalchemy.types.TypeEngine.should_evaluate_none")标志，表示`None`在这里不应忽略；它会根据[`types.JSON.none_as_null`{.xref .py
-.py-paramref .docutils
-.literal}](core_type_basics.html#sqlalchemy.types.JSON.params.none_as_null "sqlalchemy.types.JSON")的值自动进行配置。感谢[＃3061](http://www.sqlalchemy.org/trac/ticket/3061)，我们可以区分何时值`None`由用户主动设置，而不是根本不设置。
+[`types.JSON`](core_type_basics.html#sqlalchemy.types.JSON "sqlalchemy.types.JSON")类型现在实现了[`TypeEngine.should_evaluate_none`](core_type_api.html#sqlalchemy.types.TypeEngine.should_evaluate_none "sqlalchemy.types.TypeEngine.should_evaluate_none")标志，表示`None`在这里不应忽略；它会根据[`types.JSON.none_as_null`(core_type_basics.html#sqlalchemy.types.JSON.params.none_as_null "sqlalchemy.types.JSON")的值自动进行配置。感谢[＃3061](http://www.sqlalchemy.org/trac/ticket/3061)，我们可以区分何时值`None`由用户主动设置，而不是根本不设置。
 
 如果该属性根本没有设置，那么列级别的默认值*将*触发并且/或者SQL
 NULL按预期插入，就像以前的行为一样。下面说明两个变体：
@@ -1263,9 +1241,7 @@ NULL按预期插入，就像以前的行为一样。下面说明两个变体：
 
 为了确保应用程序始终能够完全控制[`types.JSON`](core_type_basics.html#sqlalchemy.types.JSON "sqlalchemy.types.JSON")，[`postgresql.JSON`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")，[`mysql.JSON`](dialects_mysql.html#sqlalchemy.dialects.mysql.JSON "sqlalchemy.dialects.mysql.JSON")的值级别，或[`postgresql.JSONB`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSONB "sqlalchemy.dialects.postgresql.JSONB")列应该接收到SQL
 NULL或JSON `"null"`值时，常量[`types.JSON.NULL`](core_type_basics.html#sqlalchemy.types.JSON.NULL "sqlalchemy.types.JSON.NULL")已被添加，与[`null()`](core_sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")结合使用可以完全确定SQL
-NULL和JSON `"null"`之间的关系，无论[`types.JSON.none_as_null`{.xref .py
-.py-paramref .docutils
-.literal}](core_type_basics.html#sqlalchemy.types.JSON.params.none_as_null "sqlalchemy.types.JSON")被设定为：
+NULL和JSON `"null"`之间的关系，无论[`types.JSON.none_as_null`(core_type_basics.html#sqlalchemy.types.JSON.params.none_as_null "sqlalchemy.types.JSON")被设定为：
 
     from sqlalchemy import null
     from sqlalchemy.dialects.postgresql import JSON
@@ -1395,11 +1371,7 @@ ENUM一个新的CREATE TYPE语句的情况下，现在将自动与[`TypeDecorato
 
 ### 表对象的多租户模式转换[¶](#multi-tenancy-schema-translation-for-table-objects "Permalink to this headline")
 
-为了支持在许多模式中使用同一组[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的应用程序的用例，例如schema-per-user，新的执行选项[`Connection.execution_options.schema_translate_map`{.xref
-.py .py-paramref .docutils
-.literal}](core_connections.html#sqlalchemy.engine.Connection.execution_options.params.schema_translate_map "sqlalchemy.engine.Connection.execution_options")使用这种映射，可以在每个连接的基础上创建一组[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象来引用任何一组模式，而不是指定它们的[`Table.schema`{.xref
-.py .py-paramref .docutils
-.literal}](core_metadata.html#sqlalchemy.schema.Table.params.schema "sqlalchemy.schema.Table")
+为了支持在许多模式中使用同一组[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的应用程序的用例，例如schema-per-user，新的执行选项[`Connection.execution_options.schema_translate_map`](core_connections.html#sqlalchemy.engine.Connection.execution_options.params.schema_translate_map "sqlalchemy.engine.Connection.execution_options")使用这种映射，可以在每个连接的基础上创建一组[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象来引用任何一组模式，而不是指定它们的[`Table.schema`](core_metadata.html#sqlalchemy.schema.Table.params.schema "sqlalchemy.schema.Table")
 。该翻译适用于DDL和SQL生成以及ORM。
 
 例如，如果`User`类分配了架构“per\_user”：
@@ -1586,9 +1558,7 @@ which implement the full syntax supported by Posgresql 9.5 in this area:
 ### ARRAY和JSON类型现在可以正确指定“不可用”[¶](#array-and-json-types-now-correctly-specify-unhashable "Permalink to this headline")
 
 如[Changes regarding “unhashable”
-types](#change-3499)中所述，当查询的选定实体将完整的ORM实体与列表达式混合时，ORM依赖于能够为列值生成散列函数。`hashable=False`标志现在可以在所有PG的“数据结构”类型中正确设置，包括[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")和[`postgresql.JSON`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")。[`JSONB`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSONB "sqlalchemy.dialects.postgresql.JSONB")和[`HSTORE`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")类型已包含此标志。对于[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")，这是基于[`postgresql.ARRAY.as_tuple`{.xref
-.py .py-paramref .docutils
-.literal}](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY.params.as_tuple "sqlalchemy.dialects.postgresql.ARRAY")标志的条件，但是不应该再设置该标志来获得数组值存在于组成的ORM行中。
+types](#change-3499)中所述，当查询的选定实体将完整的ORM实体与列表达式混合时，ORM依赖于能够为列值生成散列函数。`hashable=False`标志现在可以在所有PG的“数据结构”类型中正确设置，包括[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")和[`postgresql.JSON`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")。[`JSONB`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSONB "sqlalchemy.dialects.postgresql.JSONB")和[`HSTORE`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")类型已包含此标志。对于[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")，这是基于[`postgresql.ARRAY.as_tuple`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY.params.as_tuple "sqlalchemy.dialects.postgresql.ARRAY")标志的条件，但是不应该再设置该标志来获得数组值存在于组成的ORM行中。
 
 也可以看看
 
@@ -1705,9 +1675,7 @@ Postgresql方言现在支持在方法[`Inspector.get_check_constraints()`](core_
 
 ### “Plain”和“Materialized”视图可以单独检查[¶](#plain-and-materialized-views-can-be-inspected-separately "Permalink to this headline")
 
-新参数[`PGInspector.get_view_names.include`{.xref .py .py-paramref
-.docutils
-.literal}](dialects_postgresql.html#sqlalchemy.dialects.postgresql.base.PGInspector.get_view_names.params.include "sqlalchemy.dialects.postgresql.base.PGInspector.get_view_names")允许指定应返回哪些视图的子类型：
+新参数[`PGInspector.get_view_names.include`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.base.PGInspector.get_view_names.params.include "sqlalchemy.dialects.postgresql.base.PGInspector.get_view_names")允许指定应返回哪些视图的子类型：
 
     from sqlalchemy import inspect
     insp = inspect(engine)
@@ -1742,11 +1710,7 @@ Parameters](dialects_postgresql.html#postgresql-index-storage)
 
 ### 支持FOR UPDATE SKIP LOCKED /无密钥更新/用于密钥共享[¶](#support-for-for-update-skip-locked-for-no-key-update-for-key-share "Permalink to this headline")
 
-Core和ORM中的新参数[`GenerativeSelect.with_for_update.skip_locked`{.xref
-.py .py-paramref .docutils
-.literal}](core_selectable.html#sqlalchemy.sql.expression.GenerativeSelect.with_for_update.params.skip_locked "sqlalchemy.sql.expression.GenerativeSelect.with_for_update")和[`GenerativeSelect.with_for_update.key_share`{.xref
-.py .py-paramref .docutils
-.literal}](core_selectable.html#sqlalchemy.sql.expression.GenerativeSelect.with_for_update.params.key_share "sqlalchemy.sql.expression.GenerativeSelect.with_for_update")对“SELECT
+Core和ORM中的新参数[`GenerativeSelect.with_for_update.skip_locked`](core_selectable.html#sqlalchemy.sql.expression.GenerativeSelect.with_for_update.params.skip_locked "sqlalchemy.sql.expression.GenerativeSelect.with_for_update")和[`GenerativeSelect.with_for_update.key_share`](core_selectable.html#sqlalchemy.sql.expression.GenerativeSelect.with_for_update.params.key_share "sqlalchemy.sql.expression.GenerativeSelect.with_for_update")对“SELECT
 ... FOR UPDATE”或“SELECT”进行修改。 ..FOR SHARE“查询Postgresql后端：
 
 -   选择无钥匙更新：
@@ -1779,9 +1743,7 @@ Core和ORM中的新参数[`GenerativeSelect.with_for_update.skip_locked`{.xref
 
 The MySQL dialect now accepts the value “AUTOCOMMIT” for the
 [`create_engine.isolation_level`](core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")
-and [`Connection.execution_options.isolation_level`{.xref .py
-.py-paramref .docutils
-.literal}](core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")
+and [`Connection.execution_options.isolation_level`(core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")
 parameters:
 
     connection = engine.connect()
@@ -1882,9 +1844,7 @@ and additionally has improved support for tables and indexes that are
 created and reflected from a remote schema, which in SQLite is a dataase
 that is assigned a name via the `ATTACH` statement;
 previously, the\`\`CREATE INDEX\`\` DDL didn’t work correctly for a
-schema-bound table and the [`Inspector.get_foreign_keys()`{.xref .py
-.py-meth .docutils
-.literal}](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_foreign_keys "sqlalchemy.engine.reflection.Inspector.get_foreign_keys")
+schema-bound table and the [`Inspector.get_foreign_keys()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_foreign_keys "sqlalchemy.engine.reflection.Inspector.get_foreign_keys")
 method will now indicate the given schema in the results.
 不支持跨模式外键。
 
@@ -1911,11 +1871,7 @@ will also indicate these phrases.
 
 ### 增加了SQL Server [¶](#added-transaction-isolation-level-support-for-sql-server "Permalink to this headline")的事务隔离级别支持
 
-所有SQL Server方言都通过[`create_engine.isolation_level`{.xref .py
-.py-paramref .docutils
-.literal}](core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")和[`Connection.execution_options.isolation_level`{.xref
-.py .py-paramref .docutils
-.literal}](core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")参数支持事务隔离级别设置。支持四种标准级别以及`SNAPSHOT`：
+所有SQL Server方言都通过[`create_engine.isolation_level`(core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")和[`Connection.execution_options.isolation_level`](core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")参数支持事务隔离级别设置。支持四种标准级别以及`SNAPSHOT`：
 
     engine = create_engine(
         "mssql+pyodbc://scott:tiger@ms_2008",
@@ -1996,7 +1952,5 @@ aliasing to be turned off.
 
 ### 支持SKIP LOCKED [¶](#support-for-skip-locked "Permalink to this headline")
 
-Core和ORM中的新参数[`GenerativeSelect.with_for_update.skip_locked`{.xref
-.py .py-paramref .docutils
-.literal}](core_selectable.html#sqlalchemy.sql.expression.GenerativeSelect.with_for_update.params.skip_locked "sqlalchemy.sql.expression.GenerativeSelect.with_for_update")将生成“SELECT
+Core和ORM中的新参数[`GenerativeSelect.with_for_update.skip_locked`](core_selectable.html#sqlalchemy.sql.expression.GenerativeSelect.with_for_update.params.skip_locked "sqlalchemy.sql.expression.GenerativeSelect.with_for_update")将生成“SELECT
 ... FOR UPDATE”或“SELECT .. FOR SHARE”查询的“SKIP LOCKED”后缀。

@@ -38,9 +38,7 @@ tags:
 
 在第二种情况下，必须在引用“条目”行之前插入“小部件”行，但直到生成“条目”行后才能设置该“小部件”行的“favorite\_entry\_id”列。在这种情况下，仅使用两个INSERT语句插入“小部件”和“入口”行通常是不可能的；必须执行UPDATE以保持实现外键约束。例外情况是，如果外键配置为“延迟到提交”（某些数据库支持的功能），并且手动填充了标识符（本质上绕过[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")）。
 
-为了能够使用补充UPDATE语句，我们使用[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`post_update`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.post_update "sqlalchemy.orm.relationship")选项。这指定两行之间的链接应该在两行已被INSERTED后使用UPDATE语句创建；它还会导致在发出DELETE之前通过UPDATE将行彼此解除关联。The
+为了能够使用补充UPDATE语句，我们使用[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`post_update`](relationship_api.html#sqlalchemy.orm.relationship.params.post_update "sqlalchemy.orm.relationship")选项。这指定两行之间的链接应该在两行已被INSERTED后使用UPDATE语句创建；它还会导致在发出DELETE之前通过UPDATE将行彼此解除关联。The
 flag should be placed on just *one* of the relationships, preferably the
 many-to-one side.
 下面我们举例说明一个完整的例子，包括两个[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")结构：
@@ -135,9 +133,7 @@ many-to-one side.
 
 上面的映射具有桥接`widget_id`和`favorite_entry_id`列的组合[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")。To
 ensure that `Widget.widget_id` remains an
-“autoincrementing” column we specify [`autoincrement`{.xref .py
-.py-paramref .docutils
-.literal}](core_metadata.html#sqlalchemy.schema.Column.params.autoincrement "sqlalchemy.schema.Column")
+“autoincrementing” column we specify [`autoincrement`(core_metadata.html#sqlalchemy.schema.Column.params.autoincrement "sqlalchemy.schema.Column")
 to the value `"ignore_fk"` on [`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column"),
 and additionally on each [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
 we must limit those columns considered as part of the foreign key for

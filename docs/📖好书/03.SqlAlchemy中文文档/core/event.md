@@ -45,9 +45,7 @@ New in version 0.7: The system supersedes the previous system of
 命名参数样式[¶](#named-argument-styles "Permalink to this headline")
 --------------------------------------------------------------------
 
-听众功能可以接受一些不同的参数风格。以[`PoolEvents.connect()`{.xref .py
-.py-meth .docutils
-.literal}](events.html#sqlalchemy.events.PoolEvents.connect "sqlalchemy.events.PoolEvents.connect")为例，该函数被记录为接收`dbapi_connection`和`connection_record`参数。We can opt to
+听众功能可以接受一些不同的参数风格。以[`PoolEvents.connect()`](events.html#sqlalchemy.events.PoolEvents.connect "sqlalchemy.events.PoolEvents.connect")为例，该函数被记录为接收`dbapi_connection`和`connection_record`参数。We can opt to
 receive these arguments by name, by establishing a listener function
 that accepts `**keyword` arguments, by passing
 `named=True` to either [`listen()`](#sqlalchemy.event.listen "sqlalchemy.event.listen") or

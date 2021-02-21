@@ -113,8 +113,7 @@ emitted, even though an append occurs to `some_user.addresses` - the event is ca
     -   **include\_backrefs**
         [¶](#sqlalchemy.orm.validates.params.include_backrefs) -
 
-        默认为`True`；如果`False`{.docutils
-        .literal}，如果始发者是通过backref相关的属性事件，则验证函数不会发出。这可以用于双向[`validates()`{.xref
+        默认为`True`；如果`False`，如果始发者是通过backref相关的属性事件，则验证函数不会发出。这可以用于双向[`validates()`{.xref
         .py .py-func .docutils
         .literal}](#sqlalchemy.orm.validates "sqlalchemy.orm.validates")用法，其中每个属性操作只有一个验证器应该发出。
 
@@ -315,15 +314,11 @@ attribute](#mapper-hybrids)特性更好地处理了在描述符中增强属性�
         is accessed at the instance level.
     -   **map\_column** [¶](#sqlalchemy.orm.synonym.params.map_column) -
 
-        if `True`, the [`synonym()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")
+        if `True`, the [`synonym()`](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")
         construct will locate the existing named [`MapperProperty`{.xref
         .py .py-class .docutils
         .literal}](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")
-        based on the attribute name of this [`synonym()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym"),
+        based on the attribute name of this [`synonym()`](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym"),
         and assign it to a new attribute linked to the name of this
         [`synonym()`](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym").
         也就是说，给定一个映射如下：
@@ -337,14 +332,9 @@ attribute](#mapper-hybrids)特性更好地处理了在描述符中增强属性�
                 job_status = synonym("_job_status", map_column=True)
 
         The above class `MyClass` will now have the
-        `job_status` [`Column`{.xref .py .py-class
-        .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
-        object mapped to the attribute named `_job_status`{.docutils
-        .literal}, and the attribute named `job_status`{.docutils
-        .literal} will refer to the synonym itself.
-        此功能通常与`descriptor`{.docutils
-        .literal}参数结合使用，以便将用户定义的描述符作为现有列的“包装器”链接。
+        `job_status` [`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
+        object mapped to the attribute named `_job_status`, and the attribute named `job_status` will refer to the synonym itself.
+        此功能通常与`descriptor`参数结合使用，以便将用户定义的描述符作为现有列的“包装器”链接。
 
     -   **info** [¶](#sqlalchemy.orm.synonym.params.info) -
 
