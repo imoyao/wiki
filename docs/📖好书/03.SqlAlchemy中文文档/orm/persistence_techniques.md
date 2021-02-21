@@ -163,9 +163,7 @@ through, rather than omitting it as a “missing” value:
 
 [`TypeEngine.evaluates_none()`](core_type_api.html#sqlalchemy.types.TypeEngine.evaluates_none "sqlalchemy.types.TypeEngine.evaluates_none")修饰符主要用于指示Python值“无”显着的类型，主要示例是可能要保留JSON的JSON类型`null`我们在这里略微重新调整它，以便向ORM发出信号，即使没有为其分配特殊的类型级别的行为，我们仍然希望将`None`传递到类型中。
 
-版本1.1中的新增功能：添加了[`TypeEngine.evaluates_none()`{.xref .py
-.py-meth .docutils
-.literal}](core_type_api.html#sqlalchemy.types.TypeEngine.evaluates_none "sqlalchemy.types.TypeEngine.evaluates_none")方法，以表明应将“无”值视为重要。
+版本1.1中的新增功能：添加了[`TypeEngine.evaluates_none()`](core_type_api.html#sqlalchemy.types.TypeEngine.evaluates_none "sqlalchemy.types.TypeEngine.evaluates_none")方法，以表明应将“无”值视为重要。
 
 分区策略[¶](#partitioning-strategies "Permalink to this headline")
 ------------------------------------------------------------------
@@ -291,9 +289,7 @@ methods, including performance metrics.
 
 批量方法提供的性能在特定情况下可以接近在“executemany”上下文中使用核心[`Insert`](core_dml.html#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")和[`Update`](core_dml.html#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")结构的性能（有关“executemany”
 ，请参阅Core教程中的[Executing Multiple
-Statements](core_tutorial.html#execute-multiple)）。为了实现这一点，应禁用[`Session.bulk_insert_mappings.return_defaults`{.xref
-.py .py-paramref .docutils
-.literal}](session_api.html#sqlalchemy.orm.session.Session.bulk_insert_mappings.params.return_defaults "sqlalchemy.orm.session.Session.bulk_insert_mappings")标志，以便可以将行组合在一起。应仔细研究[Performance](examples.html#examples-performance)中的示例套件，以便熟悉可以实现批量性能的快速程度。
+Statements](core_tutorial.html#execute-multiple)）。为了实现这一点，应禁用[`Session.bulk_insert_mappings.return_defaults`](session_api.html#sqlalchemy.orm.session.Session.bulk_insert_mappings.params.return_defaults "sqlalchemy.orm.session.Session.bulk_insert_mappings")标志，以便可以将行组合在一起。应仔细研究[Performance](examples.html#examples-performance)中的示例套件，以便熟悉可以实现批量性能的快速程度。
 
 ### ORM兼容性[¶](#orm-compatibility "Permalink to this headline")
 

@@ -215,10 +215,8 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
         .py-class .docutils
         .literal}](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
         type, thus causing all [`String`](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
-        -based columns to accommodate Python `unicode`{.docutils
-        .literal} objects. 当使用不支持本地支持Python
-        `unicode`{.docutils
-        .literal}对象的DBAPI时，该标志可用作引擎范围的设置，并在收到一个错误时引发错误（如带有FreeTDS的pyodbc）。
+        -based columns to accommodate Python `unicode` objects. 当使用不支持本地支持Python
+        `unicode`对象的DBAPI时，该标志可用作引擎范围的设置，并在收到一个错误时引发错误（如带有FreeTDS的pyodbc）。
 
         有关此标志指示的更多详细信息，请参阅[`String`{.xref .py
         .py-class .docutils
@@ -229,10 +227,7 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
     -   **echo=False**[¶](#sqlalchemy.create_engine.params.echo) – if
         True, the Engine will log all statements as well as a repr() of
         their parameter lists to the engines logger, which defaults to
-        sys.stdout. 可以随时修改`Engine`{.docutils
-        .literal}的`echo`{.docutils
-        .literal}属性，以打开和关闭日志记录。如果设置为字符串`"debug"`{.docutils
-        .literal}，结果行也会打印到标准输出。这个标志最终控制着一个Python记录器；有关如何直接配置日志记录的信息，请参阅[Configuring
+        sys.stdout. 可以随时修改`Engine`的`echo`属性，以打开和关闭日志记录。如果设置为字符串`"debug"`，结果行也会打印到标准输出。这个标志最终控制着一个Python记录器；有关如何直接配置日志记录的信息，请参阅[Configuring
         Logging](#dbengine-logging)。
     -   **echo\_pool=False**[¶](#sqlalchemy.create_engine.params.echo_pool)
         – if True, the connection pool will log all checkouts/checkins
@@ -244,14 +239,10 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
         默认为`utf-8`。This is the string encoding
         used by SQLAlchemy for string encode/decode operations which
         occur within SQLAlchemy, **outside of the
-        DBAPI.**大多数现代的DBAPI都具有对Python `unicode`{.docutils
-        .literal}对象的一定程度的直接支持，您在Python
-        2中看到的形式为`u'some 字符串“ T4>  T2>。`{.docutils
-        .literal}对于DBAPI被检测为不支持Python `unicode`{.docutils
-        .literal}对象的情况，此编码用于确定源/目标编码。对于DBAPI直接处理unicode的情况，**未使用**。
+        DBAPI.**大多数现代的DBAPI都具有对Python `unicode`对象的一定程度的直接支持，您在Python
+        2中看到的形式为`u'some 字符串“ T4>  T2>。`对于DBAPI被检测为不支持Python `unicode`对象的情况，此编码用于确定源/目标编码。对于DBAPI直接处理unicode的情况，**未使用**。
 
-        要正确配置系统以适应Python `unicode`{.docutils
-        .literal}对象，应该将DBAPI配置为根据需要最大程度地处理unicode -
+        要正确配置系统以适应Python `unicode`对象，应该将DBAPI配置为根据需要最大程度地处理unicode -
         请参阅[Dialects](dialects_index.html)
 
         可能需要在DBAPI之外容纳字符串编码的领域包括零个或多个：
@@ -276,8 +267,7 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
 
         When using Python 3, the DBAPI is required to support *all* of
         the above values as Python `unicode`
-        objects, which in Python 3 are just known as `str`{.docutils
-        .literal}. 在Python
+        objects, which in Python 3 are just known as `str`. 在Python
         2中，DBAPI根本没有指定unicode行为，所以SQLAlchemy必须在每个DBAPI基础上为每个上述值做出决定
         - 实现在它们的行为中完全不一致。
 
@@ -290,21 +280,13 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
         primary key values when a single row INSERT statement is emitted
         with no existing returning() clause.
         这适用于那些支持RETURNING或兼容构造的后端，包括Postgresql，Firebird，Oracle，Microsoft
-        SQL Server。将其设置为`False`{.docutils
-        .literal}以禁用自动使用RETURNING。
+        SQL Server。将其设置为`False`以禁用自动使用RETURNING。
     -   **isolation\_level**
         [¶](#sqlalchemy.create_engine.params.isolation_level) -
 
-        此字符串参数由各种方言解释，以影响数据库连接的事务隔离级别。参数基本上接受这些字符串参数的一些子集：`"SERIALIZABLE"`{.docutils
-        .literal}，`"REPEATABLE_READ"`{.docutils
-        .literal}，`"READ_COMMITTED"`{.docutils
-        .literal}，`"READ_UNCOMMITTED"`{.docutils
-        .literal}和`"AUTOCOMMIT"`{.docutils
-        .literal}。这里的行为因后端而异，应直接咨询个别方言。
+        此字符串参数由各种方言解释，以影响数据库连接的事务隔离级别。参数基本上接受这些字符串参数的一些子集：`"SERIALIZABLE"`，`"REPEATABLE_READ"`，`"READ_COMMITTED"`，`"READ_UNCOMMITTED"`和`"AUTOCOMMIT"`。这里的行为因后端而异，应直接咨询个别方言。
 
-        请注意，也可以使用[`Connection.execution_options.isolation_level`{.xref
-        .py .py-paramref .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")功能在每个[`Connection`{.xref
+        请注意，也可以使用[`Connection.execution_options.isolation_level`](connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")功能在每个[`Connection`{.xref
         .py .py-class .docutils
         .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")基础上设置隔离级别。
 
@@ -336,13 +318,9 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
     -   **label\_length=None**[¶](#sqlalchemy.create_engine.params.label_length)
         – optional integer value which limits the size of dynamically
         generated column labels to that many characters.
-        如果小于6，标签生成为“\_（计数器）”。如果`None`{.docutils
-        .literal}，则使用`dialect.max_identifier_length`{.docutils
-        .literal}的值代替。
+        如果小于6，标签生成为“\_（计数器）”。如果`None`，则使用`dialect.max_identifier_length`的值代替。
     -   **listeners**[¶](#sqlalchemy.create_engine.params.listeners) – A
-        list of one or more [`PoolListener`{.xref .py .py-class
-        .docutils
-        .literal}](interfaces.html#sqlalchemy.interfaces.PoolListener "sqlalchemy.interfaces.PoolListener")
+        list of one or more [`PoolListener`](interfaces.html#sqlalchemy.interfaces.PoolListener "sqlalchemy.interfaces.PoolListener")
         objects which will receive connection pool events.
     -   **logging\_name**[¶](#sqlalchemy.create_engine.params.logging_name)
         – String identifier which will be used within the “name” field
@@ -363,16 +341,9 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
         – The
         [paramstyle](http://legacy.python.org/dev/peps/pep-0249/#paramstyle)
         to use when rendering bound parameters.
-        此样式默认为由DBAPI本身推荐的样式，该样式从DBAPI的`.paramstyle`{.docutils
-        .literal}属性中检索。但是，大多数DBAPI接受多个参数样式，特别是可能希望将“已命名”参数样式更改为“定位”参数样式，反之亦然。当这个属性被传递时，它应该是`"qmark"`{.docutils
-        .literal}，`"numeric"`，`"named"`{.docutils
-        .literal}，`"format"`{.docutils
-        .literal}或`"pyformat"`{.docutils
-        .literal}，并且应该与已知的DBAPI支持的参数样式相对应。
+        此样式默认为由DBAPI本身推荐的样式，该样式从DBAPI的`.paramstyle`属性中检索。但是，大多数DBAPI接受多个参数样式，特别是可能希望将“已命名”参数样式更改为“定位”参数样式，反之亦然。当这个属性被传递时，它应该是`"qmark"`，`"numeric"`，`"named"`，`"format"`或`"pyformat"`，并且应该与已知的DBAPI支持的参数样式相对应。
     -   **pool=None**[¶](#sqlalchemy.create_engine.params.pool) – an
-        already-constructed instance of [`Pool`{.xref .py .py-class
-        .docutils
-        .literal}](pooling.html#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool"),
+        already-constructed instance of [`Pool`](pooling.html#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool"),
         such as a [`QueuePool`](pooling.html#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")
         instance.
         如果为非无，则此池将直接用作引擎的基础连接池，绕过URL参数中存在的任何连接参数。有关手动构建连接池的信息，请参阅[Connection
@@ -381,23 +352,18 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
         – a [`Pool`](pooling.html#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")
         subclass, which will be used to create a connection pool
         instance using the connection parameters given in the URL.
-        请注意，这与`pool`{.docutils
-        .literal}不同，因为在这种情况下您并未真正实例化池，您只需指出要使用的池的类型。
+        请注意，这与`pool`不同，因为在这种情况下您并未真正实例化池，您只需指出要使用的池的类型。
     -   **pool\_logging\_name**[¶](#sqlalchemy.create_engine.params.pool_logging_name)
         – String identifier which will be used within the “name” field
         of logging records generated within the “sqlalchemy.pool”
         logger. 缺省为对象ID的十六进制字符串。
     -   **pool\_size = 5**
         [¶](#sqlalchemy.create_engine.params.pool_size) -
-        在连接池内保持打开的连接数。这与[`QueuePool`{.xref .py .py-class
-        .docutils
-        .literal}](pooling.html#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")以及[`SingletonThreadPool`{.xref
+        在连接池内保持打开的连接数。这与[`QueuePool`](pooling.html#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")以及[`SingletonThreadPool`{.xref
         .py .py-class .docutils
         .literal}](pooling.html#sqlalchemy.pool.SingletonThreadPool "sqlalchemy.pool.SingletonThreadPool")一起使用。对于[`QueuePool`{.xref
         .py .py-class .docutils
-        .literal}](pooling.html#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")，`pool_size`{.docutils
-        .literal}设置为0表示没有限制；要禁用池化，请将`poolclass`{.docutils
-        .literal}设置为[`NullPool`](pooling.html#sqlalchemy.pool.NullPool "sqlalchemy.pool.NullPool")。
+        .literal}](pooling.html#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")，`pool_size`设置为0表示没有限制；要禁用池化，请将`poolclass`设置为[`NullPool`](pooling.html#sqlalchemy.pool.NullPool "sqlalchemy.pool.NullPool")。
     -   **pool\_recycle=-1**[¶](#sqlalchemy.create_engine.params.pool_recycle)
         – this setting causes the pool to recycle connections after the
         given number of seconds has passed.
@@ -406,10 +372,7 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
         [¶](#sqlalchemy.create_engine.params.pool_reset_on_return) -
 
         设置池的“reset on
-        return”行为，即是否在连接返回池时调用`rollback()`{.docutils
-        .literal}，`commit()`{.docutils
-        .literal}或任何内容。在[`Pool`](pooling.html#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")中查看`reset_on_return`{.docutils
-        .literal}的文档字符串。
+        return”行为，即是否在连接返回池时调用`rollback()`，`commit()`或任何内容。在[`Pool`](pooling.html#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")中查看`reset_on_return`的文档字符串。
 
         New in version 0.7.6.
 
@@ -433,8 +396,7 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
         – a function taking arguments
         `(sql, *multiparams, **params)`, to which
         the `mock` strategy will dispatch all
-        statement execution. 仅用于`strategy='mock'`{.docutils
-        .literal}。
+        statement execution. 仅用于`strategy='mock'`。
 
 `sqlalchemy。`{.descclassname} `engine_from_config`{.descname} （ *configuration*，*prefix ='sqlalchemy。'*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.engine_from_config "Permalink to this definition")*
 :   使用配置字典创建一个新的引擎实例。
@@ -456,8 +418,7 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
     -   **prefix**[¶](#sqlalchemy.engine_from_config.params.prefix) –
         Prefix to match and then strip from keys in ‘configuration’.
     -   **kwargs**[¶](#sqlalchemy.engine_from_config.params.kwargs) –
-        Each keyword argument to `engine_from_config()`{.docutils
-        .literal} itself overrides the corresponding item taken from the
+        Each keyword argument to `engine_from_config()` itself overrides the corresponding item taken from the
         ‘configuration’ dictionary. 关键字参数应该以*不是*为前缀。
 
 ` sqlalchemy.engine.url。 T0>  make_url  T1> （ T2>  name_or_url  T3> ） T4> ¶< / T5>`{.descclassname}

@@ -28,9 +28,7 @@ DBAPI支持[¶](#dialect-mssql "Permalink to this headline")
 自动增量行为[¶](#auto-increment-behavior "Permalink to this headline")
 ----------------------------------------------------------------------
 
-SQL Server使用`IDENTITY`结构提供所谓的“自动递增”行为，该结构可放置在整数主键上。SQLAlchemy在[`Column.autoincrement`{.xref
-.py .py-paramref .docutils
-.literal}](core_metadata.html#sqlalchemy.schema.Column.params.autoincrement "sqlalchemy.schema.Column")中描述的默认“autoincrement”行为内考虑`IDENTITY`；这意味着默认情况下，[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中的第一个整数主键列将被视为标识列，并将生成DDL：
+SQL Server使用`IDENTITY`结构提供所谓的“自动递增”行为，该结构可放置在整数主键上。SQLAlchemy在[`Column.autoincrement`](core_metadata.html#sqlalchemy.schema.Column.params.autoincrement "sqlalchemy.schema.Column")中描述的默认“autoincrement”行为内考虑`IDENTITY`；这意味着默认情况下，[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中的第一个整数主键列将被视为标识列，并将生成DDL：
 
     from sqlalchemy import Table, MetaData, Column, Integer
 
@@ -115,8 +113,7 @@ Server上，它重新用于指定有关标识列的行为，包括对“开始�
         subsequent to an INSERT statement. If the flag
         `use_scope_identity=False` is passed to
         [`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine"),
-        the statement `SELECT @@identity AS lastrowid`{.docutils
-        .literal} is used instead.
+        the statement `SELECT @@identity AS lastrowid` is used instead.
 
 包含`IDENTITY`列的表将禁止显式引用标识列的INSERT语句。The SQLAlchemy dialect
 will detect when an INSERT construct, created using a core
@@ -187,12 +184,8 @@ All SQL Server dialects support setting of transaction isolation level
 both via a dialect-specific parameter
 [`create_engine.isolation_level`](core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")
 accepted by [`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine"),
-as well as the [`Connection.execution_options.isolation_level`{.xref .py
-.py-paramref .docutils
-.literal}](core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")
-argument as passed to [`Connection.execution_options()`{.xref .py
-.py-meth .docutils
-.literal}](core_connections.html#sqlalchemy.engine.Connection.execution_options "sqlalchemy.engine.Connection.execution_options").
+as well as the [`Connection.execution_options.isolation_level`(core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")
+argument as passed to [`Connection.execution_options()`](core_connections.html#sqlalchemy.engine.Connection.execution_options "sqlalchemy.engine.Connection.execution_options").
 该功能通过发出命令`SET TRANSACTION ISOLATION LEVEL  tt> ＆lt； level＆gt； / t5>`为每个新的连接。
 
 使用[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")设置隔离级别：
@@ -576,8 +569,7 @@ Server的UPPERCASE类型都可以从顶级方言导入，无论它们来源于[`
 
         创建一个[`Unicode`](core_type_basics.html#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")对象。
 
-        参数与[`String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")的参数相同，不同的是`convert_unicode`{.docutils
-        .literal}默认为`True`。
+        参数与[`String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")的参数相同，不同的是`convert_unicode`默认为`True`。
 
 *class* `sqlalchemy.dialects.mssql。`{.descclassname} `NTEXT`{.descname} （ *length = None*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mssql.NTEXT "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.UnicodeText`](core_type_basics.html#sqlalchemy.types.UnicodeText "sqlalchemy.types.UnicodeText")
@@ -590,8 +582,7 @@ Server的UPPERCASE类型都可以从顶级方言导入，无论它们来源于[`
 
         创建一个Unicode转换文本类型。
 
-        参数与[`Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")相同，但`convert_unicode`{.docutils
-        .literal}默认为`True`。
+        参数与[`Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")相同，但`convert_unicode`默认为`True`。
 
 *class* `sqlalchemy.dialects.mssql。`{.descclassname} `NVARCHAR`{.descname} （ *length = None*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mssql.NVARCHAR "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.Unicode`](core_type_basics.html#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")
@@ -604,8 +595,7 @@ Server的UPPERCASE类型都可以从顶级方言导入，无论它们来源于[`
 
         创建一个[`Unicode`](core_type_basics.html#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")对象。
 
-        参数与[`String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")的参数相同，不同的是`convert_unicode`{.docutils
-        .literal}默认为`True`。
+        参数与[`String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")的参数相同，不同的是`convert_unicode`默认为`True`。
 
 *class* `sqlalchemy.dialects.mssql。`{.descclassname} `REAL`{.descname} （ *\*\* kw* ） T5\> [¶ T6\>](#sqlalchemy.dialects.mssql.REAL "Permalink to this definition")
 :   基础：[`sqlalchemy.types.REAL`](core_type_basics.html#sqlalchemy.types.REAL "sqlalchemy.types.REAL")
@@ -906,9 +896,7 @@ ODBC驱动程序的特定API调用（已知SQLDescribeParam），而后者则不
 
 因此，默认情况下，mxODBC方言默认只使用INSERT，UPDATE和DELETE语句的“本机”模式，对所有其他语句使用转义字符串模式。
 
-This behavior can be controlled via [`execution_options()`{.xref .py
-.py-meth .docutils
-.literal}](core_selectable.html#sqlalchemy.sql.expression.Executable.execution_options "sqlalchemy.sql.expression.Executable.execution_options")
+This behavior can be controlled via [`execution_options()`](core_selectable.html#sqlalchemy.sql.expression.Executable.execution_options "sqlalchemy.sql.expression.Executable.execution_options")
 using the `native_odbc_execute` flag with a value of
 `True` or `False`, where a value
 of `True` will unconditionally use native bind

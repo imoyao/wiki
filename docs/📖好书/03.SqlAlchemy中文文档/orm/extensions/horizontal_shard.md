@@ -44,9 +44,7 @@ API文档[¶](#api-documentation "Permalink to this headline")
             the query should be issued.
             所有返回的碎片结果将合并成一个列表。
         -   **shards**[¶](#sqlalchemy.ext.horizontal_shard.ShardedSession.params.shards)
-            – A dictionary of string shard names to [`Engine`{.xref .py
-            .py-class .docutils
-            .literal}](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
+            – A dictionary of string shard names to [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
             objects.
 
  *class*`sqlalchemy.ext.horizontal_shard.`{.descclassname}`ShardedQuery`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.ext.horizontal_shard.ShardedQuery "Permalink to this definition")

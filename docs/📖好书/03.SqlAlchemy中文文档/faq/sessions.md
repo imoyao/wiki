@@ -77,9 +77,7 @@ level is repeatable read or higher, unless we start a new transaction**.
 “此会话的事务由于刷新期间的先前异常而回滚。”（或类似的）[¶](#this-session-s-transaction-has-been-rolled-back-due-to-a-previous-exception-during-flush-or-similar "Permalink to this headline")
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-This is an error that occurs when a [`Session.flush()`{.xref .py
-.py-meth .docutils
-.literal}](orm_session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")
+This is an error that occurs when a [`Session.flush()`](orm_session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")
 raises an exception, rolls back the transaction, but further commands
 upon the Session are called without an explicit call to
 [`Session.rollback()`](orm_session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")
@@ -320,9 +318,7 @@ when we first accessed it. 设置`o.foo_id = 7`的值为“7” - 所以`o.foo`�
 
     assert o.foo is foo_7  # o.foo lazyloads on access
 
-更简单的操作是单独使用属性 - 这可以使用[`Session.expire()`{.xref .py
-.py-meth .docutils
-.literal}](orm_session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")对任何[persistent](glossary.html#term-persistent)对象执行：
+更简单的操作是单独使用属性 - 这可以使用[`Session.expire()`](orm_session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")对任何[persistent](glossary.html#term-persistent)对象执行：
 
     o = Session.query(SomeClass).first()
     o.foo_id = 7

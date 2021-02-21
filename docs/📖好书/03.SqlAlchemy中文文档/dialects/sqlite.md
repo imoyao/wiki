@@ -134,9 +134,7 @@ default mode of `SERIALIZABLE` isolation, and a
 “dirty read” isolation mode normally referred to as
 `READ UNCOMMITTED`.
 
-SQLAlchemy使用[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")的[`create_engine.isolation_level`{.xref
-.py .py-paramref .docutils
-.literal}](core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")参数连接到此PRAGMA语句中。与SQLite一起使用时，此参数的有效值分别为`"SERIALIZABLE"`和`“READ UNCOMMITTED”`分别为0和1。SQLite默认为`SERIALIZABLE`，但其行为受到pysqlite驱动程序默认行为的影响。
+SQLAlchemy使用[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")的[`create_engine.isolation_level`](core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")参数连接到此PRAGMA语句中。与SQLite一起使用时，此参数的有效值分别为`"SERIALIZABLE"`和`“READ UNCOMMITTED”`分别为0和1。SQLite默认为`SERIALIZABLE`，但其行为受到pysqlite驱动程序默认行为的影响。
 
 SQLite的事务锁定所受影响的另一个轴是通过使用的`BEGIN`语句的性质。如[BEGIN
 TRANSACTION](http://sqlite.org/lang_transaction.html)所述，这三个品种是“延期”，“即时”和“排他”。A
@@ -414,8 +412,7 @@ SQLite数据类型[¶](#sqlite-data-types "Permalink to this headline")
         – regular expression which will be applied to incoming result
         rows.
         如果正则表达式包含命名组，则所得匹配字典作为关键字参数应用于Python
-        datetime()构造函数。否则，如果使用位置组，则使用位置参数通过`* map（int， match_obj.groups（0））调用datetime T0>。`{.docutils
-        .literal}
+        datetime()构造函数。否则，如果使用位置组，则使用位置参数通过`* map（int， match_obj.groups（0））调用datetime T0>。`
 
 *class* `sqlalchemy.dialects.sqlite。`{.descclassname} `DATE`{.descname} （ *storage\_format =无*，*regexp = None*，*\*\* kw* ） [¶](#sqlalchemy.dialects.sqlite.DATE "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.sqlite.base._DateTimeMixin`，[`sqlalchemy.types.Date`](core_type_basics.html#sqlalchemy.types.Date "sqlalchemy.types.Date")
@@ -449,8 +446,7 @@ SQLite数据类型[¶](#sqlite-data-types "Permalink to this headline")
         regular expression which will be applied to incoming result
         rows.
         如果正则表达式包含命名组，则所得到的匹配字典作为关键字参数应用于Python
-        date()构造函数。否则，如果使用位置组，则使用位置参数通过`* map（int， match_obj.groups（0））调用date T0>。`{.docutils
-        .literal}
+        date()构造函数。否则，如果使用位置组，则使用位置参数通过`* map（int， match_obj.groups（0））调用date T0>。`
 
  *class*`sqlalchemy.dialects.sqlite.`{.descclassname}`TIME`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.dialects.sqlite.TIME "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.sqlite.base._DateTimeMixin`，[`sqlalchemy.types.Time`](core_type_basics.html#sqlalchemy.types.Time "sqlalchemy.types.Time")
@@ -483,8 +479,7 @@ SQLite数据类型[¶](#sqlite-data-types "Permalink to this headline")
         regular expression which will be applied to incoming result
         rows.
         如果正则表达式包含命名组，则所得匹配字典作为关键字参数应用于Python
-        time()构造函数。否则，如果使用位置组，time()构造函数将通过位置参数通过`* map（int， match_obj.groups（0）） T0>。`{.docutils
-        .literal}
+        time()构造函数。否则，如果使用位置组，time()构造函数将通过位置参数通过`* map（int， match_obj.groups（0）） T0>。`
 
 Pysqlite [¶ T0\>](#module-sqlalchemy.dialects.sqlite.pysqlite "Permalink to this headline")
 -------------------------------------------------------------------------------------------

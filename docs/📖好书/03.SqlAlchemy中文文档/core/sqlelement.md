@@ -262,8 +262,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
         .literal}](#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")对象存在于同一个关键字中，或者其长度过长并且需要截断，则可能会修改此值。
     -   **value**[¶](#sqlalchemy.sql.expression.bindparam.params.value)
         – Initial value for this bind param.
-        如果没有其他值针对此特定参数名称的语句执行方法指示，则将在语句执行时间用作传递给DBAPI的此参数的值。默认为`None`{.docutils
-        .literal}。
+        如果没有其他值针对此特定参数名称的语句执行方法指示，则将在语句执行时间用作传递给DBAPI的此参数的值。默认为`None`。
     -   **callable \_**
         [¶](#sqlalchemy.sql.expression.bindparam.params.callable_) -
         代替“value”的可调用函数。该函数将在语句执行时调用以确定最终值。用于在创建子句结构时无法确定实际绑定值的场景，但嵌入式绑定值仍然是可取的。
@@ -272,11 +271,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         [`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")类或实例表示此[`bindparam()`{.xref
         .py .py-func .docutils
-        .literal}](#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")的可选数据类型。如果没有通过，基于给定的值可以自动确定绑定的类型；例如，诸如`str`{.docutils
-        .literal}，`int`，`bool`{.docutils
-        .literal}等普通Python类型可能会导致[`String`{.xref .py .py-class
-        .docutils
-        .literal}](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")，[`Integer`{.xref
+        .literal}](#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")的可选数据类型。如果没有通过，基于给定的值可以自动确定绑定的类型；例如，诸如`str`，`int`，`bool`等普通Python类型可能会导致[`String`](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")，[`Integer`{.xref
         .py .py-class .docutils
         .literal}](type_basics.html#sqlalchemy.types.Integer "sqlalchemy.types.Integer")或[`Boolean`{.xref
         .py .py-class .docutils
@@ -292,9 +287,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
         – if True, the key name of this [`BindParameter`{.xref .py
         .py-class .docutils
         .literal}](#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")
-        will be modified if another [`BindParameter`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")
+        will be modified if another [`BindParameter`](#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")
         of the same name already has been located within the containing
         expression.
         当生成所谓的“匿名”绑定表达式时，这个标志一般由内部使用，它通常不适用于显式命名的[`bindparam()`{.xref
@@ -303,22 +296,9 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     -   **必填**
         [¶](#sqlalchemy.sql.expression.bindparam.params.required) -
 
-        如果`True`{.docutils
-        .literal}，则在执行时需要一个值。如果没有通过，如果[`bindparam.value`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.sql.expression.bindparam.params.value "sqlalchemy.sql.expression.bindparam")或[`bindparam.callable`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.sql.expression.bindparam.params.callable "sqlalchemy.sql.expression.bindparam")都没有通过，则默认为`True`{.docutils
-        .literal}。如果其中任何一个参数存在，那么[`bindparam.required`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.sql.expression.bindparam.params.required "sqlalchemy.sql.expression.bindparam")默认为`False`{.docutils
-        .literal}。
+        如果`True`，则在执行时需要一个值。如果没有通过，如果[`bindparam.value`](#sqlalchemy.sql.expression.bindparam.params.value "sqlalchemy.sql.expression.bindparam")或[`bindparam.callable`](#sqlalchemy.sql.expression.bindparam.params.callable "sqlalchemy.sql.expression.bindparam")都没有通过，则默认为`True`。如果其中任何一个参数存在，那么[`bindparam.required`](#sqlalchemy.sql.expression.bindparam.params.required "sqlalchemy.sql.expression.bindparam")默认为`False`。
 
-        在0.8版中更改：如果未指定`required`{.docutils
-        .literal}标志，它将自动设置为`True`{.docutils
-        .literal}或`False`{.docutils
-        .literal}取决于是否指定了`value`{.docutils
-        .literal}或`callable`参数。
+        在0.8版中更改：如果未指定`required`标志，它将自动设置为`True`或`False`取决于是否指定了`value`或`callable`参数。
 
     -   **quote**[¶](#sqlalchemy.sql.expression.bindparam.params.quote)
         – True if this parameter name requires quoting and is not
@@ -432,10 +412,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
                 (users_table.c.name == 'jack', 'J')
             ])
 
-        在第二种形式中，它接受映射到结果值的比较值的Python字典；这种形式要求[`case.value`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.sql.expression.case.params.value "sqlalchemy.sql.expression.case")存在，并且值将使用`==`{.docutils
-        .literal}运算符进行比较，例如：
+        在第二种形式中，它接受映射到结果值的比较值的Python字典；这种形式要求[`case.value`](#sqlalchemy.sql.expression.case.params.value "sqlalchemy.sql.expression.case")存在，并且值将使用`==`运算符进行比较，例如：
 
             case(
                 {"wendy": "W", "jack": "J"},
@@ -1080,8 +1057,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     参数：
 
     -   **text** [¶](#sqlalchemy.sql.expression.text.params.text) -
-        要创建的SQL语句的文本。使用`:<param>`{.docutils
-        .literal}指定绑定参数；它们将被编译为其引擎特定的格式。
+        要创建的SQL语句的文本。使用`:<param>`指定绑定参数；它们将被编译为其引擎特定的格式。
     -   **autocommit**
         [¶](#sqlalchemy.sql.expression.text.params.autocommit) -
         弃用。Use .execution\_options(autocommit=) to set the autocommit
@@ -1109,9 +1085,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     -   **typemap** [¶](#sqlalchemy.sql.expression.text.params.typemap)
         -
 
-        已过时。一个字典，它将`SELECT`{.docutils
-        .literal}语句的columns子句中表示的列的名称映射到类型对象，这些对象将用于对结果集中的列执行后处理。此参数现在调用[`TextClause.columns()`](#sqlalchemy.sql.expression.TextClause.columns "sqlalchemy.sql.expression.TextClause.columns")方法，该方法返回一个获取`.c`{.docutils
-        .literal}集合的[`TextAsFrom`](selectable.html#sqlalchemy.sql.expression.TextAsFrom "sqlalchemy.sql.expression.TextAsFrom")结构，并且可以嵌入其他表达式。例如。：
+        已过时。一个字典，它将`SELECT`语句的columns子句中表示的列的名称映射到类型对象，这些对象将用于对结果集中的列执行后处理。此参数现在调用[`TextClause.columns()`](#sqlalchemy.sql.expression.TextClause.columns "sqlalchemy.sql.expression.TextClause.columns")方法，该方法返回一个获取`.c`集合的[`TextAsFrom`](selectable.html#sqlalchemy.sql.expression.TextAsFrom "sqlalchemy.sql.expression.TextAsFrom")结构，并且可以嵌入其他表达式。例如。：
 
             stmt = text("SELECT * FROM table",
                           typemap={'id': Integer, 'name': String},
@@ -1326,8 +1300,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     :   将这个[`BindParameter`](#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")与给定的子句进行比较。
 
     ` effective_value  T0> ¶ T1>`{.descname}
-    :   考虑是否设置了`callable`{.docutils
-        .literal}参数，返回此绑定参数的值。
+    :   考虑是否设置了`callable`参数，返回此绑定参数的值。
 
         The `callable` value will be evaluated and
         returned if present, else `value`.
@@ -1410,12 +1383,9 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     `编译`{.descname} （ *bind = None*，*dialect = None*，*\*\* kw* ） T5\> [¶ T6\>](#sqlalchemy.sql.expression.ClauseElement.compile "Permalink to this definition")
     :   编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -1433,9 +1403,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
         -   **dialect**[¶](#sqlalchemy.sql.expression.ClauseElement.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.ClauseElement.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -1477,9 +1445,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     `params`{.descname} （ *\* optionaldict*，*\*\* kwargs* ） [T5\>](#sqlalchemy.sql.expression.ClauseElement.params "Permalink to this definition")
     :   返回带有[`bindparam()`](#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素的副本。
 
-        返回此ClauseElement的一个副本，其中[`bindparam()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
+        返回此ClauseElement的一个副本，其中[`bindparam()`](#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
 
             >>> clause = column('x') + bindparam('foo')
             >>> print clause.compile().params
@@ -1674,8 +1640,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
         实施`==`运算符。
 
         在列上下文中，生成子句`a = b`。If the target
-        is `None`, produces `a IS NULL`{.docutils
-        .literal}.
+        is `None`, produces `a IS NULL`.
 
     ` __初始化__  T0> ¶ T1>`{.descname}
     :   *继承自* `__init__`
@@ -1753,8 +1718,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     :   
 
     `铸造 T0> （ T1> 类型_  T2> ） T3> ¶ T4>`{.descname}
-    :   制作一个类型演员，即`CAST（＆lt； expression＆gt； AS ＆lt； type＆gt；）`{.docutils
-        .literal}。
+    :   制作一个类型演员，即`CAST（＆lt； expression＆gt； AS ＆lt； type＆gt；）`。
 
         这是[`cast()`](#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")函数的快捷方式。
 
@@ -1764,9 +1728,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     :   *inherited from the* [`collate()`](#sqlalchemy.sql.operators.ColumnOperators.collate "sqlalchemy.sql.operators.ColumnOperators.collate")
         *method of* [`ColumnOperators`](#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")
 
-        根据给定的排序字符串，针对父对象生成一个[`collate()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.sql.expression.collate "sqlalchemy.sql.expression.collate")子句。
+        根据给定的排序字符串，针对父对象生成一个[`collate()`](#sqlalchemy.sql.expression.collate "sqlalchemy.sql.expression.collate")子句。
 
     `比较 T0> ¶ T1>`{.descname}
     :   
@@ -1791,12 +1753,9 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`{.docutils
-        .literal}或`unicode()`{.docutils
-        .literal}将产生结果的字符串表示形式。[`Compiled`{.xref .py
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
         .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`{.docutils
-        .literal}访问器返回一个绑定参数名称和值的字典。
+        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
@@ -1814,9 +1773,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
         -   **dialect**[¶](#sqlalchemy.sql.expression.ColumnElement.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
-            该参数优先于bind参数以及[`ClauseElement`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
+            该参数优先于bind参数以及[`ClauseElement`](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎（如果有的话）。
         -   **inline**[¶](#sqlalchemy.sql.expression.ColumnElement.compile.params.inline)
             – Used for INSERT statements, for a dialect which does not
             support inline retrieval of newly generated primary key
@@ -1853,9 +1810,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         实现'concat'操作符。
 
-        在列上下文中，生成子句`a || b`{.docutils
-        .literal}，或者使用`concat()`{.docutils
-        .literal}运算符在MySQL上。
+        在列上下文中，生成子句`a || b`，或者使用`concat()`运算符在MySQL上。
 
     `包含`{.descname} （ *其他*，*\*\* kwargs* ） [](#sqlalchemy.sql.expression.ColumnElement.contains "Permalink to this definition") \>
     :   *inherited from the* [`contains()`](#sqlalchemy.sql.operators.ColumnOperators.contains "sqlalchemy.sql.operators.ColumnOperators.contains")
@@ -1863,8 +1818,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         实现'包含'运算符。
 
-        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；％'`{.docutils
-        .literal}
+        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；％'`
 
     `递减 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   *继承自* [`desc()`](#sqlalchemy.sql.operators.ColumnOperators.desc "sqlalchemy.sql.operators.ColumnOperators.desc")
@@ -1887,8 +1841,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         实现'endswith'操作符。
 
-        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；`{.docutils
-        .literal}
+        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；`
 
     `表达 T0> ¶ T1>`{.descname}
     :   返回一个列表达式。
@@ -1945,8 +1898,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         在运算符中实现`in`
 
-        在列上下文中，生成子句`a IN 其他`{.docutils
-        .literal}。“other”可以是列表达式的元组/列表，或者是[`select()`{.xref
+        在列上下文中，生成子句`a IN 其他`。“other”可以是列表达式的元组/列表，或者是[`select()`{.xref
         .py .py-func .docutils
         .literal}](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构。
 
@@ -1956,11 +1908,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         实现`IS`运算符。
 
-        通常，当与`None`{.docutils
-        .literal}的值进行比较时，会自动生成`IS`{.docutils
-        .literal}，这会解析为`NULL`{.docutils
-        .literal}。但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS`{.docutils
-        .literal}。
+        通常，当与`None`的值进行比较时，会自动生成`IS`，这会解析为`NULL`。但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS`。
 
         New in version 0.7.9.
 
@@ -1992,10 +1940,8 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
         实现`IS NOT`运算符。
 
         Normally, `IS NOT` is generated
-        automatically when comparing to a value of `None`{.docutils
-        .literal}, which resolves to `NULL`.
-        但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS NOT`{.docutils
-        .literal}。
+        automatically when comparing to a value of `None`, which resolves to `NULL`.
+        但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS NOT`。
 
         New in version 0.7.9.
 
@@ -2017,13 +1963,11 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     `键`{.descname} *=无* [¶](#sqlalchemy.sql.expression.ColumnElement.key "Permalink to this definition")
     :   在某些情况下在Python命名空间中引用该对象的'关键'。
 
-        这典型地指的是存在于可选择的例如`.c`{.docutils
-        .literal}集合中的列的“关键字”。 sometable.c
+        这典型地指的是存在于可选择的例如`.c`集合中的列的“关键字”。 sometable.c
         [“somekey”]会返回一个带有“somekey”.key的Column。
 
     `标签 T0> （ T1> 名称 T2> ） T3> ¶ T4>`{.descname}
-    :   生成列标签，即`＆lt； columnname＆gt； AS ＆lt； name＆gt；`{.docutils
-        .literal}。
+    :   生成列标签，即`＆lt； columnname＆gt； AS ＆lt； name＆gt；`。
 
         这是[`label()`](#sqlalchemy.sql.expression.label "sqlalchemy.sql.expression.label")函数的快捷方式。
 
@@ -2082,8 +2026,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         执行`NOT ILIKE`运算符。
 
-        这相当于对[`ColumnOperators.ilike()`](#sqlalchemy.sql.operators.ColumnOperators.ilike "sqlalchemy.sql.operators.ColumnOperators.ilike")使用否定，即`~x.ilike(y)`{.docutils
-        .literal}。
+        这相当于对[`ColumnOperators.ilike()`](#sqlalchemy.sql.operators.ColumnOperators.ilike "sqlalchemy.sql.operators.ColumnOperators.ilike")使用否定，即`~x.ilike(y)`。
 
         0.8版本中的新功能
 
@@ -2097,8 +2040,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         执行`NOT IN`运算符。
 
-        这相当于对[`ColumnOperators.in_()`](#sqlalchemy.sql.operators.ColumnOperators.in_ "sqlalchemy.sql.operators.ColumnOperators.in_")，即`~x.in_(y)`{.docutils
-        .literal}使用否定。
+        这相当于对[`ColumnOperators.in_()`](#sqlalchemy.sql.operators.ColumnOperators.in_ "sqlalchemy.sql.operators.ColumnOperators.in_")，即`~x.in_(y)`使用否定。
 
         0.8版本中的新功能
 
@@ -2112,8 +2054,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         执行`NOT LIKE`运算符。
 
-        这相当于对[`ColumnOperators.like()`](#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")，即`~x.like(y)`{.docutils
-        .literal}使用否定。
+        这相当于对[`ColumnOperators.like()`](#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")，即`~x.like(y)`使用否定。
 
         0.8版本中的新功能
 
@@ -2178,9 +2119,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
             true / false值，如`==`，`>`{.docutils
             .literal}等。应该设置此标志，以便ORM关系可以确定运算符在自定义连接条件中使用时是比较运算符。
 
-            版本0.9.2新增： - 添加了[`Operators.op.is_comparison`{.xref
-            .py .py-paramref .docutils
-            .literal}](#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")标志。
+            版本0.9.2新增： - 添加了[`Operators.op.is_comparison`](#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")标志。
 
         也可以看看
 
@@ -2199,9 +2138,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         返回带有[`bindparam()`](#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素的副本。
 
-        返回此ClauseElement的一个副本，其中[`bindparam()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
+        返回此ClauseElement的一个副本，其中[`bindparam()`](#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")元素替换为从给定字典中取得的值：
 
             >>> clause = column('x') + bindparam('foo')
             >>> print clause.compile().params
@@ -2232,8 +2169,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         实现`startwith`运算符。
 
-        在列上下文中，生成子句`LIKE '＆lt； other＆gt；％'`{.docutils
-        .literal}
+        在列上下文中，生成子句`LIKE '＆lt； other＆gt；％'`
 
     `supports_execution`{.descname} *= False* [¶](#sqlalchemy.sql.expression.ColumnElement.supports_execution "Permalink to this definition")
     :   
@@ -2284,8 +2220,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     ` __添加__  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
     :   实施`+`运算符。
 
-        在列上下文中，如果父对象具有非字符串亲和性，则会生成子句`a + b`{.docutils
-        .literal}。If the parent object has a string affinity, produces
+        在列上下文中，如果父对象具有非字符串亲和性，则会生成子句`a + b`。If the parent object has a string affinity, produces
         the concatenation operator, `a || b` - see
         [`ColumnOperators.concat()`](#sqlalchemy.sql.operators.ColumnOperators.concat "sqlalchemy.sql.operators.ColumnOperators.concat").
 
@@ -2296,9 +2231,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         实施`&`运算符。
 
-        与SQL表达式一起使用时，会产生AND操作，等同于[`and_()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")，即：
+        与SQL表达式一起使用时，会产生AND操作，等同于[`and_()`](#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")，即：
 
             a & b
 
@@ -2308,8 +2241,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
             and_(a, b)
 
         在使用`&`时应注意操作符的优先级；
-        `&`{.docutils
-        .literal}运算符的优先级最高。如果操作数包含更多的子表达式，则应将其括在括号中：
+        `&`运算符的优先级最高。如果操作数包含更多的子表达式，则应将其括在括号中：
 
             (a == 2) & (b == 4)
 
@@ -2328,8 +2260,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     :   实施`==`运算符。
 
         在列上下文中，生成子句`a = b`。If the target
-        is `None`, produces `a IS NULL`{.docutils
-        .literal}.
+        is `None`, produces `a IS NULL`.
 
     ` __格式__  T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   *继承自* `__format__()`
@@ -2374,9 +2305,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         实施`~`运算符。
 
-        与SQL表达式一起使用时，结果为NOT操作，相当于[`not_()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.sql.expression.not_ "sqlalchemy.sql.expression.not_")，即：
+        与SQL表达式一起使用时，结果为NOT操作，相当于[`not_()`](#sqlalchemy.sql.expression.not_ "sqlalchemy.sql.expression.not_")，即：
 
             ~a
 
@@ -2432,9 +2361,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         实施`|`运算符。
 
-        与SQL表达式一起使用时，会产生OR操作，等同于[`or_()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.sql.expression.or_ "sqlalchemy.sql.expression.or_")，即：
+        与SQL表达式一起使用时，会产生OR操作，等同于[`or_()`](#sqlalchemy.sql.expression.or_ "sqlalchemy.sql.expression.or_")，即：
 
             a | b
 
@@ -2444,8 +2371,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
             or_(a, b)
 
         在使用`|`时应注意运营商的优先级；
-        `|`{.docutils
-        .literal}运算符的优先级最高。如果操作数包含更多的子表达式，则应将其括在括号中：
+        `|`运算符的优先级最高。如果操作数包含更多的子表达式，则应将其括在括号中：
 
             (a == 2) | (b == 4)
 
@@ -2554,22 +2480,17 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
         .literal}](#sqlalchemy.sql.expression.between "sqlalchemy.sql.expression.between")
 
     `整理 T0> （ T1> 整理 T2> ） T3> ¶ T4>`{.descname}
-    :   根据给定的排序字符串，针对父对象生成一个[`collate()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.sql.expression.collate "sqlalchemy.sql.expression.collate")子句。
+    :   根据给定的排序字符串，针对父对象生成一个[`collate()`](#sqlalchemy.sql.expression.collate "sqlalchemy.sql.expression.collate")子句。
 
     `的concat  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
     :   实现'concat'操作符。
 
-        在列上下文中，生成子句`a || b`{.docutils
-        .literal}，或者使用`concat()`{.docutils
-        .literal}运算符在MySQL上。
+        在列上下文中，生成子句`a || b`，或者使用`concat()`运算符在MySQL上。
 
     `包含`{.descname} （ *其他*，*\*\* kwargs* ） [](#sqlalchemy.sql.operators.ColumnOperators.contains "Permalink to this definition") \>
     :   实现'包含'运算符。
 
-        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；％'`{.docutils
-        .literal}
+        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；％'`
 
     `递减 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   针对父对象生成一个[`desc()`](#sqlalchemy.sql.expression.desc "sqlalchemy.sql.expression.desc")子句。
@@ -2580,8 +2501,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     `endswith`{.descname} （ *其他*，*\*\* kwargs* ） [t5 \>](#sqlalchemy.sql.operators.ColumnOperators.endswith "Permalink to this definition")
     :   实现'endswith'操作符。
 
-        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；`{.docutils
-        .literal}
+        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；`
 
     `ilike`{.descname} （ *其他*，*escape =无* ） [t5 \>](#sqlalchemy.sql.operators.ColumnOperators.ilike "Permalink to this definition")
     :   实现`ilike`运算符。
@@ -2613,19 +2533,14 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     `在_  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
     :   在运算符中实现`in`
 
-        在列上下文中，生成子句`a IN 其他`{.docutils
-        .literal}。“other”可以是列表达式的元组/列表，或者是[`select()`{.xref
+        在列上下文中，生成子句`a IN 其他`。“other”可以是列表达式的元组/列表，或者是[`select()`{.xref
         .py .py-func .docutils
         .literal}](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构。
 
     `是_  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
     :   实现`IS`运算符。
 
-        通常，当与`None`{.docutils
-        .literal}的值进行比较时，会自动生成`IS`{.docutils
-        .literal}，这会解析为`NULL`{.docutils
-        .literal}。但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS`{.docutils
-        .literal}。
+        通常，当与`None`的值进行比较时，会自动生成`IS`，这会解析为`NULL`。但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS`。
 
         New in version 0.7.9.
 
@@ -2645,10 +2560,8 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     :   实现`IS NOT`运算符。
 
         Normally, `IS NOT` is generated
-        automatically when comparing to a value of `None`{.docutils
-        .literal}, which resolves to `NULL`.
-        但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS NOT`{.docutils
-        .literal}。
+        automatically when comparing to a value of `None`, which resolves to `NULL`.
+        但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS NOT`。
 
         New in version 0.7.9.
 
@@ -2708,8 +2621,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
      `notilike`{.descname}(*other*, *escape=None*)[¶](#sqlalchemy.sql.operators.ColumnOperators.notilike "Permalink to this definition")
     :   执行`NOT ILIKE`运算符。
 
-        这相当于对[`ColumnOperators.ilike()`](#sqlalchemy.sql.operators.ColumnOperators.ilike "sqlalchemy.sql.operators.ColumnOperators.ilike")使用否定，即`~x.ilike(y)`{.docutils
-        .literal}。
+        这相当于对[`ColumnOperators.ilike()`](#sqlalchemy.sql.operators.ColumnOperators.ilike "sqlalchemy.sql.operators.ColumnOperators.ilike")使用否定，即`~x.ilike(y)`。
 
         0.8版本中的新功能
 
@@ -2720,8 +2632,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     ` notin _  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
     :   执行`NOT IN`运算符。
 
-        这相当于对[`ColumnOperators.in_()`](#sqlalchemy.sql.operators.ColumnOperators.in_ "sqlalchemy.sql.operators.ColumnOperators.in_")，即`~x.in_(y)`{.docutils
-        .literal}使用否定。
+        这相当于对[`ColumnOperators.in_()`](#sqlalchemy.sql.operators.ColumnOperators.in_ "sqlalchemy.sql.operators.ColumnOperators.in_")，即`~x.in_(y)`使用否定。
 
         0.8版本中的新功能
 
@@ -2732,8 +2643,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     `notlike`{.descname} （ *其他*，*转义=无* ） [t5 \>](#sqlalchemy.sql.operators.ColumnOperators.notlike "Permalink to this definition")
     :   执行`NOT LIKE`运算符。
 
-        这相当于对[`ColumnOperators.like()`](#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")，即`~x.like(y)`{.docutils
-        .literal}使用否定。
+        这相当于对[`ColumnOperators.like()`](#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")，即`~x.like(y)`使用否定。
 
         0.8版本中的新功能
 
@@ -2792,9 +2702,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
             true / false值，如`==`，`>`{.docutils
             .literal}等。应该设置此标志，以便ORM关系可以确定运算符在自定义连接条件中使用时是比较运算符。
 
-            版本0.9.2新增： - 添加了[`Operators.op.is_comparison`{.xref
-            .py .py-paramref .docutils
-            .literal}](#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")标志。
+            版本0.9.2新增： - 添加了[`Operators.op.is_comparison`](#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")标志。
 
         也可以看看
 
@@ -2815,8 +2723,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         在子类上覆盖它可以使普通行为适用于所有操作。例如，覆盖[`ColumnOperators`{.xref
         .py .py-class .docutils
-        .literal}](#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")将`func.lower()`{.docutils
-        .literal}应用于左侧和右侧：
+        .literal}](#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")将`func.lower()`应用于左侧和右侧：
 
             class MyComparator(ColumnOperators):
                 def operate(self, op, other):
@@ -2848,8 +2755,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     `startswith`{.descname} （ *其他*，*\*\* kwargs* ） [¶ t5 \>](#sqlalchemy.sql.operators.ColumnOperators.startswith "Permalink to this definition")
     :   实现`startwith`运算符。
 
-        在列上下文中，生成子句`LIKE '＆lt； other＆gt；％'`{.docutils
-        .literal}
+        在列上下文中，生成子句`LIKE '＆lt； other＆gt；％'`
 
     `timetuple`{.descname} *=无* [¶](#sqlalchemy.sql.operators.ColumnOperators.timetuple "Permalink to this definition")
     :   Hack，允许在LHS上比较日期时间对象。
@@ -2907,13 +2813,11 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     ` dialect_kwargs  T0> ¶ T1>`{.descname}
     :   指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`{.docutils
-        .literal}格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
         .py .py-attr .docutils
         .literal}](#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
-        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`{.docutils
-        .literal}，其中值将被组合到选项列表中。
+        该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
@@ -2930,10 +2834,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     ` dialect_options  T0> ¶ T1>`{.descname}
     :   指定为此构造的方言特定选项的关键字参数的集合。
 
-        这是一个两级嵌套注册表，键入`<dialect_name>`{.docutils
-        .literal}和`<argument_name>`{.docutils
-        .literal}。例如，`postgresql_where`{.docutils
-        .literal}参数可以定位为：
+        这是一个两级嵌套注册表，键入`<dialect_name>`和`<argument_name>`。例如，`postgresql_where`参数可以定位为：
 
             arg = my_object.dialect_options['postgresql']['where']
 
@@ -3054,10 +2955,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     ` FUNC  T0> ¶ T1>`{.descname}
     :   由[`Over`](#sqlalchemy.sql.expression.Over "sqlalchemy.sql.expression.Over")子句引用的元素。
 
-        从版本1.1开始弃用： `func`{.docutils
-        .literal}元素已被重命名为`.element`{.docutils
-        .literal}。虽然`.func`{.docutils
-        .literal}是只读的，但这两个属性是同义词。
+        从版本1.1开始弃用： `func`元素已被重命名为`.element`。虽然`.func`是只读的，但这两个属性是同义词。
 
 *class* `sqlalchemy.sql.expression。`{.descclassname} `TextClause`{.descname} （ *text*，*=无 T5\> ） T6\> [¶ T7\>](#sqlalchemy.sql.expression.TextClause "Permalink to this definition")*
 :   基础：[`sqlalchemy.sql.expression.Executable`](selectable.html#sqlalchemy.sql.expression.Executable "sqlalchemy.sql.expression.Executable")，[`sqlalchemy.sql.expression.ClauseElement`](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")
@@ -3086,15 +2984,13 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
             stmt = text("SELECT id, name FROM user WHERE name=:name "
                         "AND timestamp=:timestamp")
 
-        通过使用简单的关键字参数，可以使用[`TextClause.bindparams()`](#sqlalchemy.sql.expression.TextClause.bindparams "sqlalchemy.sql.expression.TextClause.bindparams")方法建立`:name`{.docutils
-        .literal}和`:timestamp`的初始值：
+        通过使用简单的关键字参数，可以使用[`TextClause.bindparams()`](#sqlalchemy.sql.expression.TextClause.bindparams "sqlalchemy.sql.expression.TextClause.bindparams")方法建立`:name`和`:timestamp`的初始值：
 
             stmt = stmt.bindparams(name='jack',
                         timestamp=datetime.datetime(2012, 10, 8, 15, 12, 5))
 
         Where above, new [`BindParameter`](#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")
-        objects will be generated with the names `name`{.docutils
-        .literal} and `timestamp`, and values of
+        objects will be generated with the names `name` and `timestamp`, and values of
         `jack` and
         `datetime.datetime(2012, 10, 8, 15, 12, 5)`,
         respectively.
@@ -3104,11 +3000,9 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
         .py .py-class .docutils
         .literal}](type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")。
 
-        当需要特定的键入行为时，可以使用位置`*binds`{.docutils
-        .literal}参数来直接指定[`bindparam()`{.xref .py .py-func
+        当需要特定的键入行为时，可以使用位置`*binds`参数来直接指定[`bindparam()`{.xref .py .py-func
         .docutils
-        .literal}](#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")结构。这些结构必须至少包含`key`{.docutils
-        .literal}参数，然后是可选值和类型：
+        .literal}](#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")结构。这些结构必须至少包含`key`参数，然后是可选值和类型：
 
             from sqlalchemy import bindparam
             stmt = stmt.bindparams(
@@ -3116,11 +3010,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
                             bindparam('timestamp', type_=DateTime)
                         )
 
-        在上面，我们为`timestamp`{.docutils
-        .literal}绑定指定了[`DateTime`](type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")的类型，`name`{.docutils
-        .literal}绑定的[`String`](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")的类型。在`name`{.docutils
-        .literal}的情况下，我们还设置`"jack"`{.docutils
-        .literal}的默认值。
+        在上面，我们为`timestamp`绑定指定了[`DateTime`](type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")的类型，`name`绑定的[`String`](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")的类型。在`name`的情况下，我们还设置`"jack"`的默认值。
 
         额外的绑定参数可以在语句执行时提供，例如：
 
@@ -3228,8 +3118,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
         New in version 0.9.0: [`text()`](#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")
         can now be converted into a fully featured “selectable”
         construct using the [`TextClause.columns()`](#sqlalchemy.sql.expression.TextClause.columns "sqlalchemy.sql.expression.TextClause.columns")
-        method. 此方法取代[`text()`](#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")的`typemap`{.docutils
-        .literal}参数。
+        method. 此方法取代[`text()`](#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")的`typemap`参数。
 
  *class*`sqlalchemy.sql.expression.`{.descclassname}`Tuple`{.descname}(*\*clauses*, *\*\*kw*)[¶](#sqlalchemy.sql.expression.Tuple "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ClauseList`](#sqlalchemy.sql.expression.ClauseList "sqlalchemy.sql.expression.ClauseList")，[`sqlalchemy.sql.expression.ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
@@ -3324,9 +3213,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     ` __和__  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
     :   实施`&`运算符。
 
-        与SQL表达式一起使用时，会产生AND操作，等同于[`and_()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")，即：
+        与SQL表达式一起使用时，会产生AND操作，等同于[`and_()`](#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")，即：
 
             a & b
 
@@ -3336,17 +3223,14 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
             and_(a, b)
 
         在使用`&`时应注意操作符的优先级；
-        `&`{.docutils
-        .literal}运算符的优先级最高。如果操作数包含更多的子表达式，则应将其括在括号中：
+        `&`运算符的优先级最高。如果操作数包含更多的子表达式，则应将其括在括号中：
 
             (a == 2) & (b == 4)
 
     ` __反相__  T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   实施`~`运算符。
 
-        与SQL表达式一起使用时，结果为NOT操作，相当于[`not_()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.sql.expression.not_ "sqlalchemy.sql.expression.not_")，即：
+        与SQL表达式一起使用时，结果为NOT操作，相当于[`not_()`](#sqlalchemy.sql.expression.not_ "sqlalchemy.sql.expression.not_")，即：
 
             ~a
 
@@ -3358,9 +3242,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     ` __或__  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
     :   实施`|`运算符。
 
-        与SQL表达式一起使用时，会产生OR操作，等同于[`or_()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.sql.expression.or_ "sqlalchemy.sql.expression.or_")，即：
+        与SQL表达式一起使用时，会产生OR操作，等同于[`or_()`](#sqlalchemy.sql.expression.or_ "sqlalchemy.sql.expression.or_")，即：
 
             a | b
 
@@ -3370,8 +3252,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
             or_(a, b)
 
         在使用`|`时应注意运营商的优先级；
-        `|`{.docutils
-        .literal}运算符的优先级最高。如果操作数包含更多的子表达式，则应将其括在括号中：
+        `|`运算符的优先级最高。如果操作数包含更多的子表达式，则应将其括在括号中：
 
             (a == 2) | (b == 4)
 
@@ -3417,9 +3298,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
             true / false值，如`==`，`>`{.docutils
             .literal}等。应该设置此标志，以便ORM关系可以确定运算符在自定义连接条件中使用时是比较运算符。
 
-            版本0.9.2新增： - 添加了[`Operators.op.is_comparison`{.xref
-            .py .py-paramref .docutils
-            .literal}](#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")标志。
+            版本0.9.2新增： - 添加了[`Operators.op.is_comparison`](#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")标志。
 
         也可以看看
 
@@ -3437,8 +3316,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
         在子类上覆盖它可以使普通行为适用于所有操作。例如，覆盖[`ColumnOperators`{.xref
         .py .py-class .docutils
-        .literal}](#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")将`func.lower()`{.docutils
-        .literal}应用于左侧和右侧：
+        .literal}](#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")将`func.lower()`应用于左侧和右侧：
 
             class MyComparator(ColumnOperators):
                 def operate(self, op, other):

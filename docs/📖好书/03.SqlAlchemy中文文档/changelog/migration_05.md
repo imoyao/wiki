@@ -366,9 +366,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
     -   实例()
     -   get\_session() -
-        这个方法不是很明显，但是具有将惰性加载与特定会话相关联的效果，即使父对象完全分离，当扩展名如`scoped_session()`{.docutils
-        .literal}或旧使用`SessionContextExt`{.docutils
-        .literal}。一些依赖此行为的应用程序可能不再按预期工作；但是更好的编程习惯是在需要从属性访问数据库时始终确保对象存在于会话中。
+        这个方法不是很明显，但是具有将惰性加载与特定会话相关联的效果，即使父对象完全分离，当扩展名如`scoped_session()`或旧使用`SessionContextExt`。一些依赖此行为的应用程序可能不再按预期工作；但是更好的编程习惯是在需要从属性访问数据库时始终确保对象存在于会话中。
 -   `mapper（MyClass， mytable）`
 
     映射类no更长，具有“c”类属性；例如`MyClass.c`

@@ -282,8 +282,7 @@ CONSTRAINT等。:
 -   其他删除的东西：
     -   `Table.key`（不知道这是什么）
     -   `Column.bind`（通过column.table.bind获取）
-    -   `Column.metadata`{.docutils
-        .literal}（通过column.table.metadata获取）
+    -   `Column.metadata`（通过column.table.metadata获取）
     -   `Column.sequence`（使用column.default）
 
 ### 其他行为改变[¶](#other-behavioral-changes "Permalink to this headline")

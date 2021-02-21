@@ -12,15 +12,11 @@ tags:
 级联[¶ T0\>](#cascades "Permalink to this headline")
 ====================================================
 
-映射器支持在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构上配置cascade行为的概念。这涉及如何将相对于特定[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的“父”对象执行的操作传播到由该关系引用的项目（例如“子”对象），并且受到[`relationship.cascade`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.cascade "sqlalchemy.orm.relationship")选项。
+映射器支持在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构上配置cascade行为的概念。这涉及如何将相对于特定[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的“父”对象执行的操作传播到由该关系引用的项目（例如“子”对象），并且受到[`relationship.cascade`](relationship_api.html#sqlalchemy.orm.relationship.params.cascade "sqlalchemy.orm.relationship")选项。
 
 级联的默认行为仅限于所谓的[save-update](#cascade-save-update)和[merge](#cascade-merge)设置的级联。级联的典型“替代”设置是添加[delete](#cascade-delete)和[delete-orphan](#cascade-delete-orphan)选项；这些设置适用于相关对象，只要它们连接到它们的父级，并且以其他方式删除，它们就会存在。
 
-在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中使用[`cascade`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.cascade "sqlalchemy.orm.relationship")选项配置级联行为：
+在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中使用[`cascade`](relationship_api.html#sqlalchemy.orm.relationship.params.cascade "sqlalchemy.orm.relationship")选项配置级联行为：
 
     class Order(Base):
         __tablename__ = 'order'
@@ -213,9 +209,7 @@ DELETE](core_constraints.html#on-update-on-delete).
 
 -   虽然数据库级`  ON  T1> 删除 T2>  T0>功能只适用于关系的“多”方，SQLAlchemy的的“删除”梯级具有有限还可以在reverse方向上操作，这意味着它可以在“多”侧配置，以删除“一侧”上的对象，当“多”方被删除。`然而，如果有其他对象从“many”引用这个“one”一侧，这很容易导致违反约束，所以它通常只在关系实际上是“一对一”时才有用。应该使用[`single_parent`](relationship_api.html#sqlalchemy.orm.relationship.params.single_parent "sqlalchemy.orm.relationship")标志为这种情况建立一个Python内断言。
 
-当使用[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")时，也使用[`secondary`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")选项包含多对多表，SQLAlchemy的删除级联会自动处理此多对多表中的行。就像正如[Deleting
+当使用[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")时，也使用[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")选项包含多对多表，SQLAlchemy的删除级联会自动处理此多对多表中的行。就像正如[Deleting
 Rows from the Many to Many
 Table](basic_relationships.html#relationships-many-to-many-deletion)中所描述的那样，从多对多集合中添加或删除对象会导致INSERT或DELETE行中的many-当由于父对象删除操作而激活时，`delete`级联会删除“child”表中的行，但也会删除多对多表中的行。
 
@@ -228,16 +222,12 @@ NULL外键，因此从父集合中删除项目会导致其删除。
 `delete-orphan` cascade implies that each child
 object can only have one parent at a time, so is configured in the vast
 majority of cases on a one-to-many relationship.
-将其设置为多对一或多对多的关系更为尴尬；对于这个用例，SQLAlchemy要求使用[`single_parent`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.single_parent "sqlalchemy.orm.relationship")参数配置[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")，建立Python端验证，确保该对象仅与一个父对象关联时间。
+将其设置为多对一或多对多的关系更为尴尬；对于这个用例，SQLAlchemy要求使用[`single_parent`](relationship_api.html#sqlalchemy.orm.relationship.params.single_parent "sqlalchemy.orm.relationship")参数配置[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")，建立Python端验证，确保该对象仅与一个父对象关联时间。
 
 合并[¶ T0\>](#merge "Permalink to this headline")
 -------------------------------------------------
 
-`merge` cascade指示[`Session.merge()`{.xref .py
-.py-meth .docutils
-.literal}](session_api.html#sqlalchemy.orm.session.Session.merge "sqlalchemy.orm.session.Session.merge")操作应该从作为[`Session.merge()`](session_api.html#sqlalchemy.orm.session.Session.merge "sqlalchemy.orm.session.Session.merge")主题的父级传播引用对象。这个级联也是默认的。
+`merge` cascade指示[`Session.merge()`](session_api.html#sqlalchemy.orm.session.Session.merge "sqlalchemy.orm.session.Session.merge")操作应该从作为[`Session.merge()`](session_api.html#sqlalchemy.orm.session.Session.merge "sqlalchemy.orm.session.Session.merge")主题的父级传播引用对象。这个级联也是默认的。
 
 刷新-到期[¶ T0\>](#refresh-expire "Permalink to this headline")
 ---------------------------------------------------------------

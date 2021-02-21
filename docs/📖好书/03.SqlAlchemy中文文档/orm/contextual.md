@@ -198,9 +198,7 @@ current thread.
         – Keyword arguments will be passed to the
         [`scoped_session.session_factory`{.xref .py .py-attr .docutils
         .literal}](#sqlalchemy.orm.scoping.scoped_session.session_factory "sqlalchemy.orm.scoping.scoped_session.session_factory")
-        callable, if an existing [`Session`{.xref .py .py-class
-        .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
+        callable, if an existing [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
         is not present. 如果存在[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")并且关键字参数已被传递，则引发[`InvalidRequestError`{.xref
         .py .py-exc .docutils
         .literal}](core_exceptions.html#sqlalchemy.exc.InvalidRequestError "sqlalchemy.exc.InvalidRequestError")。
@@ -211,9 +209,7 @@ current thread.
         参数：
 
         -   **session\_factory**[¶](#sqlalchemy.orm.scoping.scoped_session.params.session_factory)
-            – a factory to create new [`Session`{.xref .py .py-class
-            .docutils
-            .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
+            – a factory to create new [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
             instances. 这通常但不一定是[`sessionmaker`{.xref .py
             .py-class .docutils
             .literal}](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")的一个实例。
@@ -224,9 +220,7 @@ current thread.
             .py .py-class .docutils
             .literal}](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")对象将采用“线程本地”作用域，并将使用Python
             `threading.local()`{.docutils
-            .literal}来维护当前的[`Session`{.xref .py .py-class
-            .docutils
-            .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")如果通过，函数应该返回一个可哈希标记；此标记将用作字典中的键以存储和检索当前的[`Session`{.xref
+            .literal}来维护当前的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")如果通过，函数应该返回一个可哈希标记；此标记将用作字典中的键以存储和检索当前的[`Session`{.xref
             .py .py-class .docutils
             .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。
 
@@ -254,8 +248,7 @@ current thread.
             # after mappers are defined
             result = MyClass.query.filter(MyClass.name=='foo').all()
 
-        默认生成会话配置的查询类的实例。要覆盖和使用自定义实现，请提供一个`query_cls`{.docutils
-        .literal}可调用。可调用对象将作为位置参数和会话关键字参数与类的映射器一起调用。
+        默认生成会话配置的查询类的实例。要覆盖和使用自定义实现，请提供一个`query_cls`可调用。可调用对象将作为位置参数和会话关键字参数与类的映射器一起调用。
 
         放置在类上的查询属性的数量没有限制。
 

@@ -226,9 +226,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
             the numeric precision for use in DDL
             `CREATE TABLE`.
         -   **asdecimal**[¶](#sqlalchemy.types.Float.params.asdecimal) –
-            the same flag as that of [`Numeric`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric"),
+            the same flag as that of [`Numeric`](#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric"),
             but defaults to `False`.
             请注意，将此标志设置为`True`{.docutils
             .literal}会导致浮点转换。
@@ -242,9 +240,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
         -   **\*\* kwargs** [¶](#sqlalchemy.types.Float.params.**kwargs)
             - 不建议使用。其他参数在这里被默认的[`Float`{.xref .py
             .py-class .docutils
-            .literal}](#sqlalchemy.types.Float "sqlalchemy.types.Float")类型忽略。对于支持附加参数的特定于数据库的浮点数，请参阅该方言的文档以获取详细信息，例如[`sqlalchemy.dialects.mysql.FLOAT`{.xref
-            .py .py-class .docutils
-            .literal}](dialects_mysql.html#sqlalchemy.dialects.mysql.FLOAT "sqlalchemy.dialects.mysql.FLOAT")。
+            .literal}](#sqlalchemy.types.Float "sqlalchemy.types.Float")类型忽略。对于支持附加参数的特定于数据库的浮点数，请参阅该方言的文档以获取详细信息，例如[`sqlalchemy.dialects.mysql.FLOAT`](dialects_mysql.html#sqlalchemy.dialects.mysql.FLOAT "sqlalchemy.dialects.mysql.FLOAT")。
 
 *class* `sqlalchemy.types。`{.descclassname} `整数`{.descname} [¶](#sqlalchemy.types.Integer "Permalink to this definition")
 :   基础：`sqlalchemy.types._DateAffinity`，[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
@@ -363,15 +359,12 @@ Standard Types\`\_](#id1)和本章的其他部分。
 
             版本0.9.0中的新功能
 
-        当使用`Numeric`{.docutils
-        .literal}类型时，应注意确保asdecimal设置适用于正在使用的DBAPI -
+        当使用`Numeric`类型时，应注意确保asdecimal设置适用于正在使用的DBAPI -
         当Numeric应用从Decimal-\> float或float-\>
         Decimal的转换时，此转换会发生所有结果列的额外性能开销。
 
-        原生返回Decimal的DBAPI（例如psycopg2）的设置为`True`{.docutils
-        .literal}将具有更高的准确性和更高的性能，因为Decimal的本地转换减少了游戏中浮点问题的数量，而Numeric类型本身不需要应用任何进一步的转换。然而，另一个返回本地*浮动的DBAPI会产生额外的转换开销，并且仍然会受到浮点数据丢失的影响
-        - 在这种情况下，`asdecimal=False`{.docutils
-        .literal}至少会移除额外的转换开销。*
+        原生返回Decimal的DBAPI（例如psycopg2）的设置为`True`将具有更高的准确性和更高的性能，因为Decimal的本地转换减少了游戏中浮点问题的数量，而Numeric类型本身不需要应用任何进一步的转换。然而，另一个返回本地*浮动的DBAPI会产生额外的转换开销，并且仍然会受到浮点数据丢失的影响
+        - 在这种情况下，`asdecimal=False`至少会移除额外的转换开销。*
 
  *class*`sqlalchemy.types.`{.descclassname}`PickleType`{.descname}(*protocol=2*, *pickler=None*, *comparator=None*)[¶](#sqlalchemy.types.PickleType "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeDecorator`](custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
@@ -565,16 +558,13 @@ Standard Types\`\_](#id1)和本章的其他部分。
 
     也可以看看：
 
-    > [`UnicodeText`{.xref .py .py-class .docutils
-    > .literal}](#sqlalchemy.types.UnicodeText "sqlalchemy.types.UnicodeText")
-    > - 与[`Unicode`{.xref .py .py-class .docutils
-    > .literal}](#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")不相容的文本对应。
+    > [`UnicodeText`](#sqlalchemy.types.UnicodeText "sqlalchemy.types.UnicodeText")
+    > - 与[`Unicode`](#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")不相容的文本对应。
 
     `__ init __`{.descname} （ *length = None*，*\*\* kwargs* ） [/ T5\>](#sqlalchemy.types.Unicode.__init__ "Permalink to this definition")
     :   创建一个[`Unicode`](#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")对象。
 
-        参数与[`String`](#sqlalchemy.types.String "sqlalchemy.types.String")的参数相同，不同的是`convert_unicode`{.docutils
-        .literal}默认为`True`。
+        参数与[`String`](#sqlalchemy.types.String "sqlalchemy.types.String")的参数相同，不同的是`convert_unicode`默认为`True`。
 
 *class* `sqlalchemy.types。`{.descclassname} `UnicodeText`{.descname} （ *length = None*，*\* \* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.types.UnicodeText "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.Text`](#sqlalchemy.types.Text "sqlalchemy.types.Text")
@@ -588,8 +578,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
     `__ init __`{.descname} （ *length = None*，*\*\* kwargs* ） [/ T5\>](#sqlalchemy.types.UnicodeText.__init__ "Permalink to this definition")
     :   创建一个Unicode转换文本类型。
 
-        参数与[`Text`](#sqlalchemy.types.Text "sqlalchemy.types.Text")相同，但`convert_unicode`{.docutils
-        .literal}默认为`True`。
+        参数与[`Text`](#sqlalchemy.types.Text "sqlalchemy.types.Text")相同，但`convert_unicode`默认为`True`。
 
 SQL标准和多个供应商类型[¶](#sql-standard-and-multiple-vendor-types "Permalink to this headline")
 ------------------------------------------------------------------------------------------------
@@ -632,16 +621,11 @@ backends that explicitly support them by name.
 
     发送多个维度是可选的，但建议如果数据类型代表多个维度的数组。这个数字用于：
 
-    -   当向数据库发送类型声明本身时，例如`INTEGER[][]`{.docutils
-        .literal}
+    -   当向数据库发送类型声明本身时，例如`INTEGER[][]`
 
-    -   在将Python值转换为数据库值时，反之亦然，例如一个[`Unicode`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")对象的ARRAY使用此数字来高效地访问数组结构中的字符串值，而无需依靠每行类型检查
+    -   在将Python值转换为数据库值时，反之亦然，例如一个[`Unicode`](#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")对象的ARRAY使用此数字来高效地访问数组结构中的字符串值，而无需依靠每行类型检查
 
-    -   当与Python `getitem`{.docutils
-        .literal}访问器一起使用时，维数用于定义`[]`{.docutils
-        .literal}运算符应返回的类型的类型。对于具有两个维度的INTEGER阵列：
+    -   当与Python `getitem`访问器一起使用时，维数用于定义`[]`运算符应返回的类型的类型。对于具有两个维度的INTEGER阵列：
 
             >>> expr = table.c.column[5]  # returns ARRAY(Integer, dimensions=1)
             >>> expr = expr[6]  # returns Integer
@@ -676,9 +660,7 @@ backends that explicitly support them by name.
 
         定义[`types.ARRAY`](#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")的比较操作。
 
-        这种类型的方言特定形式提供了更多的运算符。参见[`postgresql.ARRAY.Comparator`{.xref
-        .py .py-class .docutils
-        .literal}](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY.Comparator "sqlalchemy.dialects.postgresql.ARRAY.Comparator")。
+        这种类型的方言特定形式提供了更多的运算符。参见[`postgresql.ARRAY.Comparator`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY.Comparator "sqlalchemy.dialects.postgresql.ARRAY.Comparator")。
 
         `全部`{.descname} （ *其他*，*运营商=无* ） [t5 \>](#sqlalchemy.types.ARRAY.Comparator.all "Permalink to this definition")
         :   返回`其他 运算符 ALL （数组）`子句。
@@ -771,9 +753,7 @@ backends that explicitly support them by name.
         -   **dimensions**[¶](#sqlalchemy.types.ARRAY.params.dimensions)
             – if non-None, the ARRAY will assume a fixed number of
             dimensions.
-            这会影响数组在数据库中的声明方式，它如何解释Python和结果值，以及与“getitem”运算符一起工作的表达式行为。有关更多详细信息，请参阅[`types.ARRAY`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")中的说明。
+            这会影响数组在数据库中的声明方式，它如何解释Python和结果值，以及与“getitem”运算符一起工作的表达式行为。有关更多详细信息，请参阅[`types.ARRAY`](#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")中的说明。
         -   **zero\_indexes=False**[¶](#sqlalchemy.types.ARRAY.params.zero_indexes)
             – when True, index values will be converted between Python
             zero-based and SQL one-based indexes, e.g. a value of one
@@ -917,18 +897,14 @@ backends that explicitly support them by name.
         定义[`types.JSON`](#sqlalchemy.types.JSON "sqlalchemy.types.JSON")的比较操作。
 
     *class* `JSON。`{.descclassname} `JSONIndexType`{.descname} [¶](#sqlalchemy.types.JSON.JSONIndexType "Permalink to this definition")
-    :   基础：[`sqlalchemy.types.TypeEngine`{.xref .py .py-class
-        .docutils
-        .literal}](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
+    :   基础：[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
         JSON索引值的数据类型的占位符。
 
         这允许执行时处理JSON索引值以获取特殊语法。
 
     *class* `JSON。`{.descclassname} `JSONPathType`{.descname} [¶](#sqlalchemy.types.JSON.JSONPathType "Permalink to this definition")
-    :   基础：[`sqlalchemy.types.TypeEngine`{.xref .py .py-class
-        .docutils
-        .literal}](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
+    :   基础：[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
         JSON路径操作的占位符类型。
 
@@ -937,13 +913,11 @@ backends that explicitly support them by name.
     `JSON。`{.descclassname} `NULL`{.descname} *=符号（'JSON\_NULL'）* [¶](#sqlalchemy.types.JSON.NULL "Permalink to this definition")
     :   描述NULL的json值。
 
-        该值用于强制使用`"null"`{.docutils
-        .literal}的JSON值作为值。根据[`JSON.none_as_null`{.xref .py
+        该值用于强制使用`"null"`的JSON值作为值。根据[`JSON.none_as_null`{.xref .py
         .py-paramref .docutils
         .literal}](#sqlalchemy.types.JSON.params.none_as_null "sqlalchemy.types.JSON")标志的设置，Python
         `None`的值将被识别为SQL NULL或JSON
-        `"null"`{.docutils
-        .literal}无论此设置如何，都可以使用[`JSON.NULL`{.xref .py
+        `"null"`无论此设置如何，都可以使用[`JSON.NULL`{.xref .py
         .py-attr .docutils
         .literal}](#sqlalchemy.types.JSON.NULL "sqlalchemy.types.JSON.NULL")常量来解析为JSON
         `"null"`。这与`sql.null()`{.xref .py
@@ -968,8 +942,7 @@ backends that explicitly support them by name.
         [¶](#sqlalchemy.types.JSON.params.none_as_null) -
 
         如果为True，则将值`None`保留为SQL
-        NULL值，而不是`null`{.docutils
-        .literal}的JSON编码。请注意，当此标志为False时，[`null()`{.xref
+        NULL值，而不是`null`的JSON编码。请注意，当此标志为False时，[`null()`{.xref
         .py .py-func .docutils
         .literal}](sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")结构仍可用于保留NULL值：
 

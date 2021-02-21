@@ -69,9 +69,7 @@ depth is added (i.e. `r + r*r2 + r*r2*r3` ...)
         logger.debug("Query Complete!")
         logger.debug("Total Time: %f", total)
 
-以上，我们使用[`ConnectionEvents.before_cursor_execute()`{.xref .py
-.py-meth .docutils
-.literal}](core_events.html#sqlalchemy.events.ConnectionEvents.before_cursor_execute "sqlalchemy.events.ConnectionEvents.before_cursor_execute")和[`ConnectionEvents.after_cursor_execute()`](core_events.html#sqlalchemy.events.ConnectionEvents.after_cursor_execute "sqlalchemy.events.ConnectionEvents.after_cursor_execute")事件来建立执行语句时的拦截点。我们使用`_ConnectionRecord.info`字典将一个计时器附加到连接上；我们在这里使用一个堆栈来处理游标执行事件可能被嵌套的偶然情况。
+以上，我们使用[`ConnectionEvents.before_cursor_execute()`](core_events.html#sqlalchemy.events.ConnectionEvents.before_cursor_execute "sqlalchemy.events.ConnectionEvents.before_cursor_execute")和[`ConnectionEvents.after_cursor_execute()`](core_events.html#sqlalchemy.events.ConnectionEvents.after_cursor_execute "sqlalchemy.events.ConnectionEvents.after_cursor_execute")事件来建立执行语句时的拦截点。我们使用`_ConnectionRecord.info`字典将一个计时器附加到连接上；我们在这里使用一个堆栈来处理游标执行事件可能被嵌套的偶然情况。
 
 ### 代码分析[¶](#code-profiling "Permalink to this headline")
 
@@ -183,8 +181,7 @@ Core或ORM查询生成此行为通常很容易。
 
 也就是说，我们在`type_api`系统中看到许多昂贵的调用，实际耗时的事情是`time.sleep()`调用。
 
-请务必检查`Dialect 文档`{.xref .doc .docutils
-.literal}，以获取有关此级别已知性能调整建议的说明，特别是对于像Oracle这样的数据库。可能存在与确保数字准确性或字符串处理相关的系统，这些系统在所有情况下可能都不需要。
+请务必检查`Dialect 文档`，以获取有关此级别已知性能调整建议的说明，特别是对于像Oracle这样的数据库。可能存在与确保数字准确性或字符串处理相关的系统，这些系统在所有情况下可能都不需要。
 
 排队性能受到影响的可能还有更多的低级别点，例如，如果花费的时间似乎集中在像`socket.receive()`这样的调用上，这可能表明除了实际的网络连接，所有事情都很快，并且数据移动花费的时间太多网络。
 
@@ -239,9 +236,7 @@ work](glossary.html#term-unit-of-work)模式。这种模式远远超出了简单
 ORM基本上不适用于高性能批量插入 -
 这是SQLAlchemy除了将ORM作为第一级组件提供Core之外的全部原因。
 
-对于快速批量插入的用例，ORM构建在其上的SQL生成和执行系统是`Core`{.xref
-.doc .docutils
-.literal}的一部分。直接使用此系统，我们可以生成一个与直接使用原始数据库API相竞争的INSERT。
+对于快速批量插入的用例，ORM构建在其上的SQL生成和执行系统是`Core`的一部分。直接使用此系统，我们可以生成一个与直接使用原始数据库API相竞争的INSERT。
 
 或者，SQLAlchemy ORM提供了[Bulk
 Operations](orm_persistence_techniques.html#bulk-operations)方法套件，这些方法提供了工作单元过程的子部分的挂钩，以便发布具有小程度的基于ORM的核心级INSERT和UPDATE结构自动化。

@@ -60,8 +60,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
     `值 T0> ¶ T1>`{.descname}
     :   返回此属性的值。
 
-        这个操作等同于直接或通过`getattr()`{.docutils
-        .literal}访问对象的属性，并且如果需要的话将触发任何挂起的加载器可调用。
+        这个操作等同于直接或通过`getattr()`访问对象的属性，并且如果需要的话将触发任何挂起的加载器可调用。
 
 *class* `sqlalchemy.orm.util。`{.descclassname} `CascadeOptions`{.descname} [¶](#sqlalchemy.orm.util.CascadeOptions "Permalink to this definition")
 :   Bases: `__builtin__.frozenset`
@@ -199,9 +198,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         为[`ColumnProperty`](#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty")属性生成布尔值，比较和其他运算符。
 
-        有关简要概述，请参阅[`PropComparator`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.orm.interfaces.PropComparator "sqlalchemy.orm.interfaces.PropComparator")的文档。
+        有关简要概述，请参阅[`PropComparator`](#sqlalchemy.orm.interfaces.PropComparator "sqlalchemy.orm.interfaces.PropComparator")的文档。
 
         也可以看看：
 
@@ -778,9 +775,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
             return getattr(self.parent.class_, self.key)
 
-        即如果这个[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")被命名为`addresses`{.docutils
-        .literal}，并且它映射到的类是`User`{.docutils
-        .literal}，那么这个序列是可能的：
+        即如果这个[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")被命名为`addresses`，并且它映射到的类是`User`，那么这个序列是可能的：
 
             >>> from sqlalchemy import inspect
             >>> mapper = inspect(User)
@@ -981,16 +976,12 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
         .literal}](#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")关联。
 
         字典在第一次访问时生成。Alternatively, it can be specified as a
-        constructor argument to the [`column_property()`{.xref .py
-        .py-func .docutils
-        .literal}](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property"),
+        constructor argument to the [`column_property()`](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property"),
         [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship"),
         or [`composite()`](composites.html#sqlalchemy.orm.composite "sqlalchemy.orm.composite")
         functions.
 
-        0.8版新增功能：增加了对所有[`MapperProperty`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")子类的.info支持。
+        0.8版新增功能：增加了对所有[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")子类的.info支持。
 
         版本1.0.0更改： [`MapperProperty.info`{.xref .py .py-attr
         .docutils
@@ -1044,9 +1035,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
     `删除 T0> ¶ T1>`{.descname}
     :   如果对象[deleted](glossary.html#term-deleted)，则返回true。
 
-        处于删除状态的对象保证不在其父节点[`Session`{.xref .py .py-class
-        .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的[`Session.identity_map`{.xref
+        处于删除状态的对象保证不在其父节点[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的[`Session.identity_map`{.xref
         .py .py-attr .docutils
         .literal}](session_api.html#sqlalchemy.orm.session.Session.identity_map "sqlalchemy.orm.session.Session.identity_map")内；但是如果会话的事务回滚，对象将被恢复到持久状态和身份映射。
 
@@ -1077,22 +1066,19 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
     `字典 T0> ¶ T1>`{.descname}
     :   返回对象使用的实例字典。
 
-        在正常情况下，除非已配置备用仪器系统，否则这总是与映射对象的`__dict__`{.docutils
-        .literal}属性同义。
+        在正常情况下，除非已配置备用仪器系统，否则这总是与映射对象的`__dict__`属性同义。
 
         在实际对象已被垃圾收集的情况下，这个访问器返回一个空白字典。
 
     `expired_attributes`{.descname} *=无* [¶](#sqlalchemy.orm.state.InstanceState.expired_attributes "Permalink to this definition")
     :   假设没有待处理的更改，将由管理器的延迟标量加载器加载的'过期'密钥集。
 
-        另请参阅发生刷新操作时与此set相交的`unmodified`{.docutils
-        .literal}集合。
+        另请参阅发生刷新操作时与此set相交的`unmodified`集合。
 
     ` has_identity  T0> ¶ T1>`{.descname}
     :   如果此对象具有标识关键字，则返回`True`。
 
-        这应该始终与表达式`state.persistent 或 state.detached`{.docutils
-        .literal}具有相同的值。
+        这应该始终与表达式`state.persistent 或 state.detached`具有相同的值。
 
     `身份 T0> ¶ T1>`{.descname}
     :   返回映射对象的映射标识。这是ORM持久保存的主键标识，它总是可以直接传递给[`Query.get()`](query.html#sqlalchemy.orm.query.Query.get "sqlalchemy.orm.query.Query.get")。
@@ -1129,9 +1115,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
     `持久 T0> ¶ T1>`{.descname}
     :   如果对象是[persistent](glossary.html#term-persistent)，则返回true。
 
-        处于持久状态的对象保证位于其父节点[`Session`{.xref .py .py-class
-        .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的[`Session.identity_map`{.xref
+        处于持久状态的对象保证位于其父节点[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的[`Session.identity_map`{.xref
         .py .py-attr .docutils
         .literal}](session_api.html#sqlalchemy.orm.session.Session.identity_map "sqlalchemy.orm.session.Session.identity_map")内。
 
@@ -1147,13 +1131,9 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
         States](session_state_management.html#session-object-states)
 
     `会话 T0> ¶ T1>`{.descname}
-    :   如果没有可用的，则返回此实例的拥有[`Session`{.xref .py .py-class
-        .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，或返回`None`{.docutils
-        .literal}。
+    :   如果没有可用的，则返回此实例的拥有[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，或返回`None`。
 
-        请注意，这里的结果在某些情况下可能与`obj 在 会话中的不同 T1>；一个被删除的对象会在 session中报告为不是，但是如果事务仍在进行中，该属性仍然会引用该会话。`{.docutils
-        .literal}只有在交易完成后，物品才能在正常情况下完全分离。
+        请注意，这里的结果在某些情况下可能与`obj 在 会话中的不同 T1>；一个被删除的对象会在 session中报告为不是，但是如果事务仍在进行中，该属性仍然会引用该会话。`只有在交易完成后，物品才能在正常情况下完全分离。
 
     `瞬态 T0> ¶ T1>`{.descname}
     :   如果对象[transient](glossary.html#term-transient)，则返回true。
@@ -1235,21 +1215,15 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
         .literal}](#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")关联。
 
         字典在第一次访问时生成。Alternatively, it can be specified as a
-        constructor argument to the [`column_property()`{.xref .py
-        .py-func .docutils
-        .literal}](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property"),
+        constructor argument to the [`column_property()`](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property"),
         [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship"),
         or [`composite()`](composites.html#sqlalchemy.orm.composite "sqlalchemy.orm.composite")
         functions.
 
-        0.8版新增功能：增加了对所有[`MapperProperty`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")子类的.info支持。
+        0.8版新增功能：增加了对所有[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")子类的.info支持。
 
         版本1.0.0中已更改： `InspectionAttr.info`{.xref .py .py-attr
-        .docutils .literal}从[`MapperProperty`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")移动，以便它可以应用于更广泛的ORM和扩展结构。
+        .docutils .literal}从[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")移动，以便它可以应用于更广泛的ORM和扩展结构。
 
         也可以看看
 
@@ -1282,9 +1256,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
             return getattr(self.parent.class_, self.key)
 
-        即如果这个[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")被命名为`addresses`{.docutils
-        .literal}，并且它映射到的类是`User`{.docutils
-        .literal}，那么这个序列是可能的：
+        即如果这个[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")被命名为`addresses`，并且它映射到的类是`User`，那么这个序列是可能的：
 
             >>> from sqlalchemy import inspect
             >>> mapper = inspect(User)
@@ -1300,8 +1272,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
     ` do_init  T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   执行子类特定的初始化后映射器创建步骤。
 
-        这是一个由`MapperProperty`{.docutils
-        .literal}对象的init()方法调用的模板方法。
+        这是一个由`MapperProperty`对象的init()方法调用的模板方法。
 
     `初始化 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   在创建所有映射器以调用映射器之间的关系并执行其他映射器创建初始化步骤后调用。
@@ -1319,8 +1290,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
     :   InspectionAttr接口的一部分；声明这个对象是一个映射器属性。
 
      `merge`{.descname}(*session*, *source\_state*, *source\_dict*, *dest\_state*, *dest\_dict*, *load*, *\_recursive*, *\_resolve\_conflict\_map*)[¶](#sqlalchemy.orm.interfaces.MapperProperty.merge "Permalink to this definition")
-    :   合并由`MapperProperty`{.docutils
-        .literal}表示的属性从源到目标对象。
+    :   合并由`MapperProperty`表示的属性从源到目标对象。
 
     ` post_instrument_class  T0> （ T1> 映射器 T2> ） T3> ¶ T4>`{.descname}
     :   执行init()完成后需要进行的仪器调整。
@@ -1438,8 +1408,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
         实施`==`运算符。
 
         在列上下文中，生成子句`a = b`。If the target
-        is `None`, produces `a IS NULL`{.docutils
-        .literal}.
+        is `None`, produces `a IS NULL`.
 
     ` __文件__  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`__le__()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.__le__ "sqlalchemy.sql.operators.ColumnOperators.__le__")
@@ -1486,8 +1455,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
     `任何`{.descname} （ *criterion = None*，*\*\* kwargs* ） [/ T5\>](#sqlalchemy.orm.interfaces.PropComparator.any "Permalink to this definition")
     :   如果此集合包含符合给定条件的任何成员，则返回true。
 
-        `any()`{.docutils
-        .literal}的通常实现是[`RelationshipProperty.Comparator.any()`](#sqlalchemy.orm.properties.RelationshipProperty.Comparator.any "sqlalchemy.orm.properties.RelationshipProperty.Comparator.any")。
+        `any()`的通常实现是[`RelationshipProperty.Comparator.any()`](#sqlalchemy.orm.properties.RelationshipProperty.Comparator.any "sqlalchemy.orm.properties.RelationshipProperty.Comparator.any")。
 
         参数：
 
@@ -1525,9 +1493,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
     :   *inherited from the* [`collate()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.collate "sqlalchemy.sql.operators.ColumnOperators.collate")
         *method of* [`ColumnOperators`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")
 
-        根据给定的排序字符串，针对父对象生成一个[`collate()`{.xref .py
-        .py-func .docutils
-        .literal}](core_sqlelement.html#sqlalchemy.sql.expression.collate "sqlalchemy.sql.expression.collate")子句。
+        根据给定的排序字符串，针对父对象生成一个[`collate()`](core_sqlelement.html#sqlalchemy.sql.expression.collate "sqlalchemy.sql.expression.collate")子句。
 
     `的concat  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
     :   *继承自* [`concat()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.concat "sqlalchemy.sql.operators.ColumnOperators.concat")
@@ -1535,9 +1501,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         实现'concat'操作符。
 
-        在列上下文中，生成子句`a || b`{.docutils
-        .literal}，或者使用`concat()`{.docutils
-        .literal}运算符在MySQL上。
+        在列上下文中，生成子句`a || b`，或者使用`concat()`运算符在MySQL上。
 
     `包含`{.descname} （ *其他*，*\*\* kwargs* ） [](#sqlalchemy.orm.interfaces.PropComparator.contains "Permalink to this definition") \>
     :   *inherited from the* [`contains()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.contains "sqlalchemy.sql.operators.ColumnOperators.contains")
@@ -1545,8 +1509,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         实现'包含'运算符。
 
-        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；％'`{.docutils
-        .literal}
+        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；％'`
 
     `递减 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   *继承自* [`desc()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.desc "sqlalchemy.sql.operators.ColumnOperators.desc")
@@ -1566,8 +1529,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         实现'endswith'操作符。
 
-        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；`{.docutils
-        .literal}
+        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；`
 
     `有`{.descname} （ *criterion = None*，*\*\* kwargs* ） [/ T5\>](#sqlalchemy.orm.interfaces.PropComparator.has "Permalink to this definition")
     :   如果此元素引用符合给定条件的成员，则返回true。
@@ -1621,8 +1583,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         在运算符中实现`in`
 
-        在列上下文中，生成子句`a IN 其他`{.docutils
-        .literal}。“other”可以是列表达式的元组/列表，或者是[`select()`{.xref
+        在列上下文中，生成子句`a IN 其他`。“other”可以是列表达式的元组/列表，或者是[`select()`{.xref
         .py .py-func .docutils
         .literal}](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构。
 
@@ -1632,11 +1593,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         实现`IS`运算符。
 
-        通常，当与`None`{.docutils
-        .literal}的值进行比较时，会自动生成`IS`{.docutils
-        .literal}，这会解析为`NULL`{.docutils
-        .literal}。但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS`{.docutils
-        .literal}。
+        通常，当与`None`的值进行比较时，会自动生成`IS`，这会解析为`NULL`。但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS`。
 
         New in version 0.7.9.
 
@@ -1662,10 +1619,8 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
         实现`IS NOT`运算符。
 
         Normally, `IS NOT` is generated
-        automatically when comparing to a value of `None`{.docutils
-        .literal}, which resolves to `NULL`.
-        但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS NOT`{.docutils
-        .literal}。
+        automatically when comparing to a value of `None`, which resolves to `NULL`.
+        但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS NOT`。
 
         New in version 0.7.9.
 
@@ -1737,8 +1692,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         执行`NOT ILIKE`运算符。
 
-        这相当于对[`ColumnOperators.ilike()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.ilike "sqlalchemy.sql.operators.ColumnOperators.ilike")使用否定，即`~x.ilike(y)`{.docutils
-        .literal}。
+        这相当于对[`ColumnOperators.ilike()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.ilike "sqlalchemy.sql.operators.ColumnOperators.ilike")使用否定，即`~x.ilike(y)`。
 
         0.8版本中的新功能
 
@@ -1752,8 +1706,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         执行`NOT IN`运算符。
 
-        这相当于对[`ColumnOperators.in_()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.in_ "sqlalchemy.sql.operators.ColumnOperators.in_")，即`~x.in_(y)`{.docutils
-        .literal}使用否定。
+        这相当于对[`ColumnOperators.in_()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.in_ "sqlalchemy.sql.operators.ColumnOperators.in_")，即`~x.in_(y)`使用否定。
 
         0.8版本中的新功能
 
@@ -1767,8 +1720,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         执行`NOT LIKE`运算符。
 
-        这相当于对[`ColumnOperators.like()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")，即`~x.like(y)`{.docutils
-        .literal}使用否定。
+        这相当于对[`ColumnOperators.like()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")，即`~x.like(y)`使用否定。
 
         0.8版本中的新功能
 
@@ -1849,9 +1801,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
             true / false值，如`==`，`>`{.docutils
             .literal}等。应该设置此标志，以便ORM关系可以确定运算符在自定义连接条件中使用时是比较运算符。
 
-            版本0.9.2新增： - 添加了[`Operators.op.is_comparison`{.xref
-            .py .py-paramref .docutils
-            .literal}](core_sqlelement.html#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")标志。
+            版本0.9.2新增： - 添加了[`Operators.op.is_comparison`](core_sqlelement.html#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")标志。
 
         也可以看看
 
@@ -1872,8 +1822,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         在子类上覆盖它可以使普通行为适用于所有操作。例如，覆盖[`ColumnOperators`{.xref
         .py .py-class .docutils
-        .literal}](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")将`func.lower()`{.docutils
-        .literal}应用于左侧和右侧：
+        .literal}](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")将`func.lower()`应用于左侧和右侧：
 
             class MyComparator(ColumnOperators):
                 def operate(self, op, other):
@@ -1908,8 +1857,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         实现`startwith`运算符。
 
-        在列上下文中，生成子句`LIKE '＆lt； other＆gt；％'`{.docutils
-        .literal}
+        在列上下文中，生成子句`LIKE '＆lt； other＆gt；％'`
 
  *class*`sqlalchemy.orm.properties.`{.descclassname}`RelationshipProperty`{.descname}(*argument*, *secondary=None*, *primaryjoin=None*, *secondaryjoin=None*, *foreign\_keys=None*, *uselist=None*, *order\_by=False*, *backref=None*, *back\_populates=None*, *post\_update=False*, *cascade=False*, *extension=None*, *viewonly=False*, *lazy=True*, *collection\_class=None*, *passive\_deletes=False*, *passive\_updates=True*, *remote\_side=None*, *enable\_typechecks=True*, *join\_depth=None*, *comparator\_factory=None*, *single\_parent=False*, *innerjoin=False*, *distinct\_target\_key=None*, *doc=None*, *active\_history=False*, *cascade\_backrefs=True*, *load\_on\_pending=False*, *bake\_queries=True*, *strategy\_class=None*, *\_local\_remote\_pairs=None*, *query\_class=None*, *info=None*)[¶](#sqlalchemy.orm.properties.RelationshipProperty "Permalink to this definition")
 :   基础：`sqlalchemy.orm.interfaces.StrategizedProperty`
@@ -1974,9 +1922,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
                 .literal}的比较产生NOT EXISTS子句。
 
          `__init__`{.descname}(*prop*, *parentmapper*, *adapt\_to\_entity=None*, *of\_type=None*)[¶](#sqlalchemy.orm.properties.RelationshipProperty.Comparator.__init__ "Permalink to this definition")
-        :   [`RelationshipProperty.Comparator`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.orm.properties.RelationshipProperty.Comparator "sqlalchemy.orm.properties.RelationshipProperty.Comparator")的结构是ORM属性结构的内部结构。
+        :   [`RelationshipProperty.Comparator`](#sqlalchemy.orm.properties.RelationshipProperty.Comparator "sqlalchemy.orm.properties.RelationshipProperty.Comparator")的结构是ORM属性结构的内部结构。
 
         ` __文件__  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
         :   *inherited from the* [`__le__()`{.xref .py .py-meth
@@ -2276,9 +2222,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
             .literal}](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")
 
         `在_  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
-        :   产生一个IN子句 - 目前还没有为[`relationship()`{.xref .py
-            .py-func .docutils
-            .literal}](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")实现属性。
+        :   产生一个IN子句 - 目前还没有为[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")实现属性。
 
         `是_  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
         :   *inherited from the* [`is_()`{.xref .py .py-meth .docutils
@@ -2378,9 +2322,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
             .literal}](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.ilike "sqlalchemy.sql.operators.ColumnOperators.ilike")
 
         `映射器 T0> ¶ T1>`{.descname}
-        :   由[`RelationshipProperty.Comparator`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.orm.properties.RelationshipProperty.Comparator "sqlalchemy.orm.properties.RelationshipProperty.Comparator")引用的目标[`Mapper`{.xref
+        :   由[`RelationshipProperty.Comparator`](#sqlalchemy.orm.properties.RelationshipProperty.Comparator "sqlalchemy.orm.properties.RelationshipProperty.Comparator")引用的目标[`Mapper`{.xref
             .py .py-class .docutils
             .literal}](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")。
 
@@ -2610,9 +2552,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
             .literal}
 
      `RelationshipProperty.`{.descclassname}`__init__`{.descname}(*argument*, *secondary=None*, *primaryjoin=None*, *secondaryjoin=None*, *foreign\_keys=None*, *uselist=None*, *order\_by=False*, *backref=None*, *back\_populates=None*, *post\_update=False*, *cascade=False*, *extension=None*, *viewonly=False*, *lazy=True*, *collection\_class=None*, *passive\_deletes=False*, *passive\_updates=True*, *remote\_side=None*, *enable\_typechecks=True*, *join\_depth=None*, *comparator\_factory=None*, *single\_parent=False*, *innerjoin=False*, *distinct\_target\_key=None*, *doc=None*, *active\_history=False*, *cascade\_backrefs=True*, *load\_on\_pending=False*, *bake\_queries=True*, *strategy\_class=None*, *\_local\_remote\_pairs=None*, *query\_class=None*, *info=None*)[¶](#sqlalchemy.orm.properties.RelationshipProperty.__init__ "Permalink to this definition")
-    :   构建一个新的[`RelationshipProperty`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.orm.properties.RelationshipProperty "sqlalchemy.orm.properties.RelationshipProperty")对象。
+    :   构建一个新的[`RelationshipProperty`](#sqlalchemy.orm.properties.RelationshipProperty "sqlalchemy.orm.properties.RelationshipProperty")对象。
 
         这个构造函数被镜像为公共API函数；有关完整的用法和参数说明，请参阅[`relationship()`{.xref
         .py .py-func .docutils
@@ -2633,9 +2573,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
             return getattr(self.parent.class_, self.key)
 
-        即如果这个[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")被命名为`addresses`{.docutils
-        .literal}，并且它映射到的类是`User`{.docutils
-        .literal}，那么这个序列是可能的：
+        即如果这个[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")被命名为`addresses`，并且它映射到的类是`User`，那么这个序列是可能的：
 
             >>> from sqlalchemy import inspect
             >>> mapper = inspect(User)
@@ -2710,9 +2648,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
             return getattr(self.parent.class_, self.key)
 
-        即如果这个[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")被命名为`addresses`{.docutils
-        .literal}，并且它映射到的类是`User`{.docutils
-        .literal}，那么这个序列是可能的：
+        即如果这个[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")被命名为`addresses`，并且它映射到的类是`User`，那么这个序列是可能的：
 
             >>> from sqlalchemy import inspect
             >>> mapper = inspect(User)
@@ -2734,8 +2670,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         执行子类特定的初始化后映射器创建步骤。
 
-        这是一个由`MapperProperty`{.docutils
-        .literal}对象的init()方法调用的模板方法。
+        这是一个由`MapperProperty`对象的init()方法调用的模板方法。
 
     `extension_type`{.descname} *=符号（'NOT\_EXTENSION'）* [¶](#sqlalchemy.orm.descriptor_props.SynonymProperty.extension_type "Permalink to this definition")
     :   
@@ -2750,8 +2685,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
     :   *继承自* *[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")的
         [`merge()`](#sqlalchemy.orm.interfaces.MapperProperty.merge "sqlalchemy.orm.interfaces.MapperProperty.merge")*
 
-        合并由`MapperProperty`{.docutils
-        .literal}表示的属性从源到目标对象。
+        合并由`MapperProperty`表示的属性从源到目标对象。
 
     ` post_instrument_class  T0> （ T1> 映射器 T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`post_instrument_class()`](#sqlalchemy.orm.interfaces.MapperProperty.post_instrument_class "sqlalchemy.orm.interfaces.MapperProperty.post_instrument_class")
@@ -2797,8 +2731,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
         实施`==`运算符。
 
         在列上下文中，生成子句`a = b`。If the target
-        is `None`, produces `a IS NULL`{.docutils
-        .literal}.
+        is `None`, produces `a IS NULL`.
 
     ` __文件__  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`__le__()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.__le__ "sqlalchemy.sql.operators.ColumnOperators.__le__")
@@ -2847,8 +2780,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         如果此集合包含符合给定条件的任何成员，则返回true。
 
-        `any()`{.docutils
-        .literal}的通常实现是[`RelationshipProperty.Comparator.any()`](#sqlalchemy.orm.properties.RelationshipProperty.Comparator.any "sqlalchemy.orm.properties.RelationshipProperty.Comparator.any")。
+        `any()`的通常实现是[`RelationshipProperty.Comparator.any()`](#sqlalchemy.orm.properties.RelationshipProperty.Comparator.any "sqlalchemy.orm.properties.RelationshipProperty.Comparator.any")。
 
         参数：
 
@@ -2886,9 +2818,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
     :   *inherited from the* [`collate()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.collate "sqlalchemy.sql.operators.ColumnOperators.collate")
         *method of* [`ColumnOperators`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")
 
-        根据给定的排序字符串，针对父对象生成一个[`collate()`{.xref .py
-        .py-func .docutils
-        .literal}](core_sqlelement.html#sqlalchemy.sql.expression.collate "sqlalchemy.sql.expression.collate")子句。
+        根据给定的排序字符串，针对父对象生成一个[`collate()`](core_sqlelement.html#sqlalchemy.sql.expression.collate "sqlalchemy.sql.expression.collate")子句。
 
     `的concat  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
     :   *继承自* [`concat()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.concat "sqlalchemy.sql.operators.ColumnOperators.concat")
@@ -2896,9 +2826,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         实现'concat'操作符。
 
-        在列上下文中，生成子句`a || b`{.docutils
-        .literal}，或者使用`concat()`{.docutils
-        .literal}运算符在MySQL上。
+        在列上下文中，生成子句`a || b`，或者使用`concat()`运算符在MySQL上。
 
     `包含`{.descname} （ *其他*，*\*\* kwargs* ） [](#sqlalchemy.orm.attributes.QueryableAttribute.contains "Permalink to this definition") \>
     :   *inherited from the* [`contains()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.contains "sqlalchemy.sql.operators.ColumnOperators.contains")
@@ -2906,8 +2834,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         实现'包含'运算符。
 
-        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；％'`{.docutils
-        .literal}
+        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；％'`
 
     `递减 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   *继承自* [`desc()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.desc "sqlalchemy.sql.operators.ColumnOperators.desc")
@@ -2927,8 +2854,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         实现'endswith'操作符。
 
-        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；`{.docutils
-        .literal}
+        在列上下文中，生成子句`LIKE '％＆lt； other＆gt；`
 
     `extension_type`{.descname} *=符号（'NOT\_EXTENSION'）* [¶](#sqlalchemy.orm.attributes.QueryableAttribute.extension_type "Permalink to this definition")
     :   
@@ -2988,8 +2914,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         在运算符中实现`in`
 
-        在列上下文中，生成子句`a IN 其他`{.docutils
-        .literal}。“other”可以是列表达式的元组/列表，或者是[`select()`{.xref
+        在列上下文中，生成子句`a IN 其他`。“other”可以是列表达式的元组/列表，或者是[`select()`{.xref
         .py .py-func .docutils
         .literal}](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构。
 
@@ -3010,9 +2935,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
             .py .py-class .docutils
             .literal}](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
             object.
-        -   If the attribute is a [`ColumnProperty`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty")
+        -   If the attribute is a [`ColumnProperty`](#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty")
             but is mapped to any other kind of SQL expression other than
             a [`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column"),
             the attribute will refer to the [`MapperProperty.info`{.xref
@@ -3025,9 +2948,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
             case, unless a user-defined SQL construct has defined one).
         -   If the attribute refers to any other kind of
             [`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty"),
-            including [`RelationshipProperty`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.orm.properties.RelationshipProperty "sqlalchemy.orm.properties.RelationshipProperty"),
+            including [`RelationshipProperty`](#sqlalchemy.orm.properties.RelationshipProperty "sqlalchemy.orm.properties.RelationshipProperty"),
             the attribute will refer to the [`MapperProperty.info`{.xref
             .py .py-attr .docutils
             .literal}](#MapperProperty.info "MapperProperty.info")
@@ -3037,9 +2958,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
         -   To access the [`MapperProperty.info`{.xref .py .py-attr
             .docutils
             .literal}](#MapperProperty.info "MapperProperty.info")
-            dictionary of the [`MapperProperty`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")
+            dictionary of the [`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")
             unconditionally, including for a [`ColumnProperty`{.xref .py
             .py-class .docutils
             .literal}](#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty")
@@ -3068,11 +2987,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         实现`IS`运算符。
 
-        通常，当与`None`{.docutils
-        .literal}的值进行比较时，会自动生成`IS`{.docutils
-        .literal}，这会解析为`NULL`{.docutils
-        .literal}。但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS`{.docutils
-        .literal}。
+        通常，当与`None`的值进行比较时，会自动生成`IS`，这会解析为`NULL`。但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS`。
 
         New in version 0.7.9.
 
@@ -3098,10 +3013,8 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
         实现`IS NOT`运算符。
 
         Normally, `IS NOT` is generated
-        automatically when comparing to a value of `None`{.docutils
-        .literal}, which resolves to `NULL`.
-        但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS NOT`{.docutils
-        .literal}。
+        automatically when comparing to a value of `None`, which resolves to `NULL`.
+        但是，如果与某些平台上的布尔值进行比较，则可能需要明确使用`IS NOT`。
 
         New in version 0.7.9.
 
@@ -3173,8 +3086,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         执行`NOT ILIKE`运算符。
 
-        这相当于对[`ColumnOperators.ilike()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.ilike "sqlalchemy.sql.operators.ColumnOperators.ilike")使用否定，即`~x.ilike(y)`{.docutils
-        .literal}。
+        这相当于对[`ColumnOperators.ilike()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.ilike "sqlalchemy.sql.operators.ColumnOperators.ilike")使用否定，即`~x.ilike(y)`。
 
         0.8版本中的新功能
 
@@ -3188,8 +3100,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         执行`NOT IN`运算符。
 
-        这相当于对[`ColumnOperators.in_()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.in_ "sqlalchemy.sql.operators.ColumnOperators.in_")，即`~x.in_(y)`{.docutils
-        .literal}使用否定。
+        这相当于对[`ColumnOperators.in_()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.in_ "sqlalchemy.sql.operators.ColumnOperators.in_")，即`~x.in_(y)`使用否定。
 
         0.8版本中的新功能
 
@@ -3203,8 +3114,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         执行`NOT LIKE`运算符。
 
-        这相当于对[`ColumnOperators.like()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")，即`~x.like(y)`{.docutils
-        .literal}使用否定。
+        这相当于对[`ColumnOperators.like()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")，即`~x.like(y)`使用否定。
 
         0.8版本中的新功能
 
@@ -3269,9 +3179,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
             true / false值，如`==`，`>`{.docutils
             .literal}等。应该设置此标志，以便ORM关系可以确定运算符在自定义连接条件中使用时是比较运算符。
 
-            版本0.9.2新增： - 添加了[`Operators.op.is_comparison`{.xref
-            .py .py-paramref .docutils
-            .literal}](core_sqlelement.html#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")标志。
+            版本0.9.2新增： - 添加了[`Operators.op.is_comparison`](core_sqlelement.html#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")标志。
 
         也可以看看
 
@@ -3293,9 +3201,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
         .py .py-class .docutils
         .literal}](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")。
 
-        这里的返回值通常是[`ColumnProperty`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty")或[`RelationshipProperty`{.xref
+        这里的返回值通常是[`ColumnProperty`](#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty")或[`RelationshipProperty`{.xref
         .py .py-class .docutils
         .literal}](#sqlalchemy.orm.properties.RelationshipProperty "sqlalchemy.orm.properties.RelationshipProperty")的实例。
 
@@ -3305,8 +3211,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
         实现`startwith`运算符。
 
-        在列上下文中，生成子句`LIKE '＆lt； other＆gt；％'`{.docutils
-        .literal}
+        在列上下文中，生成子句`LIKE '＆lt； other＆gt；％'`
 
  *class*`sqlalchemy.orm.session.`{.descclassname}`UOWTransaction`{.descname}(*session*)[¶](#sqlalchemy.orm.session.UOWTransaction "Permalink to this definition")
 :    `filter_states_for_dep`{.descname}(*dep*, *states*)[¶](#sqlalchemy.orm.session.UOWTransaction.filter_states_for_dep "Permalink to this definition")

@@ -133,9 +133,7 @@ kinterbasdb [¶ T0\>](#module-sqlalchemy.dialects.firebird.kinterbasdb "Permalin
 
 ### 参数[¶ T0\>](#id1 "Permalink to this headline")
 
-Kinterbasdb后端接受[`sqlalchemy.dialects.firebird.fdb`{.xref .py .py-mod
-.docutils
-.literal}](#module-sqlalchemy.dialects.firebird.fdb "sqlalchemy.dialects.firebird.fdb")方言接受的`enable_rowcount`和`retaining`参数。另外，它还接受以下内容：
+Kinterbasdb后端接受[`sqlalchemy.dialects.firebird.fdb`](#module-sqlalchemy.dialects.firebird.fdb "sqlalchemy.dialects.firebird.fdb")方言接受的`enable_rowcount`和`retaining`参数。另外，它还接受以下内容：
 
 -   `type_conv` -
     选择在类型上完成的映射种类：默认情况下，SQLAlchemy使用200，Unicode，datetime和decimal支持。请参阅下面的链接文件以获取更多信息。

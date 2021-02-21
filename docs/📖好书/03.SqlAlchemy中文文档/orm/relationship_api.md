@@ -94,9 +94,7 @@ tags:
         intermediary [`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
         is not otherwise expressed in any direct class mapping.
         如果“辅助”表也被明确地映射到其他地方（例如在[Association
-        Object](basic_relationships.html#association-pattern)中），应该考虑应用[`viewonly`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.relationship.params.viewonly "sqlalchemy.orm.relationship")标志，以便[`relationship()`{.xref
+        Object](basic_relationships.html#association-pattern)中），应该考虑应用[`viewonly`](#sqlalchemy.orm.relationship.params.viewonly "sqlalchemy.orm.relationship")标志，以便[`relationship()`{.xref
         .py .py-func .docutils
         .literal}](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
 
@@ -133,8 +131,7 @@ tags:
         .py .py-class .docutils
         .literal}](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")实例时更有效。
 
-    -   T0\> **active\_history =假 T1\> [¶ T2\> - 当`True`{.docutils
-        .literal}](#sqlalchemy.orm.relationship.params.active_history)**通常情况下，简单多对一的历史追踪逻辑只需要知道“新”值就可以执行刷新。该标志可用于使用[`attributes.get_history()`{.xref
+    -   T0\> **active\_history =假 T1\> [¶ T2\> - 当`True`](#sqlalchemy.orm.relationship.params.active_history)**通常情况下，简单多对一的历史追踪逻辑只需要知道“新”值就可以执行刷新。该标志可用于使用[`attributes.get_history()`{.xref
         .py .py-func .docutils
         .literal}](session_api.html#sqlalchemy.orm.attributes.get_history "sqlalchemy.orm.attributes.get_history")的应用程序，该应用程序还需要知道该属性的“上一个”值。
     -   **backref** [¶](#sqlalchemy.orm.relationship.params.backref) -
@@ -165,9 +162,7 @@ tags:
     -   **back\_populates**
         [¶](#sqlalchemy.orm.relationship.params.back_populates) -
 
-        一个字符串名称，作用与[`backref`](#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")相同，除了补充属性**不是**自动创建，而是必须在其他映射器上显式配置。补充属性还应该指示[`back_populates`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")到此关系，以确保正常运行。
+        一个字符串名称，作用与[`backref`](#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")相同，除了补充属性**不是**自动创建，而是必须在其他映射器上显式配置。补充属性还应该指示[`back_populates`](#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")到此关系，以确保正常运行。
 
         也可以看看
 
@@ -204,19 +199,15 @@ tags:
 
     -   **cascade** [¶](#sqlalchemy.orm.relationship.params.cascade) -
 
-        一个逗号分隔的级联规则列表，确定会话操作应该如何从父级到子级“级联”。这默认为`False`{.docutils
-        .literal}，这意味着应该使用默认级联 -
-        这个默认级联是`“save-update， 合并” < / T2>。`{.docutils
-        .literal}
+        一个逗号分隔的级联规则列表，确定会话操作应该如何从父级到子级“级联”。这默认为`False`，这意味着应该使用默认级联 -
+        这个默认级联是`“save-update， 合并” < / T2>。`
 
         The available cascades are `save-update`,
         `merge`, `expunge`,
-        `delete`, `delete-orphan`{.docutils
-        .literal}, and `refresh-expire`. An
+        `delete`, `delete-orphan`, and `refresh-expire`. An
         additional option, `all` indicates shorthand
         for
-        `"save-update, merge, refresh-expire, expunge, delete"`{.docutils
-        .literal}, and is often used as in
+        `"save-update, merge, refresh-expire, expunge, delete"`, and is often used as in
         `"all, delete-orphan"` to indicate that
         related objects should follow along with the parent object in
         all cases, and be deleted when de-associated.
@@ -233,9 +224,7 @@ tags:
     -   **cascade\_backrefs = True**
         [¶](#sqlalchemy.orm.relationship.params.cascade_backrefs) -
 
-        一个布尔值，用于指示`save-update`{.docutils
-        .literal}级联应该沿着backref截取的赋值事件操作。当设置为`False`{.docutils
-        .literal}时，如果通过backref接收事件，则由此关系管理的属性不会将传入的瞬态对象级联到永久父级的会话中。
+        一个布尔值，用于指示`save-update`级联应该沿着backref截取的赋值事件操作。当设置为`False`时，如果通过backref接收事件，则由此关系管理的属性不会将传入的瞬态对象级联到永久父级的会话中。
 
         也可以看看
 
@@ -256,9 +245,7 @@ tags:
     -   **comparator\_factory**
         [¶](#sqlalchemy.orm.relationship.params.comparator_factory) -
 
-        一个扩展[`RelationshipProperty.Comparator`{.xref .py .py-class
-        .docutils
-        .literal}](internals.html#sqlalchemy.orm.properties.RelationshipProperty.Comparator "sqlalchemy.orm.properties.RelationshipProperty.Comparator")的类，它为比较操作提供自定义的SQL子句生成。
+        一个扩展[`RelationshipProperty.Comparator`](internals.html#sqlalchemy.orm.properties.RelationshipProperty.Comparator "sqlalchemy.orm.properties.RelationshipProperty.Comparator")的类，它为比较操作提供自定义的SQL子句生成。
 
         也可以看看
 
@@ -272,9 +259,7 @@ tags:
     -   **distinct\_target\_key = None**
         [¶](#sqlalchemy.orm.relationship.params.distinct_target_key) -
 
-        指示“子查询”渴望加载是否应将DISTINCT关键字应用于最内层的SELECT语句。当作为`None`{.docutils
-        .literal}离开时，在目标列不包含目标表的完整主键的情况下，将应用DISTINCT关键字。当设置为`True`{.docutils
-        .literal}时，DISTINCT关键字无条件地应用于最内层的SELECT。
+        指示“子查询”渴望加载是否应将DISTINCT关键字应用于最内层的SELECT语句。当作为`None`离开时，在目标列不包含目标表的完整主键的情况下，将应用DISTINCT关键字。当设置为`True`时，DISTINCT关键字无条件地应用于最内层的SELECT。
 
         当DISTINCT将最内层子查询的性能降低到超出最内层行可能导致的性能时，可能需要将此标志设置为False。
 
@@ -282,8 +267,7 @@ tags:
         .py-paramref .docutils
         .literal}](#sqlalchemy.orm.relationship.params.distinct_target_key "sqlalchemy.orm.relationship")允许子查询eager加载器将DISTINCT修饰符应用于最内层的SELECT。
 
-        版本0.9.0更改： - [`distinct_target_key`](#sqlalchemy.orm.relationship.params.distinct_target_key "sqlalchemy.orm.relationship")现在默认为`None`{.docutils
-        .literal}，因此该功能会自动为其中最内层查询目标一个非唯一的密钥。
+        版本0.9.0更改： - [`distinct_target_key`](#sqlalchemy.orm.relationship.params.distinct_target_key "sqlalchemy.orm.relationship")现在默认为`None`，因此该功能会自动为其中最内层查询目标一个非唯一的密钥。
 
         也可以看看
 
@@ -296,16 +280,12 @@ tags:
 
         一个[`AttributeExtension`](deprecated.html#sqlalchemy.orm.interfaces.AttributeExtension "sqlalchemy.orm.interfaces.AttributeExtension")实例或扩展名列表，它们将被放置在放置在该类上的结果描述符的属性侦听器列表中。
 
-        从版本0.7开始弃用：请参阅[`AttributeEvents`{.xref .py .py-class
-        .docutils
-        .literal}](events.html#sqlalchemy.orm.events.AttributeEvents "sqlalchemy.orm.events.AttributeEvents")。
+        从版本0.7开始弃用：请参阅[`AttributeEvents`](events.html#sqlalchemy.orm.events.AttributeEvents "sqlalchemy.orm.events.AttributeEvents")。
 
     -   **foreign\_keys**
         [¶](#sqlalchemy.orm.relationship.params.foreign_keys) -
 
-        在[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")对象的[`primaryjoin`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")That
+        在[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")对象的[`primaryjoin`](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")That
         is, if the [`primaryjoin`{.xref .py .py-paramref .docutils
         .literal}](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")
         condition of this [`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
@@ -316,9 +296,7 @@ tags:
         is `b.a_id`.
 
         In normal cases, the [`foreign_keys`](#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")
-        parameter is **not required.** [`relationship()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
+        parameter is **not required.** [`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
         will automatically determine which columns in the
         [`primaryjoin`{.xref .py .py-paramref .docutils
         .literal}](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")
@@ -343,8 +321,7 @@ tags:
         >     .py .py-paramref .docutils
         >     .literal}](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")以及。
         >
-        > 2.  被映射的[`Table`{.xref .py .py-class .docutils
-        >     .literal}](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")实际上并不存在[`ForeignKey`{.xref
+        > 2.  被映射的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")实际上并不存在[`ForeignKey`{.xref
         >     .py .py-class .docutils
         >     .literal}](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")或[`ForeignKeyConstraint`{.xref
         >     .py .py-class .docutils
@@ -353,13 +330,9 @@ tags:
         > 3.  [`primaryjoin`{.xref .py .py-paramref .docutils
         >     .literal}](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")参数用于构造非标准连接条件，该条件使用通常不引用其“父”列的列或表达式，例如由复杂比较表示的连接条件使用SQL函数。
 
-        [`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构会引发信息错误消息，提示在出现模糊条件时使用[`foreign_keys`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")参数。在典型情况下，如果[`relationship()`{.xref
+        [`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构会引发信息错误消息，提示在出现模糊条件时使用[`foreign_keys`](#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")参数。在典型情况下，如果[`relationship()`{.xref
         .py .py-func .docutils
-        .literal}](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")不引发任何异常，通常不需要[`foreign_keys`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")参数。
+        .literal}](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")不引发任何异常，通常不需要[`foreign_keys`](#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")参数。
 
         [`foreign_keys`{.xref .py .py-paramref .docutils
         .literal}](#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")
@@ -379,11 +352,7 @@ tags:
         允许直接注释[`primaryjoin`{.xref .py .py-paramref .docutils
         .literal}](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")条件中的“外部”列。
 
-        0.8版中的新功能 [`foreign()`](#sqlalchemy.orm.foreign "sqlalchemy.orm.foreign")注释也可以直接应用于[`primaryjoin`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")表达式，该表达式是一种替代的，更具体的描述特定[`primaryjoin`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")中的哪些列应被视为“外来”。
+        0.8版中的新功能 [`foreign()`](#sqlalchemy.orm.foreign "sqlalchemy.orm.foreign")注释也可以直接应用于[`primaryjoin`](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")表达式，该表达式是一种替代的，更具体的描述特定[`primaryjoin`](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")中的哪些列应被视为“外来”。
 
     -   **info** [¶](#sqlalchemy.orm.relationship.params.info) -
 
@@ -396,11 +365,9 @@ tags:
     -   **innerjoin = False**
         [¶](#sqlalchemy.orm.relationship.params.innerjoin) -
 
-        当`True`{.docutils
-        .literal}时，加入的紧急加载将使用内部联接来加入相关表而不是外部联接。此选项的用途通常是性能之一，因为内部联接通常比外部联接执行得更好。
+        当`True`时，加入的紧急加载将使用内部联接来加入相关表而不是外部联接。此选项的用途通常是性能之一，因为内部联接通常比外部联接执行得更好。
 
-        当关系通过使用不可为空的局部外键多对一地引用一个对象时，或者当引用是一对一或集合是一对一的时候，该标志可以设置为`True`{.docutils
-        .literal}保证有一个或至少一个条目。
+        当关系通过使用不可为空的局部外键多对一地引用一个对象时，或者当引用是一对一或集合是一对一的时候，该标志可以设置为`True`保证有一个或至少一个条目。
 
         该选项支持与[`joinedload.innerjoin`](loading_relationships.html#sqlalchemy.orm.joinedload.params.innerjoin "sqlalchemy.orm.joinedload")相同的“嵌套”和“非嵌入”选项。有关嵌套/未引入行为的详细信息，请参阅该标志。
 
@@ -417,9 +384,7 @@ tags:
     -   **join\_depth**
         [¶](#sqlalchemy.orm.relationship.params.join_depth) -
 
-        当非`None`{.docutils
-        .literal}时，指示深度“渴望”加载器应该加入自我引用或循环关系的级别的整数值。该数字表示同一个映射器在特定连接分支的加载条件下应出现多少次。当缺省值为`None`{.docutils
-        .literal}时，渴望的加载器在遇到链中已经更高的相同目标映射器时将停止链接。该选项适用于加入和子查询的加载器。
+        当非`None`时，指示深度“渴望”加载器应该加入自我引用或循环关系的级别的整数值。该数字表示同一个映射器在特定连接分支的加载条件下应出现多少次。当缺省值为`None`时，渴望的加载器在遇到链中已经更高的相同目标映射器时将停止链接。该选项适用于加入和子查询的加载器。
 
         也可以看看
 
@@ -430,8 +395,7 @@ tags:
     -   **lazy ='select'** [¶](#sqlalchemy.orm.relationship.params.lazy)
         -
 
-        指定应该如何加载相关项目。默认值是`select`{.docutils
-        .literal}。价值观包括：
+        指定应该如何加载相关项目。默认值是`select`。价值观包括：
 
         -   `select` - items should be loaded lazily
             when the property is first accessed, using a separate SELECT
@@ -441,9 +405,7 @@ tags:
             the parents are loaded, using a separate SELECT statement,
             or identity map fetch for simple many-to-one references.
         -   `joined` - 应该使用JOIN或LEFT OUTER
-            JOIN“加热”与父项相同的查询。连接是否为“外部”取决于[`innerjoin`{.xref
-            .py .py-paramref .docutils
-            .literal}](#sqlalchemy.orm.relationship.params.innerjoin "sqlalchemy.orm.relationship")参数。
+            JOIN“加热”与父项相同的查询。连接是否为“外部”取决于[`innerjoin`](#sqlalchemy.orm.relationship.params.innerjoin "sqlalchemy.orm.relationship")参数。
         -   `subquery` - items should be loaded
             “eagerly” as the parents are loaded, using one additional
             SQL statement, which issues a JOIN to a subquery of the
@@ -485,8 +447,7 @@ tags:
 
         指示暂时或挂起的父对象的加载行为。
 
-        设置为`True`{.docutils
-        .literal}时，会导致lazy-loader为不持久的父对象发出查询，这意味着它从未被刷新过。当禁用自动刷新或暂挂对象已被“附加”到[`Session`{.xref
+        设置为`True`时，会导致lazy-loader为不持久的父对象发出查询，这意味着它从未被刷新过。当禁用自动刷新或暂挂对象已被“附加”到[`Session`{.xref
         .py .py-class .docutils
         .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")但不属于其暂挂集合的一部分时，这可能对未决对象有效。
 
@@ -506,9 +467,7 @@ tags:
         指示加载这些项目时应该应用的顺序。[`order_by`{.xref .py
         .py-paramref .docutils
         .literal}](#sqlalchemy.orm.relationship.params.order_by "sqlalchemy.orm.relationship")
-        is expected to refer to one of the [`Column`{.xref .py .py-class
-        .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
+        is expected to refer to one of the [`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
         objects to which the target class is mapped, or the attribute
         itself bound to the target class which refers to the column.
 
@@ -537,13 +496,11 @@ tags:
 
         指示引用的主键值发生更改时要执行的持久性行为，指示引用的外键列也将需要更改其值。
 
-        如果为True，则假定在数据库的外键上配置了`ON UPDATE CASCADE`{.docutils
-        .literal}数据库将处理UPDATE从源列到相关行的传播。当False时，SQLAlchemy
+        如果为True，则假定在数据库的外键上配置了`ON UPDATE CASCADE`数据库将处理UPDATE从源列到相关行的传播。当False时，SQLAlchemy
         [`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构将尝试发出自己的UPDATE语句来修改相关的目标。但是请注意，SQLAlchemy
         **不能**为多个级联发出UPDATE。另外，在数据库实际上实施参照完整性的情况下，将此标志设置为False是不兼容的，除非这些限制是明确“延迟”的，如果目标后端支持它的话。
 
-        强烈建议使用可变主键的应用程序将`passive_updates`{.docutils
-        .literal}设置为True，而是使用数据库本身的参照完整性功能来高效完整地处理更改。
+        强烈建议使用可变主键的应用程序将`passive_updates`设置为True，而是使用数据库本身的参照完整性功能来高效完整地处理更改。
 
         也可以看看
 
@@ -558,9 +515,7 @@ tags:
     -   **post\_update**
         [¶](#sqlalchemy.orm.relationship.params.post_update) -
 
-        这表示该关系应该在INSERT之后或DELETE之前由第二个UPDATE语句处理。目前，它也会在实例更新后发出UPDATE，尽管这在技术上应该得到改进。该标志用于处理保存两个单独行之间的双向依赖关系（即，每行都引用另一行），否则将无法完全插入或删除两行，因为一行存在于另一行之前。当一个特定的映射安排会产生两个相互依赖的行时使用这个标志，例如一个与一组子行有一对多关系的表，还有一个引用单个子行的列在该列表中（即两个表都包含彼此的外键）。如果刷新操作返回检测到“循环依赖”的错误，则这是一个提示，您可能希望使用[`post_update`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.relationship.params.post_update "sqlalchemy.orm.relationship")来“中断”该循环。
+        这表示该关系应该在INSERT之后或DELETE之前由第二个UPDATE语句处理。目前，它也会在实例更新后发出UPDATE，尽管这在技术上应该得到改进。该标志用于处理保存两个单独行之间的双向依赖关系（即，每行都引用另一行），否则将无法完全插入或删除两行，因为一行存在于另一行之前。当一个特定的映射安排会产生两个相互依赖的行时使用这个标志，例如一个与一组子行有一对多关系的表，还有一个引用单个子行的列在该列表中（即两个表都包含彼此的外键）。如果刷新操作返回检测到“循环依赖”的错误，则这是一个提示，您可能希望使用[`post_update`](#sqlalchemy.orm.relationship.params.post_update "sqlalchemy.orm.relationship")来“中断”该循环。
 
         也可以看看
 
@@ -592,9 +547,7 @@ tags:
         [`relationship.remote_side`{.xref .py .py-paramref .docutils
         .literal}](#sqlalchemy.orm.relationship.params.remote_side "sqlalchemy.orm.relationship")也可以作为一个可调用的函数传递，它在映射器初始化时计算，并且在使用Declarative时可以作为Python可评估的字符串传递。
 
-        版本0.8中的更改： [`remote()`](#sqlalchemy.orm.remote "sqlalchemy.orm.remote")注释也可以直接应用于`primaryjoin`{.docutils
-        .literal}表达式，该表达式是一个替代的，更具体的描述特定`primaryjoin`{.docutils
-        .literal}中的哪些列应被视为“远程”。
+        版本0.8中的更改： [`remote()`](#sqlalchemy.orm.remote "sqlalchemy.orm.remote")注释也可以直接应用于`primaryjoin`表达式，该表达式是一个替代的，更具体的描述特定`primaryjoin`中的哪些列应被视为“远程”。
 
         也可以看看
 
@@ -605,17 +558,14 @@ tags:
 
         [`remote()`](#sqlalchemy.orm.remote "sqlalchemy.orm.remote") -
         通常在使用自定义[`primaryjoin`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")条件时实现与[`remote_side`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.relationship.params.remote_side "sqlalchemy.orm.relationship")相同目的的注释功能。
+        .literal}](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")条件时实现与[`remote_side`](#sqlalchemy.orm.relationship.params.remote_side "sqlalchemy.orm.relationship")相同目的的注释功能。
 
     -   **query\_class**
         [¶](#sqlalchemy.orm.relationship.params.query_class) -
 
         将被用作由“动态”关系返回的“appender查询”的基础的[`Query`{.xref
         .py .py-class .docutils
-        .literal}](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")子类，即指定`lazy="dynamic"`{.docutils
-        .literal}或者使用[`orm.dynamic_loader()`{.xref .py .py-func
+        .literal}](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")子类，即指定`lazy="dynamic"`或者使用[`orm.dynamic_loader()`{.xref .py .py-func
         .docutils
         .literal}](#sqlalchemy.orm.dynamic_loader "sqlalchemy.orm.dynamic_loader")函数以其他方式构造。
 
@@ -646,8 +596,7 @@ tags:
 
         如果为True，则安装一个验证器，该验证器可以防止对象一次与多个父对象关联。这用于多对一或多对多关系，应该将其视为一对一或一对多关系。它的用法是可选的，除了[`relationship()`{.xref
         .py .py-func .docutils
-        .literal}](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构是多对一或多对多的，并且还指定了`delete-orphan`{.docutils
-        .literal}级联选项。[`relationship()`{.xref .py .py-func
+        .literal}](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构是多对一或多对多的，并且还指定了`delete-orphan`级联选项。[`relationship()`{.xref .py .py-func
         .docutils
         .literal}](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构本身会引发错误，指示何时需要此选项。
 
@@ -663,9 +612,7 @@ tags:
         .py .py-func .docutils
         .literal}](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")自动确定
         -
-        一对多形成一个列表，多对一形成一个标量，许多到很多是一个列表。如果通常需要一个标量（如双向一对一关系），则将[`uselist`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.relationship.params.uselist "sqlalchemy.orm.relationship")设置为False。
+        一对多形成一个列表，多对一形成一个标量，许多到很多是一个列表。如果通常需要一个标量（如双向一对一关系），则将[`uselist`](#sqlalchemy.orm.relationship.params.uselist "sqlalchemy.orm.relationship")设置为False。
 
         [`uselist`{.xref .py .py-paramref .docutils
         .literal}](#sqlalchemy.orm.relationship.params.uselist "sqlalchemy.orm.relationship")标志在现有[`relationship()`{.xref
@@ -690,9 +637,7 @@ tags:
         指定[`viewonly`{.xref .py .py-paramref .docutils
         .literal}](#sqlalchemy.orm.relationship.params.viewonly "sqlalchemy.orm.relationship")的[`relationship()`{.xref
         .py .py-func .docutils
-        .literal}](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")可以在[`primaryjoin`{.xref
-        .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")条件中使用更广泛的SQL操作，包括使用各种比较运算符以及SQL函数（如[`cast()`{.xref
+        .literal}](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")可以在[`primaryjoin`](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")条件中使用更广泛的SQL操作，包括使用各种比较运算符以及SQL函数（如[`cast()`{.xref
         .py .py-func .docutils
         .literal}](core_sqlelement.html#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")）。The
         [`viewonly`{.xref .py .py-paramref .docutils

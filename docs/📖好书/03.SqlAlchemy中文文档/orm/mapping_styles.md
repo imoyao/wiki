@@ -126,9 +126,7 @@ API](core_inspection.html)系统，无论使用何种方法，[`Mapper`](mapping
     >>> insp.columns.name
     Column('name', String(length=50), table=<user>)
 
-其他名称空间包括[`Mapper.all_orm_descriptors`{.xref .py .py-attr
-.docutils
-.literal}](mapping_api.html#sqlalchemy.orm.mapper.Mapper.all_orm_descriptors "sqlalchemy.orm.mapper.Mapper.all_orm_descriptors")，其中包含所有映射的属性以及混合，关联代理：
+其他名称空间包括[`Mapper.all_orm_descriptors`](mapping_api.html#sqlalchemy.orm.mapper.Mapper.all_orm_descriptors "sqlalchemy.orm.mapper.Mapper.all_orm_descriptors")，其中包含所有映射的属性以及混合，关联代理：
 
     >>> insp.all_orm_descriptors
     <sqlalchemy.util._collections.ImmutableProperties object at 0x1040e2c68>
