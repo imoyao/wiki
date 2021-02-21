@@ -110,8 +110,7 @@ well as query for them, using the `.start` and
     -   **active\_history = False**
         [¶](#sqlalchemy.orm.composite.params.active_history) -
 
-        当`True`{.docutils
-        .literal}时，表示标量属性的“上一个”值在替换时应加载，如果尚未加载。查看[`column_property()`{.xref
+        当`True`时，表示标量属性的“上一个”值在替换时应加载，如果尚未加载。查看[`column_property()`{.xref
         .py .py-func .docutils
         .literal}](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")上的同一个标志。
 

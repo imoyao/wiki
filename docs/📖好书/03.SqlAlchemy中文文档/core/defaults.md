@@ -43,9 +43,7 @@ SQLAlchemy针对在INSERT和UPDATE语句期间发生的列级事件提供了非�
 Python执行的函数[¶](#python-executed-functions "Permalink to this headline")
 ----------------------------------------------------------------------------
 
-[`Column.default`](metadata.html#sqlalchemy.schema.Column.params.default "sqlalchemy.schema.Column")和[`Column.onupdate`{.xref
-.py .py-paramref .docutils
-.literal}](metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")关键字参数也接受Python函数。如果没有提供该列的其他值，则在插入或更新时调用这些函数，并将返回的值用于该列的值。下面举例说明了一个粗略的“序列”，它将一个递增计数器分配给主键列：
+[`Column.default`](metadata.html#sqlalchemy.schema.Column.params.default "sqlalchemy.schema.Column")和[`Column.onupdate`](metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")关键字参数也接受Python函数。如果没有提供该列的其他值，则在插入或更新时调用这些函数，并将返回的值用于该列的值。下面举例说明了一个粗略的“序列”，它将一个递增计数器分配给主键列：
 
     # a function which counts upwards
     i = 0
@@ -58,9 +56,7 @@ Python执行的函数[¶](#python-executed-functions "Permalink to this headline
         Column('id', Integer, primary_key=True, default=mydefault),
     )
 
-应该注意的是，对于真正的“递增序列”行为，通常应该使用数据库的内置功能，这可能包括序列对象或其他自动增量功能。对于主键列，SQLAlchemy在大多数情况下会自动使用这些功能。有关[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的API文档，包括[`Column.autoincrement`{.xref
-.py .py-paramref .docutils
-.literal}](metadata.html#sqlalchemy.schema.Column.params.autoincrement "sqlalchemy.schema.Column")标志以及本章后面[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")中有关标准主要背景的部分密钥生成技术。
+应该注意的是，对于真正的“递增序列”行为，通常应该使用数据库的内置功能，这可能包括序列对象或其他自动增量功能。对于主键列，SQLAlchemy在大多数情况下会自动使用这些功能。有关[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的API文档，包括[`Column.autoincrement`](metadata.html#sqlalchemy.schema.Column.params.autoincrement "sqlalchemy.schema.Column")标志以及本章后面[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")中有关标准主要背景的部分密钥生成技术。
 
 To illustrate onupdate, we assign the Python `datetime` function `now` to the
 [`Column.onupdate`](metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")
@@ -81,9 +77,7 @@ SQLAlchemy将在语句执行时执行该函数。
 
 ### 上下文相关的默认函数[¶](#context-sensitive-default-functions "Permalink to this headline")
 
-由[`Column.default`](metadata.html#sqlalchemy.schema.Column.params.default "sqlalchemy.schema.Column")和[`Column.onupdate`{.xref
-.py .py-paramref .docutils
-.literal}](metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")使用的Python函数也可以使用当前语句的上下文来确定一个值。语句的context是一个内部SQLAlchemy对象，它包含有关正在执行的语句的所有信息，包括其源表达式，与其关联的参数以及游标。与默认生成有关的上下文的典型用例是访问在该行上插入或更新的其他值。要访问上下文，请提供一个接受单个`context`参数的函数：
+由[`Column.default`](metadata.html#sqlalchemy.schema.Column.params.default "sqlalchemy.schema.Column")和[`Column.onupdate`](metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")使用的Python函数也可以使用当前语句的上下文来确定一个值。语句的context是一个内部SQLAlchemy对象，它包含有关正在执行的语句的所有信息，包括其源表达式，与其关联的参数以及游标。与默认生成有关的上下文的典型用例是访问在该行上插入或更新的其他值。要访问上下文，请提供一个接受单个`context`参数的函数：
 
     def mydefault(context):
         return context.current_parameters['counter'] + 12
@@ -152,9 +146,7 @@ collections on [`ResultProxy`](connections.html#sqlalchemy.engine.ResultProxy "s
 服务器端默认值[¶](#server-side-defaults "Permalink to this headline")
 ---------------------------------------------------------------------
 
-SQL表达式默认的变体是[`Column.server_default`{.xref .py .py-paramref
-.docutils
-.literal}](metadata.html#sqlalchemy.schema.Column.params.server_default "sqlalchemy.schema.Column")，它在[`Table.create()`](metadata.html#sqlalchemy.schema.Table.create "sqlalchemy.schema.Table.create")操作期间被放置在CREATE
+SQL表达式默认的变体是[`Column.server_default`](metadata.html#sqlalchemy.schema.Column.params.server_default "sqlalchemy.schema.Column")，它在[`Table.create()`](metadata.html#sqlalchemy.schema.Table.create "sqlalchemy.schema.Table.create")操作期间被放置在CREATE
 TABLE语句中：
 
     t = Table('test', meta,
@@ -200,9 +192,7 @@ Where above, when [`Table.insert()`](metadata.html#sqlalchemy.schema.Table.inser
 is used, the `func.generate_new_value()` expression
 will be pre-executed in the context of a scalar `SELECT` statement, and the new value will be applied to the subsequent
 `INSERT`, while at the same time being made
-available to the [`ResultProxy.inserted_primary_key`{.xref .py .py-attr
-.docutils
-.literal}](connections.html#sqlalchemy.engine.ResultProxy.inserted_primary_key "sqlalchemy.engine.ResultProxy.inserted_primary_key")
+available to the [`ResultProxy.inserted_primary_key`](connections.html#sqlalchemy.engine.ResultProxy.inserted_primary_key "sqlalchemy.engine.ResultProxy.inserted_primary_key")
 attribute.
 
 定义序列[¶](#defining-sequences "Permalink to this headline")
@@ -235,9 +225,7 @@ SQLAlchemy使用[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequ
 
 当我们如上所述将[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")与[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")相关联时，此关联仅为**in-Python
 only**关联。将为我们的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")生成的CREATE
-TABLE不会引用此序列。如果我们希望将序列用作服务器端缺省值，即使我们从SQL命令行向表中发出INSERT命令，也可以使用[`Column.server_default`{.xref
-.py .py-paramref .docutils
-.literal}](metadata.html#sqlalchemy.schema.Column.params.server_default "sqlalchemy.schema.Column")参数与序列的值生成函数一起使用，可以从[`Sequence.next_value()`](#sqlalchemy.schema.Sequence.next_value "sqlalchemy.schema.Sequence.next_value")方法获得：
+TABLE不会引用此序列。如果我们希望将序列用作服务器端缺省值，即使我们从SQL命令行向表中发出INSERT命令，也可以使用[`Column.server_default`](metadata.html#sqlalchemy.schema.Column.params.server_default "sqlalchemy.schema.Column")参数与序列的值生成函数一起使用，可以从[`Sequence.next_value()`](#sqlalchemy.schema.Sequence.next_value "sqlalchemy.schema.Sequence.next_value")方法获得：
 
     cart_id_seq = Sequence('cart_id_seq')
     table = Table("cartitems", meta,
@@ -432,9 +420,7 @@ it’s probably a good idea to specify it in this way as well.
             Optional schema name for the sequence, if located in a
             schema other than the default. 当[`MetaData`{.xref .py
             .py-class .docutils
-            .literal}](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")出现时选择模式名称的规则与[`Table.schema`{.xref
-            .py .py-paramref .docutils
-            .literal}](metadata.html#sqlalchemy.schema.Table.params.schema "sqlalchemy.schema.Table")的规则相同。
+            .literal}](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")出现时选择模式名称的规则与[`Table.schema`](metadata.html#sqlalchemy.schema.Table.params.schema "sqlalchemy.schema.Table")的规则相同。
         -   **optional**[¶](#sqlalchemy.schema.Sequence.params.optional)
             – boolean value, when `True`, indicates
             that this [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")
@@ -457,9 +443,7 @@ it’s probably a good idea to specify it in this way as well.
             .py .py-class .docutils
             .literal}](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")关联。A
             [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")
-            that is associated with a [`MetaData`{.xref .py .py-class
-            .docutils
-            .literal}](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
+            that is associated with a [`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
             gains access to the `bind` of that
             [`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData"),
             meaning the [`Sequence.create()`{.xref .py .py-meth
@@ -498,9 +482,7 @@ it’s probably a good idea to specify it in this way as well.
 
         -   **for\_update**[¶](#sqlalchemy.schema.Sequence.params.for_update)
             – Indicates this [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence"),
-            when associated with a [`Column`{.xref .py .py-class
-            .docutils
-            .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column"),
+            when associated with a [`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column"),
             should be invoked for UPDATE statements on that column’s
             table, rather than for INSERT statements, when no value is
             otherwise present for that column in the statement.

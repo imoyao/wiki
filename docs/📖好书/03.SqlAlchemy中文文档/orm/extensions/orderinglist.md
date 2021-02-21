@@ -122,8 +122,7 @@ API参考[¶](#api-reference "Permalink to this headline")
     -   **count\_from**[¶](#sqlalchemy.ext.orderinglist.ordering_list.params.count_from)
         – Set up an integer-based ordering, starting at
         `count_from`.
-        例如，`orders_list（'pos'， count_from = 1）`{.docutils
-        .literal}会在SQL中创建一个基于1的列表，将值存储在'
+        例如，`orders_list（'pos'， count_from = 1）`会在SQL中创建一个基于1的列表，将值存储在'
         pos'栏。如果提供`ordering_func`，则忽略。
 
     其他参数传递给[`OrderingList`](#sqlalchemy.ext.orderinglist.OrderingList "sqlalchemy.ext.orderinglist.OrderingList")构造函数。
@@ -152,8 +151,7 @@ API参考[¶](#api-reference "Permalink to this headline")
         syncs position in a Python list with a position attribute on the
         mapped objects.
 
-        这个实现依赖于以正确的顺序开始的列表，所以**确定**在你的关系上放置一个`order_by`{.docutils
-        .literal}。
+        这个实现依赖于以正确的顺序开始的列表，所以**确定**在你的关系上放置一个`order_by`。
 
         参数：
 

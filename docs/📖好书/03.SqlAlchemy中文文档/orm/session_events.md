@@ -199,9 +199,7 @@ instance-level event.
 
 ### 持久到瞬间[¶](#persistent-to-transient "Permalink to this headline")
 
-如果为对象首次添加为待处理的事务调用[`Session.rollback()`{.xref .py
-.py-meth .docutils
-.literal}](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")方法，持久对象可以恢复到瞬态状态。在ROLLBACK的情况下，使该对象持久化的INSERT语句被回滚，并且该对象从[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")被逐出以再次变为瞬态。使用[`SessionEvents.persistent_to_transient()`](events.html#sqlalchemy.orm.events.SessionEvents.persistent_to_transient "sqlalchemy.orm.events.SessionEvents.persistent_to_transient")事件挂钩跟踪从持久性恢复为瞬态的对象：
+如果为对象首次添加为待处理的事务调用[`Session.rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")方法，持久对象可以恢复到瞬态状态。在ROLLBACK的情况下，使该对象持久化的INSERT语句被回滚，并且该对象从[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")被逐出以再次变为瞬态。使用[`SessionEvents.persistent_to_transient()`](events.html#sqlalchemy.orm.events.SessionEvents.persistent_to_transient "sqlalchemy.orm.events.SessionEvents.persistent_to_transient")事件挂钩跟踪从持久性恢复为瞬态的对象：
 
     @event.listens_for(sessionmaker, "persistent_to_transient")
     def intercept_persistent_to_transient(session, object_):

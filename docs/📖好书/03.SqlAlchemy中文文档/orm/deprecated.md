@@ -51,30 +51,24 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
     `after_delete`{.descname} （ *mapper*，*connection*，*instance* ） [¶ T6\>](#sqlalchemy.orm.interfaces.MapperExtension.after_delete "Permalink to this definition")
     :   在该实例被删除后接收对象实例。
 
-        返回值仅在`MapperExtension`{.docutils
-        .literal}链中有效；父映射器的行为不会被此方法修改。
+        返回值仅在`MapperExtension`链中有效；父映射器的行为不会被此方法修改。
 
      `after_insert`{.descname}(*mapper*, *connection*, *instance*)[¶](#sqlalchemy.orm.interfaces.MapperExtension.after_insert "Permalink to this definition")
     :   在插入实例后接收对象实例。
 
-        返回值仅在`MapperExtension`{.docutils
-        .literal}链中有效；父映射器的行为不会被此方法修改。
+        返回值仅在`MapperExtension`链中有效；父映射器的行为不会被此方法修改。
 
     `after_update`{.descname} （ *mapper*，*连接*，*实例* ） [¶ T6\>](#sqlalchemy.orm.interfaces.MapperExtension.after_update "Permalink to this definition")
     :   在实例更新后接收对象实例。
 
-        返回值仅在`MapperExtension`{.docutils
-        .literal}链中有效；父映射器的行为不会被此方法修改。
+        返回值仅在`MapperExtension`链中有效；父映射器的行为不会被此方法修改。
 
      `before_delete`{.descname}(*mapper*, *connection*, *instance*)[¶](#sqlalchemy.orm.interfaces.MapperExtension.before_delete "Permalink to this definition")
     :   在该实例被删除之前接收一个对象实例。
 
-        请注意，可以在此处设置*no*更改整体刷新计划；并且对`Session`{.docutils
-        .literal}的操纵不会产生预期的效果。要操作扩展中的`Session`{.docutils
-        .literal}，请使用`SessionExtension`。
+        请注意，可以在此处设置*no*更改整体刷新计划；并且对`Session`的操纵不会产生预期的效果。要操作扩展中的`Session`，请使用`SessionExtension`。
 
-        返回值仅在`MapperExtension`{.docutils
-        .literal}链中有效；父映射器的行为不会被此方法修改。
+        返回值仅在`MapperExtension`链中有效；父映射器的行为不会被此方法修改。
 
     `before_insert`{.descname} （ *mapper*，*连接*，*实例* ） [¶ T6\>](#sqlalchemy.orm.interfaces.MapperExtension.before_insert "Permalink to this definition")
     :   在该实例插入其表中之前接收一个对象实例。
@@ -84,11 +78,9 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
         可以在此方法内修改基于列的属性，这将导致插入新值。However *no*
         changes to the overall flush plan can be made, and manipulation
         of the `Session` will not have the desired
-        effect. 要操作扩展中的`Session`{.docutils
-        .literal}，请使用`SessionExtension`。
+        effect. 要操作扩展中的`Session`，请使用`SessionExtension`。
 
-        返回值仅在`MapperExtension`{.docutils
-        .literal}链中有效；父映射器的行为不会被此方法修改。
+        返回值仅在`MapperExtension`链中有效；父映射器的行为不会被此方法修改。
 
     `before_update`{.descname} （ *mapper*，*connection*，*instance* ） [¶ T6\>](#sqlalchemy.orm.interfaces.MapperExtension.before_update "Permalink to this definition")
     :   在实例更新之前接收对象实例。
@@ -96,50 +88,42 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
         请注意，为所有标记为“脏”的实例调用此方法，即使这些实例没有对其基于列的属性进行净更改。当一个对象的任何基于列的属性有一个被调用的“set
         attribute”操作或当它的任何集合被修改时，这个对象被标记为脏。如果在更新时没有基于列的属性有任何净更改，则不会发布UPDATE语句。这意味着发送到before\_update的实例*不是*保证会发出UPDATE语句（尽管您可以在此处影响结果）。
 
-        要检测对象上的基于列的属性是否具有净更改，并因此会生成UPDATE语句，请使用`object_session（instance）.is_modified（instance， include_collections = False）  T2>  T0>。`{.docutils
-        .literal}
+        要检测对象上的基于列的属性是否具有净更改，并因此会生成UPDATE语句，请使用`object_session（instance）.is_modified（instance， include_collections = False）  T2>  T0>。`
 
         可以在此方法中修改基于列的属性，这将导致更新新值。However *no*
         changes to the overall flush plan can be made, and manipulation
         of the `Session` will not have the desired
-        effect. 要操作扩展中的`Session`{.docutils
-        .literal}，请使用`SessionExtension`。
+        effect. 要操作扩展中的`Session`，请使用`SessionExtension`。
 
-        返回值仅在`MapperExtension`{.docutils
-        .literal}链中有效；父映射器的行为不会被此方法修改。
+        返回值仅在`MapperExtension`链中有效；父映射器的行为不会被此方法修改。
 
     `init_failed`{.descname} （ *mapper*，*class \_*，*oldinit*，*实例 t5 \>，*args*，*kwargs* ） [¶](#sqlalchemy.orm.interfaces.MapperExtension.init_failed "Permalink to this definition")*
     :   当它的构造函数被调用时接收一个实例，并引发异常。
 
         该方法仅在对象的用户区构造期间被调用。从数据库加载对象时不会调用它。
 
-        返回值仅在`MapperExtension`{.docutils
-        .literal}链中有效；父映射器的行为不会被此方法修改。
+        返回值仅在`MapperExtension`链中有效；父映射器的行为不会被此方法修改。
 
      `init_instance`{.descname}(*mapper*, *class\_*, *oldinit*, *instance*, *args*, *kwargs*)[¶](#sqlalchemy.orm.interfaces.MapperExtension.init_instance "Permalink to this definition")
     :   当它的构造函数被调用时接收一个实例。
 
         该方法仅在对象的用户区构造期间被调用。从数据库加载对象时不会调用它。
 
-        返回值仅在`MapperExtension`{.docutils
-        .literal}链中有效；父映射器的行为不会被此方法修改。
+        返回值仅在`MapperExtension`链中有效；父映射器的行为不会被此方法修改。
 
      `instrument_class`{.descname}(*mapper*, *class\_*)[¶](#sqlalchemy.orm.interfaces.MapperExtension.instrument_class "Permalink to this definition")
     :   首次构建映射器时接收类，并将映射应用到映射类。
 
-        返回值仅在`MapperExtension`{.docutils
-        .literal}链中有效；父映射器的行为不会被此方法修改。
+        返回值仅在`MapperExtension`链中有效；父映射器的行为不会被此方法修改。
 
      `reconstruct_instance`{.descname}(*mapper*, *instance*)[¶](#sqlalchemy.orm.interfaces.MapperExtension.reconstruct_instance "Permalink to this definition")
-    :   通过`__new__`{.docutils
-        .literal}创建对象实例后，并在初始属性填充发生后接收对象实例。
+    :   通过`__new__`创建对象实例后，并在初始属性填充发生后接收对象实例。
 
         这通常在基于传入结果行创建实例时发生，并且在该实例的生存期中仅调用一次。
 
         请注意，在结果行加载期间，在为此实例接收的第一行调用此方法。请注意，根据结果行中的内容，某些属性和集合可能被加载，甚至可能不被加载或甚至被初始化。
 
-        返回值仅在`MapperExtension`{.docutils
-        .literal}链中有效；父映射器的行为不会被此方法修改。
+        返回值仅在`MapperExtension`链中有效；父映射器的行为不会被此方法修改。
 
 会话事件[¶](#session-events "Permalink to this headline")
 ---------------------------------------------------------
@@ -257,8 +241,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
     `active_history`{.descname} *= True* [¶](#sqlalchemy.orm.interfaces.AttributeExtension.active_history "Permalink to this definition")
     :   表明set()方法想要接收'旧'值，即使它意味着释放懒惰的可调参数。
 
-        请注意，`active_history`{.docutils
-        .literal}也可以直接通过[`column_property()`{.xref .py .py-func
+        请注意，`active_history`也可以直接通过[`column_property()`{.xref .py .py-func
         .docutils
         .literal}](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")和[`relationship()`{.xref
         .py .py-func .docutils

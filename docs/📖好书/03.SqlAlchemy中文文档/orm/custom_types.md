@@ -130,11 +130,9 @@ of Existing Types](#replacing-processors)部分。
         `self.impl` instance attribute (thus
         overriding the class attribute of the same name).
 
-        如果类级别`impl`{.docutils
-        .literal}不是可调用的（不寻常的情况），它将被分配给同样的实例属性'as-is'，忽略传递给构造函数的那些参数。
+        如果类级别`impl`不是可调用的（不寻常的情况），它将被分配给同样的实例属性'as-is'，忽略传递给构造函数的那些参数。
 
-        子类可以覆盖它来完全自定义`self.impl`{.docutils
-        .literal}的生成。
+        子类可以覆盖它来完全自定义`self.impl`的生成。
 
      `adapt`{.descname}(*cls*, *\*\*kw*)[¶](#sqlalchemy.types.TypeDecorator.adapt "Permalink to this definition")
     :   *inherited from the* [`adapt()`](type_api.html#sqlalchemy.types.TypeEngine.adapt "sqlalchemy.types.TypeEngine.adapt")
@@ -148,9 +146,7 @@ of Existing Types](#replacing-processors)部分。
     :   *inherited from the* [`bind_expression()`](type_api.html#sqlalchemy.types.TypeEngine.bind_expression "sqlalchemy.types.TypeEngine.bind_expression")
         *method of* [`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-        “给定一个绑定值（即一个[`BindParameter`{.xref .py .py-class
-        .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")实例），在它的位置返回一个SQL表达式。
+        “给定一个绑定值（即一个[`BindParameter`](sqlelement.html#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")实例），在它的位置返回一个SQL表达式。
 
         这通常是一个包含语句中现有绑定参数的SQL函数。它用于特殊数据类型，这些数据类型需要文字被封装在某些特殊的数据库函数中，以便将应用程序级别的值强制转换为数据库特定的格式。它是[`TypeEngine.bind_processor()`](type_api.html#sqlalchemy.types.TypeEngine.bind_processor "sqlalchemy.types.TypeEngine.bind_processor")方法的SQL模拟。
 
@@ -166,17 +162,14 @@ of Existing Types](#replacing-processors)部分。
     ` bind_processor  T0> （ T1> 方言 T2> ） T3> ¶ T4>`{.descname}
     :   为给定的[`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")提供绑定值处理功能。
 
-        这是实现用于绑定值转换的[`TypeEngine`{.xref .py .py-class
-        .docutils
-        .literal}](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")合同的方法。[`TypeDecorator`{.xref
+        这是实现用于绑定值转换的[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")合同的方法。[`TypeDecorator`{.xref
         .py .py-class .docutils
         .literal}](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
         will wrap a user-defined implementation of
         [`process_bind_param()`](#sqlalchemy.types.TypeDecorator.process_bind_param "sqlalchemy.types.TypeDecorator.process_bind_param")
         here.
 
-        用户定义的代码可以直接覆盖此方法，尽管它最好使用[`process_bind_param()`](#sqlalchemy.types.TypeDecorator.process_bind_param "sqlalchemy.types.TypeDecorator.process_bind_param")，以保持由`self.impl`{.docutils
-        .literal}提供的处理。
+        用户定义的代码可以直接覆盖此方法，尽管它最好使用[`process_bind_param()`](#sqlalchemy.types.TypeDecorator.process_bind_param "sqlalchemy.types.TypeDecorator.process_bind_param")，以保持由`self.impl`提供的处理。
 
         参数：
 
@@ -196,20 +189,16 @@ of Existing Types](#replacing-processors)部分。
         Where above, if `somecolumn` uses this type,
         this method will be called with the value
         `operator.add` and `35`.
-        返回值是任何SQLAlchemy类型应该用于此特定操作的`35`{.docutils
-        .literal}。
+        返回值是任何SQLAlchemy类型应该用于此特定操作的`35`。
 
     `coerce_to_is_types`{.descname} *=（＆lt； type'NoneType＆gt；，）* [¶](#sqlalchemy.types.TypeDecorator.coerce_to_is_types "Permalink to this definition")
-    :   使用`==`{.docutils
-        .literal}进行比较时指定应该在表达式级别转换为“IS
+    :   使用`==`进行比较时指定应该在表达式级别转换为“IS
         ”的Python类型（对于`IS NOT 与!=`结合。
 
-        对于大多数SQLAlchemy类型，这包括`NoneType`{.docutils
-        .literal}以及`bool`。
+        对于大多数SQLAlchemy类型，这包括`NoneType`以及`bool`。
 
         [`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
-        modifies this list to only include `NoneType`{.docutils
-        .literal}, as typedecorator implementations that deal with
+        modifies this list to only include `NoneType`, as typedecorator implementations that deal with
         boolean types are common.
 
         Custom [`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")类可以覆盖此属性以返回空元组，在这种情况下，不会将值强制为常量。
@@ -241,8 +230,7 @@ of Existing Types](#replacing-processors)部分。
 
         将此类型与给定的后端类型进行比较。
 
-        此函数目前尚未针对SQLAlchemy类型实现，对于所有内置类型，此函数将返回`None`{.docutils
-        .literal}。但是，它可以通过用户定义的类型实现，可以通过模式比较工具（如Alembic
+        此函数目前尚未针对SQLAlchemy类型实现，对于所有内置类型，此函数将返回`None`。但是，它可以通过用户定义的类型实现，可以通过模式比较工具（如Alembic
         autogenerate）使用它。
 
         未来的SQLAlchemy版本也可能会对这种内置类型的方法产生影响。
@@ -263,8 +251,7 @@ of Existing Types](#replacing-processors)部分。
     `比较值`{.descname} （ *x*，*y* ） [¶](#sqlalchemy.types.TypeDecorator.compare_values "Permalink to this definition")
     :   给定两个值，比较他们的平等。
 
-        默认情况下，这会调用基础“impl”的[`TypeEngine.compare_values()`](type_api.html#sqlalchemy.types.TypeEngine.compare_values "sqlalchemy.types.TypeEngine.compare_values")，后者通常使用Python等号运算符`==`{.docutils
-        .literal}。
+        默认情况下，这会调用基础“impl”的[`TypeEngine.compare_values()`](type_api.html#sqlalchemy.types.TypeEngine.compare_values "sqlalchemy.types.TypeEngine.compare_values")，后者通常使用Python等号运算符`==`。
 
         ORM使用该函数将原始加载的值与截获的“已更改”值进行比较，以确定是否发生了净更改。
 
@@ -285,9 +272,7 @@ of Existing Types](#replacing-processors)部分。
     `复制 T0> （ T1>  **千瓦 T2> ） T3> ¶ T4>`{.descname}
     :   生成此[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")实例的副本。
 
-        这是一个浅层副本，用于履行[`TypeEngine`{.xref .py .py-class
-        .docutils
-        .literal}](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")合约的一部分。通常不需要重写，除非用户定义的[`TypeDecorator`{.xref
+        这是一个浅层副本，用于履行[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")合约的一部分。通常不需要重写，除非用户定义的[`TypeDecorator`{.xref
         .py .py-class .docutils
         .literal}](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")具有应该被深度复制的本地状态。
 
@@ -314,11 +299,9 @@ of Existing Types](#replacing-processors)部分。
                     server_default='no value')
             )
 
-        ORM使用此标志来指示在INSERT语句中将`None`{.docutils
-        .literal}的正值传递到列，而不是从INSERT语句中省略列，该列具有触发列级缺省值的效果。它还允许具有与Python
+        ORM使用此标志来指示在INSERT语句中将`None`的正值传递到列，而不是从INSERT语句中省略列，该列具有触发列级缺省值的效果。它还允许具有与Python
         None值关联的特殊行为的类型指示该值不一定会转换为SQL
-        NULL；这是一个JSON类型的主要例子，它可能希望保存JSON值`'null'`{.docutils
-        .literal}。
+        NULL；这是一个JSON类型的主要例子，它可能希望保存JSON值`'null'`。
 
         在所有情况下，通过在INSERT语句中使用[`null`{.xref .py .py-obj
         .docutils
@@ -353,9 +336,7 @@ of Existing Types](#replacing-processors)部分。
         此处的子类通常会覆盖[`TypeDecorator.process_literal_param()`](#sqlalchemy.types.TypeDecorator.process_literal_param "sqlalchemy.types.TypeDecorator.process_literal_param")，而不是直接使用此方法。
 
         默认情况下，如果实现了该方法，则此方法使用[`TypeDecorator.process_bind_param()`](#sqlalchemy.types.TypeDecorator.process_bind_param "sqlalchemy.types.TypeDecorator.process_bind_param")，其中[`TypeDecorator.process_literal_param()`](#sqlalchemy.types.TypeDecorator.process_literal_param "sqlalchemy.types.TypeDecorator.process_literal_param")不是。The
-        rationale here is that [`TypeDecorator`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
+        rationale here is that [`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
         typically deals with Python conversions of data that are above
         the layer of database presentation. With the value converted by
         [`TypeDecorator.process_bind_param()`](#sqlalchemy.types.TypeDecorator.process_bind_param "sqlalchemy.types.TypeDecorator.process_bind_param"),
@@ -411,8 +392,7 @@ of Existing Types](#replacing-processors)部分。
 
         子类应实现此方法以对从数据库获取的数据进行操作。
 
-        给定一个已由底层[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")对象处理的值，最初来自DBAPI游标方法`fetchone()`{.docutils
-        .literal}
+        给定一个已由底层[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")对象处理的值，最初来自DBAPI游标方法`fetchone()`
 
         该操作可以是执行自定义行为所需的任何操作，例如转换或序列化数据。这也可以用作验证逻辑的钩子。
 
@@ -434,14 +414,11 @@ of Existing Types](#replacing-processors)部分。
 
         如果已知，则返回预期由此类型的实例返回的Python类型对象。
 
-        基本上，对于那些强制执行返回类型的类型，或者在所有常见DBAPI（例如`int`{.docutils
-        .literal}）中都可以这样做的类型，将返回该类型。
+        基本上，对于那些强制执行返回类型的类型，或者在所有常见DBAPI（例如`int`）中都可以这样做的类型，将返回该类型。
 
-        如果未定义返回类型，则引发`NotImplementedError`{.docutils
-        .literal}。
+        如果未定义返回类型，则引发`NotImplementedError`。
 
-        请注意，任何类型也可以在SQL中容纳NULL，这意味着您在实践中也可以从任何类型获取`None`{.docutils
-        .literal}。
+        请注意，任何类型也可以在SQL中容纳NULL，这意味着您在实践中也可以从任何类型获取`None`。
 
     `result_processor`{.descname} （ *dialect*，*coltype* ） [¶](#sqlalchemy.types.TypeDecorator.result_processor "Permalink to this definition")
     :   为给定的[`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")提供结果值处理功能。
@@ -453,8 +430,7 @@ of Existing Types](#replacing-processors)部分。
         [`process_result_value()`](#sqlalchemy.types.TypeDecorator.process_result_value "sqlalchemy.types.TypeDecorator.process_result_value")
         here.
 
-        用户定义的代码可以直接覆盖此方法，尽管它最好使用[`process_result_value()`](#sqlalchemy.types.TypeDecorator.process_result_value "sqlalchemy.types.TypeDecorator.process_result_value")，以保持由`self.impl`{.docutils
-        .literal}提供的处理。
+        用户定义的代码可以直接覆盖此方法，尽管它最好使用[`process_result_value()`](#sqlalchemy.types.TypeDecorator.process_result_value "sqlalchemy.types.TypeDecorator.process_result_value")，以保持由`self.impl`提供的处理。
 
         参数：
 
@@ -472,8 +448,7 @@ of Existing Types](#replacing-processors)部分。
         .py .py-class .docutils
         .literal}](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")实例。
 
-        在大多数情况下，这返回由`self.impl`{.docutils
-        .literal}表示的[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")类型的方言适应形式。使用[`dialect_impl()`](#sqlalchemy.types.TypeDecorator.dialect_impl "sqlalchemy.types.TypeDecorator.dialect_impl")，但也遍历包装的[`TypeDecorator`{.xref
+        在大多数情况下，这返回由`self.impl`表示的[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")类型的方言适应形式。使用[`dialect_impl()`](#sqlalchemy.types.TypeDecorator.dialect_impl "sqlalchemy.types.TypeDecorator.dialect_impl")，但也遍历包装的[`TypeDecorator`{.xref
         .py .py-class .docutils
         .literal}](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")实例。行为可以通过覆盖[`load_dialect_impl()`](#sqlalchemy.types.TypeDecorator.load_dialect_impl "sqlalchemy.types.TypeDecorator.load_dialect_impl")来定制。
 
@@ -679,9 +654,7 @@ Tracking](orm_extensions_mutable.html)中的示例。
 Bind/Result Processing of Existing
 Types](#replacing-processors)部分所见，SQLAlchemy允许在将参数发送到语句时调用Python函数，如以及从数据库加载结果行时，以及在将数据发送到数据库或从数据库发送时对其应用转换。也可以定义SQL级别的转换。这里的基本原理是，只有关系数据库包含一系列必要的功能，才能在应用程序和持久性格式之间强制传入和传出数据。例子包括使用数据库定义的加密/解密函数，以及处理地理数据的存储过程。Postgis对Postgresql的扩展包括一系列SQL函数，这些函数是将数据强制转换为特定格式所必需的。
 
-任何[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")，[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")或[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")子类都可以包含[`TypeEngine.bind_expression()`](type_api.html#sqlalchemy.types.TypeEngine.bind_expression "sqlalchemy.types.TypeEngine.bind_expression")和/或[`TypeEngine.column_expression()`](type_api.html#sqlalchemy.types.TypeEngine.column_expression "sqlalchemy.types.TypeEngine.column_expression")，当定义为返回非`None`值时，应返回要注入SQL语句的[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")表达式，参数或列表达式。例如，要构建将所有传入数据应用于Postgis函数`ST_GeomFromText`的所有传出值和函数`ST_AsText`的`Geometry`类型，我们可以创建我们自己的[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")的子类，它提供这些方法与[`func`{.xref
-.py .py-data .docutils
-.literal}](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结合使用：
+任何[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")，[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")或[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")子类都可以包含[`TypeEngine.bind_expression()`](type_api.html#sqlalchemy.types.TypeEngine.bind_expression "sqlalchemy.types.TypeEngine.bind_expression")和/或[`TypeEngine.column_expression()`](type_api.html#sqlalchemy.types.TypeEngine.column_expression "sqlalchemy.types.TypeEngine.column_expression")，当定义为返回非`None`值时，应返回要注入SQL语句的[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")表达式，参数或列表达式。例如，要构建将所有传入数据应用于Postgis函数`ST_GeomFromText`的所有传出值和函数`ST_AsText`的`Geometry`类型，我们可以创建我们自己的[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")的子类，它提供这些方法与[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结合使用：
 
     from sqlalchemy import func
     from sqlalchemy.types import UserDefinedType
@@ -792,9 +765,7 @@ expression. 例如，如果我们针对表达式的[`label()`](sqlelement.html#s
 
 SQLAlchemy Core定义了一组可用于所有列表达式的表达式运算符。Some of these
 operations have the effect of overloading Python’s built in operators;
-examples of such operators include [`ColumnOperators.__eq__()`{.xref .py
-.py-meth .docutils
-.literal}](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.__eq__ "sqlalchemy.sql.operators.ColumnOperators.__eq__")
+examples of such operators include [`ColumnOperators.__eq__()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.__eq__ "sqlalchemy.sql.operators.ColumnOperators.__eq__")
 (`table.c.somecolumn == 'foo'`),
 [`ColumnOperators.__invert__()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.__invert__ "sqlalchemy.sql.operators.ColumnOperators.__invert__")
 (`~table.c.flag`), and
@@ -820,9 +791,7 @@ class. 用户定义的[`TypeEngine.Comparator`](type_api.html#sqlalchemy.types.T
             def __add__(self, other):
                 return self.op("goofy")(other)
 
-上面的配置创建了一个新的类`MyInt`，它将[`TypeEngine.comparator_factory`{.xref .py .py-attr
-.docutils
-.literal}](type_api.html#sqlalchemy.types.TypeEngine.comparator_factory "sqlalchemy.types.TypeEngine.comparator_factory")属性建立为引用新的类，继承[`TypeEngine.Comparator`](type_api.html#sqlalchemy.types.TypeEngine.Comparator "sqlalchemy.types.TypeEngine.Comparator")类的子类与[`Integer`](type_basics.html#sqlalchemy.types.Integer "sqlalchemy.types.Integer")类型相关联。
+上面的配置创建了一个新的类`MyInt`，它将[`TypeEngine.comparator_factory`](type_api.html#sqlalchemy.types.TypeEngine.comparator_factory "sqlalchemy.types.TypeEngine.comparator_factory")属性建立为引用新的类，继承[`TypeEngine.Comparator`](type_api.html#sqlalchemy.types.TypeEngine.Comparator "sqlalchemy.types.TypeEngine.Comparator")类的子类与[`Integer`](type_basics.html#sqlalchemy.types.Integer "sqlalchemy.types.Integer")类型相关联。
 
 用法：
 
@@ -932,11 +901,9 @@ database types.
 
         [`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")的默认行为与[`TypeDecorator`{.xref
         .py .py-class .docutils
-        .literal}](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")的默认行为相同。默认情况下它会返回`self`{.docutils
-        .literal}，假设比较值应该强制为与此类型相同的类型。有关更多详细信息，请参阅[`TypeDecorator.coerce_compared_value()`](#sqlalchemy.types.TypeDecorator.coerce_compared_value "sqlalchemy.types.TypeDecorator.coerce_compared_value")。
+        .literal}](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")的默认行为相同。默认情况下它会返回`self`，假设比较值应该强制为与此类型相同的类型。有关更多详细信息，请参阅[`TypeDecorator.coerce_compared_value()`](#sqlalchemy.types.TypeDecorator.coerce_compared_value "sqlalchemy.types.TypeDecorator.coerce_compared_value")。
 
         在版本0.8中改变：
-        [`UserDefinedType.coerce_compared_value()`](#sqlalchemy.types.UserDefinedType.coerce_compared_value "sqlalchemy.types.UserDefinedType.coerce_compared_value")现在默认返回`self`{.docutils
-        .literal}，而不是落在[`TypeEngine.coerce_compared_value()`](type_api.html#sqlalchemy.types.TypeEngine.coerce_compared_value "sqlalchemy.types.TypeEngine.coerce_compared_value")
+        [`UserDefinedType.coerce_compared_value()`](#sqlalchemy.types.UserDefinedType.coerce_compared_value "sqlalchemy.types.UserDefinedType.coerce_compared_value")现在默认返回`self`，而不是落在[`TypeEngine.coerce_compared_value()`](type_api.html#sqlalchemy.types.TypeEngine.coerce_compared_value "sqlalchemy.types.TypeEngine.coerce_compared_value")
 
 

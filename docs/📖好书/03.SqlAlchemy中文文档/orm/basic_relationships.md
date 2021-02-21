@@ -56,11 +56,7 @@ tags:
 
 `child`将获得具有多对一语义的`parent`属性。
 
-或者，可以在单个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上使用[`backref`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")选项，而不使用[`back_populates`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")。
+或者，可以在单个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上使用[`backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")选项，而不使用[`back_populates`](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")。
 
     class Parent(Base):
         __tablename__ = 'parent'
@@ -98,9 +94,7 @@ tags:
         id = Column(Integer, primary_key=True)
         parents = relationship("Parent", back_populates="child")
 
-或者，可以在单个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上使用[`backref`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")参数，例如`Parent.child`。
+或者，可以在单个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上使用[`backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")参数，例如`Parent.child`。
 
     class Parent(Base):
         __tablename__ = 'parent'
@@ -111,9 +105,7 @@ tags:
 一对一[¶](#one-to-one "Permalink to this headline")
 ---------------------------------------------------
 
-一对一本质上是在两边都是标量属性的双向关系。为了实现这一点，放置指示标量属性的[`uselist`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.uselist "sqlalchemy.orm.relationship")标志，来代替“多”侧关系的集合。来将一对多转换为一对一：
+一对一本质上是在两边都是标量属性的双向关系。为了实现这一点，放置指示标量属性的[`uselist`](relationship_api.html#sqlalchemy.orm.relationship.params.uselist "sqlalchemy.orm.relationship")标志，来代替“多”侧关系的集合。来将一对多转换为一对一：
 
     class Parent(Base):
         __tablename__ = 'parent'
@@ -139,9 +131,7 @@ tags:
         id = Column(Integer, primary_key=True)
         parent = relationship("Parent", back_populates="child", uselist=False)
 
-总之，可以使用[`relationship.backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")和[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")函数来代替[`relationship.back_populates`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")方法；要在反向引用上指定`uselist`，请使用[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")函数：
+总之，可以使用[`relationship.backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")和[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")函数来代替[`relationship.back_populates`](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")方法；要在反向引用上指定`uselist`，请使用[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")函数：
 
     from sqlalchemy.orm import backref
 
@@ -154,9 +144,7 @@ tags:
 多对多[¶](#many-to-many "Permalink to this headline")
 -----------------------------------------------------
 
-在“多对多”中，需要在两个类之间添加了一个关联表。关联表由[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`secondary`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数指示。通常，[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")使用与声明性基类关联的[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象，以便[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")指令可以定位要链接的远程表：
+在“多对多”中，需要在两个类之间添加了一个关联表。关联表由[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数指示。通常，[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")使用与声明性基类关联的[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象，以便[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")指令可以定位要链接的远程表：
 
     association_table = Table('association', Base.metadata,
         Column('left_id', Integer, ForeignKey('left.id')),
@@ -173,9 +161,7 @@ tags:
         __tablename__ = 'right'
         id = Column(Integer, primary_key=True)
 
-对于双向关系，关系的两侧都包含集合。使用[`relationship.back_populates`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")指定，并为每个[`关系()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")指定公共关联表：
+对于双向关系，关系的两侧都包含集合。使用[`relationship.back_populates`](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")指定，并为每个[`关系()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")指定公共关联表：
 
     association_table = Table('association', Base.metadata,
         Column('left_id', Integer, ForeignKey('left.id')),
@@ -198,11 +184,7 @@ tags:
             secondary=association_table,
             back_populates="children")
 
-当使用[`backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")参数而不是[`relationship.back_populates`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")时，反向引用将自动对反向关系使用相同的[`secondary`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数：
+当使用[`backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")参数而不是[`relationship.back_populates`](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")时，反向引用将自动对反向关系使用相同的[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数：
 
     association_table = Table('association', Base.metadata,
         Column('left_id', Integer, ForeignKey('left.id')),
@@ -220,9 +202,7 @@ tags:
         __tablename__ = 'right'
         id = Column(Integer, primary_key=True)
 
-[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`secondary`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数也接受一个可返回最终参数的callable，只有在首次使用mappers时才会计算。.使用它，稍后我们可以定义`association_table`，只要在所有模块初始化完成后便可调用。
+[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数也接受一个可返回最终参数的callable，只有在首次使用mappers时才会计算。.使用它，稍后我们可以定义`association_table`，只要在所有模块初始化完成后便可调用。
 
     class Parent(Base):
         __tablename__ = 'left'
@@ -242,17 +222,13 @@ tags:
 
 ### 从多对多表中删除行[¶](#deleting-rows-from-the-many-to-many-table "Permalink to this headline")
 
-对于[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`secondary`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数唯一的行为是指定这里的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")自动受限于INSERT和DELETE语句，因为对象从集合中添加或删除。这里**不需要手动从此表中删除**。从集合中删除记录的操作将影响正在删除的行：
+对于[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数唯一的行为是指定这里的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")自动受限于INSERT和DELETE语句，因为对象从集合中添加或删除。这里**不需要手动从此表中删除**。从集合中删除记录的操作将影响正在删除的行：
 
     # row will be deleted from the "secondary" table
     # automatically
     myparent.children.remove(somechild)
 
-经常出现的一个问题是，当子对象直接传递给[`Session.delete()`{.xref .py
-.py-meth .docutils
-.literal}](session_api.html#sqlalchemy.orm.session.Session.delete "sqlalchemy.orm.session.Session.delete")时，“secondary”表中的行是如何删除的：
+经常出现的一个问题是，当子对象直接传递给[`Session.delete()`](session_api.html#sqlalchemy.orm.session.Session.delete "sqlalchemy.orm.session.Session.delete")时，“secondary”表中的行是如何删除的：
 
     session.delete(somechild)
 
@@ -264,11 +240,7 @@ tags:
 -   这里更高性能的选择是使用ON DELETE
     CASCADE指令与数据库使用的外键。假设数据库支持此功能，则可以使数据库本身自动删除“辅助”表中的行，作为引用“child”中的行将被删除。可以指示SQLAlchemy使用[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上的[`passive_deletes`](relationship_api.html#sqlalchemy.orm.relationship.params.passive_deletes "sqlalchemy.orm.relationship")指令，在`Child.parents`集合中放弃主动加载；有关详细信息，请参阅[使用被动删除](collections.html#passive-deletes)。
 
-再次注意，这些行为仅**与[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中使用的[`secondary`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")选项相关。如果处理显式地映射且在相关[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`secondary`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")
+再次注意，这些行为仅**与[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中使用的[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")选项相关。如果处理显式地映射且在相关[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")
 选项中
 *不*存在的关联表，可以使用级联规则来自动删除对正在删除的相关实体作出反应的实体
 -
@@ -277,9 +249,7 @@ tags:
 关联对象[¶](#association-object "Permalink to this headline")
 -------------------------------------------------------------
 
-关联对象模式是多对多的变体：当关联表包含除左表和右表外键之外的其他列时使用。而不是使用[`secondary`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数，将一个新类直接映射到关联表。关系的左侧通过一对多引用关联对象，关联类通过多对一引用右侧。下面我们示出映射到`Association`类的关联表，这包括被称为`extra_data`的列，它是一个储存在相互关联`Parent`和
+关联对象模式是多对多的变体：当关联表包含除左表和右表外键之外的其他列时使用。而不是使用[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数，将一个新类直接映射到关联表。关系的左侧通过一对多引用关联对象，关联类通过多对一引用右侧。下面我们示出映射到`Association`类的关联表，这包括被称为`extra_data`的列，它是一个储存在相互关联`Parent`和
 `Child`中的string值。
 
     class Association(Base):
@@ -298,11 +268,7 @@ tags:
         __tablename__ = 'right'
         id = Column(Integer, primary_key=True)
 
-一如既往，双向关系使用[`relationship.back_populates`{.xref .py
-.py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")或[`relationship.backref`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")：
+一如既往，双向关系使用[`relationship.back_populates`(relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")或[`relationship.backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")：
 
     class Association(Base):
         __tablename__ = 'association'

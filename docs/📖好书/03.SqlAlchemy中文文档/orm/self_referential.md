@@ -41,9 +41,7 @@ tags:
     5        3             subchild2
     6        1             child3
 
-这里[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")配置与“正常”一对多关系的工作方式相同，除了“方向”，即关系是一对多还是一对多多对一，默认情况下假定为一对多。为了建立多对一的关系，额外的指令被称为[`remote_side`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.remote_side "sqlalchemy.orm.relationship")，它是[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")或[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的集合表明那些应该被认为是“遥远”的那些：
+这里[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")配置与“正常”一对多关系的工作方式相同，除了“方向”，即关系是一对多还是一对多多对一，默认情况下假定为一对多。为了建立多对一的关系，额外的指令被称为[`remote_side`](relationship_api.html#sqlalchemy.orm.relationship.params.remote_side "sqlalchemy.orm.relationship")，它是[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")或[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的集合表明那些应该被认为是“遥远”的那些：
 
     class Node(Base):
         __tablename__ = 'node'
@@ -52,9 +50,7 @@ tags:
         data = Column(String(50))
         parent = relationship("Node", remote_side=[id])
 
-在上面的情况中，`id`列作为`parent` [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`remote_side`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.remote_side "sqlalchemy.orm.relationship")应用，从而建立`parent_id`作为“本地”一方，然后该关系表现为多对一。
+在上面的情况中，`id`列作为`parent` [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`remote_side`](relationship_api.html#sqlalchemy.orm.relationship.params.remote_side "sqlalchemy.orm.relationship")应用，从而建立`parent_id`作为“本地”一方，然后该关系表现为多对一。
 
 与往常一样，可以使用[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")函数将两个方向组合为双向关系：
 
@@ -94,9 +90,7 @@ Persistence](examples.html#examples-xmlpersistence)。
                             remote_side=[account_id, folder_id]
                       )
 
-上面，我们将`account_id`传递到[`remote_side`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.remote_side "sqlalchemy.orm.relationship")列表中。[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")识别这里的`account_id`列位于两侧，并将“remote”列与`folder_id`列对齐，承认在“远程”方面是唯一存在的。
+上面，我们将`account_id`传递到[`remote_side`](relationship_api.html#sqlalchemy.orm.relationship.params.remote_side "sqlalchemy.orm.relationship")列表中。[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")识别这里的`account_id`列位于两侧，并将“remote”列与`folder_id`列对齐，承认在“远程”方面是唯一存在的。
 
 0.8版新增功能：支持[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中的自引用组合键，其中列指向自身。
 
@@ -130,9 +124,7 @@ Aliases](tutorial.html#ormtutorial-aliases)，[`orm.aliased()`](query.html#sqlal
     ['subchild1', 'child2']
 
 [`Query.join()`](query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")
-also includes a feature known as [`Query.join.aliased`{.xref .py
-.py-paramref .docutils
-.literal}](query.html#sqlalchemy.orm.query.Query.join.params.aliased "sqlalchemy.orm.query.Query.join")
+also includes a feature known as [`Query.join.aliased`(query.html#sqlalchemy.orm.query.Query.join.params.aliased "sqlalchemy.orm.query.Query.join")
 that can shorten the verbosity self- referential joins, at the expense
 of query flexibility.
 此功能执行与上述相似的“别名”步骤，而不需要明确的实体。调用[`Query.filter()`](query.html#sqlalchemy.orm.query.Query.filter "sqlalchemy.orm.query.Query.filter")以及在别名连接之后的类似操作将**将`Node`实体修改为别名的实体：**
@@ -149,9 +141,7 @@ of query flexibility.
     WHERE node.data = ? AND node_1.data = ?
     ['subchild1', 'child2']
 
-要将标准添加到更长连接的多个点，请将[`Query.join.from_joinpoint`{.xref
-.py .py-paramref .docutils
-.literal}](query.html#sqlalchemy.orm.query.Query.join.params.from_joinpoint "sqlalchemy.orm.query.Query.join")添加到其他[`join()`](query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")调用中：
+要将标准添加到更长连接的多个点，请将[`Query.join.from_joinpoint`](query.html#sqlalchemy.orm.query.Query.join.params.from_joinpoint "sqlalchemy.orm.query.Query.join")添加到其他[`join()`](query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")调用中：
 
     # get all nodes named 'subchild1' with a
     # parent named 'child2' and a grandparent 'root'
@@ -187,9 +177,7 @@ Persistence](examples.html#examples-xmlpersistence)。
 配置自引用预加载[¶](#configuring-self-referential-eager-loading "Permalink to this headline")
 ---------------------------------------------------------------------------------------------
 
-在正常的查询操作期间，使用从父表到子表的连接或外连接进行预先加载关系，从而可以从单个SQL语句填充父代及其直接子集合或引用，或者可以为所有直接子集合填充第二个语句。在加入相关项目时，SQLAlchemy的联接和子查询预加载在所有情况下使用别名表，因此与自引用加入兼容。但是，为了使用自引用关系进行加载，需要告诉SQLAlchemy应该加入和/或查询多少层；否则急切的负载将不会发生。该深度设置通过[`join_depth`{.xref
-.py .py-paramref .docutils
-.literal}](mapping_api.html#sqlalchemy.orm.mapper.Mapper.relationships.params.join_depth "sqlalchemy.orm.mapper.Mapper.relationships")进行配置：
+在正常的查询操作期间，使用从父表到子表的连接或外连接进行预先加载关系，从而可以从单个SQL语句填充父代及其直接子集合或引用，或者可以为所有直接子集合填充第二个语句。在加入相关项目时，SQLAlchemy的联接和子查询预加载在所有情况下使用别名表，因此与自引用加入兼容。但是，为了使用自引用关系进行加载，需要告诉SQLAlchemy应该加入和/或查询多少层；否则急切的负载将不会发生。该深度设置通过[`join_depth`](mapping_api.html#sqlalchemy.orm.mapper.Mapper.relationships.params.join_depth "sqlalchemy.orm.mapper.Mapper.relationships")进行配置：
 
     class Node(Base):
         __tablename__ = 'node'

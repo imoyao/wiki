@@ -15,9 +15,7 @@ tags:
 
 提供对跟踪对标量值进行就地更改的支持，这些标量值将在拥有父对象时传播到ORM更改事件中。
 
-New in version 0.7: [`sqlalchemy.ext.mutable`{.xref .py .py-mod
-.docutils
-.literal}](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")
+New in version 0.7: [`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")
 replaces SQLAlchemy’s legacy approach to in-place mutations of scalar
 values; see [Mutation event extension, supersedes
 “mutable=True”](changelog_migration_07.html#migration-mutation-extension).
@@ -46,9 +44,7 @@ Types](core_types.html)中介绍的示例之后，我们从一个自定义类型
                 value = json.loads(value)
             return value
 
-`json`的用法仅用于示例。[`sqlalchemy.ext.mutable`{.xref .py .py-mod
-.docutils
-.literal}](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")扩展名可用于目标Python类型可变的任何类型，包括[`PickleType`](core_type_basics.html#sqlalchemy.types.PickleType "sqlalchemy.types.PickleType")，[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")等。
+`json`的用法仅用于示例。[`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")扩展名可用于目标Python类型可变的任何类型，包括[`PickleType`](core_type_basics.html#sqlalchemy.types.PickleType "sqlalchemy.types.PickleType")，[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")等。
 
 当使用[`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")扩展名时，该值本身会跟踪引用它的所有父项。下面，我们演示一下[`MutableDict`](#sqlalchemy.ext.mutable.MutableDict "sqlalchemy.ext.mutable.MutableDict")字典对象的简单版本，它将[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")
 mixin应用于普通的Python字典：
@@ -84,9 +80,7 @@ mixin应用于普通的Python字典：
 上面的字典类采用子类化Python内置的`dict`的方法来生成一个dict子类，该子类通过`__setitem__`发送所有的突变事件。There are variants on this approach, such
 as subclassing `UserDict.UserDict` or
 `collections.MutableMapping`; the part that’s
-important to this example is that the [`Mutable.changed()`{.xref .py
-.py-meth .docutils
-.literal}](#sqlalchemy.ext.mutable.Mutable.changed "sqlalchemy.ext.mutable.Mutable.changed")
+important to this example is that the [`Mutable.changed()`](#sqlalchemy.ext.mutable.Mutable.changed "sqlalchemy.ext.mutable.Mutable.changed")
 method is called whenever an in-place change to the datastructure takes
 place.
 
@@ -305,8 +299,7 @@ API参考[¶](#api-reference "Permalink to this headline")
     ` _parents  T0> ¶ T1>`{.descname}
     :   父对象上的字典 - \>属性名称。
 
-        这个属性是一个所谓的“memoized”属性。它在第一次访问时使用新的`weakref.WeakKeyDictionary`{.docutils
-        .literal}进行初始化，并在后续访问时返回相同的对象。
+        这个属性是一个所谓的“memoized”属性。它在第一次访问时使用新的`weakref.WeakKeyDictionary`进行初始化，并在后续访问时返回相同的对象。
 
      *classmethod*`coerce`{.descname}(*key*, *value*)[¶](#sqlalchemy.ext.mutable.MutableBase.coerce "Permalink to this definition")
     :   给定一个值，将其强制转换为目标类型。
@@ -330,8 +323,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 
         返回：
 
-        该方法应该返回强制值，或者如果强制无法完成，则会引发`ValueError`{.docutils
-        .literal}。
+        该方法应该返回强制值，或者如果强制无法完成，则会引发`ValueError`。
 
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `Mutable`{.descname} [¶](#sqlalchemy.ext.mutable.Mutable "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
@@ -353,11 +345,9 @@ API参考[¶](#api-reference "Permalink to this headline")
         .py-class .docutils
         .literal}](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
-        给定描述符属性，返回属性键的`set()`{.docutils
-        .literal}，它表示此属性状态的变化。
+        给定描述符属性，返回属性键的`set()`，它表示此属性状态的变化。
 
-        这通常只是`set([attribute.key])`{.docutils
-        .literal}，但可以被覆盖以提供额外的键。例如。一个[`MutableComposite`{.xref
+        这通常只是`set([attribute.key])`，但可以被覆盖以提供额外的键。例如。一个[`MutableComposite`{.xref
         .py .py-class .docutils
         .literal}](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")使用与组成复合值的列相关联的属性键来扩充该集合。
 
@@ -380,8 +370,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 
         父对象上的字典 - \>属性名称。
 
-        这个属性是一个所谓的“memoized”属性。它在第一次访问时使用新的`weakref.WeakKeyDictionary`{.docutils
-        .literal}进行初始化，并在后续访问时返回相同的对象。
+        这个属性是一个所谓的“memoized”属性。它在第一次访问时使用新的`weakref.WeakKeyDictionary`进行初始化，并在后续访问时返回相同的对象。
 
      *classmethod*`as_mutable`{.descname}(*sqltype*)[¶](#sqlalchemy.ext.mutable.Mutable.as_mutable "Permalink to this definition")
     :   将SQL类型与此可变的Python类型关联。
@@ -408,8 +397,7 @@ API参考[¶](#api-reference "Permalink to this headline")
      *classmethod*`associate_with`{.descname}(*sqltype*)[¶](#sqlalchemy.ext.mutable.Mutable.associate_with "Permalink to this definition")
     :   将此包装与给定类型的所有未来映射列相关联。
 
-        这是一种自动调用`associate_with_attribute`{.docutils
-        .literal}的便捷方法。
+        这是一种自动调用`associate_with_attribute`的便捷方法。
 
         警告
 
@@ -446,8 +434,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 
         返回：
 
-        该方法应该返回强制值，或者如果强制无法完成，则会引发`ValueError`{.docutils
-        .literal}。
+        该方法应该返回强制值，或者如果强制无法完成，则会引发`ValueError`。
 
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableComposite`{.descname} [¶](#sqlalchemy.ext.mutable.MutableComposite "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")

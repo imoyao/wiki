@@ -156,12 +156,7 @@ method:
         参数和用法与`SelectBase.cte()`方法的参数和用法相同；请参阅该方法了解更多详情。
 
         这里是[Postgresql WITH
-        RECURSIVE示例](http://www.postgresql.org/docs/8.4/static/queries-with.html)。请注意，在本例中，它的`included_parts`{.docutils
-        .literal} cte和`incl_alias`{.docutils
-        .literal}别名是核心可选项，这意味着通过`.c.`{.docutils
-        .literal}属性。`parts_alias`{.docutils
-        .literal}对象是`Part`{.docutils
-        .literal}实体的[`orm.aliased()`](#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")实例，因此列映射属性可直接使用：
+        RECURSIVE示例](http://www.postgresql.org/docs/8.4/static/queries-with.html)。请注意，在本例中，它的`included_parts` cte和`incl_alias`别名是核心可选项，这意味着通过`.c.`属性。`parts_alias`对象是`Part`实体的[`orm.aliased()`](#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")实例，因此列映射属性可直接使用：
 
             from sqlalchemy.orm import aliased
 
@@ -267,9 +262,7 @@ method:
             scan of all matching objects within the [`Session`{.xref .py
             .py-class .docutils
             .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session");
-            if the contents of the [`Session`{.xref .py .py-class
-            .docutils
-            .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
+            if the contents of the [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
             are expired, such as via a proceeding
             [`Session.commit()`{.xref .py .py-meth .docutils
             .literal}](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")
@@ -291,8 +284,7 @@ method:
         Deletes](core_tutorial.html#inserts-and-updates) - 核心SQL教程
 
     `不同 T0> （ T1>  *标准 T2> ） T3> ¶ T4>`{.descname}
-    :   将`DISTINCT`{.docutils
-        .literal}应用于查询并返回新生成的`Query`。
+    :   将`DISTINCT`应用于查询并返回新生成的`Query`。
 
         注意
 
@@ -308,8 +300,7 @@ method:
 
         **\* expr**
         [¶](#sqlalchemy.orm.query.Query.distinct.params.*expr) -
-        可选的列表达式。当存在时，Postgresql方言将呈现`DISTINCT ON （＆lt；表达式＆gt；）`{.docutils
-        .literal}结构。
+        可选的列表达式。当存在时，Postgresql方言将呈现`DISTINCT ON （＆lt；表达式＆gt；）`结构。
 
     ` enable_assertions  T0> （ T1> 值 T2> ） T3> ¶ T4>`{.descname}
     :   控制是否生成断言。
@@ -328,8 +319,7 @@ method:
         When set to False, the returned Query will not render eager
         joins regardless of [`joinedload()`](loading_relationships.html#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload"),
         [`subqueryload()`](loading_relationships.html#sqlalchemy.orm.subqueryload "sqlalchemy.orm.subqueryload")
-        options or mapper-level `lazy='joined'`{.docutils
-        .literal}/`lazy='subquery'` configurations.
+        options or mapper-level `lazy='joined'`/`lazy='subquery'` configurations.
 
         这主要用于将Query语句嵌套到子查询或其他可选项中，或者在使用[`Query.yield_per()`](#sqlalchemy.orm.query.Query.yield_per "sqlalchemy.orm.query.Query.yield_per")时使用。
 
@@ -348,8 +338,7 @@ method:
 
         这些选项与[`Connection.execution_options()`](core_connections.html#sqlalchemy.engine.Connection.execution_options "sqlalchemy.engine.Connection.execution_options")接受的选项相同。
 
-        请注意，如果使用[`yield_per()`](#sqlalchemy.orm.query.Query.yield_per "sqlalchemy.orm.query.Query.yield_per")方法，则会自动启用`stream_results`{.docutils
-        .literal}执行选项。
+        请注意，如果使用[`yield_per()`](#sqlalchemy.orm.query.Query.yield_per "sqlalchemy.orm.query.Query.yield_per")方法，则会自动启用`stream_results`执行选项。
 
     `存在 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   将查询转换为EXISTS（SELECT 1 FROM ... WHERE
@@ -390,9 +379,7 @@ method:
 
             session.query(MyClass).filter(MyClass.name == 'some name')
 
-        多个标准可以指定为逗号分隔；效果是它们将使用[`and_()`{.xref .py
-        .py-func .docutils
-        .literal}](core_sqlelement.html#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")函数连接在一起：
+        多个标准可以指定为逗号分隔；效果是它们将使用[`and_()`](core_sqlelement.html#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")函数连接在一起：
 
             session.query(MyClass).\
                 filter(MyClass.name == 'some name', MyClass.id > 5)
@@ -415,9 +402,7 @@ method:
 
             session.query(MyClass).filter_by(name = 'some name')
 
-        多个标准可以指定为逗号分隔；效果是它们将使用[`and_()`{.xref .py
-        .py-func .docutils
-        .literal}](core_sqlelement.html#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")函数连接在一起：
+        多个标准可以指定为逗号分隔；效果是它们将使用[`and_()`](core_sqlelement.html#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")函数连接在一起：
 
             session.query(MyClass).\
                 filter_by(name = 'some name', id = 5)
@@ -430,8 +415,7 @@ method:
         - 过滤SQL表达式。
 
     `第一 T0> （ T1> ） T2> ¶ T3>`{.descname}
-    :   如果结果不包含任何行，则返回此`Query`{.docutils
-        .literal}的第一个结果或None。
+    :   如果结果不包含任何行，则返回此`Query`的第一个结果或None。
 
         first()在生成的SQL中应用一个限制，以便在服务器端仅生成一个主要实体行（注意，如果存在连接加载的集合，则这可能包含多个结果行）。
 
@@ -470,9 +454,7 @@ method:
                 limit(5).from_self().\
                 join(User.addresses).filter(Address.email.like('q%'))
 
-        上述查询连接到`Address`{.docutils
-        .literal}实体，但仅针对`User`{.docutils
-        .literal}查询的前五个结果：
+        上述查询连接到`Address`实体，但仅针对`User`查询的前五个结果：
 
             SELECT anon_1.user_id AS anon_1_user_id,
                    anon_1.user_name AS anon_1_user_name
@@ -485,8 +467,7 @@ method:
 
         **自动别名**
 
-        [`Query.from_self()`](#sqlalchemy.orm.query.Query.from_self "sqlalchemy.orm.query.Query.from_self")的另一个关键行为是，当子查询内部的实体在外部引用时，它将**自动别名**应用到子查询中的实体。在上面，如果我们继续引用`User`{.docutils
-        .literal}实体而没有应用任何额外的别名，那么这些引用将以子查询的形式表示：
+        [`Query.from_self()`](#sqlalchemy.orm.query.Query.from_self "sqlalchemy.orm.query.Query.from_self")的另一个关键行为是，当子查询内部的实体在外部引用时，它将**自动别名**应用到子查询中的实体。在上面，如果我们继续引用`User`实体而没有应用任何额外的别名，那么这些引用将以子查询的形式表示：
 
             q = session.query(User).filter(User.name.like('e%')).\
                 limit(5).from_self().\
@@ -512,10 +493,7 @@ method:
         [`Query.from_self()`](#sqlalchemy.orm.query.Query.from_self "sqlalchemy.orm.query.Query.from_self")
         also includes the ability to modify what columns are being
         queried.
-        在我们的例子中，我们想通过内部查询来查询`User.id`{.docutils
-        .literal}，以便我们可以连接到外部的`Address`{.docutils
-        .literal}实体，但我们只需要外部查询返回`Address.email`{.docutils
-        .literal}列：
+        在我们的例子中，我们想通过内部查询来查询`User.id`，以便我们可以连接到外部的`Address`实体，但我们只需要外部查询返回`Address.email`列：
 
             q = session.query(User).filter(User.name.like('e%')).\
                 limit(5).from_self(Address.email).\
@@ -535,12 +513,9 @@ method:
 
         请记住，当引用源自子查询内部的列时，我们需要确保它们存在于子查询本身的列子句中；这是SQL的一个普通方面。例如，如果我们想要使用[`contains_eager()`{.xref
         .py .py-func .docutils
-        .literal}](loading_relationships.html#sqlalchemy.orm.contains_eager "sqlalchemy.orm.contains_eager")从子查询中的连接实体加载，我们需要添加这些列。下面举例说明`Address`{.docutils
-        .literal}到`User`{.docutils
-        .literal}的连接，然后是子查询，然后我们希望[`contains_eager()`{.xref
+        .literal}](loading_relationships.html#sqlalchemy.orm.contains_eager "sqlalchemy.orm.contains_eager")从子查询中的连接实体加载，我们需要添加这些列。下面举例说明`Address`到`User`的连接，然后是子查询，然后我们希望[`contains_eager()`{.xref
         .py .py-func .docutils
-        .literal}](loading_relationships.html#sqlalchemy.orm.contains_eager "sqlalchemy.orm.contains_eager")访问`User`{.docutils
-        .literal}列：
+        .literal}](loading_relationships.html#sqlalchemy.orm.contains_eager "sqlalchemy.orm.contains_eager")访问`User`列：
 
             q = session.query(Address).join(Address.user).\
                 filter(User.name.like('e%'))
@@ -612,8 +587,7 @@ method:
         ORM教程中的使用示例
 
     `获得 T0> （ T1>  IDENT  T2> ） T3> ¶ T4>`{.descname}
-    :   基于给定的主键标识符返回实例，如果未找到，则返回`None`{.docutils
-        .literal}。
+    :   基于给定的主键标识符返回实例，如果未找到，则返回`None`。
 
         例如。：
 
@@ -668,9 +642,7 @@ method:
         .literal}](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")
 
     `具有 T0> （ T1> 标准 T2> ） T3> ¶ T4>`{.descname}
-    :   将HAVING条件应用于查询并返回新生成的[`Query`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")。
+    :   将HAVING条件应用于查询并返回新生成的[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")。
 
         [`having()`](#sqlalchemy.orm.query.Query.having "sqlalchemy.orm.query.Query.having")
         is used in conjunction with [`group_by()`](#sqlalchemy.orm.query.Query.group_by "sqlalchemy.orm.query.Query.group_by").
@@ -703,30 +675,20 @@ method:
 
     `join  tt> （ * props，** kwargs ） T5>`{.descname}
     :   根据[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象的标准创建SQL
-        JOIN并生成应用，返回最新生成的[`Query`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")。
+        JOIN并生成应用，返回最新生成的[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")。
 
         **简单的关系加入**
 
-        考虑两个类`User`和`Address`{.docutils
-        .literal}之间的映射，其中`User.addresses`{.docutils
-        .literal}表示`Address`{.docutils
-        .literal}对象的集合与每个`User`{.docutils
-        .literal}关联。[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")的最常见用法是使用`User.addresses`{.docutils
-        .literal}属性作为这种情况发生的指示符，以此关系创建JOIN：
+        考虑两个类`User`和`Address`之间的映射，其中`User.addresses`表示`Address`对象的集合与每个`User`关联。[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")的最常见用法是使用`User.addresses`属性作为这种情况发生的指示符，以此关系创建JOIN：
 
             q = session.query(User).join(User.addresses)
 
-        在上面，沿着`User.addresses`{.docutils
-        .literal}调用[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")将导致SQL等同于：
+        在上面，沿着`User.addresses`调用[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")将导致SQL等同于：
 
             SELECT user.* FROM user JOIN address ON user.id = address.user_id
 
-        在上面的例子中，我们将`User.addresses`{.docutils
-        .literal}作为*on子句*传递给[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")，也就是说，
-        ON“部分的JOIN应该被构建。对于像上面那样的单一实体查询（即，我们只从`User`{.docutils
-        .literal}开始，而没有其他选择），关系也可以用字符串名称来指定：
+        在上面的例子中，我们将`User.addresses`作为*on子句*传递给[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")，也就是说，
+        ON“部分的JOIN应该被构建。对于像上面那样的单一实体查询（即，我们只从`User`开始，而没有其他选择），关系也可以用字符串名称来指定：
 
             q = session.query(User).join("addresses")
 
@@ -755,12 +717,7 @@ method:
 
         **使用ON子句**加入目标
 
-        第三个调用形式允许明确传递目标实体以及ON子句。假设我们想要加入`Address`{.docutils
-        .literal}两次，第二次使用别名。我们使用[`aliased()`{.xref .py
-        .py-func .docutils
-        .literal}](#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")创建`Address`{.docutils
-        .literal}的不同别名，并使用`目标， / t7>`{.docutils
-        .literal}表单，以便可以将该别名与关系一起显式指定为目标，以指示ON子句应如何继续：
+        第三个调用形式允许明确传递目标实体以及ON子句。假设我们想要加入`Address`两次，第二次使用别名。我们使用[`aliased()`](#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")创建`Address`的不同别名，并使用`目标， / t7>`表单，以便可以将该别名与关系一起显式指定为目标，以指示ON子句应如何继续：
 
             a_alias = aliased(Address)
 
@@ -782,8 +739,7 @@ method:
 
             q = session.query(User).join(Address, User.id==Address.user_id)
 
-        在版本0.7中更改：在SQLAlchemy 0.6及更早版本中，[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")的两个参数形式需要使用元组：`query（User） .join（（地址， User.id == Address.user_id））`{.docutils
-        .literal}。这个调用形式在0.7中被接受，并且更进一步，除非多个连接条件被传递给单个[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")调用，否则它是不必要的，它本身也不是必需的，因为它现在等同于多个调用（情况并非总是如此）。
+        在版本0.7中更改：在SQLAlchemy 0.6及更早版本中，[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")的两个参数形式需要使用元组：`query（User） .join（（地址， User.id == Address.user_id））`。这个调用形式在0.7中被接受，并且更进一步，除非多个连接条件被传递给单个[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")调用，否则它是不必要的，它本身也不是必需的，因为它现在等同于多个调用（情况并非总是如此）。
 
         **高级连接定位和自适应**
 
@@ -806,10 +762,7 @@ method:
         [`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")
         also features the ability to *adapt* a [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
         -driven ON clause to the target selectable.
-        下面我们构造一个从`User`{.docutils
-        .literal}到`Address`{.docutils
-        .literal}的子查询的JOIN，允许`User.addresses`{.docutils
-        .literal}到*adapt t6 \>本身改变目标：*
+        下面我们构造一个从`User`到`Address`的子查询的JOIN，允许`User.addresses`到*adapt t6 \>本身改变目标：*
 
             address_subq = session.query(Address).\
                             filter(Address.email_address == 'ed@foo.com').\
@@ -835,11 +788,9 @@ method:
 
         **控制要从**加入的内容
 
-        虽然[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")专门处理JOIN的“右侧”，但我们也可以在需要的情况下使用[`select_from()`](#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")下面我们构建一个针对`Address`{.docutils
-        .literal}的查询，但是仍然可以通过指示[`Query`{.xref .py
+        虽然[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")专门处理JOIN的“右侧”，但我们也可以在需要的情况下使用[`select_from()`](#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")下面我们构建一个针对`Address`的查询，但是仍然可以通过指示[`Query`{.xref .py
         .py-class .docutils
-        .literal}](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")从第一个选择第一个作为ON子句来使用`User.addresses`{.docutils
-        .literal} `User`实体：
+        .literal}](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")从第一个选择第一个作为ON子句来使用`User.addresses` `User`实体：
 
             q = session.query(Address).select_from(User).\
                             join(User.addresses).\
@@ -861,15 +812,13 @@ method:
             q = session.query(Node).\
                     join("children", "children", aliased=True)
 
-        当使用`aliased=True`{.docutils
-        .literal}时，实际的“别名”结构不明确可用。要使用它，诸如[`Query.filter()`](#sqlalchemy.orm.query.Query.filter "sqlalchemy.orm.query.Query.filter")等方法将使传入实体适应最后一个连接点：
+        当使用`aliased=True`时，实际的“别名”结构不明确可用。要使用它，诸如[`Query.filter()`](#sqlalchemy.orm.query.Query.filter "sqlalchemy.orm.query.Query.filter")等方法将使传入实体适应最后一个连接点：
 
             q = session.query(Node).\
                     join("children", "children", aliased=True).\
                     filter(Node.name == 'grandchild 1')
 
-        使用自动别名时，`from_joinpoint=True`{.docutils
-        .literal}参数可以允许将多节点连接分解为对[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")的多次调用，以便每个路径都可以进一步过滤：
+        使用自动别名时，`from_joinpoint=True`参数可以允许将多节点连接分解为对[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")的多次调用，以便每个路径都可以进一步过滤：
 
             q = session.query(Node).\
                     join("children", aliased=True).\
@@ -877,8 +826,7 @@ method:
                     join("children", aliased=True, from_joinpoint=True).\
                     filter(Node.name == 'grandchild 1')
 
-        上面的过滤别名可以使用[`reset_joinpoint()`](#sqlalchemy.orm.query.Query.reset_joinpoint "sqlalchemy.orm.query.Query.reset_joinpoint")重置回原始的`Node`{.docutils
-        .literal}实体：
+        上面的过滤别名可以使用[`reset_joinpoint()`](#sqlalchemy.orm.query.Query.reset_joinpoint "sqlalchemy.orm.query.Query.reset_joinpoint")重置回原始的`Node`实体：
 
             q = session.query(Node).\
                     join("children", "children", aliased=True).\
@@ -952,8 +900,7 @@ method:
         版本0.6.5中的新功能
 
     `限制 T0> （ T1> 限制 T2> ） T3> ¶ T4>`{.descname}
-    :   将`LIMIT`{.docutils
-        .literal}应用于查询并返回新生成的`Query`。
+    :   将`LIMIT`应用于查询并返回新生成的`Query`。
 
     `merge_result`{.descname} （ *iterator*，*load = True* ） [t5 \>](#sqlalchemy.orm.query.Query.merge_result "Permalink to this definition")
     :   将结果合并到[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象的Session中。
@@ -971,15 +918,12 @@ method:
         .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。
 
     `偏移 T0> （ T1> 偏移 T2> ） T3> ¶ T4>`{.descname}
-    :   对查询应用一个`OFFSET`{.docutils
-        .literal}并返回新生成的`Query`。
+    :   对查询应用一个`OFFSET`并返回新生成的`Query`。
 
     `一个 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   只返回一个结果或引发异常。
 
-        如果查询未选择任何行，则引发`sqlalchemy.orm.exc.NoResultFound`{.docutils
-        .literal}。如果返回多个对象标识，或者如果为仅返回标量值的查询返回多个行而不是完整的标识映射实体，则引发`sqlalchemy.orm.exc.MultipleResultsFound`{.docutils
-        .literal}。
+        如果查询未选择任何行，则引发`sqlalchemy.orm.exc.NoResultFound`。如果返回多个对象标识，或者如果为仅返回标量值的查询返回多个行而不是完整的标识映射实体，则引发`sqlalchemy.orm.exc.MultipleResultsFound`。
 
         调用[`one()`](extensions_baked.html#sqlalchemy.ext.baked.Result.one "sqlalchemy.ext.baked.Result.one")会导致执行基础查询。
 
@@ -992,9 +936,7 @@ method:
     ` one_or_none  T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   至多返回一个结果或引发异常。
 
-        如果查询未选择任何行，则返回`None`{.docutils
-        .literal}。如果返回多个对象标识，或者如果为仅返回标量值的查询返回多个行而不是完整的标识映射实体，则引发`sqlalchemy.orm.exc.MultipleResultsFound`{.docutils
-        .literal}。
+        如果查询未选择任何行，则返回`None`。如果返回多个对象标识，或者如果为仅返回标量值的查询返回多个行而不是完整的标识映射实体，则引发`sqlalchemy.orm.exc.MultipleResultsFound`。
 
         调用[`Query.one_or_none()`](#sqlalchemy.orm.query.Query.one_or_none "sqlalchemy.orm.query.Query.one_or_none")会导致执行基础查询。
 
@@ -1019,14 +961,11 @@ method:
 
         所有现有的ORDER BY设置都可以通过传递`None`
 
-        或者，通过传递`False`{.docutils
-        .literal}作为值，可以完全取消Query对象上现有的ORDER BY设置 -
+        或者，通过传递`False`作为值，可以完全取消Query对象上现有的ORDER BY设置 -
         在调用ORDER BY无效的方法之前使用此设置。
 
     `外连接`{.descname} （ *\* props*，*\*\* kwargs* ） [T5\>](#sqlalchemy.orm.query.Query.outerjoin "Permalink to this definition")
-    :   根据此`Query`{.docutils
-        .literal}对象的标准创建左外连接，并生成应用，返回新生成的`Query`{.docutils
-        .literal}。
+    :   根据此`Query`对象的标准创建左外连接，并生成应用，返回新生成的`Query`。
 
         用法与`join()`方法相同。
 
@@ -1079,8 +1018,7 @@ method:
     ` reset_joinpoint  T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   返回一个新的[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")，其中“连接点”已被重置回查询的基本FROM实体。
 
-        此方法通常与[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")方法的`aliased=True`{.docutils
-        .literal}特性结合使用。请参阅[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")中的示例了解如何使用它。
+        此方法通常与[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")方法的`aliased=True`特性结合使用。请参阅[`join()`](#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")中的示例了解如何使用它。
 
     `标量 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   返回第一个结果的第一个元素，如果没有行存在，返回None。如果返回多行，则引发MultipleResultsFound。
@@ -1112,9 +1050,7 @@ method:
         An example would be a [`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")
         that selects `User` entities, but uses
         [`Query.select_entity_from()`](#sqlalchemy.orm.query.Query.select_entity_from "sqlalchemy.orm.query.Query.select_entity_from")
-        to have the entities selected from a [`select()`{.xref .py
-        .py-func .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")
+        to have the entities selected from a [`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")
         construct instead of the base `user` table:
 
             select_stmt = select([User]).where(User.id == 7)
@@ -1123,8 +1059,7 @@ method:
                     select_entity_from(select_stmt).\
                     filter(User.name == 'ed')
 
-        生成的查询将直接从给定的[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造中选择`User`{.docutils
-        .literal}个实体，并且将为：
+        生成的查询将直接从给定的[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造中选择`User`个实体，并且将为：
 
             SELECT anon_1.id AS anon_1_id, anon_1.name AS anon_1_name
             FROM (SELECT "user".id AS id, "user".name AS name
@@ -1132,9 +1067,7 @@ method:
             WHERE "user".id = :id_1) AS anon_1
             WHERE anon_1.name = :name_1
 
-        注意，即使WHERE标准是“适应性的”，使得`anon_1`{.docutils
-        .literal}子查询有效地替代了所有对`user`{.docutils
-        .literal}表的引用，除了它在内部引用的那个。
+        注意，即使WHERE标准是“适应性的”，使得`anon_1`子查询有效地替代了所有对`user`表的引用，除了它在内部引用的那个。
 
         将它与[`Query.select_from()`](#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")进行比较，该版本的版本为0.9，不会影响现有实体。以下声明：
 
@@ -1142,10 +1075,7 @@ method:
                     select_from(select_stmt).\
                     filter(User.name == 'ed')
 
-        生成SQL，其中`user`{.docutils
-        .literal}表以及`select_stmt`{.docutils
-        .literal}构造在FROM子句中作为单独的元素存在。没有应用`user`{.docutils
-        .literal}表的“自适应”：
+        生成SQL，其中`user`表以及`select_stmt`构造在FROM子句中作为单独的元素存在。没有应用`user`表的“自适应”：
 
             SELECT "user".id AS user_id, "user".name AS user_name
             FROM "user", (SELECT "user".id AS id, "user".name AS name
@@ -1240,9 +1170,7 @@ method:
 
         开始和停止索引的行为与Python内置的`range()`{.xref .py .py-func
         .docutils
-        .literal}函数的参数类似。此方法提供了使用`LIMIT`{.docutils
-        .literal} / `OFFSET`{.docutils
-        .literal}来获取查询片段的替代方法。
+        .literal}函数的参数类似。此方法提供了使用`LIMIT` / `OFFSET`来获取查询片段的替代方法。
 
         例如，
 
@@ -1294,9 +1222,7 @@ method:
             if True, [`Select.reduce_columns()`{.xref .py .py-meth
             .docutils
             .literal}](core_selectable.html#sqlalchemy.sql.expression.Select.reduce_columns "sqlalchemy.sql.expression.Select.reduce_columns")
-            will be called on the resulting [`select()`{.xref .py
-            .py-func .docutils
-            .literal}](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")
+            will be called on the resulting [`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")
             construct, to remove same-named columns where one also
             refers to the other via foreign key or WHERE clause
             equivalence.
@@ -1331,8 +1257,7 @@ method:
 
             q3 = q1.union(q2)
 
-        该方法接受多个Query对象以控制嵌套的级别。一系列`union()`{.docutils
-        .literal}调用，例如：
+        该方法接受多个Query对象以控制嵌套的级别。一系列`union()`调用，例如：
 
             x.union(y).union(z).all()
 
@@ -1352,8 +1277,7 @@ method:
 
         请注意，许多数据库后端不允许在UNION，EXCEPT等内部调用的查询上呈现ORDER
         BY。要禁用所有ORDER
-        BY子句（包括映射器上配置的子句），发出`query.order_by(None)`{.docutils
-        .literal} - 生成的[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象不会在其SELECT语句中呈现ORDER
+        BY子句（包括映射器上配置的子句），发出`query.order_by(None)` - 生成的[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象不会在其SELECT语句中呈现ORDER
         BY。
 
     ` union_all  T0> （ T1>  * Q  T2> ） T3> ¶ T4>`{.descname}
@@ -1384,11 +1308,7 @@ method:
             -
 
             一个带有属性名称的字典，或者映射属性或SQL表达式作为键，字面值或sql表达式作为值。如果需要[parameter-ordered
-            mode](core_tutorial.html#updates-order-parameters)，则这些值可以作为2元组列表传递；这要求将[`preserve_parameter_order`{.xref
-            .py .py-paramref .docutils
-            .literal}](core_dml.html#sqlalchemy.sql.expression.update.params.preserve_parameter_order "sqlalchemy.sql.expression.update")标志传递给[`Query.update.update_args`{.xref
-            .py .py-paramref .docutils
-            .literal}](#sqlalchemy.orm.query.Query.update.params.update_args "sqlalchemy.orm.query.Query.update")字典。
+            mode](core_tutorial.html#updates-order-parameters)，则这些值可以作为2元组列表传递；这要求将[`preserve_parameter_order`](core_dml.html#sqlalchemy.sql.expression.update.params.preserve_parameter_order "sqlalchemy.sql.expression.update")标志传递给[`Query.update.update_args`](#sqlalchemy.orm.query.Query.update.params.update_args "sqlalchemy.orm.query.Query.update")字典。
 
             > 版本1.0.0更改： -
             > 值字典中的字符串名称现在针对映射的实体进行解析；以前，这些字符串是作为文字列名传递的，没有映射器级别的转换。
@@ -1417,9 +1337,7 @@ method:
             .literal}传递给底层的[`update()`{.xref .py .py-func
             .docutils
             .literal}](core_dml.html#sqlalchemy.sql.expression.update "sqlalchemy.sql.expression.update")结构。可用于传递特定于方言的参数，如`mysql_limit`{.docutils
-            .literal}以及其他特殊参数，如[`preserve_parameter_order`{.xref
-            .py .py-paramref .docutils
-            .literal}](core_dml.html#sqlalchemy.sql.expression.update.params.preserve_parameter_order "sqlalchemy.sql.expression.update")。
+            .literal}以及其他特殊参数，如[`preserve_parameter_order`](core_dml.html#sqlalchemy.sql.expression.update.params.preserve_parameter_order "sqlalchemy.sql.expression.update")。
 
             版本1.0.0中的新功能
 
@@ -1455,9 +1373,7 @@ method:
             scan of all matching objects within the [`Session`{.xref .py
             .py-class .docutils
             .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session");
-            if the contents of the [`Session`{.xref .py .py-class
-            .docutils
-            .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
+            if the contents of the [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
             are expired, such as via a proceeding
             [`Session.commit()`{.xref .py .py-meth .docutils
             .literal}](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")
@@ -1499,8 +1415,7 @@ method:
     ` whereclause  T0> ¶ T1>`{.descname}
     :   readonly属性，它返回此查询的当前WHERE标准。
 
-        这个返回值是一个SQL表达式结构，如果没有建立标准，则返回`None`{.docutils
-        .literal}。
+        这个返回值是一个SQL表达式结构，如果没有建立标准，则返回`None`。
 
     ` with_entities  T0> （ T1>  *实体 T2> ） T3> ¶ T4>`{.descname}
     :   返回一个新的[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")替换给定实体的SELECT列表。
@@ -1526,16 +1441,10 @@ method:
         版本0.6.5中的新功能
 
      `with_for_update`{.descname}(*read=False*, *nowait=False*, *of=None*, *skip\_locked=False*, *key\_share=False*)[¶](#sqlalchemy.orm.query.Query.with_for_update "Permalink to this definition")
-    :   用`FOR UPDATE`{.docutils
-        .literal}子句的指定选项返回新的[`Query`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")。
+    :   用`FOR UPDATE`子句的指定选项返回新的[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")。
 
-        此方法的行为与`SelectBase.with_for_update()`的行为相同。当不带参数调用时，结果的`SELECT`{.docutils
-        .literal}语句将附加一个`FOR UPDATE`{.docutils
-        .literal}子句。When additional arguments are specified,
-        backend-specific options such as `FOR UPDATE NOWAIT`{.docutils
-        .literal} or `LOCK IN SHARE MODE` can take
+        此方法的行为与`SelectBase.with_for_update()`的行为相同。当不带参数调用时，结果的`SELECT`语句将附加一个`FOR UPDATE`子句。When additional arguments are specified,
+        backend-specific options such as `FOR UPDATE NOWAIT` or `LOCK IN SHARE MODE` can take
         effect.
 
         例如。：
@@ -1559,8 +1468,7 @@ method:
         .py .py-class .docutils
         .literal}](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")。
 
-        功能直接传递给[`with_hint()`](core_selectable.html#sqlalchemy.sql.expression.Select.with_hint "sqlalchemy.sql.expression.Select.with_hint")，其中`selectable`{.docutils
-        .literal}可以是[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，[`Alias`{.xref
+        功能直接传递给[`with_hint()`](core_selectable.html#sqlalchemy.sql.expression.Select.with_hint "sqlalchemy.sql.expression.Select.with_hint")，其中`selectable`可以是[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，[`Alias`{.xref
         .py .py-class .docutils
         .literal}](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")或ORM实体/映射类/等等。
 
@@ -1591,10 +1499,7 @@ method:
             result = session.execute(query.with_labels().statement)
 
     ` with_lockmode  T0> （ T1> 模式 T2> ） T3> ¶ T4>`{.descname}
-    :   使用指定的“锁定模式”返回一个新的[`Query`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象，该模式实质上是指`FOR UPDATE`{.docutils
-        .literal}子句。
+    :   使用指定的“锁定模式”返回一个新的[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象，该模式实质上是指`FOR UPDATE`子句。
 
         从版本0.9.0开始弃用：被[`Query.with_for_update()`](#sqlalchemy.orm.query.Query.with_for_update "sqlalchemy.orm.query.Query.with_for_update")取代。
 
@@ -1638,8 +1543,7 @@ method:
         [`Query.with_polymorphic()`](#sqlalchemy.orm.query.Query.with_polymorphic "sqlalchemy.orm.query.Query.with_polymorphic")
         applies transformations to the “main” mapped class represented
         by this [`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query").
-        这里的“main”映射类意味着[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象的第一个参数是一个完整的类，即`session.query(SomeClass)`{.docutils
-        .literal}。这些转换允许在FROM子句中出现额外的表，这样查询中就可以使用联合继承子类的列，这既是为了加载时效率，也是为了在查询时使用这些列。
+        这里的“main”映射类意味着[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象的第一个参数是一个完整的类，即`session.query(SomeClass)`。这些转换允许在FROM子句中出现额外的表，这样查询中就可以使用联合继承子类的列，这既是为了加载时效率，也是为了在查询时使用这些列。
 
         有关如何使用此方法的详细信息，请参阅文档部分[Basic Control of
         Which Tables are Queried](inheritance.html#with-polymorphic)。
@@ -1747,20 +1651,14 @@ method:
     -   **别名** [¶](#sqlalchemy.orm.aliased.params.alias) -
         可选可选单元以将元素映射到。This should normally be a
         [`Alias`](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")
-        object corresponding to the [`Table`{.xref .py .py-class
-        .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
-        to which the class is mapped, or to a [`select()`{.xref .py
-        .py-func .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")
+        object corresponding to the [`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
+        to which the class is mapped, or to a [`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")
         construct that is compatible with the mapping.
         默认情况下，会生成映射表的简单匿名别名。
     -   **name**[¶](#sqlalchemy.orm.aliased.params.name) – optional
         string name to use for the alias, if not specified by the
         `alias` parameter.
-        除此之外，该名称构成了可通过[`Query`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象返回的元组访问的属性名称。
+        除此之外，该名称构成了可通过[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象返回的元组访问的属性名称。
     -   **flat** [¶](#sqlalchemy.orm.aliased.params.flat) -
 
         布尔值将传递给[`FromClause.alias()`](core_selectable.html#sqlalchemy.sql.expression.FromClause.alias "sqlalchemy.sql.expression.FromClause.alias")调用，以便[`Join`{.xref
@@ -1793,11 +1691,7 @@ method:
             aggregated_unit_price = aliased(UnitPrice,
                         alias=aggregated_unit_price, adapt_on_names=True)
 
-        以上，引用`.price`{.docutils
-        .literal}的`aggregated_unit_price`{.docutils
-        .literal}上的函数将返回`fund.sum(UnitPrice.price).label('price')`{.docutils
-        .literal}列，因为它与名称“价格”相匹配。通常，“价格”函数与实际的`UnitPrice.price`{.docutils
-        .literal}列没有任何“列对应”，因为它不是原始代理。
+        以上，引用`.price`的`aggregated_unit_price`上的函数将返回`fund.sum(UnitPrice.price).label('price')`列，因为它与名称“价格”相匹配。通常，“价格”函数与实际的`UnitPrice.price`列没有任何“列对应”，因为它不是原始代理。
 
         New in version 0.7.3.
 
@@ -1850,9 +1744,7 @@ method:
     -   `mapper` - 映射基础类的[`Mapper`{.xref .py
         .py-class .docutils
         .literal}](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")。
-    -   `selectable` - [`Alias`{.xref .py .py-class
-        .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")结构最终代表别名[`Table`{.xref
+    -   `selectable` - [`Alias`](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")结构最终代表别名[`Table`{.xref
         .py .py-class .docutils
         .literal}](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或[`Select`{.xref
         .py .py-class .docutils
@@ -1902,9 +1794,7 @@ method:
         -   **\* exprs** [¶](#sqlalchemy.orm.query.Bundle.params.*exprs)
             - 包含该包的列或SQL表达式。
         -   **single\_entity=False**[¶](#sqlalchemy.orm.query.Bundle.params.single_entity)
-            – if True, rows for this [`Bundle`{.xref .py .py-class
-            .docutils
-            .literal}](#sqlalchemy.orm.query.Bundle "sqlalchemy.orm.query.Bundle")
+            – if True, rows for this [`Bundle`](#sqlalchemy.orm.query.Bundle "sqlalchemy.orm.query.Bundle")
             can be returned as a “single entity” outside of any
             enclosing tuple in the same manner as a mapped entity.
 
@@ -1981,16 +1871,14 @@ method:
     ` _asdict  T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   将[`KeyedTuple`](#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")的内容作为字典返回。
 
-        该方法提供了与`collections.namedtuple()`{.docutils
-        .literal}的兼容性，不同之处在于返回的字典是**not**的顺序。
+        该方法提供了与`collections.namedtuple()`的兼容性，不同之处在于返回的字典是**not**的顺序。
 
         0.8版本中的新功能
 
     ` _fields  T0> ¶ T1>`{.descname}
     :   返回此[`KeyedTuple`](#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")的字符串键名称的元组。
 
-        该方法提供了与`collections.namedtuple()`{.docutils
-        .literal}的兼容性。
+        该方法提供了与`collections.namedtuple()`的兼容性。
 
         0.8版本中的新功能
 

@@ -410,9 +410,7 @@ attribute in a star-args context:
             join(uka, User.keywords.local_attr).\
             join(ka, User.keywords.remote_attr)
 
-New in version 0.7.3: [`AssociationProxy.local_attr`{.xref .py .py-attr
-.docutils
-.literal}](#sqlalchemy.ext.associationproxy.AssociationProxy.local_attr "sqlalchemy.ext.associationproxy.AssociationProxy.local_attr")
+New in version 0.7.3: [`AssociationProxy.local_attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.local_attr "sqlalchemy.ext.associationproxy.AssociationProxy.local_attr")
 and [`AssociationProxy.remote_attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.remote_attr "sqlalchemy.ext.associationproxy.AssociationProxy.remote_attr"),
 synonyms for the actual proxied attributes, and usable for querying.
 
@@ -556,25 +554,19 @@ API文档[¶](#api-documentation "Permalink to this headline")
     `信息 T0> ¶ T1>`{.descname}
     :   *inherited from the* [`info`{.xref .py .py-attr .docutils
         .literal}](internals.html#sqlalchemy.orm.base.InspectionAttrInfo.info "sqlalchemy.orm.base.InspectionAttrInfo.info")
-        *attribute of* [`InspectionAttrInfo`{.xref .py .py-class
-        .docutils
-        .literal}](internals.html#sqlalchemy.orm.base.InspectionAttrInfo "sqlalchemy.orm.base.InspectionAttrInfo")
+        *attribute of* [`InspectionAttrInfo`](internals.html#sqlalchemy.orm.base.InspectionAttrInfo "sqlalchemy.orm.base.InspectionAttrInfo")
 
         信息字典与对象关联，允许用户定义的数据与这个[`InspectionAttr`{.xref
         .py .py-class .docutils
         .literal}](internals.html#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")关联。
 
         字典在第一次访问时生成。Alternatively, it can be specified as a
-        constructor argument to the [`column_property()`{.xref .py
-        .py-func .docutils
-        .literal}](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property"),
+        constructor argument to the [`column_property()`](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property"),
         [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship"),
         or [`composite()`](composites.html#sqlalchemy.orm.composite "sqlalchemy.orm.composite")
         functions.
 
-        0.8版新增功能：增加了对所有[`MapperProperty`{.xref .py .py-class
-        .docutils
-        .literal}](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")子类的.info支持。
+        0.8版新增功能：增加了对所有[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")子类的.info支持。
 
         版本1.0.0更改： [`MapperProperty.info`{.xref .py .py-attr
         .docutils
@@ -642,8 +634,7 @@ API文档[¶](#api-documentation "Permalink to this headline")
         .literal}](#sqlalchemy.ext.associationproxy.AssociationProxy.local_attr "sqlalchemy.ext.associationproxy.AssociationProxy.local_attr")
 
     `标量 T0> ¶ T1>`{.descname}
-    :   如果[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")代表本地方的标量关系，则返回`True`{.docutils
-        .literal}。
+    :   如果[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")代表本地方的标量关系，则返回`True`。
 
     ` target_class  T0> ¶ T1>`{.descname}
     :   由[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")处理的中介类。

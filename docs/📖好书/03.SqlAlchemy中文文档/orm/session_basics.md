@@ -445,9 +445,7 @@ setting that disables the session’s persistent transactional state.
 
 [`commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")
 is used to commit the current transaction.
-它总是事先发送[`flush()`](session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")以将任何剩余状态清除到数据库；这与“自动刷新”设置无关。如果没有交易存在，则会引发错误。请注意，[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的默认行为是“交易”始终存在；这种行为可以通过设置`autocommit=True`来禁用。在自动提交模式下，可以通过调用[`begin()`{.xref .py
-.py-meth .docutils
-.literal}](session_api.html#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")方法启动事务。
+它总是事先发送[`flush()`](session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")以将任何剩余状态清除到数据库；这与“自动刷新”设置无关。如果没有交易存在，则会引发错误。请注意，[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的默认行为是“交易”始终存在；这种行为可以通过设置`autocommit=True`来禁用。在自动提交模式下，可以通过调用[`begin()`](session_api.html#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")方法启动事务。
 
 注意
 

@@ -38,11 +38,8 @@ and others. 另一个原因是，[`inspect()`](#sqlalchemy.inspection.inspect "s
     -   **raiseerr**[¶](#sqlalchemy.inspection.inspect.params.raiseerr)
         – When `True`, if the given subject does not
         correspond to a known SQLAlchemy inspected type,
-        [`sqlalchemy.exc.NoInspectionAvailable`{.xref .py .py-class
-        .docutils
-        .literal}](exceptions.html#sqlalchemy.exc.NoInspectionAvailable "sqlalchemy.exc.NoInspectionAvailable")
-        is raised. 如果`False`{.docutils
-        .literal}，则返回`None`。
+        [`sqlalchemy.exc.NoInspectionAvailable`](exceptions.html#sqlalchemy.exc.NoInspectionAvailable "sqlalchemy.exc.NoInspectionAvailable")
+        is raised. 如果`False`，则返回`None`。
 
 可用的检查目标[¶](#available-inspection-targets "Permalink to this headline")
 -----------------------------------------------------------------------------

@@ -88,14 +88,10 @@ they should establish “bidirectional” behavior between each other.
     >>> u1.addresses
     []
 
-对`.addresses`集合和`.user`属性的操作完全在Python中进行，没有与SQL数据库进行任何交互。如果没有这种行为，一旦数据被刷新到数据库，并且在提交或到期操作发生后重新加载，适当的状态就会显现在两端。[`backref`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")
+对`.addresses`集合和`.user`属性的操作完全在Python中进行，没有与SQL数据库进行任何交互。如果没有这种行为，一旦数据被刷新到数据库，并且在提交或到期操作发生后重新加载，适当的状态就会显现在两端。[`backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")
 / [`back_populates`](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")行为具有以下优点：常见的双向操作可以反映正确的状态，而无需数据库往返。
 
-请记住，当在单个关系上使用[`backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")关键字时，就好像上面的两个关系是分别使用[`back_populates`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")创建的。
+请记住，当在单个关系上使用[`backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")关键字时，就好像上面的两个关系是分别使用[`back_populates`](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")创建的。
 
 Backref参数[¶](#backref-arguments "Permalink to this headline")
 ---------------------------------------------------------------
@@ -144,9 +140,7 @@ Conditions](join_conditions.html#relationship-primaryjoin)).
 
 This reuse of arguments should pretty much do the “right thing” - it
 uses only arguments that are applicable, and in the case of a many-to-
-many relationship, will reverse the usage of [`primaryjoin`{.xref .py
-.py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")
+many relationship, will reverse the usage of [`primaryjoin`(relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")
 and [`secondaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.secondaryjoin "sqlalchemy.orm.relationship")
 to correspond to the other direction (see the example in
 [Self-Referential Many-to-Many
@@ -177,14 +171,10 @@ and [`cascade_backrefs`](relationship_api.html#sqlalchemy.orm.relationship.param
 单向后退[¶](#one-way-backrefs "Permalink to this headline")
 -----------------------------------------------------------
 
-一种不寻常的情况是“单向后退”。这是backref的“back-populating”行为只在一个方向上需要的地方。一个例子是包含一个过滤[`primaryjoin`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")条件的集合。我们希望根据需要将项追加到此集合中，并让它们在传入对象上填充“父”对象。但是，我们还想拥有不属于集合的项目，但仍具有相同的“父母”关联
+一种不寻常的情况是“单向后退”。这是backref的“back-populating”行为只在一个方向上需要的地方。一个例子是包含一个过滤[`primaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")条件的集合。我们希望根据需要将项追加到此集合中，并让它们在传入对象上填充“父”对象。但是，我们还想拥有不属于集合的项目，但仍具有相同的“父母”关联
 - 这些项目不应该在集合中。
 
-以我们前面的例子为例，我们建立了[`primaryjoin`{.xref .py .py-paramref
-.docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")，该集合仅限于`Address`对象的电子邮件地址以`tony`开头，通常backref行为是所有项目都在两个方向上填充。我们不希望出现类似以下情况的此行为：
+以我们前面的例子为例，我们建立了[`primaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")，该集合仅限于`Address`对象的电子邮件地址以`tony`开头，通常backref行为是所有项目都在两个方向上填充。我们不希望出现类似以下情况的此行为：
 
     >>> u1 = User()
     >>> a1 = Address(email='mary')
@@ -192,9 +182,7 @@ and [`cascade_backrefs`](relationship_api.html#sqlalchemy.orm.relationship.param
     >>> u1.addresses
     [<__main__.Address object at 0x1411910>]
 
-以上，`Address`对象与`u1`的`addresses`集合中的条件不匹配。在刷新这些对象之后，提交的事务及其属性在重新加载时到期，`addresses`集合将在下次访问时触发数据库，​​并且不再具有此`Address`对象目前，由于过滤条件。但是，我们可以通过使用两个单独的[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构，仅在一侧放置[`back_populates`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")来消除Python端“backref”行为的这一不需要的一方：
+以上，`Address`对象与`u1`的`addresses`集合中的条件不匹配。在刷新这些对象之后，提交的事务及其属性在重新加载时到期，`addresses`集合将在下次访问时触发数据库，​​并且不再具有此`Address`对象目前，由于过滤条件。但是，我们可以通过使用两个单独的[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构，仅在一侧放置[`back_populates`](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")来消除Python端“backref”行为的这一不需要的一方：
 
     from sqlalchemy import Integer, ForeignKey, String, Column
     from sqlalchemy.ext.declarative import declarative_base
@@ -234,9 +222,7 @@ and [`cascade_backrefs`](relationship_api.html#sqlalchemy.orm.relationship.param
     >>> a2 in u1.addresses
     False
 
-Of course, we’ve disabled some of the usefulness of [`backref`{.xref .py
-.py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")
+Of course, we’ve disabled some of the usefulness of [`backref`(relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")
 here, in that when we do append an `Address` that
 corresponds to the criteria of `email.startswith('tony')`, it won’t show up in the `User.addresses`
 collection until the session is flushed, and the attributes reloaded

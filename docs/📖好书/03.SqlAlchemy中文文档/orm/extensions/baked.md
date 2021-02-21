@@ -246,9 +246,7 @@ producing a new object that can be invoked with minimal overhead.
 
 ### 选择与bake\_queries标志[¶](#opting-out-with-the-bake-queries-flag "Permalink to this headline")
 
-[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构包含一个标志[`relationship.bake_queries`{.xref
-.py .py-paramref .docutils
-.literal}](relationship_api.html#sqlalchemy.orm.relationship.params.bake_queries "sqlalchemy.orm.relationship")，当设置为False时，会导致该关系退出烘焙查询系统，当应用程序范围[`bake_lazy_loaders()`](#sqlalchemy.ext.baked.bake_lazy_loaders "sqlalchemy.ext.baked.bake_lazy_loaders")函数来启用烘焙查询加载器。
+[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构包含一个标志[`relationship.bake_queries`](relationship_api.html#sqlalchemy.orm.relationship.params.bake_queries "sqlalchemy.orm.relationship")，当设置为False时，会导致该关系退出烘焙查询系统，当应用程序范围[`bake_lazy_loaders()`](#sqlalchemy.ext.baked.bake_lazy_loaders "sqlalchemy.ext.baked.bake_lazy_loaders")函数来启用烘焙查询加载器。
 
 API文档[¶](#api-documentation "Permalink to this headline")
 -----------------------------------------------------------
@@ -262,10 +260,7 @@ API文档[¶](#api-documentation "Permalink to this headline")
     `add_criteria`{.descname} （ *fn*，*\* args* ） [](#sqlalchemy.ext.baked.BakedQuery.add_criteria "Permalink to this definition")
     :   将标准函数添加到此[`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")中。
 
-        这相当于使用`+=`{.docutils
-        .literal}运算符就地修改[`BakedQuery`{.xref .py .py-class
-        .docutils
-        .literal}](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")。
+        这相当于使用`+=`运算符就地修改[`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")。
 
     *classmethod* `面包店`{.descname} （ *size = 200* ） [](#sqlalchemy.ext.baked.BakedQuery.bakery "Permalink to this definition")
     :   建造一个新的面包店。
@@ -294,15 +289,12 @@ API文档[¶](#api-documentation "Permalink to this headline")
         object subsequent to the spoil step will be non-cached; the
         state of the [`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")
         up until this point will be pulled from the cache.
-        如果为True，则每次从头创建整个[`Query`{.xref .py .py-class
-        .docutils
-        .literal}](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象，并在每次调用时调用所有创建函数。
+        如果为True，则每次从头创建整个[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象，并在每次调用时调用所有创建函数。
 
      `with_criteria`{.descname}(*fn*, *\*args*)[¶](#sqlalchemy.ext.baked.BakedQuery.with_criteria "Permalink to this definition")
     :   向这个克隆的[`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")添加一个标准函数。
 
-        这相当于使用`+`{.docutils
-        .literal}运算符生成新的带有修改的[`BakedQuery`{.xref .py
+        这相当于使用`+`运算符生成新的带有修改的[`BakedQuery`{.xref .py
         .py-class .docutils
         .literal}](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")。
 

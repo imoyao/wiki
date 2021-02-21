@@ -365,9 +365,7 @@ queries to different backends.
 
         session.query(User.id, User.name).all()
 
--   SQL函数和其他针对间接映射的表达式，如[`column_property`{.xref .py
-    .py-obj .docutils
-    .literal}](orm_mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")：
+-   SQL函数和其他针对间接映射的表达式，如[`column_property`](orm_mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")：
 
         class User(Base):
             # ...
@@ -494,9 +492,7 @@ mutually-dependent cycles between tables, without the need to specify
 [`ForeignKeyConstraint.use_alter`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint").
 此外，外键约束不再需要有一个名称才能通过ALTER创建；只有DROP操作需要名称。在DROP的情况下，该功能将确保只有具有明确名称的约束实际上包含在ALTER语句中。如果DROP无法解决，则系统现在发出一个简洁明了的错误信息，如果DROP无法继续进行。
 
-[`ForeignKeyConstraint.use_alter`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")和[`ForeignKey.use_alter`{.xref
-.py .py-paramref .docutils
-.literal}](core_constraints.html#sqlalchemy.schema.ForeignKey.params.use_alter "sqlalchemy.schema.ForeignKey")标志保持不变，并且在CREATE
+[`ForeignKeyConstraint.use_alter`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")和[`ForeignKey.use_alter`](core_constraints.html#sqlalchemy.schema.ForeignKey.params.use_alter "sqlalchemy.schema.ForeignKey")标志保持不变，并且在CREATE
 / DROP场景中继续具有建立那些需要ALTER的约束的效果。
 
 从版本1.0.1开始，如果SQLite不支持ALTER，那么在DROP期间，给定的表有一个无法解析的周期；在这种情况下会发出警告，并且按照**no**顺序删除这些表，除非启用约束，否则这通常在SQLite上可以正常工作。要解决警告并继续至少对SQLite数据库进行部分排序，特别是在启用了约束的情况下，将“use\_alter”标志重新应用于这些[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")和[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")应该明确地从这种排序中删除的对象。
@@ -520,8 +516,7 @@ ALTER](core_constraints.html#use-alter) - 新行为的完整描述。
     >>> result.fetchone()
     exception: ResourceClosedError
 
-这种行为与pep-249的状态不一致，即在结果耗尽后，您可以重复调用fetch方法。它还会干扰结果代理的某些实现的行为，例如cx\_oracle方言对某些数据类型使用的`BufferedColumnResultProxy`{.xref
-.py .py-class .docutils .literal}。
+这种行为与pep-249的状态不一致，即在结果耗尽后，您可以重复调用fetch方法。它还会干扰结果代理的某些实现的行为，例如cx\_oracle方言对某些数据类型使用的`BufferedColumnResultProxy`。
 
 To solve this, the “closed” state of the [`ResultProxy`](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")
 has been broken into two states; a “soft close” which does the majority
@@ -676,9 +671,7 @@ are rendered as constants into the SELECT statement:
     INSERT INTO t (x, y) SELECT t.x, somefunction() AS somefunction_1
     FROM t
 
-该功能可以使用[`Insert.from_select.include_defaults`{.xref .py
-.py-paramref .docutils
-.literal}](core_dml.html#sqlalchemy.sql.expression.Insert.from_select.params.include_defaults "sqlalchemy.sql.expression.Insert.from_select")禁用。
+该功能可以使用[`Insert.from_select.include_defaults`(core_dml.html#sqlalchemy.sql.expression.Insert.from_select.params.include_defaults "sqlalchemy.sql.expression.Insert.from_select")禁用。
 
 ### 列服务器默认值现在呈现文字值[¶](#column-server-defaults-now-render-literal-values "Permalink to this headline")
 
@@ -720,8 +713,7 @@ INDEX。[`Inspector.get_indexes()`](core_reflection.html#sqlalchemy.engine.refle
 reflection using `Table(..., autoload=True)`, the
 [`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")
 construct is detected as being linked to the [`UniqueConstraint`](core_constraints.html#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint"),
-and is **not** present within the `Table.indexes`{.xref .py .py-attr
-.docutils .literal} collection; only the [`UniqueConstraint`](core_constraints.html#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")
+and is **not** present within the `Table.indexes` collection; only the [`UniqueConstraint`](core_constraints.html#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")
 will be present in the `Table.constraints` collection. 重复数据删除逻辑通过在查询`pg_index`时加入到`pg_constraint`表来查看两个结构是否已链接。
 
 #### MySQL的[¶ T0\>](#mysql "Permalink to this headline")
@@ -975,10 +967,7 @@ of attribute changes on relationship-bound attributes vs. FK-bound may
 appear to
 change](#migration-3060)）说明了一些很少的边缘情况实际上我们确实希望设置`None`。此外，在这里允许属性事件意味着现在可以为ORM映射属性创建“默认值”函数。
 
-作为这种变化的一部分，隐含的“无”的生成现在在过去发生的其他情况下被禁用；这包括何时收到多对一的属性集操作；以前，如果没有设置其他值，“旧”值将为“无”；它现在将发送`orm.attributes.NEVER_SET`{.xref
-.py .py-data .docutils
-.literal}值，该值现在可以发送给属性侦听器。调用Mapper实用程序函数（如[`Mapper.primary_key_from_instance()`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper.primary_key_from_instance "sqlalchemy.orm.mapper.Mapper.primary_key_from_instance")；）时也可能会收到此符号。如果主键属性根本没有设置，而之前的值为`None`，它现在将成为`orm.attributes.NEVER_SET`{.xref .py .py-data
-.docutils .literal}符号，并且不会更改对象的状态发生。
+作为这种变化的一部分，隐含的“无”的生成现在在过去发生的其他情况下被禁用；这包括何时收到多对一的属性集操作；以前，如果没有设置其他值，“旧”值将为“无”；它现在将发送`orm.attributes.NEVER_SET`值，该值现在可以发送给属性侦听器。调用Mapper实用程序函数（如[`Mapper.primary_key_from_instance()`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper.primary_key_from_instance "sqlalchemy.orm.mapper.Mapper.primary_key_from_instance")；）时也可能会收到此符号。如果主键属性根本没有设置，而之前的值为`None`，它现在将成为`orm.attributes.NEVER_SET`符号，并且不会更改对象的状态发生。
 
 [＃3061 T0\>](http://www.sqlalchemy.org/trac/ticket/3061)
 
@@ -1231,9 +1220,7 @@ That is, the `A.bs` is part of a “path”.
 
 ### 右内部连接嵌套现在是innerjoin = True [¶](#right-inner-join-nesting-now-the-default-for-joinedload-with-innerjoin-true "Permalink to this headline")的已加入连接的默认值
 
-[`joinedload.innerjoin`](orm_loading_relationships.html#sqlalchemy.orm.joinedload.params.innerjoin "sqlalchemy.orm.joinedload")以及[`relationship.innerjoin`{.xref
-.py .py-paramref .docutils
-.literal}](orm_relationship_api.html#sqlalchemy.orm.relationship.params.innerjoin "sqlalchemy.orm.relationship")的行为现在使用“嵌套”内部联接，即右嵌套，作为内部联接加入加入的急切加载被链接到外部加入急切加载。为了获得将外部连接存在时将所有连接的紧急加载链接为外部连接的旧行为，请使用`innerjoin="unnested"`。
+[`joinedload.innerjoin`](orm_loading_relationships.html#sqlalchemy.orm.joinedload.params.innerjoin "sqlalchemy.orm.joinedload")以及[`relationship.innerjoin`](orm_relationship_api.html#sqlalchemy.orm.relationship.params.innerjoin "sqlalchemy.orm.relationship")的行为现在使用“嵌套”内部联接，即右嵌套，作为内部联接加入加入的急切加载被链接到外部加入急切加载。为了获得将外部连接存在时将所有连接的紧急加载链接为外部连接的旧行为，请使用`innerjoin="unnested"`。
 
 As introduced in [Right-nested inner joins available in joined eager
 loads](migration_09.html#feature-2976) from version 0.9, the behavior of
@@ -1249,9 +1236,7 @@ load chained to an outer join eager load will use a right-nested join.
 
     FROM users LEFT OUTER JOIN (orders JOIN items ON <onclause>) ON <onclause>
 
-也就是说，对INNER连接使用右嵌套连接，以便可以返回`users`的完整结果。INNER连接的使用比使用OUTER连接更有效，并允许[`joinedload.innerjoin`{.xref
-.py .py-paramref .docutils
-.literal}](orm_loading_relationships.html#sqlalchemy.orm.joinedload.params.innerjoin "sqlalchemy.orm.joinedload")优化参数在所有情况下都生效。
+也就是说，对INNER连接使用右嵌套连接，以便可以返回`users`的完整结果。INNER连接的使用比使用OUTER连接更有效，并允许[`joinedload.innerjoin`](orm_loading_relationships.html#sqlalchemy.orm.joinedload.params.innerjoin "sqlalchemy.orm.joinedload")优化参数在所有情况下都生效。
 
 要获得较旧的行为，请使用`innerjoin="unnested"`：
 
@@ -1443,9 +1428,7 @@ ON子句，不只是从关系中产生的那些，包括一个明确说明的关
 自从SQLAlchemy开始以来，一直强调不妨碍纯文本的使用。The Core and ORM
 expression systems were intended to allow any number of points at which
 the user can just use plain text SQL expressions, not just in the sense
-that you can send a full SQL string to [`Connection.execute()`{.xref .py
-.py-meth .docutils
-.literal}](core_connections.html#sqlalchemy.engine.Connection.execute "sqlalchemy.engine.Connection.execute"),
+that you can send a full SQL string to [`Connection.execute()`](core_connections.html#sqlalchemy.engine.Connection.execute "sqlalchemy.engine.Connection.execute"),
 but that you can send strings with SQL expressions into many functions,
 such as [`Select.where()`](core_selectable.html#sqlalchemy.sql.expression.Select.where "sqlalchemy.sql.expression.Select.where"),
 [`Query.filter()`](orm_query.html#sqlalchemy.orm.query.Query.filter "sqlalchemy.orm.query.Query.filter"),
@@ -1662,9 +1645,7 @@ SELECT需要在任何情况下隐式返回。如果需要插入数据，则应�
 
 在[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象失效，然后尝试重新连接并遇到错误的情况下，SQLAlchemy的包装DBAPI异常不会发生；这已经解决了。
 
-此外，最近添加的[`ConnectionEvents.handle_error()`](core_events.html#sqlalchemy.events.ConnectionEvents.handle_error "sqlalchemy.events.ConnectionEvents.handle_error")事件现在将针对初始连接时发生的错误，重新连接时以及在使用[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")时给定自定义连接通过[`create_engine.creator`{.xref
-.py .py-paramref .docutils
-.literal}](core_engines.html#sqlalchemy.create_engine.params.creator "sqlalchemy.create_engine")执行功能。
+此外，最近添加的[`ConnectionEvents.handle_error()`](core_events.html#sqlalchemy.events.ConnectionEvents.handle_error "sqlalchemy.events.ConnectionEvents.handle_error")事件现在将针对初始连接时发生的错误，重新连接时以及在使用[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")时给定自定义连接通过[`create_engine.creator`](core_engines.html#sqlalchemy.create_engine.params.creator "sqlalchemy.create_engine")执行功能。
 
 The [`ExceptionContext`](core_connections.html#sqlalchemy.engine.ExceptionContext "sqlalchemy.engine.ExceptionContext")
 object has a new datamember [`ExceptionContext.engine`](core_connections.html#sqlalchemy.engine.ExceptionContext.engine "sqlalchemy.engine.ExceptionContext.engine")
@@ -1681,9 +1662,7 @@ was previously a plain list containing either strings or [`Column`](core_metadat
 objects, depending on how the [`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")
 was constructed and whether it was associated with a table.
 该集合现在是[`ColumnCollection`](core_sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")，并且仅在[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")与[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")关联后才被初始化。A
-new accessor [`ForeignKeyConstraint.column_keys`{.xref .py .py-attr
-.docutils
-.literal}](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint.column_keys "sqlalchemy.schema.ForeignKeyConstraint.column_keys")
+new accessor [`ForeignKeyConstraint.column_keys`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint.column_keys "sqlalchemy.schema.ForeignKeyConstraint.column_keys")
 is added to unconditionally return string keys for the local set of
 columns regardless of how the object was constructed or its current
 state.
@@ -1718,9 +1697,7 @@ determine lexical significance.
 
 ### SQLite / Oracle具有不同的临时表/视图名称报告方法[¶](#sqlite-oracle-have-distinct-methods-for-temporary-table-view-name-reporting "Permalink to this headline")
 
-在SQLite / Oracle的情况下，[`Inspector.get_table_names()`{.xref .py
-.py-meth .docutils
-.literal}](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_table_names "sqlalchemy.engine.reflection.Inspector.get_table_names")和[`Inspector.get_view_names()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_view_names "sqlalchemy.engine.reflection.Inspector.get_view_names")方法也会返回临时表和视图的名称，任何其他方言（在MySQL的情况下，至少它是不可能的）。This
+在SQLite / Oracle的情况下，[`Inspector.get_table_names()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_table_names "sqlalchemy.engine.reflection.Inspector.get_table_names")和[`Inspector.get_view_names()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_view_names "sqlalchemy.engine.reflection.Inspector.get_view_names")方法也会返回临时表和视图的名称，任何其他方言（在MySQL的情况下，至少它是不可能的）。This
 logic has been moved out to two new methods
 [`Inspector.get_temp_table_names()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_temp_table_names "sqlalchemy.engine.reflection.Inspector.get_temp_table_names")
 and [`Inspector.get_temp_view_names()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_temp_view_names "sqlalchemy.engine.reflection.Inspector.get_temp_view_names").
@@ -1903,9 +1880,7 @@ Postgresql现在支持9.4的集合函数的SQL标准FILTER关键字。SQLAlchemy
 
 也可以看看
 
-[`sqlalchemy.dialects.postgresql.psycopg2cffi`{.xref .py .py-mod
-.docutils
-.literal}](dialects_postgresql.html#module-sqlalchemy.dialects.postgresql.psycopg2cffi "sqlalchemy.dialects.postgresql.psycopg2cffi")
+[`sqlalchemy.dialects.postgresql.psycopg2cffi`](dialects_postgresql.html#module-sqlalchemy.dialects.postgresql.psycopg2cffi "sqlalchemy.dialects.postgresql.psycopg2cffi")
 
 方言的改进和改变 - MySQL [¶](#dialect-improvements-and-changes-mysql "Permalink to this headline")
 --------------------------------------------------------------------------------------------------
@@ -1935,9 +1910,7 @@ SET中存储一个空字符串，因为驱动程序给我们返回的字符串�
 -   将MySQL-Connector-Python返回的单空值集合`set([''])`转换为空set `set()`；
 -   为了处理实际希望在其可能值列表中包含空值`''`的集合类型的情况，实现了一个新特性（在这个用例中是必需的），从而设置值被持久化并且作为一个按位整数值加载；添加标志[`mysql.SET.retrieve_as_bitwise`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET.params.retrieve_as_bitwise "sqlalchemy.dialects.mysql.SET")以启用此功能。
 
-通过使用[`mysql.SET.retrieve_as_bitwise`{.xref .py .py-paramref
-.docutils
-.literal}](dialects_mysql.html#sqlalchemy.dialects.mysql.SET.params.retrieve_as_bitwise "sqlalchemy.dialects.mysql.SET")标志，可以保持集合的持久性，并且检索时不会出现任何含糊不清的值。理论上这个标志可以在任何情况下被打开，只要该类型的给定值列表与数据库中声明的顺序完全匹配即可。它只会使SQL
+通过使用[`mysql.SET.retrieve_as_bitwise`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET.params.retrieve_as_bitwise "sqlalchemy.dialects.mysql.SET")标志，可以保持集合的持久性，并且检索时不会出现任何含糊不清的值。理论上这个标志可以在任何情况下被打开，只要该类型的给定值列表与数据库中声明的顺序完全匹配即可。它只会使SQL
 echo输出更加不寻常。
 
 [`mysql.SET`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET "sqlalchemy.dialects.mysql.SET")的默认行为保持不变，使用字符串往返传值。基于字符串的行为现在支持unicode完全包含use\_unicode
@@ -1947,9 +1920,7 @@ echo输出更加不寻常。
 
 ### MySQL内部“没有这样的表”异常不会传递给事件处理程序[¶](#mysql-internal-no-such-table-exceptions-not-passed-to-event-handlers "Permalink to this headline")
 
-现在，MySQL方言将禁止[`ConnectionEvents.handle_error()`{.xref .py
-.py-meth .docutils
-.literal}](core_events.html#sqlalchemy.events.ConnectionEvents.handle_error "sqlalchemy.events.ConnectionEvents.handle_error")事件触发它在内部使用的用于检测表是否存在的语句。这是通过使用执行选项`skip_user_error_events`来实现的，该选项为该执行的范围禁用句柄错误事件。通过这种方式，重写异常的用户代码不需要担心偶尔需要捕获SQLAlchemy特定异常的MySQL方言或其他方言。
+现在，MySQL方言将禁止[`ConnectionEvents.handle_error()`](core_events.html#sqlalchemy.events.ConnectionEvents.handle_error "sqlalchemy.events.ConnectionEvents.handle_error")事件触发它在内部使用的用于检测表是否存在的语句。这是通过使用执行选项`skip_user_error_events`来实现的，该选项为该执行的范围禁用句柄错误事件。通过这种方式，重写异常的用户代码不需要担心偶尔需要捕获SQLAlchemy特定异常的MySQL方言或其他方言。
 
 ### 为MySQL连接器更改了`raise_on_warnings`的默认值[¶](#changed-the-default-value-of-raise-on-warnings-for-mysql-connector "Permalink to this headline")
 
@@ -2044,8 +2015,7 @@ Deprecation](dialects_mssql.html#mssql-large-type-deprecation)。
 
 ### 在Oracle [¶](#improved-support-for-ctes-in-oracle "Permalink to this headline")中改进了对CTE的支持
 
-CTE对Oracle的支持已经得到了修复，并且还有一个新特性`CTE.with_suffixes()`{.xref
-.py .py-meth .docutils .literal}可以帮助Oracle的特殊指令：
+CTE对Oracle的支持已经得到了修复，并且还有一个新特性`CTE.with_suffixes()`可以帮助Oracle的特殊指令：
 
     included_parts = select([
         part.c.sub_part, part.c.part, part.c.quantity

@@ -243,8 +243,7 @@ string `'*'` to indicate all subclasses:
     -   **classes**[¶](#sqlalchemy.orm.with_polymorphic.params.classes)
         – a single class or mapper, or list of class/mappers, which
         inherit from the base class.
-        或者，它也可以是字符串`'*'`{.docutils
-        .literal}，在这种情况下，所有降序映射类将被添加到FROM子句中。
+        或者，它也可以是字符串`'*'`，在这种情况下，所有降序映射类将被添加到FROM子句中。
     -   **aliased**[¶](#sqlalchemy.orm.with_polymorphic.params.aliased)
         – when True, the selectable will be wrapped in an alias, that is
         `(SELECT * FROM <fromclauses>) AS anon_1`.
@@ -257,9 +256,7 @@ string `'*'` to indicate all subclasses:
             .py .py-class .docutils
             .literal}](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")对象的别名不包含封闭的SELECT。这可以在许多情况下导致更高效的查询。针对嵌套JOIN的JOIN将被重写为针对不支持此语法的后端上的别名SELECT子查询的JOIN。
 
-        将`flat`设置为`True`{.docutils
-        .literal}意味着`aliased`{.docutils
-        .literal}标志也是`True`。
+        将`flat`设置为`True`意味着`aliased`标志也是`True`。
 
         版本0.9.0中的新功能
 
@@ -270,8 +267,7 @@ string `'*'` to indicate all subclasses:
     -   **selectable**[¶](#sqlalchemy.orm.with_polymorphic.params.selectable)
         – a table or select() statement that will be used in place of
         the generated FROM clause.
-        如果任何期望的类使用具体的表继承，则此参数是必需的，因为SQLAlchemy目前无法自动在表之间生成UNION。如果使用，`selectable`{.docutils
-        .literal}参数必须表示由每个映射类映射的全部表和列集。否则，未记录的映射列将导致它们的表直接附加到FROM子句中，这通常会导致错误的结果。
+        如果任何期望的类使用具体的表继承，则此参数是必需的，因为SQLAlchemy目前无法自动在表之间生成UNION。如果使用，`selectable`参数必须表示由每个映射类映射的全部表和列集。否则，未记录的映射列将导致它们的表直接附加到FROM子句中，这通常会导致错误的结果。
     -   **polymorphic\_on**
         [¶](#sqlalchemy.orm.with_polymorphic.params.polymorphic_on) -
         用作给定可选项的“鉴别器”列的列。如果没有给定，将使用基类映射器的polymorphic\_on属性（如果有的话）。这对默认情况下没有多态加载行为的映射很有用。
@@ -570,9 +566,7 @@ targets.
 
 ### 具体多态加载[¶](#concrete-polymorphic-loading "Permalink to this headline")
 
-要多态加载，需要使用[`orm.mapper.with_polymorphic`{.xref .py
-.py-paramref .docutils
-.literal}](mapping_api.html#sqlalchemy.orm.mapper.params.with_polymorphic "sqlalchemy.orm.mapper")参数，以及可选的指示如何加载行。多态加载对于具体继承来说效率最低，所以如果我们确实寻求这种加载方式，虽然可能不太推荐。在具体继承的情况下，这意味着我们必须构建所有三个表的联合。
+要多态加载，需要使用[`orm.mapper.with_polymorphic`(mapping_api.html#sqlalchemy.orm.mapper.params.with_polymorphic "sqlalchemy.orm.mapper")参数，以及可选的指示如何加载行。多态加载对于具体继承来说效率最低，所以如果我们确实寻求这种加载方式，虽然可能不太推荐。在具体继承的情况下，这意味着我们必须构建所有三个表的联合。
 
 首先用经典映射来说明这一点，SQLAlchemy包含一个辅助函数来创建这个名为[`polymorphic_union()`](mapping_api.html#sqlalchemy.orm.util.polymorphic_union "sqlalchemy.orm.util.polymorphic_union")的UNION，它将把所有不同的列映射到具有相同数字和列名的选择结构中，还为每个子查询生成一个虚拟的`type`列。在所有三个表都被声明之后，该函数被称为**，然后与映射器结合使用：**
 
