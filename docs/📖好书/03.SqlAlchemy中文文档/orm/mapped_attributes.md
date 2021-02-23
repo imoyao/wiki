@@ -332,8 +332,7 @@ attribute](#mapper-hybrids)特性更好地处理了在描述符中增强属性�
 
     -   **info** [¶](#sqlalchemy.orm.synonym.params.info) -
 
-        可选数据字典，将填充到此对象的`InspectionAttr.info`{.xref .py
-        .py-attr .docutils .literal}属性中。
+        可选数据字典，将填充到此对象的`InspectionAttr.info`属性中。
 
         版本1.0.0中的新功能
 

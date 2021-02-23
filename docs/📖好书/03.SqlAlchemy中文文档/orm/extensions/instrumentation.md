@@ -24,8 +24,7 @@ tags:
 有关如何使用检测扩展的示例，请参阅示例[Attribute
 Instrumentation](examples.html#examples-instrumentation)。
 
-在版本0.8中更改： [`sqlalchemy.orm.instrumentation`](events.html#module-sqlalchemy.orm.instrumentation "sqlalchemy.orm.instrumentation")被拆分出来，以便将与非标准检测相关的所有功能移出到[`sqlalchemy.ext.instrumentation`](#module-sqlalchemy.ext.instrumentation "sqlalchemy.ext.instrumentation")导入时，模块将自身安装在[`sqlalchemy.orm.instrumentation`](events.html#module-sqlalchemy.orm.instrumentation "sqlalchemy.orm.instrumentation")中，以便生效，包括识别映射类上的`__sa_instrumentation_manager__`以及[`instrumentation_finders`{.xref .py .py-data .docutils
-.literal}](#sqlalchemy.ext.instrumentation.instrumentation_finders "sqlalchemy.ext.instrumentation.instrumentation_finders")
+在版本0.8中更改： [`sqlalchemy.orm.instrumentation`](events.html#module-sqlalchemy.orm.instrumentation "sqlalchemy.orm.instrumentation")被拆分出来，以便将与非标准检测相关的所有功能移出到[`sqlalchemy.ext.instrumentation`](#module-sqlalchemy.ext.instrumentation "sqlalchemy.ext.instrumentation")导入时，模块将自身安装在[`sqlalchemy.orm.instrumentation`](events.html#module-sqlalchemy.orm.instrumentation "sqlalchemy.orm.instrumentation")中，以便生效，包括识别映射类上的`__sa_instrumentation_manager__`以及[`instrumentation_finders`](#sqlalchemy.ext.instrumentation.instrumentation_finders "sqlalchemy.ext.instrumentation.instrumentation_finders")
 \>被用来确定类仪器的分辨率。
 
 API参考[¶](#api-reference "Permalink to this headline")

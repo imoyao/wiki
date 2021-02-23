@@ -202,9 +202,7 @@ of Existing Types](#replacing-processors)部分。
         Custom [`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")类可以覆盖此属性以返回空元组，在这种情况下，不会将值强制为常量。
 
         ..versionadded :: 0.8.2
-        :   添加[`TypeDecorator.coerce_to_is_types`{.xref .py .py-attr
-            .docutils
-            .literal}](#sqlalchemy.types.TypeDecorator.coerce_to_is_types "sqlalchemy.types.TypeDecorator.coerce_to_is_types")以便更容易地控制`__eq__()` `__ne__()`操作。
+        :   添加[`TypeDecorator.coerce_to_is_types`](#sqlalchemy.types.TypeDecorator.coerce_to_is_types "sqlalchemy.types.TypeDecorator.coerce_to_is_types")以便更容易地控制`__eq__()` `__ne__()`操作。
 
     ` column_expression  T0> （ T1>  colexpr  T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`column_expression()`](type_api.html#sqlalchemy.types.TypeEngine.column_expression "sqlalchemy.types.TypeEngine.column_expression")
@@ -297,9 +295,7 @@ of Existing Types](#replacing-processors)部分。
         None值关联的特殊行为的类型指示该值不一定会转换为SQL
         NULL；这是一个JSON类型的主要例子，它可能希望保存JSON值`'null'`。
 
-        在所有情况下，通过在INSERT语句中使用[`null`{.xref .py .py-obj
-        .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")
+        在所有情况下，通过在INSERT语句中使用[`null`](sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")
         SQL构造或与ORM映射属性关联，实际的NULL
         SQL值可始终保留在任何列中。
 
@@ -446,8 +442,7 @@ of Existing Types](#replacing-processors)部分。
 
             s = s.with_variant(mysql.VARCHAR(collation='foo'), 'mysql')
 
-        [`TypeEngine.with_variant()`](type_api.html#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")的构造始终是从“fallback”类型到特定于方言的。返回的类型是[`Variant`](type_api.html#sqlalchemy.types.Variant "sqlalchemy.types.Variant")的一个实例，它本身提供了一个可重复调用的`Variant.with_variant()`{.xref
-        .py .py-meth .docutils .literal}。
+        [`TypeEngine.with_variant()`](type_api.html#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")的构造始终是从“fallback”类型到特定于方言的。返回的类型是[`Variant`](type_api.html#sqlalchemy.types.Variant "sqlalchemy.types.Variant")的一个实例，它本身提供了一个可重复调用的`Variant.with_variant()`。
 
         参数：
 

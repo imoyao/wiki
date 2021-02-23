@@ -273,24 +273,13 @@ tags:
         construct.
         只有在以下情况下才需要foreign\_keys：[`foreign_keys`](#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")
 
-        > 1.  由于存在多个外键引用，因此从本地表到远程表构建联接的方式不止一种。设置`foreign_keys`将限制[`relationship()`{.xref .py .py-func
-        >     .docutils
-        >     .literal}](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")将这些列指定为“foreign”。
+        > 1.  由于存在多个外键引用，因此从本地表到远程表构建联接的方式不止一种。设置`foreign_keys`将限制[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")将这些列指定为“foreign”。
         >
-        >     在版本0.8中更改：通过单独设置[`foreign_keys`{.xref .py
-        >     .py-paramref .docutils
-        >     .literal}](#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")参数可以解决多外键加入歧义，而无需明确设置[`primaryjoin`{.xref
-        >     .py .py-paramref .docutils
-        >     .literal}](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")以及。
+        >     在版本0.8中更改：通过单独设置[`foreign_keys`](#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")参数可以解决多外键加入歧义，而无需明确设置[`primaryjoin`](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")以及。
         >
-        > 2.  被映射的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")实际上并不存在[`ForeignKey`{.xref
-        >     .py .py-class .docutils
-        >     .literal}](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")或[`ForeignKeyConstraint`{.xref
-        >     .py .py-class .docutils
-        >     .literal}](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")结构，这通常是因为该表是从不支持外键的数据库反射（MySQL
+        > 2.  被映射的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")实际上并不存在[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")或[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")结构，这通常是因为该表是从不支持外键的数据库反射（MySQL
         >     MyISAM）。
-        > 3.  [`primaryjoin`{.xref .py .py-paramref .docutils
-        >     .literal}](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")参数用于构造非标准连接条件，该条件使用通常不引用其“父”列的列或表达式，例如由复杂比较表示的连接条件使用SQL函数。
+        > 3.  [`primaryjoin`](#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")参数用于构造非标准连接条件，该条件使用通常不引用其“父”列的列或表达式，例如由复杂比较表示的连接条件使用SQL函数。
 
         [`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构会引发信息错误消息，提示在出现模糊条件时使用[`foreign_keys`](#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")参数。在典型情况下，如果[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")不引发任何异常，通常不需要[`foreign_keys`](#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")参数。
 
@@ -368,9 +357,7 @@ tags:
         -   `noload` -
             任何时候都不应该发生加载。这是为了支持“只写”属性或以某种特定于应用程序的方式填充的属性。
         -   `raise` -
-            不允许延迟加载；访问该属性，如果其值尚未通过预加载加载，则会引发[`InvalidRequestError`{.xref
-            .py .py-exc .docutils
-            .literal}](core_exceptions.html#sqlalchemy.exc.InvalidRequestError "sqlalchemy.exc.InvalidRequestError")。
+            不允许延迟加载；访问该属性，如果其值尚未通过预加载加载，则会引发[`InvalidRequestError`](core_exceptions.html#sqlalchemy.exc.InvalidRequestError "sqlalchemy.exc.InvalidRequestError")。
 
             版本1.1中的新功能
 

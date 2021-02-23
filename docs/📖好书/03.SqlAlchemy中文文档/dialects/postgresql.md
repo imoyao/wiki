@@ -393,8 +393,7 @@ method on any textual column expression.
 
     SELECT text @@ to_tsquery('search string') FROM table
 
-使用标准的[`func`{.xref .py .py-data .docutils
-.literal}](core_sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结构显式使用Postgresql文本搜索函数，如`to_tsquery()`和`to_tsvector()`。例如：
+使用标准的[`func`](core_sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结构显式使用Postgresql文本搜索函数，如`to_tsquery()`和`to_tsvector()`。例如：
 
     select([
         func.to_tsvector('fat cats ate rats').match('cat & rat')
@@ -860,8 +859,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
     - 产生一个文字数组值。
 
     *class* `比较器`{.descname} （ *expr* ） [¶](#sqlalchemy.dialects.postgresql.ARRAY.Comparator "Permalink to this definition")
-    :   基础：`sqlalchemy.types.Comparator`{.xref .py .py-class
-        .docutils .literal}
+    :   基础：`sqlalchemy.types.Comparator`
 
         定义[`ARRAY`](#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")的比较操作。
 
@@ -1165,9 +1163,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
     - 呈现Postgresql `hstore()`函数。
 
     *class* `比较器`{.descname} （ *expr* ） [¶](#sqlalchemy.dialects.postgresql.HSTORE.Comparator "Permalink to this definition")
-    :   基础：`sqlalchemy.types.Comparator`{.xref .py .py-class
-        .docutils .literal}，`sqlalchemy.types.Comparator`{.xref .py
-        .py-class .docutils .literal}
+    :   基础：`sqlalchemy.types.Comparator`，`sqlalchemy.types.Comparator`
 
         定义[`HSTORE`](#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")的比较操作。
 
@@ -1322,8 +1318,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
     [`JSONB`](#sqlalchemy.dialects.postgresql.JSONB "sqlalchemy.dialects.postgresql.JSONB")
 
     *class* `比较器`{.descname} （ *expr* ） [¶](#sqlalchemy.dialects.postgresql.JSON.Comparator "Permalink to this definition")
-    :   基础：`sqlalchemy.types.Comparator`{.xref .py .py-class
-        .docutils .literal}
+    :   基础：`sqlalchemy.types.Comparator`
 
         为[`JSON`](#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")定义比较操作。
 
@@ -1364,9 +1359,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
             [¶](#sqlalchemy.dialects.postgresql.JSON.params.astext_type)
             -
 
-            在索引属性上用于[`JSON.Comparator.astext`{.xref .py .py-attr
-            .docutils
-            .literal}](#sqlalchemy.dialects.postgresql.JSON.Comparator.astext "sqlalchemy.dialects.postgresql.JSON.Comparator.astext")访问器的类型。默认为[`types.Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")。
+            在索引属性上用于[`JSON.Comparator.astext`](#sqlalchemy.dialects.postgresql.JSON.Comparator.astext "sqlalchemy.dialects.postgresql.JSON.Comparator.astext")访问器的类型。默认为[`types.Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")。
 
             版本1.1中的新功能
 
@@ -1410,8 +1403,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
     [`JSON`](#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")
 
     *class* `比较器`{.descname} （ *expr* ） [¶](#sqlalchemy.dialects.postgresql.JSONB.Comparator "Permalink to this definition")
-    :   基础：`sqlalchemy.dialects.postgresql.json.Comparator`{.xref .py
-        .py-class .docutils .literal}
+    :   基础：`sqlalchemy.dialects.postgresql.json.Comparator`
 
         为[`JSON`](#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")定义比较操作。
 
@@ -1581,8 +1573,7 @@ PostgreSQL 9.2以后的新范围列类型可以通过以下类型来满足：
     0.8.2版新增功能：支持Postgresql RANGE操作。
 
     *class* `comparator_factory`{.descname} （ *expr* ） [](#sqlalchemy.dialects.postgresql.ranges.RangeOperators.comparator_factory "Permalink to this definition")
-    :   基础：`sqlalchemy.types.Comparator`{.xref .py .py-class
-        .docutils .literal}
+    :   基础：`sqlalchemy.types.Comparator`
 
         定义范围类型的比较操作。
 

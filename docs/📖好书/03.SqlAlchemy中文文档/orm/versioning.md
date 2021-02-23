@@ -57,9 +57,7 @@ The above UPDATE statement is updating the row that not only matches
 `user.id = 1`, it also is requiring that
 `user.version_id = 1`, where “1” is the last version
 identifier we’ve been known to use on this object.
-如果某个事务独立修改了该行，则此版本ID将不再匹配，并且UPDATE语句将报告没有行匹配；这是SQLAlchemy测试的条件，只有一行符合我们的UPDATE（或DELETE）语句。如果零行匹配，则表明我们的数据版本已过时，并引发[`StaleDataError`{.xref
-.py .py-exc .docutils
-.literal}](exceptions.html#sqlalchemy.orm.exc.StaleDataError "sqlalchemy.orm.exc.StaleDataError")。
+如果某个事务独立修改了该行，则此版本ID将不再匹配，并且UPDATE语句将报告没有行匹配；这是SQLAlchemy测试的条件，只有一行符合我们的UPDATE（或DELETE）语句。如果零行匹配，则表明我们的数据版本已过时，并引发[`StaleDataError`](exceptions.html#sqlalchemy.orm.exc.StaleDataError "sqlalchemy.orm.exc.StaleDataError")。
 
 自定义版本计数器/类型[¶](#custom-version-counters-types "Permalink to this headline")
 -------------------------------------------------------------------------------------

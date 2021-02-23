@@ -53,8 +53,7 @@ TABLE，该连接将被锁定。
 SQLAlchemy是否支持ALTER TABLE，CREATE VIEW，CREATE TRIGGER，架构升级功能？[¶](#does-sqlalchemy-support-alter-table-create-view-create-trigger-schema-upgrade-functionality "Permalink to this headline")
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-一般ALTER支持不直接出现在SQLAlchemy中。对于特殊的DDL，可以使用[`DDL`](core_ddl.html#sqlalchemy.schema.DDL "sqlalchemy.schema.DDL")和相关的结构。有关此主题的讨论，请参阅`core_ddl`{.xref
-.doc .docutils .literal}。
+一般ALTER支持不直接出现在SQLAlchemy中。对于特殊的DDL，可以使用[`DDL`](core_ddl.html#sqlalchemy.schema.DDL "sqlalchemy.schema.DDL")和相关的结构。有关此主题的讨论，请参阅`core_ddl`。
 
 更全面的选择是使用模式迁移工具，例如Alembic或SQLAlchemy-Migrate；请参阅[Altering
 Schemas through

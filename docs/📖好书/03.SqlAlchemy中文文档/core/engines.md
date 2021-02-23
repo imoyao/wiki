@@ -283,9 +283,7 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
         [`Connection.default_isolation_level`](connections.html#sqlalchemy.engine.Connection.default_isolation_level "sqlalchemy.engine.Connection.default_isolation_level")
         - 查看默认级别
 
-        [`Connection.execution_options.isolation_level`{.xref .py
-        .py-paramref .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")
+        [`Connection.execution_options.isolation_level`](connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")
         - 根据[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")设置隔离级别
 
         [SQLite Transaction

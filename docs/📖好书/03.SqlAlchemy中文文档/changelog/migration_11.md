@@ -170,8 +170,7 @@ object, which is handled distinctly:
 
 与作为[JSON “null” is inserted as expected with ORM operations,
 regardless of column default
-present](#change-3514)，基本的[`TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")类现在支持[`TypeEngine.evaluates_none()`](core_type_api.html#sqlalchemy.types.TypeEngine.evaluates_none "sqlalchemy.types.TypeEngine.evaluates_none")方法，该方法允许将属性上的`None`值的肯定集保留为NULL，而不是从INSERT语句中省略列，它具有使用列级别缺省的效果。这允许将现有对象级别的技术分配给属性的`sql.null()`{.xref
-.py .py-func .docutils .literal}的映射器级配置。
+present](#change-3514)，基本的[`TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")类现在支持[`TypeEngine.evaluates_none()`](core_type_api.html#sqlalchemy.types.TypeEngine.evaluates_none "sqlalchemy.types.TypeEngine.evaluates_none")方法，该方法允许将属性上的`None`值的肯定集保留为NULL，而不是从INSERT语句中省略列，它具有使用列级别缺省的效果。这允许将现有对象级别的技术分配给属性的`sql.null()`的映射器级配置。
 
 也可以看看
 

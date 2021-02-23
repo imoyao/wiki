@@ -322,8 +322,7 @@ clear or delete all the rows in a database:
             从版本1.0.0开始弃用： -
             请参阅[`Inspector.get_sorted_table_and_fkc_names()`](#sqlalchemy.engine.reflection.Inspector.get_sorted_table_and_fkc_names "sqlalchemy.engine.reflection.Inspector.get_sorted_table_and_fkc_names")，以便自动解析表之间的外键循环。
 
-            在版本0.8中更改：“foreign\_key”排序按依赖顺序对依赖项进行排序；即按照创建顺序，而不是按降序排列。这是为了与类似的功能保持一致，例如[`MetaData.sorted_tables`](metadata.html#sqlalchemy.schema.MetaData.sorted_tables "sqlalchemy.schema.MetaData.sorted_tables")和`util.sort_tables()`{.xref
-            .py .py-func .docutils .literal}。
+            在版本0.8中更改：“foreign\_key”排序按依赖顺序对依赖项进行排序；即按照创建顺序，而不是按降序排列。这是为了与类似的功能保持一致，例如[`MetaData.sorted_tables`](metadata.html#sqlalchemy.schema.MetaData.sorted_tables "sqlalchemy.schema.MetaData.sorted_tables")和`util.sort_tables()`。
 
         也可以看看
 

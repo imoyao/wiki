@@ -328,8 +328,7 @@ API文档 - 可用的池实现[¶](#api-documentation-available-pool-implementat
 
             警告
 
-            [`Pool.use_threadlocal`{.xref .py .py-paramref .docutils
-            .literal}](#sqlalchemy.pool.Pool.params.use_threadlocal "sqlalchemy.pool.Pool")标志**不会影响[`Engine.connect()`](connections.html#sqlalchemy.engine.Engine.connect "sqlalchemy.engine.Engine.connect")的行为。**[`Engine.connect()`](connections.html#sqlalchemy.engine.Engine.connect "sqlalchemy.engine.Engine.connect")
+            [`Pool.use_threadlocal`](#sqlalchemy.pool.Pool.params.use_threadlocal "sqlalchemy.pool.Pool")标志**不会影响[`Engine.connect()`](connections.html#sqlalchemy.engine.Engine.connect "sqlalchemy.engine.Engine.connect")的行为。**[`Engine.connect()`](connections.html#sqlalchemy.engine.Engine.connect "sqlalchemy.engine.Engine.connect")
             makes use of the [`Pool.unique_connection()`](#sqlalchemy.pool.Pool.unique_connection "sqlalchemy.pool.Pool.unique_connection")
             method which **does not use thread local context**.
             要产生引用[`Pool.connect()`](#sqlalchemy.pool.Pool.connect "sqlalchemy.pool.Pool.connect")方法的[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")，请使用[`Engine.contextual_connect()`](connections.html#sqlalchemy.engine.Engine.contextual_connect "sqlalchemy.engine.Engine.contextual_connect")。
@@ -443,10 +442,8 @@ API文档 - 可用的池实现[¶](#api-documentation-available-pool-implementat
             a connection. 默认为30。
         -   **\*\*kw**[¶](#sqlalchemy.pool.QueuePool.params.**kw) –
             Other keyword arguments including [`Pool.recycle`](#sqlalchemy.pool.Pool.params.recycle "sqlalchemy.pool.Pool"),
-            [`Pool.echo`{.xref .py .py-paramref .docutils
-            .literal}](#sqlalchemy.pool.Pool.params.echo "sqlalchemy.pool.Pool"),
-            [`Pool.reset_on_return`{.xref .py .py-paramref .docutils
-            .literal}](#sqlalchemy.pool.Pool.params.reset_on_return "sqlalchemy.pool.Pool")
+            [`Pool.echo`](#sqlalchemy.pool.Pool.params.echo "sqlalchemy.pool.Pool"),
+            [`Pool.reset_on_return`](#sqlalchemy.pool.Pool.params.reset_on_return "sqlalchemy.pool.Pool")
             and others are passed to the [`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")
             constructor.
 

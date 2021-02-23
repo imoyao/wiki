@@ -97,8 +97,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
             objects.
 
     ` close_all  T0> （ T1> ） T2> ¶ T3>`{.descname}
-    :   *inherited from the* `close_all()` *method of* `_SessionClassMethods`{.xref .py .py-class
-        .docutils .literal}
+    :   *inherited from the* `close_all()` *method of* `_SessionClassMethods`
 
         Close *all* sessions in memory.
 
@@ -112,18 +111,14 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
             Session.configure(bind=create_engine('sqlite://'))
 
     ` identity_key  T0> （ T1>  * ARGS  T2>， ** kwargs  T3> ） T4> ¶ T5>`{.descname}
-    :   *inherited from the* `identity_key()`{.xref .py .py-meth
-        .docutils .literal} *method of* `_SessionClassMethods`{.xref .py
-        .py-class .docutils .literal}
+    :   *inherited from the* `identity_key()` *method of* `_SessionClassMethods`
 
         返回身份密钥。
 
         这是[`util.identity_key()`](mapping_api.html#sqlalchemy.orm.util.identity_key "sqlalchemy.orm.util.identity_key")的别名。
 
     ` object_session  T0> （ T1> 实例 T2> ） T3> ¶ T4>`{.descname}
-    :   *inherited from the* `object_session()`{.xref .py .py-meth
-        .docutils .literal} *method of* `_SessionClassMethods`{.xref .py
-        .py-class .docutils .literal}
+    :   *inherited from the* `object_session()` *method of* `_SessionClassMethods`
 
         返回对象所属的[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。
 
@@ -177,9 +172,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
                 [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
                 instances to individual [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
                 or [`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")
-                objects. 相对于特定[`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")进行的操作将查询此字典中的直接[`Mapper`{.xref
-                .py .py-class .docutils
-                .literal}](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")实例以及映射器的`mapped_table`属性，以便找到可连接使用。完整的分辨率在[`Session.get_bind()`](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind")中描述。用法如下所示：
+                objects. 相对于特定[`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")进行的操作将查询此字典中的直接[`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")实例以及映射器的`mapped_table`属性，以便找到可连接使用。完整的分辨率在[`Session.get_bind()`](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind")中描述。用法如下所示：
 
                     Session = sessionmaker(binds={
                         SomeMappedClass: create_engine('postgresql://engine1'),
@@ -438,17 +431,14 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         如果此会话是使用`autocommit=False`创建的，则立即开始一个新事务。请注意，这个新事务在第一次需要之前不会使用任何连接资源。
 
     ` close_all  T0> （ T1> ） T2> ¶ T3>`{.descname}
-    :   *inherited from the* `close_all()` *method of* `_SessionClassMethods`{.xref .py .py-class
-        .docutils .literal}
+    :   *inherited from the* `close_all()` *method of* `_SessionClassMethods`
 
         Close *all* sessions in memory.
 
     `提交 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   刷新挂起的更改并提交当前事务。
 
-        如果没有事务正在进行，则此方法引发一个[`InvalidRequestError`{.xref
-        .py .py-exc .docutils
-        .literal}](core_exceptions.html#sqlalchemy.exc.InvalidRequestError "sqlalchemy.exc.InvalidRequestError")。
+        如果没有事务正在进行，则此方法引发一个[`InvalidRequestError`](core_exceptions.html#sqlalchemy.exc.InvalidRequestError "sqlalchemy.exc.InvalidRequestError")。
 
         默认情况下，在事务提交后，[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")也会在所有ORM托管的属性上过期加载所有数据库状态。这样可以使后续操作从数据库加载最新的数据。可以使用[`sessionmaker`](#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")或[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")构造函数的`expire_on_commit=False`选项禁用此行为。
 
@@ -770,9 +760,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         3.  如果session.bind存在，则返回该值。
         4.  如果给出子句，则尝试返回链接到最终与该子句关联的[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")的绑定。
         5.  如果给定了映射器，则尝试返回链接到最终与映射器映射到的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或其他可选映射关联的[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")的绑定。
-        6.  无法找到绑定，[`UnboundExecutionError`{.xref .py .py-exc
-            .docutils
-            .literal}](core_exceptions.html#sqlalchemy.exc.UnboundExecutionError "sqlalchemy.exc.UnboundExecutionError")。
+        6.  无法找到绑定，[`UnboundExecutionError`](core_exceptions.html#sqlalchemy.exc.UnboundExecutionError "sqlalchemy.exc.UnboundExecutionError")。
 
         参数：
 
@@ -797,9 +785,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
             associated with bound [`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData").
 
     ` identity_key  T0> （ T1>  * ARGS  T2>， ** kwargs  T3> ） T4> ¶ T5>`{.descname}
-    :   *inherited from the* `identity_key()`{.xref .py .py-meth
-        .docutils .literal} *method of* `_SessionClassMethods`{.xref .py
-        .py-class .docutils .literal}
+    :   *inherited from the* `identity_key()` *method of* `_SessionClassMethods`
 
         返回身份密钥。
 
@@ -984,9 +970,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         New in version 0.7.6.
 
     ` object_session  T0> （ T1> 实例 T2> ） T3> ¶ T4>`{.descname}
-    :   *inherited from the* `object_session()`{.xref .py .py-meth
-        .docutils .literal} *method of* `_SessionClassMethods`{.xref .py
-        .py-class .docutils .literal}
+    :   *inherited from the* `object_session()` *method of* `_SessionClassMethods`
 
         返回对象所属的[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。
 
@@ -995,13 +979,9 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
     `制备 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   准备当前正在进行的两阶段提交事务。
 
-        如果没有事务正在进行，则此方法引发一个[`InvalidRequestError`{.xref
-        .py .py-exc .docutils
-        .literal}](core_exceptions.html#sqlalchemy.exc.InvalidRequestError "sqlalchemy.exc.InvalidRequestError")。
+        如果没有事务正在进行，则此方法引发一个[`InvalidRequestError`](core_exceptions.html#sqlalchemy.exc.InvalidRequestError "sqlalchemy.exc.InvalidRequestError")。
 
-        只能准备两阶段会话的根交易。如果当前事务不是这样，则引发一个[`InvalidRequestError`{.xref
-        .py .py-exc .docutils
-        .literal}](core_exceptions.html#sqlalchemy.exc.InvalidRequestError "sqlalchemy.exc.InvalidRequestError")。
+        只能准备两阶段会话的根交易。如果当前事务不是这样，则引发一个[`InvalidRequestError`](core_exceptions.html#sqlalchemy.exc.InvalidRequestError "sqlalchemy.exc.InvalidRequestError")。
 
     `剪枝 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   移除标识映射中缓存的未引用实例。

@@ -45,8 +45,7 @@ API参考[¶](#api-reference "Permalink to this headline")
         [¶](#sqlalchemy.ext.declarative.declarative_base.params.name) -
         默认为`Base`。生成的类的显示名称。自定义这不是必需的，但可以提高回溯和调试的清晰度。
     -   **constructor**[¶](#sqlalchemy.ext.declarative.declarative_base.params.constructor)
-        – Defaults to `_declarative_constructor()`{.xref .py .py-func
-        .docutils .literal}, an \_\_init\_\_ implementation that assigns
+        – Defaults to `_declarative_constructor()`, an \_\_init\_\_ implementation that assigns
         \*\*kwargs for declared fields and relationships to an instance.
         如果提供`None`，则不会提供\_\_init\_\_，并且构造会通过正常的Python语义回退到cls
         .\_\_ init\_\_。

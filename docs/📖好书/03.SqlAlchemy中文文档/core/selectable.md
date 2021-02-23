@@ -283,17 +283,13 @@ subclasses).
     -   **for\_update = False**
         [¶](#sqlalchemy.sql.expression.select.params.for_update) -
 
-        > 当`True`时，将`FOR UPDATE`{.docutils
-        > .literal}应用到结果语句的末尾。
+        > 当`True`时，将`FOR UPDATE`应用到结果语句的末尾。
         >
         > Deprecated since version 0.9.0: - use
-        > [`Select.with_for_update()`{.xref .py .py-meth .docutils
-        > .literal}](#sqlalchemy.sql.expression.Select.with_for_update "sqlalchemy.sql.expression.Select.with_for_update")
-        > to specify the structure of the `FOR UPDATE`{.docutils
-        > .literal} clause.
+        > [`Select.with_for_update()`](#sqlalchemy.sql.expression.Select.with_for_update "sqlalchemy.sql.expression.Select.with_for_update")
+        > to specify the structure of the `FOR UPDATE` clause.
         >
-        > `for_update`{.docutils
-        > .literal}接受由特定后端解释的各种字符串值，包括：
+        > `for_update`接受由特定后端解释的各种字符串值，包括：
         >
         > -   `"read"` - on MySQL, translates to
         >     `LOCK IN SHARE MODE`; on Postgresql,
@@ -376,8 +372,7 @@ subclasses).
 
     \* args，\*\* kwargs
 
-    > 所有其他参数传递给[`select()`{.xref .py .py-func .docutils
-    > .literal}](#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")函数。
+    > 所有其他参数传递给[`select()`](#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")函数。
 
  `sqlalchemy.sql.expression.`{.descclassname}`table`{.descname}(*name*, *\*columns*)[¶](#sqlalchemy.sql.expression.table "Permalink to this definition")
 :   产生一个新的[`TableClause`](#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")。
@@ -1474,8 +1469,7 @@ subclasses).
 
     代表通用表达式。
 
-    [`CTE`](#sqlalchemy.sql.expression.CTE "sqlalchemy.sql.expression.CTE")对象是使用任何可选择的`SelectBase.cte()`{.xref
-    .py .py-meth .docutils .literal}方法获得的。查看完整示例的方法。
+    [`CTE`](#sqlalchemy.sql.expression.CTE "sqlalchemy.sql.expression.CTE")对象是使用任何可选择的`SelectBase.cte()`方法获得的。查看完整示例的方法。
 
     New in version 0.7.6.
 
@@ -3912,8 +3906,7 @@ subclasses).
         在版本0.8.0中更改： ORM映射类被[`Select.correlate()`](#sqlalchemy.sql.expression.Select.correlate "sqlalchemy.sql.expression.Select.correlate")接受。
 
         版本0.8.0中已更改： [`Select.correlate()`](#sqlalchemy.sql.expression.Select.correlate "sqlalchemy.sql.expression.Select.correlate")方法不再无条件地从FROM子句中删除条目；相反，候选FROM条目还必须与位于封闭[`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")中的FROM条目匹配，该条目最终包含在WHERE子句，ORDER
-        BY子句，HAVING子句或columns子句中一个封闭的`Select()`{.xref .py
-        .py-meth .docutils .literal}。
+        BY子句，HAVING子句或columns子句中一个封闭的`Select()`。
 
         在版本0.8.2中更改：显式关联通过[`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象的任何级别嵌套进行；在以前的0.8版本中，相关只会发生在相对于立即封闭的[`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")结构中。
 
