@@ -121,9 +121,7 @@ sending in the group name:
     -   **\*列** [¶](#sqlalchemy.orm.deferred.params.*columns) -
         要映射的列。这通常是一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象，但是为了支持在同一个属性下映射多个列，支持一个集合。
     -   **\*\*kw**[¶](#sqlalchemy.orm.deferred.params.**kw) – additional
-        keyword arguments passed to [`ColumnProperty`{.xref .py
-        .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty").
+        keyword arguments passed to [`ColumnProperty`](internals.html#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty").
 
     也可以看看
 

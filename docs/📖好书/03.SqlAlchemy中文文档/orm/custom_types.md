@@ -162,9 +162,7 @@ of Existing Types](#replacing-processors)部分。
     ` bind_processor  T0> （ T1> 方言 T2> ） T3> ¶ T4>`{.descname}
     :   为给定的[`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")提供绑定值处理功能。
 
-        这是实现用于绑定值转换的[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")合同的方法。[`TypeDecorator`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
+        这是实现用于绑定值转换的[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")合同的方法。[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
         will wrap a user-defined implementation of
         [`process_bind_param()`](#sqlalchemy.types.TypeDecorator.process_bind_param "sqlalchemy.types.TypeDecorator.process_bind_param")
         here.
@@ -206,8 +204,7 @@ of Existing Types](#replacing-processors)部分。
         ..versionadded :: 0.8.2
         :   添加[`TypeDecorator.coerce_to_is_types`{.xref .py .py-attr
             .docutils
-            .literal}](#sqlalchemy.types.TypeDecorator.coerce_to_is_types "sqlalchemy.types.TypeDecorator.coerce_to_is_types")以便更容易地控制`__eq__()`{.docutils
-            .literal} `__ne__()`操作。
+            .literal}](#sqlalchemy.types.TypeDecorator.coerce_to_is_types "sqlalchemy.types.TypeDecorator.coerce_to_is_types")以便更容易地控制`__eq__()` `__ne__()`操作。
 
     ` column_expression  T0> （ T1>  colexpr  T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`column_expression()`](type_api.html#sqlalchemy.types.TypeEngine.column_expression "sqlalchemy.types.TypeEngine.column_expression")
@@ -272,9 +269,7 @@ of Existing Types](#replacing-processors)部分。
     `复制 T0> （ T1>  **千瓦 T2> ） T3> ¶ T4>`{.descname}
     :   生成此[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")实例的副本。
 
-        这是一个浅层副本，用于履行[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")合约的一部分。通常不需要重写，除非用户定义的[`TypeDecorator`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")具有应该被深度复制的本地状态。
+        这是一个浅层副本，用于履行[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")合约的一部分。通常不需要重写，除非用户定义的[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")具有应该被深度复制的本地状态。
 
     ` dialect_impl  T0> （ T1> 方言 T2> ） T3> ¶ T4>`{.descname}
     :   *继承自* [`dialect_impl()`](type_api.html#sqlalchemy.types.TypeEngine.dialect_impl "sqlalchemy.types.TypeEngine.dialect_impl")
@@ -286,8 +281,7 @@ of Existing Types](#replacing-processors)部分。
     :   *inherited from the* [`evaluates_none()`](type_api.html#sqlalchemy.types.TypeEngine.evaluates_none "sqlalchemy.types.TypeEngine.evaluates_none")
         *method of* [`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-        返回将[`should_evaluate_none`{.xref .py .py-attr .docutils
-        .literal}](type_api.html#sqlalchemy.types.TypeEngine.should_evaluate_none "sqlalchemy.types.TypeEngine.should_evaluate_none")标志设置为True的此类型的副本。
+        返回将[`should_evaluate_none`](type_api.html#sqlalchemy.types.TypeEngine.should_evaluate_none "sqlalchemy.types.TypeEngine.should_evaluate_none")标志设置为True的此类型的副本。
 
         例如。：
 
@@ -317,12 +311,10 @@ of Existing Types](#replacing-processors)部分。
         default](orm_persistence_techniques.html#session-forcing-null) -
         in the ORM documentation
 
-        [`postgresql.JSON.none_as_null`{.xref .py .py-paramref .docutils
-        .literal}](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON.params.none_as_null "sqlalchemy.dialects.postgresql.JSON")
+        [`postgresql.JSON.none_as_null`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON.params.none_as_null "sqlalchemy.dialects.postgresql.JSON")
         - Postgresql与此标志的JSON交互。
 
-        [`TypeEngine.should_evaluate_none`{.xref .py .py-attr .docutils
-        .literal}](type_api.html#sqlalchemy.types.TypeEngine.should_evaluate_none "sqlalchemy.types.TypeEngine.should_evaluate_none")
+        [`TypeEngine.should_evaluate_none`](type_api.html#sqlalchemy.types.TypeEngine.should_evaluate_none "sqlalchemy.types.TypeEngine.should_evaluate_none")
         - class-level flag
 
     ` get_dbapi_type  T0> （ T1>  DBAPI  T2> ） T3> ¶ T4>`{.descname}
@@ -349,20 +341,14 @@ of Existing Types](#replacing-processors)部分。
     ` load_dialect_impl  T0> （ T1> 方言 T2> ） T3> ¶ T4>`{.descname}
     :   返回与方言对应的[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")对象。
 
-        这是一个最终用户覆盖挂钩，可以根据给定的方言用于提供不同的类型。它由[`type_engine()`](#sqlalchemy.types.TypeDecorator.type_engine "sqlalchemy.types.TypeDecorator.type_engine")的[`TypeDecorator`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")实现使用，以帮助确定最终返回给定[`TypeDecorator`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")的类型。
+        这是一个最终用户覆盖挂钩，可以根据给定的方言用于提供不同的类型。它由[`type_engine()`](#sqlalchemy.types.TypeDecorator.type_engine "sqlalchemy.types.TypeDecorator.type_engine")的[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")实现使用，以帮助确定最终返回给定[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")的类型。
 
         默认返回`self.impl`。
 
      `process_bind_param`{.descname}(*value*, *dialect*)[¶](#sqlalchemy.types.TypeDecorator.process_bind_param "Permalink to this definition")
     :   接收要转换的绑定参数值。
 
-        子类重写此方法以返回应传递给底层[`TypeEngine`{.xref .py
-        .py-class .docutils
-        .literal}](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")对象的值，并从那里返回到DBAPI
+        子类重写此方法以返回应传递给底层[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")对象的值，并从那里返回到DBAPI
         `execute()`方法。
 
         该操作可以是执行自定义行为所需的任何操作，例如转换或序列化数据。这也可以用作验证逻辑的钩子。
@@ -408,8 +394,7 @@ of Existing Types](#replacing-processors)部分。
         这个操作应该被设计成可以通过这个类的“process\_bind\_param”方法来反转。
 
     ` python_type  T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`python_type`{.xref .py .py-attr .docutils
-        .literal}](type_api.html#sqlalchemy.types.TypeEngine.python_type "sqlalchemy.types.TypeEngine.python_type")
+    :   *inherited from the* [`python_type`](type_api.html#sqlalchemy.types.TypeEngine.python_type "sqlalchemy.types.TypeEngine.python_type")
         *attribute of* [`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
         如果已知，则返回预期由此类型的实例返回的Python类型对象。
@@ -423,9 +408,7 @@ of Existing Types](#replacing-processors)部分。
     `result_processor`{.descname} （ *dialect*，*coltype* ） [¶](#sqlalchemy.types.TypeDecorator.result_processor "Permalink to this definition")
     :   为给定的[`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")提供结果值处理功能。
 
-        这是实现结果值转换的[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")合同的方法。[`TypeDecorator`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
+        这是实现结果值转换的[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")合同的方法。[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
         will wrap a user-defined implementation of
         [`process_result_value()`](#sqlalchemy.types.TypeDecorator.process_result_value "sqlalchemy.types.TypeDecorator.process_result_value")
         here.
@@ -444,13 +427,9 @@ of Existing Types](#replacing-processors)部分。
         此方法与此类的[`bind_processor()`](#sqlalchemy.types.TypeDecorator.bind_processor "sqlalchemy.types.TypeDecorator.bind_processor")方法相反。
 
      `type_engine`{.descname}(*dialect*)[¶](#sqlalchemy.types.TypeDecorator.type_engine "Permalink to this definition")
-    :   为[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")返回一个特定于方言的[`TypeEngine`{.xref
-        .py .py-class .docutils
-        .literal}](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")实例。
+    :   为[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")返回一个特定于方言的[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")实例。
 
-        在大多数情况下，这返回由`self.impl`表示的[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")类型的方言适应形式。使用[`dialect_impl()`](#sqlalchemy.types.TypeDecorator.dialect_impl "sqlalchemy.types.TypeDecorator.dialect_impl")，但也遍历包装的[`TypeDecorator`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")实例。行为可以通过覆盖[`load_dialect_impl()`](#sqlalchemy.types.TypeDecorator.load_dialect_impl "sqlalchemy.types.TypeDecorator.load_dialect_impl")来定制。
+        在大多数情况下，这返回由`self.impl`表示的[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")类型的方言适应形式。使用[`dialect_impl()`](#sqlalchemy.types.TypeDecorator.dialect_impl "sqlalchemy.types.TypeDecorator.dialect_impl")，但也遍历包装的[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")实例。行为可以通过覆盖[`load_dialect_impl()`](#sqlalchemy.types.TypeDecorator.load_dialect_impl "sqlalchemy.types.TypeDecorator.load_dialect_impl")来定制。
 
     `with_variant`{.descname} （ *type\_*，*dialect\_name* ） [](#sqlalchemy.types.TypeDecorator.with_variant "Permalink to this definition")
     :   *inherited from the* [`with_variant()`](type_api.html#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")
@@ -467,9 +446,7 @@ of Existing Types](#replacing-processors)部分。
 
             s = s.with_variant(mysql.VARCHAR(collation='foo'), 'mysql')
 
-        [`TypeEngine.with_variant()`](type_api.html#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")的构造始终是从“fallback”类型到特定于方言的。返回的类型是[`Variant`{.xref
-        .py .py-class .docutils
-        .literal}](type_api.html#sqlalchemy.types.Variant "sqlalchemy.types.Variant")的一个实例，它本身提供了一个可重复调用的`Variant.with_variant()`{.xref
+        [`TypeEngine.with_variant()`](type_api.html#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")的构造始终是从“fallback”类型到特定于方言的。返回的类型是[`Variant`](type_api.html#sqlalchemy.types.Variant "sqlalchemy.types.Variant")的一个实例，它本身提供了一个可重复调用的`Variant.with_variant()`{.xref
         .py .py-meth .docutils .literal}。
 
         参数：
@@ -480,8 +457,7 @@ of Existing Types](#replacing-processors)部分。
             type, when a dialect of the given name is in use.
         -   **dialect\_name**[¶](#sqlalchemy.types.TypeDecorator.with_variant.params.dialect_name)
             – base name of the dialect which uses this type.
-            （即`'postgresql'`，`'mysql'`{.docutils
-            .literal}等）
+            （即`'postgresql'`，`'mysql'`等）
 
         New in version 0.7.2.
 
@@ -899,9 +875,7 @@ database types.
     `coerce_compared_value`{.descname} （ *op*，*值* ） [](#sqlalchemy.types.UserDefinedType.coerce_compared_value "Permalink to this definition")
     :   为表达式中的'强制'Python值建议类型。
 
-        [`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")的默认行为与[`TypeDecorator`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")的默认行为相同。默认情况下它会返回`self`，假设比较值应该强制为与此类型相同的类型。有关更多详细信息，请参阅[`TypeDecorator.coerce_compared_value()`](#sqlalchemy.types.TypeDecorator.coerce_compared_value "sqlalchemy.types.TypeDecorator.coerce_compared_value")。
+        [`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")的默认行为与[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")的默认行为相同。默认情况下它会返回`self`，假设比较值应该强制为与此类型相同的类型。有关更多详细信息，请参阅[`TypeDecorator.coerce_compared_value()`](#sqlalchemy.types.TypeDecorator.coerce_compared_value "sqlalchemy.types.TypeDecorator.coerce_compared_value")。
 
         在版本0.8中改变：
         [`UserDefinedType.coerce_compared_value()`](#sqlalchemy.types.UserDefinedType.coerce_compared_value "sqlalchemy.types.UserDefinedType.coerce_compared_value")现在默认返回`self`，而不是落在[`TypeEngine.coerce_compared_value()`](type_api.html#sqlalchemy.types.TypeEngine.coerce_compared_value "sqlalchemy.types.TypeEngine.coerce_compared_value")

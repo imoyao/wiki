@@ -143,8 +143,7 @@ ORM Event Interfaces](orm_deprecated.html)中描述。
         con\_record
         :   持续管理连接的`_ConnectionRecord`
         con\_proxy
-        :   `_ConnectionFairy`{.docutils
-            .literal}管理当前结帐范围的连接。
+        :   `_ConnectionFairy`管理当前结帐范围的连接。
 
         如果您引发`exc.DisconnectionError`，则将丢弃当前连接并检索新的连接。处理所有结帐侦听器将中止并使用新连接重新启动。
 

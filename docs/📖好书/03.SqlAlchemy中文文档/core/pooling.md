@@ -263,8 +263,7 @@ T6\>。**TCP连接表示为文件描述符，通常跨进程边界工作，这�
 
     p = Process(target=run_in_process)
 
-The next approach is to instrument the [`Pool`{.xref .py .py-class
-.docutils .literal}](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")
+The next approach is to instrument the [`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")
 itself with events so that connections are automatically invalidated in
 the subprocess. 这有点神奇，但可能更加万无一失：
 
@@ -325,37 +324,18 @@ API文档 - 可用的池实现[¶](#api-documentation-available-pool-implementat
         -   **use\_threadlocal**
             [¶](#sqlalchemy.pool.Pool.params.use_threadlocal) -
 
-            如果设置为True，在同一个应用程序线程中重复调用[`connect()`{.xref
-            .py .py-meth .docutils
-            .literal}](#sqlalchemy.pool.Pool.connect "sqlalchemy.pool.Pool.connect")将保证返回相同的连接对象（如果已从池中检索到并且尚未返回）。默认情况下以单个交易为代价提供轻微的性能优势。提供了[`Pool.unique_connection()`{.xref
-            .py .py-meth .docutils
-            .literal}](#sqlalchemy.pool.Pool.unique_connection "sqlalchemy.pool.Pool.unique_connection")方法来返回一致的唯一连接，以在设置标志时绕过此行为。
+            如果设置为True，在同一个应用程序线程中重复调用[`connect()`](#sqlalchemy.pool.Pool.connect "sqlalchemy.pool.Pool.connect")将保证返回相同的连接对象（如果已从池中检索到并且尚未返回）。默认情况下以单个交易为代价提供轻微的性能优势。提供了[`Pool.unique_connection()`](#sqlalchemy.pool.Pool.unique_connection "sqlalchemy.pool.Pool.unique_connection")方法来返回一致的唯一连接，以在设置标志时绕过此行为。
 
             警告
 
             [`Pool.use_threadlocal`{.xref .py .py-paramref .docutils
-            .literal}](#sqlalchemy.pool.Pool.params.use_threadlocal "sqlalchemy.pool.Pool")标志**不会影响[`Engine.connect()`{.xref
-            .py .py-meth .docutils
-            .literal}](connections.html#sqlalchemy.engine.Engine.connect "sqlalchemy.engine.Engine.connect")的行为。**[`Engine.connect()`{.xref
-            .py .py-meth .docutils
-            .literal}](connections.html#sqlalchemy.engine.Engine.connect "sqlalchemy.engine.Engine.connect")
-            makes use of the [`Pool.unique_connection()`{.xref .py
-            .py-meth .docutils
-            .literal}](#sqlalchemy.pool.Pool.unique_connection "sqlalchemy.pool.Pool.unique_connection")
+            .literal}](#sqlalchemy.pool.Pool.params.use_threadlocal "sqlalchemy.pool.Pool")标志**不会影响[`Engine.connect()`](connections.html#sqlalchemy.engine.Engine.connect "sqlalchemy.engine.Engine.connect")的行为。**[`Engine.connect()`](connections.html#sqlalchemy.engine.Engine.connect "sqlalchemy.engine.Engine.connect")
+            makes use of the [`Pool.unique_connection()`](#sqlalchemy.pool.Pool.unique_connection "sqlalchemy.pool.Pool.unique_connection")
             method which **does not use thread local context**.
-            要产生引用[`Pool.connect()`{.xref .py .py-meth .docutils
-            .literal}](#sqlalchemy.pool.Pool.connect "sqlalchemy.pool.Pool.connect")方法的[`Connection`{.xref
-            .py .py-class .docutils
-            .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")，请使用[`Engine.contextual_connect()`{.xref
-            .py .py-meth .docutils
-            .literal}](connections.html#sqlalchemy.engine.Engine.contextual_connect "sqlalchemy.engine.Engine.contextual_connect")。
+            要产生引用[`Pool.connect()`](#sqlalchemy.pool.Pool.connect "sqlalchemy.pool.Pool.connect")方法的[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")，请使用[`Engine.contextual_connect()`](connections.html#sqlalchemy.engine.Engine.contextual_connect "sqlalchemy.engine.Engine.contextual_connect")。
 
-            请注意，其他SQLAlchemy连接系统如[`Engine.execute()`{.xref
-            .py .py-meth .docutils
-            .literal}](connections.html#sqlalchemy.engine.Engine.execute "sqlalchemy.engine.Engine.execute")以及orm
-            [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")在内部使用[`Engine.contextual_connect()`{.xref
-            .py .py-meth .docutils
-            .literal}](connections.html#sqlalchemy.engine.Engine.contextual_connect "sqlalchemy.engine.Engine.contextual_connect")所以这些功能与[`Pool.use_threadlocal`](#sqlalchemy.pool.Pool.params.use_threadlocal "sqlalchemy.pool.Pool")设置兼容。
+            请注意，其他SQLAlchemy连接系统如[`Engine.execute()`](connections.html#sqlalchemy.engine.Engine.execute "sqlalchemy.engine.Engine.execute")以及orm
+            [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")在内部使用[`Engine.contextual_connect()`](connections.html#sqlalchemy.engine.Engine.contextual_connect "sqlalchemy.engine.Engine.contextual_connect")所以这些功能与[`Pool.use_threadlocal`](#sqlalchemy.pool.Pool.params.use_threadlocal "sqlalchemy.pool.Pool")设置兼容。
 
             也可以看看
 
@@ -363,9 +343,7 @@ API文档 - 可用的池实现[¶](#api-documentation-available-pool-implementat
             Strategy](connections.html#threadlocal-strategy) - contains
             detail on the “threadlocal” engine strategy, which provides
             a more comprehensive approach to “threadlocal” connectivity
-            for the specific use case of using [`Engine`{.xref .py
-            .py-class .docutils
-            .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
+            for the specific use case of using [`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
             and [`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")
             objects directly.
 
@@ -388,33 +366,23 @@ API文档 - 可用的池实现[¶](#api-documentation-available-pool-implementat
                 should **never be selected** for a database that
                 supports transactions, as it will lead to deadlocks and
                 stale state.
-            -   `"none"` - 与`None`{.docutils
-                .literal}相同
+            -   `"none"` - 与`None`相同
 
                 版本0.9.10中的新功能
 
             -   `False` -
                 与None相同，这是为了向后兼容。
 
-            Changed in version 0.7.6: [`Pool.reset_on_return`{.xref .py
-            .py-paramref .docutils
-            .literal}](#sqlalchemy.pool.Pool.params.reset_on_return "sqlalchemy.pool.Pool")
+            Changed in version 0.7.6: [`Pool.reset_on_return`](#sqlalchemy.pool.Pool.params.reset_on_return "sqlalchemy.pool.Pool")
             accepts `"rollback"` and
             `"commit"` arguments.
 
         -   **events**[¶](#sqlalchemy.pool.Pool.params.events) – a list
-            of 2-tuples, each of the form `(callable, target)`{.docutils
-            .literal} which will be passed to [`event.listen()`{.xref
-            .py .py-func .docutils
-            .literal}](event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")
+            of 2-tuples, each of the form `(callable, target)` which will be passed to [`event.listen()`](event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")
             upon construction.
-            在此处提供，以便可以在应用方言级侦听器之前通过[`create_engine()`{.xref
-            .py .py-func .docutils
-            .literal}](engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")分配事件侦听器。
+            在此处提供，以便可以在应用方言级侦听器之前通过[`create_engine()`](engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")分配事件侦听器。
         -   **听众** [¶](#sqlalchemy.pool.Pool.params.listeners) -
-            弃用。类似于[`PoolListener`](interfaces.html#sqlalchemy.interfaces.PoolListener "sqlalchemy.interfaces.PoolListener")的对象或可调用字典的列表，这些对象或字典在DB-API连接创建，检出并签入池时接收事件。这已被[`listen()`{.xref
-            .py .py-func .docutils
-            .literal}](event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")取代。
+            弃用。类似于[`PoolListener`](interfaces.html#sqlalchemy.interfaces.PoolListener "sqlalchemy.interfaces.PoolListener")的对象或可调用字典的列表，这些对象或字典在DB-API连接创建，检出并签入池时接收事件。这已被[`listen()`](event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")取代。
 
     `连接 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   从池中返回一个DBAPI连接。
@@ -431,15 +399,12 @@ API文档 - 可用的池实现[¶](#api-documentation-available-pool-implementat
     `重新创建 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   返回一个新的[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")，它与这个相同的类，并配置相同的创建参数。
 
-        此方法与[`dispose()`](#sqlalchemy.pool.Pool.dispose "sqlalchemy.pool.Pool.dispose")结合使用，以关闭整个[`Pool`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")并在其位置创建一个新的。
+        此方法与[`dispose()`](#sqlalchemy.pool.Pool.dispose "sqlalchemy.pool.Pool.dispose")结合使用，以关闭整个[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")并在其位置创建一个新的。
 
     ` unique_connection  T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   生成一个没有被任何线程本地上下文引用的DBAPI连接。
 
-        当[`Pool.use_threadlocal`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.pool.Pool.params.use_threadlocal "sqlalchemy.pool.Pool")标志未设置为True时，此方法等同于[`Pool.connect()`](#sqlalchemy.pool.Pool.connect "sqlalchemy.pool.Pool.connect")。当[`Pool.use_threadlocal`](#sqlalchemy.pool.Pool.params.use_threadlocal "sqlalchemy.pool.Pool")为True时，[`Pool.unique_connection()`](#sqlalchemy.pool.Pool.unique_connection "sqlalchemy.pool.Pool.unique_connection")方法提供绕过threadlocal上下文的方法。
+        当[`Pool.use_threadlocal`](#sqlalchemy.pool.Pool.params.use_threadlocal "sqlalchemy.pool.Pool")标志未设置为True时，此方法等同于[`Pool.connect()`](#sqlalchemy.pool.Pool.connect "sqlalchemy.pool.Pool.connect")。当[`Pool.use_threadlocal`](#sqlalchemy.pool.Pool.params.use_threadlocal "sqlalchemy.pool.Pool")为True时，[`Pool.unique_connection()`](#sqlalchemy.pool.Pool.unique_connection "sqlalchemy.pool.Pool.unique_connection")方法提供绕过threadlocal上下文的方法。
 
  *class*`sqlalchemy.pool.`{.descclassname}`QueuePool`{.descname}(*creator*, *pool\_size=5*, *max\_overflow=10*, *timeout=30*, *\*\*kw*)[¶](#sqlalchemy.pool.QueuePool "Permalink to this definition")
 :   基础：[`sqlalchemy.pool.Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")
@@ -457,13 +422,10 @@ API文档 - 可用的池实现[¶](#api-documentation-available-pool-implementat
 
         -   **creator**[¶](#sqlalchemy.pool.QueuePool.params.creator) –
             a callable function that returns a DB-API connection object,
-            same as that of [`Pool.creator`{.xref .py .py-paramref
-            .docutils
-            .literal}](#sqlalchemy.pool.Pool.params.creator "sqlalchemy.pool.Pool").
+            same as that of [`Pool.creator`](#sqlalchemy.pool.Pool.params.creator "sqlalchemy.pool.Pool").
         -   **pool\_size**[¶](#sqlalchemy.pool.QueuePool.params.pool_size)
             – The size of the pool to be maintained, defaults to 5.
-            这是将永久保存在池中的最大数量的连接。请注意，池开始时没有连接；一旦请求连接数量，连接数量将保持不变。`pool_size`{.docutils
-            .literal} can be set to 0 to indicate no size limit; to
+            这是将永久保存在池中的最大数量的连接。请注意，池开始时没有连接；一旦请求连接数量，连接数量将保持不变。`pool_size` can be set to 0 to indicate no size limit; to
             disable pooling, use a [`NullPool`](#sqlalchemy.pool.NullPool "sqlalchemy.pool.NullPool")
             instead.
         -   **max\_overflow**
@@ -480,9 +442,7 @@ API文档 - 可用的池实现[¶](#api-documentation-available-pool-implementat
             The number of seconds to wait before giving up on returning
             a connection. 默认为30。
         -   **\*\*kw**[¶](#sqlalchemy.pool.QueuePool.params.**kw) –
-            Other keyword arguments including [`Pool.recycle`{.xref .py
-            .py-paramref .docutils
-            .literal}](#sqlalchemy.pool.Pool.params.recycle "sqlalchemy.pool.Pool"),
+            Other keyword arguments including [`Pool.recycle`](#sqlalchemy.pool.Pool.params.recycle "sqlalchemy.pool.Pool"),
             [`Pool.echo`{.xref .py .py-paramref .docutils
             .literal}](#sqlalchemy.pool.Pool.params.echo "sqlalchemy.pool.Pool"),
             [`Pool.reset_on_return`{.xref .py .py-paramref .docutils
@@ -504,8 +464,7 @@ API文档 - 可用的池实现[¶](#api-documentation-available-pool-implementat
 
         生成一个没有被任何线程本地上下文引用的DBAPI连接。
 
-        当[`Pool.use_threadlocal`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.pool.Pool.params.use_threadlocal "sqlalchemy.pool.Pool")标志未设置为True时，此方法等同于[`Pool.connect()`](#sqlalchemy.pool.Pool.connect "sqlalchemy.pool.Pool.connect")。当[`Pool.use_threadlocal`](#sqlalchemy.pool.Pool.params.use_threadlocal "sqlalchemy.pool.Pool")为True时，[`Pool.unique_connection()`](#sqlalchemy.pool.Pool.unique_connection "sqlalchemy.pool.Pool.unique_connection")方法提供绕过threadlocal上下文的方法。
+        当[`Pool.use_threadlocal`](#sqlalchemy.pool.Pool.params.use_threadlocal "sqlalchemy.pool.Pool")标志未设置为True时，此方法等同于[`Pool.connect()`](#sqlalchemy.pool.Pool.connect "sqlalchemy.pool.Pool.connect")。当[`Pool.use_threadlocal`](#sqlalchemy.pool.Pool.params.use_threadlocal "sqlalchemy.pool.Pool")为True时，[`Pool.unique_connection()`](#sqlalchemy.pool.Pool.unique_connection "sqlalchemy.pool.Pool.unique_connection")方法提供绕过threadlocal上下文的方法。
 
 *class* `sqlalchemy.pool。`{.descclassname} `SingletonThreadPool`{.descname} （ *creator*，*pool\_size = 5*，*\*\* kw* ） [¶](#sqlalchemy.pool.SingletonThreadPool "Permalink to this definition")
 :   基础：[`sqlalchemy.pool.Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")
@@ -605,13 +564,7 @@ API文档 - 可用的池实现[¶](#api-documentation-available-pool-implementat
     `信息 T0> ¶ T1>`{.descname}
     :   信息字典与该`ConnectionFairy`引用的底层DBAPI连接关联，允许用户定义的数据与连接相关联。
 
-        这里的数据将与DBAPI连接一起进行，包括返回到连接池之后，并在[`_ConnectionFairy`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.pool._ConnectionFairy "sqlalchemy.pool._ConnectionFairy")的后续实例中再次使用。它与[`_ConnectionRecord.info`{.xref
-        .py .py-attr .docutils
-        .literal}](#sqlalchemy.pool._ConnectionRecord.info "sqlalchemy.pool._ConnectionRecord.info")和[`Connection.info`{.xref
-        .py .py-attr .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection.info "sqlalchemy.engine.Connection.info")访问器共享。
+        这里的数据将与DBAPI连接一起进行，包括返回到连接池之后，并在[`_ConnectionFairy`](#sqlalchemy.pool._ConnectionFairy "sqlalchemy.pool._ConnectionFairy")的后续实例中再次使用。它与[`_ConnectionRecord.info`](#sqlalchemy.pool._ConnectionRecord.info "sqlalchemy.pool._ConnectionRecord.info")和[`Connection.info`](connections.html#sqlalchemy.engine.Connection.info "sqlalchemy.engine.Connection.info")访问器共享。
 
      `invalidate`{.descname}(*e=None*, *soft=False*)[¶](#sqlalchemy.pool._ConnectionFairy.invalidate "Permalink to this definition")
     :   将此连接标记为无效。
@@ -654,17 +607,12 @@ API文档 - 可用的池实现[¶](#api-documentation-available-pool-implementat
     `连接`{.descname} *=无* [¶](#sqlalchemy.pool._ConnectionRecord.connection "Permalink to this definition")
     :   对正在跟踪的实际DBAPI连接的引用。
 
-        如果[`_ConnectionRecord`](#sqlalchemy.pool._ConnectionRecord "sqlalchemy.pool._ConnectionRecord")已被标记为无效，则可能`None`；如果拥有的池调用此[`_ConnectionRecord`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.pool._ConnectionRecord "sqlalchemy.pool._ConnectionRecord")重新连接，则新的DBAPI连接可能会替换它。
+        如果[`_ConnectionRecord`](#sqlalchemy.pool._ConnectionRecord "sqlalchemy.pool._ConnectionRecord")已被标记为无效，则可能`None`；如果拥有的池调用此[`_ConnectionRecord`](#sqlalchemy.pool._ConnectionRecord "sqlalchemy.pool._ConnectionRecord")重新连接，则新的DBAPI连接可能会替换它。
 
     `信息 T0> ¶ T1>`{.descname}
     :   与DBAPI连接关联的`.info`字典。
 
-        该字典在[`_ConnectionFairy.info`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.pool._ConnectionFairy.info "sqlalchemy.pool._ConnectionFairy.info")和[`Connection.info`{.xref
-        .py .py-attr .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection.info "sqlalchemy.engine.Connection.info")访问器中共享。
+        该字典在[`_ConnectionFairy.info`](#sqlalchemy.pool._ConnectionFairy.info "sqlalchemy.pool._ConnectionFairy.info")和[`Connection.info`](connections.html#sqlalchemy.engine.Connection.info "sqlalchemy.engine.Connection.info")访问器中共享。
 
      `invalidate`{.descname}(*e=None*, *soft=False*)[¶](#sqlalchemy.pool._ConnectionRecord.invalidate "Permalink to this definition")
     :   使此[`_ConnectionRecord`](#sqlalchemy.pool._ConnectionRecord "sqlalchemy.pool._ConnectionRecord")持有的DBAPI连接失效。

@@ -354,8 +354,7 @@ or [`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy
 并非所有的MySQL存储引擎都支持外键。When using the very common
 `MyISAM` MySQL storage engine, the information
 loaded by table reflection will not include foreign keys.
-对于这些表，您可以在反射时提供`ForeignKeyConstraint`{.xref .py .py-class
-.docutils .literal}：
+对于这些表，您可以在反射时提供`ForeignKeyConstraint`：
 
     Table('mytable', metadata,
           ForeignKeyConstraint(['other_id'], ['othertable.other_id']),
@@ -595,9 +594,7 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
             DBAPI驱动程序对小数秒的支持可能有限；目前的支持包括MySQL连接器/
             Python。
 
-        0.8.5版新增：增加了支持小数秒的特定于MySQL的[`mysql.DATETIME`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.dialects.mysql.DATETIME "sqlalchemy.dialects.mysql.DATETIME")。
+        0.8.5版新增：增加了支持小数秒的特定于MySQL的[`mysql.DATETIME`](#sqlalchemy.dialects.mysql.DATETIME "sqlalchemy.dialects.mysql.DATETIME")。
 
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `DECIMAL`{.descname} （ *precision = None*，*scale = None*，*asdecimal = True*，*\*\* kw* ） [](#sqlalchemy.dialects.mysql.DECIMAL "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.mysql.types._NumericType`，[`sqlalchemy.types.DECIMAL`](core_type_basics.html#sqlalchemy.types.DECIMAL "sqlalchemy.types.DECIMAL")
@@ -951,17 +948,13 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
         -   **values**[¶](#sqlalchemy.dialects.mysql.SET.params.values)
             – The range of valid values for this SET.
         -   **convert\_unicode**[¶](#sqlalchemy.dialects.mysql.SET.params.convert_unicode)
-            – Same flag as that of [`String.convert_unicode`{.xref .py
-            .py-paramref .docutils
-            .literal}](core_type_basics.html#sqlalchemy.types.String.params.convert_unicode "sqlalchemy.types.String").
+            – Same flag as that of [`String.convert_unicode`](core_type_basics.html#sqlalchemy.types.String.params.convert_unicode "sqlalchemy.types.String").
         -   **整理**
             [¶](#sqlalchemy.dialects.mysql.SET.params.collation) -
             与[`String.collation`{.xref .py .py-paramref .docutils
             .literal}](core_type_basics.html#sqlalchemy.types.String.params.collation "sqlalchemy.types.String")
         -   **charset**[¶](#sqlalchemy.dialects.mysql.SET.params.charset)
-            – same as that of [`VARCHAR.charset`{.xref .py .py-paramref
-            .docutils
-            .literal}](#sqlalchemy.dialects.mysql.VARCHAR.params.charset "sqlalchemy.dialects.mysql.VARCHAR").
+            – same as that of [`VARCHAR.charset`](#sqlalchemy.dialects.mysql.VARCHAR.params.charset "sqlalchemy.dialects.mysql.VARCHAR").
         -   **ascii** [¶](#sqlalchemy.dialects.mysql.SET.params.ascii) -
             与[`VARCHAR.ascii`{.xref .py .py-paramref .docutils
             .literal}](#sqlalchemy.dialects.mysql.VARCHAR.params.ascii "sqlalchemy.dialects.mysql.VARCHAR")相同。
@@ -970,9 +963,7 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
             与[`VARCHAR.unicode`{.xref .py .py-paramref .docutils
             .literal}](#sqlalchemy.dialects.mysql.VARCHAR.params.unicode "sqlalchemy.dialects.mysql.VARCHAR")相同。
         -   **binary**[¶](#sqlalchemy.dialects.mysql.SET.params.binary)
-            – same as that of [`VARCHAR.binary`{.xref .py .py-paramref
-            .docutils
-            .literal}](#sqlalchemy.dialects.mysql.VARCHAR.params.binary "sqlalchemy.dialects.mysql.VARCHAR").
+            – same as that of [`VARCHAR.binary`](#sqlalchemy.dialects.mysql.VARCHAR.params.binary "sqlalchemy.dialects.mysql.VARCHAR").
         -   **引用** [¶](#sqlalchemy.dialects.mysql.SET.params.quoting)
             -
 
@@ -995,9 +986,7 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
 
             警告
 
-            当使用[`mysql.SET.retrieve_as_bitwise`{.xref .py
-            .py-paramref .docutils
-            .literal}](#sqlalchemy.dialects.mysql.SET.params.retrieve_as_bitwise "sqlalchemy.dialects.mysql.SET")时，设置值列表必须以与MySQL数据库上存在的**完全相同的顺序**表示。
+            当使用[`mysql.SET.retrieve_as_bitwise`](#sqlalchemy.dialects.mysql.SET.params.retrieve_as_bitwise "sqlalchemy.dialects.mysql.SET")时，设置值列表必须以与MySQL数据库上存在的**完全相同的顺序**表示。
 
             版本1.0.0中的新功能
 
@@ -1102,9 +1091,7 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
             DBAPI驱动程序对小数秒的支持可能有限；目前的支持包括MySQL连接器/
             Python。
 
-        0.8.5版新增：增加了支持小数秒的特定于MySQL的[`mysql.TIMESTAMP`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.dialects.mysql.TIMESTAMP "sqlalchemy.dialects.mysql.TIMESTAMP")。
+        0.8.5版新增：增加了支持小数秒的特定于MySQL的[`mysql.TIMESTAMP`](#sqlalchemy.dialects.mysql.TIMESTAMP "sqlalchemy.dialects.mysql.TIMESTAMP")。
 
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `TINYBLOB`{.descname} （ *length = None* ） T5\> [¶ T6\>](#sqlalchemy.dialects.mysql.TINYBLOB "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`

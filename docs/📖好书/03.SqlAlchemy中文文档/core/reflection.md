@@ -151,11 +151,7 @@ clear or delete all the rows in a database:
         which is typically an instance of [`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
         or [`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection").
 
-        此方法不同于直接构造函数调用[`Inspector`](#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")，因为[`Dialect`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")有机会提供特定于方言的[`Inspector`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")实例，它可能会提供其他方法。
+        此方法不同于直接构造函数调用[`Inspector`](#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")，因为[`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")有机会提供特定于方言的[`Inspector`](#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")实例，它可能会提供其他方法。
 
         请参阅[`Inspector`](#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")中的示例。
 
@@ -177,9 +173,7 @@ clear or delete all the rows in a database:
         -   **架构**
             [](#sqlalchemy.engine.reflection.Inspector.get_check_constraints.params.schema)
             -
-            字符串架构名称；如果省略，则使用数据库连接的默认模式。对于特殊引用，请使用[`quoted_name`{.xref
-            .py .py-class .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            字符串架构名称；如果省略，则使用数据库连接的默认模式。对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
 
         版本1.1.0中的新功能
 
@@ -207,9 +201,7 @@ clear or delete all the rows in a database:
         -   **架构**
             [](#sqlalchemy.engine.reflection.Inspector.get_columns.params.schema)
             -
-            字符串架构名称；如果省略，则使用数据库连接的默认模式。对于特殊引用，请使用[`quoted_name`{.xref
-            .py .py-class .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            字符串架构名称；如果省略，则使用数据库连接的默认模式。对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
 
     `get_foreign_keys`{.descname} （ *table\_name*，*schema =无*，*\*\* kw* ） T5\> [¶ T6\>](#sqlalchemy.engine.reflection.Inspector.get_foreign_keys "Permalink to this definition")
     :   在table\_name中返回有关foreign\_keys的信息。
@@ -235,9 +227,7 @@ clear or delete all the rows in a database:
         -   **架构**
             [](#sqlalchemy.engine.reflection.Inspector.get_foreign_keys.params.schema)
             -
-            字符串架构名称；如果省略，则使用数据库连接的默认模式。对于特殊引用，请使用[`quoted_name`{.xref
-            .py .py-class .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            字符串架构名称；如果省略，则使用数据库连接的默认模式。对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
 
     `get_indexes`{.descname} （ *table\_name*，*schema =无*，*\*\* kw* ） T5\> [¶ T6\>](#sqlalchemy.engine.reflection.Inspector.get_indexes "Permalink to this definition")
     :   返回有关table\_name中索引的信息。
@@ -263,9 +253,7 @@ clear or delete all the rows in a database:
         -   **架构**
             [](#sqlalchemy.engine.reflection.Inspector.get_indexes.params.schema)
             -
-            字符串架构名称；如果省略，则使用数据库连接的默认模式。对于特殊引用，请使用[`quoted_name`{.xref
-            .py .py-class .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            字符串架构名称；如果省略，则使用数据库连接的默认模式。对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
 
     `get_pk_constraint`{.descname} （ *table\_name*，*schema =无*，*\*\* kw* ） T5\> [¶ T6\>](#sqlalchemy.engine.reflection.Inspector.get_pk_constraint "Permalink to this definition")
     :   返回有关table\_name上主键约束的信息。
@@ -285,9 +273,7 @@ clear or delete all the rows in a database:
         -   **架构**
             [](#sqlalchemy.engine.reflection.Inspector.get_pk_constraint.params.schema)
             -
-            字符串架构名称；如果省略，则使用数据库连接的默认模式。对于特殊引用，请使用[`quoted_name`{.xref
-            .py .py-class .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            字符串架构名称；如果省略，则使用数据库连接的默认模式。对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
 
     `get_primary_keys`{.descname} （ *table\_name*，*schema =无*，*\*\* kw* ） T5\> [¶ T6\>](#sqlalchemy.engine.reflection.Inspector.get_primary_keys "Permalink to this definition")
     :   返回有关table\_name中主键的信息。
@@ -326,37 +312,24 @@ clear or delete all the rows in a database:
 
         -   **架构**
             [¶](#sqlalchemy.engine.reflection.Inspector.get_table_names.params.schema)
-            - 架构名称。如果`schema`{.docutils
-            .literal}留在`None`{.docutils
-            .literal}中，则使用数据库的默认模式，否则搜索指定的模式。如果数据库不支持命名模式，那么如果`schema`{.docutils
-            .literal}未作为`None`{.docutils
-            .literal}传递，则行为未定义。对于特殊引用，请使用[`quoted_name`{.xref
-            .py .py-class .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            - 架构名称。如果`schema`留在`None`中，则使用数据库的默认模式，否则搜索指定的模式。如果数据库不支持命名模式，那么如果`schema`未作为`None`传递，则行为未定义。对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
         -   **order\_by**
             [¶](#sqlalchemy.engine.reflection.Inspector.get_table_names.params.order_by)
             -
 
-            可选的，可能是字符串“foreign\_key”对外键依赖项的结果进行排序。不会自动解决循环，并且如果循环存在，将会引发[`CircularDependencyError`{.xref
-            .py .py-class .docutils
-            .literal}](exceptions.html#sqlalchemy.exc.CircularDependencyError "sqlalchemy.exc.CircularDependencyError")。
+            可选的，可能是字符串“foreign\_key”对外键依赖项的结果进行排序。不会自动解决循环，并且如果循环存在，将会引发[`CircularDependencyError`](exceptions.html#sqlalchemy.exc.CircularDependencyError "sqlalchemy.exc.CircularDependencyError")。
 
             从版本1.0.0开始弃用： -
-            请参阅[`Inspector.get_sorted_table_and_fkc_names()`{.xref
-            .py .py-meth .docutils
-            .literal}](#sqlalchemy.engine.reflection.Inspector.get_sorted_table_and_fkc_names "sqlalchemy.engine.reflection.Inspector.get_sorted_table_and_fkc_names")，以便自动解析表之间的外键循环。
+            请参阅[`Inspector.get_sorted_table_and_fkc_names()`](#sqlalchemy.engine.reflection.Inspector.get_sorted_table_and_fkc_names "sqlalchemy.engine.reflection.Inspector.get_sorted_table_and_fkc_names")，以便自动解析表之间的外键循环。
 
-            在版本0.8中更改：“foreign\_key”排序按依赖顺序对依赖项进行排序；即按照创建顺序，而不是按降序排列。这是为了与类似的功能保持一致，例如[`MetaData.sorted_tables`{.xref
-            .py .py-attr .docutils
-            .literal}](metadata.html#sqlalchemy.schema.MetaData.sorted_tables "sqlalchemy.schema.MetaData.sorted_tables")和`util.sort_tables()`{.xref
+            在版本0.8中更改：“foreign\_key”排序按依赖顺序对依赖项进行排序；即按照创建顺序，而不是按降序排列。这是为了与类似的功能保持一致，例如[`MetaData.sorted_tables`](metadata.html#sqlalchemy.schema.MetaData.sorted_tables "sqlalchemy.schema.MetaData.sorted_tables")和`util.sort_tables()`{.xref
             .py .py-func .docutils .literal}。
 
         也可以看看
 
         [`Inspector.get_sorted_table_and_fkc_names()`](#sqlalchemy.engine.reflection.Inspector.get_sorted_table_and_fkc_names "sqlalchemy.engine.reflection.Inspector.get_sorted_table_and_fkc_names")
 
-        [`MetaData.sorted_tables`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.MetaData.sorted_tables "sqlalchemy.schema.MetaData.sorted_tables")
+        [`MetaData.sorted_tables`](metadata.html#sqlalchemy.schema.MetaData.sorted_tables "sqlalchemy.schema.MetaData.sorted_tables")
 
     `get_table_options`{.descname} （ *table\_name*，*schema =无*，*\*\* kw* ） T5\> [¶ T6\>](#sqlalchemy.engine.reflection.Inspector.get_table_options "Permalink to this definition")
     :   返回创建给定名称的表时指定的选项字典。
@@ -371,9 +344,7 @@ clear or delete all the rows in a database:
         -   **架构**
             [](#sqlalchemy.engine.reflection.Inspector.get_table_options.params.schema)
             -
-            字符串架构名称；如果省略，则使用数据库连接的默认模式。对于特殊引用，请使用[`quoted_name`{.xref
-            .py .py-class .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            字符串架构名称；如果省略，则使用数据库连接的默认模式。对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
 
     ` get_temp_table_names  T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   返回当前绑定的临时表名称列表。
@@ -407,9 +378,7 @@ clear or delete all the rows in a database:
         -   **架构**
             [](#sqlalchemy.engine.reflection.Inspector.get_unique_constraints.params.schema)
             -
-            字符串架构名称；如果省略，则使用数据库连接的默认模式。对于特殊引用，请使用[`quoted_name`{.xref
-            .py .py-class .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
+            字符串架构名称；如果省略，则使用数据库连接的默认模式。对于特殊引用，请使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")。
 
         0.8.4版本中的新功能
 
@@ -453,8 +422,7 @@ clear or delete all the rows in a database:
         -   **include\_columns**
             [¶](#sqlalchemy.engine.reflection.Inspector.reflecttable.params.include_columns)
             -
-            要包含在反射过程中的字符串列名称的列表。如果`None`{.docutils
-            .literal}，则会反映所有列。
+            要包含在反射过程中的字符串列名称的列表。如果`None`，则会反映所有列。
 
 反射的限制[¶](#limitations-of-reflection "Permalink to this headline")
 ----------------------------------------------------------------------

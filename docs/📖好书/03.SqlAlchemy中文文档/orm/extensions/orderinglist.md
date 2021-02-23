@@ -164,19 +164,15 @@ API参考[¶](#api-reference "Permalink to this headline")
 
             可选的。将Python列表中的位置映射到要存储在`ordering_attr`中的值的函数。返回的值通常是（但不一定是！）整数。
 
-            使用两个位置参数调用`ordering_func`{.docutils
-            .literal}：列表中元素的索引和列表本身。
+            使用两个位置参数调用`ordering_func`：列表中元素的索引和列表本身。
 
-            如果省略，则Python列表索引用于属性值。该模块提供了两种基本的预置编号功能：`count_from_0`{.docutils
-            .literal}和`count_from_1`{.docutils
-            .literal}。更多奇异的例子，如步进编号，字母和斐波那契编号，请参阅单元测试。
+            如果省略，则Python列表索引用于属性值。该模块提供了两种基本的预置编号功能：`count_from_0`和`count_from_1`。更多奇异的例子，如步进编号，字母和斐波那契编号，请参阅单元测试。
 
         -   **reorder\_on\_append**
             [¶](#sqlalchemy.ext.orderinglist.OrderingList.params.reorder_on_append)
             -
 
-            默认为False。当附加一个具有现有（非无）排序值的对象时，除非`reorder_on_append`{.docutils
-            .literal}为真，否则该值将保持不变。这是一种优化，可以避免各种危险的意外数据库写入。
+            默认为False。当附加一个具有现有（非无）排序值的对象时，除非`reorder_on_append`为真，否则该值将保持不变。这是一种优化，可以避免各种危险的意外数据库写入。
 
             当你的对象加载时，SQLAlchemy会通过append()将实例添加到列表中。如果由于某种原因，数据库中的结果集跳过了排序步骤（比如说，行'1'丢失，但您得到'2'，'3'和'4'），reorder\_on\_append
             =

@@ -141,20 +141,11 @@ Standard Types\`\_](#id1)和本章的其他部分。
             默认为True。在创建非本机枚举类型时，还要根据有效值在数据库上构建一个CHECK约束。
 
             版本1.1中的新增功能： -
-            添加了[`Enum.create_constraint`{.xref .py .py-paramref
-            .docutils
-            .literal}](#sqlalchemy.types.Enum.params.create_constraint "sqlalchemy.types.Enum")，它提供了禁止为非本机枚举类型生成CHECK约束的选项。
+            添加了[`Enum.create_constraint`](#sqlalchemy.types.Enum.params.create_constraint "sqlalchemy.types.Enum")，它提供了禁止为非本机枚举类型生成CHECK约束的选项。
 
         -   **metadata**[¶](#sqlalchemy.types.Enum.params.metadata) –
-            Associate this type directly with a `MetaData`{.docutils
-            .literal} object.
-            对于作为独立模式构造（Postgresql）存在于目标数据库上的类型，将在`create_all()`{.docutils
-            .literal}和`drop_all()`{.docutils
-            .literal}操作中创建并删除此类型。如果该类型与任何`MetaData`{.docutils
-            .literal}对象关联，则它将自己与其使用的每个`Table`{.docutils
-            .literal}相关联，并且将在创建任何单个表时创建，在检查完成后进行检查。但是，只有当为该`Table`{.docutils
-            .literal}对象的元数据调用`drop_all()`{.docutils
-            .literal}时，才会删除该类型。
+            Associate this type directly with a `MetaData` object.
+            对于作为独立模式构造（Postgresql）存在于目标数据库上的类型，将在`create_all()`和`drop_all()`操作中创建并删除此类型。如果该类型与任何`MetaData`对象关联，则它将自己与其使用的每个`Table`相关联，并且将在创建任何单个表时创建，在检查完成后进行检查。但是，只有当为该`Table`对象的元数据调用`drop_all()`时，才会删除该类型。
         -   **名称** [¶](#sqlalchemy.types.Enum.params.name) -
             此类型的名称。这是Postgresql和任何未来支持的数据库所必需的，这些数据库需要显式命名的类型或显式命名的约束才能生成类型和/或使用它的表。如果使用PEP-435枚举类，则默认使用其名称（转换为小写）。
         -   **native\_enum**[¶](#sqlalchemy.types.Enum.params.native_enum)
@@ -166,10 +157,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
 
             注意
 
-            [`Enum`](#sqlalchemy.types.Enum "sqlalchemy.types.Enum")类型的`schema`{.docutils
-            .literal}默认不使用在[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")上建立的`schema`{.docutils
-            .literal}。如果需要这种行为，请将`inherit_schema`{.docutils
-            .literal}标志设置为`True`。
+            [`Enum`](#sqlalchemy.types.Enum "sqlalchemy.types.Enum")类型的`schema`默认不使用在[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")上建立的`schema`。如果需要这种行为，请将`inherit_schema`标志设置为`True`。
 
         -   **quote**[¶](#sqlalchemy.types.Enum.params.quote) – Set
             explicit quoting preferences for the type’s name.
@@ -180,8 +168,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
             [`Enum`](#sqlalchemy.types.Enum "sqlalchemy.types.Enum"),
             replacing whatever value was passed for the
             `schema` attribute.
-            这在使用[`Table.tometadata()`{.xref .py .py-meth .docutils
-            .literal}](metadata.html#sqlalchemy.schema.Table.tometadata "sqlalchemy.schema.Table.tometadata")操作时也会生效。
+            这在使用[`Table.tometadata()`](metadata.html#sqlalchemy.schema.Table.tometadata "sqlalchemy.schema.Table.tometadata")操作时也会生效。
         -   **validate\_strings**
             [¶](#sqlalchemy.types.Enum.params.validate_strings) -
 
@@ -228,8 +215,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
         -   **asdecimal**[¶](#sqlalchemy.types.Float.params.asdecimal) –
             the same flag as that of [`Numeric`](#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric"),
             but defaults to `False`.
-            请注意，将此标志设置为`True`{.docutils
-            .literal}会导致浮点转换。
+            请注意，将此标志设置为`True`会导致浮点转换。
         -   **decimal\_return\_scale**
             [¶](#sqlalchemy.types.Float.params.decimal_return_scale) -
 
@@ -238,9 +224,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
             版本0.9.0中的新功能
 
         -   **\*\* kwargs** [¶](#sqlalchemy.types.Float.params.**kwargs)
-            - 不建议使用。其他参数在这里被默认的[`Float`{.xref .py
-            .py-class .docutils
-            .literal}](#sqlalchemy.types.Float "sqlalchemy.types.Float")类型忽略。对于支持附加参数的特定于数据库的浮点数，请参阅该方言的文档以获取详细信息，例如[`sqlalchemy.dialects.mysql.FLOAT`](dialects_mysql.html#sqlalchemy.dialects.mysql.FLOAT "sqlalchemy.dialects.mysql.FLOAT")。
+            - 不建议使用。其他参数在这里被默认的[`Float`](#sqlalchemy.types.Float "sqlalchemy.types.Float")类型忽略。对于支持附加参数的特定于数据库的浮点数，请参阅该方言的文档以获取详细信息，例如[`sqlalchemy.dialects.mysql.FLOAT`](dialects_mysql.html#sqlalchemy.dialects.mysql.FLOAT "sqlalchemy.dialects.mysql.FLOAT")。
 
 *class* `sqlalchemy.types。`{.descclassname} `整数`{.descname} [¶](#sqlalchemy.types.Integer "Permalink to this definition")
 :   基础：`sqlalchemy.types._DateAffinity`，[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
@@ -344,8 +328,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
             – the numeric precision for use in DDL
             `CREATE TABLE`.
         -   **scale**[¶](#sqlalchemy.types.Numeric.params.scale) – the
-            numeric scale for use in DDL `CREATE TABLE`{.docutils
-            .literal}.
+            numeric scale for use in DDL `CREATE TABLE`.
         -   **asdecimal**
             [¶](#sqlalchemy.types.Numeric.params.asdecimal) -
             默认为True。返回值是否应该作为Python
@@ -385,12 +368,10 @@ Standard Types\`\_](#id1)和本章的其他部分。
             默认为`pickle.HIGHEST_PROTOCOL`。
         -   **pickler** [¶](#sqlalchemy.types.PickleType.params.pickler)
             -
-            如果cPickle不可用，则默认为cPickle.pickle或pickle.pickle。可以是任何具有pickle兼容性的对象``` dumps` 和 ``loads ```{.docutils
-            .literal}方法。
+            如果cPickle不可用，则默认为cPickle.pickle或pickle.pickle。可以是任何具有pickle兼容性的对象``` dumps` 和 ``loads ```方法。
         -   **comparator**[¶](#sqlalchemy.types.PickleType.params.comparator)
             – a 2-arg callable predicate used to compare values of this
-            type. 如果保留为`None`{.docutils
-            .literal}，则使用Python“equals”运算符来比较值。
+            type. 如果保留为`None`，则使用Python“equals”运算符来比较值。
 
     ` IMPL  T0> ¶ T1>`{.descname}
     :   [`LargeBinary`](#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")的别名
@@ -456,11 +437,8 @@ Standard Types\`\_](#id1)和本章的其他部分。
 
         -   **length**[¶](#sqlalchemy.types.String.params.length) –
             optional, a length for the column for use in DDL and CAST
-            expressions. 如果没有发布`CREATE TABLE`{.docutils
-            .literal}，可以安全地省略。某些数据库可能需要用于DDL的`length`{.docutils
-            .literal}，并且在`CREATE TABLE`
-            DDL时会引发异常如果包含没有长度的`VARCHAR`{.docutils
-            .literal}，则发布。值是否被解释为字节或字符是数据库特定的。
+            expressions. 如果没有发布`CREATE TABLE`，可以安全地省略。某些数据库可能需要用于DDL的`length`，并且在`CREATE TABLE`
+            DDL时会引发异常如果包含没有长度的`VARCHAR`，则发布。值是否被解释为字节或字符是数据库特定的。
         -   **整理** [¶](#sqlalchemy.types.String.params.collation) -
 
             可选，用于DDL和CAST表达式的列级别排序规则。使用SQLite，MySQL和Postgresql支持的COLLATE关键字进行呈现。例如。：
@@ -474,16 +452,13 @@ Standard Types\`\_](#id1)和本章的其他部分。
         -   **convert\_unicode**
             [¶](#sqlalchemy.types.String.params.convert_unicode) -
 
-            当设置为`True`时，[`String`{.xref .py
-            .py-class .docutils
-            .literal}](#sqlalchemy.types.String "sqlalchemy.types.String")类型将假定输入将作为Python
+            当设置为`True`时，[`String`](#sqlalchemy.types.String "sqlalchemy.types.String")类型将假定输入将作为Python
             `unicode`对象传递，结果以Python
             `unicode`对象。If the DBAPI in use does
             not support Python unicode (which is fewer and fewer these
             days), SQLAlchemy will encode/decode the value, using the
             value of the `encoding` parameter passed
-            to [`create_engine()`{.xref .py .py-func .docutils
-            .literal}](engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")
+            to [`create_engine()`](engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")
             as the encoding.
 
             当使用本地支持Python
@@ -496,17 +471,11 @@ Standard Types\`\_](#id1)和本章的其他部分。
             indicate an underlying column type that directly supports
             unicode, such as `NVARCHAR`.
 
-            对于非常罕见的情况，Python `unicode`{.docutils
-            .literal}将由本地支持Python `unicode`{.docutils
-            .literal}的后端由SQLAlchemy编码/解码，值`force`{.docutils
-            .literal}可以在这里传递，这将导致无条件地使用SQLAlchemy的编码/解码服务。
+            对于非常罕见的情况，Python `unicode`将由本地支持Python `unicode`的后端由SQLAlchemy编码/解码，值`force`可以在这里传递，这将导致无条件地使用SQLAlchemy的编码/解码服务。
 
         -   **unicode\_error**
             [¶](#sqlalchemy.types.String.params.unicode_error) -
-            可选，一种用于处理Unicode转换错误的方法。行为与标准库的`string.decode()`{.docutils
-            .literal}函数的`errors`{.docutils
-            .literal}关键字参数相同。该标志要求将`convert_unicode`{.docutils
-            .literal}设置为`force` -
+            可选，一种用于处理Unicode转换错误的方法。行为与标准库的`string.decode()`函数的`errors`关键字参数相同。该标志要求将`convert_unicode`设置为`force` -
             否则，SQLAlchemy不保证处理unicode转换的任务。请注意，此标志为已经返回unicode对象的后端（大多数DBAPI所执行的操作）的后端操作增加了显着的性能开销。此标志只能用作从不同或损坏编码的列中读取字符串的最后手段。
 
 *class* `sqlalchemy.types。`{.descclassname} `Text`{.descname} （ *length = None*，*= None*，*convert\_unicode = False*，*unicode\_error = None*，*\_warn\_on\_bytestring = False ） [¶ T10\>](#sqlalchemy.types.Text "Permalink to this definition")*
@@ -690,11 +659,9 @@ backends that explicitly support them by name.
 
             也可以看看
 
-            [`sql.expression.all_()`{.xref .py .py-func .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.all_ "sqlalchemy.sql.expression.all_")
+            [`sql.expression.all_()`](sqlelement.html#sqlalchemy.sql.expression.all_ "sqlalchemy.sql.expression.all_")
 
-            [`types.ARRAY.Comparator.any()`{.xref .py .py-meth .docutils
-            .literal}](#sqlalchemy.types.ARRAY.Comparator.any "sqlalchemy.types.ARRAY.Comparator.any")
+            [`types.ARRAY.Comparator.any()`](#sqlalchemy.types.ARRAY.Comparator.any "sqlalchemy.types.ARRAY.Comparator.any")
 
         `任何`{.descname} （ *其他*，*运营商=无* ） [t5 \>](#sqlalchemy.types.ARRAY.Comparator.any "Permalink to this definition")
         :   返回`其他 运算符 ANY （数组）`子句。
@@ -724,11 +691,9 @@ backends that explicitly support them by name.
 
             也可以看看
 
-            [`sql.expression.any_()`{.xref .py .py-func .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.any_ "sqlalchemy.sql.expression.any_")
+            [`sql.expression.any_()`](sqlelement.html#sqlalchemy.sql.expression.any_ "sqlalchemy.sql.expression.any_")
 
-            [`types.ARRAY.Comparator.all()`{.xref .py .py-meth .docutils
-            .literal}](#sqlalchemy.types.ARRAY.Comparator.all "sqlalchemy.types.ARRAY.Comparator.all")
+            [`types.ARRAY.Comparator.all()`](#sqlalchemy.types.ARRAY.Comparator.all "sqlalchemy.types.ARRAY.Comparator.all")
 
     `ARRAY  tt> __ init __`{.descclassname} （ *item\_type*，*as\_tuple = False*，*dimensions =无*，*zero\_indexes = False ） [¶](#sqlalchemy.types.ARRAY.__init__ "Permalink to this definition")*
     :   构建[`types.ARRAY`](#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")。
@@ -743,10 +708,7 @@ backends that explicitly support them by name.
 
         -   **item\_type** [¶](#sqlalchemy.types.ARRAY.params.item_type)
             -
-            此数组项目的数据类型。请注意，这里的维数是不相关的，所以像`INTEGER[][]`{.docutils
-            .literal}这样的多维数组被构造为`ARRAY(Integer)`{.docutils
-            .literal}，而不是`ARRAY(ARRAY(Integer))`{.docutils
-            .literal}等等。
+            此数组项目的数据类型。请注意，这里的维数是不相关的，所以像`INTEGER[][]`这样的多维数组被构造为`ARRAY(Integer)`，而不是`ARRAY(ARRAY(Integer))`等等。
         -   **as\_tuple = False**
             [¶](#sqlalchemy.types.ARRAY.params.as_tuple) -
             指定返回结果是否应该从列表转换为元组。由于Python列表很好地对应于SQL数组，因此通常不需要此参数。
@@ -917,9 +879,7 @@ backends that explicitly support them by name.
         .py-paramref .docutils
         .literal}](#sqlalchemy.types.JSON.params.none_as_null "sqlalchemy.types.JSON")标志的设置，Python
         `None`的值将被识别为SQL NULL或JSON
-        `"null"`无论此设置如何，都可以使用[`JSON.NULL`{.xref .py
-        .py-attr .docutils
-        .literal}](#sqlalchemy.types.JSON.NULL "sqlalchemy.types.JSON.NULL")常量来解析为JSON
+        `"null"`无论此设置如何，都可以使用[`JSON.NULL`](#sqlalchemy.types.JSON.NULL "sqlalchemy.types.JSON.NULL")常量来解析为JSON
         `"null"`。这与`sql.null()`{.xref .py
         .py-func .docutils .literal}结构形成对比，该结构始终解析为SQL
         NULL。例如。：
@@ -942,17 +902,14 @@ backends that explicitly support them by name.
         [¶](#sqlalchemy.types.JSON.params.none_as_null) -
 
         如果为True，则将值`None`保留为SQL
-        NULL值，而不是`null`的JSON编码。请注意，当此标志为False时，[`null()`{.xref
-        .py .py-func .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")结构仍可用于保留NULL值：
+        NULL值，而不是`null`的JSON编码。请注意，当此标志为False时，[`null()`](sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")结构仍可用于保留NULL值：
 
             from sqlalchemy import null
             conn.execute(table.insert(), data=null())
 
         也可以看看
 
-        [`types.JSON.NULL`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.types.JSON.NULL "sqlalchemy.types.JSON.NULL")
+        [`types.JSON.NULL`](#sqlalchemy.types.JSON.NULL "sqlalchemy.types.JSON.NULL")
 
     ` JSON。 T0>  comparator_factory  T1> ¶ T2>`{.descclassname}
     :   [`Comparator`](#sqlalchemy.types.JSON.Comparator "sqlalchemy.types.JSON.Comparator")的别名

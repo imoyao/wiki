@@ -341,8 +341,7 @@ parameters. 从SQLAlchemy
 0.9.2开始，这个基于事件的方法被包含在内，并且可以使用参数[`MetaData.naming_convention`](metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")进行配置。
 
 [`MetaData.naming_convention`](metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")
-refers to a dictionary which accepts the [`Index`{.xref .py .py-class
-.docutils .literal}](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")
+refers to a dictionary which accepts the [`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")
 class or individual [`Constraint`](#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")
 classes as keys, and Python string templates as values.
 它也接受一系列的字符码作为替代键，即`"fk"`，`"pk"`，`"ix"`，`"ck"`，`"uq"`分别为外键，主键，索引，检查和唯一约束。无论何时约束或索引与此[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象关联，此字典中的字符串模板都没有给定的现有名称（包括一个现有名称可以进一步修饰的例外情况）。
@@ -605,8 +604,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         -   **\*\*dialect\_kw**[¶](#sqlalchemy.schema.Constraint.params.**dialect_kw)
             – Additional keyword arguments are dialect specific, and
-            passed in the form `<dialectname>_<argname>`{.docutils
-            .literal}.
+            passed in the form `<dialectname>_<argname>`.
             有关记录参数的详细信息，请参阅[Dialects](dialects_index.html)中有关单个方言的文档。
 
 *class* `sqlalchemy.schema。`{.descclassname} `ColumnCollectionMixin`{.descname} （ *\*列*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.schema.ColumnCollectionMixin "Permalink to this definition")*
@@ -637,9 +635,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             。
         -   **\*\*kw**[¶](#sqlalchemy.schema.ColumnCollectionConstraint.params.**kw)
             – other keyword arguments including dialect-specific
-            arguments are propagated to the [`Constraint`{.xref .py
-            .py-class .docutils
-            .literal}](#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")
+            arguments are propagated to the [`Constraint`](#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")
             superclass.
 
     `argument_for`{.descname} （ *dialect\_name*，*argument\_name*，*默认* ） [¶ T6\>](#sqlalchemy.schema.ColumnCollectionConstraint.argument_for "Permalink to this definition")
@@ -656,9 +652,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         The [`DialectKWArgs.argument_for()`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.argument_for "sqlalchemy.sql.base.DialectKWArgs.argument_for")
         method is a per-argument way adding extra arguments to the
-        [`DefaultDialect.construct_arguments`{.xref .py .py-attr
-        .docutils
-        .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
+        [`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
         dictionary.
         这本词典提供了代表方言的各种模式层次结构所接受的参数名称列表。
 
@@ -670,11 +664,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             – name of a dialect. The dialect must be locatable, else a
             [`NoSuchModuleError`](exceptions.html#sqlalchemy.exc.NoSuchModuleError "sqlalchemy.exc.NoSuchModuleError")
             is raised.
-            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`{.xref
-            .py .py-attr .docutils
-            .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`{.xref
-            .py .py-class .docutils
-            .literal}](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
+            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
         -   **argument\_name**
             [¶](#sqlalchemy.schema.ColumnCollectionConstraint.argument_for.params.argument_name)
             - 参数的名称。
@@ -687,38 +677,29 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
     ` contains_column  T0> （ T1>  COL  T2> ） T3> ¶ T4>`{.descname}
     :   如果此约束包含给定的列，则返回True。
 
-        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
-        .py .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
+        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
 
     ` dialect_kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+    :   *继承自* [`dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
-        .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
         该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
-        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`{.xref .py
-        .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
+        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
 
         也可以看看
 
-        [`DialectKWArgs.dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+        [`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         - nested dictionary form
 
     ` dialect_options  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+    :   *继承自* [`dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
@@ -731,8 +712,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         也可以看看
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         - flat dictionary form
 
     ` get_children  T0> （ T1>  ** kwargs  T2> ） T3> ¶ T4>`{.descname}
@@ -742,31 +722,21 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         用于允许SchemaVisitor访问
 
     `信息 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`info`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
+    :   *inherited from the* [`info`](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
+        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
 
-        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
+        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
 
     ` kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
+    :   *继承自* [`kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
 
     `引用 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`quote`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
+    :   *inherited from the* [`quote`](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
         对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
@@ -788,9 +758,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         -   **sqltext**
             [¶](#sqlalchemy.schema.CheckConstraint.params.sqltext) -
 
-            包含约束定义的字符串，将逐字使用，或SQL表达式结构。如果以字符串形式给出，则该对象将转换为[`Text`{.xref
-            .py .py-class .docutils
-            .literal}](type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")对象。如果文本字符串包含冒号字符，请使用反斜杠进行转义：
+            包含约束定义的字符串，将逐字使用，或SQL表达式结构。如果以字符串形式给出，则该对象将转换为[`Text`](type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")对象。如果文本字符串包含冒号字符，请使用反斜杠进行转义：
 
                 CheckConstraint(r"foo ~ E'a(?\:b|c)d")
 
@@ -806,9 +774,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         -   **info** [¶](#sqlalchemy.schema.CheckConstraint.params.info)
             -
 
-            可选数据字典，将填充到此对象的[`SchemaItem.info`{.xref .py
-            .py-attr .docutils
-            .literal}](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")属性中。
+            可选数据字典，将填充到此对象的[`SchemaItem.info`](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")属性中。
 
             版本1.0.0中的新功能
 
@@ -826,9 +792,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         The [`DialectKWArgs.argument_for()`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.argument_for "sqlalchemy.sql.base.DialectKWArgs.argument_for")
         method is a per-argument way adding extra arguments to the
-        [`DefaultDialect.construct_arguments`{.xref .py .py-attr
-        .docutils
-        .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
+        [`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
         dictionary.
         这本词典提供了代表方言的各种模式层次结构所接受的参数名称列表。
 
@@ -840,11 +804,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             – name of a dialect. The dialect must be locatable, else a
             [`NoSuchModuleError`](exceptions.html#sqlalchemy.exc.NoSuchModuleError "sqlalchemy.exc.NoSuchModuleError")
             is raised.
-            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`{.xref
-            .py .py-attr .docutils
-            .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`{.xref
-            .py .py-class .docutils
-            .literal}](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
+            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
         -   **argument\_name**
             [¶](#sqlalchemy.schema.CheckConstraint.argument_for.params.argument_name)
             - 参数的名称。
@@ -860,38 +820,29 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         如果此约束包含给定的列，则返回True。
 
-        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
-        .py .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
+        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
 
     ` dialect_kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+    :   *继承自* [`dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
-        .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
         该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
-        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`{.xref .py
-        .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
+        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
 
         也可以看看
 
-        [`DialectKWArgs.dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+        [`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         - nested dictionary form
 
     ` dialect_options  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+    :   *继承自* [`dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
@@ -904,8 +855,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         也可以看看
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         - flat dictionary form
 
     ` get_children  T0> （ T1>  ** kwargs  T2> ） T3> ¶ T4>`{.descname}
@@ -915,31 +865,21 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         用于允许SchemaVisitor访问
 
     `信息 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`info`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
+    :   *inherited from the* [`info`](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
+        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
 
-        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
+        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
 
     ` kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
+    :   *继承自* [`kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
 
     `引用 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`quote`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
+    :   *inherited from the* [`quote`](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
         对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
@@ -986,18 +926,13 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         -   **列** [¶](#sqlalchemy.schema.ForeignKey.params.column) -
 
-            关键关系的单个目标列。一个[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象或列名称作为字符串：`tablename.columnkey`{.docutils
-            .literal}或`schema.tablename.columnkey`{.docutils
-            .literal}。`columnkey` is the
+            关键关系的单个目标列。一个[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象或列名称作为字符串：`tablename.columnkey`或`schema.tablename.columnkey`。`columnkey` is the
             `key` which has been assigned to the
             column (defaults to the column name itself), unless
-            `link_to_name` is `True`{.docutils
-            .literal} in which case the rendered name of the column is
+            `link_to_name` is `True` in which case the rendered name of the column is
             used.
 
-            0.7.4版中的新功能：请注意，如果未包含模式名称，并且基础[`MetaData`{.xref
-            .py .py-class .docutils
-            .literal}](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")具有“模式”，则将使用该值。
+            0.7.4版中的新功能：请注意，如果未包含模式名称，并且基础[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")具有“模式”，则将使用该值。
 
         -   **名称** [¶](#sqlalchemy.schema.ForeignKey.params.name) -
             可选字符串。没有提供约束时，密钥的数据库内名称。
@@ -1017,8 +952,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             - 可选字符串。如果设置，则在为此约束发出DDL时发出INITIALLY
             。
         -   **link\_to\_name**[¶](#sqlalchemy.schema.ForeignKey.params.link_to_name)
-            – if True, the string name given in `column`{.docutils
-            .literal} is the rendered name of the referenced column, not
+            – if True, the string name given in `column` is the rendered name of the referenced column, not
             its locally assigned `key`.
         -   **use\_alter**
             [¶](#sqlalchemy.schema.ForeignKey.params.use_alter) -
@@ -1029,9 +963,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
             也可以看看
 
-            [`ForeignKeyConstraint.use_alter`{.xref .py .py-paramref
-            .docutils
-            .literal}](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")
+            [`ForeignKeyConstraint.use_alter`](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")
 
             [Creating/Dropping Foreign Key Constraints via
             ALTER](#use-alter)创建/删除外键约束
@@ -1041,19 +973,14 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             T0\>典型值包括SIMPLE，PARTIAL和FULL。
         -   **info** [¶](#sqlalchemy.schema.ForeignKey.params.info) -
 
-            可选数据字典，将填充到此对象的[`SchemaItem.info`{.xref .py
-            .py-attr .docutils
-            .literal}](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")属性中。
+            可选数据字典，将填充到此对象的[`SchemaItem.info`](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")属性中。
 
             版本1.0.0中的新功能
 
         -   **\*\* dialect\_kw**
             [¶](#sqlalchemy.schema.ForeignKey.params.**dialect_kw) -
 
-            其他关键字参数是特定于方言的，并以`<dialectname>_<argname>`{.docutils
-            .literal}的形式传递。参数最终由相应的[`ForeignKeyConstraint`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")处理。有关记录参数的详细信息，请参阅[Dialects](dialects_index.html)中有关单个方言的文档。
+            其他关键字参数是特定于方言的，并以`<dialectname>_<argname>`的形式传递。参数最终由相应的[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")处理。有关记录参数的详细信息，请参阅[Dialects](dialects_index.html)中有关单个方言的文档。
 
             版本0.9.2中的新功能
 
@@ -1071,9 +998,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         The [`DialectKWArgs.argument_for()`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.argument_for "sqlalchemy.sql.base.DialectKWArgs.argument_for")
         method is a per-argument way adding extra arguments to the
-        [`DefaultDialect.construct_arguments`{.xref .py .py-attr
-        .docutils
-        .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
+        [`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
         dictionary.
         这本词典提供了代表方言的各种模式层次结构所接受的参数名称列表。
 
@@ -1085,11 +1010,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             – name of a dialect. The dialect must be locatable, else a
             [`NoSuchModuleError`](exceptions.html#sqlalchemy.exc.NoSuchModuleError "sqlalchemy.exc.NoSuchModuleError")
             is raised.
-            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`{.xref
-            .py .py-attr .docutils
-            .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`{.xref
-            .py .py-class .docutils
-            .literal}](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
+            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
         -   **argument\_name**
             [¶](#sqlalchemy.schema.ForeignKey.argument_for.params.argument_name)
             - 参数的名称。
@@ -1100,9 +1021,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         版本0.9.4中的新功能
 
     `列 T0> ¶ T1>`{.descname}
-    :   返回由[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")引用的目标[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
+    :   返回由[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")引用的目标[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
 
         如果没有建立目标列，则会引发异常。
 
@@ -1111,9 +1030,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
     `复制 T0> （ T1> 架构=无 T2> ） T3> ¶ T4>`{.descname}
     :   生成这个[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")对象的副本。
 
-        新的[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")不会绑定到任何[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
+        新的[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")不会绑定到任何[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
 
         This method is usually used by the internal copy procedures of
         [`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column"),
@@ -1128,33 +1045,26 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         the given string schema name.
 
     ` dialect_kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+    :   *继承自* [`dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
-        .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
         该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
-        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`{.xref .py
-        .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
+        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
 
         也可以看看
 
-        [`DialectKWArgs.dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+        [`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         - nested dictionary form
 
     ` dialect_options  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+    :   *继承自* [`dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
@@ -1167,8 +1077,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         也可以看看
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         - flat dictionary form
 
     ` get_children  T0> （ T1>  ** kwargs  T2> ） T3> ¶ T4>`{.descname}
@@ -1178,42 +1087,26 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         用于允许SchemaVisitor访问
 
     ` get_referent  T0> （ T1> 表 T2> ） T3> ¶ T4>`{.descname}
-    :   返回此[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")引用的[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中的[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
+    :   返回此[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")引用的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中的[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
 
-        如果[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")没有引用给定的[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，则返回None。
+        如果[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")没有引用给定的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，则返回None。
 
     `信息 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`info`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
+    :   *inherited from the* [`info`](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
+        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
 
-        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
+        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
 
     ` kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
+    :   *继承自* [`kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
 
     `引用 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`quote`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
+    :   *inherited from the* [`quote`](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
         对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
@@ -1221,9 +1114,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         从版本0.9开始弃用：使用`<obj>.name.quote`
 
     `引用 T0> （ T1> 表 T2> ） T3> ¶ T4>`{.descname}
-    :   如果给定的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")被此[`ForeignKey`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")引用，则返回True。
+    :   如果给定的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")被此[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")引用，则返回True。
 
     ` target_fullname  T0> ¶ T1>`{.descname}
     :   为[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")返回一个基于字符串的'列规范'。
@@ -1250,9 +1141,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         -   **columns**[¶](#sqlalchemy.schema.ForeignKeyConstraint.params.columns)
             – A sequence of local column names.
-            指定的列必须定义并出现在父表中。除非`link_to_name`{.docutils
-            .literal}为True，否则这些名称应该与赋予每列的`key`{.docutils
-            .literal}匹配（默认为名称）。
+            指定的列必须定义并出现在父表中。除非`link_to_name`为True，否则这些名称应该与赋予每列的`key`匹配（默认为名称）。
         -   **refcolumns**
             [¶](#sqlalchemy.schema.ForeignKeyConstraint.params.refcolumns)
             - 一系列外部列名或列对象。这些列必须全部位于同一个表内。
@@ -1276,8 +1165,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             - 可选字符串。如果设置，则在为此约束发出DDL时发出INITIALLY
             。
         -   **link\_to\_name**[¶](#sqlalchemy.schema.ForeignKeyConstraint.params.link_to_name)
-            – if True, the string name given in `column`{.docutils
-            .literal} is the rendered name of the referenced column, not
+            – if True, the string name given in `column` is the rendered name of the referenced column, not
             its locally assigned `key`.
         -   **use\_alter**
             [¶](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter)
@@ -1288,16 +1176,12 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             TABLE语句生成它，并在删除整个表集合之前通过ALTER
             TABLE语句删除它。
 
-            The use of [`ForeignKeyConstraint.use_alter`{.xref .py
-            .py-paramref .docutils
-            .literal}](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")
+            The use of [`ForeignKeyConstraint.use_alter`](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")
             is particularly geared towards the case where two or more
             tables are established within a mutually-dependent foreign
             key constraint relationship; however, the
-            [`MetaData.create_all()`{.xref .py .py-meth .docutils
-            .literal}](metadata.html#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")
-            and [`MetaData.drop_all()`{.xref .py .py-meth .docutils
-            .literal}](metadata.html#sqlalchemy.schema.MetaData.drop_all "sqlalchemy.schema.MetaData.drop_all")
+            [`MetaData.create_all()`](metadata.html#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")
+            and [`MetaData.drop_all()`](metadata.html#sqlalchemy.schema.MetaData.drop_all "sqlalchemy.schema.MetaData.drop_all")
             methods will perform this resolution automatically, so the
             flag is normally not needed.
 
@@ -1315,9 +1199,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         -   **info**
             [¶](#sqlalchemy.schema.ForeignKeyConstraint.params.info) -
 
-            可选数据字典，将填充到此对象的[`SchemaItem.info`{.xref .py
-            .py-attr .docutils
-            .literal}](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")属性中。
+            可选数据字典，将填充到此对象的[`SchemaItem.info`](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")属性中。
 
             版本1.0.0中的新功能
 
@@ -1325,8 +1207,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             [¶](#sqlalchemy.schema.ForeignKeyConstraint.params.**dialect_kw)
             -
 
-            其他关键字参数是特定于方言的，并以`<dialectname>_<argname>`{.docutils
-            .literal}的形式传递。有关记录参数的详细信息，请参阅[Dialects](dialects_index.html)中有关单个方言的文档。
+            其他关键字参数是特定于方言的，并以`<dialectname>_<argname>`的形式传递。有关记录参数的详细信息，请参阅[Dialects](dialects_index.html)中有关单个方言的文档。
 
             > 版本0.9.2中的新功能
 
@@ -1344,9 +1225,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         The [`DialectKWArgs.argument_for()`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.argument_for "sqlalchemy.sql.base.DialectKWArgs.argument_for")
         method is a per-argument way adding extra arguments to the
-        [`DefaultDialect.construct_arguments`{.xref .py .py-attr
-        .docutils
-        .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
+        [`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
         dictionary.
         这本词典提供了代表方言的各种模式层次结构所接受的参数名称列表。
 
@@ -1358,11 +1237,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             – name of a dialect. The dialect must be locatable, else a
             [`NoSuchModuleError`](exceptions.html#sqlalchemy.exc.NoSuchModuleError "sqlalchemy.exc.NoSuchModuleError")
             is raised.
-            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`{.xref
-            .py .py-attr .docutils
-            .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`{.xref
-            .py .py-class .docutils
-            .literal}](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
+            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
         -   **argument\_name**
             [¶](#sqlalchemy.schema.ForeignKeyConstraint.argument_for.params.argument_name)
             - 参数的名称。
@@ -1375,9 +1250,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
     ` column_keys  T0> ¶ T1>`{.descname}
     :   返回表示本[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")中本地列的字符串键列表。
 
-        该列表是发送给[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")的构造函数的原始字符串参数，或者如果约束已使用[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象初始化，则为每个元素的字符串.key。
+        该列表是发送给[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")的构造函数的原始字符串参数，或者如果约束已使用[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象初始化，则为每个元素的字符串.key。
 
         版本1.0.0中的新功能
 
@@ -1387,38 +1260,29 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         如果此约束包含给定的列，则返回True。
 
-        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
-        .py .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
+        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
 
     ` dialect_kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+    :   *继承自* [`dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
-        .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
         该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
-        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`{.xref .py
-        .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
+        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
 
         也可以看看
 
-        [`DialectKWArgs.dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+        [`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         - nested dictionary form
 
     ` dialect_options  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+    :   *继承自* [`dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
@@ -1431,8 +1295,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         也可以看看
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         - flat dictionary form
 
     ` get_children  T0> （ T1>  ** kwargs  T2> ） T3> ¶ T4>`{.descname}
@@ -1442,31 +1305,21 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         用于允许SchemaVisitor访问
 
     `信息 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`info`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
+    :   *inherited from the* [`info`](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
+        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
 
-        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
+        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
 
     ` kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
+    :   *继承自* [`kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
 
     `引用 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`quote`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
+    :   *inherited from the* [`quote`](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
         对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
@@ -1474,9 +1327,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         从版本0.9开始弃用：使用`<obj>.name.quote`
 
     ` referred_table  T0> ¶ T1>`{.descname}
-    :   这个[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")引用的[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象。
+    :   这个[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")引用的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象。
 
         这是一个动态计算的属性，如果约束和/或父表尚未与包含引用表的元数据集合关联，则该属性可能不可用。
 
@@ -1554,9 +1405,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         The [`DialectKWArgs.argument_for()`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.argument_for "sqlalchemy.sql.base.DialectKWArgs.argument_for")
         method is a per-argument way adding extra arguments to the
-        [`DefaultDialect.construct_arguments`{.xref .py .py-attr
-        .docutils
-        .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
+        [`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
         dictionary.
         这本词典提供了代表方言的各种模式层次结构所接受的参数名称列表。
 
@@ -1568,11 +1417,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             – name of a dialect. The dialect must be locatable, else a
             [`NoSuchModuleError`](exceptions.html#sqlalchemy.exc.NoSuchModuleError "sqlalchemy.exc.NoSuchModuleError")
             is raised.
-            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`{.xref
-            .py .py-attr .docutils
-            .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`{.xref
-            .py .py-class .docutils
-            .literal}](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
+            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
         -   **argument\_name**
             [¶](#sqlalchemy.schema.PrimaryKeyConstraint.argument_for.params.argument_name)
             - 参数的名称。
@@ -1588,38 +1433,29 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         如果此约束包含给定的列，则返回True。
 
-        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
-        .py .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
+        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
 
     ` dialect_kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+    :   *继承自* [`dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
-        .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
         该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
-        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`{.xref .py
-        .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
+        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
 
         也可以看看
 
-        [`DialectKWArgs.dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+        [`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         - nested dictionary form
 
     ` dialect_options  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+    :   *继承自* [`dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
@@ -1632,8 +1468,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         也可以看看
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         - flat dictionary form
 
     ` get_children  T0> （ T1>  ** kwargs  T2> ） T3> ¶ T4>`{.descname}
@@ -1643,31 +1478,21 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         用于允许SchemaVisitor访问
 
     `信息 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`info`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
+    :   *inherited from the* [`info`](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
+        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
 
-        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
+        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
 
     ` kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
+    :   *继承自* [`kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
 
     `引用 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`quote`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
+    :   *inherited from the* [`quote`](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
         对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
@@ -1698,9 +1523,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             可选字符串。如果设置，则在为此约束发出DDL时发出INITIALLY 。
         -   **\*\*kw**[¶](#sqlalchemy.schema.UniqueConstraint.params.**kw)
             – other keyword arguments including dialect-specific
-            arguments are propagated to the [`Constraint`{.xref .py
-            .py-class .docutils
-            .literal}](#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")
+            arguments are propagated to the [`Constraint`](#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")
             superclass.
 
     `argument_for`{.descname} （ *dialect\_name*，*argument\_name*，*默认* ） [¶ T6\>](#sqlalchemy.schema.UniqueConstraint.argument_for "Permalink to this definition")
@@ -1717,9 +1540,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         The [`DialectKWArgs.argument_for()`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.argument_for "sqlalchemy.sql.base.DialectKWArgs.argument_for")
         method is a per-argument way adding extra arguments to the
-        [`DefaultDialect.construct_arguments`{.xref .py .py-attr
-        .docutils
-        .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
+        [`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
         dictionary.
         这本词典提供了代表方言的各种模式层次结构所接受的参数名称列表。
 
@@ -1731,11 +1552,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
             – name of a dialect. The dialect must be locatable, else a
             [`NoSuchModuleError`](exceptions.html#sqlalchemy.exc.NoSuchModuleError "sqlalchemy.exc.NoSuchModuleError")
             is raised.
-            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`{.xref
-            .py .py-attr .docutils
-            .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`{.xref
-            .py .py-class .docutils
-            .literal}](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
+            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
         -   **argument\_name**
             [¶](#sqlalchemy.schema.UniqueConstraint.argument_for.params.argument_name)
             - 参数的名称。
@@ -1751,38 +1568,29 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         如果此约束包含给定的列，则返回True。
 
-        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`{.xref
-        .py .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
+        请注意，此对象还包含属性`.columns`，它是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
 
     ` dialect_kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+    :   *继承自* [`dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
-        .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
         该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
-        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`{.xref .py
-        .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
+        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
 
         也可以看看
 
-        [`DialectKWArgs.dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+        [`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         - nested dictionary form
 
     ` dialect_options  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+    :   *继承自* [`dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
@@ -1795,8 +1603,7 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
 
         也可以看看
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         - flat dictionary form
 
     ` get_children  T0> （ T1>  ** kwargs  T2> ） T3> ¶ T4>`{.descname}
@@ -1806,31 +1613,21 @@ CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](typ
         用于允许SchemaVisitor访问
 
     `信息 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`info`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
+    :   *inherited from the* [`info`](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
+        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
 
-        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
+        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
 
     ` kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
+    :   *继承自* [`kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
 
     `引用 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`quote`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
+    :   *inherited from the* [`quote`](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
         对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
@@ -1989,8 +1786,7 @@ INDEX”的DDL在表的create语句之后立即发布：
 
         Index("some_index", sometable.c.name, sometable.c.address)
 
-    函数索引也受支持，通常通过将[`func`{.xref .py .py-data .docutils
-    .literal}](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结构与表结合的[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象结合使用：
+    函数索引也受支持，通常通过将[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结构与表结合的[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象结合使用：
 
         Index("some_index", func.lower(sometable.c.name))
 
@@ -2042,9 +1838,7 @@ INDEX”的DDL在表的create语句之后立即发布：
             索引的名称
         -   **\*expressions**[¶](#sqlalchemy.schema.Index.params.*expressions)
             – Column expressions to include in the index.
-            这些表达式通常是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的实例，但也可以是最终指向[`Column`{.xref
-            .py .py-class .docutils
-            .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的任意SQL表达式。
+            这些表达式通常是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的实例，但也可以是最终指向[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的任意SQL表达式。
         -   **unique = False**
             [¶](#sqlalchemy.schema.Index.params.unique) -
             仅关键字参数；如果为True，则创建唯一索引。
@@ -2052,9 +1846,7 @@ INDEX”的DDL在表的create语句之后立即发布：
             仅关键字参数；是否将引用应用于索引的名称。**以与[`Column.quote`](metadata.html#sqlalchemy.schema.Column.params.quote "sqlalchemy.schema.Column")相同的方式工作。
         -   **info =无** [¶](#sqlalchemy.schema.Index.params.info) -
 
-            可选数据字典，将填充到此对象的[`SchemaItem.info`{.xref .py
-            .py-attr .docutils
-            .literal}](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")属性中。
+            可选数据字典，将填充到此对象的[`SchemaItem.info`](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")属性中。
 
             版本1.0.0中的新功能
 
@@ -2078,9 +1870,7 @@ INDEX”的DDL在表的create语句之后立即发布：
 
         The [`DialectKWArgs.argument_for()`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.argument_for "sqlalchemy.sql.base.DialectKWArgs.argument_for")
         method is a per-argument way adding extra arguments to the
-        [`DefaultDialect.construct_arguments`{.xref .py .py-attr
-        .docutils
-        .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
+        [`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
         dictionary.
         这本词典提供了代表方言的各种模式层次结构所接受的参数名称列表。
 
@@ -2092,11 +1882,7 @@ INDEX”的DDL在表的create语句之后立即发布：
             – name of a dialect. The dialect must be locatable, else a
             [`NoSuchModuleError`](exceptions.html#sqlalchemy.exc.NoSuchModuleError "sqlalchemy.exc.NoSuchModuleError")
             is raised.
-            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`{.xref
-            .py .py-attr .docutils
-            .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`{.xref
-            .py .py-class .docutils
-            .literal}](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
+            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
         -   **argument\_name**
             [¶](#sqlalchemy.schema.Index.argument_for.params.argument_name)
             - 参数的名称。
@@ -2110,42 +1896,33 @@ INDEX”的DDL在表的create语句之后立即发布：
     :   返回与此索引关联的可连接。
 
     `创建 T0> （ T1> 绑定=无 T2> ） T3> ¶ T4>`{.descname}
-    :   使用给定的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")进行连接，为此[`Index`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")发出`CREATE`语句。
+    :   使用给定的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")进行连接，为此[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")发出`CREATE`语句。
 
         也可以看看
 
         [`MetaData.create_all()`](metadata.html#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")
 
     ` dialect_kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+    :   *继承自* [`dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
-        .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
         该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
-        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`{.xref .py
-        .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
+        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
 
         也可以看看
 
-        [`DialectKWArgs.dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+        [`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         - nested dictionary form
 
     ` dialect_options  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+    :   *继承自* [`dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
@@ -2158,14 +1935,11 @@ INDEX”的DDL在表的create语句之后立即发布：
 
         也可以看看
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         - flat dictionary form
 
     `降 T0> （ T1> 绑定=无 T2> ） T3> ¶ T4>`{.descname}
-    :   使用给定的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")进行连接，为此[`Index`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")发出`DROP`语句。
+    :   使用给定的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")进行连接，为此[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")发出`DROP`语句。
 
         也可以看看
 
@@ -2178,31 +1952,21 @@ INDEX”的DDL在表的create语句之后立即发布：
         用于允许SchemaVisitor访问
 
     `信息 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`info`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
+    :   *inherited from the* [`info`](metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
+        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
 
-        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
+        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
 
     ` kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
+    :   *继承自* [`kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
 
     `引用 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`quote`{.xref .py .py-attr .docutils
-        .literal}](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
+    :   *inherited from the* [`quote`](metadata.html#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
         对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。

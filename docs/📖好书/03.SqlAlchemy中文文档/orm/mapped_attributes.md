@@ -113,9 +113,7 @@ emitted, even though an append occurs to `some_user.addresses` - the event is ca
     -   **include\_backrefs**
         [¶](#sqlalchemy.orm.validates.params.include_backrefs) -
 
-        默认为`True`；如果`False`，如果始发者是通过backref相关的属性事件，则验证函数不会发出。这可以用于双向[`validates()`{.xref
-        .py .py-func .docutils
-        .literal}](#sqlalchemy.orm.validates "sqlalchemy.orm.validates")用法，其中每个属性操作只有一个验证器应该发出。
+        默认为`True`；如果`False`，如果始发者是通过backref相关的属性事件，则验证函数不会发出。这可以用于双向[`validates()`](#sqlalchemy.orm.validates "sqlalchemy.orm.validates")用法，其中每个属性操作只有一个验证器应该发出。
 
         版本0.9.0中的新功能
 
@@ -305,9 +303,7 @@ attribute](#mapper-hybrids)特性更好地处理了在描述符中增强属性�
     参数：
 
     -   **名称** [¶](#sqlalchemy.orm.synonym.params.name) -
-        现有映射属性的名称。这可以引用该类上配置的任何[`MapperProperty`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")的字符串名称，包括列绑定的属性和关系。
+        现有映射属性的名称。这可以引用该类上配置的任何[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")的字符串名称，包括列绑定的属性和关系。
     -   **descriptor**[¶](#sqlalchemy.orm.synonym.params.descriptor) – a
         Python [descriptor](glossary.html#term-descriptor) that will be
         used as a getter (and potentially a setter) when this attribute
@@ -315,9 +311,7 @@ attribute](#mapper-hybrids)特性更好地处理了在描述符中增强属性�
     -   **map\_column** [¶](#sqlalchemy.orm.synonym.params.map_column) -
 
         if `True`, the [`synonym()`](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")
-        construct will locate the existing named [`MapperProperty`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")
+        construct will locate the existing named [`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")
         based on the attribute name of this [`synonym()`](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym"),
         and assign it to a new attribute linked to the name of this
         [`synonym()`](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym").

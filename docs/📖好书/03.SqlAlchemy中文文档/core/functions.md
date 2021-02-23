@@ -40,8 +40,7 @@ SQL函数API，工厂和内置函数。
 
     也可以看看
 
-    [`func`{.xref .py .py-data .docutils
-    .literal}](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")
+    [`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")
     - 产生注册或临时[`Function`](#sqlalchemy.sql.functions.Function "sqlalchemy.sql.functions.Function")实例的命名空间。
 
     [`GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
@@ -50,10 +49,7 @@ SQL函数API，工厂和内置函数。
      `__init__`{.descname}(*name*, *\*clauses*, *\*\*kw*)[¶](#sqlalchemy.sql.functions.Function.__init__ "Permalink to this definition")
     :   构建一个[`Function`](#sqlalchemy.sql.functions.Function "sqlalchemy.sql.functions.Function")。
 
-        [`func`{.xref .py .py-data .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结构通常用于构造新的[`Function`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.sql.functions.Function "sqlalchemy.sql.functions.Function")实例。
+        [`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结构通常用于构造新的[`Function`](#sqlalchemy.sql.functions.Function "sqlalchemy.sql.functions.Function")实例。
 
  *class*`sqlalchemy.sql.functions.`{.descclassname}`FunctionElement`{.descname}(*\*clauses*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.FunctionElement "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.Executable`](selectable.html#sqlalchemy.sql.expression.Executable "sqlalchemy.sql.expression.Executable")，[`sqlalchemy.sql.expression.ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")，[`sqlalchemy.sql.expression.FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
@@ -65,8 +61,7 @@ SQL函数API，工厂和内置函数。
     [`Function`](#sqlalchemy.sql.functions.Function "sqlalchemy.sql.functions.Function")
     - 名为SQL函数。
 
-    [`func`{.xref .py .py-data .docutils
-    .literal}](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")
+    [`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")
     - 产生注册或临时[`Function`](#sqlalchemy.sql.functions.Function "sqlalchemy.sql.functions.Function")实例的命名空间。
 
     [`GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
@@ -76,9 +71,7 @@ SQL函数API，工厂和内置函数。
     :   构造一个[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")。
 
      `alias`{.descname}(*name=None*, *flat=False*)[¶](#sqlalchemy.sql.functions.FunctionElement.alias "Permalink to this definition")
-    :   根据[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")生成[`Alias`{.xref
-        .py .py-class .docutils
-        .literal}](selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")结构。
+    :   根据[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")生成[`Alias`](selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")结构。
 
         这个构造将函数包装在一个适用于FROM子句的命名别名中，例如Postgresql接受的样式。
 
@@ -99,18 +92,14 @@ SQL函数API，工厂和内置函数。
         版本0.9.8新增：现在支持[`FunctionElement.alias()`](#sqlalchemy.sql.functions.FunctionElement.alias "sqlalchemy.sql.functions.FunctionElement.alias")方法。以前，此方法的行为未定义，并且在各个版本中的行为不一致。
 
     `条款 T0> ¶ T1>`{.descname}
-    :   返回包含此[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")参数的基础[`ClauseList`{.xref
-        .py .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseList "sqlalchemy.sql.expression.ClauseList")。
+    :   返回包含此[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")参数的基础[`ClauseList`](sqlelement.html#sqlalchemy.sql.expression.ClauseList "sqlalchemy.sql.expression.ClauseList")。
 
     `列 T0> ¶ T1>`{.descname}
     :   由[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")导出的一组列。
 
         函数对象当前没有内置的结果列名称；此方法返回一个具有匿名名称列的单元素列集合。
 
-        为函数提供命名列作为FROM子句的临时方法是使用所需的列构建[`select()`{.xref
-        .py .py-func .docutils
-        .literal}](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")：
+        为函数提供命名列作为FROM子句的临时方法是使用所需的列构建[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")：
 
             from sqlalchemy.sql import column
 
@@ -121,11 +110,7 @@ SQL函数API，工厂和内置函数。
 
         这首先调用[`select()`](#sqlalchemy.sql.functions.FunctionElement.select "sqlalchemy.sql.functions.FunctionElement.select")来产生一个SELECT结构。
 
-        请注意，可以将[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")传递给[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")或[`Engine`{.xref
-        .py .py-class .docutils
-        .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的[`Connectable.execute()`](connections.html#sqlalchemy.engine.Connectable.execute "sqlalchemy.engine.Connectable.execute")方法。
+        请注意，可以将[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")传递给[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")或[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的[`Connectable.execute()`](connections.html#sqlalchemy.engine.Connectable.execute "sqlalchemy.engine.Connectable.execute")方法。
 
     `过滤 T0> （ T1>  *标准 T2> ） T3> ¶ T4>`{.descname}
     :   针对此功能生成一个FILTER子句。
@@ -178,16 +163,10 @@ SQL函数API，工厂和内置函数。
 
         这首先调用[`select()`](#sqlalchemy.sql.functions.FunctionElement.select "sqlalchemy.sql.functions.FunctionElement.select")来产生一个SELECT结构。
 
-        请注意，可以将[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")传递给[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")或[`Engine`{.xref
-        .py .py-class .docutils
-        .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的[`Connectable.scalar()`](connections.html#sqlalchemy.engine.Connectable.scalar "sqlalchemy.engine.Connectable.scalar")方法。
+        请注意，可以将[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")传递给[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")或[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的[`Connectable.scalar()`](connections.html#sqlalchemy.engine.Connectable.scalar "sqlalchemy.engine.Connectable.scalar")方法。
 
     `选择 T0> （ T1> ） T2> ¶ T3>`{.descname}
-    :   根据[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")产生一个[`select()`{.xref
-        .py .py-func .docutils
-        .literal}](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构。
+    :   根据[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")产生一个[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构。
 
         这是简写​​：
 
@@ -199,17 +178,9 @@ SQL函数API，工厂和内置函数。
     ` within_group  T0> （ T1>  * ORDER_BY  T2> ） T3> ¶ T4>`{.descname}
     :   根据此函数生成一个WITHIN GROUP（ORDER BY expr）子句。
 
-        针对所谓的“有序集合”和“假设集合”功能，包括[`percentile_cont`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.sql.functions.percentile_cont "sqlalchemy.sql.functions.percentile_cont")，[`rank`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.sql.functions.rank "sqlalchemy.sql.functions.rank")，[`dense_rank`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.sql.functions.dense_rank "sqlalchemy.sql.functions.dense_rank")等。
+        针对所谓的“有序集合”和“假设集合”功能，包括[`percentile_cont`](#sqlalchemy.sql.functions.percentile_cont "sqlalchemy.sql.functions.percentile_cont")，[`rank`](#sqlalchemy.sql.functions.rank "sqlalchemy.sql.functions.rank")，[`dense_rank`](#sqlalchemy.sql.functions.dense_rank "sqlalchemy.sql.functions.dense_rank")等。
 
-        有关完整说明，请参见[`within_group()`{.xref .py .py-func
-        .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.within_group "sqlalchemy.sql.expression.within_group")。
+        有关完整说明，请参见[`within_group()`](sqlelement.html#sqlalchemy.sql.expression.within_group "sqlalchemy.sql.expression.within_group")。
 
         版本1.1中的新功能
 
@@ -224,11 +195,7 @@ SQL函数API，工厂和内置函数。
 
     定义一个“通用”功能。
 
-    通用函数是预先建立的[`Function`](#sqlalchemy.sql.functions.Function "sqlalchemy.sql.functions.Function")类，当从[`func`{.xref
-    .py .py-data .docutils
-    .literal}](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")属性中按名称调用时，会自动实例化该类。请注意，调用[`func`{.xref
-    .py .py-data .docutils
-    .literal}](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")中的任何名称都会导致自动创建新的[`Function`](#sqlalchemy.sql.functions.Function "sqlalchemy.sql.functions.Function")实例，并给定该名称。定义一个[`GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")类的主要用例是这样的，一个特定名称的函数可以被赋予一个固定的返回类型。它还可以包含自定义参数解析方案以及其他方法。
+    通用函数是预先建立的[`Function`](#sqlalchemy.sql.functions.Function "sqlalchemy.sql.functions.Function")类，当从[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")属性中按名称调用时，会自动实例化该类。请注意，调用[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")中的任何名称都会导致自动创建新的[`Function`](#sqlalchemy.sql.functions.Function "sqlalchemy.sql.functions.Function")实例，并给定该名称。定义一个[`GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")类的主要用例是这样的，一个特定名称的函数可以被赋予一个固定的返回类型。它还可以包含自定义参数解析方案以及其他方法。
 
     [`GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")的子类自动注册在类的名字下。例如，用户定义的函数`as_utc()`将立即可用：
 
@@ -246,14 +213,11 @@ SQL函数API，工厂和内置函数。
             type = DateTime
             package = "time"
 
-    上面的函数可以从[`func`{.xref .py .py-data .docutils
-    .literal}](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")使用包名称`time`获得：
+    上面的函数可以从[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")使用包名称`time`获得：
 
         print select([func.time.as_utc()])
 
-    最后一个选项是允许从[`func`{.xref .py .py-data .docutils
-    .literal}](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")中的某个名称访问该函数，但要呈现为不同的名称。`identifier`属性将覆盖从[`func`{.xref .py .py-data .docutils
-    .literal}](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")加载的用于访问函数的名称，但会保留`name`作为呈现名称的用法：
+    最后一个选项是允许从[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")中的某个名称访问该函数，但要呈现为不同的名称。`identifier`属性将覆盖从[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")加载的用于访问函数的名称，但会保留`name`作为呈现名称的用法：
 
         class GeoBuffer(GenericFunction):
             type = Geometry
@@ -648,9 +612,7 @@ SQL函数API，工厂和内置函数。
  `sqlalchemy.sql.functions.`{.descclassname}`register_function`{.descname}(*identifier*, *fn*, *package='\_default'*)[¶](#sqlalchemy.sql.functions.register_function "Permalink to this definition")
 :   将可调用函数与特定的函数关联。名称。
 
-    这通常由\_GenericMeta调用，但也可以自行使用，以便非函数结构可以与[`func`{.xref
-    .py .py-data .docutils
-    .literal}](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")访问器关联（即，CAST，EXTRACT）。
+    这通常由\_GenericMeta调用，但也可以自行使用，以便非函数结构可以与[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")访问器关联（即，CAST，EXTRACT）。
 
 *class* `sqlalchemy.sql.functions。`{.descclassname} `session_user`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.sql.functions.session_user "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.AnsiFunction`](#sqlalchemy.sql.functions.AnsiFunction "sqlalchemy.sql.functions.AnsiFunction")

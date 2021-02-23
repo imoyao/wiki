@@ -90,9 +90,7 @@ API参考[¶](#api-reference "Permalink to this headline")
     [`declarative_base()`](#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")
 
 *类 T0\> ` sqlalchemy.ext.declarative。 T1>  declared_attr  T2> （ T3>  fget  T4>，级联=假 T5> ） T6> ¶ T7>`{.descclassname}*
-:   基础：`sqlalchemy.orm.base._MappedAttribute`{.xref .py .py-class
-    .docutils .literal}，`__builtin__.property`{.xref .py .py-class
-    .docutils .literal}
+:   基础：`sqlalchemy.orm.base._MappedAttribute`，`__builtin__.property`
 
     将类级方法标记为表示映射属性或特殊声明性成员名称的定义。
 
@@ -196,8 +194,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 ` sqlalchemy.ext.declarative。 T0>  comparable_using  T1> （ T2>  comparator_factory  T3> ） T4> ¶< / T5>`{.descclassname}
 :   装饰者，允许在查询标准中使用Python @property。
 
-    这是通过comparator\_factory和正在装饰的函数的`comparable_property()`{.xref
-    .py .py-func .docutils .literal}的装饰器前端：
+    这是通过comparator\_factory和正在装饰的函数的`comparable_property()`的装饰器前端：
 
         @comparable_using(MyComparatorType)
         @property
@@ -385,9 +382,7 @@ API参考[¶](#api-reference "Permalink to this headline")
     0.8版本中的新功能
 
      *classmethod*`prepare`{.descname}(*engine*)[¶](#sqlalchemy.ext.declarative.DeferredReflection.prepare "Permalink to this definition")
-    :   为所有当前的[`DeferredReflection`](#sqlalchemy.ext.declarative.DeferredReflection "sqlalchemy.ext.declarative.DeferredReflection")子类反映所有[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象
+    :   为所有当前的[`DeferredReflection`](#sqlalchemy.ext.declarative.DeferredReflection "sqlalchemy.ext.declarative.DeferredReflection")子类反映所有[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象
 
 ### 特殊指令[¶](#special-directives "Permalink to this headline")
 

@@ -266,9 +266,7 @@ API文档[¶](#api-documentation "Permalink to this headline")
     :   建造一个新的面包店。
 
     ` for_session  T0> （ T1> 会话 T2> ） T3> ¶ T4>`{.descname}
-    :   为这个[`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")返回一个[`Result`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.ext.baked.Result "sqlalchemy.ext.baked.Result")对象。
+    :   为这个[`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")返回一个[`Result`](#sqlalchemy.ext.baked.Result "sqlalchemy.ext.baked.Result")对象。
 
         这相当于将[`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")作为Python可调用对象来调用。
         `结果 = my_baked_query（会话）`。
@@ -283,9 +281,7 @@ API文档[¶](#api-documentation "Permalink to this headline")
         参数：
 
         **full**[¶](#sqlalchemy.ext.baked.BakedQuery.spoil.params.full)
-        – if False, only functions added to this [`BakedQuery`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")
+        – if False, only functions added to this [`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")
         object subsequent to the spoil step will be non-cached; the
         state of the [`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")
         up until this point will be pulled from the cache.
@@ -294,9 +290,7 @@ API文档[¶](#api-documentation "Permalink to this headline")
      `with_criteria`{.descname}(*fn*, *\*args*)[¶](#sqlalchemy.ext.baked.BakedQuery.with_criteria "Permalink to this definition")
     :   向这个克隆的[`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")添加一个标准函数。
 
-        这相当于使用`+`运算符生成新的带有修改的[`BakedQuery`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")。
+        这相当于使用`+`运算符生成新的带有修改的[`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")。
 
  *class*`sqlalchemy.ext.baked.`{.descclassname}`Result`{.descname}(*bq*, *session*)[¶](#sqlalchemy.ext.baked.Result "Permalink to this definition")
 :   针对[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")调用[`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")。

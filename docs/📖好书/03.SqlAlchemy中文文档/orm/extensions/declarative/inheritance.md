@@ -251,10 +251,7 @@ string `'*'` to indicate all subclasses:
     -   **flat** [¶](#sqlalchemy.orm.with_polymorphic.params.flat) -
 
         布尔，将通过传递给
-        :   [`FromClause.alias()`{.xref .py .py-meth .docutils
-            .literal}](core_selectable.html#sqlalchemy.sql.expression.FromClause.alias "sqlalchemy.sql.expression.FromClause.alias")调用，以便[`Join`{.xref
-            .py .py-class .docutils
-            .literal}](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")对象的别名不包含封闭的SELECT。这可以在许多情况下导致更高效的查询。针对嵌套JOIN的JOIN将被重写为针对不支持此语法的后端上的别名SELECT子查询的JOIN。
+        :   [`FromClause.alias()`](core_selectable.html#sqlalchemy.sql.expression.FromClause.alias "sqlalchemy.sql.expression.FromClause.alias")调用，以便[`Join`](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")对象的别名不包含封闭的SELECT。这可以在许多情况下导致更高效的查询。针对嵌套JOIN的JOIN将被重写为针对不支持此语法的后端上的别名SELECT子查询的JOIN。
 
         将`flat`设置为`True`意味着`aliased`标志也是`True`。
 

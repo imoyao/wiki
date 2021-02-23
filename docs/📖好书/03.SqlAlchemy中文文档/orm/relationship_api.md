@@ -70,11 +70,7 @@ tags:
 
     -   **辅助** [¶](#sqlalchemy.orm.relationship.params.secondary) -
 
-        对于多对多关系，指定中间表，并且通常是[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的实例。在不常见的情况下，参数也可以被指定为[`Alias`{.xref
-        .py .py-class .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")结构，甚至可以指定为[`Join`{.xref
-        .py .py-class .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")结构。
+        对于多对多关系，指定中间表，并且通常是[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的实例。在不常见的情况下，参数也可以被指定为[`Alias`](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")结构，甚至可以指定为[`Join`](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")结构。
 
         [`secondary`](#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")也可以作为可映射函数在映射器初始化时进行评估。When
         using Declarative, it may also be a string argument noting the
@@ -116,9 +112,7 @@ tags:
         一种较少使用的模式，在某些情况下可以启用复杂的[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
         SQL条件。
 
-        版本0.9.2中的新功能： [`secondary`](#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")在引用[`Join`{.xref
-        .py .py-class .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")实例时更有效。
+        版本0.9.2中的新功能： [`secondary`](#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")在引用[`Join`](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")实例时更有效。
 
     -   T0\> **active\_history =假 T1\> [¶ T2\> - 当`True`](#sqlalchemy.orm.relationship.params.active_history)**通常情况下，简单多对一的历史追踪逻辑只需要知道“新”值就可以执行刷新。该标志可用于使用[`attributes.get_history()`](session_api.html#sqlalchemy.orm.attributes.get_history "sqlalchemy.orm.attributes.get_history")的应用程序，该应用程序还需要知道该属性的“上一个”值。
     -   **backref** [¶](#sqlalchemy.orm.relationship.params.backref) -
@@ -158,9 +152,7 @@ tags:
     -   **bake\_queries = True**
         [¶](#sqlalchemy.orm.relationship.params.bake_queries) -
 
-        当首先调用[`bake_lazy_loaders()`](extensions_baked.html#sqlalchemy.ext.baked.bake_lazy_loaders "sqlalchemy.ext.baked.bake_lazy_loaders")函数时，使用[`BakedQuery`{.xref
-        .py .py-class .docutils
-        .literal}](extensions_baked.html#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")缓存来缓存惰性加载中使用的SQL的构造。默认为True，当烘焙查询缓存系统正在使用时，它旨在为每个关系提供“退出”标志。
+        当首先调用[`bake_lazy_loaders()`](extensions_baked.html#sqlalchemy.ext.baked.bake_lazy_loaders "sqlalchemy.ext.baked.bake_lazy_loaders")函数时，使用[`BakedQuery`](extensions_baked.html#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")缓存来缓存惰性加载中使用的SQL的构造。默认为True，当烘焙查询缓存系统正在使用时，它旨在为每个关系提供“退出”标志。
 
         警告
 
@@ -281,8 +273,7 @@ tags:
         construct.
         只有在以下情况下才需要foreign\_keys：[`foreign_keys`](#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")
 
-        > 1.  由于存在多个外键引用，因此从本地表到远程表构建联接的方式不止一种。设置`foreign_keys`{.docutils
-        >     .literal}将限制[`relationship()`{.xref .py .py-func
+        > 1.  由于存在多个外键引用，因此从本地表到远程表构建联接的方式不止一种。设置`foreign_keys`将限制[`relationship()`{.xref .py .py-func
         >     .docutils
         >     .literal}](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")将这些列指定为“foreign”。
         >
@@ -323,9 +314,7 @@ tags:
 
     -   **info** [¶](#sqlalchemy.orm.relationship.params.info) -
 
-        可选数据字典，将填充到此对象的[`MapperProperty.info`{.xref .py
-        .py-attr .docutils
-        .literal}](internals.html#MapperProperty.info "MapperProperty.info")属性中。
+        可选数据字典，将填充到此对象的[`MapperProperty.info`](internals.html#MapperProperty.info "MapperProperty.info")属性中。
 
         0.8版本中的新功能
 
@@ -386,9 +375,7 @@ tags:
             版本1.1中的新功能
 
         -   `dynamic` -
-            该属性将为所有读取操作返回一个预配置的[`Query`{.xref .py
-            .py-class .docutils
-            .literal}](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象，在迭代结果之前，可以对其应用进一步的过滤操作。有关更多详细信息，请参阅[Dynamic
+            该属性将为所有读取操作返回一个预配置的[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象，在迭代结果之前，可以对其应用进一步的过滤操作。有关更多详细信息，请参阅[Dynamic
             Relationship
             Loaders](collections.html#dynamic-relationship)部分。
         -   真 - “选择”的同义词
@@ -413,9 +400,7 @@ tags:
 
         指示暂时或挂起的父对象的加载行为。
 
-        设置为`True`时，会导致lazy-loader为不持久的父对象发出查询，这意味着它从未被刷新过。当禁用自动刷新或暂挂对象已被“附加”到[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")但不属于其暂挂集合的一部分时，这可能对未决对象有效。
+        设置为`True`时，会导致lazy-loader为不持久的父对象发出查询，这意味着它从未被刷新过。当禁用自动刷新或暂挂对象已被“附加”到[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")但不属于其暂挂集合的一部分时，这可能对未决对象有效。
 
         当正常使用ORM时，[`load_on_pending`](#sqlalchemy.orm.relationship.params.load_on_pending "sqlalchemy.orm.relationship")标志不会改善行为
         -
@@ -521,9 +506,7 @@ tags:
     -   **query\_class**
         [¶](#sqlalchemy.orm.relationship.params.query_class) -
 
-        将被用作由“动态”关系返回的“appender查询”的基础的[`Query`{.xref
-        .py .py-class .docutils
-        .literal}](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")子类，即指定`lazy="dynamic"`或者使用[`orm.dynamic_loader()`](#sqlalchemy.orm.dynamic_loader "sqlalchemy.orm.dynamic_loader")函数以其他方式构造。
+        将被用作由“动态”关系返回的“appender查询”的基础的[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")子类，即指定`lazy="dynamic"`或者使用[`orm.dynamic_loader()`](#sqlalchemy.orm.dynamic_loader "sqlalchemy.orm.dynamic_loader")函数以其他方式构造。
 
         也可以看看
 

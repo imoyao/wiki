@@ -207,20 +207,14 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
         [¶](#sqlalchemy.create_engine.params.convert_unicode) -
 
         if set to True, sets the default behavior of
-        `convert_unicode` on the [`String`{.xref .py
-        .py-class .docutils
-        .literal}](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
+        `convert_unicode` on the [`String`](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
         type to `True`, regardless of a setting of
-        `False` on an individual [`String`{.xref .py
-        .py-class .docutils
-        .literal}](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
+        `False` on an individual [`String`](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
         type, thus causing all [`String`](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
         -based columns to accommodate Python `unicode` objects. 当使用不支持本地支持Python
         `unicode`对象的DBAPI时，该标志可用作引擎范围的设置，并在收到一个错误时引发错误（如带有FreeTDS的pyodbc）。
 
-        有关此标志指示的更多详细信息，请参阅[`String`{.xref .py
-        .py-class .docutils
-        .literal}](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")。
+        有关此标志指示的更多详细信息，请参阅[`String`](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")。
 
     -   **creator** [¶](#sqlalchemy.create_engine.params.creator) -
         返回DBAPI连接的可调用对象。这个创建函数将被传递到底层连接池，并将用于创建所有新的数据库连接。该函数的使用会导致URL参数中指定的连接参数被绕过。
@@ -257,13 +251,9 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
             type or the [`String`](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
             type when `convert_unicode` is
             `True`;
-        -   将字符串SQL语句传递给DBAPI的`cursor.execute()`{.docutils
-            .literal}方法；
-        -   绑定参数字典中的键的字符串名称传递给DBAPI的`cursor.execute()`{.docutils
-            .literal}以及`cursor.setinputsizes()`{.docutils
-            .literal}方法；
-        -   从DBAPI的`cursor.description`{.docutils
-            .literal}属性中检索的字符串列名称。
+        -   将字符串SQL语句传递给DBAPI的`cursor.execute()`方法；
+        -   绑定参数字典中的键的字符串名称传递给DBAPI的`cursor.execute()`以及`cursor.setinputsizes()`方法；
+        -   从DBAPI的`cursor.description`属性中检索的字符串列名称。
 
         When using Python 3, the DBAPI is required to support *all* of
         the above values as Python `unicode`
@@ -286,15 +276,11 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
 
         此字符串参数由各种方言解释，以影响数据库连接的事务隔离级别。参数基本上接受这些字符串参数的一些子集：`"SERIALIZABLE"`，`"REPEATABLE_READ"`，`"READ_COMMITTED"`，`"READ_UNCOMMITTED"`和`"AUTOCOMMIT"`。这里的行为因后端而异，应直接咨询个别方言。
 
-        请注意，也可以使用[`Connection.execution_options.isolation_level`](connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")功能在每个[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")基础上设置隔离级别。
+        请注意，也可以使用[`Connection.execution_options.isolation_level`](connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")功能在每个[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")基础上设置隔离级别。
 
         也可以看看
 
-        [`Connection.default_isolation_level`{.xref .py .py-attr
-        .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection.default_isolation_level "sqlalchemy.engine.Connection.default_isolation_level")
+        [`Connection.default_isolation_level`](connections.html#sqlalchemy.engine.Connection.default_isolation_level "sqlalchemy.engine.Connection.default_isolation_level")
         - 查看默认级别
 
         [`Connection.execution_options.isolation_level`{.xref .py
@@ -334,9 +320,7 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
     -   **module=None**[¶](#sqlalchemy.create_engine.params.module) –
         reference to a Python module object (the module itself, not its
         string name).
-        指定引擎方言使用的备用DBAPI模块。每个子方言引用一个特定的DBAPI，它将在第一次连接之前被导入。此参数导致绕过导入，并改为使用给定的模块。可用于测试DBAPI以及将“模拟”DBAPI实现注入到[`Engine`{.xref
-        .py .py-class .docutils
-        .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")中。
+        指定引擎方言使用的备用DBAPI模块。每个子方言引用一个特定的DBAPI，它将在第一次连接之前被导入。此参数导致绕过导入，并改为使用给定的模块。可用于测试DBAPI以及将“模拟”DBAPI实现注入到[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")中。
     -   **paramstyle=None**[¶](#sqlalchemy.create_engine.params.paramstyle)
         – The
         [paramstyle](http://legacy.python.org/dev/peps/pep-0249/#paramstyle)
@@ -359,11 +343,7 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
         logger. 缺省为对象ID的十六进制字符串。
     -   **pool\_size = 5**
         [¶](#sqlalchemy.create_engine.params.pool_size) -
-        在连接池内保持打开的连接数。这与[`QueuePool`](pooling.html#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")以及[`SingletonThreadPool`{.xref
-        .py .py-class .docutils
-        .literal}](pooling.html#sqlalchemy.pool.SingletonThreadPool "sqlalchemy.pool.SingletonThreadPool")一起使用。对于[`QueuePool`{.xref
-        .py .py-class .docutils
-        .literal}](pooling.html#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")，`pool_size`设置为0表示没有限制；要禁用池化，请将`poolclass`设置为[`NullPool`](pooling.html#sqlalchemy.pool.NullPool "sqlalchemy.pool.NullPool")。
+        在连接池内保持打开的连接数。这与[`QueuePool`](pooling.html#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")以及[`SingletonThreadPool`](pooling.html#sqlalchemy.pool.SingletonThreadPool "sqlalchemy.pool.SingletonThreadPool")一起使用。对于[`QueuePool`](pooling.html#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")，`pool_size`设置为0表示没有限制；要禁用池化，请将`poolclass`设置为[`NullPool`](pooling.html#sqlalchemy.pool.NullPool "sqlalchemy.pool.NullPool")。
     -   **pool\_recycle=-1**[¶](#sqlalchemy.create_engine.params.pool_recycle)
         – this setting causes the pool to recycle connections after the
         given number of seconds has passed.
@@ -378,20 +358,15 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
 
     -   **pool\_timeout = 30**
         [¶](#sqlalchemy.create_engine.params.pool_timeout) -
-        放弃从池中获取连接之前等待的秒数。这仅用于[`QueuePool`{.xref .py
-        .py-class .docutils
-        .literal}](pooling.html#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")。
+        放弃从池中获取连接之前等待的秒数。这仅用于[`QueuePool`](pooling.html#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")。
     -   **strategy ='plain'**
         [¶](#sqlalchemy.create_engine.params.strategy) -
 
         选择备用引擎实现。目前可用的有：
 
         -   [Using the Threadlocal Execution
-            Strategy](connections.html#threadlocal-strategy)描述`threadlocal`{.docutils
-            .literal}策略；
-        -   `mock`{.docutils
-            .literal}策略，它将所有语句执行分派给作为参数`executor`{.docutils
-            .literal}传递的函数。请参阅FAQ中的[示例。](http://docs.sqlalchemy.org/en/latest/faq_metadata_schema.html#how-can-i-get-the-create-table-drop-table-output-as-a-string)
+            Strategy](connections.html#threadlocal-strategy)描述`threadlocal`策略；
+        -   `mock`策略，它将所有语句执行分派给作为参数`executor`传递的函数。请参阅FAQ中的[示例。](http://docs.sqlalchemy.org/en/latest/faq_metadata_schema.html#how-can-i-get-the-create-table-drop-table-output-as-a-string)
     -   **executor=None**[¶](#sqlalchemy.create_engine.params.executor)
         – a function taking arguments
         `(sql, *multiparams, **params)`, to which

@@ -469,9 +469,7 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
     *static* `within_instrumented`{.descname} （ *fn* ） [](#sqlalchemy.orm.collections.collection.internally_instrumented "Permalink to this definition")
     :   按照仪器标记方法。
 
-        这个标签将防止任何装饰被应用于该方法。如果您正在使用基本的SQLAlchemy接口方法之一编排您自己对`collection_adapter()`{.xref
-        .py .py-func .docutils
-        .literal}的调用，或者阻止自动的ABC方法修饰封装您的实现，请使用此方法：
+        这个标签将防止任何装饰被应用于该方法。如果您正在使用基本的SQLAlchemy接口方法之一编排您自己对`collection_adapter()`的调用，或者阻止自动的ABC方法修饰封装您的实现，请使用此方法：
 
             # normally an 'extend' method on a list-like class would be
             # automatically intercepted and re-implemented in terms of
