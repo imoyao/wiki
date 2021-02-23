@@ -1,7 +1,7 @@
 ---
-title: internals
+title: ORM内部
 date: 2021-02-20 22:41:35
-permalink: /pages/cd5fde/
+permalink: /sqlalchemy/core/internals/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

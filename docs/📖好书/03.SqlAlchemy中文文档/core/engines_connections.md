@@ -1,7 +1,7 @@
 ---
-title: engines_connections
+title: 引擎和连接使用
 date: 2021-02-20 22:41:33
-permalink: /pages/232dd9/
+permalink: /sqlalchemy/core/enines_connections/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

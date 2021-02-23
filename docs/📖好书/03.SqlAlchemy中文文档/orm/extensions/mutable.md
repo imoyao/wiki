@@ -1,7 +1,7 @@
 ---
-title: mutable
+title: 突变跟踪
 date: 2021-02-20 22:41:43
-permalink: /pages/e889a7/
+permalink: /sqlalchemy/orm/extensions/mutable/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

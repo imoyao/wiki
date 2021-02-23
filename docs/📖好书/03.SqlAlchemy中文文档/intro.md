@@ -1,7 +1,7 @@
 ---
 title: intro
 date: 2021-02-20 22:41:39
-permalink: /pages/1b7f39/
+permalink: /sqlalchemy/intro/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

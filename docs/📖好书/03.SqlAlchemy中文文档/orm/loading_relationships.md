@@ -1,7 +1,7 @@
 ---
-title: loading_relationships
+title: 关系加载技术
 date: 2021-02-20 22:41:43
-permalink: /pages/f1ecde/
+permalink: /sqlalchemy/orm/loading_relationships/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

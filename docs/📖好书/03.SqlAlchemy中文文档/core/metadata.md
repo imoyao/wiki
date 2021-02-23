@@ -1,7 +1,7 @@
 ---
-title: metadata
+title: 用MetaData描述数据库
 date: 2021-02-20 22:41:35
-permalink: /pages/f325d5/
+permalink: /sqlalchemy/core/metadata/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

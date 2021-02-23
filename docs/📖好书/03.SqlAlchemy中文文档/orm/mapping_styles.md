@@ -1,7 +1,7 @@
 ---
-title: mapping_styles
+title: 映射类型
 date: 2021-02-20 22:41:45
-permalink: /pages/ab8936/
+permalink: /sqlalchemy/orm/mapping_styles/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

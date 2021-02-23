@@ -1,7 +1,7 @@
 ---
-title: session_state_management
+title: 状态管理
 date: 2021-02-20 22:41:47
-permalink: /pages/517678/
+permalink: /sqlalchemy/orm/session_state_management/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

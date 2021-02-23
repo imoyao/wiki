@@ -1,7 +1,7 @@
 ---
-title: compiler
+title: 自定义SQL构造和编译扩展
 date: 2021-02-20 22:41:33
-permalink: /pages/55c1ab/
+permalink: /sqlalchemy/55c1ab/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

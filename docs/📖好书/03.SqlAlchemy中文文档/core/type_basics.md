@@ -1,7 +1,7 @@
 ---
-title: type_basics
+title: 列和数据类型
 date: 2021-02-20 22:41:37
-permalink: /pages/0e898c/
+permalink: /sqlalchemy/core/type_basics/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

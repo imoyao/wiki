@@ -1,7 +1,7 @@
 ---
-title: api_basics
+title: 核心API基础
 date: 2021-02-20 22:41:32
-permalink: /pages/4e8c94/
+permalink: /sqlalchemy/core/api_basics/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

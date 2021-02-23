@@ -1,7 +1,7 @@
 ---
-title: sybase
+title: Sybase特有的
 date: 2021-02-20 22:41:38
-permalink: /pages/72a267/
+permalink: /sqlalchemy/dialects/sybase/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

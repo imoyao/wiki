@@ -1,7 +1,7 @@
 ---
-title: mapping_columns
+title: 映射表列
 date: 2021-02-20 22:41:45
-permalink: /pages/478870/
+permalink: /sqlalchemy/orm/mapping_columns/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

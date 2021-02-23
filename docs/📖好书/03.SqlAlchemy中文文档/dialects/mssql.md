@@ -1,7 +1,7 @@
 ---
-title: mssql
+title: Microsoft SQL Server
 date: 2021-02-20 22:41:37
-permalink: /pages/7ddc32/
+permalink: /sqlalchemy/dialects/mssql/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

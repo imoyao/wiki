@@ -1,7 +1,7 @@
 ---
-title: expression_api
+title: SQL语句和表达式API
 date: 2021-02-20 22:41:34
-permalink: /pages/a90b68/
+permalink: /sqlalchemy/core/expression_api/
 categories:
   - 📖好书
   - SqlAlchemy中文文档
@@ -12,8 +12,7 @@ tags:
 SQL语句和表达式API [¶](#module-sqlalchemy.sql.expression "Permalink to this headline")
 ======================================================================================
 
-本节介绍SQL表达式语言的API参考。有关其用法的完整介绍，请参阅[SQL
-Expression Language Tutorial](tutorial.html)。
+本节介绍SQL表达式语言的API参考。有关其用法的完整介绍，请参阅[SQL Expression Language Tutorial](tutorial.html)。
 
 -   [列元素和表达式](sqlelement.html)
 -   [可选项，表格，FROM对象](selectable.html)

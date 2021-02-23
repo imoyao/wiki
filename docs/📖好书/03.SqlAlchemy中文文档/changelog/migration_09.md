@@ -1,7 +1,7 @@
 ---
 title: migration_09
 date: 2021-02-20 22:41:31
-permalink: /pages/cac9ed/
+permalink: /sqlalchemy/cac9ed/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

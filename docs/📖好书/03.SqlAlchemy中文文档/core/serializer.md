@@ -1,7 +1,7 @@
 ---
-title: serializer
+title: 表达式串行器扩展
 date: 2021-02-20 22:41:36
-permalink: /pages/79dfb3/
+permalink: /sqlalchemy/core/serializer/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

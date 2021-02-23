@@ -1,13 +1,13 @@
 ---
-title: index
+title: 方言
 date: 2021-02-20 23:10:52
-permalink: /pages/32a1d7/
+permalink: /sqlalchemy/dialects/index/
 categories:
   - 📖好书
   - SqlAlchemy中文文档
   - dialects
 tags:
-  - 
+  - 方言
 ---
 方言[¶ T0\>](#dialects "Permalink to this headline")
 ====================================================

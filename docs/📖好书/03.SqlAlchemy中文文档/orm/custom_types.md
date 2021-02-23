@@ -1,7 +1,7 @@
 ---
-title: custom_types
+title: 自定义类型
 date: 2021-02-20 22:41:33
-permalink: /pages/caa112/
+permalink: /sqlalchemy/orm/custom_types/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

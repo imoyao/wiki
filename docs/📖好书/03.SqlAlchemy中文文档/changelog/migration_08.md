@@ -1,7 +1,7 @@
 ---
 title: migration_08
 date: 2021-02-20 22:41:31
-permalink: /pages/1557ad/
+permalink: /sqlalchemy/1557ad/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

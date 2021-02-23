@@ -1,7 +1,7 @@
 ---
-title: mapper_config
+title: 映射器配置
 date: 2021-02-20 22:41:43
-permalink: /pages/7908fe/
+permalink: /sqlalchemy/orm/mapper_config/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

@@ -1,7 +1,7 @@
 ---
-title: loading_objects
+title: 加载对象
 date: 2021-02-20 22:41:43
-permalink: /pages/9d10db/
+permalink: /sqlalchemy/orm/loading_objects/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

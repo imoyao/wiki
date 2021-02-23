@@ -1,7 +1,7 @@
 ---
-title: join_conditions
+title: 配置关系如何连接
 date: 2021-02-20 22:41:43
-permalink: /pages/5666ac/
+permalink: /sqlalchemy/orm/join_conditions/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

@@ -1,7 +1,7 @@
 ---
-title: connections
+title: 连接/引擎
 date: 2021-02-20 22:41:33
-permalink: /pages/ffcb37/
+permalink: /sqlalchemy/ffcb37/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

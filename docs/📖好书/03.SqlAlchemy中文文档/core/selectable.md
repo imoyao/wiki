@@ -1,7 +1,7 @@
 ---
 title: selectable
 date: 2021-02-20 22:41:36
-permalink: /pages/0f6ca2/
+permalink: /sqlalchemy/core/selectable/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

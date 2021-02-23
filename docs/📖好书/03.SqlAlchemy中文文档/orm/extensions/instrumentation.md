@@ -1,7 +1,7 @@
 ---
-title: instrumentation
+title: 替代类仪器
 date: 2021-02-20 22:41:43
-permalink: /pages/c65335/
+permalink: /sqlalchemy/orm/extensions/instrumentation/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

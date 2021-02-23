@@ -1,7 +1,7 @@
 ---
-title: inspection
+title: 运行时检测API
 date: 2021-02-20 22:41:35
-permalink: /pages/e748ea/
+permalink: /sqlalchemy/core/inspection/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

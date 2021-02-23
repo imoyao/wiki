@@ -1,7 +1,7 @@
 ---
 title: migration_07
 date: 2021-02-20 22:41:31
-permalink: /pages/aec63a/
+permalink: /sqlalchemy/aec63a/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

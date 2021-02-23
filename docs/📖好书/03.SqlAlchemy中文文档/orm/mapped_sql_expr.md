@@ -1,7 +1,7 @@
 ---
-title: mapped_sql_expr
+title: SQL表达式作为映射的属性
 date: 2021-02-20 22:41:43
-permalink: /pages/a9f106/
+permalink: /sqlalchemy/orm/mapped_sql_expr/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

@@ -1,7 +1,7 @@
 ---
-title: constraints
+title: 定义约束和索引
 date: 2021-02-20 22:41:33
-permalink: /pages/31bc0d/
+permalink: /sqlalchemy/core/constraints/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

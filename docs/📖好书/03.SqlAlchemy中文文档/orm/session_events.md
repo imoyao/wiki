@@ -1,7 +1,7 @@
 ---
-title: session_events
+title: 使用事件跟踪对象和会话更改
 date: 2021-02-20 22:41:47
-permalink: /pages/72615b/
+permalink: /sqlalchemy/orm/session_events/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

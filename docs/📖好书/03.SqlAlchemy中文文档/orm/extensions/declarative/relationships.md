@@ -1,7 +1,7 @@
 ---
-title: relationships
+title: 关系配置
 date: 2021-02-20 22:41:42
-permalink: /pages/52fdeb/
+permalink: /sqlalchemy/orm/extensions/declarative/relationships/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

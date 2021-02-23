@@ -1,7 +1,7 @@
 ---
-title: extending
+title: 事件和内部
 date: 2021-02-20 22:41:40
-permalink: /pages/4cb8c3/
+permalink: /sqlalchemy/orm/extending/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

@@ -1,7 +1,7 @@
 ---
-title: exceptions
+title: ORM异常
 date: 2021-02-20 22:41:34
-permalink: /pages/e91b52/
+permalink: /sqlalchemy/core/exceptions/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

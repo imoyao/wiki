@@ -1,7 +1,7 @@
 ---
-title: contextual
+title: 上下文/线程本地会话
 date: 2021-02-20 22:41:40
-permalink: /pages/e22718/
+permalink: /sqlalchemy/orm/contextual/
 categories:
   - 📖好书
   - SqlAlchemy中文文档
