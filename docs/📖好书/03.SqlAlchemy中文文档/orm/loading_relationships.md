@@ -314,11 +314,7 @@ are returned.
 >     ='select'\< / t0\>是迄今为止最有效的方法。
 > -   使用连接加载时，100个对象的加载只会发出一条SQL语句。连接将是一个LEFT
 >     OUTER
->     JOIN，在所有情况下总行数将等于100。如果你知道每个父对象都有一个子对象（即外键引用不是NULL），那么可以将[`innerjoin`{.xref
->     .py .py-paramref .docutils
->     .literal}](relationship_api.html#sqlalchemy.orm.relationship.params.innerjoin "sqlalchemy.orm.relationship")设置为`True`{.docutils
->     .literal}在[`relationship()`{.xref .py .py-func .docutils
->     .literal}](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中指定。对于有很多可能的目标引用可能尚未加载的对象加载，使用INNER
+>     JOIN，在所有情况下总行数将等于100。如果你知道每个父对象都有一个子对象（即外键引用不是NULL），那么可以将[`innerjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.innerjoin "sqlalchemy.orm.relationship")设置为`True`在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中指定。对于有很多可能的目标引用可能尚未加载的对象加载，使用INNER
 >     JOIN加载加载非常有效。
 > -   子查询加载将为所有子对象发出第二次加载，因此对于100个对象的加载，将会发出两条SQL语句。然而，除了可能在所有情况下子查询加载都可以使用INNER
 >     JOIN，而连接加载要求外键不是NULL，这里可能没有太多优势。

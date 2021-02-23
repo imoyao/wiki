@@ -162,8 +162,7 @@ API参考[¶](#api-reference "Permalink to this headline")
             [¶](#sqlalchemy.ext.orderinglist.OrderingList.params.ordering_func)
             -
 
-            可选的。将Python列表中的位置映射到要存储在`ordering_attr`{.docutils
-            .literal}中的值的函数。返回的值通常是（但不一定是！）整数。
+            可选的。将Python列表中的位置映射到要存储在`ordering_attr`中的值的函数。返回的值通常是（但不一定是！）整数。
 
             使用两个位置参数调用`ordering_func`{.docutils
             .literal}：列表中元素的索引和列表本身。
@@ -183,9 +182,7 @@ API参考[¶](#api-reference "Permalink to this headline")
             =
             True会立即重新编号项目到'1'，'2'，'3'。如果您有多个会话进行更改，其中任何一个会偶尔加载此集合，但所有会话都会尝试“清除”其提交中的编号，可能会导致除一个之外的所有会话都发生并发修改错误。
 
-            建议使用False默认值，如果您正在对之前已排序的实例执行`append()`{.docutils
-            .literal}操作，或者在手动执行sql之后执行一些内务操作，则只需调用`reorder()`{.docutils
-            .literal}操作。
+            建议使用False默认值，如果您正在对之前已排序的实例执行`append()`操作，或者在手动执行sql之后执行一些内务操作，则只需调用`reorder()`操作。
 
     `追加 T0> （ T1> 实体 T2> ） T3> ¶ T4>`{.descname}
     :   L.append（object） - 追加对象结束
