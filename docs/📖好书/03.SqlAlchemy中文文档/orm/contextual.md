@@ -196,9 +196,7 @@ current thread.
         – Keyword arguments will be passed to the
         [`scoped_session.session_factory`](#sqlalchemy.orm.scoping.scoped_session.session_factory "sqlalchemy.orm.scoping.scoped_session.session_factory")
         callable, if an existing [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
-        is not present. 如果存在[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")并且关键字参数已被传递，则引发[`InvalidRequestError`{.xref
-        .py .py-exc .docutils
-        .literal}](core_exceptions.html#sqlalchemy.exc.InvalidRequestError "sqlalchemy.exc.InvalidRequestError")。
+        is not present. 如果存在[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")并且关键字参数已被传递，则引发[`InvalidRequestError`](core_exceptions.html#sqlalchemy.exc.InvalidRequestError "sqlalchemy.exc.InvalidRequestError")。
 
     `__ init __`{.descname} （ *session\_factory*，*scopefunc = None* ） [t5 \>](#sqlalchemy.orm.scoping.scoped_session.__init__ "Permalink to this definition")
     :   构建一个新的[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")。

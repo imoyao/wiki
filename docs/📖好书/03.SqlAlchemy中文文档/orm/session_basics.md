@@ -461,9 +461,7 @@ Transactions](session_transaction.html#unitofwork-transaction)。
 [`rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")回滚当前事务。使用默认配置的会话时，会话的回滚后状态如下所示：
 
 > -   所有事务回滚并且所有连接返回到连接池，除非Session直接绑定到Connection，在这种情况下，连接仍然保持（但仍然回滚）。
-> -   当它们被添加到事务生命周期内的[`Session`{.xref .py .py-class
->     .docutils
->     .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")时，最初处于*挂起*状态的对象被删除，对应于它们的INSERT语句被回滚。它们的属性状态保持不变。
+> -   当它们被添加到事务生命周期内的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")时，最初处于*挂起*状态的对象被删除，对应于它们的INSERT语句被回滚。它们的属性状态保持不变。
 > -   在事务生命周期内被标记为*删除*的对象被提升回*持久*状态，对应于它们的DELETE语句被回滚。请注意，如果这些对象在事务内第一个*挂起*，则该操作优先。
 > -   所有未被清除的对象已经过期。
 

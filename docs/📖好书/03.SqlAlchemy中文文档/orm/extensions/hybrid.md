@@ -126,8 +126,7 @@ SQL表达式的构造有足够的区别，应该定义两个单独的Python表�
         def radius(cls):
             return func.abs(cls.length) / 2
 
-Python函数`abs()`用于实例级操作，SQL函数`ABS()`通过[`func`{.xref .py .py-data .docutils
-.literal}](core_sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")对象用于类级表达式：
+Python函数`abs()`用于实例级操作，SQL函数`ABS()`通过[`func`](core_sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")对象用于类级表达式：
 
     >>> i1.radius
     2

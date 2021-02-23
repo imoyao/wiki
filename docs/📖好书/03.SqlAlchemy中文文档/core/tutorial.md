@@ -703,8 +703,7 @@ based metadata. 在下面，我们还为key [`literal_column()`](sqlelement.html
 
 我们有时希望使用字符串作为快捷方式的一个地方是，当我们的语句有一些我们想要在诸如“ORDER
 BY”或“GROUP
-BY”子句的地方引用的标签列元素时；其他候选人包括“OVER”或“DISTINCT”条款中的字段。如果我们的[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构中有这样的标签，我们可以直接通过将字符串直接传递给`select.order_by()`或`select.group_by()`{.xref .py .py-meth
-.docutils .literal}等等。这将引用指定的标签并防止表达式被渲染两次：
+BY”子句的地方引用的标签列元素时；其他候选人包括“OVER”或“DISTINCT”条款中的字段。如果我们的[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构中有这样的标签，我们可以直接通过将字符串直接传递给`select.order_by()`或`select.group_by()`等等。这将引用指定的标签并防止表达式被渲染两次：
 
     >>> from sqlalchemy import func
     >>> stmt = select([
@@ -919,8 +918,7 @@ DBA的秘密部落不希望他们发现黑魔法；）。
 
 ### 功能[¶ T0\>](#functions "Permalink to this headline")
 
-SQL函数使用[`func`{.xref .py .py-data .docutils
-.literal}](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")关键字创建，该关键字使用属性访问生成函数：
+SQL函数使用[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")关键字创建，该关键字使用属性访问生成函数：
 
     >>> from sqlalchemy.sql import func
     >>> print(func.now())
@@ -993,8 +991,7 @@ using “lexical” column objects as well as bind parameters:
 
 也可以看看
 
-[`func`{.xref .py .py-data .docutils
-.literal}](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")
+[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")
 
 ### 窗口函数[¶](#window-functions "Permalink to this headline")
 

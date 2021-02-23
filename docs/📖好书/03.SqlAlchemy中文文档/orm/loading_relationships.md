@@ -308,9 +308,7 @@ are returned.
 
 > -   当使用默认的延迟加载时，在收集的情况下，100个对象的负载会发出多达101个SQL语句。然而
 >     -
->     这是一个明显的例外，因为如果多对一引用是对目标主键的简单外键引用，那么将使用[`Query.get()`{.xref
->     .py .py-meth .docutils
->     .literal}](query.html#sqlalchemy.orm.query.Query.get "sqlalchemy.orm.query.Query.get")因此，在这里，如果对象集合引用相对较小的目标对象集合，或者完整的可能目标对象集合已被加载到会话中并被强引用，则使用默认的lazy
+>     这是一个明显的例外，因为如果多对一引用是对目标主键的简单外键引用，那么将使用[`Query.get()`](query.html#sqlalchemy.orm.query.Query.get "sqlalchemy.orm.query.Query.get")因此，在这里，如果对象集合引用相对较小的目标对象集合，或者完整的可能目标对象集合已被加载到会话中并被强引用，则使用默认的lazy
 >     ='select'\< / t0\>是迄今为止最有效的方法。
 > -   使用连接加载时，100个对象的加载只会发出一条SQL语句。连接将是一个LEFT
 >     OUTER

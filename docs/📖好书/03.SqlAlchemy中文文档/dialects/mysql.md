@@ -951,17 +951,14 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
             – Same flag as that of [`String.convert_unicode`](core_type_basics.html#sqlalchemy.types.String.params.convert_unicode "sqlalchemy.types.String").
         -   **整理**
             [¶](#sqlalchemy.dialects.mysql.SET.params.collation) -
-            与[`String.collation`{.xref .py .py-paramref .docutils
-            .literal}](core_type_basics.html#sqlalchemy.types.String.params.collation "sqlalchemy.types.String")
+            与[`String.collation`](core_type_basics.html#sqlalchemy.types.String.params.collation "sqlalchemy.types.String")
         -   **charset**[¶](#sqlalchemy.dialects.mysql.SET.params.charset)
             – same as that of [`VARCHAR.charset`](#sqlalchemy.dialects.mysql.VARCHAR.params.charset "sqlalchemy.dialects.mysql.VARCHAR").
         -   **ascii** [¶](#sqlalchemy.dialects.mysql.SET.params.ascii) -
-            与[`VARCHAR.ascii`{.xref .py .py-paramref .docutils
-            .literal}](#sqlalchemy.dialects.mysql.VARCHAR.params.ascii "sqlalchemy.dialects.mysql.VARCHAR")相同。
+            与[`VARCHAR.ascii`](#sqlalchemy.dialects.mysql.VARCHAR.params.ascii "sqlalchemy.dialects.mysql.VARCHAR")相同。
         -   tt\> **unicode**
             [¶](#sqlalchemy.dialects.mysql.SET.params.unicode) -
-            与[`VARCHAR.unicode`{.xref .py .py-paramref .docutils
-            .literal}](#sqlalchemy.dialects.mysql.VARCHAR.params.unicode "sqlalchemy.dialects.mysql.VARCHAR")相同。
+            与[`VARCHAR.unicode`](#sqlalchemy.dialects.mysql.VARCHAR.params.unicode "sqlalchemy.dialects.mysql.VARCHAR")相同。
         -   **binary**[¶](#sqlalchemy.dialects.mysql.SET.params.binary)
             – same as that of [`VARCHAR.binary`](#sqlalchemy.dialects.mysql.VARCHAR.params.binary "sqlalchemy.dialects.mysql.VARCHAR").
         -   **引用** [¶](#sqlalchemy.dialects.mysql.SET.params.quoting)

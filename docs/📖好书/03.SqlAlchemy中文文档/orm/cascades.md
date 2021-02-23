@@ -185,14 +185,9 @@ DELETE](core_constraints.html#on-update-on-delete).
     present.
     如果在一对多关系中需要此行为，则SQLAlchemy将外键设置为`NULL`的默认行为可以通过以下两种方式之一来捕获：
 
-    > -   最简单也是最常见的就是在数据库模式级别将外键保存列设置为`NOT NULL`{.docutils
-    >     .literal}。SQLAlchemy将列设置为NULL的尝试将失败并出现简单的NOT
+    > -   最简单也是最常见的就是在数据库模式级别将外键保存列设置为`NOT NULL`。SQLAlchemy将列设置为NULL的尝试将失败并出现简单的NOT
     >     NULL约束异常。
-    > -   另一种更特殊的方式是将[`passive_deletes`{.xref .py
-    >     .py-paramref .docutils
-    >     .literal}](relationship_api.html#sqlalchemy.orm.relationship.params.passive_deletes "sqlalchemy.orm.relationship")标志设置为字符串`"all"`{.docutils
-    >     .literal}。这具有完全禁用SQLAlchemy将外键列设置为NULL的行为的效果，并且即使子行存在于内存中，也会为父行发出DELETE，而不会影响子行。在数据库级外键触发（特殊的`ON DELETE`{.docutils
-    >     .literal}设置或其他情况）需要全部激活的情况下，这可能是需要的父行被删除的情况。
+    > -   另一种更特殊的方式是将[`passive_deletes`](relationship_api.html#sqlalchemy.orm.relationship.params.passive_deletes "sqlalchemy.orm.relationship")标志设置为字符串`"all"`。这具有完全禁用SQLAlchemy将外键列设置为NULL的行为的效果，并且即使子行存在于内存中，也会为父行发出DELETE，而不会影响子行。在数据库级外键触发（特殊的`ON DELETE`设置或其他情况）需要全部激活的情况下，这可能是需要的父行被删除的情况。
 
 -   Database level `ON DELETE` cascade is **vastly
     more efficient** than that of SQLAlchemy.

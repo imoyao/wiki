@@ -1468,8 +1468,7 @@ method:
         Also note that while [`yield_per()`](#sqlalchemy.orm.query.Query.yield_per "sqlalchemy.orm.query.Query.yield_per")
         will set the `stream_results` execution
         option to True, currently this is only understood by
-        [`psycopg2`{.xref .py .py-mod .docutils
-        .literal}](dialects_postgresql.html#module-sqlalchemy.dialects.postgresql.psycopg2 "sqlalchemy.dialects.postgresql.psycopg2")
+        [`psycopg2`](dialects_postgresql.html#module-sqlalchemy.dialects.postgresql.psycopg2 "sqlalchemy.dialects.postgresql.psycopg2")
         dialect which will stream results using server side cursors
         instead of pre-buffer all rows for this query. 其他DBAPI
         **在使其可用之前预缓冲所有行**。原始数据库行的内存使用量远小于ORM映射对象的内存使用量，但在进行基准测试时应该将其考虑在内。
@@ -1724,8 +1723,7 @@ method:
         [`KeyedTuple.keys()`](#sqlalchemy.util.KeyedTuple.keys "sqlalchemy.util.KeyedTuple.keys")
 
     `键 T0> （ T1> ） T2> ¶ T3>`{.descname}
-    :   *inherited from the* `keys()` *method of* `AbstractKeyedTuple`{.xref .py .py-class
-        .docutils .literal}
+    :   *inherited from the* `keys()` *method of* `AbstractKeyedTuple`
 
         返回此[`KeyedTuple`](#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")的字符串键名称列表。
 
@@ -1777,8 +1775,7 @@ method:
     `baked_lazyload  tt> （ loadopt，attr ） ¶`{.descname}
     :   应用`orm.baked_lazyload()`选项产生一个新的[`Load`](#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")对象。
 
-        有关用法示例，请参阅`orm.baked_lazyload()`{.xref .py .py-func
-        .docutils .literal}。
+        有关用法示例，请参阅`orm.baked_lazyload()`。
 
     `contains_eager`{.descname} （ *loadopt*，*attr*，*别名=无* T5\> [¶ T6\>](#sqlalchemy.orm.strategy_options.Load.contains_eager "Permalink to this definition")
     :   使用[`orm.contains_eager()`](loading_relationships.html#sqlalchemy.orm.contains_eager "sqlalchemy.orm.contains_eager")选项生成新的[`Load`](#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")对象。
