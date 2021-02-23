@@ -673,13 +673,11 @@ tags:
             [¶](#sqlalchemy.orm.mapper.Mapper.cascade_iterator.params.type_)
             -
 
-            级联规则的名称（即`"save-update"`{.docutils
-            .literal}，`"delete"`等。）。
+            级联规则的名称（即`"save-update"`，`"delete"`等。）。
 
             注意
 
-            这里不接受`"all"`{.docutils
-            .literal}级联。对于通用对象遍历函数，请参阅[How do I walk
+            这里不接受`"all"`级联。对于通用对象遍历函数，请参阅[How do I walk
             all objects that are related to a given
             object?](faq_sessions.html#faq-walk-objects)。
 
