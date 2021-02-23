@@ -1,7 +1,7 @@
 ---
-title: sqlite
+title: SQLite特有的
 date: 2021-02-20 22:41:38
-permalink: /pages/243733/
+permalink: /sqlalchemy/dialects/sqlite/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

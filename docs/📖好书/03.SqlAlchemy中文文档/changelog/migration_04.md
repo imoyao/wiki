@@ -1,7 +1,7 @@
 ---
 title: migration_04
 date: 2021-02-20 22:41:31
-permalink: /pages/a5cdb7/
+permalink: /sqlalchemy/a5cdb7/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

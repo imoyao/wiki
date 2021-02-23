@@ -1,7 +1,7 @@
 ---
-title: functions
+title: SQL和通用函数
 date: 2021-02-20 22:41:34
-permalink: /pages/3bc238/
+permalink: /sqlalchemy/core/functions/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

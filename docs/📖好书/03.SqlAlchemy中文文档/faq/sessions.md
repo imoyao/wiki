@@ -1,7 +1,7 @@
 ---
-title: sessions
+title: 会话/查询
 date: 2021-02-20 22:41:39
-permalink: /pages/58af04/
+permalink: /sqlalchemy/faq/sessions/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

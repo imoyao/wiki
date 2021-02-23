@@ -1,7 +1,7 @@
 ---
-title: versioning
+title: 配置版本计数器
 date: 2021-02-20 22:41:49
-permalink: /pages/8d6794/
+permalink: /sqlalchemy/orm/versioning/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

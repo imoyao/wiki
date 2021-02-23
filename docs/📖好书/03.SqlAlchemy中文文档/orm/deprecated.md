@@ -1,7 +1,7 @@
 ---
-title: deprecated
+title: 不推荐使用的ORM事件接口
 date: 2021-02-20 22:41:40
-permalink: /pages/9bc068/
+permalink: /sqlalchemy/orm/deprecated/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

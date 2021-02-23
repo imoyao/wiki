@@ -1,7 +1,7 @@
 ---
-title: index
+title: ORM扩展
 date: 2021-02-20 23:15:02
-permalink: /pages/0fc457/
+permalink: /sqlalchemy/orm/extensions/index/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

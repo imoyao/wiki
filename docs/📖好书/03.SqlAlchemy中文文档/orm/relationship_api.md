@@ -1,7 +1,7 @@
 ---
-title: relationship_api
+title: 关系API
 date: 2021-02-20 22:41:45
-permalink: /pages/9f27b1/
+permalink: /sqlalchemy/orm/relationship_api/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

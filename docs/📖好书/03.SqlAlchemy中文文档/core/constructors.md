@@ -1,7 +1,7 @@
 ---
-title: constructors
+title: 构造函数和对象初始化
 date: 2021-02-20 22:41:40
-permalink: /pages/619fef/
+permalink: /sqlalchemy/core/constructors/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

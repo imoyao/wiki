@@ -1,7 +1,7 @@
 ---
-title: tutorial
+title: SQL表达式语言教程
 date: 2021-02-20 22:41:36
-permalink: /pages/b9c06d/
+permalink: /sqlalchemy/core/tutorial/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

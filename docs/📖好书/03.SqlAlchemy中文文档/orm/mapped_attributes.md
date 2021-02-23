@@ -1,7 +1,7 @@
 ---
-title: mapped_attributes
+title: 更改属性行为
 date: 2021-02-20 22:41:43
-permalink: /pages/99b767/
+permalink: /sqlalchemy/orm/mapped_attributes/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

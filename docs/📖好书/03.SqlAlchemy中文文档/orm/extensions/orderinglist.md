@@ -1,7 +1,7 @@
 ---
-title: orderinglist
+title: 订购清单
 date: 2021-02-20 22:41:43
-permalink: /pages/849022/
+permalink: /sqlalchemy/orm/extensions/orderinglist/
 categories:
   - 📖好书
   - SqlAlchemy中文文档
@@ -15,9 +15,7 @@ tags:
 
 管理包含元素的索引/位置信息的自定义列表。
 
-作者：
-
-Jason Kirtland
+作者：Jason Kirtland
 
 `orderinglist` is a helper for mutable ordered
 relationships. 它将拦截在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")管理的集合上执行的列表操作，并自动将列表位置中的更改同步到目标标量属性上。

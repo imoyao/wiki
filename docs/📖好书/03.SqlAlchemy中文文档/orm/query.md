@@ -1,7 +1,7 @@
 ---
-title: query
+title: 查询API
 date: 2021-02-20 22:41:45
-permalink: /pages/ce4d67/
+permalink: /sqlalchemy/orm/query/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

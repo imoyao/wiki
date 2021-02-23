@@ -1,7 +1,7 @@
 ---
-title: ddl
+title: 定制DDL
 date: 2021-02-20 22:41:33
-permalink: /pages/cd0c29/
+permalink: /sqlalchemy/core/ddl/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

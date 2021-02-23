@@ -1,7 +1,7 @@
 ---
-title: loading_columns
+title: 加载列
 date: 2021-02-20 22:41:43
-permalink: /pages/6c733e/
+permalink: /sqlalchemy/orm/loading_columns/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

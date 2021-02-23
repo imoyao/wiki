@@ -1,7 +1,7 @@
 ---
-title: type_api
+title: 基本类型API
 date: 2021-02-20 22:41:37
-permalink: /pages/3e7a7e/
+permalink: /sqlalchemy/core/type_api/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

@@ -1,7 +1,7 @@
 ---
-title: table_config
+title: 表格配置
 date: 2021-02-20 22:41:42
-permalink: /pages/3bbc2f/
+permalink: /sqlalchemy/orm/extensions/declarative/table_config/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

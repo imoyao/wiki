@@ -1,7 +1,7 @@
 ---
-title: engines
+title: 引擎配置
 date: 2021-02-20 22:41:33
-permalink: /pages/55f36a/
+permalink: /sqlalchemy/core/engines/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

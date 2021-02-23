@@ -1,7 +1,7 @@
 ---
-title: event
+title: 事件
 date: 2021-02-20 22:41:34
-permalink: /pages/424986/
+permalink: /sqlalchemy/core/event/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

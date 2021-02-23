@@ -1,7 +1,7 @@
 ---
-title: mysql
+title: MySQL相关的
 date: 2021-02-20 22:41:37
-permalink: /pages/6326fd/
+permalink: /sqlalchemy/dialects/mysql/
 categories:
   - 📖好书
   - SqlAlchemy中文文档
@@ -9,7 +9,7 @@ categories:
 tags:
   - 
 ---
-MySQL的[¶ T0\>](#module-sqlalchemy.dialects.mysql.base "Permalink to this headline")
+MySQL[¶ T0\>](#module-sqlalchemy.dialects.mysql.base "Permalink to this headline")
 ====================================================================================
 
 支持MySQL数据库。

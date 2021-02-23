@@ -1,7 +1,7 @@
 ---
-title: metadata_schema
+title: MetaData / Schema
 date: 2021-02-20 22:41:39
-permalink: /pages/3c7f8a/
+permalink: /sqlalchemy/faq/metadata_schema/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

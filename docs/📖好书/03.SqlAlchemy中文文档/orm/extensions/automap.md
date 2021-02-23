@@ -1,7 +1,7 @@
 ---
-title: automap
+title: 自动地图
 date: 2021-02-20 22:41:41
-permalink: /pages/0b473a/
+permalink: /sqlalchemy/orm/extensions/automap/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

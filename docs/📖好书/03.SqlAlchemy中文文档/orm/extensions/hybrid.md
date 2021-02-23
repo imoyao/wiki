@@ -1,7 +1,7 @@
 ---
-title: hybrid
+title: 混合属性
 date: 2021-02-20 22:41:42
-permalink: /pages/750d06/
+permalink: /sqlalchemy/orm/extensions/hybrid/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

@@ -1,7 +1,7 @@
 ---
 title: SqlAlchemy 1.1 中文文档
 date: 2021-02-20 23:09:14
-permalink: /pages/fefea0/
+permalink: /sqlalchemy/index/
 categories:
   - 📖好书
   - SqlAlchemy 中文文档

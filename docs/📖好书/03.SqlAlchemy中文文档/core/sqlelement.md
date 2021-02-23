@@ -1,7 +1,7 @@
 ---
-title: sqlelement
+title: 列元素和表达式
 date: 2021-02-20 22:41:36
-permalink: /pages/d88528/
+permalink: /sqlalchemy/core/sqlelement/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

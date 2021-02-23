@@ -1,7 +1,7 @@
 ---
-title: session
+title: 使用会话
 date: 2021-02-20 22:41:46
-permalink: /pages/9774b1/
+permalink: /sqlalchemy/orm/session/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

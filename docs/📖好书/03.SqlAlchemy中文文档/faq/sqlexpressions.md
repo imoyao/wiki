@@ -1,7 +1,7 @@
 ---
-title: sqlexpressions
+title: SQL表达式
 date: 2021-02-20 22:41:39
-permalink: /pages/5c856b/
+permalink: /sqlalchemy/faq/sqlexpressions/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

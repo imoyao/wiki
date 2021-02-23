@@ -1,7 +1,7 @@
 ---
 title: 基本关系模式
 date: 2021-02-20 22:41:39
-permalink: /pages/002fd5/
+permalink: /sqlalchemy/orm/basic_relationships/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

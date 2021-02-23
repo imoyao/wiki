@@ -1,7 +1,7 @@
 ---
 title: changelog_09
 date: 2021-02-20 22:41:29
-permalink: /pages/b2578e/
+permalink: /sqlalchemy/b2578e/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

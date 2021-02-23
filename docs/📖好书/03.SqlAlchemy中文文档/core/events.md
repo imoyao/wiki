@@ -1,7 +1,7 @@
 ---
-title: events
+title: ORM事件
 date: 2021-02-20 22:41:34
-permalink: /pages/5aeacd/
+permalink: /sqlalchemy/core/events/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

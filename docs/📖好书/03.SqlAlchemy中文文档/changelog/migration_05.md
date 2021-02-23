@@ -1,7 +1,7 @@
 ---
 title: migration_05
 date: 2021-02-20 22:41:31
-permalink: /pages/8a8597/
+permalink: /sqlalchemy/8a8597/
 categories:
   - 📖好书
   - SqlAlchemy中文文档
