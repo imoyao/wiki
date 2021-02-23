@@ -303,11 +303,8 @@ Oracle数据类型[¶](#oracle-data-types "Permalink to this headline")
 
         -   **length**[¶](#sqlalchemy.dialects.oracle.NCLOB.params.length)
             – optional, a length for the column for use in DDL and CAST
-            expressions. 如果没有发布`CREATE TABLE`{.docutils
-            .literal}，可以安全地省略。某些数据库可能需要用于DDL的`length`{.docutils
-            .literal}，并且在`CREATE TABLE`
-            DDL时会引发异常如果包含没有长度的`VARCHAR`{.docutils
-            .literal}，则发布。值是否被解释为字节或字符是数据库特定的。
+            expressions. 如果没有发布`CREATE TABLE`，可以安全地省略。某些数据库可能需要用于DDL的`length`，并且在`CREATE TABLE`
+            DDL时会引发异常如果包含没有长度的`VARCHAR`，则发布。值是否被解释为字节或字符是数据库特定的。
         -   **整理**
             [¶](#sqlalchemy.dialects.oracle.NCLOB.params.collation) -
 
@@ -323,16 +320,13 @@ Oracle数据类型[¶](#oracle-data-types "Permalink to this headline")
             [¶](#sqlalchemy.dialects.oracle.NCLOB.params.convert_unicode)
             -
 
-            当设置为`True`时，[`String`{.xref .py
-            .py-class .docutils
-            .literal}](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")类型将假定输入将作为Python
+            当设置为`True`时，[`String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")类型将假定输入将作为Python
             `unicode`对象传递，结果以Python
             `unicode`对象。If the DBAPI in use does
             not support Python unicode (which is fewer and fewer these
             days), SQLAlchemy will encode/decode the value, using the
             value of the `encoding` parameter passed
-            to [`create_engine()`{.xref .py .py-func .docutils
-            .literal}](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")
+            to [`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")
             as the encoding.
 
             当使用本地支持Python
@@ -345,18 +339,12 @@ Oracle数据类型[¶](#oracle-data-types "Permalink to this headline")
             indicate an underlying column type that directly supports
             unicode, such as `NVARCHAR`.
 
-            对于非常罕见的情况，Python `unicode`{.docutils
-            .literal}将由本地支持Python `unicode`{.docutils
-            .literal}的后端由SQLAlchemy编码/解码，值`force`{.docutils
-            .literal}可以在这里传递，这将导致无条件地使用SQLAlchemy的编码/解码服务。
+            对于非常罕见的情况，Python `unicode`将由本地支持Python `unicode`的后端由SQLAlchemy编码/解码，值`force`可以在这里传递，这将导致无条件地使用SQLAlchemy的编码/解码服务。
 
         -   **unicode\_error**
             [¶](#sqlalchemy.dialects.oracle.NCLOB.params.unicode_error)
             -
-            可选，一种用于处理Unicode转换错误的方法。行为与标准库的`string.decode()`{.docutils
-            .literal}函数的`errors`{.docutils
-            .literal}关键字参数相同。该标志要求将`convert_unicode`{.docutils
-            .literal}设置为`force` -
+            可选，一种用于处理Unicode转换错误的方法。行为与标准库的`string.decode()`函数的`errors`关键字参数相同。该标志要求将`convert_unicode`设置为`force` -
             否则，SQLAlchemy不保证处理unicode转换的任务。请注意，此标志为已经返回unicode对象的后端（大多数DBAPI所执行的操作）的后端操作增加了显着的性能开销。此标志只能用作从不同或损坏编码的列中读取字符串的最后手段。
 
 *class* `sqlalchemy.dialects.oracle。`{.descclassname} `NUMBER`{.descname} （ *precision = None*，*scale = None*，*asdecimal = None* ） [¶](#sqlalchemy.dialects.oracle.NUMBER "Permalink to this definition")
@@ -375,11 +363,8 @@ Oracle数据类型[¶](#oracle-data-types "Permalink to this headline")
 
         -   **length**[¶](#sqlalchemy.dialects.oracle.LONG.params.length)
             – optional, a length for the column for use in DDL and CAST
-            expressions. 如果没有发布`CREATE TABLE`{.docutils
-            .literal}，可以安全地省略。某些数据库可能需要用于DDL的`length`{.docutils
-            .literal}，并且在`CREATE TABLE`
-            DDL时会引发异常如果包含没有长度的`VARCHAR`{.docutils
-            .literal}，则发布。值是否被解释为字节或字符是数据库特定的。
+            expressions. 如果没有发布`CREATE TABLE`，可以安全地省略。某些数据库可能需要用于DDL的`length`，并且在`CREATE TABLE`
+            DDL时会引发异常如果包含没有长度的`VARCHAR`，则发布。值是否被解释为字节或字符是数据库特定的。
         -   **整理**
             [¶](#sqlalchemy.dialects.oracle.LONG.params.collation) -
 
@@ -395,16 +380,13 @@ Oracle数据类型[¶](#oracle-data-types "Permalink to this headline")
             [¶](#sqlalchemy.dialects.oracle.LONG.params.convert_unicode)
             -
 
-            当设置为`True`时，[`String`{.xref .py
-            .py-class .docutils
-            .literal}](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")类型将假定输入将作为Python
+            当设置为`True`时，[`String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")类型将假定输入将作为Python
             `unicode`对象传递，结果以Python
             `unicode`对象。If the DBAPI in use does
             not support Python unicode (which is fewer and fewer these
             days), SQLAlchemy will encode/decode the value, using the
             value of the `encoding` parameter passed
-            to [`create_engine()`{.xref .py .py-func .docutils
-            .literal}](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")
+            to [`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")
             as the encoding.
 
             当使用本地支持Python
@@ -417,17 +399,11 @@ Oracle数据类型[¶](#oracle-data-types "Permalink to this headline")
             indicate an underlying column type that directly supports
             unicode, such as `NVARCHAR`.
 
-            对于非常罕见的情况，Python `unicode`{.docutils
-            .literal}将由本地支持Python `unicode`{.docutils
-            .literal}的后端由SQLAlchemy编码/解码，值`force`{.docutils
-            .literal}可以在这里传递，这将导致无条件地使用SQLAlchemy的编码/解码服务。
+            对于非常罕见的情况，Python `unicode`将由本地支持Python `unicode`的后端由SQLAlchemy编码/解码，值`force`可以在这里传递，这将导致无条件地使用SQLAlchemy的编码/解码服务。
 
         -   **unicode\_error**
             [¶](#sqlalchemy.dialects.oracle.LONG.params.unicode_error) -
-            可选，一种用于处理Unicode转换错误的方法。行为与标准库的`string.decode()`{.docutils
-            .literal}函数的`errors`{.docutils
-            .literal}关键字参数相同。该标志要求将`convert_unicode`{.docutils
-            .literal}设置为`force` -
+            可选，一种用于处理Unicode转换错误的方法。行为与标准库的`string.decode()`函数的`errors`关键字参数相同。该标志要求将`convert_unicode`设置为`force` -
             否则，SQLAlchemy不保证处理unicode转换的任务。请注意，此标志为已经返回unicode对象的后端（大多数DBAPI所执行的操作）的后端操作增加了显着的性能开销。此标志只能用作从不同或损坏编码的列中读取字符串的最后手段。
 
 *class* `sqlalchemy.dialects.oracle。`{.descclassname} `RAW  长度=无 ） T5> ¶ T6>`{.descname}

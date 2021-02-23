@@ -308,9 +308,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 
         默认情况下，引发`ValueError`。
 
-        根据父类是[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")类型还是[`MutableComposite`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")类型，在不同场景中调用此方法。在前者的情况下，它既被称为属性集操作，也被称为ORM加载操作。对于后者，它只在属性集操作期间被调用；
+        根据父类是[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")类型还是[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")类型，在不同场景中调用此方法。在前者的情况下，它既被称为属性集操作，也被称为ORM加载操作。对于后者，它只在属性集操作期间被调用；
         [`composite()`](composites.html#sqlalchemy.orm.composite "sqlalchemy.orm.composite")构造的机制在加载操作期间处理强制。
 
         参数：
@@ -341,15 +339,11 @@ API参考[¶](#api-reference "Permalink to this headline")
 
     ` _get_listen_keys  T0> （ T1> 属性 T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* `_get_listen_keys()`{.xref .py .py-meth
-        .docutils .literal} *method of* [`MutableBase`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
+        .docutils .literal} *method of* [`MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
         给定描述符属性，返回属性键的`set()`，它表示此属性状态的变化。
 
-        这通常只是`set([attribute.key])`，但可以被覆盖以提供额外的键。例如。一个[`MutableComposite`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")使用与组成复合值的列相关联的属性键来扩充该集合。
+        这通常只是`set([attribute.key])`，但可以被覆盖以提供额外的键。例如。一个[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")使用与组成复合值的列相关联的属性键来扩充该集合。
 
         在拦截[`InstanceEvents.refresh()`](events.html#sqlalchemy.orm.events.InstanceEvents.refresh "sqlalchemy.orm.events.InstanceEvents.refresh")和[`InstanceEvents.refresh_flush()`](events.html#sqlalchemy.orm.events.InstanceEvents.refresh_flush "sqlalchemy.orm.events.InstanceEvents.refresh_flush")事件的情况下，会查看此集合，这些事件传递已刷新的属性名称列表；该列表与该组进行比较以确定是否需要采取行动。
 
@@ -357,15 +351,12 @@ API参考[¶](#api-reference "Permalink to this headline")
 
      `_listen_on_attribute`{.descname}(*attribute*, *coerce*, *parent\_cls*)[¶](#sqlalchemy.ext.mutable.Mutable._listen_on_attribute "Permalink to this definition")
     :   *inherited from the* `_listen_on_attribute()`{.xref .py .py-meth
-        .docutils .literal} *method of* [`MutableBase`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
+        .docutils .literal} *method of* [`MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
         将此类型建立为给定映射描述符的变种侦听器。
 
     ` _parents  T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`_parents`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.ext.mutable.MutableBase._parents "sqlalchemy.ext.mutable.MutableBase._parents")
+    :   *inherited from the* [`_parents`](#sqlalchemy.ext.mutable.MutableBase._parents "sqlalchemy.ext.mutable.MutableBase._parents")
         *attribute of* [`MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
         父对象上的字典 - \>属性名称。
@@ -386,9 +377,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 
         请注意，返回的类型始终是一个实例，即使给出了一个类，并且只有与该类型实例专门声明的列才会接收其他检测。
 
-        要将特定的可变类型与特定类型的所有匹配关联起来，请使用特定[`Mutable`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")子类的[`Mutable.associate_with()`](#sqlalchemy.ext.mutable.Mutable.associate_with "sqlalchemy.ext.mutable.Mutable.associate_with")类方法建立全局关联。
+        要将特定的可变类型与特定类型的所有匹配关联起来，请使用特定[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")子类的[`Mutable.associate_with()`](#sqlalchemy.ext.mutable.Mutable.associate_with "sqlalchemy.ext.mutable.Mutable.associate_with")类方法建立全局关联。
 
         警告
 
@@ -419,9 +408,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 
         默认情况下，引发`ValueError`。
 
-        根据父类是[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")类型还是[`MutableComposite`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")类型，在不同场景中调用此方法。在前者的情况下，它既被称为属性集操作，也被称为ORM加载操作。对于后者，它只在属性集操作期间被调用；
+        根据父类是[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")类型还是[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")类型，在不同场景中调用此方法。在前者的情况下，它既被称为属性集操作，也被称为ORM加载操作。对于后者，它只在属性集操作期间被调用；
         [`composite()`](composites.html#sqlalchemy.orm.composite "sqlalchemy.orm.composite")构造的机制在加载操作期间处理强制。
 
         参数：

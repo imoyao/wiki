@@ -142,16 +142,12 @@ Attributes](mapped_sql_expr.html#mapper-sql-expressions)中查看此用法的示
     -   **active\_history = False**
         [¶](#sqlalchemy.orm.column_property.params.active_history) -
 
-        当`True`时，表示标量属性的“上一个”值在替换时应加载，如果尚未加载。通常，简单的非主键标量值的历史跟踪逻辑只需要知道“新”值就可以执行刷新。此标志可用于使用[`attributes.get_history()`{.xref
-        .py .py-func .docutils
-        .literal}](session_api.html#sqlalchemy.orm.attributes.get_history "sqlalchemy.orm.attributes.get_history")或[`Session.is_modified()`](session_api.html#sqlalchemy.orm.session.Session.is_modified "sqlalchemy.orm.session.Session.is_modified")的应用程序，该应用程序还需要知道属性的“上一个”值。
+        当`True`时，表示标量属性的“上一个”值在替换时应加载，如果尚未加载。通常，简单的非主键标量值的历史跟踪逻辑只需要知道“新”值就可以执行刷新。此标志可用于使用[`attributes.get_history()`](session_api.html#sqlalchemy.orm.attributes.get_history "sqlalchemy.orm.attributes.get_history")或[`Session.is_modified()`](session_api.html#sqlalchemy.orm.session.Session.is_modified "sqlalchemy.orm.session.Session.is_modified")的应用程序，该应用程序还需要知道属性的“上一个”值。
 
         New in version 0.6.6.
 
     -   **comparator\_factory**[¶](#sqlalchemy.orm.column_property.params.comparator_factory)
-        – a class which extends [`ColumnProperty.Comparator`{.xref .py
-        .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.properties.ColumnProperty.Comparator "sqlalchemy.orm.properties.ColumnProperty.Comparator")
+        – a class which extends [`ColumnProperty.Comparator`](internals.html#sqlalchemy.orm.properties.ColumnProperty.Comparator "sqlalchemy.orm.properties.ColumnProperty.Comparator")
         which provides custom SQL clause generation for comparison
         operations.
     -   **group**[¶](#sqlalchemy.orm.column_property.params.group) – a
@@ -167,17 +163,13 @@ Attributes](mapped_sql_expr.html#mapper-sql-expressions)中查看此用法的示
     -   **expire\_on\_flush = True**
         [¶](#sqlalchemy.orm.column_property.params.expire_on_flush) -
 
-        在刷新时禁用过期。引用SQL表达式（而不是单个表绑定列）的column\_property()被认为是“只读”属性；填充它对数据状态没有影响，它只能返回数据库状态。出于这个原因，只要父对象涉及到刷新，即在刷新中有任何种类的“脏”状态，column\_property()的值就会过期。将该参数设置为`False`将产生在刷新过程结束后保留​​现有值的效果。但请注意，具有默认到期设置的[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")仍会在[`Session.commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")调用之后过期所有属性。
+        在刷新时禁用过期。引用SQL表达式（而不是单个表绑定列）的column\_property()被认为是“只读”属性；填充它对数据状态没有影响，它只能返回数据库状态。出于这个原因，只要父对象涉及到刷新，即在刷新中有任何种类的“脏”状态，column\_property()的值就会过期。将该参数设置为`False`将产生在刷新过程结束后保留​​现有值的效果。但请注意，具有默认到期设置的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")仍会在[`Session.commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")调用之后过期所有属性。
 
         New in version 0.7.3.
 
     -   **info** [¶](#sqlalchemy.orm.column_property.params.info) -
 
-        可选数据字典，将填充到此对象的[`MapperProperty.info`{.xref .py
-        .py-attr .docutils
-        .literal}](internals.html#MapperProperty.info "MapperProperty.info")属性中。
+        可选数据字典，将填充到此对象的[`MapperProperty.info`](internals.html#MapperProperty.info "MapperProperty.info")属性中。
 
         0.8版本中的新功能
 
@@ -185,9 +177,7 @@ Attributes](mapped_sql_expr.html#mapper-sql-expressions)中查看此用法的示
         – an [`AttributeExtension`](deprecated.html#sqlalchemy.orm.interfaces.AttributeExtension "sqlalchemy.orm.interfaces.AttributeExtension")
         instance, or list of extensions, which will be prepended to the
         list of attribute listeners for the resulting descriptor placed
-        on the class. **已过时。 T0\>**请参阅[`AttributeEvents`{.xref
-        .py .py-class .docutils
-        .literal}](events.html#sqlalchemy.orm.events.AttributeEvents "sqlalchemy.orm.events.AttributeEvents")。
+        on the class. **已过时。 T0\>**请参阅[`AttributeEvents`](events.html#sqlalchemy.orm.events.AttributeEvents "sqlalchemy.orm.events.AttributeEvents")。
 
 映射表列的子集[¶](#mapping-a-subset-of-table-columns "Permalink to this headline")
 ----------------------------------------------------------------------------------

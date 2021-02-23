@@ -13,8 +13,7 @@ tags:
 ============================================================
 
 *class* `sqlalchemy.types。`{.descclassname} `TypeEngine`{.descname} [¶](#sqlalchemy.types.TypeEngine "Permalink to this definition")
-:   基础：`sqlalchemy.sql.visitors.Visitable`{.xref .py .py-class
-    .docutils .literal}
+:   基础：`sqlalchemy.sql.visitors.Visitable`
 
     所有SQL数据类型的最终基类。
 
@@ -28,13 +27,9 @@ tags:
     [Column and Data Types](types.html)
 
     *class* `比较器`{.descname} （ *expr* ） [¶](#sqlalchemy.types.TypeEngine.Comparator "Permalink to this definition")
-    :   基础：[`sqlalchemy.sql.operators.ColumnOperators`{.xref .py
-        .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")
+    :   基础：[`sqlalchemy.sql.operators.ColumnOperators`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")
 
-        在类型级别定义的自定义比较操作的基类。请参阅[`TypeEngine.comparator_factory`{.xref
-        .py .py-attr .docutils
-        .literal}](#sqlalchemy.types.TypeEngine.comparator_factory "sqlalchemy.types.TypeEngine.comparator_factory")。
+        在类型级别定义的自定义比较操作的基类。请参阅[`TypeEngine.comparator_factory`](#sqlalchemy.types.TypeEngine.comparator_factory "sqlalchemy.types.TypeEngine.comparator_factory")。
 
      `TypeEngine.`{.descclassname}`adapt`{.descname}(*cls*, *\*\*kw*)[¶](#sqlalchemy.types.TypeEngine.adapt "Permalink to this definition")
     :   产生这种类型的“适应”形式，给予一个“impl”类来处理。
@@ -75,9 +70,7 @@ tags:
 
         这里的默认行为是保守的；如果右侧已经被强制为一个基于它的Python类型的SQL类型，那么它通常是独立的。
 
-        这里的最终用户功能扩展通常应该通过[`TypeDecorator`{.xref .py
-        .py-class .docutils
-        .literal}](custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")，它提供了更自由的行为，因为它默认将表达式的另一端强制转换为这种类型，从而将特殊的Python转换应用到超出需要的地方由DBAPI向两个ide。它还提供了用于此行为的最终用户定制的公共方法[`TypeDecorator.coerce_compared_value()`](custom_types.html#sqlalchemy.types.TypeDecorator.coerce_compared_value "sqlalchemy.types.TypeDecorator.coerce_compared_value")。
+        这里的最终用户功能扩展通常应该通过[`TypeDecorator`](custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")，它提供了更自由的行为，因为它默认将表达式的另一端强制转换为这种类型，从而将特殊的Python转换应用到超出需要的地方由DBAPI向两个ide。它还提供了用于此行为的最终用户定制的公共方法[`TypeDecorator.coerce_compared_value()`](custom_types.html#sqlalchemy.types.TypeDecorator.coerce_compared_value "sqlalchemy.types.TypeDecorator.coerce_compared_value")。
 
     ` TypeEngine。 T0>  column_expression  T1> （ T2>  colexpr  T3> ） T4> ¶ T5>`{.descclassname}
     :   给定一个SELECT列表达式，返回一个包装SQL表达式。
@@ -92,18 +85,11 @@ tags:
         Processing](custom_types.html#types-sql-value-processing)
 
     ` TypeEngine。 T0>  comparator_factory  T1> ¶ T2>`{.descclassname}
-    :   基础：[`sqlalchemy.sql.operators.ColumnOperators`{.xref .py
-        .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")
+    :   基础：[`sqlalchemy.sql.operators.ColumnOperators`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")
 
-        一个[`TypeEngine.Comparator`](#sqlalchemy.types.TypeEngine.Comparator "sqlalchemy.types.TypeEngine.Comparator")类，它将应用于拥有[`ColumnElement`{.xref
-        .py .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")对象的操作。
+        一个[`TypeEngine.Comparator`](#sqlalchemy.types.TypeEngine.Comparator "sqlalchemy.types.TypeEngine.Comparator")类，它将应用于拥有[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")对象的操作。
 
-        [`comparator_factory`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.types.TypeEngine.comparator_factory "sqlalchemy.types.TypeEngine.comparator_factory")属性是在执行列和SQL表达式操作时由核心表达式系统查询的钩子。当[`TypeEngine.Comparator`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.types.TypeEngine.Comparator "sqlalchemy.types.TypeEngine.Comparator")类与此属性关联时，它允许自定义所有现有运算符的重新定义，并定义新的运算符。Existing
+        [`comparator_factory`](#sqlalchemy.types.TypeEngine.comparator_factory "sqlalchemy.types.TypeEngine.comparator_factory")属性是在执行列和SQL表达式操作时由核心表达式系统查询的钩子。当[`TypeEngine.Comparator`](#sqlalchemy.types.TypeEngine.Comparator "sqlalchemy.types.TypeEngine.Comparator")类与此属性关联时，它允许自定义所有现有运算符的重新定义，并定义新的运算符。Existing
         operators include those provided by Python operator overloading
         such as [`operators.ColumnOperators.__add__()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.__add__ "sqlalchemy.sql.operators.ColumnOperators.__add__")
         and [`operators.ColumnOperators.__eq__()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.__eq__ "sqlalchemy.sql.operators.ColumnOperators.__eq__"),
@@ -112,9 +98,7 @@ tags:
         such as [`operators.ColumnOperators.like()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")
         and [`operators.ColumnOperators.in_()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.in_ "sqlalchemy.sql.operators.ColumnOperators.in_").
 
-        通过对现有类型进行简单的子类化，或者通过使用[`TypeDecorator`{.xref
-        .py .py-class .docutils
-        .literal}](custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")，可以使用该钩子的基本用法。有关示例，请参阅文档部分[Redefining
+        通过对现有类型进行简单的子类化，或者通过使用[`TypeDecorator`](custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")，可以使用该钩子的基本用法。有关示例，请参阅文档部分[Redefining
         and Creating New Operators](custom_types.html#types-operators)。
 
         0.8版新增功能：增强了表达式系统，支持按类型级别定制运算符。
@@ -160,8 +144,7 @@ tags:
     :   返回该[`TypeEngine`](#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")的特定于方言的实现。
 
     ` TypeEngine。 T0>  evaluates_none  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
-    :   返回将[`should_evaluate_none`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.types.TypeEngine.should_evaluate_none "sqlalchemy.types.TypeEngine.should_evaluate_none")标志设置为True的此类型的副本。
+    :   返回将[`should_evaluate_none`](#sqlalchemy.types.TypeEngine.should_evaluate_none "sqlalchemy.types.TypeEngine.should_evaluate_none")标志设置为True的此类型的副本。
 
         例如。：
 
@@ -191,12 +174,10 @@ tags:
         default](orm_persistence_techniques.html#session-forcing-null) -
         in the ORM documentation
 
-        [`postgresql.JSON.none_as_null`{.xref .py .py-paramref .docutils
-        .literal}](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON.params.none_as_null "sqlalchemy.dialects.postgresql.JSON")
+        [`postgresql.JSON.none_as_null`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON.params.none_as_null "sqlalchemy.dialects.postgresql.JSON")
         - Postgresql与此标志的JSON交互。
 
-        [`TypeEngine.should_evaluate_none`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.types.TypeEngine.should_evaluate_none "sqlalchemy.types.TypeEngine.should_evaluate_none")
+        [`TypeEngine.should_evaluate_none`](#sqlalchemy.types.TypeEngine.should_evaluate_none "sqlalchemy.types.TypeEngine.should_evaluate_none")
         - class-level flag
 
     ` TypeEngine。 T0>  get_dbapi_type  T1> （ T2>  DBAPI  T3> ） T4> ¶ T5>`{.descclassname}
@@ -265,9 +246,7 @@ tags:
 
             s = s.with_variant(mysql.VARCHAR(collation='foo'), 'mysql')
 
-        [`TypeEngine.with_variant()`](#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")的构造始终是从“fallback”类型到特定于方言的。返回的类型是[`Variant`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.types.Variant "sqlalchemy.types.Variant")的一个实例，它本身提供了一个可重复调用的`Variant.with_variant()`{.xref
+        [`TypeEngine.with_variant()`](#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")的构造始终是从“fallback”类型到特定于方言的。返回的类型是[`Variant`](#sqlalchemy.types.Variant "sqlalchemy.types.Variant")的一个实例，它本身提供了一个可重复调用的`Variant.with_variant()`{.xref
         .py .py-meth .docutils .literal}。
 
         参数：
@@ -278,8 +257,7 @@ tags:
             type, when a dialect of the given name is in use.
         -   **dialect\_name**[¶](#sqlalchemy.types.TypeEngine.with_variant.params.dialect_name)
             – base name of the dialect which uses this type.
-            （即`'postgresql'`，`'mysql'`{.docutils
-            .literal}等）
+            （即`'postgresql'`，`'mysql'`等）
 
         New in version 0.7.2.
 

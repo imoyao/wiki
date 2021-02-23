@@ -210,8 +210,7 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
     function cannot by itself accommodate automatic resolution of
     dependency cycles between tables, which are usually caused by
     mutually dependent foreign key constraints.
-    要解决这些循环，可以将[`ForeignKeyConstraint.use_alter`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")参数应用于这些约束，或者使用`sql.sort_tables_and_constraints()`{.xref
-    .py .py-func .docutils .literal}函数来打破涉及分开循环。
+    要解决这些循环，可以将[`ForeignKeyConstraint.use_alter`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")参数应用于这些约束，或者使用`sql.sort_tables_and_constraints()`函数来打破涉及分开循环。
 
     参数：
 
@@ -223,9 +222,7 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
         object; if it returns True, this constraint will not be
         considered as a dependency. Note this is **different** from the
         same parameter in [`sort_tables_and_constraints()`](#sqlalchemy.schema.sort_tables_and_constraints "sqlalchemy.schema.sort_tables_and_constraints"),
-        which is instead passed the owning [`ForeignKeyConstraint`{.xref
-        .py .py-class .docutils
-        .literal}](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")
+        which is instead passed the owning [`ForeignKeyConstraint`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")
         object.
     -   **extra\_dependencies**
         [¶](#sqlalchemy.schema.sort_tables.params.extra_dependencies) -
@@ -326,23 +323,18 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
      `execute`{.descname}(*bind=None*, *target=None*)[¶](#sqlalchemy.schema.DDLElement.execute "Permalink to this definition")
     :   立即执行此DDL。
 
-        如果未提供，则使用分配给`.bind`属性的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")或[`Connectable`{.xref
-        .py .py-class .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")执行DDL语句。如果DDL在标准上有条件的`on`
+        如果未提供，则使用分配给`.bind`属性的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")或[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")执行DDL语句。如果DDL在标准上有条件的`on`
 
         参数：
 
         -   **bind**[¶](#sqlalchemy.schema.DDLElement.execute.params.bind)
             – Optional, an `Engine` or
             `Connection`.
-            如果未提供，则必须在`.bind`{.docutils
-            .literal}属性中存在有效的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")。
+            如果未提供，则必须在`.bind`属性中存在有效的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")。
         -   **target**
             [¶](#sqlalchemy.schema.DDLElement.execute.params.target) -
-            可选，默认为None。执行调用的目标SchemaItem。将被传递给`on`{.docutils
-            .literal}
-            callable（如果有），并且还可以为该语句提供字符串扩展数据。有关更多信息，请参阅`execute_at`{.docutils
-            .literal}。
+            可选，默认为None。执行调用的目标SchemaItem。将被传递给`on`
+            callable（如果有），并且还可以为该语句提供字符串扩展数据。有关更多信息，请参阅`execute_at`。
 
      `execute_at`{.descname}(*event\_name*, *target*)[¶](#sqlalchemy.schema.DDLElement.execute_at "Permalink to this definition")
     :   将此DDL的执行链接到SchemaItem的DDL生命周期。
@@ -363,11 +355,7 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
 
         DDLElement实例可以链接到任意数量的模式项目。
 
-        `execute_at`建立在[`MetaData`{.xref .py
-        .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")和[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的`append_ddl_listener`接口上。
+        `execute_at`建立在[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")和[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的`append_ddl_listener`接口上。
 
         警告：创建或删除独立的表也会触发任何DDL设置为`execute_at`表的元数据。这可能会在未来的版本中发生变化。
 
@@ -405,22 +393,18 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
             > DDL：
             > 这个DDL元素。
             > 目标：
-            > [`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或[`MetaData`{.xref
-            > .py .py-class .docutils
-            > .literal}](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象是此事件的目标。如果DDL是明确执行的，可能是None。
+            > [`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象是此事件的目标。如果DDL是明确执行的，可能是None。
             > 绑定：
             > 用于DDL执行的[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")
             > 表：
             > 可选关键字参数 -
             > 要在MetaData.create\_all()或drop\_all()方法调用中创建/删除的Table对象的列表。
             > 州：
-            > 可选的关键字参数 - 将成为传递给此函数的`state`{.docutils
-            > .literal}参数。
+            > 可选的关键字参数 - 将成为传递给此函数的`state`参数。
             > checkfirst：
             > Keyword argument, will be True if the ‘checkfirst’ flag
             > was set during the call to `create()`,
-            > `create_all()`, `drop()`{.docutils
-            > .literal}, `drop_all()`.
+            > `create_all()`, `drop()`, `drop_all()`.
 
             如果callable返回一个真值，则会执行DDL语句。
 
@@ -476,8 +460,7 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
 
         -   **语句** [¶](#sqlalchemy.schema.DDL.params.statement) -
 
-            要执行的字符串或unicode字符串。语句将用Python的字符串格式化操作符处理。请参阅`context`{.docutils
-            .literal}参数和`execute_at`方法。
+            要执行的字符串或unicode字符串。语句将用Python的字符串格式化操作符处理。请参阅`context`参数和`execute_at`方法。
 
             语句中的文字'％'必须转义为'%%'。
 
@@ -485,9 +468,7 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
 
         -   **on** [¶](#sqlalchemy.schema.DDL.params.on) -
 
-            从版本0.7开始弃用：请参阅[`DDLElement.execute_if()`{.xref
-            .py .py-meth .docutils
-            .literal}](#sqlalchemy.schema.DDLElement.execute_if "sqlalchemy.schema.DDLElement.execute_if")。
+            从版本0.7开始弃用：请参阅[`DDLElement.execute_if()`](#sqlalchemy.schema.DDLElement.execute_if "sqlalchemy.schema.DDLElement.execute_if")。
 
             可选的过滤标准。可能是一个字符串，元组或可调用谓词。如果是字符串，则会将其与正在执行的数据库方言的名称进行比较：
 
@@ -504,8 +485,7 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
             > 事件：
             > 触发此DDL的事件的名称，例如'after-create'如果显式执行DDL，则为None。
             > 目标：
-            > `Table`或`MetaData`{.docutils
-            > .literal}对象是此事件的目标。如果DDL是明确执行的，可能是None。
+            > `Table`或`MetaData`对象是此事件的目标。如果DDL是明确执行的，可能是None。
             > 连接：
             > 用于DDL执行的`Connection`
             > 表：
@@ -517,8 +497,7 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
         -   **上下文** [¶](#sqlalchemy.schema.DDL.params.context) -
             可选字典，默认为None。这些值将可用于DDL语句中的字符串替换。
         -   **绑定** [¶](#sqlalchemy.schema.DDL.params.bind) -
-            可选。一个[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")，当`execute()`{.docutils
-            .literal}没有绑定参数时被调用时默认使用。
+            可选。一个[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")，当`execute()`没有绑定参数时被调用时默认使用。
 
         也可以看看
 
@@ -554,9 +533,7 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
             [¶](#sqlalchemy.schema.CreateTable.params.include_foreign_key_constraints)
             -
 
-            将被包含在CREATE结构内的[`ForeignKeyConstraint`{.xref .py
-            .py-class .docutils
-            .literal}](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象的可选序列；如果省略，则包含所有未指定use\_alter
+            将被包含在CREATE结构内的[`ForeignKeyConstraint`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象的可选序列；如果省略，则包含所有未指定use\_alter
             = True的外键约束。
 
             版本1.0.0中的新功能

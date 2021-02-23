@@ -79,9 +79,7 @@ tags:
     -   **batch**[¶](#sqlalchemy.orm.mapper.params.batch) – Defaults to
         `True`, indicating that save operations of
         multiple entities can be batched together for efficiency.
-        设置为False表示在保存下一个实例之前，实例将完全保存。这是极少数情况下使用的，即[`MapperEvents`{.xref
-        .py .py-class .docutils
-        .literal}](events.html#sqlalchemy.orm.events.MapperEvents "sqlalchemy.orm.events.MapperEvents")侦听器需要在各个行持久性操作之间调用。
+        设置为False表示在保存下一个实例之前，实例将完全保存。这是极少数情况下使用的，即[`MapperEvents`](events.html#sqlalchemy.orm.events.MapperEvents "sqlalchemy.orm.events.MapperEvents")侦听器需要在各个行持久性操作之间调用。
     -   **column\_prefix**
         [¶](#sqlalchemy.orm.mapper.params.column_prefix) -
 
@@ -138,9 +136,7 @@ tags:
 
     -   **继承** [¶](#sqlalchemy.orm.mapper.params.inherits) -
 
-        一个映射类或相应的[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")，表示该[`Mapper`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")应该*继承*的超类。这里映射的类必须是其他映射器类的子类。当使用Declarative时，由于声明的类的自然类层次结构而自动传递此参数。
+        一个映射类或相应的[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")，表示该[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")应该*继承*的超类。这里映射的类必须是其他映射器类的子类。当使用Declarative时，由于声明的类的自然类层次结构而自动传递此参数。
 
         也可以看看
 
@@ -166,21 +162,14 @@ tags:
         aggressive](changelog_migration_08.html#legacy-is-orphan-addition)。
 
         0.8版新增功能： -
-        将待处理对象视为“孤立对象”的修改已被修改为与持久对象的行为更加接近，即对象从[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，只要它从任何孤立启用的父母中解除关联。以前，挂起的对象只有在与所有孤立启用的父母关联时才会被清除。新标志`legacy_is_orphan`被添加到[`orm.mapper()`](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")中，以重新建立传统行为。
+        将待处理对象视为“孤立对象”的修改已被修改为与持久对象的行为更加接近，即对象从[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，只要它从任何孤立启用的父母中解除关联。以前，挂起的对象只有在与所有孤立启用的父母关联时才会被清除。新标志`legacy_is_orphan`被添加到[`orm.mapper()`](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")中，以重新建立传统行为。
 
     -   **non\_primary** [¶](#sqlalchemy.orm.mapper.params.non_primary)
         -
 
-        指定该[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")是“主”映射程序的补充，即用于持久化的映射程序。这里创建的[`Mapper`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")可用于类的临时映射到备选可选项，仅用于加载。
+        指定该[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")是“主”映射程序的补充，即用于持久化的映射程序。这里创建的[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")可用于类的临时映射到备选可选项，仅用于加载。
 
-        [`Mapper.non_primary`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.params.non_primary "sqlalchemy.orm.mapper.Mapper")不是一个经常使用的选项，但在某些特定的[`relationship()`{.xref
-        .py .py-func .docutils
-        .literal}](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")情况下很有用。
+        [`Mapper.non_primary`](#sqlalchemy.orm.mapper.Mapper.params.non_primary "sqlalchemy.orm.mapper.Mapper")不是一个经常使用的选项，但在某些特定的[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")情况下很有用。
 
         也可以看看
 
@@ -189,9 +178,7 @@ tags:
 
     -   **order\_by** [¶](#sqlalchemy.orm.mapper.params.order_by) -
 
-        一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")或[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象列表，选择操作应将其用作实体的默认排序。默认情况下，映射器没有预定义的顺序。
+        一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")或[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象列表，选择操作应将其用作实体的默认排序。默认情况下，映射器没有预定义的顺序。
 
         从版本1.1开始弃用：不推荐使用[`Mapper.order_by`{.xref .py
         .py-paramref .docutils
@@ -216,8 +203,7 @@ tags:
         [Using Passive Deletes](collections.html#passive-deletes) -
         与[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")一起使用的相似功能的描述
 
-        [`mapper.passive_updates`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.mapper.params.passive_updates "sqlalchemy.orm.mapper")
+        [`mapper.passive_updates`](#sqlalchemy.orm.mapper.params.passive_updates "sqlalchemy.orm.mapper")
         - 支持连接表继承映射器的ON UPDATE CASCADE
 
     -   **passive\_updates**
@@ -236,8 +222,7 @@ tags:
         Cascades](relationship_persistence.html#passive-updates) -
         与[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")一起使用的相似特征的描述
 
-        [`mapper.passive_deletes`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.mapper.params.passive_deletes "sqlalchemy.orm.mapper")
+        [`mapper.passive_deletes`](#sqlalchemy.orm.mapper.params.passive_deletes "sqlalchemy.orm.mapper")
         - 为连接表继承映射器支持ON DELETE CASCADE
 
     -   **polymorphic\_on**
@@ -245,9 +230,7 @@ tags:
 
         当存在继承类时，指定用于确定传入行的目标类的列，属性或SQL表达式。
 
-        该值通常是存在于映射的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中的[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象：
+        该值通常是存在于映射的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中的[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象：
 
             class Employee(Base):
                 __tablename__ = 'employee'
@@ -260,9 +243,7 @@ tags:
                     "polymorphic_identity":"employee"
                 }
 
-        它也可以被指定为一个SQL表达式，就像在这个例子中我们使用[`case()`{.xref
-        .py .py-func .docutils
-        .literal}](core_sqlelement.html#sqlalchemy.sql.expression.case "sqlalchemy.sql.expression.case")结构来提供一个条件方法：
+        它也可以被指定为一个SQL表达式，就像在这个例子中我们使用[`case()`](core_sqlelement.html#sqlalchemy.sql.expression.case "sqlalchemy.sql.expression.case")结构来提供一个条件方法：
 
             class Employee(Base):
                 __tablename__ = 'employee'
@@ -297,9 +278,7 @@ tags:
                     "polymorphic_identity":"employee"
                 }
 
-        在版本0.7.4中进行了更改： `polymorphic_on`可以指定为SQL表达式，或者参考使用[`column_property()`{.xref
-        .py .py-func .docutils
-        .literal}](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")配置的任何属性，一个字符串的名称。
+        在版本0.7.4中进行了更改： `polymorphic_on`可以指定为SQL表达式，或者参考使用[`column_property()`](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")配置的任何属性，一个字符串的名称。
 
         当设置`polymorphic_on`引用本地映射的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中不存在的属性或表达式时，鉴别器的值应该持久保存到数据库中，鉴别器的值不会自动设置在新实例上；这必须由用户通过手动方式或通过事件监听器来处理。建立这样一个听众的典型方法如下所示：
 
@@ -330,11 +309,7 @@ tags:
         dictionary mapping the string names of object attributes to
         [`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")
         instances, which define the persistence behavior of that
-        attribute. 请注意，映射后的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中存在的[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象会自动放入`ColumnProperty`实例中，除非被覆盖。当使用Declarative时，基于所声明的类体中声明的所有[`MapperProperty`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")实例自动传递此参数。
+        attribute. 请注意，映射后的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中存在的[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象会自动放入`ColumnProperty`实例中，除非被覆盖。当使用Declarative时，基于所声明的类体中声明的所有[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")实例自动传递此参数。
     -   **primary\_key**[¶](#sqlalchemy.orm.mapper.params.primary_key) –
         A list of [`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
         objects which define the primary key to be used against this
@@ -342,11 +317,7 @@ tags:
     -   **version\_id\_col**
         [¶](#sqlalchemy.orm.mapper.params.version_id_col) -
 
-        一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")，用于保留表中行的正在运行的版本标识。这用于检测并发更新或在刷新中存在陈旧数据。该方法是检测UPDATE语句是否与最后一个已知版本ID不匹配，引发[`StaleDataError`{.xref
-        .py .py-class .docutils
-        .literal}](exceptions.html#sqlalchemy.orm.exc.StaleDataError "sqlalchemy.orm.exc.StaleDataError")异常。默认情况下，除非`version_id_generator`指定了替代版本生成器，否则该列必须为[`Integer`{.xref
-        .py .py-class .docutils
-        .literal}](core_type_basics.html#sqlalchemy.types.Integer "sqlalchemy.types.Integer")类型。
+        一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")，用于保留表中行的正在运行的版本标识。这用于检测并发更新或在刷新中存在陈旧数据。该方法是检测UPDATE语句是否与最后一个已知版本ID不匹配，引发[`StaleDataError`](exceptions.html#sqlalchemy.orm.exc.StaleDataError "sqlalchemy.orm.exc.StaleDataError")异常。默认情况下，除非`version_id_generator`指定了替代版本生成器，否则该列必须为[`Integer`](core_type_basics.html#sqlalchemy.types.Integer "sqlalchemy.types.Integer")类型。
 
         也可以看看
 
@@ -419,9 +390,7 @@ tags:
     [`configure_mappers()`](#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")函数提供了几个可用于扩充其功能的事件挂钩。这些方法包括：
 
     -   [`MapperEvents.before_configured()`](events.html#sqlalchemy.orm.events.MapperEvents.before_configured "sqlalchemy.orm.events.MapperEvents.before_configured")
-        - called once before [`configure_mappers()`{.xref .py .py-func
-        .docutils
-        .literal}](#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")
+        - called once before [`configure_mappers()`](#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")
         does any work; this can be used to establish additional options,
         properties, or related mappings before the operation proceeds.
     -   [`MapperEvents.mapper_configured()`](events.html#sqlalchemy.orm.events.MapperEvents.mapper_configured "sqlalchemy.orm.events.MapperEvents.mapper_configured")
@@ -430,9 +399,7 @@ tags:
         except for backrefs set up by other mappers that are still to be
         configured.
     -   [`MapperEvents.after_configured()`](events.html#sqlalchemy.orm.events.MapperEvents.after_configured "sqlalchemy.orm.events.MapperEvents.after_configured")
-        - called once after [`configure_mappers()`{.xref .py .py-func
-        .docutils
-        .literal}](#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")
+        - called once after [`configure_mappers()`](#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")
         is complete; at this stage, all [`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
         objects that are known to SQLAlchemy will be fully configured.
         请注意，调用应用程序可能还有其他尚未生成的映射，例如，如果它们尚处于未导入模块中。
@@ -516,9 +483,7 @@ tags:
     参数：
 
     -   **table\_map**[¶](#sqlalchemy.orm.util.polymorphic_union.params.table_map)
-        – mapping of polymorphic identities to [`Table`{.xref .py
-        .py-class .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
+        – mapping of polymorphic identities to [`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
         objects.
     -   **typecolname**[¶](#sqlalchemy.orm.util.polymorphic_union.params.typecolname)
         – string name of a “discriminator” column, which will be derived
@@ -553,9 +518,7 @@ tags:
      `__init__`{.descname}(*class\_*, *local\_table=None*, *properties=None*, *primary\_key=None*, *non\_primary=False*, *inherits=None*, *inherit\_condition=None*, *inherit\_foreign\_keys=None*, *extension=None*, *order\_by=False*, *always\_refresh=False*, *version\_id\_col=None*, *version\_id\_generator=None*, *polymorphic\_on=None*, *\_polymorphic\_map=None*, *polymorphic\_identity=None*, *concrete=False*, *with\_polymorphic=None*, *allow\_partial\_pks=True*, *batch=True*, *column\_prefix=None*, *include\_properties=None*, *exclude\_properties=None*, *passive\_updates=True*, *passive\_deletes=False*, *confirm\_deleted\_rows=True*, *eager\_defaults=False*, *legacy\_is\_orphan=False*, *\_compiled\_cache\_size=100*)[¶](#sqlalchemy.orm.mapper.Mapper.__init__ "Permalink to this definition")
     :   构建一个新的[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象。
 
-        这个构造函数被镜像为公共API函数；有关完整的用法和参数描述，请参阅[`mapper()`{.xref
-        .py .py-func .docutils
-        .literal}](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")。
+        这个构造函数被镜像为公共API函数；有关完整的用法和参数描述，请参阅[`mapper()`](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")。
 
     ` add_properties  T0> （ T1>  dict_of_properties  T2> ） T3> ¶ T4>`{.descname}
     :   使用add\_property将给定的属性字典添加到此映射器中。
@@ -571,36 +534,15 @@ tags:
         这些属性在所有情况下都是与映射类或其超类关联的Python
         [descriptors](glossary.html#term-descriptors)。
 
-        该名称空间包括映射到该类的属性以及由扩展模块声明的属性。它包含从[`InspectionAttr`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")继承的任何Python描述符类型。这包括[`QueryableAttribute`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.attributes.QueryableAttribute "sqlalchemy.orm.attributes.QueryableAttribute")以及扩展类型，例如[`hybrid_property`{.xref
-        .py .py-class .docutils
-        .literal}](extensions_hybrid.html#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")，[`hybrid_method`{.xref
-        .py .py-class .docutils
-        .literal}](extensions_hybrid.html#sqlalchemy.ext.hybrid.hybrid_method "sqlalchemy.ext.hybrid.hybrid_method")和[`AssociationProxy`{.xref
-        .py .py-class .docutils
-        .literal}](extensions_associationproxy.html#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")。
+        该名称空间包括映射到该类的属性以及由扩展模块声明的属性。它包含从[`InspectionAttr`](internals.html#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")继承的任何Python描述符类型。这包括[`QueryableAttribute`](internals.html#sqlalchemy.orm.attributes.QueryableAttribute "sqlalchemy.orm.attributes.QueryableAttribute")以及扩展类型，例如[`hybrid_property`](extensions_hybrid.html#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")，[`hybrid_method`](extensions_hybrid.html#sqlalchemy.ext.hybrid.hybrid_method "sqlalchemy.ext.hybrid.hybrid_method")和[`AssociationProxy`](extensions_associationproxy.html#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")。
 
-        为了区分映射属性和扩展属性，属性[`InspectionAttr.extension_type`{.xref
-        .py .py-attr .docutils
-        .literal}](internals.html#sqlalchemy.orm.base.InspectionAttr.extension_type "sqlalchemy.orm.base.InspectionAttr.extension_type")将引用区分不同扩展类型的常量。
+        为了区分映射属性和扩展属性，属性[`InspectionAttr.extension_type`](internals.html#sqlalchemy.orm.base.InspectionAttr.extension_type "sqlalchemy.orm.base.InspectionAttr.extension_type")将引用区分不同扩展类型的常量。
 
-        在处理[`QueryableAttribute`](internals.html#sqlalchemy.orm.attributes.QueryableAttribute "sqlalchemy.orm.attributes.QueryableAttribute")时，[`QueryableAttribute.property`{.xref
-        .py .py-attr .docutils
-        .literal}](internals.html#sqlalchemy.orm.attributes.QueryableAttribute.property "sqlalchemy.orm.attributes.QueryableAttribute.property")属性指向[`MapperProperty`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")属性，这是您在引用映射集合时获得的通过[`Mapper.attrs`{.xref
-        .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")的属性。
+        在处理[`QueryableAttribute`](internals.html#sqlalchemy.orm.attributes.QueryableAttribute "sqlalchemy.orm.attributes.QueryableAttribute")时，[`QueryableAttribute.property`](internals.html#sqlalchemy.orm.attributes.QueryableAttribute.property "sqlalchemy.orm.attributes.QueryableAttribute.property")属性指向[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")属性，这是您在引用映射集合时获得的通过[`Mapper.attrs`](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")的属性。
 
         警告
 
-        [`Mapper.all_orm_descriptors`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.all_orm_descriptors "sqlalchemy.orm.mapper.Mapper.all_orm_descriptors")访问器名称空间是`OrderedProperties`{.xref
-        .py .py-class .docutils
-        .literal}的一个实例。这是一个类似字典的对象，它包含少量的命名方法，如`OrderedProperties.items()`和`OrderedProperties.values()`{.xref .py .py-meth
+        [`Mapper.all_orm_descriptors`](#sqlalchemy.orm.mapper.Mapper.all_orm_descriptors "sqlalchemy.orm.mapper.Mapper.all_orm_descriptors")访问器名称空间是`OrderedProperties`的一个实例。这是一个类似字典的对象，它包含少量的命名方法，如`OrderedProperties.items()`和`OrderedProperties.values()`{.xref .py .py-meth
         .docutils .literal}。When accessing attributes dynamically,
         favor using the dict-access scheme, e.g.
         `mapper.all_orm_descriptors[somename]` over
@@ -610,34 +552,23 @@ tags:
 
         也可以看看
 
-        [`Mapper.attrs`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")
+        [`Mapper.attrs`](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")
 
     ` ATTRS  T0> ¶ T1>`{.descname}
     :   所有[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")对象的名称空间都与此映射器关联。
 
-        这是一个基于其关键名称提供每个属性的对象。例如，具有`User.name`属性的`User`类的映射器将提供`mapper.attrs.name`，它将是[`ColumnProperty`](internals.html#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty")表示`name`列。命名空间对象也可以迭代，这会产生每个[`MapperProperty`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")。
+        这是一个基于其关键名称提供每个属性的对象。例如，具有`User.name`属性的`User`类的映射器将提供`mapper.attrs.name`，它将是[`ColumnProperty`](internals.html#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty")表示`name`列。命名空间对象也可以迭代，这会产生每个[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")。
 
         [`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
         has several pre-filtered views of this attribute which limit the
-        types of properties returned, inclding [`synonyms`{.xref .py
-        .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.synonyms "sqlalchemy.orm.mapper.Mapper.synonyms"),
-        [`column_attrs`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.column_attrs "sqlalchemy.orm.mapper.Mapper.column_attrs"),
-        [`relationships`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.relationships "sqlalchemy.orm.mapper.Mapper.relationships"),
-        and [`composites`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.composites "sqlalchemy.orm.mapper.Mapper.composites").
+        types of properties returned, inclding [`synonyms`](#sqlalchemy.orm.mapper.Mapper.synonyms "sqlalchemy.orm.mapper.Mapper.synonyms"),
+        [`column_attrs`](#sqlalchemy.orm.mapper.Mapper.column_attrs "sqlalchemy.orm.mapper.Mapper.column_attrs"),
+        [`relationships`](#sqlalchemy.orm.mapper.Mapper.relationships "sqlalchemy.orm.mapper.Mapper.relationships"),
+        and [`composites`](#sqlalchemy.orm.mapper.Mapper.composites "sqlalchemy.orm.mapper.Mapper.composites").
 
         警告
 
-        [`Mapper.attrs`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")访问器名称空间是`OrderedProperties`{.xref
-        .py .py-class .docutils
-        .literal}的实例。这是一个类似字典的对象，它包含少量的命名方法，如`OrderedProperties.items()`和`OrderedProperties.values()`{.xref .py .py-meth
+        [`Mapper.attrs`](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")访问器名称空间是`OrderedProperties`的实例。这是一个类似字典的对象，它包含少量的命名方法，如`OrderedProperties.items()`和`OrderedProperties.values()`{.xref .py .py-meth
         .docutils .literal}。When accessing attributes dynamically,
         favor using the dict-access scheme, e.g.
         `mapper.attrs[somename]` over
@@ -646,23 +577,17 @@ tags:
 
         也可以看看
 
-        [`Mapper.all_orm_descriptors`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.all_orm_descriptors "sqlalchemy.orm.mapper.Mapper.all_orm_descriptors")
+        [`Mapper.all_orm_descriptors`](#sqlalchemy.orm.mapper.Mapper.all_orm_descriptors "sqlalchemy.orm.mapper.Mapper.all_orm_descriptors")
 
     `base_mapper`{.descname} *=无* [¶](#sqlalchemy.orm.mapper.Mapper.base_mapper "Permalink to this definition")
     :   继承链中最基本的[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")。
 
-        在非继承场景中，该属性将始终是[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")。在继承场景中，它引用了[`Mapper`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")，它是继承链中所有其他[`Mapper`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象的父对象。
+        在非继承场景中，该属性将始终是[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")。在继承场景中，它引用了[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")，它是继承链中所有其他[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象的父对象。
 
         这是在映射器构建期间确定的*只读*属性。如果直接修改，行为是未定义的。
 
     `c`{.descname} *=无* [¶](#sqlalchemy.orm.mapper.Mapper.c "Permalink to this definition")
-    :   [`columns`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.columns "sqlalchemy.orm.mapper.Mapper.columns")。
+    :   [`columns`](#sqlalchemy.orm.mapper.Mapper.columns "sqlalchemy.orm.mapper.Mapper.columns")。
 
      `cascade_iterator`{.descname}(*type\_*, *state*, *halt\_on=None*)[¶](#sqlalchemy.orm.mapper.Mapper.cascade_iterator "Permalink to this definition")
     :   迭代对象图中的每个元素及其映射器，以满足给定级联规则的所有关系。
@@ -704,31 +629,22 @@ tags:
         这是在映射器构建期间确定的*只读*属性。如果直接修改，行为是未定义的。
 
     `class_manager`{.descname} *=无* [¶](#sqlalchemy.orm.mapper.Mapper.class_manager "Permalink to this definition")
-    :   [`ClassManager`](internals.html#sqlalchemy.orm.instrumentation.ClassManager "sqlalchemy.orm.instrumentation.ClassManager")，它为这个[`Mapper`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")维护事件侦听器和类绑定描述符。
+    :   [`ClassManager`](internals.html#sqlalchemy.orm.instrumentation.ClassManager "sqlalchemy.orm.instrumentation.ClassManager")，它为这个[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")维护事件侦听器和类绑定描述符。
 
         这是在映射器构建期间确定的*只读*属性。如果直接修改，行为是未定义的。
 
     ` column_attrs  T0> ¶ T1>`{.descname}
-    :   返回由[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")维护的所有[`ColumnProperty`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty")属性的命名空间。
+    :   返回由[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")维护的所有[`ColumnProperty`](internals.html#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty")属性的命名空间。
 
         也可以看看
 
-        [`Mapper.attrs`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")
+        [`Mapper.attrs`](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")
         - 所有[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")对象的命名空间。
 
     `列`{.descname} *=无* [¶](#sqlalchemy.orm.mapper.Mapper.columns "Permalink to this definition")
-    :   由[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")维护的[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")或其他标量表达式对象的集合。
+    :   由[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")维护的[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")或其他标量表达式对象的集合。
 
-        该集合的行为与任何[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的`c`属性的行为相同，区别仅在于此映射中包含的那些列存在，并且基于属性名称在映射中定义，不一定是[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")本身的`key`属性。另外，这里还存在由[`column_property()`](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")映​​射的标量表达式。
+        该集合的行为与任何[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的`c`属性的行为相同，区别仅在于此映射中包含的那些列存在，并且基于属性名称在映射中定义，不一定是[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")本身的`key`属性。另外，这里还存在由[`column_property()`](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")映​​射的标量表达式。
 
         这是在映射器构建期间确定的*只读*属性。如果直接修改，行为是未定义的。
 
@@ -736,14 +652,11 @@ tags:
     :   如果给定的映射器与此映射器共享共同的继承父项，则返回true。
 
     `复合材料 T0> ¶ T1>`{.descname}
-    :   返回由[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")维护的所有[`CompositeProperty`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.descriptor_props.CompositeProperty "sqlalchemy.orm.descriptor_props.CompositeProperty")属性的命名空间。
+    :   返回由[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")维护的所有[`CompositeProperty`](internals.html#sqlalchemy.orm.descriptor_props.CompositeProperty "sqlalchemy.orm.descriptor_props.CompositeProperty")属性的命名空间。
 
         也可以看看
 
-        [`Mapper.attrs`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")
+        [`Mapper.attrs`](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")
         - 所有[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")对象的命名空间。
 
     `具体`{.descname} *=无* [¶](#sqlalchemy.orm.mapper.Mapper.concrete "Permalink to this definition")
@@ -769,16 +682,12 @@ tags:
     :   返回与给定键相关联的MapperProperty。
 
     ` get_property_by_column  T0> （ T1> 列 T2> ） T3> ¶ T4>`{.descname}
-    :   给定一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象，返回映射此列的[`MapperProperty`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")。
+    :   给定一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象，返回映射此列的[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")。
 
     ` identity_key_from_instance  T0> （ T1> 实例 T2> ） T3> ¶ T4>`{.descname}
     :   根据主键属性返回给定实例的身份关键字。
 
-        如果实例的状态已过期，则调用此方法将导致数据库检查以查看该对象是否已被删除。如果该行不再存在，则引发[`ObjectDeletedError`{.xref
-        .py .py-class .docutils
-        .literal}](exceptions.html#sqlalchemy.orm.exc.ObjectDeletedError "sqlalchemy.orm.exc.ObjectDeletedError")。
+        如果实例的状态已过期，则调用此方法将导致数据库检查以查看该对象是否已被删除。如果该行不再存在，则引发[`ObjectDeletedError`](exceptions.html#sqlalchemy.orm.exc.ObjectDeletedError "sqlalchemy.orm.exc.ObjectDeletedError")。
 
         该值通常也可以在属性名称键下的实例状态中找到。
 
@@ -798,9 +707,7 @@ tags:
 
         **row**[¶](#sqlalchemy.orm.mapper.Mapper.identity_key_from_row.params.row)
         – A [`RowProxy`](core_connections.html#sqlalchemy.engine.RowProxy "sqlalchemy.engine.RowProxy")
-        instance. The columns which are mapped by this [`Mapper`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
+        instance. The columns which are mapped by this [`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
         should be locatable in the row, preferably via the
         [`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
         object directly (as is the case when a [`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")
@@ -808,9 +715,7 @@ tags:
         `<tablename>_<colname>`.
 
     `继承`{.descname} *=无* [¶](#sqlalchemy.orm.mapper.Mapper.inherits "Permalink to this definition")
-    :   引用这个[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")继承的[`Mapper`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")，如果有的话。
+    :   引用这个[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")继承的[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")，如果有的话。
 
         这是在映射器构建期间确定的*只读*属性。如果直接修改，行为是未定义的。
 
@@ -824,42 +729,26 @@ tags:
     :   返回所有MapperProperty对象的迭代器。
 
     `local_table`{.descname} *=无* [¶](#sqlalchemy.orm.mapper.Mapper.local_table "Permalink to this definition")
-    :   这个[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")管理的[`Selectable`{.xref
-        .py .py-class .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Selectable "sqlalchemy.sql.expression.Selectable")。
+    :   这个[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")管理的[`Selectable`](core_selectable.html#sqlalchemy.sql.expression.Selectable "sqlalchemy.sql.expression.Selectable")。
 
-        通常是[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或[`Alias`{.xref
-        .py .py-class .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")的实例。也可以是`None`。
+        通常是[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或[`Alias`](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")的实例。也可以是`None`。
 
-        “本地”表是[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")直接负责从属性访问和刷新角度管理的可选项。对于非继承映射器，本地表与“映射”表相同。对于连接表继承映射器，local\_table将是这个[`Mapper`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")所代表的整体“连接”的特定子表。如果这个映射器是一个单表继承映射器，local\_table将是`None`。
+        “本地”表是[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")直接负责从属性访问和刷新角度管理的可选项。对于非继承映射器，本地表与“映射”表相同。对于连接表继承映射器，local\_table将是这个[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")所代表的整体“连接”的特定子表。如果这个映射器是一个单表继承映射器，local\_table将是`None`。
 
         也可以看看
 
-        [`mapped_table`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.mapped_table "sqlalchemy.orm.mapper.Mapper.mapped_table")
+        [`mapped_table`](#sqlalchemy.orm.mapper.Mapper.mapped_table "sqlalchemy.orm.mapper.Mapper.mapped_table")
 
     `mapped_table`{.descname} *=无* [¶](#sqlalchemy.orm.mapper.Mapper.mapped_table "Permalink to this definition")
-    :   [`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")映射到的[`Selectable`{.xref
-        .py .py-class .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Selectable "sqlalchemy.sql.expression.Selectable")。
+    :   [`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")映射到的[`Selectable`](core_selectable.html#sqlalchemy.sql.expression.Selectable "sqlalchemy.sql.expression.Selectable")。
 
-        通常是[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，[`Join`{.xref
-        .py .py-class .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")或[`Alias`{.xref
-        .py .py-class .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")的实例。
+        通常是[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，[`Join`](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")或[`Alias`](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")的实例。
 
-        “映射”表是映射器在查询期间选择的可选项。对于非继承映射器，映射表与“本地”表相同。对于连接表继承映射器，mapped\_table引用表示此特定子类的完整行的完整[`Join`{.xref
-        .py .py-class .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")。对于单表继承映射器，mapped\_table引用基表。
+        “映射”表是映射器在查询期间选择的可选项。对于非继承映射器，映射表与“本地”表相同。对于连接表继承映射器，mapped\_table引用表示此特定子类的完整行的完整[`Join`](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")。对于单表继承映射器，mapped\_table引用基表。
 
         也可以看看
 
-        [`local_table`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.local_table "sqlalchemy.orm.mapper.Mapper.local_table")
+        [`local_table`](#sqlalchemy.orm.mapper.Mapper.local_table "sqlalchemy.orm.mapper.Mapper.local_table")
 
     `映射器 T0> ¶ T1>`{.descname}
     :   检查API的一部分。
@@ -872,13 +761,9 @@ tags:
         这是在映射器构建期间确定的*只读*属性。如果直接修改，行为是未定义的。
 
     `polymorphic_identity`{.descname} *=无* [¶](#sqlalchemy.orm.mapper.Mapper.polymorphic_identity "Permalink to this definition")
-    :   表示结果行加载过程中与[`polymorphic_on`{.xref .py .py-attr
-        .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.polymorphic_on "sqlalchemy.orm.mapper.Mapper.polymorphic_on")列匹配的标识符。
+    :   表示结果行加载过程中与[`polymorphic_on`](#sqlalchemy.orm.mapper.Mapper.polymorphic_on "sqlalchemy.orm.mapper.Mapper.polymorphic_on")列匹配的标识符。
 
-        仅用于继承，此对象可以是任何类型，与[`polymorphic_on`{.xref .py
-        .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.polymorphic_on "sqlalchemy.orm.mapper.Mapper.polymorphic_on")表示的列的类型相当。
+        仅用于继承，此对象可以是任何类型，与[`polymorphic_on`](#sqlalchemy.orm.mapper.Mapper.polymorphic_on "sqlalchemy.orm.mapper.Mapper.polymorphic_on")表示的列的类型相当。
 
         这是在映射器构建期间确定的*只读*属性。如果直接修改，行为是未定义的。
 
@@ -892,64 +777,42 @@ tags:
     `polymorphic_map`{.descname} *=无* [¶](#sqlalchemy.orm.mapper.Mapper.polymorphic_map "Permalink to this definition")
     :   在继承场景中映射到[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")实例的“多态身份”标识符的映射。
 
-        标识符可以是任何类型，与[`polymorphic_on`{.xref .py .py-attr
-        .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.polymorphic_on "sqlalchemy.orm.mapper.Mapper.polymorphic_on")表示的列的类型相当。
+        标识符可以是任何类型，与[`polymorphic_on`](#sqlalchemy.orm.mapper.Mapper.polymorphic_on "sqlalchemy.orm.mapper.Mapper.polymorphic_on")表示的列的类型相当。
 
         映射器的继承链将全部引用相同的多态映射对象。该对象用于将传入结果行关联到目标映射器。
 
         这是在映射器构建期间确定的*只读*属性。如果直接修改，行为是未定义的。
 
     `polymorphic_on`{.descname} *=无* [¶](#sqlalchemy.orm.mapper.Mapper.polymorphic_on "Permalink to this definition")
-    :   在继承方案中，[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")或SQL表达式被指定为该[`Mapper`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")的`polymorphic_on`参数。
+    :   在继承方案中，[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")或SQL表达式被指定为该[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")的`polymorphic_on`参数。
 
-        该属性通常是一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")实例，但也可能是一个表达式，例如从[`cast()`{.xref
-        .py .py-func .docutils
-        .literal}](core_sqlelement.html#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")派生的表达式。
+        该属性通常是一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")实例，但也可能是一个表达式，例如从[`cast()`](core_sqlelement.html#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")派生的表达式。
 
         这是在映射器构建期间确定的*只读*属性。如果直接修改，行为是未定义的。
 
     `primary_key`{.descname} *=无* [¶](#sqlalchemy.orm.mapper.Mapper.primary_key "Permalink to this definition")
-    :   从[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")的角度来看，一个迭代器包含[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的集合，该对象构成映射表的“主键”。
+    :   从[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")的角度来看，一个迭代器包含[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的集合，该对象构成映射表的“主键”。
 
-        该列表与[`mapped_table`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.mapped_table "sqlalchemy.orm.mapper.Mapper.mapped_table")中的可选列表相反。在继承映射器的情况下，某些列可能由超类映射器管理。例如，对于[`Join`{.xref
-        .py .py-class .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")，主键由[`Join`{.xref
-        .py .py-class .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")引用的所有表中的所有主键列确定。
+        该列表与[`mapped_table`](#sqlalchemy.orm.mapper.Mapper.mapped_table "sqlalchemy.orm.mapper.Mapper.mapped_table")中的可选列表相反。在继承映射器的情况下，某些列可能由超类映射器管理。例如，对于[`Join`](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")，主键由[`Join`](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")引用的所有表中的所有主键列确定。
 
-        该列表也不一定与与基础表关联的主键列集合相同； [`Mapper`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")具有`primary_key`参数，可以覆盖[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")认为的主键列。
+        该列表也不一定与与基础表关联的主键列集合相同； [`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")具有`primary_key`参数，可以覆盖[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")认为的主键列。
 
         这是在映射器构建期间确定的*只读*属性。如果直接修改，行为是未定义的。
 
     ` primary_key_from_instance  T0> （ T1> 实例 T2> ） T3> ¶ T4>`{.descname}
     :   返回给定实例的主键值列表。
 
-        如果实例的状态已过期，则调用此方法将导致数据库检查以查看该对象是否已被删除。如果该行不再存在，则引发[`ObjectDeletedError`{.xref
-        .py .py-class .docutils
-        .literal}](exceptions.html#sqlalchemy.orm.exc.ObjectDeletedError "sqlalchemy.orm.exc.ObjectDeletedError")。
+        如果实例的状态已过期，则调用此方法将导致数据库检查以查看该对象是否已被删除。如果该行不再存在，则引发[`ObjectDeletedError`](exceptions.html#sqlalchemy.orm.exc.ObjectDeletedError "sqlalchemy.orm.exc.ObjectDeletedError")。
 
     ` primary_mapper  T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   返回与此映射器的类关键字（类）相对应的主映射器。
 
     `关系 T0> ¶ T1>`{.descname}
-    :   由[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")维护的所有[`RelationshipProperty`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.properties.RelationshipProperty "sqlalchemy.orm.properties.RelationshipProperty")属性的命名空间。
+    :   由[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")维护的所有[`RelationshipProperty`](internals.html#sqlalchemy.orm.properties.RelationshipProperty "sqlalchemy.orm.properties.RelationshipProperty")属性的命名空间。
 
         警告
 
-        [`Mapper.relationships`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.relationships "sqlalchemy.orm.mapper.Mapper.relationships")存取器名称空间是`OrderedProperties`{.xref
-        .py .py-class .docutils
-        .literal}的一个实例。这是一个类似字典的对象，它包含少量的命名方法，如`OrderedProperties.items()`和`OrderedProperties.values()`{.xref .py .py-meth
+        [`Mapper.relationships`](#sqlalchemy.orm.mapper.Mapper.relationships "sqlalchemy.orm.mapper.Mapper.relationships")存取器名称空间是`OrderedProperties`的一个实例。这是一个类似字典的对象，它包含少量的命名方法，如`OrderedProperties.items()`和`OrderedProperties.values()`{.xref .py .py-meth
         .docutils .literal}。When accessing attributes dynamically,
         favor using the dict-access scheme, e.g.
         `mapper.relationships[somename]` over
@@ -958,17 +821,13 @@ tags:
 
         也可以看看
 
-        [`Mapper.attrs`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")
+        [`Mapper.attrs`](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")
         - 所有[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")对象的命名空间。
 
     `可选 T0> ¶ T1>`{.descname}
-    :   这个[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")构造的[`select()`{.xref
-        .py .py-func .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造默认选择。
+    :   这个[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")构造的[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造默认选择。
 
-        通常情况下，这相当于[`mapped_table`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.mapped_table "sqlalchemy.orm.mapper.Mapper.mapped_table")，除非使用`with_polymorphic`功能，在这种情况下，将返回完整的“多态”选择。
+        通常情况下，这相当于[`mapped_table`](#sqlalchemy.orm.mapper.Mapper.mapped_table "sqlalchemy.orm.mapper.Mapper.mapped_table")，除非使用`with_polymorphic`功能，在这种情况下，将返回完整的“多态”选择。
 
     ` self_and_descendants  T0> ¶ T1>`{.descname}
     :   包含这个映射器和所有后代映射器的集合。
@@ -978,35 +837,23 @@ tags:
     `单`{.descname} *=无* [¶](#sqlalchemy.orm.mapper.Mapper.single "Permalink to this definition")
     :   如果[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")是单表继承映射器，则表示`True`。
 
-        [`local_table`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.local_table "sqlalchemy.orm.mapper.Mapper.local_table")
+        [`local_table`](#sqlalchemy.orm.mapper.Mapper.local_table "sqlalchemy.orm.mapper.Mapper.local_table")
         will be `None` if this flag is set.
 
         这是在映射器构建期间确定的*只读*属性。如果直接修改，行为是未定义的。
 
     `同义词 T0> ¶ T1>`{.descname}
-    :   返回由[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")维护的所有[`SynonymProperty`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.descriptor_props.SynonymProperty "sqlalchemy.orm.descriptor_props.SynonymProperty")属性的名称空间。
+    :   返回由[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")维护的所有[`SynonymProperty`](internals.html#sqlalchemy.orm.descriptor_props.SynonymProperty "sqlalchemy.orm.descriptor_props.SynonymProperty")属性的名称空间。
 
         也可以看看
 
-        [`Mapper.attrs`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")
+        [`Mapper.attrs`](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")
         - 所有[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")对象的命名空间。
 
     `表格`{.descname} *=无* [¶](#sqlalchemy.orm.mapper.Mapper.tables "Permalink to this definition")
-    :   一个迭代器，包含[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")所知的[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的集合。
+    :   一个迭代器，包含[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")所知的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的集合。
 
-        如果映射器映射到[`Join`](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")或[`Alias`{.xref
-        .py .py-class .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")表示[`Select`{.xref
-        .py .py-class .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")，则包含[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象完整的构造将在这里呈现。
+        如果映射器映射到[`Join`](core_selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")或[`Alias`](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")表示[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")，则包含[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象完整的构造将在这里呈现。
 
         这是在映射器构建期间确定的*只读*属性。如果直接修改，行为是未定义的。
 

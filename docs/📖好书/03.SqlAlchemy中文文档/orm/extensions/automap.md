@@ -446,9 +446,7 @@ API参考[¶](#api-reference "Permalink to this headline")
     -   **declarative\_base**[¶](#sqlalchemy.ext.automap.automap_base.params.declarative_base)
         – an existing class produced by
         [`declarative.declarative_base()`](declarative_api.html#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base").
-        当它被传递时，函数本身不再调用[`declarative.declarative_base()`{.xref
-        .py .py-func .docutils
-        .literal}](declarative_api.html#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")，所有其他关键字参数都被忽略。
+        当它被传递时，函数本身不再调用[`declarative.declarative_base()`](declarative_api.html#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")，所有其他关键字参数都被忽略。
     -   **\*\*kw**[¶](#sqlalchemy.ext.automap.automap_base.params.**kw)
         – keyword arguments are passed along to
         [`declarative.declarative_base()`](declarative_api.html#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base").
@@ -483,19 +481,13 @@ API参考[¶](#api-reference "Permalink to this headline")
             – an [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
             or [`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")
             with which to perform schema reflection, if specified.
-            如果[`AutomapBase.prepare.reflect`{.xref .py .py-paramref
-            .docutils
-            .literal}](#sqlalchemy.ext.automap.AutomapBase.prepare.params.reflect "sqlalchemy.ext.automap.AutomapBase.prepare")参数为False，则不使用此对象。
+            如果[`AutomapBase.prepare.reflect`](#sqlalchemy.ext.automap.AutomapBase.prepare.params.reflect "sqlalchemy.ext.automap.AutomapBase.prepare")参数为False，则不使用此对象。
         -   **reflect**[¶](#sqlalchemy.ext.automap.AutomapBase.prepare.params.reflect)
-            – if True, the [`MetaData.reflect()`{.xref .py .py-meth
-            .docutils
-            .literal}](core_metadata.html#sqlalchemy.schema.MetaData.reflect "sqlalchemy.schema.MetaData.reflect")
+            – if True, the [`MetaData.reflect()`](core_metadata.html#sqlalchemy.schema.MetaData.reflect "sqlalchemy.schema.MetaData.reflect")
             method is called on the [`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
             associated with this [`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase").
             The [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
-            passed via [`AutomapBase.prepare.engine`{.xref .py
-            .py-paramref .docutils
-            .literal}](#sqlalchemy.ext.automap.AutomapBase.prepare.params.engine "sqlalchemy.ext.automap.AutomapBase.prepare")
+            passed via [`AutomapBase.prepare.engine`](#sqlalchemy.ext.automap.AutomapBase.prepare.params.engine "sqlalchemy.ext.automap.AutomapBase.prepare")
             will be used to perform the reflection if present; else, the
             [`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
             should already be bound to some engine else the operation
@@ -503,40 +495,30 @@ API参考[¶](#api-reference "Permalink to this headline")
         -   **classname\_for\_table**[¶](#sqlalchemy.ext.automap.AutomapBase.prepare.params.classname_for_table)
             – callable function which will be used to produce new class
             names, given a table name.
-            默认为[`classname_for_table()`{.xref .py .py-func .docutils
-            .literal}](#sqlalchemy.ext.automap.classname_for_table "sqlalchemy.ext.automap.classname_for_table")。
+            默认为[`classname_for_table()`](#sqlalchemy.ext.automap.classname_for_table "sqlalchemy.ext.automap.classname_for_table")。
         -   **name\_for\_scalar\_relationship**[¶](#sqlalchemy.ext.automap.AutomapBase.prepare.params.name_for_scalar_relationship)
             – callable function which will be used to produce
             relationship names for scalar relationships.
-            默认为[`name_for_scalar_relationship()`{.xref .py .py-func
-            .docutils
-            .literal}](#sqlalchemy.ext.automap.name_for_scalar_relationship "sqlalchemy.ext.automap.name_for_scalar_relationship")。
+            默认为[`name_for_scalar_relationship()`](#sqlalchemy.ext.automap.name_for_scalar_relationship "sqlalchemy.ext.automap.name_for_scalar_relationship")。
         -   **name\_for\_collection\_relationship**[¶](#sqlalchemy.ext.automap.AutomapBase.prepare.params.name_for_collection_relationship)
             – callable function which will be used to produce
             relationship names for collection-oriented relationships.
             默认为[`name_for_collection_relationship()`](#sqlalchemy.ext.automap.name_for_collection_relationship "sqlalchemy.ext.automap.name_for_collection_relationship")。
         -   **generate\_relationship**[¶](#sqlalchemy.ext.automap.AutomapBase.prepare.params.generate_relationship)
             – callable function which will be used to actually generate
-            [`relationship()`{.xref .py .py-func .docutils
-            .literal}](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
-            and [`backref()`{.xref .py .py-func .docutils
-            .literal}](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")
+            [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
+            and [`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")
             constructs. 默认为[`generate_relationship()`](#sqlalchemy.ext.automap.generate_relationship "sqlalchemy.ext.automap.generate_relationship")。
         -   **collection\_class**[¶](#sqlalchemy.ext.automap.AutomapBase.prepare.params.collection_class)
             – the Python collection class that will be used when a new
-            [`relationship()`{.xref .py .py-func .docutils
-            .literal}](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
+            [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
             object is created that represents a collection.
             默认为`list`。
         -   **模式**
             [¶](#sqlalchemy.ext.automap.AutomapBase.prepare.params.schema)
             -
 
-            当与[`AutomapBase.prepare.reflect`{.xref .py .py-paramref
-            .docutils
-            .literal}](#sqlalchemy.ext.automap.AutomapBase.prepare.params.reflect "sqlalchemy.ext.automap.AutomapBase.prepare")标志一起出现时，将传递给[`MetaData.reflect()`{.xref
-            .py .py-meth .docutils
-            .literal}](core_metadata.html#sqlalchemy.schema.MetaData.reflect "sqlalchemy.schema.MetaData.reflect")以指示表应该从哪里反映出来的主模式。省略时，将使用由数据库连接使用的默认模式。
+            当与[`AutomapBase.prepare.reflect`](#sqlalchemy.ext.automap.AutomapBase.prepare.params.reflect "sqlalchemy.ext.automap.AutomapBase.prepare")标志一起出现时，将传递给[`MetaData.reflect()`](core_metadata.html#sqlalchemy.schema.MetaData.reflect "sqlalchemy.schema.MetaData.reflect")以指示表应该从哪里反映出来的主模式。省略时，将使用由数据库连接使用的默认模式。
 
             版本1.1中的新功能
 
@@ -639,21 +621,12 @@ API参考[¶](#api-reference "Permalink to this headline")
         class doing the prepare.
     -   **direction**[¶](#sqlalchemy.ext.automap.generate_relationship.params.direction)
         – indicate the “direction” of the relationship; this will be one
-        of [`ONETOMANY`{.xref .py .py-data .docutils
-        .literal}](internals.html#sqlalchemy.orm.interfaces.ONETOMANY "sqlalchemy.orm.interfaces.ONETOMANY"),
-        [`MANYTOONE`{.xref .py .py-data .docutils
-        .literal}](internals.html#sqlalchemy.orm.interfaces.MANYTOONE "sqlalchemy.orm.interfaces.MANYTOONE"),
-        [`MANYTOMANY`{.xref .py .py-data .docutils
-        .literal}](internals.html#sqlalchemy.orm.interfaces.MANYTOMANY "sqlalchemy.orm.interfaces.MANYTOMANY").
+        of [`ONETOMANY`](internals.html#sqlalchemy.orm.interfaces.ONETOMANY "sqlalchemy.orm.interfaces.ONETOMANY"),
+        [`MANYTOONE`](internals.html#sqlalchemy.orm.interfaces.MANYTOONE "sqlalchemy.orm.interfaces.MANYTOONE"),
+        [`MANYTOMANY`](internals.html#sqlalchemy.orm.interfaces.MANYTOMANY "sqlalchemy.orm.interfaces.MANYTOMANY").
     -   **return\_fn**
         [¶](#sqlalchemy.ext.automap.generate_relationship.params.return_fn)
-        - 默认用于创建关系的功能。这将是[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")或[`backref()`{.xref
-        .py .py-func .docutils
-        .literal}](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")。在第二步中，将使用[`backref()`{.xref
-        .py .py-func .docutils
-        .literal}](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")函数的结果产生新的[`relationship()`{.xref
-        .py .py-func .docutils
-        .literal}](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")，所以用户定义的实现正确区分这两个函数，如果使用自定义关系函数。
+        - 默认用于创建关系的功能。这将是[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")或[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")。在第二步中，将使用[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")函数的结果产生新的[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")，所以用户定义的实现正确区分这两个函数，如果使用自定义关系函数。
     -   **local\_cls**[¶](#sqlalchemy.ext.automap.generate_relationship.params.local_cls)
         – the “local” class to which this relationship or backref will
         be locally present.

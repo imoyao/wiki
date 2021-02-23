@@ -241,11 +241,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
     `active_history`{.descname} *= True* [¶](#sqlalchemy.orm.interfaces.AttributeExtension.active_history "Permalink to this definition")
     :   表明set()方法想要接收'旧'值，即使它意味着释放懒惰的可调参数。
 
-        请注意，`active_history`也可以直接通过[`column_property()`{.xref .py .py-func
-        .docutils
-        .literal}](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")和[`relationship()`{.xref
-        .py .py-func .docutils
-        .literal}](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")设置。
+        请注意，`active_history`也可以直接通过[`column_property()`](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")和[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")设置。
 
      `append`{.descname}(*state*, *value*, *initiator*)[¶](#sqlalchemy.orm.interfaces.AttributeExtension.append "Permalink to this definition")
     :   收到追加追加事件。

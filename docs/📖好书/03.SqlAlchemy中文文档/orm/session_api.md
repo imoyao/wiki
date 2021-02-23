@@ -49,9 +49,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         sess = Session()
 
     ` __呼叫__  T0> （ T1>  ** local_kw  T2> ） T3> ¶ T4>`{.descname}
-    :   使用此[`sessionmaker`](#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")中建立的配置生成新的[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象。
+    :   使用此[`sessionmaker`](#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")中建立的配置生成新的[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象。
 
         在Python中，当调用与对象相同的方式“调用”时，会在对象上调用`__call__`方法：
 
@@ -61,9 +59,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
     `__ init __`{.descname} （ *bind = None*，*class \_ =＆lt； class'sqlalchemy.orm.session.Session'＆gt；* ，*autoflush = True*，*autocommit = False*，*expire\_on\_commit = True*，*info =无*，*\*\*千瓦 T8\> ） T9\> [¶ T10\>](#sqlalchemy.orm.session.sessionmaker.__init__ "Permalink to this definition")*
     :   构建一个新的[`sessionmaker`](#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")。
 
-        除了`class_`之外，所有参数都直接对应于由[`Session`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")接受的参数。有关参数的更多详细信息，请参阅[`Session.__init__()`](#sqlalchemy.orm.session.Session.__init__ "sqlalchemy.orm.session.Session.__init__")
+        除了`class_`之外，所有参数都直接对应于由[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")接受的参数。有关参数的更多详细信息，请参阅[`Session.__init__()`](#sqlalchemy.orm.session.Session.__init__ "sqlalchemy.orm.session.Session.__init__")
         docstring。
 
         参数：
@@ -74,9 +70,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
             with which newly created [`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
             objects will be associated.
         -   **class\_**[¶](#sqlalchemy.orm.session.sessionmaker.params.class_)
-            – class to use in order to create new [`Session`{.xref .py
-            .py-class .docutils
-            .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
+            – class to use in order to create new [`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
             objects. 默认为[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。
         -   **autoflush**[¶](#sqlalchemy.orm.session.sessionmaker.params.autoflush)
             – The autoflush setting to use with newly created
@@ -93,9 +87,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         -   **info**
             [¶](#sqlalchemy.orm.session.sessionmaker.params.info) -
 
-            可通过[`Session.info`{.xref .py .py-attr .docutils
-            .literal}](#sqlalchemy.orm.session.Session.info "sqlalchemy.orm.session.Session.info")获得的可选信息字典。注意，当`info`{.docutils
-            .literal}参数指定给特定[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")施工操作时，该字典*更新*，不会被替换。
+            可通过[`Session.info`](#sqlalchemy.orm.session.Session.info "sqlalchemy.orm.session.Session.info")获得的可选信息字典。注意，当`info`参数指定给特定[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")施工操作时，该字典*更新*，不会被替换。
 
             版本0.9.0中的新功能
 
@@ -147,9 +139,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
      `__init__`{.descname}(*bind=None*, *autoflush=True*, *expire\_on\_commit=True*, *\_enable\_transaction\_accounting=True*, *autocommit=False*, *twophase=False*, *weak\_identity\_map=True*, *binds=None*, *extension=None*, *info=None*, *query\_cls=\<class 'sqlalchemy.orm.query.Query'\>*)[¶](#sqlalchemy.orm.session.Session.__init__ "Permalink to this definition")
     :   构建一个新的会话。
 
-        另请参阅[`sessionmaker`](#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")函数，该函数用于生成具有给定参数集的[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")生成可调用对象。
+        另请参阅[`sessionmaker`](#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")函数，该函数用于生成具有给定参数集的[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")生成可调用对象。
 
         参数：
 
@@ -158,16 +148,10 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
 
             警告
 
-            自动提交标志**不用于一般用途**，如果使用它，只应在[`Session.begin()`{.xref
-            .py .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")
-            / [`Session.commit()`{.xref .py .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")对。在划定的事务之外执行查询是传统的使用模式，并且在某些情况下可能会导致并发连接检出。
+            自动提交标志**不用于一般用途**，如果使用它，只应在[`Session.begin()`](#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")
+            / [`Session.commit()`](#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")对。在划定的事务之外执行查询是传统的使用模式，并且在某些情况下可能会导致并发连接检出。
 
-            默认为`False`。当`True`{.docutils
-            .literal}时，[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")不会保持持续的事务处于运行状态，并且会根据需要从引擎获取连接，并在使用后立即返回。如果没有交易存在，冲洗将开始并提交（或可能回滚）自己的交易。使用此模式时，[`Session.begin()`{.xref
-            .py .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")方法用于显式启动事务。
+            默认为`False`。当`True`时，[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")不会保持持续的事务处于运行状态，并且会根据需要从引擎获取连接，并在使用后立即返回。如果没有交易存在，冲洗将开始并提交（或可能回滚）自己的交易。使用此模式时，[`Session.begin()`](#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")方法用于显式启动事务。
 
             也可以看看
 
@@ -176,19 +160,10 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
 
         -   **autoflush**[¶](#sqlalchemy.orm.session.Session.params.autoflush)
             – When `True`, all query operations will
-            issue a [`flush()`{.xref .py .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")
+            issue a [`flush()`](#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")
             call to this `Session` before
             proceeding.
-            这是一个方便的功能，因此无需重复调用[`flush()`{.xref .py
-            .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")以便数据库查询检索结果。通常，`autoflush`{.docutils
-            .literal}与`autocommit=False`{.docutils
-            .literal}结合使用。在这种情况下，很少需要显式调用[`flush()`{.xref
-            .py .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")；你通常只需要调用[`commit()`{.xref
-            .py .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")（刷新）来完成更改。
+            这是一个方便的功能，因此无需重复调用[`flush()`](#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")以便数据库查询检索结果。通常，`autoflush`与`autocommit=False`结合使用。在这种情况下，很少需要显式调用[`flush()`](#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")；你通常只需要调用[`commit()`](#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")（刷新）来完成更改。
         -   **bind**[¶](#sqlalchemy.orm.session.Session.params.bind) –
             An optional [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
             or [`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")
@@ -197,18 +172,14 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         -   **绑定** [¶](#sqlalchemy.orm.session.Session.params.binds) -
 
             包含更多粒度的可选字典
-            :   “绑定”信息比`bind`{.docutils
-                .literal}参数提供的信息。This dictionary can map
+            :   “绑定”信息比`bind`参数提供的信息。This dictionary can map
                 individual :class\`.Table\` instances as well as
                 [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
                 instances to individual [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
                 or [`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")
                 objects. 相对于特定[`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")进行的操作将查询此字典中的直接[`Mapper`{.xref
                 .py .py-class .docutils
-                .literal}](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")实例以及映射器的`mapped_table`{.docutils
-                .literal}属性，以便找到可连接使用。完整的分辨率在[`Session.get_bind()`{.xref
-                .py .py-meth .docutils
-                .literal}](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind")中描述。用法如下所示：
+                .literal}](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")实例以及映射器的`mapped_table`属性，以便找到可连接使用。完整的分辨率在[`Session.get_bind()`](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind")中描述。用法如下所示：
 
                     Session = sessionmaker(binds={
                         SomeMappedClass: create_engine('postgresql://engine1'),
@@ -216,18 +187,13 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
                         some_table: create_engine('postgresql://engine3'),
                         })
 
-            另请参阅[`Session.bind_mapper()`{.xref .py .py-meth
-            .docutils
-            .literal}](#sqlalchemy.orm.session.Session.bind_mapper "sqlalchemy.orm.session.Session.bind_mapper")和[`Session.bind_table()`{.xref
-            .py .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.bind_table "sqlalchemy.orm.session.Session.bind_table")方法。
+            另请参阅[`Session.bind_mapper()`](#sqlalchemy.orm.session.Session.bind_mapper "sqlalchemy.orm.session.Session.bind_mapper")和[`Session.bind_table()`](#sqlalchemy.orm.session.Session.bind_table "sqlalchemy.orm.session.Session.bind_table")方法。
 
         -   **class\_**[¶](#sqlalchemy.orm.session.Session.params.class_)
             – Specify an alternate class other than
             `sqlalchemy.orm.session.Session` which
             should be used by the returned class.
-            这是[`sessionmaker`](#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")函数本地唯一的参数，不会直接发送给`Session`{.docutils
-            .literal}的构造函数。
+            这是[`sessionmaker`](#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")函数本地唯一的参数，不会直接发送给`Session`的构造函数。
         -   **\_enable\_transaction\_accounting**
             [¶](#sqlalchemy.orm.session.Session.params._enable_transaction_accounting)
             - 默认为`True`。A legacy-only flag which
@@ -235,16 +201,11 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
             object accounting on transaction boundaries, including
             auto-expiry of instances on rollback and commit, maintenance
             of the “new” and “deleted” lists upon rollback, and
-            autoflush of pending changes upon [`begin()`{.xref .py
-            .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin"),
+            autoflush of pending changes upon [`begin()`](#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin"),
             all of which are interdependent.
         -   **expire\_on\_commit**
             [¶](#sqlalchemy.orm.session.Session.params.expire_on_commit)
-            - 默认为`True`。当`True`{.docutils
-            .literal}时，所有实例将在每个[`commit()`{.xref .py .py-meth
-            .docutils
-            .literal}](#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")后完全过期，以便完成的事务之后的所有属性/对象访问将从最近的数据库状态加载。
+            - 默认为`True`。当`True`时，所有实例将在每个[`commit()`](#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")后完全过期，以便完成的事务之后的所有属性/对象访问将从最近的数据库状态加载。
         -   **extension**[¶](#sqlalchemy.orm.session.Session.params.extension)
             – An optional [`SessionExtension`](deprecated.html#sqlalchemy.orm.interfaces.SessionExtension "sqlalchemy.orm.interfaces.SessionExtension")
             instance, or a list of such instances, which will receive
@@ -253,35 +214,23 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
             T0\>**请参阅[`SessionEvents`](events.html#sqlalchemy.orm.events.SessionEvents "sqlalchemy.orm.events.SessionEvents")。
         -   **info** [¶](#sqlalchemy.orm.session.Session.params.info) -
 
-            任意数据的可选字典将与此[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")关联。通过[`Session.info`{.xref
-            .py .py-attr .docutils
-            .literal}](#sqlalchemy.orm.session.Session.info "sqlalchemy.orm.session.Session.info")属性可用。请注意，字典在构建时被复制，以便对[`Session`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")字典的修改将在本地到[`Session`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。
+            任意数据的可选字典将与此[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")关联。通过[`Session.info`](#sqlalchemy.orm.session.Session.info "sqlalchemy.orm.session.Session.info")属性可用。请注意，字典在构建时被复制，以便对[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")字典的修改将在本地到[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。
 
             版本0.9.0中的新功能
 
         -   **query\_cls**[¶](#sqlalchemy.orm.session.Session.params.query_cls)
             – Class which should be used to create new Query objects, as
-            returned by the [`query()`{.xref .py .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.query "sqlalchemy.orm.session.Session.query")
+            returned by the [`query()`](#sqlalchemy.orm.session.Session.query "sqlalchemy.orm.session.Session.query")
             method. 默认为[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")。
         -   **twophase**[¶](#sqlalchemy.orm.session.Session.params.twophase)
             – When `True`, all transactions will be
             started as a “two phase” transaction, i.e. using the “two
             phase” semantics of the database in use along with an XID.
-            During a [`commit()`{.xref .py .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit"),
-            after [`flush()`{.xref .py .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")
+            During a [`commit()`](#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit"),
+            after [`flush()`](#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")
             has been issued for all attached databases, the
-            [`prepare()`{.xref .py .py-meth .docutils
-            .literal}](core_connections.html#sqlalchemy.engine.TwoPhaseTransaction.prepare "sqlalchemy.engine.TwoPhaseTransaction.prepare")
-            method on each database’s [`TwoPhaseTransaction`{.xref .py
-            .py-class .docutils
-            .literal}](core_connections.html#sqlalchemy.engine.TwoPhaseTransaction "sqlalchemy.engine.TwoPhaseTransaction")
+            [`prepare()`](core_connections.html#sqlalchemy.engine.TwoPhaseTransaction.prepare "sqlalchemy.engine.TwoPhaseTransaction.prepare")
+            method on each database’s [`TwoPhaseTransaction`](core_connections.html#sqlalchemy.engine.TwoPhaseTransaction "sqlalchemy.engine.TwoPhaseTransaction")
             will be called.
             这允许每个数据库在每个事务提交之前回滚整个事务。
         -   **weak\_identity\_map**[¶](#sqlalchemy.orm.session.Session.params.weak_identity_map)
@@ -325,20 +274,12 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         SAVEPOINT](session_transaction.html#session-begin-nested)。
 
      `bind_mapper`{.descname}(*mapper*, *bind*)[¶](#sqlalchemy.orm.session.Session.bind_mapper "Permalink to this definition")
-    :   将[`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")与“绑定”相关联，例如一个[`Engine`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")。
+    :   将[`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")与“绑定”相关联，例如一个[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")。
 
         给定的映射器被添加到由[`Session.get_bind()`](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind")方法使用的查找中。
 
      `bind_table`{.descname}(*table*, *bind*)[¶](#sqlalchemy.orm.session.Session.bind_table "Permalink to this definition")
-    :   将[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")与“绑定”相关联，例如一个[`Engine`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")。
+    :   将[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")与“绑定”相关联，例如一个[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")。
 
         给定的映射器被添加到由[`Session.get_bind()`](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind")方法使用的查找中。
 
@@ -366,9 +307,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         参数：
 
         -   **mapper**[¶](#sqlalchemy.orm.session.Session.bulk_insert_mappings.params.mapper)
-            – a mapped class, or the actual [`Mapper`{.xref .py
-            .py-class .docutils
-            .literal}](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
+            – a mapped class, or the actual [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
             object, representing the single kind of object represented
             within the mapping list.
         -   T0\> **映射 T1\> [¶ T2\> -
@@ -384,8 +323,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
             [¶](#sqlalchemy.orm.session.Session.bulk_insert_mappings.params.render_nulls)
             -
 
-            当为True时，`None`{.docutils
-            .literal}的值将导致INSERT语句中包含NULL值，而不是INSERT中省略的列。这允许所有被插入的行具有相同的一组列，这允许将全部行集合到DBAPI。通常情况下，包含与前一行不同的NULL值组合的每个列集必须从所呈现的INSERT语句中省略不同的一系列列，这意味着它必须作为单独的语句发布。通过传递这个标志，整套行保证可批量化为一个批次；但是费用是由省略列调用的服务器端默认值将被跳过，因此必须小心确保这些不是必需的。
+            当为True时，`None`的值将导致INSERT语句中包含NULL值，而不是INSERT中省略的列。这允许所有被插入的行具有相同的一组列，这允许将全部行集合到DBAPI。通常情况下，包含与前一行不同的NULL值组合的每个列集必须从所呈现的INSERT语句中省略不同的一系列列，这意味着它必须作为单独的语句发布。通过传递这个标志，整套行保证可批量化为一个批次；但是费用是由省略列调用的服务器端默认值将被跳过，因此必须小心确保这些不是必需的。
 
             警告
 
@@ -428,18 +366,11 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
             [¶](#sqlalchemy.orm.session.Session.bulk_save_objects.params.objects)
             -
 
-            一个映射对象实例的列表。映射的对象保持原样，之后**不**与[`Session`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")关联。
+            一个映射对象实例的列表。映射的对象保持原样，之后**不**与[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")关联。
 
-            对于每个对象，对象是否作为INSERT或UPDATE发送取决于传统操作中[`Session`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")使用的相同规则；如果对象具有`InstanceState.key`{.xref
-            .py .py-attr .docutils
-            .literal}属性集，则该对象被假定为“分离”并且将导致UPDATE。否则，使用INSERT。
+            对于每个对象，对象是否作为INSERT或UPDATE发送取决于传统操作中[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")使用的相同规则；如果对象具有`InstanceState.key`属性集，则该对象被假定为“分离”并且将导致UPDATE。否则，使用INSERT。
 
-            在UPDATE的情况下，语句根据哪些属性发生了变化进行分组，并因此成为每个SET子句的主题。如果`update_changed_only`{.docutils
-            .literal}为False，那么每个对象中的所有属性都会应用到UPDATE语句中，这可能有助于允许将语句组合到一个更大的executemany()中，并且还会减少开销检查属性的历史记录。
+            在UPDATE的情况下，语句根据哪些属性发生了变化进行分组，并因此成为每个SET子句的主题。如果`update_changed_only`为False，那么每个对象中的所有属性都会应用到UPDATE语句中，这可能有助于允许将语句组合到一个更大的executemany()中，并且还会减少开销检查属性的历史记录。
 
         -   **return\_defaults**[¶](#sqlalchemy.orm.session.Session.bulk_save_objects.params.return_defaults)
             – when True, rows that are missing values which generate
@@ -482,9 +413,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         参数：
 
         -   **mapper**[¶](#sqlalchemy.orm.session.Session.bulk_update_mappings.params.mapper)
-            – a mapped class, or the actual [`Mapper`{.xref .py
-            .py-class .docutils
-            .literal}](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
+            – a mapped class, or the actual [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
             object, representing the single kind of object represented
             within the mapping list.
         -   **mappings**[¶](#sqlalchemy.orm.session.Session.bulk_update_mappings.params.mappings)
@@ -521,11 +450,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         .py .py-exc .docutils
         .literal}](core_exceptions.html#sqlalchemy.exc.InvalidRequestError "sqlalchemy.exc.InvalidRequestError")。
 
-        默认情况下，在事务提交后，[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")也会在所有ORM托管的属性上过期加载所有数据库状态。这样可以使后续操作从数据库加载最新的数据。可以使用[`sessionmaker`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")或[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")构造函数的`expire_on_commit=False`选项禁用此行为。
+        默认情况下，在事务提交后，[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")也会在所有ORM托管的属性上过期加载所有数据库状态。这样可以使后续操作从数据库加载最新的数据。可以使用[`sessionmaker`](#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")或[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")构造函数的`expire_on_commit=False`选项禁用此行为。
 
         如果子事务有效（在多次调用begin()时发生），子事务将被关闭，并且对`commit()`的下一次调用将在封闭事务上运行。
 
@@ -536,15 +461,9 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         [Committing](session_basics.html#session-committing)
 
      `connection`{.descname}(*mapper=None*, *clause=None*, *bind=None*, *close\_with\_result=False*, *execution\_options=None*, *\*\*kw*)[¶](#sqlalchemy.orm.session.Session.connection "Permalink to this definition")
-    :   返回与此[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象的事务状态相对应的[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象。
+    :   返回与此[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象的事务状态相对应的[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象。
 
-        如果[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")配置为`autocommit=False`，则返回与当前事务对应的[`Connection`{.xref .py
-        .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")，或者如果没有事务正在进行，一个新的开始并返回[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")（请注意，在发出第一个SQL语句之前，没有与DBAPI建立事务性状态）。
+        如果[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")配置为`autocommit=False`，则返回与当前事务对应的[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")，或者如果没有事务正在进行，一个新的开始并返回[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")（请注意，在发出第一个SQL语句之前，没有与DBAPI建立事务性状态）。
 
         Alternatively, if this [`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
         is configured with `autocommit=True`, an
@@ -559,38 +478,26 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         -   **bind**[¶](#sqlalchemy.orm.session.Session.connection.params.bind)
             – Optional [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
             to be used as the bind.
-            如果此引擎已经涉及正在进行的交易，则将使用该连接。此参数优先于`mapper`{.docutils
-            .literal}，`clause`。
+            如果此引擎已经涉及正在进行的交易，则将使用该连接。此参数优先于`mapper`，`clause`。
         -   **mapper**[¶](#sqlalchemy.orm.session.Session.connection.params.mapper)
-            – Optional [`mapper()`{.xref .py .py-func .docutils
-            .literal}](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")
+            – Optional [`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")
             mapped class, used to identify the appropriate bind.
             此参数优先于`clause`。
         -   **clause**[¶](#sqlalchemy.orm.session.Session.connection.params.clause)
             – A [`ClauseElement`](core_sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")
-            (i.e. [`select()`{.xref .py .py-func .docutils
-            .literal}](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select"),
-            [`text()`{.xref .py .py-func .docutils
-            .literal}](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text"),
+            (i.e. [`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select"),
+            [`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text"),
             etc.) 如果绑定不能以其他方式被识别，将用于定位绑定。
         -   **close\_with\_result**[¶](#sqlalchemy.orm.session.Session.connection.params.close_with_result)
-            – Passed to [`Engine.connect()`{.xref .py .py-meth .docutils
-            .literal}](core_connections.html#sqlalchemy.engine.Engine.connect "sqlalchemy.engine.Engine.connect"),
+            – Passed to [`Engine.connect()`](core_connections.html#sqlalchemy.engine.Engine.connect "sqlalchemy.engine.Engine.connect"),
             indicating the [`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")
             should be considered “single use”, automatically closing
-            when the first result set is closed. 如果[`Session`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")配置为`autocommit=True`{.docutils
-            .literal}并且尚未执行事务，则此标志仅起作用。
+            when the first result set is closed. 如果[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")配置为`autocommit=True`并且尚未执行事务，则此标志仅起作用。
         -   **execution\_options**
             [¶](#sqlalchemy.orm.session.Session.connection.params.execution_options)
             -
 
-            一个执行选项的字典，当连接首次被采购时，它将被传递给[`Connection.execution_options()`{.xref
-            .py .py-meth .docutils
-            .literal}](core_connections.html#sqlalchemy.engine.Connection.execution_options "sqlalchemy.engine.Connection.execution_options")，****。如果连接已经存在于[`Session`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中，则发出警告并忽略参数。
+            一个执行选项的字典，当连接首次被采购时，它将被传递给[`Connection.execution_options()`](core_connections.html#sqlalchemy.engine.Connection.execution_options "sqlalchemy.engine.Connection.execution_options")，****。如果连接已经存在于[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中，则发出警告并忽略参数。
 
             版本0.9.9中的新功能
 
@@ -601,12 +508,9 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
 
         -   **\*\*kw**[¶](#sqlalchemy.orm.session.Session.connection.params.**kw)
             – Additional keyword arguments are sent to
-            [`get_bind()`{.xref .py .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind"),
+            [`get_bind()`](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind"),
             allowing additional arguments to be passed to custom
-            implementations of [`get_bind()`{.xref .py .py-meth
-            .docutils
-            .literal}](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind").
+            implementations of [`get_bind()`](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind").
 
     `删除 T0> （ T1> 实例 T2> ） T3> ¶ T4>`{.descname}
     :   将实例标记为已删除。
@@ -638,22 +542,16 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         exists to serve special use cases and is not recommended for
         general use.
 
-        使用[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")映​​射的属性访问将尝试使用此[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")作为连接的来源从数据库加载值。这些值将根据此对象上存在的外键值加载
+        使用[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")映​​射的属性访问将尝试使用此[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")作为连接的来源从数据库加载值。这些值将根据此对象上存在的外键值加载
         - 因此，此功能通常仅适用于多对一关系。
 
         该对象将被附加到该会话中，但**不会**参与任何持久性操作；其几乎所有目的的状态将保持“暂时”或“分离”，除了关系加载的情况。
 
         另请注意，backrefs通常无法按预期工作。如果有效值是已从外键持有值加载的内容，则在目标对象上更改关系绑定属性可能不会触发backref事件。
 
-        [`Session.enable_relationship_loading()`](#sqlalchemy.orm.session.Session.enable_relationship_loading "sqlalchemy.orm.session.Session.enable_relationship_loading")方法类似于[`relationship()`{.xref
-        .py .py-func .docutils
-        .literal}](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上的`load_on_pending`标志。与该标志不同，[`Session.enable_relationship_loading()`](#sqlalchemy.orm.session.Session.enable_relationship_loading "sqlalchemy.orm.session.Session.enable_relationship_loading")允许对象保持瞬态，同时仍然能够加载相关项目。
+        [`Session.enable_relationship_loading()`](#sqlalchemy.orm.session.Session.enable_relationship_loading "sqlalchemy.orm.session.Session.enable_relationship_loading")方法类似于[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上的`load_on_pending`标志。与该标志不同，[`Session.enable_relationship_loading()`](#sqlalchemy.orm.session.Session.enable_relationship_loading "sqlalchemy.orm.session.Session.enable_relationship_loading")允许对象保持瞬态，同时仍然能够加载相关项目。
 
-        To make a transient object associated with a [`Session`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
+        To make a transient object associated with a [`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
         via [`Session.enable_relationship_loading()`](#sqlalchemy.orm.session.Session.enable_relationship_loading "sqlalchemy.orm.session.Session.enable_relationship_loading")
         pending, add it to the [`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
         using [`Session.add()`](#sqlalchemy.orm.session.Session.add "sqlalchemy.orm.session.Session.add")
@@ -669,20 +567,14 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
 
         也可以看看
 
-        `load_on_pending` at [`relationship()`{.xref
-        .py .py-func .docutils
-        .literal}](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
+        `load_on_pending` at [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
         - this flag allows per-relationship loading of many-to-ones on
         items that are pending.
 
      `execute`{.descname}(*clause*, *params=None*, *mapper=None*, *bind=None*, *\*\*kw*)[¶](#sqlalchemy.orm.session.Session.execute "Permalink to this definition")
     :   在当前事务中执行SQL表达式结构或字符串语句。
 
-        以与[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")相同的方式返回表示语句执行结果的[`ResultProxy`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")。
+        以与[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")相同的方式返回表示语句执行结果的[`ResultProxy`](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")。
 
         例如。：
 
@@ -697,9 +589,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         [`update()`](core_dml.html#sqlalchemy.sql.expression.update "sqlalchemy.sql.expression.update"),
         [`delete()`](core_dml.html#sqlalchemy.sql.expression.delete "sqlalchemy.sql.expression.delete"),
         and [`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text").
-        普通的SQL字符串也可以被传递，在[`Session.execute()`](#sqlalchemy.orm.session.Session.execute "sqlalchemy.orm.session.Session.execute")的情况下，它将被解释为与通过[`text()`{.xref
-        .py .py-func .docutils
-        .literal}](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")构造传递相同。即，以下用法：
+        普通的SQL字符串也可以被传递，在[`Session.execute()`](#sqlalchemy.orm.session.Session.execute "sqlalchemy.orm.session.Session.execute")的情况下，它将被解释为与通过[`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")构造传递相同。即，以下用法：
 
             result = session.execute(
                         "SELECT * FROM user WHERE id=:param",
@@ -727,17 +617,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
                                     {"id": 9, "name": "somename9"}
                                 ])
 
-        该语句在[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的当前事务上下文中执行。用于执行语句的[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")也可以通过调用[`Session.connection()`](#sqlalchemy.orm.session.Session.connection "sqlalchemy.orm.session.Session.connection")方法直接获取。这两种方法都使用基于规则的解决方案来确定[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")，它在平均情况下直接来自[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")本身的“绑定”，并且在其他情况可以基于传递给该方法的[`mapper()`{.xref
-        .py .py-func .docutils
-        .literal}](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")和[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象；请参阅[`Session.get_bind()`](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind")的文档以获得该方案的完整描述。
+        该语句在[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的当前事务上下文中执行。用于执行语句的[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")也可以通过调用[`Session.connection()`](#sqlalchemy.orm.session.Session.connection "sqlalchemy.orm.session.Session.connection")方法直接获取。这两种方法都使用基于规则的解决方案来确定[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")，它在平均情况下直接来自[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")本身的“绑定”，并且在其他情况可以基于传递给该方法的[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")和[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象；请参阅[`Session.get_bind()`](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind")的文档以获得该方案的完整描述。
 
         The [`Session.execute()`](#sqlalchemy.orm.session.Session.execute "sqlalchemy.orm.session.Session.execute")
         method does *not* invoke autoflush.
@@ -753,42 +633,30 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         is established for the statement execution, which is closed
         (meaning, returned to the connection pool) when the
         [`ResultProxy`](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")
-        has consumed all available data. 当[`Session`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")配置为autocommit
+        has consumed all available data. 当[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")配置为autocommit
         = True并且没有事务已启动时，这仅适用于**。
 
         参数：
 
         -   **clause**[¶](#sqlalchemy.orm.session.Session.execute.params.clause)
-            – An executable statement (i.e. an [`Executable`{.xref .py
-            .py-class .docutils
-            .literal}](core_selectable.html#sqlalchemy.sql.expression.Executable "sqlalchemy.sql.expression.Executable")
-            expression such as [`expression.select()`{.xref .py .py-func
-            .docutils
-            .literal}](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select"))
+            – An executable statement (i.e. an [`Executable`](core_selectable.html#sqlalchemy.sql.expression.Executable "sqlalchemy.sql.expression.Executable")
+            expression such as [`expression.select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select"))
             or string SQL statement to be executed.
         -   **params**[¶](#sqlalchemy.orm.session.Session.execute.params.params)
             – Optional dictionary, or list of dictionaries, containing
             bound parameter values.
             如果单个字典发生单行执行；如果一个字典列表，“executemany”将被调用。每个字典中的键必须对应于语句中存在的参数名称。
         -   **mapper**[¶](#sqlalchemy.orm.session.Session.execute.params.mapper)
-            – Optional [`mapper()`{.xref .py .py-func .docutils
-            .literal}](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")
+            – Optional [`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")
             or mapped class, used to identify the appropriate bind.
-            定位绑定时，此参数优先于`clause`{.docutils
-            .literal}。有关更多详细信息，请参阅[`Session.get_bind()`{.xref
-            .py .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind")。
+            定位绑定时，此参数优先于`clause`。有关更多详细信息，请参阅[`Session.get_bind()`](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind")。
         -   **bind**[¶](#sqlalchemy.orm.session.Session.execute.params.bind)
             – Optional [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
             to be used as the bind.
-            如果此引擎已经涉及正在进行的交易，则将使用该连接。定位绑定时，此参数优先于`mapper`{.docutils
-            .literal}和`clause`。
+            如果此引擎已经涉及正在进行的交易，则将使用该连接。定位绑定时，此参数优先于`mapper`和`clause`。
         -   **\*\*kw**[¶](#sqlalchemy.orm.session.Session.execute.params.**kw)
             – Additional keyword arguments are sent to
-            [`Session.get_bind()`{.xref .py .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind")
+            [`Session.get_bind()`](#sqlalchemy.orm.session.Session.get_bind "sqlalchemy.orm.session.Session.get_bind")
             to allow extensibility of “bind” schemes.
 
         也可以看看
@@ -807,9 +675,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
     `expire`{.descname} （ *实例*，*attribute\_names =无* ） [t5 \>](#sqlalchemy.orm.session.Session.expire "Permalink to this definition")
     :   过期实例上的属性。
 
-        将实例的属性标记为过时。当下一次访问过期属性时，将向[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象的当前事务上下文发出查询，以加载给定实例的所有过期属性。请注意，高度孤立的事务将返回与先前在同一事务中读取的值相同的值，而不考虑该事务之外的数据库状态更改。
+        将实例的属性标记为过时。当下一次访问过期属性时，将向[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象的当前事务上下文发出查询，以加载给定实例的所有过期属性。请注意，高度孤立的事务将返回与先前在同一事务中读取的值相同的值，而不考虑该事务之外的数据库状态更改。
 
         要同时过期[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中的所有对象，请使用[`Session.expire_all()`](#sqlalchemy.orm.session.Session.expire_all "sqlalchemy.orm.session.Session.expire_all")。
 
@@ -837,9 +703,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
     ` expire_all  T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   在此会话中过期所有持久性实例。
 
-        当下一次访问持久实例上的任何属性时，将使用[`Session`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象的当前事务上下文发出查询，以加载给定实例的所有过期属性。请注意，高度孤立的事务将返回与先前在同一事务中读取的值相同的值，而不考虑该事务之外的数据库状态更改。
+        当下一次访问持久实例上的任何属性时，将使用[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象的当前事务上下文发出查询，以加载给定实例的所有过期属性。请注意，高度孤立的事务将返回与先前在同一事务中读取的值相同的值，而不考虑该事务之外的数据库状态更改。
 
         要使这些对象上的单个对象和单个属性过期，请使用[`Session.expire()`](#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")。
 
@@ -887,11 +751,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
     ` get_bind  T0> （ T1> 映射器=无 T2>，子句=无 T3> ） T4> ¶< / T5>`{.descname}
     :   返回该[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")绑定到的“绑定”。
 
-        “绑定”通常是[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的一个实例，除非[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")已直接显式绑定到[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")。
+        “绑定”通常是[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的一个实例，除非[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")已直接显式绑定到[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")。
 
         对于乘法或非约束[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，使用`mapper`或`clause`参数来确定要返回的适当绑定。
 
@@ -906,18 +766,10 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         解决的顺序是：
 
         1.  如果存在映射器和session.binds，则根据映射器找到绑定。
-        2.  如果存在子句given和session.binds，则根据在session.binds中给出的子句中找到的[`Table`{.xref
-            .py .py-class .docutils
-            .literal}](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象找到一个绑定。
+        2.  如果存在子句given和session.binds，则根据在session.binds中给出的子句中找到的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象找到一个绑定。
         3.  如果session.bind存在，则返回该值。
-        4.  如果给出子句，则尝试返回链接到最终与该子句关联的[`MetaData`{.xref
-            .py .py-class .docutils
-            .literal}](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")的绑定。
-        5.  如果给定了映射器，则尝试返回链接到最终与映射器映射到的[`Table`{.xref
-            .py .py-class .docutils
-            .literal}](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或其他可选映射关联的[`MetaData`{.xref
-            .py .py-class .docutils
-            .literal}](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")的绑定。
+        4.  如果给出子句，则尝试返回链接到最终与该子句关联的[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")的绑定。
+        5.  如果给定了映射器，则尝试返回链接到最终与映射器映射到的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或其他可选映射关联的[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")的绑定。
         6.  无法找到绑定，[`UnboundExecutionError`{.xref .py .py-exc
             .docutils
             .literal}](core_exceptions.html#sqlalchemy.exc.UnboundExecutionError "sqlalchemy.exc.UnboundExecutionError")。
@@ -925,24 +777,19 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         参数：
 
         -   **mapper**[¶](#sqlalchemy.orm.session.Session.get_bind.params.mapper)
-            – Optional [`mapper()`{.xref .py .py-func .docutils
-            .literal}](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")
+            – Optional [`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")
             mapped class or instance of [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper").
             The bind can be derived from a [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
             first by consulting the “binds” map associated with this
             [`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session"),
-            and secondly by consulting the [`MetaData`{.xref .py
-            .py-class .docutils
-            .literal}](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
+            and secondly by consulting the [`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
             associated with the [`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
             to which the [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
             is mapped for a bind.
         -   **clause**[¶](#sqlalchemy.orm.session.Session.get_bind.params.clause)
             – A [`ClauseElement`](core_sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")
-            (i.e. [`select()`{.xref .py .py-func .docutils
-            .literal}](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select"),
-            [`text()`{.xref .py .py-func .docutils
-            .literal}](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text"),
+            (i.e. [`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select"),
+            [`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text"),
             etc.). If the `mapper` argument is not
             present or could not produce a bind, the given expression
             construct will be searched for a bound element, typically a
@@ -971,22 +818,14 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
     `信息 T0> ¶ T1>`{.descname}
     :   用户可修改的字典。
 
-        该字典的初始值可以使用[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")构造函数或[`sessionmaker`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")构造函数或工厂方法的`info`参数填充。此处的字典始终是本地[`Session`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，并且可以独立于所有其他[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象进行修改。
+        该字典的初始值可以使用[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")构造函数或[`sessionmaker`](#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")构造函数或工厂方法的`info`参数填充。此处的字典始终是本地[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，并且可以独立于所有其他[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象进行修改。
 
         版本0.9.0中的新功能
 
     `无效 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   关闭此会话，使用连接失效。
 
-        这是[`Session.close()`](#sqlalchemy.orm.session.Session.close "sqlalchemy.orm.session.Session.close")的一个变体，它还将确保[`Connection.invalidate()`](core_connections.html#sqlalchemy.engine.Connection.invalidate "sqlalchemy.engine.Connection.invalidate")方法在所有[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象上被调用。当知道数据库处于连接不再安全使用的状态时，可以调用它。
+        这是[`Session.close()`](#sqlalchemy.orm.session.Session.close "sqlalchemy.orm.session.Session.close")的一个变体，它还将确保[`Connection.invalidate()`](core_connections.html#sqlalchemy.engine.Connection.invalidate "sqlalchemy.engine.Connection.invalidate")方法在所有[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象上被调用。当知道数据库处于连接不再安全使用的状态时，可以调用它。
 
         例如。：
 
@@ -1011,11 +850,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
     :   True if this [`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
         is in “transaction mode” and is not in “partial rollback” state.
 
-        在`autocommit=False`默认模式下的[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")本质上总是处于“事务模式”，因为[`SessionTransaction`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")与其关联因为它被实例化。由于回滚，提交或关闭操作，这个[`SessionTransaction`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")一旦被结束立即被新的替换。
+        在`autocommit=False`默认模式下的[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")本质上总是处于“事务模式”，因为[`SessionTransaction`](#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")与其关联因为它被实例化。由于回滚，提交或关闭操作，这个[`SessionTransaction`](#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")一旦被结束立即被新的替换。
 
         “Transaction mode” does *not* indicate whether or not actual
         database connection resources are in use; the
@@ -1023,47 +858,30 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         object coordinates among zero or more actual database
         transactions, and starts out with none, accumulating individual
         DBAPI connections as different data sources are used within its
-        scope. The best way to track when a particular [`Session`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
+        scope. The best way to track when a particular [`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
         has actually begun to use DBAPI resources is to implement a
         listener using the [`SessionEvents.after_begin()`](events.html#sqlalchemy.orm.events.SessionEvents.after_begin "sqlalchemy.orm.events.SessionEvents.after_begin")
-        method, which will deliver both the [`Session`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
+        method, which will deliver both the [`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
         as well as the target [`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")
         to a user-defined event listener.
 
-        “部分回滚”状态是指通常在刷新期间使用的“内部”事务遇到错误并发出DBAPI连接的回滚时。此时，[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")处于“部分回滚”并等待用户调用[`Session.rollback()`](#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")，以关闭事务堆栈。正是在这个“部分回滚”期间，[`is_active`{.xref
-        .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.session.Session.is_active "sqlalchemy.orm.session.Session.is_active")标志返回False。After
+        “部分回滚”状态是指通常在刷新期间使用的“内部”事务遇到错误并发出DBAPI连接的回滚时。此时，[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")处于“部分回滚”并等待用户调用[`Session.rollback()`](#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")，以关闭事务堆栈。正是在这个“部分回滚”期间，[`is_active`](#sqlalchemy.orm.session.Session.is_active "sqlalchemy.orm.session.Session.is_active")标志返回False。After
         the call to [`Session.rollback()`](#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback"),
         the [`SessionTransaction`](#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")
-        is replaced with a new one and [`is_active`{.xref .py .py-attr
-        .docutils
-        .literal}](#sqlalchemy.orm.session.Session.is_active "sqlalchemy.orm.session.Session.is_active")
+        is replaced with a new one and [`is_active`](#sqlalchemy.orm.session.Session.is_active "sqlalchemy.orm.session.Session.is_active")
         returns `True` again.
 
-        在`autocommit=True`模式下使用[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")时，[`SessionTransaction`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")仅在flush调用的范围内实例化，或[`Session.begin()`](#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")被调用。So
-        [`is_active`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.session.Session.is_active "sqlalchemy.orm.session.Session.is_active")
+        在`autocommit=True`模式下使用[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")时，[`SessionTransaction`](#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")仅在flush调用的范围内实例化，或[`Session.begin()`](#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")被调用。So
+        [`is_active`](#sqlalchemy.orm.session.Session.is_active "sqlalchemy.orm.session.Session.is_active")
         will always be `False` outside of a flush or
         [`Session.begin()`](#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")
         block in this mode, and will be `True`
         within the [`Session.begin()`](#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")
         block as long as it doesn’t enter “partial rollback” state.
 
-        从以上所述可以看出，对于这个标志唯一的目的是希望检测的应用程序框架在通用错误处理例程中是必需的，对于[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象在“部分回滚”模式下。在一个典型的集成案例中，这也不是必须的，因为标准做法是无条件地在最外面的异常捕获中发布[`Session.rollback()`](#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")。
+        从以上所述可以看出，对于这个标志唯一的目的是希望检测的应用程序框架在通用错误处理例程中是必需的，对于[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象在“部分回滚”模式下。在一个典型的集成案例中，这也不是必须的，因为标准做法是无条件地在最外面的异常捕获中发布[`Session.rollback()`](#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")。
 
-        To track the transactional state of a [`Session`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
+        To track the transactional state of a [`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
         fully, use event listeners, primarily the
         [`SessionEvents.after_begin()`](events.html#sqlalchemy.orm.events.SessionEvents.after_begin "sqlalchemy.orm.events.SessionEvents.after_begin"),
         [`SessionEvents.after_commit()`](events.html#sqlalchemy.orm.events.SessionEvents.after_commit "sqlalchemy.orm.events.SessionEvents.after_commit"),
@@ -1075,8 +893,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
 
         此方法检索实例上每个已插装属性的历史记录，并将当前值与之前提交的值（如果有）进行比较。
 
-        它实际上是检查[`Session.dirty`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.session.Session.dirty "sqlalchemy.orm.session.Session.dirty")集合中给定实例的更昂贵和准确的版本；对每个属性的“脏”状态进行全面测试。
+        它实际上是检查[`Session.dirty`](#sqlalchemy.orm.session.Session.dirty "sqlalchemy.orm.session.Session.dirty")集合中给定实例的更昂贵和准确的版本；对每个属性的“脏”状态进行全面测试。
 
         例如。：
 
@@ -1091,23 +908,13 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
 
         这种方法的一些注意事项适用于：
 
-        -   当使用此方法进行测试时，存在于[`Session.dirty`{.xref .py
-            .py-attr .docutils
-            .literal}](#sqlalchemy.orm.session.Session.dirty "sqlalchemy.orm.session.Session.dirty")集合中的实例可能会报告`False`{.docutils
-            .literal}。这是因为对象可能通过属性突变接收到更改事件，因此将其放置在[`Session.dirty`{.xref
-            .py .py-attr .docutils
-            .literal}](#sqlalchemy.orm.session.Session.dirty "sqlalchemy.orm.session.Session.dirty")中，但最终状态与从数据库加载的状态相同，因此在此处没有净更改。
+        -   当使用此方法进行测试时，存在于[`Session.dirty`](#sqlalchemy.orm.session.Session.dirty "sqlalchemy.orm.session.Session.dirty")集合中的实例可能会报告`False`。这是因为对象可能通过属性突变接收到更改事件，因此将其放置在[`Session.dirty`](#sqlalchemy.orm.session.Session.dirty "sqlalchemy.orm.session.Session.dirty")中，但最终状态与从数据库加载的状态相同，因此在此处没有净更改。
 
         -   标量属性可能没有记录应用新值的时候以前设置的值，如果在接收新值时该属性未加载或已过期
             -
             在这些情况下，该属性被假定为有变化，即使对数据库值最终没有净变化。在大多数情况下，SQLAlchemy在设置事件发生时不需要“旧”值，因此，如果旧值不存在，则基于假定需要更新标量值，则跳过SQL调用的开销，而在少数情况下，平均成本低于发布防御性SELECT。
 
-            仅当属性容器的`active_history`{.docutils
-            .literal}标志设置为`True`{.docutils
-            .literal}时，才会无条件地获取“旧”值。通常为主键属性和标量对象引用设置此标志，这些参数不是简单的多对一。要为任意映射列设置此标志，请使用[`column_property()`{.xref
-            .py .py-func .docutils
-            .literal}](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")的`active_history`{.docutils
-            .literal}参数。
+            仅当属性容器的`active_history`标志设置为`True`时，才会无条件地获取“旧”值。通常为主键属性和标量对象引用设置此标志，这些参数不是简单的多对一。要为任意映射列设置此标志，请使用[`column_property()`](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")的`active_history`参数。
 
         参数：
 
@@ -1116,16 +923,14 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         -   **include\_collections**
             [¶](#sqlalchemy.orm.session.Session.is_modified.params.include_collections)
             -
-            指示是否应将多值集合包含在操作中。将此设置为`False`{.docutils
-            .literal}是一种仅检测基于本地列的属性（即标量列或多对一外键）的方法，这些属性在刷新时会导致此实例的UPDATE。
+            指示是否应将多值集合包含在操作中。将此设置为`False`是一种仅检测基于本地列的属性（即标量列或多对一外键）的方法，这些属性在刷新时会导致此实例的UPDATE。
         -   **被动**
             [¶](#sqlalchemy.orm.session.Session.is_modified.params.passive)
             -
 
             Changed in version 0.8: Ignored for backwards compatibility.
             使用SQLAlchemy
-            0.7及更早版本时，该标志应始终设置为`True`{.docutils
-            .literal}。
+            0.7及更早版本时，该标志应始终设置为`True`。
 
     `merge`{.descname} （ *instance*，*load = True* ） [t5 \>](#sqlalchemy.orm.session.Session.merge "Permalink to this definition")
     :   将给定实例的状态复制到[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")内的相应实例中。
@@ -1134,9 +939,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         examines the primary key attributes of the source instance, and
         attempts to reconcile it with an instance of the same primary
         key in the session.
-        如果没有在本地找到，它将尝试从基于主键的数据库加载对象，如果没有可找到的对象，则创建一个新实例。然后将源实例上的每个属性的状态复制到目标实例。然后由方法返回结果的目标实例；原始源实例保持不变，并且如果尚未与[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")关联。
+        如果没有在本地找到，它将尝试从基于主键的数据库加载对象，如果没有可找到的对象，则创建一个新实例。然后将源实例上的每个属性的状态复制到目标实例。然后由方法返回结果的目标实例；原始源实例保持不变，并且如果尚未与[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")关联。
 
         如果关联使用`cascade="merge"`映​​射，则此操作将级联到关联的实例。
 
@@ -1153,20 +956,13 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         -   **载入**
             [¶](#sqlalchemy.orm.session.Session.merge.params.load) -
 
-            Boolean, when False, [`merge()`{.xref .py .py-meth .docutils
-            .literal}](#sqlalchemy.orm.session.Session.merge "sqlalchemy.orm.session.Session.merge")
+            Boolean, when False, [`merge()`](#sqlalchemy.orm.session.Session.merge "sqlalchemy.orm.session.Session.merge")
             switches into a “high performance” mode which causes it to
             forego emitting history events as well as all database
-            access. 该标志用于将对象图形从二级缓存转移到[`Session`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中，或将刚刚加载的对象转移到工作线程拥有的[`Session`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中或过程而不重新查询数据库。
+            access. 该标志用于将对象图形从二级缓存转移到[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中，或将刚刚加载的对象转移到工作线程拥有的[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中或过程而不重新查询数据库。
 
-            `load=False`{.docutils
-            .literal}用例增加了给定对象必须处于“干净”状态的警告，也就是说，没有待处理的更改被刷新
-            - 即使传入对象与任何对象分离[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")这样，当合并操作将本地属性和级联填充到相关对象和集合时，可以按原样将这些值“加盖”到目标对象上，而不会生成任何历史记录或属性事件，也不需要协调传入数据与任何现有的相关对象或集合可能不会被加载。来自`load=False`{.docutils
-            .literal}的结果对象总是产生为“干净”的，所以只有给定的对象也应该是“干净”的，否则这表明该方法被错误使用。
+            `load=False`用例增加了给定对象必须处于“干净”状态的警告，也就是说，没有待处理的更改被刷新
+            - 即使传入对象与任何对象分离[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")这样，当合并操作将本地属性和级联填充到相关对象和集合时，可以按原样将这些值“加盖”到目标对象上，而不会生成任何历史记录或属性事件，也不需要协调传入数据与任何现有的相关对象或集合可能不会被加载。来自`load=False`的结果对象总是产生为“干净”的，所以只有给定的对象也应该是“干净”的，否则这表明该方法被错误使用。
 
     `新的 T0> ¶ T1>`{.descname}
     :   在`Session`中标记为“新”的所有实例的集合。
@@ -1217,9 +1013,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
         移除此会话身份地图中未在用户代码中引用，修改，新建或计划删除的任何对象。返回修剪的对象数量。
 
     `查询`{.descname} （ *\*实体*，*\*\* kwargs* ） [T5\>](#sqlalchemy.orm.session.Session.query "Permalink to this definition")
-    :   返回与[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对应的新[`Query`{.xref
-        .py .py-class .docutils
-        .literal}](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象。
+    :   返回与[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对应的新[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象。
 
     `refresh`{.descname} （ *instance*，*attribute\_names = None*，*lockmode = None* ） T5\> [¶ T6\>](#sqlalchemy.orm.session.Session.refresh "Permalink to this definition")
     :   过期并刷新给定实例上的属性。
@@ -1241,8 +1035,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
             - 可选。指示要刷新的属性子集的可迭代字符串属性名称集合。
         -   **lockmode**[¶](#sqlalchemy.orm.session.Session.refresh.params.lockmode)
             – Passed to the [`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")
-            as used by [`with_lockmode()`{.xref .py .py-meth .docutils
-            .literal}](query.html#sqlalchemy.orm.query.Query.with_lockmode "sqlalchemy.orm.query.Query.with_lockmode").
+            as used by [`with_lockmode()`](query.html#sqlalchemy.orm.query.Query.with_lockmode "sqlalchemy.orm.query.Query.with_lockmode").
 
         也可以看看
 
@@ -1427,8 +1220,7 @@ Events*](events.html)中描述的那些函数。
     -   **passive**[¶](#sqlalchemy.orm.attributes.get_history.params.passive)
         – indicates loading behavior for the attribute if the value is
         not already present.
-        这是一个bitflag属性，默认为符号`PASSIVE_OFF`{.xref .py .py-attr
-        .docutils .literal}，表示应发出所有必需的SQL。
+        这是一个bitflag属性，默认为符号`PASSIVE_OFF`，表示应发出所有必需的SQL。
 
  `sqlalchemy.orm.attributes.`{.descclassname}`init_collection`{.descname}(*obj*, *key*)[¶](#sqlalchemy.orm.attributes.init_collection "Permalink to this definition")
 :   初始化集合属性并返回集合适配器。

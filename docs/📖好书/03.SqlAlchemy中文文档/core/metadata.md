@@ -292,9 +292,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
             不包含大写字母的名称将被视为不区分大小写的名称，除非是保留字，否则不会被引用。任何数量的大写字符的名称都将被引用并准确发送。请注意，即使对于将大写名称标准化为不区分大小写的数据库（如Oracle），此行为也适用。
 
-            名称字段在构建时可以省略，并在列与[`Table`{.xref .py
-            .py-class .docutils
-            .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")关联之前随时应用。这是为了支持[`declarative`{.xref
+            名称字段在构建时可以省略，并在列与[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")关联之前随时应用。这是为了支持[`declarative`{.xref
             .py .py-mod .docutils
             .literal}](orm_extensions_declarative_api.html#module-sqlalchemy.ext.declarative "sqlalchemy.ext.declarative")扩展中的方便用法。
 
@@ -308,66 +306,34 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
                 # use no arguments
                 Column('level', Integer)
 
-            `type`{.docutils
-            .literal}参数可以是第二个位置参数或由关键字指定。
+            `type`参数可以是第二个位置参数或由关键字指定。
 
-            如果`type`为`None`{.docutils
-            .literal}或省略，它将首先默认为特殊类型[`NullType`{.xref .py
-            .py-class .docutils
-            .literal}](type_api.html#sqlalchemy.types.NullType "sqlalchemy.types.NullType")。如果使用[`ForeignKey`{.xref
-            .py .py-class .docutils
-            .literal}](constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")和/或[`ForeignKeyConstraint`{.xref
-            .py .py-class .docutils
-            .literal}](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")使[`Column`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")引用另一列，则远程引用列的类型将为复制到此列，此时外键已针对该远程[`Column`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象解析。
+            如果`type`为`None`或省略，它将首先默认为特殊类型[`NullType`](type_api.html#sqlalchemy.types.NullType "sqlalchemy.types.NullType")。如果使用[`ForeignKey`](constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")和/或[`ForeignKeyConstraint`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")使[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")引用另一列，则远程引用列的类型将为复制到此列，此时外键已针对该远程[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象解析。
 
-            版本0.9.0更改：支持从[`ForeignKey`](constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")对象将类型传播到[`Column`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")进行了改进，应该更加可靠和及时。
+            版本0.9.0更改：支持从[`ForeignKey`](constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")对象将类型传播到[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")进行了改进，应该更加可靠和及时。
 
         -   **\*args**[¶](#sqlalchemy.schema.Column.params.*args) –
             Additional positional arguments include various
             [`SchemaItem`](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
             derived constructs which will be applied as options to the
-            column. 这些包括[`Constraint`](constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")，[`ForeignKey`{.xref
-            .py .py-class .docutils
-            .literal}](constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")，[`ColumnDefault`{.xref
-            .py .py-class .docutils
-            .literal}](defaults.html#sqlalchemy.schema.ColumnDefault "sqlalchemy.schema.ColumnDefault")和[`Sequence`{.xref
-            .py .py-class .docutils
-            .literal}](defaults.html#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")的实例。在某些情况下，可以使用等效的关键字参数，如`server_default`{.docutils
-            .literal}，`default`和`unique`{.docutils
-            .literal}。
+            column. 这些包括[`Constraint`](constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")，[`ForeignKey`](constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")，[`ColumnDefault`](defaults.html#sqlalchemy.schema.ColumnDefault "sqlalchemy.schema.ColumnDefault")和[`Sequence`](defaults.html#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")的实例。在某些情况下，可以使用等效的关键字参数，如`server_default`，`default`和`unique`。
         -   **autoincrement**
             [¶](#sqlalchemy.schema.Column.params.autoincrement) -
 
-            为整数主键列设置“自动增量”语义。缺省值是字符串`"auto"`{.docutils
-            .literal}，它表示没有声明客户端或python端缺省值的INTEGER类型的单列主键应该自动接收自动增量语义；所有其他品种的主键列都不会。这包括在创建表的过程中为这个列发出诸如Postgresql
+            为整数主键列设置“自动增量”语义。缺省值是字符串`"auto"`，它表示没有声明客户端或python端缺省值的INTEGER类型的单列主键应该自动接收自动增量语义；所有其他品种的主键列都不会。这包括在创建表的过程中为这个列发出诸如Postgresql
             SERIAL或MySQL
             AUTO\_INCREMENT之类的[DDL](glossary.html#term-ddl)，以及当INSERT语句调用哪一列时，该列被假定为生成新的整数主键值将由方言检索。
 
-            该标志可以设置为`True`{.docutils
-            .literal}以指示作为组合（例如多列）主键的一部分的列应该具有自动增量语义，尽管注意到主键内只有一列可能具有这个设置。也可以将它设置为`True`{.docutils
-            .literal}以在具有客户端或服务器端默认配置的列上指示自动增量语义，但请注意，并非所有方言都可以将所有默认样式作为“自动增量”。对于具有INTEGER数据类型的单列主键，也可以将其设置为`False`{.docutils
-            .literal}，以禁用该列的自动增量语义。
+            该标志可以设置为`True`以指示作为组合（例如多列）主键的一部分的列应该具有自动增量语义，尽管注意到主键内只有一列可能具有这个设置。也可以将它设置为`True`以在具有客户端或服务器端默认配置的列上指示自动增量语义，但请注意，并非所有方言都可以将所有默认样式作为“自动增量”。对于具有INTEGER数据类型的单列主键，也可以将其设置为`False`，以禁用该列的自动增量语义。
 
             在版本1.1中更改：
-            autoincrement标志现在默认为`"auto"`{.docutils
-            .literal}，仅指示单列整数主键的默认自动增量语义；对于复合（多列）主键，自动增量永远不会隐式启用；像往常一样，`autoincrement=True`{.docutils
-            .literal}最多只允许其中一列为“自动增量”列。`autoincrement=True`{.docutils
-            .literal}也可以在具有显式客户端或服务器端默认值的[`Column`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")上设置，但要受到后端数据库和方言的限制。
+            autoincrement标志现在默认为`"auto"`，仅指示单列整数主键的默认自动增量语义；对于复合（多列）主键，自动增量永远不会隐式启用；像往常一样，`autoincrement=True`最多只允许其中一列为“自动增量”列。`autoincrement=True`也可以在具有显式客户端或服务器端默认值的[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")上设置，但要受到后端数据库和方言的限制。
 
             仅*设置*对于以下列的列有效：
 
             -   整数派生（即INT，SMALLINT，BIGINT）。
             -   主键的一部分
-            -   除非值指定为`'ignore_fk'`{.docutils
-                .literal}，否则不能通过[`ForeignKey`](constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")引用另一列：
+            -   除非值指定为`'ignore_fk'`，否则不能通过[`ForeignKey`](constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")引用另一列：
 
                     # turn on autoincrement for this column despite
                     # the ForeignKey()
@@ -389,22 +355,14 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
                 [SQLite Auto Incrementing
                 Behavior](dialects_sqlite.html#sqlite-autoincrement)
 
-            -   该列将被视为可用于使用特定于后端数据库的“autoincrement”方法，例如调用`cursor.lastrowid`{.docutils
-                .literal}，使用INSERT语句中的RETURNING获取序列生成的值，或者使用诸如“SELECT
-                scope\_identity()”之类的特殊函数。这些方法对于使用的DBAPI和数据库非常具体，并且差别很大，因此在将`autoincrement=True`{.docutils
-                .literal}与自定义默认生成函数关联时应该小心。
+            -   该列将被视为可用于使用特定于后端数据库的“autoincrement”方法，例如调用`cursor.lastrowid`，使用INSERT语句中的RETURNING获取序列生成的值，或者使用诸如“SELECT
+                scope\_identity()”之类的特殊函数。这些方法对于使用的DBAPI和数据库非常具体，并且差别很大，因此在将`autoincrement=True`与自定义默认生成函数关联时应该小心。
 
         -   **默认** [¶](#sqlalchemy.schema.Column.params.default) -
 
-            表示此列的*默认值*的标量，Python可调用或[`ColumnElement`{.xref
-            .py .py-class .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")表达式，在插入时调用此方法，如果此列在其中的VALUES子句中未指定插。这是使用[`ColumnDefault`{.xref
-            .py .py-class .docutils
-            .literal}](defaults.html#sqlalchemy.schema.ColumnDefault "sqlalchemy.schema.ColumnDefault")作为位置参数的捷径；请参阅该类，以获取关于参数结构的完整细节。
+            表示此列的*默认值*的标量，Python可调用或[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")表达式，在插入时调用此方法，如果此列在其中的VALUES子句中未指定插。这是使用[`ColumnDefault`](defaults.html#sqlalchemy.schema.ColumnDefault "sqlalchemy.schema.ColumnDefault")作为位置参数的捷径；请参阅该类，以获取关于参数结构的完整细节。
 
-            将此参数与[`Column.server_default`{.xref .py .py-paramref
-            .docutils
-            .literal}](#sqlalchemy.schema.Column.params.server_default "sqlalchemy.schema.Column")对比，这会在数据库端创建一个默认生成器。
+            将此参数与[`Column.server_default`](#sqlalchemy.schema.Column.params.server_default "sqlalchemy.schema.Column")对比，这会在数据库端创建一个默认生成器。
 
             也可以看看
 
@@ -416,21 +374,14 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
             此属性不会呈现SQL注释（将来的属性“注释”将实现该注释）。
         -   **key**[¶](#sqlalchemy.schema.Column.params.key) – An
             optional string identifier which will identify this
-            `Column` object on the [`Table`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table").
-            当提供密钥时，这是在应用程序中引用`Column`{.docutils
-            .literal}的唯一标识符，包括ORM属性映射； `name`{.docutils
-            .literal}字段仅在呈现SQL时使用。
+            `Column` object on the [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table").
+            当提供密钥时，这是在应用程序中引用`Column`的唯一标识符，包括ORM属性映射； `name`字段仅在呈现SQL时使用。
         -   **index**[¶](#sqlalchemy.schema.Column.params.index) – When
             `True`, indicates that the column is
-            indexed. 这是在表上使用[`Index`](constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")结构的快捷方式。要指定具有显式名称的索引或包含多列的索引，请改用[`Index`{.xref
-            .py .py-class .docutils
-            .literal}](constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")结构。
+            indexed. 这是在表上使用[`Index`](constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")结构的快捷方式。要指定具有显式名称的索引或包含多列的索引，请改用[`Index`](constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")结构。
         -   **info**[¶](#sqlalchemy.schema.Column.params.info) –
             Optional data dictionary which will be populated into the
-            [`SchemaItem.info`{.xref .py .py-attr .docutils
-            .literal}](#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
+            [`SchemaItem.info`](#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
             attribute of this object.
         -   **nullable**[¶](#sqlalchemy.schema.Column.params.nullable) –
             If set to the default of `True`,
@@ -438,28 +389,19 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
             it’s rendered as NOT NULL. 此参数仅在发出CREATE
             TABLE语句时使用。
         -   **onupdate**[¶](#sqlalchemy.schema.Column.params.onupdate) –
-            A scalar, Python callable, or [`ClauseElement`{.xref .py
-            .py-class .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")
+            A scalar, Python callable, or [`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")
             representing a default value to be applied to the column
             within UPDATE statements, which wil be invoked upon update
             if this column is not present in the SET clause of the
-            update. 这是使用[`ColumnDefault`](defaults.html#sqlalchemy.schema.ColumnDefault "sqlalchemy.schema.ColumnDefault")作为`for_update=True`{.docutils
-            .literal}的位置参数的快捷方式。
+            update. 这是使用[`ColumnDefault`](defaults.html#sqlalchemy.schema.ColumnDefault "sqlalchemy.schema.ColumnDefault")作为`for_update=True`的位置参数的快捷方式。
         -   **primary\_key**[¶](#sqlalchemy.schema.Column.params.primary_key)
             – If `True`, marks this column as a
             primary key column.
-            多列可以将此标志设置为指定复合主键。作为替代方案，可以通过明确的[`PrimaryKeyConstraint`{.xref
-            .py .py-class .docutils
-            .literal}](constraints.html#sqlalchemy.schema.PrimaryKeyConstraint "sqlalchemy.schema.PrimaryKeyConstraint")对象指定[`Table`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的主键。
+            多列可以将此标志设置为指定复合主键。作为替代方案，可以通过明确的[`PrimaryKeyConstraint`](constraints.html#sqlalchemy.schema.PrimaryKeyConstraint "sqlalchemy.schema.PrimaryKeyConstraint")对象指定[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的主键。
         -   **server\_default**
             [¶](#sqlalchemy.schema.Column.params.server_default) -
 
-            表示列的DDL DEFAULT值的[`FetchedValue`](defaults.html#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")实例，str，Unicode或[`text()`{.xref
-            .py .py-func .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")结构。
+            表示列的DDL DEFAULT值的[`FetchedValue`](defaults.html#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")实例，str，Unicode或[`text()`](sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")结构。
 
             字符串类型将按原样发出，并由单引号括起来：
 
@@ -467,16 +409,13 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
                 x TEXT DEFAULT 'val'
 
-            一个[`text()`{.xref .py .py-func .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")表达式将按原样呈现，不带引号：
+            一个[`text()`](sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")表达式将按原样呈现，不带引号：
 
                 Column('y', DateTime, server_default=text('NOW()'))
 
                 y DATETIME DEFAULT NOW()
 
-            初始化时，字符串和文本()将被转换为[`DefaultClause`{.xref .py
-            .py-class .docutils
-            .literal}](defaults.html#sqlalchemy.schema.DefaultClause "sqlalchemy.schema.DefaultClause")对象。
+            初始化时，字符串和文本()将被转换为[`DefaultClause`](defaults.html#sqlalchemy.schema.DefaultClause "sqlalchemy.schema.DefaultClause")对象。
 
             使用[`FetchedValue`](defaults.html#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")来指示已存在的列将在数据库端生成一个默认值，SQLAlchemy将在插入后提供用于后取回的默认值。该构造不指定任何DDL，并且实现留给数据库，例如通过触发器。
 
@@ -492,31 +431,20 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         -   **quote**[¶](#sqlalchemy.schema.Column.params.quote) – Force
             quoting of this column’s name on or off, corresponding to
             `True` or `False`.
-            当它保留默认值`None`{.docutils
-            .literal}时，列标识符将根据名称是否区分大小写（带有至少一个大写字符的标识符视为区分大小写）或者是保留字。该标志仅用于强制引用SQLAlchemy方言未知的保留字。
+            当它保留默认值`None`时，列标识符将根据名称是否区分大小写（带有至少一个大写字符的标识符视为区分大小写）或者是保留字。该标志仅用于强制引用SQLAlchemy方言未知的保留字。
         -   **unique**[¶](#sqlalchemy.schema.Column.params.unique) –
             When `True`, indicates that this column
-            contains a unique constraint, or if `index`{.docutils
-            .literal} is `True` as well, indicates
+            contains a unique constraint, or if `index` is `True` as well, indicates
             that the [`Index`](constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")
             should be created with the unique flag.
-            要在约束/索引中指定多个列或指定显式名称，请明确使用[`UniqueConstraint`{.xref
-            .py .py-class .docutils
-            .literal}](constraints.html#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")或[`Index`{.xref
-            .py .py-class .docutils
-            .literal}](constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")结构。
+            要在约束/索引中指定多个列或指定显式名称，请明确使用[`UniqueConstraint`](constraints.html#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")或[`Index`](constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")结构。
         -   **系统** [¶](#sqlalchemy.schema.Column.params.system) -
 
-            当`True`{.docutils
-            .literal}时，表示这是一个“系统”列，即数据库自动提供的一列，不应包含在`CREATE列列表中 TABLE`{.docutils
-            .literal}语句。
+            当`True`时，表示这是一个“系统”列，即数据库自动提供的一列，不应包含在`CREATE列列表中 TABLE`语句。
 
-            有关列应在不同后端有条件呈现的更详细场景，请考虑[`CreateColumn`{.xref
-            .py .py-class .docutils
-            .literal}](ddl.html#sqlalchemy.schema.CreateColumn "sqlalchemy.schema.CreateColumn")的自定义编译规则。
+            有关列应在不同后端有条件呈现的更详细场景，请考虑[`CreateColumn`](ddl.html#sqlalchemy.schema.CreateColumn "sqlalchemy.schema.CreateColumn")的自定义编译规则。
 
-            0.8.3版新增：将`system=True`{.docutils
-            .literal}参数添加到[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
+            0.8.3版新增：将`system=True`参数添加到[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
 
     ` __文件__  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`__le__()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.__le__ "sqlalchemy.sql.operators.ColumnOperators.__le__")
@@ -553,8 +481,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         版本1.1中的新功能
 
     ` anon_label  T0> ¶ T1>`{.descname}
-    :   *继承自* [`anon_label`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnElement.anon_label "sqlalchemy.sql.expression.ColumnElement.anon_label")
+    :   *继承自* [`anon_label`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement.anon_label "sqlalchemy.sql.expression.ColumnElement.anon_label")
         *属性 tt\>\> [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")*
 
         为此ColumnElement提供了一个常量“匿名标签”。
@@ -581,9 +508,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     :   *inherited from the* [`between()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.between "sqlalchemy.sql.operators.ColumnOperators.between")
         *method of* [`ColumnOperators`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")
 
-        在()子句之间针对父对象生成[`between()`{.xref .py .py-func
-        .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.between "sqlalchemy.sql.expression.between")
+        在()子句之间针对父对象生成[`between()`](sqlelement.html#sqlalchemy.sql.expression.between "sqlalchemy.sql.expression.between")
 
     `铸造 T0> （ T1> 类型_  T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`cast()`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement.cast "sqlalchemy.sql.expression.ColumnElement.cast")
@@ -624,23 +549,17 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
-        .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
         -   **bind**[¶](#sqlalchemy.schema.Column.compile.params.bind) –
-            An `Engine` or `Connection`{.docutils
-            .literal} from which a `Compiled` will
-            be acquired. 这个参数优先于这个[`ClauseElement`{.xref .py
-            .py-class .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎，如果有的话。
+            An `Engine` or `Connection` from which a `Compiled` will
+            be acquired. 这个参数优先于这个[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎，如果有的话。
         -   **column\_keys**[¶](#sqlalchemy.schema.Column.compile.params.column_keys)
             – Used for INSERT and UPDATE statements, a list of column
             names which should be present in the VALUES clause of the
-            compiled statement. 如果`None`{.docutils
-            .literal}，则呈现目标表格对象中的所有列。
+            compiled statement. 如果`None`，则呈现目标表格对象中的所有列。
         -   **dialect**[¶](#sqlalchemy.schema.Column.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
@@ -656,8 +575,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
             [¶](#sqlalchemy.schema.Column.compile.params.compile_kwargs)
             -
 
-            在所有“访问”方法中将传递给编译器的附加参数的可选字典。例如，这允许将自定义标志传递给自定义编译构造。它也用于传递`literal_binds`{.docutils
-            .literal}标志的情况：
+            在所有“访问”方法中将传递给编译器的附加参数的可选字典。例如，这允许将自定义标志传递给自定义编译构造。它也用于传递`literal_binds`标志的情况：
 
                 from sqlalchemy.sql import table, column, select
 
@@ -717,8 +635,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         在列上下文中，生成子句`LIKE '％＆lt； other＆gt；`
 
     `表达 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`expression`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnElement.expression "sqlalchemy.sql.expression.ColumnElement.expression")
+    :   *inherited from the* [`expression`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement.expression "sqlalchemy.sql.expression.ColumnElement.expression")
         *attribute of* [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
         返回一个列表达式。
@@ -744,8 +661,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         -   **转义** [¶](#sqlalchemy.schema.Column.ilike.params.escape)
             -
 
-            可选的转义字符，呈现`ESCAPE`{.docutils
-            .literal}关键字，例如：
+            可选的转义字符，呈现`ESCAPE`关键字，例如：
 
                 somecolumn.ilike("foo/%bar", escape="/")
 
@@ -759,24 +675,15 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
         在运算符中实现`in`
 
-        在列上下文中，生成子句`a IN 其他`。“other”可以是列表达式的元组/列表，或者是[`select()`{.xref
-        .py .py-func .docutils
-        .literal}](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构。
+        在列上下文中，生成子句`a IN 其他`。“other”可以是列表达式的元组/列表，或者是[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构。
 
     `信息 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`info`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
+    :   *inherited from the* [`info`](#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
         *attribute of* [`SchemaItem`](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
+        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
 
-        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
+        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
 
     `是_  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`is_()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.is_ "sqlalchemy.sql.operators.ColumnOperators.is_")
@@ -858,8 +765,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
             要比较的表达式
         -   **转义** [¶](#sqlalchemy.schema.Column.like.params.escape) -
 
-            可选的转义字符，呈现`ESCAPE`{.docutils
-            .literal}关键字，例如：
+            可选的转义字符，呈现`ESCAPE`关键字，例如：
 
                 somecolumn.like("foo/%bar", escape="/")
 
@@ -967,10 +873,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         -   **优先顺序**
             [¶](#sqlalchemy.schema.Column.op.params.precedence) -
 
-            当对表达式加括号时，优先级适用于运算符。较低的数字将使表达式在针对具有较高优先级的另一个运算符应用时加括号。除了逗号（`,`{.docutils
-            .literal}）和`AS`{.docutils
-            .literal}运算符以外，`0`{.docutils
-            .literal}的默认值低于所有运算符。100的值将会高于或等于所有操作员，-100将低于或等于所有操作员。
+            当对表达式加括号时，优先级适用于运算符。较低的数字将使表达式在针对具有较高优先级的另一个运算符应用时加括号。除了逗号（`,`）和`AS`运算符以外，`0`的默认值低于所有运算符。100的值将会高于或等于所有操作员，-100将低于或等于所有操作员。
 
             New in version 0.8: - added the ‘precedence’ argument.
 
@@ -978,8 +881,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
             [¶](#sqlalchemy.schema.Column.op.params.is_comparison) -
 
             如果为True，那么该运算符将被视为“比较”运算符，即，其计算结果为boolean
-            true / false值，如`==`，`>`{.docutils
-            .literal}等。应该设置此标志，以便ORM关系可以确定运算符在自定义连接条件中使用时是比较运算符。
+            true / false值，如`==`，`>`等。应该设置此标志，以便ORM关系可以确定运算符在自定义连接条件中使用时是比较运算符。
 
             版本0.9.2新增： - 添加了[`Operators.op.is_comparison`](sqlelement.html#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")标志。
 
@@ -992,8 +894,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         conditions](orm_join_conditions.html#relationship-custom-operator)中使用自定义运算符
 
     `引用 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`quote`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
+    :   *inherited from the* [`quote`](#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
         对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
@@ -1007,9 +908,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     :   *inherited from the* [`shares_lineage()`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement.shares_lineage "sqlalchemy.sql.expression.ColumnElement.shares_lineage")
         *method of* [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
-        如果给定的[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")与此[`ColumnElement`{.xref
-        .py .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")具有共同的祖先，则返回True。
+        如果给定的[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")与此[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")具有共同的祖先，则返回True。
 
     `startswith`{.descname} （ *其他*，*\*\* kwargs* ） [¶ t5 \>](#sqlalchemy.schema.Column.startswith "Permalink to this definition")
     :   *inherited from the* [`startswith()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.startswith "sqlalchemy.sql.operators.ColumnOperators.startswith")
@@ -1046,32 +945,19 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
             也可能是一个字符串或URL实例，它们被传递给create\_engine()，并且这个MetaData将被绑定到生成的引擎。
         -   **反映** [¶](#sqlalchemy.schema.MetaData.params.reflect) -
 
-            可选，自动加载绑定数据库中的所有表。默认为False。设置此选项时需要`bind`{.docutils
-            .literal}。
+            可选，自动加载绑定数据库中的所有表。默认为False。设置此选项时需要`bind`。
 
-            从版本0.8开始弃用：请使用[`MetaData.reflect()`{.xref .py
-            .py-meth .docutils
-            .literal}](#sqlalchemy.schema.MetaData.reflect "sqlalchemy.schema.MetaData.reflect")方法。
+            从版本0.8开始弃用：请使用[`MetaData.reflect()`](#sqlalchemy.schema.MetaData.reflect "sqlalchemy.schema.MetaData.reflect")方法。
 
         -   **模式** [¶](#sqlalchemy.schema.MetaData.params.schema) -
 
-            The default schema to use for the [`Table`{.xref .py
-            .py-class .docutils
-            .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table"),
+            The default schema to use for the [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table"),
             [`Sequence`](defaults.html#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence"),
             and potentially other objects associated with this
             [`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData").
             默认为`None`。
 
-            当设置此值时，为schema参数指定`None`{.docutils
-            .literal}的任何[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或[`Sequence`{.xref
-            .py .py-class .docutils
-            .literal}](defaults.html#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")将改为定义此模式名称。要为模式构建[`Table`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或[`Sequence`{.xref
-            .py .py-class .docutils
-            .literal}](defaults.html#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")，即使此参数存在，也要使用`None`{.docutils
-            .literal}，请使用[`BLANK_SCHEMA`{.xref .py .py-attr
+            当设置此值时，为schema参数指定`None`的任何[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或[`Sequence`](defaults.html#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")将改为定义此模式名称。要为模式构建[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或[`Sequence`](defaults.html#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")，即使此参数存在，也要使用`None`，请使用[`BLANK_SCHEMA`{.xref .py .py-attr
             .docutils
             .literal}](#sqlalchemy.schema.sqlalchemy.schema.BLANK_SCHEMA "sqlalchemy.schema.sqlalchemy.schema.BLANK_SCHEMA")
 
@@ -1091,18 +977,14 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
             `schema` name.
         -   **info** [¶](#sqlalchemy.schema.MetaData.params.info) -
 
-            可选数据字典，将填充到此对象的[`SchemaItem.info`{.xref .py
-            .py-attr .docutils
-            .literal}](#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")属性中。
+            可选数据字典，将填充到此对象的[`SchemaItem.info`](#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")属性中。
 
             版本1.0.0中的新功能
 
         -   **naming\_convention**
             [¶](#sqlalchemy.schema.MetaData.params.naming_convention) -
 
-            一个字典引用的值将为[`Constraint`](constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")和[`Index`{.xref
-            .py .py-class .docutils
-            .literal}](constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")对象建立默认的命名约定，用于那些未明确指定名称的对象。
+            一个字典引用的值将为[`Constraint`](constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")和[`Index`](constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")对象建立默认的命名约定，用于那些未明确指定名称的对象。
 
             这本词典的关键可能是：
 
@@ -1114,18 +996,12 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
                 .py .py-class .docutils
                 .literal}](constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")类
             -   a string mnemonic for one of the known constraint
-                classes; `"fk"`, `"pk"`{.docutils
-                .literal}, `"ix"`, `"ck"`{.docutils
-                .literal}, `"uq"` for foreign key,
+                classes; `"fk"`, `"pk"`, `"ix"`, `"ck"`, `"uq"` for foreign key,
                 primary key, index, check, and unique constraint,
                 respectively.
             -   用户定义的“记号”的字符串名称，可用于定义新的命名记号。
 
-            与每个“约束类”或“约束助记符”键相关的值是字符串命名模板，如`"uq_%(table_name)s_%(column_0_name)s"`{.docutils
-            .literal}，它们描述名称应该如何组成。与用户定义的“标记”键相关的值应该是`fn（约束， 表）`{.docutils
-            .literal}形式的可召集，它接受约束/索引对象和[`Table`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")作为参数，返回一个字符串结果。
+            与每个“约束类”或“约束助记符”键相关的值是字符串命名模板，如`"uq_%(table_name)s_%(column_0_name)s"`，它们描述名称应该如何组成。与用户定义的“标记”键相关的值应该是`fn（约束， 表）`形式的可召集，它接受约束/索引对象和[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")作为参数，返回一个字符串结果。
 
             内置名称如下，其中一些可能仅适用于某些类型的约束：
 
@@ -1261,21 +1137,15 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
             可选的。仅加载可用命名表的子集。可能被指定为一个名称或可调用的序列。
 
-            如果提供了一系列名称，则只会反映这些表。如果请求表但不可用，则会发生错误。已经存在于`MetaData`{.docutils
-            .literal}中的命名表被忽略。
+            如果提供了一系列名称，则只会反映这些表。如果请求表但不可用，则会发生错误。已经存在于`MetaData`中的命名表被忽略。
 
-            如果提供了可调用对象，它将用作布尔谓词来过滤潜在表名称的列表。可调用表名和这个`MetaData`{.docutils
-            .literal}实例作为位置参数进行调用，并且应该为任何表反映真实值。
+            如果提供了可调用对象，它将用作布尔谓词来过滤潜在表名称的列表。可调用表名和这个`MetaData`实例作为位置参数进行调用，并且应该为任何表反映真实值。
 
         -   **extend\_existing**
             [¶](#sqlalchemy.schema.MetaData.reflect.params.extend_existing)
             -
 
-            作为[`Table.extend_existing`{.xref .py .py-paramref
-            .docutils
-            .literal}](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table")传递给每个[`Table`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")。
+            作为[`Table.extend_existing`](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table")传递给每个[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")。
 
             版本0.9.1中的新功能
 
@@ -1283,11 +1153,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
             [¶](#sqlalchemy.schema.MetaData.reflect.params.autoload_replace)
             -
 
-            作为[`Table.autoload_replace`{.xref .py .py-paramref
-            .docutils
-            .literal}](#sqlalchemy.schema.Table.params.autoload_replace "sqlalchemy.schema.Table")传递给每个[`Table`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")。
+            作为[`Table.autoload_replace`](#sqlalchemy.schema.Table.params.autoload_replace "sqlalchemy.schema.Table")传递给每个[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")。
 
             版本0.9.1中的新功能
 
@@ -1295,15 +1161,12 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
             [¶](#sqlalchemy.schema.MetaData.reflect.params.**dialect_kwargs)
             -
 
-            上面未提及的其他关键字参数是特定于方言的，并以`<dialectname>_<argname>`{.docutils
-            .literal}的形式传递。有关记录参数的详细信息，请参阅[Dialects](dialects_index.html)中有关单个方言的文档。
+            上面未提及的其他关键字参数是特定于方言的，并以`<dialectname>_<argname>`的形式传递。有关记录参数的详细信息，请参阅[Dialects](dialects_index.html)中有关单个方言的文档。
 
             > 版本0.9.2中的新功能： -
             > 添加了[`MetaData.reflect.**dialect_kwargs`{.xref .py
             > .py-paramref .docutils
-            > .literal}](#sqlalchemy.schema.MetaData.reflect.params.**dialect_kwargs "sqlalchemy.schema.MetaData.reflect")以支持反映的所有[`Table`{.xref
-            > .py .py-class .docutils
-            > .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的方言级别反射选项。
+            > .literal}](#sqlalchemy.schema.MetaData.reflect.params.**dialect_kwargs "sqlalchemy.schema.MetaData.reflect")以支持反映的所有[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的方言级别反射选项。
 
     `除去 T0> （ T1> 表 T2> ） T3> ¶ T4>`{.descname}
     :   从这个MetaData中移除给定的Table对象。
@@ -1318,21 +1181,15 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
         警告
 
-        [`sorted_tables`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.schema.MetaData.sorted_tables "sqlalchemy.schema.MetaData.sorted_tables")访问器本身不能自动解决表间依赖关系循环的自动解析问题，这通常是由相互依赖的外键约束引起的。要解决这些循环，可以将[`ForeignKeyConstraint.use_alter`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")参数应用于这些约束，或者使用[`schema.sort_tables_and_constraints()`{.xref
-        .py .py-func .docutils
-        .literal}](ddl.html#sqlalchemy.schema.sort_tables_and_constraints "sqlalchemy.schema.sort_tables_and_constraints")函数来打破涉及分开循环。
+        [`sorted_tables`](#sqlalchemy.schema.MetaData.sorted_tables "sqlalchemy.schema.MetaData.sorted_tables")访问器本身不能自动解决表间依赖关系循环的自动解析问题，这通常是由相互依赖的外键约束引起的。要解决这些循环，可以将[`ForeignKeyConstraint.use_alter`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")参数应用于这些约束，或者使用[`schema.sort_tables_and_constraints()`](ddl.html#sqlalchemy.schema.sort_tables_and_constraints "sqlalchemy.schema.sort_tables_and_constraints")函数来打破涉及分开循环。
 
         也可以看看
 
         [`schema.sort_tables()`](ddl.html#sqlalchemy.schema.sort_tables "sqlalchemy.schema.sort_tables")
 
-        [`schema.sort_tables_and_constraints()`{.xref .py .py-func
-        .docutils
-        .literal}](ddl.html#sqlalchemy.schema.sort_tables_and_constraints "sqlalchemy.schema.sort_tables_and_constraints")
+        [`schema.sort_tables_and_constraints()`](ddl.html#sqlalchemy.schema.sort_tables_and_constraints "sqlalchemy.schema.sort_tables_and_constraints")
 
-        [`MetaData.tables`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.schema.MetaData.tables "sqlalchemy.schema.MetaData.tables")
+        [`MetaData.tables`](#sqlalchemy.schema.MetaData.tables "sqlalchemy.schema.MetaData.tables")
 
         [`Inspector.get_table_names()`](reflection.html#sqlalchemy.engine.reflection.Inspector.get_table_names "sqlalchemy.engine.reflection.Inspector.get_table_names")
 
@@ -1341,20 +1198,15 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     `表格`{.descname} *=无* [¶](#sqlalchemy.schema.MetaData.tables "Permalink to this definition")
     :   一个名为[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的对象名称或“表键”。
 
-        确切的关键是由[`Table.key`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.schema.Table.key "sqlalchemy.schema.Table.key")属性确定的；对于没有`Table.schema`{.xref
-        .py .py-attr .docutils .literal}属性的表，这与`Table.name`{.xref
-        .py .py-attr .docutils
-        .literal}相同。对于具有模式的表格，其格式通常为`schemaname.tablename`。
+        确切的关键是由[`Table.key`](#sqlalchemy.schema.Table.key "sqlalchemy.schema.Table.key")属性确定的；对于没有`Table.schema`{.xref
+        .py .py-attr .docutils .literal}属性的表，这与`Table.name`相同。对于具有模式的表格，其格式通常为`schemaname.tablename`。
 
         也可以看看
 
-        [`MetaData.sorted_tables`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.schema.MetaData.sorted_tables "sqlalchemy.schema.MetaData.sorted_tables")
+        [`MetaData.sorted_tables`](#sqlalchemy.schema.MetaData.sorted_tables "sqlalchemy.schema.MetaData.sorted_tables")
 
 *class* `sqlalchemy.schema。`{.descclassname} `SchemaItem`{.descname} [¶](#sqlalchemy.schema.SchemaItem "Permalink to this definition")
-:   基础：`sqlalchemy.sql.expression.SchemaEventTarget`，`sqlalchemy.sql.visitors.Visitable`{.xref .py .py-class
-    .docutils .literal}
+:   基础：`sqlalchemy.sql.expression.SchemaEventTarget`，`sqlalchemy.sql.visitors.Visitable`
 
     定义数据库模式的项目的基类。
 
@@ -1362,15 +1214,9 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     :   用于允许SchemaVisitor访问
 
     `信息 T0> ¶ T1>`{.descname}
-    :   与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
+    :   与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
 
-        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
+        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
 
     `引用 T0> ¶ T1>`{.descname}
     :   对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
@@ -1406,15 +1252,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
         数据库中表示的该表的名称。
 
-        表名与`schema`参数的值一起构成一个关键字，用于唯一标识拥有的[`MetaData`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")集合中的[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")。对具有相同名称，元数据和模式名​​称的[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的其他调用将返回相同的[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象。
+        表名与`schema`参数的值一起构成一个关键字，用于唯一标识拥有的[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")集合中的[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")。对具有相同名称，元数据和模式名​​称的[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的其他调用将返回相同的[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象。
 
         不包含大写字母的名称将被视为不区分大小写的名称，除非它们是保留字或包含特殊字符，否则不会被引用。具有任意数量大写字符的名称被认为是区分大小写的，并将以引用方式发送。
 
@@ -1423,32 +1261,20 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     -   **metadata**[¶](#sqlalchemy.schema.Table.params.metadata) – a
         [`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
         object which will contain this table.
-        元数据被用作该表与通过外键引用的其他表的关联点。它也可以用来将该表与特定的[`Connectable`{.xref
-        .py .py-class .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")关联。
+        元数据被用作该表与通过外键引用的其他表的关联点。它也可以用来将该表与特定的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")关联。
     -   **\*args**[¶](#sqlalchemy.schema.Table.params.*args) –
         Additional positional arguments are used primarily to add the
         list of [`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
         objects contained within this table. 类似于CREATE
-        TABLE语句的样式，可以在这里添加其他[`SchemaItem`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")结构，包括[`PrimaryKeyConstraint`{.xref
-        .py .py-class .docutils
-        .literal}](constraints.html#sqlalchemy.schema.PrimaryKeyConstraint "sqlalchemy.schema.PrimaryKeyConstraint")和[`ForeignKeyConstraint`{.xref
-        .py .py-class .docutils
-        .literal}](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")。
+        TABLE语句的样式，可以在这里添加其他[`SchemaItem`](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")结构，包括[`PrimaryKeyConstraint`](constraints.html#sqlalchemy.schema.PrimaryKeyConstraint "sqlalchemy.schema.PrimaryKeyConstraint")和[`ForeignKeyConstraint`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")。
     -   **autoload** [¶](#sqlalchemy.schema.Table.params.autoload) -
 
         Defaults to False, unless [`Table.autoload_with`{.xref .py
         .py-paramref .docutils
         .literal}](#sqlalchemy.schema.Table.params.autoload_with "sqlalchemy.schema.Table")
-        is set in which case it defaults to True; [`Column`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
+        is set in which case it defaults to True; [`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
         objects for this table should be reflected from the database,
-        possibly augmenting or replacing existing [`Column`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
+        possibly augmenting or replacing existing [`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
         objects that were expicitly specified.
 
         版本1.0.0更改：设置[`Table.autoload_with`](#sqlalchemy.schema.Table.params.autoload_with "sqlalchemy.schema.Table")参数意味着[`Table.autoload`](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table")将默认为True。
@@ -1461,88 +1287,55 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         [¶](#sqlalchemy.schema.Table.params.autoload_replace) -
 
         Defaults to `True`; when using
-        [`Table.autoload`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table")
+        [`Table.autoload`](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table")
         in conjunction with [`Table.extend_existing`{.xref .py
         .py-paramref .docutils
         .literal}](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table"),
         indicates that [`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
-        objects present in the already-existing [`Table`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
+        objects present in the already-existing [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
         object should be replaced with columns of the same name
         retrieved from the autoload process. 当`False`时，已存在于现有名称下的列将从反映过程中省略。
 
-        请注意，此设置不会影响在[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")调用中以编程方式指定的[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象，该对象也是自动加载的；当[`Table.extend_existing`](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table")为`True`时，那些[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象将始终替换同名的现有列。
+        请注意，此设置不会影响在[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")调用中以编程方式指定的[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象，该对象也是自动加载的；当[`Table.extend_existing`](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table")为`True`时，那些[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象将始终替换同名的现有列。
 
         New in version 0.7.5.
 
         也可以看看
 
-        [`Table.autoload`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table")
+        [`Table.autoload`](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table")
 
-        [`Table.extend_existing`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table")
+        [`Table.extend_existing`](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table")
 
     -   **autoload\_with**
         [¶](#sqlalchemy.schema.Table.params.autoload_with) -
 
-        一个[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象，它将反映这个[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象；当设置为非无值时，它意味着[`Table.autoload`](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table")是`True`。如果未设置，但[`Table.autoload`{.xref .py
+        一个[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象，它将反映这个[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象；当设置为非无值时，它意味着[`Table.autoload`](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table")是`True`。如果未设置，但[`Table.autoload`{.xref .py
         .py-paramref .docutils
-        .literal}](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table")显式设置为`True`，则自动加载操作将尝试通过查找[`Engine`{.xref .py
-        .py-class .docutils
-        .literal}](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")绑定到底层的[`MetaData`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象。
+        .literal}](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table")显式设置为`True`，则自动加载操作将尝试通过查找[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")绑定到底层的[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象。
 
         也可以看看
 
-        [`Table.autoload`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table")
+        [`Table.autoload`](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table")
 
     -   **extend\_existing**
         [¶](#sqlalchemy.schema.Table.params.extend_existing) -
 
-        当`True`时，表示如果[`Table`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")已经存在于给定的[`MetaData`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")中，则在构造函数中将更多参数应用于现有[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
+        当`True`时，表示如果[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")已经存在于给定的[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")中，则在构造函数中将更多参数应用于现有[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
 
-        If [`Table.extend_existing`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table")
-        or [`Table.keep_existing`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.schema.Table.params.keep_existing "sqlalchemy.schema.Table")
-        are not set, and the given name of the new [`Table`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
+        If [`Table.extend_existing`](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table")
+        or [`Table.keep_existing`](#sqlalchemy.schema.Table.params.keep_existing "sqlalchemy.schema.Table")
+        are not set, and the given name of the new [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
         refers to a [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
-        that is already present in the target [`MetaData`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
+        that is already present in the target [`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
         collection, and this [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
         specifies additional columns or other constructs or flags that
         modify the table’s state, an error is raised. The purpose of
         these two mutually-exclusive flags is to specify what action
         should be taken when a [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
-        is specified that matches an existing [`Table`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table"),
+        is specified that matches an existing [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table"),
         yet specifies additional constructs.
 
-        [`Table.extend_existing`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table")
+        [`Table.extend_existing`](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table")
         will also work in conjunction with [`Table.autoload`{.xref .py
         .py-paramref .docutils
         .literal}](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table")
@@ -1562,13 +1355,9 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         .py-paramref .docutils
         .literal}](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table"),
         [`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
-        objects can be specified in the same [`Table`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
+        objects can be specified in the same [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
         constructor, which will take precedence.
-        在下面，现有的表`mytable`将被从数据库反映的[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象以及名为“y”的给定[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
+        在下面，现有的表`mytable`将被从数据库反映的[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象以及名为“y”的给定[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
 
             Table("mytable", metadata,
                         Column('y', Integer),
@@ -1579,14 +1368,11 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
         也可以看看
 
-        [`Table.autoload`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table")
+        [`Table.autoload`](#sqlalchemy.schema.Table.params.autoload "sqlalchemy.schema.Table")
 
-        [`Table.autoload_replace`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.schema.Table.params.autoload_replace "sqlalchemy.schema.Table")
+        [`Table.autoload_replace`](#sqlalchemy.schema.Table.params.autoload_replace "sqlalchemy.schema.Table")
 
-        [`Table.keep_existing`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.schema.Table.params.keep_existing "sqlalchemy.schema.Table")
+        [`Table.keep_existing`](#sqlalchemy.schema.Table.params.keep_existing "sqlalchemy.schema.Table")
 
     -   **implicit\_returning**[¶](#sqlalchemy.schema.Table.params.implicit_returning)
         – True by default - indicates that RETURNING can be used by
@@ -1601,58 +1387,34 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         默认为`None`，表示应该反映所有列。
     -   **info**[¶](#sqlalchemy.schema.Table.params.info) – Optional
         data dictionary which will be populated into the
-        [`SchemaItem.info`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
+        [`SchemaItem.info`](#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
         attribute of this object.
     -   **keep\_existing**
         [¶](#sqlalchemy.schema.Table.params.keep_existing) -
 
-        当`True`时，表示如果此表已存在于给定的[`MetaData`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")中，则在构造函数内忽略现有[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中的其他参数，并返回最初创建的[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象。这是为了允许一个函数希望在第一次调用时定义一个新的[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，但在随后的调用中将返回相同的[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，而没有任何声明（特别是约束）再次应用。
+        当`True`时，表示如果此表已存在于给定的[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")中，则在构造函数内忽略现有[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中的其他参数，并返回最初创建的[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象。这是为了允许一个函数希望在第一次调用时定义一个新的[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，但在随后的调用中将返回相同的[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，而没有任何声明（特别是约束）再次应用。
 
-        If [`Table.extend_existing`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table")
-        or [`Table.keep_existing`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.schema.Table.params.keep_existing "sqlalchemy.schema.Table")
-        are not set, and the given name of the new [`Table`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
+        If [`Table.extend_existing`](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table")
+        or [`Table.keep_existing`](#sqlalchemy.schema.Table.params.keep_existing "sqlalchemy.schema.Table")
+        are not set, and the given name of the new [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
         refers to a [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
-        that is already present in the target [`MetaData`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
+        that is already present in the target [`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
         collection, and this [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
         specifies additional columns or other constructs or flags that
         modify the table’s state, an error is raised. The purpose of
         these two mutually-exclusive flags is to specify what action
         should be taken when a [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
-        is specified that matches an existing [`Table`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table"),
+        is specified that matches an existing [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table"),
         yet specifies additional constructs.
 
         也可以看看
 
-        [`Table.extend_existing`{.xref .py .py-paramref .docutils
-        .literal}](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table")
+        [`Table.extend_existing`](#sqlalchemy.schema.Table.params.extend_existing "sqlalchemy.schema.Table")
 
     -   **听众** [¶](#sqlalchemy.schema.Table.params.listeners) -
 
         A list of tuples of the form `(<eventname>, <fn>)` which will be passed to [`event.listen()`](event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")
-        upon construction. 这个对[`event.listen()`{.xref .py .py-func
-        .docutils
-        .literal}](event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")的替代钩子允许在“autoload”过程开始之前建立一个特定于这个[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的侦听器函数。对[`DDLEvents.column_reflect()`](events.html#sqlalchemy.events.DDLEvents.column_reflect "sqlalchemy.events.DDLEvents.column_reflect")事件特别有用：
+        upon construction. 这个对[`event.listen()`](event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")的替代钩子允许在“autoload”过程开始之前建立一个特定于这个[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的侦听器函数。对[`DDLEvents.column_reflect()`](events.html#sqlalchemy.events.DDLEvents.column_reflect "sqlalchemy.events.DDLEvents.column_reflect")事件特别有用：
 
             def listen_for_reflect(table, column_info):
                 "handle the column reflection event"
@@ -1687,19 +1449,9 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         specifies its own [`MetaData.schema`](#sqlalchemy.schema.MetaData.params.schema "sqlalchemy.schema.MetaData")
         parameter, then that schema name will be applied to this
         [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
-        if the schema parameter here is set to `None`. 要在[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")上设置空白模式名称，否则它将使用拥有[`MetaData`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")的模式集，请指定特殊符号[`BLANK_SCHEMA`{.xref
-        .py .py-attr .docutils
-        .literal}](#sqlalchemy.schema.sqlalchemy.schema.BLANK_SCHEMA "sqlalchemy.schema.sqlalchemy.schema.BLANK_SCHEMA")。
+        if the schema parameter here is set to `None`. 要在[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")上设置空白模式名称，否则它将使用拥有[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")的模式集，请指定特殊符号[`BLANK_SCHEMA`](#sqlalchemy.schema.sqlalchemy.schema.BLANK_SCHEMA "sqlalchemy.schema.sqlalchemy.schema.BLANK_SCHEMA")。
 
-        版本1.0.14中的新增功能：添加了[`BLANK_SCHEMA`{.xref .py .py-attr
-        .docutils
-        .literal}](#sqlalchemy.schema.sqlalchemy.schema.BLANK_SCHEMA "sqlalchemy.schema.sqlalchemy.schema.BLANK_SCHEMA")符号以允许[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")具有空白模式名称，即使当父元素[`MetaData`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")指定[`MetaData.schema`](#sqlalchemy.schema.MetaData.params.schema "sqlalchemy.schema.MetaData")。
+        版本1.0.14中的新增功能：添加了[`BLANK_SCHEMA`](#sqlalchemy.schema.sqlalchemy.schema.BLANK_SCHEMA "sqlalchemy.schema.sqlalchemy.schema.BLANK_SCHEMA")符号以允许[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")具有空白模式名称，即使当父元素[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")指定[`MetaData.schema`](#sqlalchemy.schema.MetaData.params.schema "sqlalchemy.schema.MetaData")。
 
         模式名称的引用规则与`name`参数的引用规则相同，因为引用适用于保留字或区分大小写的名称；为模式名称启用无条件引用，为构造函数指定标记`quote_schema=True`，或使用[`quoted_name`](sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")结构指定名称。
 
@@ -1713,9 +1465,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     `__ init __`{.descname} （ *\* args*，*\*\* kw* ） [T5\>](#sqlalchemy.schema.Table.__init__ "Permalink to this definition")
     :   [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的构造函数。
 
-        这种方法是无操作的。有关构造函数参数，请参阅[`Table`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的顶级文档。
+        这种方法是无操作的。有关构造函数参数，请参阅[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的顶级文档。
 
     ` add_is_dependent_on  T0> （ T1> 表 T2> ） T3> ¶ T4>`{.descname}
     :   为此表添加一个“依赖关系”。
@@ -1738,9 +1488,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         有关详细信息，请参阅[`alias()`](selectable.html#sqlalchemy.sql.expression.alias "sqlalchemy.sql.expression.alias")。
 
     ` append_column  T0> （ T1> 列 T2> ） T3> ¶ T4>`{.descname}
-    :   追加一个[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")到这个[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")。
+    :   追加一个[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")到这个[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")。
 
         The “key” of the newly added [`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column"),
         i.e. the value of its `.key` attribute, will
@@ -1753,19 +1501,13 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         ALTER命令向现有表添加列，该命令需要针对不包含新添加列的现有表发布。
 
     ` append_constraint  T0> （ T1> 约束 T2> ） T3> ¶ T4>`{.descname}
-    :   追加一个[`Constraint`](constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")到这个[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")。
+    :   追加一个[`Constraint`](constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")到这个[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")。
 
-        如果特定的DDL创建事件尚未与给定的[`Constraint`{.xref .py
-        .py-class .docutils
-        .literal}](constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")对象相关联，则会在将来的CREATE
+        如果特定的DDL创建事件尚未与给定的[`Constraint`](constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")对象相关联，则会在将来的CREATE
         TABLE语句中包含约束。
 
         请注意，对于数据库中已存在的表，**不会**自动在关系数据库中生成约束。要将约束添加到现有的关系数据库表中，必须使用SQL
-        ALTER命令。SQLAlchemy还提供了[`AddConstraint`{.xref .py
-        .py-class .docutils
-        .literal}](ddl.html#sqlalchemy.schema.AddConstraint "sqlalchemy.schema.AddConstraint")构造，当它作为可执行子句调用时可以产生此SQL。
+        ALTER命令。SQLAlchemy还提供了[`AddConstraint`](ddl.html#sqlalchemy.schema.AddConstraint "sqlalchemy.schema.AddConstraint")构造，当它作为可执行子句调用时可以产生此SQL。
 
     `append_ddl_listener`{.descname} （ *event\_name*，*听众* ） [](#sqlalchemy.schema.Table.append_ddl_listener "Permalink to this definition")
     :   将一个DDL事件监听器追加到`Table`中。
@@ -1786,9 +1528,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
         The [`DialectKWArgs.argument_for()`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.argument_for "sqlalchemy.sql.base.DialectKWArgs.argument_for")
         method is a per-argument way adding extra arguments to the
-        [`DefaultDialect.construct_arguments`{.xref .py .py-attr
-        .docutils
-        .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
+        [`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")
         dictionary.
         这本词典提供了代表方言的各种模式层次结构所接受的参数名称列表。
 
@@ -1800,11 +1540,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
             – name of a dialect. The dialect must be locatable, else a
             [`NoSuchModuleError`](exceptions.html#sqlalchemy.exc.NoSuchModuleError "sqlalchemy.exc.NoSuchModuleError")
             is raised.
-            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`{.xref
-            .py .py-attr .docutils
-            .literal}](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`{.xref
-            .py .py-class .docutils
-            .literal}](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
+            该方言还必须包含一个现有的[`DefaultDialect.construct_arguments`](internals.html#sqlalchemy.engine.default.DefaultDialect.construct_arguments "sqlalchemy.engine.default.DefaultDialect.construct_arguments")集合，指示它参与关键字参数验证和默认系统，否则引发[`ArgumentError`](exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。如果方言不包括这个集合，那么任何关键字参数都可以代表这个方言指定。所有包含在SQLAlchemy中的方言都包含这个集合，但是对于第三方方言，支持可能会有所不同。
         -   **argument\_name**
             [¶](#sqlalchemy.schema.Table.argument_for.params.argument_name)
             - 参数的名称。
@@ -1818,26 +1554,18 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     :   返回与此表关联的可连接。
 
     ` C  T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`c`{.xref .py .py-attr .docutils
-        .literal}](selectable.html#sqlalchemy.sql.expression.FromClause.c "sqlalchemy.sql.expression.FromClause.c")
+    :   *inherited from the* [`c`](selectable.html#sqlalchemy.sql.expression.FromClause.c "sqlalchemy.sql.expression.FromClause.c")
         *attribute of* [`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
 
-        [`columns`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.schema.Table.columns "sqlalchemy.schema.Table.columns")属性的别名。
+        [`columns`](#sqlalchemy.schema.Table.columns "sqlalchemy.schema.Table.columns")属性的别名。
 
     `列 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`columns`{.xref .py .py-attr .docutils
-        .literal}](selectable.html#sqlalchemy.sql.expression.FromClause.columns "sqlalchemy.sql.expression.FromClause.columns")
+    :   *inherited from the* [`columns`](selectable.html#sqlalchemy.sql.expression.FromClause.columns "sqlalchemy.sql.expression.FromClause.columns")
         *attribute of* [`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
 
-        由[`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")维护的[`ColumnElement`{.xref
-        .py .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")对象的基于命名的集合。
+        由[`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")维护的[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")对象的基于命名的集合。
 
-        [`columns`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.schema.Table.columns "sqlalchemy.schema.Table.columns")或[`c`{.xref
-        .py .py-attr .docutils
-        .literal}](#sqlalchemy.schema.Table.c "sqlalchemy.schema.Table.c")集合是使用表绑定或其他可选绑定列构建SQL表达式的入口：
+        [`columns`](#sqlalchemy.schema.Table.columns "sqlalchemy.schema.Table.columns")或[`c`](#sqlalchemy.schema.Table.c "sqlalchemy.schema.Table.c")集合是使用表绑定或其他可选绑定列构建SQL表达式的入口：
 
             select([mytable]).where(mytable.c.somecolumn == 5)
 
@@ -1850,9 +1578,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         子类应该覆盖默认行为，这是一种直接的身份比较。
 
         \*\* kw是由subclass
-        compare()方法消耗的参数，可用于修改比较条件。（请参阅[`ColumnElement`{.xref
-        .py .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")）
+        compare()方法消耗的参数，可用于修改比较条件。（请参阅[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")）
 
     `编译`{.descname} （ *bind = None*，*dialect = None*，*\*\* kw* ） T5\> [¶ T6\>](#sqlalchemy.schema.Table.compile "Permalink to this definition")
     :   *inherited from the* [`compile()`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement.compile "sqlalchemy.sql.expression.ClauseElement.compile")
@@ -1860,23 +1586,17 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
         编译这个SQL表达式。
 
-        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`{.xref .py
-        .py-class .docutils
-        .literal}](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
+        返回值是一个[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。对返回值调用`str()`或`unicode()`将产生结果的字符串表示形式。[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象还可以使用`params`访问器返回一个绑定参数名称和值的字典。
 
         参数：
 
         -   **bind**[¶](#sqlalchemy.schema.Table.compile.params.bind) –
-            An `Engine` or `Connection`{.docutils
-            .literal} from which a `Compiled` will
-            be acquired. 这个参数优先于这个[`ClauseElement`{.xref .py
-            .py-class .docutils
-            .literal}](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎，如果有的话。
+            An `Engine` or `Connection` from which a `Compiled` will
+            be acquired. 这个参数优先于这个[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")的绑定引擎，如果有的话。
         -   **column\_keys**[¶](#sqlalchemy.schema.Table.compile.params.column_keys)
             – Used for INSERT and UPDATE statements, a list of column
             names which should be present in the VALUES clause of the
-            compiled statement. 如果`None`{.docutils
-            .literal}，则呈现目标表格对象中的所有列。
+            compiled statement. 如果`None`，则呈现目标表格对象中的所有列。
         -   **dialect**[¶](#sqlalchemy.schema.Table.compile.params.dialect)
             – A `Dialect` instance from which a
             `Compiled` will be acquired.
@@ -1892,8 +1612,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
             [¶](#sqlalchemy.schema.Table.compile.params.compile_kwargs)
             -
 
-            在所有“访问”方法中将传递给编译器的附加参数的可选字典。例如，这允许将自定义标志传递给自定义编译构造。它也用于传递`literal_binds`{.docutils
-            .literal}标志的情况：
+            在所有“访问”方法中将传递给编译器的附加参数的可选字典。例如，这允许将自定义标志传递给自定义编译构造。它也用于传递`literal_binds`标志的情况：
 
                 from sqlalchemy.sql import table, column, select
 
@@ -1921,13 +1640,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     :   *继承自* [`corresponding_column()`](selectable.html#sqlalchemy.sql.expression.FromClause.corresponding_column "sqlalchemy.sql.expression.FromClause.corresponding_column")
         *方法* [`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
 
-        给定一个[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")，从这个[`Selectable`{.xref
-        .py .py-class .docutils
-        .literal}](selectable.html#sqlalchemy.sql.expression.Selectable "sqlalchemy.sql.expression.Selectable")对象的原始[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")通过共同的祖先返回导出的[`ColumnElement`{.xref
-        .py .py-class .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")柱。
+        给定一个[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")，从这个[`Selectable`](selectable.html#sqlalchemy.sql.expression.Selectable "sqlalchemy.sql.expression.Selectable")对象的原始[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")通过共同的祖先返回导出的[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")柱。
 
         参数：
 
@@ -1961,13 +1674,10 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
         也可以看看
 
-        [`func`{.xref .py .py-data .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")
+        [`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")
 
      `create`{.descname}(*bind=None*, *checkfirst=False*)[¶](#sqlalchemy.schema.Table.create "Permalink to this definition")
-    :   使用给定的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")进行连接，为此[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")发出`CREATE`语句。
+    :   使用给定的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")进行连接，为此[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")发出`CREATE`语句。
 
         也可以看看
 
@@ -1977,46 +1687,35 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     :   *inherited from the* [`delete()`](selectable.html#sqlalchemy.sql.expression.TableClause.delete "sqlalchemy.sql.expression.TableClause.delete")
         *method of* [`TableClause`](selectable.html#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")
 
-        根据这个[`TableClause`](selectable.html#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")生成一个[`delete()`{.xref
-        .py .py-func .docutils
-        .literal}](dml.html#sqlalchemy.sql.expression.delete "sqlalchemy.sql.expression.delete")结构。
+        根据这个[`TableClause`](selectable.html#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")生成一个[`delete()`](dml.html#sqlalchemy.sql.expression.delete "sqlalchemy.sql.expression.delete")结构。
 
         例如。：
 
             table.delete().where(table.c.id==7)
 
-        有关参数和使用信息，请参阅[`delete()`{.xref .py .py-func
-        .docutils
-        .literal}](dml.html#sqlalchemy.sql.expression.delete "sqlalchemy.sql.expression.delete")。
+        有关参数和使用信息，请参阅[`delete()`](dml.html#sqlalchemy.sql.expression.delete "sqlalchemy.sql.expression.delete")。
 
     ` dialect_kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+    :   *继承自* [`dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
 
-        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`{.xref
-        .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
+        这些参数在它们的原始`<dialect>_<kwarg>`格式中呈现。只包括实际通过的论点；不同于[`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")集合，其中包含此方言已知的所有选项，包括默认值。
 
         该集合也是可写的；键被接受为形式`<dialect>_<kwarg>`，其中值将被组合到选项列表中。
 
         版本0.9.2中的新功能
 
-        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`{.xref .py
-        .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
+        在版本0.9.4中更改： [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")集合现在可写入。
 
         也可以看看
 
-        [`DialectKWArgs.dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+        [`DialectKWArgs.dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         - nested dictionary form
 
     ` dialect_options  T0> ¶ T1>`{.descname}
-    :   *继承自* [`dialect_options`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
+    :   *继承自* [`dialect_options`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_options "sqlalchemy.sql.base.DialectKWArgs.dialect_options")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
         指定为此构造的方言特定选项的关键字参数的集合。
@@ -2029,14 +1728,11 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
         也可以看看
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")
         - flat dictionary form
 
      `drop`{.descname}(*bind=None*, *checkfirst=False*)[¶](#sqlalchemy.schema.Table.drop "Permalink to this definition")
-    :   使用给定的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")进行连接，为此[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")发出`DROP`语句。
+    :   使用给定的[`Connectable`](connections.html#sqlalchemy.engine.Connectable "sqlalchemy.engine.Connectable")进行连接，为此[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")发出`DROP`语句。
 
         也可以看看
 
@@ -2046,51 +1742,37 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     :   如果此表存在，则返回True。
 
     ` foreign_key_constraints  T0> ¶ T1>`{.descname}
-    :   由[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")引用的[`ForeignKeyConstraint`{.xref
-        .py .py-class .docutils
-        .literal}](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象。
+    :   由[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")引用的[`ForeignKeyConstraint`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象。
 
         该列表由当前关联的[`ForeignKey`](constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")对象的集合生成。
 
         版本1.0.0中的新功能
 
     ` foreign_keys  T0> ¶ T1>`{.descname}
-    :   *继承自* [`foreign_keys`{.xref .py .py-attr .docutils
-        .literal}](selectable.html#sqlalchemy.sql.expression.FromClause.foreign_keys "sqlalchemy.sql.expression.FromClause.foreign_keys")
+    :   *继承自* [`foreign_keys`](selectable.html#sqlalchemy.sql.expression.FromClause.foreign_keys "sqlalchemy.sql.expression.FromClause.foreign_keys")
         *属性* [`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
 
         返回FromClause引用的ForeignKey对象的集合。
 
     `信息 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`info`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
+    :   *inherited from the* [`info`](#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
         *attribute of* [`SchemaItem`](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
+        与对象关联的信息字典，允许用户定义的数据与这个[`SchemaItem`](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")关联。
 
-        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
+        字典在第一次访问时自动生成。它也可以在一些对象的构造函数中指定，如[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")。
 
     `insert`{.descname} （ *values = None*，*inline = False*，*\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.schema.Table.insert "Permalink to this definition")
     :   *inherited from the* [`insert()`](selectable.html#sqlalchemy.sql.expression.TableClause.insert "sqlalchemy.sql.expression.TableClause.insert")
         *method of* [`TableClause`](selectable.html#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")
 
-        针对这个[`TableClause`](selectable.html#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")生成一个[`insert()`{.xref
-        .py .py-func .docutils
-        .literal}](dialects_postgresql.html#sqlalchemy.dialects.postgresql.dml.insert "sqlalchemy.dialects.postgresql.dml.insert")结构。
+        针对这个[`TableClause`](selectable.html#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")生成一个[`insert()`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.dml.insert "sqlalchemy.dialects.postgresql.dml.insert")结构。
 
         例如。：
 
             table.insert().values(name='foo')
 
-        有关参数和使用信息，请参见[`insert()`{.xref .py .py-func
-        .docutils
-        .literal}](dialects_postgresql.html#sqlalchemy.dialects.postgresql.dml.insert "sqlalchemy.dialects.postgresql.dml.insert")。
+        有关参数和使用信息，请参见[`insert()`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.dml.insert "sqlalchemy.dialects.postgresql.dml.insert")。
 
     ` is_derived_from  T0> （ T1>  fromclause  T2> ） T3> ¶ T4>`{.descname}
     :   *继承自* [`is_derived_from()`](selectable.html#sqlalchemy.sql.expression.FromClause.is_derived_from "sqlalchemy.sql.expression.FromClause.is_derived_from")
@@ -2104,10 +1786,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     :   *inherited from the* [`join()`](selectable.html#sqlalchemy.sql.expression.FromClause.join "sqlalchemy.sql.expression.FromClause.join")
         *method of* [`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
 
-        从[`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")返回[`Join`{.xref
-        .py .py-class .docutils
-        .literal}](selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")到另一个`FromClause`{.xref
-        .py .py-class .docutils .literal}。
+        从[`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")返回[`Join`](selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")到另一个`FromClause`。
 
         例如。：
 
@@ -2125,23 +1804,16 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         参数：
 
         -   **正确** [¶](#sqlalchemy.schema.Table.join.params.right) -
-            连接的右侧；这是任何[`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
+            连接的右侧；这是任何[`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.schema.Table.join.params.onclause)
             – a SQL expression representing the ON clause of the join.
-            如果留在`None`{.docutils
-            .literal}，则[`FromClause.join()`{.xref .py .py-meth
-            .docutils
-            .literal}](selectable.html#sqlalchemy.sql.expression.FromClause.join "sqlalchemy.sql.expression.FromClause.join")将尝试基于外键关系来连接两个表。
+            如果留在`None`，则[`FromClause.join()`](selectable.html#sqlalchemy.sql.expression.FromClause.join "sqlalchemy.sql.expression.FromClause.join")将尝试基于外键关系来连接两个表。
         -   **isouter**[¶](#sqlalchemy.schema.Table.join.params.isouter)
             – if True, render a LEFT OUTER JOIN, instead of JOIN.
         -   **完整** [¶](#sqlalchemy.schema.Table.join.params.full) -
 
             如果为True，则渲染一个FULL OUTER JOIN，而不是LEFT OUTER
-            JOIN。意味着[`FromClause.join.isouter`{.xref .py
-            .py-paramref .docutils
-            .literal}](selectable.html#sqlalchemy.sql.expression.FromClause.join.params.isouter "sqlalchemy.sql.expression.FromClause.join")。
+            JOIN。意味着[`FromClause.join.isouter`](selectable.html#sqlalchemy.sql.expression.FromClause.join.params.isouter "sqlalchemy.sql.expression.FromClause.join")。
 
             版本1.1中的新功能
 
@@ -2156,20 +1828,13 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     `键 T0> ¶ T1>`{.descname}
     :   返回这个[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的'键'。
 
-        该值用作[`MetaData.tables`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.schema.MetaData.tables "sqlalchemy.schema.MetaData.tables")集合中的字典键。对于没有`Table.schema`{.xref
-        .py .py-attr .docutils
-        .literal}集合的表，它通常与`Table.name`{.xref .py .py-attr
-        .docutils
-        .literal}相同；否则它通常是`schemaname.tablename`形式。
+        该值用作[`MetaData.tables`](#sqlalchemy.schema.MetaData.tables "sqlalchemy.schema.MetaData.tables")集合中的字典键。对于没有`Table.schema`集合的表，它通常与`Table.name`相同；否则它通常是`schemaname.tablename`形式。
 
     ` kwargs  T0> ¶ T1>`{.descname}
-    :   *继承自* [`kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
+    :   *继承自* [`kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.kwargs "sqlalchemy.sql.base.DialectKWArgs.kwargs")
         *属性* [`DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")
 
-        [`DialectKWArgs.dialect_kwargs`{.xref .py .py-attr .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
+        [`DialectKWArgs.dialect_kwargs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs "sqlalchemy.sql.base.DialectKWArgs.dialect_kwargs")的同义词。
 
     `横向 T0> （ T1> 名=无 T2> ） T3> ¶ T4>`{.descname}
     :   *从* [`lateral()`](selectable.html#sqlalchemy.sql.expression.FromClause.lateral "sqlalchemy.sql.expression.FromClause.lateral")
@@ -2177,9 +1842,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
         返回这个[`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")的LATERAL别名。
 
-        返回值是由顶层[`lateral()`](selectable.html#sqlalchemy.sql.expression.lateral "sqlalchemy.sql.expression.lateral")函数提供的[`Lateral`{.xref
-        .py .py-class .docutils
-        .literal}](selectable.html#sqlalchemy.sql.expression.Lateral "sqlalchemy.sql.expression.Lateral")结构。
+        返回值是由顶层[`lateral()`](selectable.html#sqlalchemy.sql.expression.lateral "sqlalchemy.sql.expression.lateral")函数提供的[`Lateral`](selectable.html#sqlalchemy.sql.expression.Lateral "sqlalchemy.sql.expression.Lateral")结构。
 
         版本1.1中的新功能
 
@@ -2215,15 +1878,10 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
         -   **正确**
             [¶](#sqlalchemy.schema.Table.outerjoin.params.right) -
-            连接的右侧；这是任何[`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
+            连接的右侧；这是任何[`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象，如[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，也可以是可选择兼容的对象，例如ORM映射类。
         -   **onclause**[¶](#sqlalchemy.schema.Table.outerjoin.params.onclause)
             – a SQL expression representing the ON clause of the join.
-            如果留在`None`{.docutils
-            .literal}，则[`FromClause.join()`{.xref .py .py-meth
-            .docutils
-            .literal}](selectable.html#sqlalchemy.sql.expression.FromClause.join "sqlalchemy.sql.expression.FromClause.join")将尝试基于外键关系来连接两个表。
+            如果留在`None`，则[`FromClause.join()`](selectable.html#sqlalchemy.sql.expression.FromClause.join "sqlalchemy.sql.expression.FromClause.join")将尝试基于外键关系来连接两个表。
         -   **完整** [¶](#sqlalchemy.schema.Table.outerjoin.params.full)
             -
 
@@ -2239,15 +1897,13 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         [`Join`](selectable.html#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")
 
     ` primary_key  T0> ¶ T1>`{.descname}
-    :   *继承自* [`primary_key`{.xref .py .py-attr .docutils
-        .literal}](selectable.html#sqlalchemy.sql.expression.FromClause.primary_key "sqlalchemy.sql.expression.FromClause.primary_key")
+    :   *继承自* [`primary_key`](selectable.html#sqlalchemy.sql.expression.FromClause.primary_key "sqlalchemy.sql.expression.FromClause.primary_key")
         *属性* [`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
 
         返回构成此FromClause主键的Column对象的集合。
 
     `引用 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`quote`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
+    :   *inherited from the* [`quote`](#sqlalchemy.schema.SchemaItem.quote "sqlalchemy.schema.SchemaItem.quote")
         *attribute of* [`SchemaItem`](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
         对于具有`name`字段的模式项，返回传递给此模式对象的`quote`标志的值。
@@ -2263,9 +1919,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     :   *继承自* [`replace_selectable()`](selectable.html#sqlalchemy.sql.expression.FromClause.replace_selectable "sqlalchemy.sql.expression.FromClause.replace_selectable")
         *方法* [`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
 
-        用给定的Alias对象替换所有出现的FromClause'old'，并返回这个[`FromClause`{.xref
-        .py .py-class .docutils
-        .literal}](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")的副本。
+        用给定的Alias对象替换所有出现的FromClause'old'，并返回这个[`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")的副本。
 
     `选择`{.descname} （ *whereclause = None*，*\*\* params* ） [/ T5\>](#sqlalchemy.schema.Table.select "Permalink to this definition")
     :   *inherited from the* [`select()`](selectable.html#sqlalchemy.sql.expression.FromClause.select "sqlalchemy.sql.expression.FromClause.select")
@@ -2309,9 +1963,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
         返回此[`FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")的TABLESAMPLE别名。
 
-        返回值是顶级[`tablesample()`](selectable.html#sqlalchemy.sql.expression.tablesample "sqlalchemy.sql.expression.tablesample")函数也提供的[`TableSample`{.xref
-        .py .py-class .docutils
-        .literal}](selectable.html#sqlalchemy.sql.expression.TableSample "sqlalchemy.sql.expression.TableSample")结构。
+        返回值是顶级[`tablesample()`](selectable.html#sqlalchemy.sql.expression.tablesample "sqlalchemy.sql.expression.tablesample")函数也提供的[`TableSample`](selectable.html#sqlalchemy.sql.expression.TableSample "sqlalchemy.sql.expression.TableSample")结构。
 
         版本1.1中的新功能
 
@@ -2321,9 +1973,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         - 使用指南和参数
 
     `tometadata`{.descname} （ *元数据*，*schema =符号（'retain\_schema'）*，*referenced\_schema\_fn =无 t4 \>，*name = None* ） [¶](#sqlalchemy.schema.Table.tometadata "Permalink to this definition")*
-    :   返回与[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")关联的[`Table`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的副本。
+    :   返回与[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")关联的[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的副本。
 
         例如。：
 
@@ -2344,16 +1994,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
             [¶](#sqlalchemy.schema.Table.tometadata.params.schema) -
 
             指示目标模式的可选字符串名称。默认为特殊符号`RETAIN_SCHEMA`{.xref
-            .py .py-attr .docutils .literal}，它表示在新的[`Table`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中不应更改模式名称。如果设置为字符串名称，则新的[`Table`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")将具有`.schema`{.docutils
-            .literal}的新名称。如果设置为`None`{.docutils
-            .literal}，则架构将设置为在目标[`MetaData`{.xref .py
-            .py-class .docutils
-            .literal}](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")上设置的架构的架构，该架构通常也是`None`{.docutils
-            .literal}，除非明确设置：
+            .py .py-attr .docutils .literal}，它表示在新的[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中不应更改模式名称。如果设置为字符串名称，则新的[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")将具有`.schema`的新名称。如果设置为`None`，则架构将设置为在目标[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")上设置的架构的架构，该架构通常也是`None`，除非明确设置：
 
                 m2 = MetaData(schema='newschema')
 
@@ -2371,12 +2012,8 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 
             optional callable which can be supplied in order to provide
             for the schema name that should be assigned to the
-            referenced table of a [`ForeignKeyConstraint`{.xref .py
-            .py-class .docutils
-            .literal}](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint").
-            可调用接受这个父表[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，我们要更改的目标模式，[`ForeignKeyConstraint`{.xref
-            .py .py-class .docutils
-            .literal}](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象以及该约束的现有“目标模式”。该函数应返回应该应用的字符串模式名称。例如。：
+            referenced table of a [`ForeignKeyConstraint`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint").
+            可调用接受这个父表[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，我们要更改的目标模式，[`ForeignKeyConstraint`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象以及该约束的现有“目标模式”。该函数应返回应该应用的字符串模式名称。例如。：
 
                 def referred_schema_fn(table, to_schema,
                                                 constraint, referred_schema):
@@ -2393,11 +2030,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
         -   **名称**
             [¶](#sqlalchemy.schema.Table.tometadata.params.name) -
 
-            可选的字符串名称，表示目标表名称。如果未指定或无，表名将被保留。这允许将[`Table`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")以新名称复制到同一个[`MetaData`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")目标中。
+            可选的字符串名称，表示目标表名称。如果未指定或无，表名将被保留。这允许将[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")以新名称复制到同一个[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")目标中。
 
             版本1.0.0中的新功能
 
@@ -2405,17 +2038,13 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     :   *继承自* [`update()`](selectable.html#sqlalchemy.sql.expression.TableClause.update "sqlalchemy.sql.expression.TableClause.update")
         *方法* [`TableClause`](selectable.html#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")
 
-        根据这个[`TableClause`](selectable.html#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")生成一个[`update()`{.xref
-        .py .py-func .docutils
-        .literal}](dml.html#sqlalchemy.sql.expression.update "sqlalchemy.sql.expression.update")结构。
+        根据这个[`TableClause`](selectable.html#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")生成一个[`update()`](dml.html#sqlalchemy.sql.expression.update "sqlalchemy.sql.expression.update")结构。
 
         例如。：
 
             table.update().where(table.c.id==7).values(name='foo')
 
-        有关参数和使用信息，请参阅[`update()`{.xref .py .py-func
-        .docutils
-        .literal}](dml.html#sqlalchemy.sql.expression.update "sqlalchemy.sql.expression.update")。
+        有关参数和使用信息，请参阅[`update()`](dml.html#sqlalchemy.sql.expression.update "sqlalchemy.sql.expression.update")。
 
 *class* `sqlalchemy.schema。`{.descclassname} `ThreadLocalMetaData`{.descname} [¶](#sqlalchemy.schema.ThreadLocalMetaData "Permalink to this definition")
 :   基础：[`sqlalchemy.schema.MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")

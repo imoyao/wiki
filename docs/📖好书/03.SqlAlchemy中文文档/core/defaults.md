@@ -297,8 +297,7 @@ it’s probably a good idea to specify it in this way as well.
         Column('foo', Integer, DefaultClause("50"))
 
 *class* `sqlalchemy.schema。`{.descclassname} `DefaultGenerator`{.descname} （ *for\_update = False* / T5\> [¶ T6\>](#sqlalchemy.schema.DefaultGenerator "Permalink to this definition")
-:   基础：`sqlalchemy.schema._NotAColumnExpr`{.xref .py .py-class
-    .docutils .literal}，[`sqlalchemy.schema.SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
+:   基础：`sqlalchemy.schema._NotAColumnExpr`，[`sqlalchemy.schema.SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
     列*默认*值的基类。
 
@@ -361,18 +360,15 @@ it’s probably a good idea to specify it in this way as well.
             序列的名称。
         -   **开始** [¶](#sqlalchemy.schema.Sequence.params.start) -
             序列的起始索引。当CREATE SEQUENCE命令作为“START
-            WITH”子句的值发送到数据库时使用此值。如果`None`{.docutils
-            .literal}，则省略该子句，在大多数平台上该子句指示起始值为1。
+            WITH”子句的值发送到数据库时使用此值。如果`None`，则省略该子句，在大多数平台上该子句指示起始值为1。
         -   **增量** [¶](#sqlalchemy.schema.Sequence.params.increment) -
             序列的增量值。当CREATE SEQUENCE命令作为“INCREMENT
-            BY”子句的值发送到数据库时使用此值。如果`None`{.docutils
-            .literal}，则该子句被省略，在大多数平台上该子句指示增量为1。
+            BY”子句的值发送到数据库时使用此值。如果`None`，则该子句被省略，在大多数平台上该子句指示增量为1。
         -   **minvalue**
             [¶](#sqlalchemy.schema.Sequence.params.minvalue) -
 
             序列的最小值。当CREATE
-            SEQUENCE命令作为“MINVALUE”子句的值发送到数据库时使用此值。如果`None`{.docutils
-            .literal}，则该子句被省略，在大多数平台上该子句分别指示升序和降序序列的最小值为1和-2
+            SEQUENCE命令作为“MINVALUE”子句的值发送到数据库时使用此值。如果`None`，则该子句被省略，在大多数平台上该子句分别指示升序和降序序列的最小值为1和-2
             \^ 63-1。
 
             版本1.0.7中的新功能
@@ -381,8 +377,7 @@ it’s probably a good idea to specify it in this way as well.
             [¶](#sqlalchemy.schema.Sequence.params.maxvalue) -
 
             序列的最大值。当CREATE
-            SEQUENCE命令作为“MAXVALUE”子句的值发送到数据库时使用此值。如果`None`{.docutils
-            .literal}，则省略该子句，它在大多数平台上分别指示升序和降序序列的最大值为2
+            SEQUENCE命令作为“MAXVALUE”子句的值发送到数据库时使用此值。如果`None`，则省略该子句，它在大多数平台上分别指示升序和降序序列的最大值为2
             \^ 63-1和-1。
 
             版本1.0.7中的新功能
@@ -391,8 +386,7 @@ it’s probably a good idea to specify it in this way as well.
             [¶](#sqlalchemy.schema.Sequence.params.nominvalue) -
 
             没有最小值的序列。当CREATE SEQUENCE命令作为“NO
-            MINVALUE”子句的值发送到数据库时使用此值。如果`None`{.docutils
-            .literal}，则该子句被省略，在大多数平台上该子句分别指示升序和降序序列的最小值为1和-2
+            MINVALUE”子句的值发送到数据库时使用此值。如果`None`，则该子句被省略，在大多数平台上该子句分别指示升序和降序序列的最小值为1和-2
             \^ 63-1。
 
             版本1.0.7中的新功能
@@ -401,8 +395,7 @@ it’s probably a good idea to specify it in this way as well.
             [¶](#sqlalchemy.schema.Sequence.params.nomaxvalue) -
 
             没有最大值的序列。当将CREATE SEQUENCE命令作为“NO
-            MAXVALUE”子句的值发送到数据库时使用此值。如果`None`{.docutils
-            .literal}，则省略该子句，它在大多数平台上分别指示升序和降序序列的最大值为2
+            MAXVALUE”子句的值发送到数据库时使用此值。如果`None`，则省略该子句，它在大多数平台上分别指示升序和降序序列的最大值为2
             \^ 63-1和-1。
 
             版本1.0.7中的新功能
@@ -418,9 +411,7 @@ it’s probably a good idea to specify it in this way as well.
 
         -   **schema**[¶](#sqlalchemy.schema.Sequence.params.schema) –
             Optional schema name for the sequence, if located in a
-            schema other than the default. 当[`MetaData`{.xref .py
-            .py-class .docutils
-            .literal}](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")出现时选择模式名称的规则与[`Table.schema`](metadata.html#sqlalchemy.schema.Table.params.schema "sqlalchemy.schema.Table")的规则相同。
+            schema other than the default. 当[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")出现时选择模式名称的规则与[`Table.schema`](metadata.html#sqlalchemy.schema.Table.params.schema "sqlalchemy.schema.Table")的规则相同。
         -   **optional**[¶](#sqlalchemy.schema.Sequence.params.optional)
             – boolean value, when `True`, indicates
             that this [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")
@@ -431,51 +422,29 @@ it’s probably a good idea to specify it in this way as well.
         -   **quote**[¶](#sqlalchemy.schema.Sequence.params.quote) –
             boolean value, when `True` or
             `False`, explicitly forces quoting of
-            the schema name on or off. 如果保留为`None`{.docutils
-            .literal}的默认值，则会发生基于大括号和保留字的正常引用规则。
+            the schema name on or off. 如果保留为`None`的默认值，则会发生基于大括号和保留字的正常引用规则。
         -   **quote\_schema**[¶](#sqlalchemy.schema.Sequence.params.quote_schema)
-            – set the quoting preferences for the `schema`{.docutils
-            .literal} name.
+            – set the quoting preferences for the `schema` name.
         -   **元数据** [¶](#sqlalchemy.schema.Sequence.params.metadata)
             -
 
-            可选的[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象，它将与此[`Sequence`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")关联。A
+            可选的[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象，它将与此[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")关联。A
             [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")
             that is associated with a [`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
             gains access to the `bind` of that
             [`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData"),
-            meaning the [`Sequence.create()`{.xref .py .py-meth
-            .docutils
-            .literal}](#sqlalchemy.schema.Sequence.create "sqlalchemy.schema.Sequence.create")
-            and [`Sequence.drop()`{.xref .py .py-meth .docutils
-            .literal}](#sqlalchemy.schema.Sequence.drop "sqlalchemy.schema.Sequence.drop")
+            meaning the [`Sequence.create()`](#sqlalchemy.schema.Sequence.create "sqlalchemy.schema.Sequence.create")
+            and [`Sequence.drop()`](#sqlalchemy.schema.Sequence.drop "sqlalchemy.schema.Sequence.drop")
             methods will make usage of that engine automatically.
 
-            版本0.7更改：此外，当[`MetaData.create_all()`{.xref .py
-            .py-meth .docutils
-            .literal}](metadata.html#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")时，相应的[`Sequence`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")将会发出相应的CREATE
+            版本0.7更改：此外，当[`MetaData.create_all()`](metadata.html#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")时，相应的[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")将会发出相应的CREATE
             SEQUENCE / DROP SEQUENCE
-            DDL命令和[`MetaData.drop_all()`{.xref .py .py-meth .docutils
-            .literal}](metadata.html#sqlalchemy.schema.MetaData.drop_all "sqlalchemy.schema.MetaData.drop_all")被调用。
+            DDL命令和[`MetaData.drop_all()`](metadata.html#sqlalchemy.schema.MetaData.drop_all "sqlalchemy.schema.MetaData.drop_all")被调用。
 
-            请注意，当一个[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")应用于[`Column`{.xref
-            .py .py-class .docutils
-            .literal}](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")时，[`Sequence`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")会自动与该元素的[`MetaData`{.xref
-            .py .py-class .docutils
-            .literal}](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象关联列的父[`Table`{.xref
-            .py .py-class .docutils
-            .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，当该关联时。The
+            请注意，当一个[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")应用于[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")时，[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")会自动与该元素的[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象关联列的父[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，当该关联时。The
             [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")
             will then be subject to automatic CREATE SEQUENCE/DROP
-            SEQUENCE corresponding to when the [`Table`{.xref .py
-            .py-class .docutils
-            .literal}](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
+            SEQUENCE corresponding to when the [`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
             object itself is created or dropped, rather than that of the
             [`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
             object overall.
@@ -494,8 +463,6 @@ it’s probably a good idea to specify it in this way as well.
     :   从数据库中删除这个序列。
 
     ` next_value  T0> （ T1> ） T2> ¶ T3>`{.descname}
-    :   返回一个[`next_value`](functions.html#sqlalchemy.sql.functions.next_value "sqlalchemy.sql.functions.next_value")函数元素，该元素将为任何SQL表达式中的[`Sequence`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")提供适当的增量函数。
+    :   返回一个[`next_value`](functions.html#sqlalchemy.sql.functions.next_value "sqlalchemy.sql.functions.next_value")函数元素，该元素将为任何SQL表达式中的[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")提供适当的增量函数。
 
 
