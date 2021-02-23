@@ -343,3 +343,243 @@ Proxy）关联代理](extensions_associationproxy.html)扩展。此扩展允许�
 
 如果你知道你在做什么，那么使用上面的映射是很好的，尽管将`viewonly = True`参数应用到“secondary”关系可能是个好主意，以避免冗余更改被记录。然而，为了获得一个万能模式，允许一个简单的两个对象`Parent->Child`关系，同时仍然使用关联对象模式，请使用关联代理扩展，如[Association
 Proxy](extensions_associationproxy.html)所述。
+
+---
+## TODO
+
+以下来自本人翻译，需要整合：
+
+### 一对多(one-to-many)
+
+一对多关系将一个外键`sqlalchemy.schema.ForeignKey`定义在引用父表的子表上。然后在父节点上指定`relationship()`，以引用由子节点表示的一组项：
+```python
+class Parent(Base):
+    __tablename__ = 'parent'
+    id = Column(Integer, primary_key=True)
+    children = relationship("Child")
+
+class Child(Base):
+    __tablename__ = 'child'
+    id = Column(Integer, primary_key=True)
+    parent_id = Column(Integer, ForeignKey('parent.id'))
+```
+要建立一对多和反过来多对一的双向关系，就指定一个附加的relationship()，并使用`relationship.back_populates`将两者连接起来：
+
+```python
+class Parent(Base):
+    __tablename__ = 'parent'
+    id = Column(Integer, primary_key=True)
+    children = relationship("Child", back_populates="parent")
+
+class Child(Base):
+    __tablename__ = 'child'
+    id = Column(Integer, primary_key=True)
+    parent_id = Column(Integer, ForeignKey('parent.id'))
+    parent = relationship("Parent", back_populates="children")
+
+```
+这样，子类就获得一个具有“多对一”的父级属性。
+
+那么`back_populates` 和 `backref` 有什么区别呢？
+
+- `back_populates` vs `backref`
+
+[python - When do I need to use sqlalchemy back_populates? - Stack Overflow](https://stackoverflow.com/questions/39869793/when-do-i-need-to-use-sqlalchemy-back-populates)
+
+> backref is more succinct because you don't need to declare the relation on both classes, but in practice I find it not worth to save this on line. I think back_populates is better, not only because in python culture "Explicit is better than implicit" (Zen of Python), but when you have many models, with a quick glance at its declaration you can see all relationships and their names instead of going over all related models. Also, a nice side benefit of back_populates is that you get auto-complete on both directions on most IDEs.
+
+英文不好的同学可以参考本人下文翻译：
+
+`backref`更为简洁，因为您不需要在两个类上都声明该关系，但是实践中，我发现这一点不值得作为准则。基于以下两点，我认为`back_populates`更好：
+
+1. 不仅因为在python文化中，“显式比隐式更好”（Python之禅）；
+2. 而且当我们创建了许多模型时，快速浏览一下它的声明，就可以看到所有关系及其名称，而不用去在所有相关模型上慢慢查找；
+3. 另外，back_populates的一个不错的好处是，您可以在大多数IDE的两个方向上自动完成。（TODO：此处不知道如何实现）
+
+#### 为“一对多”关系配置删除行为
+
+通常情况下，当所有子对象所属的父对象被删除时，子对象也应该被删除。要配置这种“皮之不存，毛将焉附？”的关系行为时，使用[delete](https://docs.sqlalchemy.org/en/14/orm/cascades.html#cascade-delete) 中描述的delete级联选项。一种典型的案例是：用户注销账户时，清空其账户历史发言信息。另一种情形是，当子对象与其父对象解除关联时，子对象本身可以被删除，要实现此行为请参考[delete-orphan](https://docs.sqlalchemy.org/en/14/orm/cascades.html#cascade-delete-orphan) 。
+
+另请参考：[Using foreign key ON DELETE cascade with ORM relationships](https://docs.sqlalchemy.org/en/14/orm/cascades.html#passive-deletes)
+
+### 多对一（Many To One）
+
+“多对一”关系在引用子表的父表中放置外键。`relationship()`在父节点上声明，在父节点上创建一个新的持有标量（scalar-holding）的属性。
+```python
+class Parent(Base):
+    __tablename__ = 'parent'
+    id = Column(Integer, primary_key=True)
+    child_id = Column(Integer, ForeignKey('child.id'))
+    child = relationship("Child")
+
+class Child(Base):
+    __tablename__ = 'child'
+    id = Column(Integer, primary_key=True)
+```
+双向行为是通过添加第二个`relationship()`并在两个方向上都应用`relationship.back_populates`参数来实现的：
+```python
+class Parent(Base):
+    __tablename__ = 'parent'
+    id = Column(Integer, primary_key=True)
+    child_id = Column(Integer, ForeignKey('child.id'))
+    child = relationship("Child", back_populates="parents")
+
+class Child(Base):
+    __tablename__ = 'child'
+    id = Column(Integer, primary_key=True)
+    parents = relationship("Parent", back_populates="child")
+```
+作为另一种选择，我们也可以将`relationship.backref`参数应用于单个`relationship()`之上，例如`Parent.child`：
+```python
+class Parent(Base):
+    __tablename__ = 'parent'
+    id = Column(Integer, primary_key=True)
+    child_id = Column(Integer, ForeignKey('child.id'))
+    child = relationship("Child", backref="parents")
+```
+
+### 一对一（One To One）
+
+“一对一”关系本质上是一种两边都有标量属性的双向关系。 为实现此目的，`relationship.uselist`标志指示在关系的“多”侧放置标量属性而不是集合。要将“一对多”转换为“一对一”：
+```python
+class Parent(Base):
+    __tablename__ = 'parent'
+    id = Column(Integer, primary_key=True)
+    child = relationship("Child", uselist=False, back_populates="parent")
+
+class Child(Base):
+    __tablename__ = 'child'
+    id = Column(Integer, primary_key=True)
+    parent_id = Column(Integer, ForeignKey('parent.id'))
+    parent = relationship("Parent", back_populates="child")
+```
+对于“多对一”：
+```python
+class Parent(Base):
+    __tablename__ = 'parent'
+    id = Column(Integer, primary_key=True)
+    child_id = Column(Integer, ForeignKey('child.id'))
+    child = relationship("Child", back_populates="parent")
+
+class Child(Base):
+    __tablename__ = 'child'
+    id = Column(Integer, primary_key=True)
+    parent = relationship("Parent", back_populates="child", uselist=False)
+```
+和上面一样，可以使用`relationship.backref`和`backref()`函数来代替`relationship.back_populates`方法；要在`backref`上指定`uselist`参数，请使用`backref()`函数：
+```python
+from sqlalchemy.orm import backref
+
+class Parent(Base):
+    __tablename__ = 'parent'
+    id = Column(Integer, primary_key=True)
+    child_id = Column(Integer, ForeignKey('child.id'))
+    child = relationship("Child", backref=backref("parent", uselist=False))
+```
+### 多对多（Many To Many）关系
+
+多对多添加了两个类之间的关联表。关联表由relationship()的relationship.secondary 参数指示。通常，表使用与声明性基类关联的MetaData对象，以便ForeignKey指令可以找到要链接的远程表：
+```python
+association_table = Table('association', Base.metadata,
+    Column('left_id', Integer, ForeignKey('left.id')),
+    Column('right_id', Integer, ForeignKey('right.id'))
+)
+
+class Parent(Base):
+    __tablename__ = 'left'
+    id = Column(Integer, primary_key=True)
+    children = relationship("Child",
+                    secondary=association_table)
+
+class Child(Base):
+    __tablename__ = 'right'
+    id = Column(Integer, primary_key=True)
+```
+对于双向关系，关系的双方都包含一个集合。使用`lationship.back_populates`指定，并为每个`relationship()`指定公共关联表：
+```python
+association_table = Table('association', Base.metadata,
+    Column('left_id', Integer, ForeignKey('left.id')),
+    Column('right_id', Integer, ForeignKey('right.id'))
+)
+
+class Parent(Base):
+    __tablename__ = 'left'
+    id = Column(Integer, primary_key=True)
+    children = relationship(
+        "Child",
+        secondary=association_table,
+        back_populates="parents")
+
+class Child(Base):
+    __tablename__ = 'right'
+    id = Column(Integer, primary_key=True)
+    parents = relationship(
+        "Parent",
+        secondary=association_table,
+        back_populates="children")
+```
+当使用relationship.backref参数而不是relationship.back_populates时，backref将自动使用相同的`relationship.secondary`参数用于反向关系：
+```pythpn
+association_table = Table('association', Base.metadata,
+    Column('left_id', Integer, ForeignKey('left.id')),
+    Column('right_id', Integer, ForeignKey('right.id'))
+)
+
+class Parent(Base):
+    __tablename__ = 'left'
+    id = Column(Integer, primary_key=True)
+    children = relationship("Child",
+                    secondary=association_table,
+                    backref="parents")
+
+class Child(Base):
+    __tablename__ = 'right'
+    id = Column(Integer, primary_key=True)
+```
+relationship（）的`relationship.secondary`参数还接受一个可返回最终参数的可调用对象，该参数仅在首次使用映射器时才评估。 使用此方法，我们可以在以后定义association_table，只要在所有模块初始化完成后有可用于调用的对象即可：
+```python
+class Parent(Base):
+    __tablename__ = 'left'
+    id = Column(Integer, primary_key=True)
+    children = relationship("Child",
+                    secondary=lambda: association_table,
+                    backref="parents")
+```
+使用声明式扩展时，也接受传统的“表的字符串名称”，与存储在Base.metadata.tables中的表名称相匹配:
+```python
+class Parent(Base):
+    __tablename__ = 'left'
+    id = Column(Integer, primary_key=True)
+    children = relationship("Child",
+                    secondary="association",
+                    backref="parents")
+```
+::: warning
+当以Python可评估的字符串形式传递时，`relationship.secondary`参数将使用Python的`eval()`函数进行解释。 **请勿将未输入的内容传递到此STRING。** 有关对`relation()`参数的声明式评估的详细信息，请参见关系参数的评估。
+:::
+#### 从多对多关系中删除数据项
+
+> A behavior which is unique to the relationship.secondary argument to relationship() is that the Table which is specified here is automatically subject to INSERT and DELETE statements, as objects are added or removed from the collection. There is no need to delete from this table manually. The act of removing a record from the collection will have the effect of the row being deleted on flush:
+
+对 relationship()关系的relationship.secondary参数的行为是唯一的。当在集合中添加或删除对象时，此处指定的表将自动受到INSERT和DELETE语句的约束，因此**无需手动从该表中删除**。 从集合中删除记录的行为将在刷新时删除行：
+```python
+# row will be deleted from the "secondary" table
+# automatically
+myparent.children.remove(somechild)
+```
+经常出现的一个问题是，当将子对象直接传递给Session.delete（）时，如何删除“secondary”表中的行：
+```
+session.delete(somechild)
+```
+这里有几种可能性：
+
+- 如果存在父级到子级之间的`relationship()`，但是**没有**将特定的子级链接到每个父级的反向关系，SQLAlchemy将不会意识到在删除此特定的Child对象时，它需要保持“secondary”表 将其链接到“父对象”。 不会删除“secondary”表。
+
+- 如果存在将特定子项链接到每个父项的关系，假设它被称为Child.parents，则默认情况下，SQLAlchemy将加载Child.parents集合，以查找所有父项对象，并从建立的“secondary”表中删除每一行中的此链接。 注意，这种关系不必是双向的。 SQLAlchemy严格检查与要删除的Child对象关联的每个`relationship()`。
+
+- 此处性能较高的选项是将ON DELETE CASCADE指令与数据库使用的外键一起使用。 假设数据库支持此功能，当删除了“子”中的引用行，则数据库本身可以自动删除“secondary”表中的行。 在这种情况下，可以使用`relationship()`关系上的[`relationship.passive_deletes `](https://docs.sqlalchemy.org/en/14/orm/relationship_api.html#sqlalchemy.orm.relationship.params.passive_deletes)指令，指示SQLAlchemy放弃主动加载Child.parents集合中的内容。 有关更多详细信息，请参见 [在ORM关系上使用外键ON DELETE级联](https://docs.sqlalchemy.org/en/14/orm/cascades.html#passive-deletes) 。
+
+再次注意，这些行为仅与`relationship()`一起使用的`relationship.secondary`选项相关。 如果处理显式映射且不存在于`relationship.secondary`选项的关联表中的关联表，则可以使用级联规则来自动删除实体，以响应要删除的相关实体请参阅 [级联](https://docs.sqlalchemy.org/en/14/orm/cascades.html#unitofwork-cascades) 了解这项特性的有关信息。
+参阅：
+- [在多对多关系中使用级联删除](https://docs.sqlalchemy.org/en/14/orm/cascades.html#cascade-delete-many-to-many)
+- [在多对多关系中使用外键的 ON DELETE](https://docs.sqlalchemy.org/en/14/orm/cascades.html#passive-deletes-many-to-many)
