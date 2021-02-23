@@ -680,11 +680,9 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
             – Optional, a column-level collation for this string value.
             优先考虑'二元'短手。
         -   **ascii**[¶](#sqlalchemy.dialects.mysql.ENUM.params.ascii) –
-            Defaults to False: short-hand for the `latin1`{.docutils
-            .literal} character set, generates ASCII in schema.
+            Defaults to False: short-hand for the `latin1` character set, generates ASCII in schema.
         -   **unicode**[¶](#sqlalchemy.dialects.mysql.ENUM.params.unicode)
-            – Defaults to False: short-hand for the `ucs2`{.docutils
-            .literal} character set, generates UNICODE in schema.
+            – Defaults to False: short-hand for the `ucs2` character set, generates UNICODE in schema.
         -   **binary**[¶](#sqlalchemy.dialects.mysql.ENUM.params.binary)
             – Defaults to False: short-hand, pick the binary collation
             type that matches the column’s character set.
@@ -777,11 +775,9 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
             – Optional, a column-level collation for this string value.
             优先考虑'二元'短手。
         -   **ascii**[¶](#sqlalchemy.dialects.mysql.LONGTEXT.params.ascii)
-            – Defaults to False: short-hand for the `latin1`{.docutils
-            .literal} character set, generates ASCII in schema.
+            – Defaults to False: short-hand for the `latin1` character set, generates ASCII in schema.
         -   **unicode**[¶](#sqlalchemy.dialects.mysql.LONGTEXT.params.unicode)
-            – Defaults to False: short-hand for the `ucs2`{.docutils
-            .literal} character set, generates UNICODE in schema.
+            – Defaults to False: short-hand for the `ucs2` character set, generates UNICODE in schema.
         -   **national**
             [¶](#sqlalchemy.dialects.mysql.LONGTEXT.params.national) -
             可选。如果为true，请使用服务器配置的国家字符集。
@@ -832,11 +828,9 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
             – Optional, a column-level collation for this string value.
             优先考虑'二元'短手。
         -   **ascii**[¶](#sqlalchemy.dialects.mysql.MEDIUMTEXT.params.ascii)
-            – Defaults to False: short-hand for the `latin1`{.docutils
-            .literal} character set, generates ASCII in schema.
+            – Defaults to False: short-hand for the `latin1` character set, generates ASCII in schema.
         -   **unicode**[¶](#sqlalchemy.dialects.mysql.MEDIUMTEXT.params.unicode)
-            – Defaults to False: short-hand for the `ucs2`{.docutils
-            .literal} character set, generates UNICODE in schema.
+            – Defaults to False: short-hand for the `ucs2` character set, generates UNICODE in schema.
         -   **national**
             [¶](#sqlalchemy.dialects.mysql.MEDIUMTEXT.params.national) -
             可选。如果为true，请使用服务器配置的国家字符集。
@@ -997,10 +991,7 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
             [¶](#sqlalchemy.dialects.mysql.SET.params.retrieve_as_bitwise)
             -
 
-            如果设置为True，则设置类型的数据将被持久保存，并使用整数值进行选择，其中一组被强制为持久性的按位掩码。MySQL允许这种模式具有能够明确存储值的优点，如空字符串`''`{.docutils
-            .literal}。数据类型将在SELECT语句中以表达式`col + 0`{.docutils
-            .literal}出现，以便将值强制到结果集中的整数值。如果希望保留一个可以存储空字符串`''`{.docutils
-            .literal}作为值的集合，则此标志是必需的。
+            如果设置为True，则设置类型的数据将被持久保存，并使用整数值进行选择，其中一组被强制为持久性的按位掩码。MySQL允许这种模式具有能够明确存储值的优点，如空字符串`''`。数据类型将在SELECT语句中以表达式`col + 0`出现，以便将值强制到结果集中的整数值。如果希望保留一个可以存储空字符串`''`作为值的集合，则此标志是必需的。
 
             警告
 
@@ -1051,11 +1042,9 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
             – Optional, a column-level collation for this string value.
             优先考虑'二元'短手。
         -   **ascii**[¶](#sqlalchemy.dialects.mysql.TEXT.params.ascii) –
-            Defaults to False: short-hand for the `latin1`{.docutils
-            .literal} character set, generates ASCII in schema.
+            Defaults to False: short-hand for the `latin1` character set, generates ASCII in schema.
         -   **unicode**[¶](#sqlalchemy.dialects.mysql.TEXT.params.unicode)
-            – Defaults to False: short-hand for the `ucs2`{.docutils
-            .literal} character set, generates UNICODE in schema.
+            – Defaults to False: short-hand for the `ucs2` character set, generates UNICODE in schema.
         -   **national**
             [¶](#sqlalchemy.dialects.mysql.TEXT.params.national) -
             可选。如果为true，请使用服务器配置的国家字符集。
@@ -1159,11 +1148,9 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
             – Optional, a column-level collation for this string value.
             优先考虑'二元'短手。
         -   **ascii**[¶](#sqlalchemy.dialects.mysql.TINYTEXT.params.ascii)
-            – Defaults to False: short-hand for the `latin1`{.docutils
-            .literal} character set, generates ASCII in schema.
+            – Defaults to False: short-hand for the `latin1` character set, generates ASCII in schema.
         -   **unicode**[¶](#sqlalchemy.dialects.mysql.TINYTEXT.params.unicode)
-            – Defaults to False: short-hand for the `ucs2`{.docutils
-            .literal} character set, generates UNICODE in schema.
+            – Defaults to False: short-hand for the `ucs2` character set, generates UNICODE in schema.
         -   **national**
             [¶](#sqlalchemy.dialects.mysql.TINYTEXT.params.national) -
             可选。如果为true，请使用服务器配置的国家字符集。
@@ -1194,11 +1181,9 @@ MySQL数据类型[¶](#mysql-data-types "Permalink to this headline")
             – Optional, a column-level collation for this string value.
             优先考虑'二元'短手。
         -   **ascii**[¶](#sqlalchemy.dialects.mysql.VARCHAR.params.ascii)
-            – Defaults to False: short-hand for the `latin1`{.docutils
-            .literal} character set, generates ASCII in schema.
+            – Defaults to False: short-hand for the `latin1` character set, generates ASCII in schema.
         -   **unicode**[¶](#sqlalchemy.dialects.mysql.VARCHAR.params.unicode)
-            – Defaults to False: short-hand for the `ucs2`{.docutils
-            .literal} character set, generates UNICODE in schema.
+            – Defaults to False: short-hand for the `ucs2` character set, generates UNICODE in schema.
         -   **national**
             [¶](#sqlalchemy.dialects.mysql.VARCHAR.params.national) -
             可选。如果为true，请使用服务器配置的国家字符集。
