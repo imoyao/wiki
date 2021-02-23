@@ -160,9 +160,7 @@ tags:
         None值关联的特殊行为的类型指示该值不一定会转换为SQL
         NULL；这是一个JSON类型的主要例子，它可能希望保存JSON值`'null'`。
 
-        在所有情况下，通过在INSERT语句中使用[`null`{.xref .py .py-obj
-        .docutils
-        .literal}](sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")
+        在所有情况下，通过在INSERT语句中使用[`null`](sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")
         SQL构造或与ORM映射属性关联，实际的NULL
         SQL值可始终保留在任何列中。
 
@@ -246,8 +244,7 @@ tags:
 
             s = s.with_variant(mysql.VARCHAR(collation='foo'), 'mysql')
 
-        [`TypeEngine.with_variant()`](#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")的构造始终是从“fallback”类型到特定于方言的。返回的类型是[`Variant`](#sqlalchemy.types.Variant "sqlalchemy.types.Variant")的一个实例，它本身提供了一个可重复调用的`Variant.with_variant()`{.xref
-        .py .py-meth .docutils .literal}。
+        [`TypeEngine.with_variant()`](#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")的构造始终是从“fallback”类型到特定于方言的。返回的类型是[`Variant`](#sqlalchemy.types.Variant "sqlalchemy.types.Variant")的一个实例，它本身提供了一个可重复调用的`Variant.with_variant()`。
 
         参数：
 
@@ -283,8 +280,7 @@ tags:
     -   当创建一个新的[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")，并且给定的类型作为`None`传递或根本不传递。
 
     可以在SQL表达式调用中毫无问题地使用[`NullType`](#sqlalchemy.types.NullType "sqlalchemy.types.NullType")，它只是在表达式构造级别或绑定参数/结果处理级别上没有任何行为。[`NullType`](#sqlalchemy.types.NullType "sqlalchemy.types.NullType")
-    will result in a [`CompileError`{.xref .py .py-exc .docutils
-    .literal}](exceptions.html#sqlalchemy.exc.CompileError "sqlalchemy.exc.CompileError")
+    will result in a [`CompileError`](exceptions.html#sqlalchemy.exc.CompileError "sqlalchemy.exc.CompileError")
     if the compiler is asked to render the type itself, such as if it is
     used in a [`cast()`](sqlelement.html#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")
     operation or within a schema creation operation such as that invoked

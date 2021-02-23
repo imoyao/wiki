@@ -2188,8 +2188,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
             -   **\*\* kwargs**
                 [¶](#sqlalchemy.orm.properties.RelationshipProperty.Comparator.operate.params.**kwargs)
                 -
-                修饰符。这些可以由特殊的操作符传递，如`ColumnOperators.contains()`{.xref
-                .py .py-meth .docutils .literal}。
+                修饰符。这些可以由特殊的操作符传递，如`ColumnOperators.contains()`。
 
         `reverse_operate`{.descname} （ *op*，*其他*，*\*\* kwargs* T5\> [¶ T6\>](#sqlalchemy.orm.properties.RelationshipProperty.Comparator.reverse_operate "Permalink to this definition")
         :   *inherited from the* [`reverse_operate()`](core_sqlelement.html#sqlalchemy.sql.operators.Operators.reverse_operate "sqlalchemy.sql.operators.Operators.reverse_operate")
@@ -2583,9 +2582,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
             including [`RelationshipProperty`](#sqlalchemy.orm.properties.RelationshipProperty "sqlalchemy.orm.properties.RelationshipProperty"),
             the attribute will refer to the [`MapperProperty.info`](#MapperProperty.info "MapperProperty.info")
             dictionary associated with that [`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty").
-        -   To access the [`MapperProperty.info`{.xref .py .py-attr
-            .docutils
-            .literal}](#MapperProperty.info "MapperProperty.info")
+        -   To access the [`MapperProperty.info`](#MapperProperty.info "MapperProperty.info")
             dictionary of the [`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")
             unconditionally, including for a [`ColumnProperty`](#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty")
             that’s associated directly with a [`schema.Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column"),

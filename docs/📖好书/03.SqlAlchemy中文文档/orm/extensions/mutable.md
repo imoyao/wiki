@@ -338,8 +338,7 @@ API参考[¶](#api-reference "Permalink to this headline")
         x .\_\_ init \_\_（...）初始化x；请参阅帮助（类型（x））进行签名
 
     ` _get_listen_keys  T0> （ T1> 属性 T2> ） T3> ¶ T4>`{.descname}
-    :   *inherited from the* `_get_listen_keys()`{.xref .py .py-meth
-        .docutils .literal} *method of* [`MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
+    :   *inherited from the* `_get_listen_keys()` *method of* [`MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
         给定描述符属性，返回属性键的`set()`，它表示此属性状态的变化。
 
@@ -350,8 +349,7 @@ API参考[¶](#api-reference "Permalink to this headline")
         版本1.0.5中的新功能
 
      `_listen_on_attribute`{.descname}(*attribute*, *coerce*, *parent\_cls*)[¶](#sqlalchemy.ext.mutable.Mutable._listen_on_attribute "Permalink to this definition")
-    :   *inherited from the* `_listen_on_attribute()`{.xref .py .py-meth
-        .docutils .literal} *method of* [`MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
+    :   *inherited from the* `_listen_on_attribute()` *method of* [`MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
         将此类型建立为给定映射描述符的变种侦听器。
 

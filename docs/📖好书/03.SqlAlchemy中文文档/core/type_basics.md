@@ -623,9 +623,7 @@ backends that explicitly support them by name.
     [`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")
 
     *class* `比较器`{.descname} （ *expr* ） [¶](#sqlalchemy.types.ARRAY.Comparator "Permalink to this definition")
-    :   基础：`sqlalchemy.types.Comparator`{.xref .py .py-class
-        .docutils .literal}，`sqlalchemy.types.Comparator`{.xref .py
-        .py-class .docutils .literal}
+    :   基础：`sqlalchemy.types.Comparator`，`sqlalchemy.types.Comparator`
 
         定义[`types.ARRAY`](#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")的比较操作。
 
@@ -653,9 +651,7 @@ backends that explicitly support them by name.
                 - 要比较的表达式
             -   **operator**[¶](#sqlalchemy.types.ARRAY.Comparator.all.params.operator)
                 – an operator object from the
-                `sqlalchemy.sql.operators`{.xref .py .py-mod .docutils
-                .literal} package, defaults to `operators.eq()`{.xref
-                .py .py-func .docutils .literal}.
+                `sqlalchemy.sql.operators` package, defaults to `operators.eq()`.
 
             也可以看看
 
@@ -685,9 +681,7 @@ backends that explicitly support them by name.
                 - 要比较的表达式
             -   **operator**[¶](#sqlalchemy.types.ARRAY.Comparator.any.params.operator)
                 – an operator object from the
-                `sqlalchemy.sql.operators`{.xref .py .py-mod .docutils
-                .literal} package, defaults to `operators.eq()`{.xref
-                .py .py-func .docutils .literal}.
+                `sqlalchemy.sql.operators` package, defaults to `operators.eq()`.
 
             也可以看看
 
@@ -852,9 +846,7 @@ backends that explicitly support them by name.
     版本1.1中的新功能
 
     *class* `比较器`{.descname} （ *expr* ） [¶](#sqlalchemy.types.JSON.Comparator "Permalink to this definition")
-    :   基础：`sqlalchemy.types.Comparator`{.xref .py .py-class
-        .docutils .literal}，`sqlalchemy.types.Comparator`{.xref .py
-        .py-class .docutils .literal}
+    :   基础：`sqlalchemy.types.Comparator`，`sqlalchemy.types.Comparator`
 
         定义[`types.JSON`](#sqlalchemy.types.JSON "sqlalchemy.types.JSON")的比较操作。
 
@@ -875,13 +867,10 @@ backends that explicitly support them by name.
     `JSON。`{.descclassname} `NULL`{.descname} *=符号（'JSON\_NULL'）* [¶](#sqlalchemy.types.JSON.NULL "Permalink to this definition")
     :   描述NULL的json值。
 
-        该值用于强制使用`"null"`的JSON值作为值。根据[`JSON.none_as_null`{.xref .py
-        .py-paramref .docutils
-        .literal}](#sqlalchemy.types.JSON.params.none_as_null "sqlalchemy.types.JSON")标志的设置，Python
+        该值用于强制使用`"null"`的JSON值作为值。根据[`JSON.none_as_null`](#sqlalchemy.types.JSON.params.none_as_null "sqlalchemy.types.JSON")标志的设置，Python
         `None`的值将被识别为SQL NULL或JSON
         `"null"`无论此设置如何，都可以使用[`JSON.NULL`](#sqlalchemy.types.JSON.NULL "sqlalchemy.types.JSON.NULL")常量来解析为JSON
-        `"null"`。这与`sql.null()`{.xref .py
-        .py-func .docutils .literal}结构形成对比，该结构始终解析为SQL
+        `"null"`。这与`sql.null()`结构形成对比，该结构始终解析为SQL
         NULL。例如。：
 
             from sqlalchemy import null

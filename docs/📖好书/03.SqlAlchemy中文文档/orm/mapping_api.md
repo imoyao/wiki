@@ -180,9 +180,7 @@ tags:
 
         一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")或[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象列表，选择操作应将其用作实体的默认排序。默认情况下，映射器没有预定义的顺序。
 
-        从版本1.1开始弃用：不推荐使用[`Mapper.order_by`{.xref .py
-        .py-paramref .docutils
-        .literal}](#sqlalchemy.orm.mapper.Mapper.params.order_by "sqlalchemy.orm.mapper.Mapper")参数。使用[`Query.order_by()`](query.html#sqlalchemy.orm.query.Query.order_by "sqlalchemy.orm.query.Query.order_by")确定结果集的排序。
+        从版本1.1开始弃用：不推荐使用[`Mapper.order_by`](#sqlalchemy.orm.mapper.Mapper.params.order_by "sqlalchemy.orm.mapper.Mapper")参数。使用[`Query.order_by()`](query.html#sqlalchemy.orm.query.Query.order_by "sqlalchemy.orm.query.Query.order_by")确定结果集的排序。
 
     -   **passive\_deletes**
         [¶](#sqlalchemy.orm.mapper.params.passive_deletes) -
@@ -542,8 +540,7 @@ tags:
 
         警告
 
-        [`Mapper.all_orm_descriptors`](#sqlalchemy.orm.mapper.Mapper.all_orm_descriptors "sqlalchemy.orm.mapper.Mapper.all_orm_descriptors")访问器名称空间是`OrderedProperties`的一个实例。这是一个类似字典的对象，它包含少量的命名方法，如`OrderedProperties.items()`和`OrderedProperties.values()`{.xref .py .py-meth
-        .docutils .literal}。When accessing attributes dynamically,
+        [`Mapper.all_orm_descriptors`](#sqlalchemy.orm.mapper.Mapper.all_orm_descriptors "sqlalchemy.orm.mapper.Mapper.all_orm_descriptors")访问器名称空间是`OrderedProperties`的一个实例。这是一个类似字典的对象，它包含少量的命名方法，如`OrderedProperties.items()`和`OrderedProperties.values()`。When accessing attributes dynamically,
         favor using the dict-access scheme, e.g.
         `mapper.all_orm_descriptors[somename]` over
         `getattr(mapper.all_orm_descriptors, somename)` to avoid name collisions.
@@ -568,8 +565,7 @@ tags:
 
         警告
 
-        [`Mapper.attrs`](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")访问器名称空间是`OrderedProperties`的实例。这是一个类似字典的对象，它包含少量的命名方法，如`OrderedProperties.items()`和`OrderedProperties.values()`{.xref .py .py-meth
-        .docutils .literal}。When accessing attributes dynamically,
+        [`Mapper.attrs`](#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")访问器名称空间是`OrderedProperties`的实例。这是一个类似字典的对象，它包含少量的命名方法，如`OrderedProperties.items()`和`OrderedProperties.values()`。When accessing attributes dynamically,
         favor using the dict-access scheme, e.g.
         `mapper.attrs[somename]` over
         `getattr(mapper.attrs, somename)` to avoid
@@ -812,8 +808,7 @@ tags:
 
         警告
 
-        [`Mapper.relationships`](#sqlalchemy.orm.mapper.Mapper.relationships "sqlalchemy.orm.mapper.Mapper.relationships")存取器名称空间是`OrderedProperties`的一个实例。这是一个类似字典的对象，它包含少量的命名方法，如`OrderedProperties.items()`和`OrderedProperties.values()`{.xref .py .py-meth
-        .docutils .literal}。When accessing attributes dynamically,
+        [`Mapper.relationships`](#sqlalchemy.orm.mapper.Mapper.relationships "sqlalchemy.orm.mapper.Mapper.relationships")存取器名称空间是`OrderedProperties`的一个实例。这是一个类似字典的对象，它包含少量的命名方法，如`OrderedProperties.items()`和`OrderedProperties.values()`。When accessing attributes dynamically,
         favor using the dict-access scheme, e.g.
         `mapper.relationships[somename]` over
         `getattr(mapper.relationships, somename)` to

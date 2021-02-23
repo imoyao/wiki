@@ -120,9 +120,7 @@ the default value will be persisted.
 即使传递了`None`，上面的操作仍会保留在`data`列的`"default"`的服务器默认值中，而不是SQL
 NULL。这是ORM的一个长期存在的行为，许多应用程序都将其作为假设。
 
-那么，如果我们想实际上将NULL放入此列，即使该列具有默认值，该怎么办呢？有两种方法。一个是在每个实例级别上，我们使用[`null`{.xref
-.py .py-obj .docutils
-.literal}](core_sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")
+那么，如果我们想实际上将NULL放入此列，即使该列具有默认值，该怎么办呢？有两种方法。一个是在每个实例级别上，我们使用[`null`](core_sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")
 SQL结构分配属性：
 
     from sqlalchemy import null
@@ -134,8 +132,7 @@ SQL结构分配属性：
                       # and server-side defaults, and the database will
                       # persist this as the NULL value
 
-[`null`{.xref .py .py-obj .docutils
-.literal}](core_sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")
+[`null`](core_sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")
 SQL构造始终转换为直接存在于目标INSERT语句中的SQL NULL值。
 
 If we’d like to be able to use the Python value `None` and have this also be persisted as NULL despite the presence
