@@ -1,5 +1,5 @@
 ---
-title: basic_relationships
+title: 基本关系模式
 date: 2021-02-20 22:41:39
 permalink: /pages/002fd5/
 categories:
@@ -7,7 +7,7 @@ categories:
   - SqlAlchemy中文文档
   - orm
 tags:
-  - 
+  - relationships
 ---
 基本关系模式[¶](#basic-relationship-patterns "Permalink to this headline")
 ==========================================================================
@@ -240,11 +240,12 @@ tags:
 -   这里更高性能的选择是使用ON DELETE
     CASCADE指令与数据库使用的外键。假设数据库支持此功能，则可以使数据库本身自动删除“辅助”表中的行，作为引用“child”中的行将被删除。可以指示SQLAlchemy使用[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上的[`passive_deletes`](relationship_api.html#sqlalchemy.orm.relationship.params.passive_deletes "sqlalchemy.orm.relationship")指令，在`Child.parents`集合中放弃主动加载；有关详细信息，请参阅[使用被动删除](collections.html#passive-deletes)。
 
-再次注意，这些行为仅**与[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中使用的[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")选项相关。如果处理显式地映射且在相关[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")
-选项中
-*不*存在的关联表，可以使用级联规则来自动删除对正在删除的相关实体作出反应的实体
--
-有关此功能的信息，请参阅[Cascades](cascades.html#unitofwork-cascades)。
+再次注意，这些行为 **仅** 与[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中使用的[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")选项相关。如果处理显式地映射且在相关[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")
+选项中 *不* 存在的关联表，可以使用级联规则来自动删除对正在删除的相关实体作出反应的实体——有关此功能的信息，请参阅[Cascades](cascades.html#unitofwork-cascades)。
+
+参阅：
+- [在多对多关系中使用级联删除](cascades.html#cascade-delete-many-to-many)
+- [在多对多关系中使用外键的 ON DELETE](cascades.html#passive-deletes-many-to-many)
 
 关联对象[¶](#association-object "Permalink to this headline")
 -------------------------------------------------------------
