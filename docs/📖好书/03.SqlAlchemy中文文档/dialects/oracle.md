@@ -1,7 +1,7 @@
 ---
-title: oracle
+title: 甲骨文oracle
 date: 2021-02-20 22:41:37
-permalink: /pages/8bf9da/
+permalink: /sqlalchemy/dialects/oracle/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

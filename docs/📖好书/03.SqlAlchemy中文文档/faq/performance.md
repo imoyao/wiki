@@ -1,7 +1,7 @@
 ---
-title: performance
+title: 性能
 date: 2021-02-20 22:41:39
-permalink: /pages/952ef3/
+permalink: /sqlalchemy/faq/performance/
 categories:
   - 📖好书
   - SqlAlchemy中文文档
@@ -107,18 +107,18 @@ depth is added (i.e. `r + r*r2 + r*r2*r3` ...)
     Ordered by: cumulative time
 
     ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-    222/21    0.001    0.000    0.011    0.001 lib/sqlalchemy/orm_loading.py:26(instances)
-    220/20    0.002    0.000    0.010    0.001 lib/sqlalchemy/orm_loading.py:327(_instance)
-    220/20    0.000    0.000    0.010    0.000 lib/sqlalchemy/orm_loading.py:284(populate_state)
-       20    0.000    0.000    0.010    0.000 lib/sqlalchemy/orm_strategies.py:987(load_collection_from_subq)
-       20    0.000    0.000    0.009    0.000 lib/sqlalchemy/orm_strategies.py:935(get)
-        1    0.000    0.000    0.009    0.009 lib/sqlalchemy/orm_strategies.py:940(_load)
-       21    0.000    0.000    0.008    0.000 lib/sqlalchemy/orm_strategies.py:942(<genexpr>)
-        2    0.000    0.000    0.004    0.002 lib/sqlalchemy/orm_query.py:2400(__iter__)
-        2    0.000    0.000    0.002    0.001 lib/sqlalchemy/orm_query.py:2414(_execute_and_instances)
-        2    0.000    0.000    0.002    0.001 lib/sqlalchemy/engine/base.py:659(execute)
-        2    0.000    0.000    0.002    0.001 lib/sqlalchemy/sql/elements.py:321(_execute_on_connection)
-        2    0.000    0.000    0.002    0.001 lib/sqlalchemy/engine/base.py:788(_execute_clauseelement)
+    222/21    0.001    0.000    0.011    0.001 lib/sqlalchemy/faq/orm_loading.py:26(instances)
+    220/20    0.002    0.000    0.010    0.001 lib/sqlalchemy/faq/orm_loading.py:327(_instance)
+    220/20    0.000    0.000    0.010    0.000 lib/sqlalchemy/faq/orm_loading.py:284(populate_state)
+       20    0.000    0.000    0.010    0.000 lib/sqlalchemy/faq/orm_strategies.py:987(load_collection_from_subq)
+       20    0.000    0.000    0.009    0.000 lib/sqlalchemy/faq/orm_strategies.py:935(get)
+        1    0.000    0.000    0.009    0.009 lib/sqlalchemy/faq/orm_strategies.py:940(_load)
+       21    0.000    0.000    0.008    0.000 lib/sqlalchemy/faq/orm_strategies.py:942(<genexpr>)
+        2    0.000    0.000    0.004    0.002 lib/sqlalchemy/faq/orm_query.py:2400(__iter__)
+        2    0.000    0.000    0.002    0.001 lib/sqlalchemy/faq/orm_query.py:2414(_execute_and_instances)
+        2    0.000    0.000    0.002    0.001 lib/sqlalchemy/faq/engine/base.py:659(execute)
+        2    0.000    0.000    0.002    0.001 lib/sqlalchemy/faq/sql/elements.py:321(_execute_on_connection)
+        2    0.000    0.000    0.002    0.001 lib/sqlalchemy/faq/engine/base.py:788(_execute_clauseelement)
 
     ...
 
@@ -157,7 +157,7 @@ Core或ORM查询生成此行为通常很容易。
     ...
 
     # but SQLAlchemy's result proxy is slow, this is type-level processing
-    2    0.100    0.200    0.100    0.200 lib/sqlalchemy/engine/result.py:778(fetchall)
+    2    0.100    0.200    0.100    0.200 lib/sqlalchemy/faq/engine/result.py:778(fetchall)
 
 在某些情况下，后端可能正在进行不需要的类型级处理。更具体地说，在类型API中查看缓慢的调用是更好的指标
 - 下面是我们使用类似这样的类型时的样子：
@@ -175,7 +175,7 @@ Core或ORM查询生成此行为通常很容易。
 
 这种故意缓慢操作的分析输出可以看作是这样的：
 
-    200    0.001    0.000    0.237    0.001 lib/sqlalchemy/sql/type_api.py:911(process)
+    200    0.001    0.000    0.237    0.001 lib/sqlalchemy/faq/sql/type_api.py:911(process)
     200    0.001    0.000    0.236    0.001 test.py:28(process_result_value)
     200    0.235    0.001    0.235    0.001 {time.sleep}
 
@@ -192,8 +192,8 @@ Core或ORM查询生成此行为通常很容易。
     # the ORM calls _instance for each ORM-loaded row it sees, and
     # populate_state for each ORM-loaded row that results in the population
     # of an object's attributes
-    220/20    0.001    0.000    0.010    0.000 lib/sqlalchemy/orm_loading.py:327(_instance)
-    220/20    0.000    0.000    0.009    0.000 lib/sqlalchemy/orm_loading.py:284(populate_state)
+    220/20    0.001    0.000    0.010    0.000 lib/sqlalchemy/faq/orm_loading.py:327(_instance)
+    220/20    0.000    0.000    0.009    0.000 lib/sqlalchemy/faq/orm_loading.py:284(populate_state)
 
 ORM将行转换为ORM映射对象的速度慢是该操作复杂性与cPython开销相结合的产物。减轻这种情况的共同策略包括：
 

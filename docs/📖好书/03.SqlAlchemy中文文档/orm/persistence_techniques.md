@@ -1,7 +1,7 @@
 ---
-title: persistence_techniques
+title: 其他持久性技术
 date: 2021-02-20 22:41:45
-permalink: /pages/1f85f6/
+permalink: /sqlalchemy/orm/persistence_techniques/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

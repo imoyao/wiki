@@ -1,7 +1,7 @@
 ---
-title: reflection
+title: 反映数据库对象
 date: 2021-02-20 22:41:35
-permalink: /pages/86437b/
+permalink: /sqlalchemy/core/core/reflection/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

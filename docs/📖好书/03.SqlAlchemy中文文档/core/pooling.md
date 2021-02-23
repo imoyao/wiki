@@ -1,7 +1,7 @@
 ---
-title: pooling
+title: 连接池
 date: 2021-02-20 22:41:35
-permalink: /pages/ade251/
+permalink: /sqlalchemy/core/pooling/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

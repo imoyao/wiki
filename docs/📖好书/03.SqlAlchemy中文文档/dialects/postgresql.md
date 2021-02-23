@@ -1,7 +1,7 @@
 ---
-title: postgresql
+title: PostgreSQL
 date: 2021-02-20 22:41:37
-permalink: /pages/8c3dc3/
+permalink: /sqlalchemy/dialects/postgresql/
 categories:
   - 📖好书
   - SqlAlchemy中文文档
@@ -9,7 +9,7 @@ categories:
 tags:
   - 
 ---
-的PostgreSQL [¶ T0\>](#module-sqlalchemy.dialects.postgresql.base "Permalink to this headline")
+PostgreSQL [¶ T0\>](#module-sqlalchemy.dialects.postgresql.base "Permalink to this headline")
 ===============================================================================================
 
 支持PostgreSQL数据库。

@@ -1,7 +1,7 @@
 ---
-title: nonstandard_mappings
+title: 非传统映射
 date: 2021-02-20 22:41:45
-permalink: /pages/64bb62/
+permalink: /sqlalchemy/orm/nonstandard_mappings/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

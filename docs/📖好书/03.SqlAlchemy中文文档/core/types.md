@@ -1,7 +1,7 @@
 ---
-title: types
+title: 列和数据类型
 date: 2021-02-20 22:41:37
-permalink: /pages/be4dee/
+permalink: /sqlalchemy/core/types/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

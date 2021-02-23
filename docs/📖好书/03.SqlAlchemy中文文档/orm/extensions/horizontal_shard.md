@@ -1,7 +1,7 @@
 ---
-title: horizontal_shard
+title: 水平分片
 date: 2021-02-20 22:41:42
-permalink: /pages/a92079/
+permalink: /sqlalchemy/orm/extensions/horizontal_shard/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

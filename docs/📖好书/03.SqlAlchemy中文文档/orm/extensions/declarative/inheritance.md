@@ -1,7 +1,7 @@
 ---
-title: inheritance
+title: 映射类继承层次结构
 date: 2021-02-20 22:41:41
-permalink: /pages/887d8a/
+permalink: /sqlalchemy/orm/extensions/declarative/inheritance/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

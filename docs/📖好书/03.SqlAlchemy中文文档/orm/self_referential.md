@@ -1,7 +1,7 @@
 ---
-title: self_referential
+title: 邻接列表关系
 date: 2021-02-20 22:41:46
-permalink: /pages/ef06f2/
+permalink: /sqlalchemy/orm/self_referential/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

@@ -1,7 +1,7 @@
 ---
-title: ormconfiguration
+title: ORM配置
 date: 2021-02-20 22:41:39
-permalink: /pages/2ed3f3/
+permalink: /sqlalchemy/faq/ormconfiguration/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

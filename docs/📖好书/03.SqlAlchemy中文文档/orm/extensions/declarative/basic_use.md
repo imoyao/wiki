@@ -1,7 +1,7 @@
 ---
-title: basic_use
+title: 基本使用
 date: 2021-02-20 22:41:41
-permalink: /pages/d2911f/
+permalink: /sqlalchemy/orm/extensions/declarative/basic_use/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

@@ -1,7 +1,7 @@
 ---
-title: composites
+title: 复合列类型
 date: 2021-02-20 22:41:39
-permalink: /pages/7474c6/
+permalink: /sqlalchemy/orm/composites/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

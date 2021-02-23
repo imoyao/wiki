@@ -1,7 +1,7 @@
 ---
-title: firebird
+title: 火鸟
 date: 2021-02-20 22:41:37
-permalink: /pages/faf336/
+permalink: /sqlalchemy/dialects/firebird/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

@@ -1,7 +1,7 @@
 ---
-title: mixins
+title: 混合、自定义实体公共类
 date: 2021-02-20 22:41:41
-permalink: /pages/412cf0/
+permalink: /sqlalchemy/orm/extensions/declarative/mixins/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

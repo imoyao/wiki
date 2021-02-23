@@ -1,7 +1,7 @@
 ---
-title: session_transaction
+title: 事务和连接管理
 date: 2021-02-20 22:41:49
-permalink: /pages/916274/
+permalink: /sqlalchemy/orm/session_transaction/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

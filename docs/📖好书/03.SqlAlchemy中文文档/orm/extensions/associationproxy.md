@@ -1,7 +1,7 @@
 ---
-title: associationproxy
+title: 关联代理
 date: 2021-02-20 22:41:41
-permalink: /pages/4ec584/
+permalink: /sqlalchemy/orm/extensions/associationproxy/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

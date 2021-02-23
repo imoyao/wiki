@@ -1,7 +1,7 @@
 ---
 title: migration_11
 date: 2021-02-20 22:41:31
-permalink: /pages/d70838/
+permalink: /sqlalchemy/d70838/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

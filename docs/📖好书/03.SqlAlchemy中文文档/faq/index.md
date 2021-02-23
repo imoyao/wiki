@@ -1,7 +1,7 @@
 ---
-title: index
+title: 常见问题
 date: 2021-02-20 23:13:24
-permalink: /pages/50846e/
+permalink: /sqlalchemy/faq/index/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

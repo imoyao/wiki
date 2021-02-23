@@ -1,7 +1,7 @@
 ---
-title: indexable
+title: 可转位
 date: 2021-02-20 22:41:42
-permalink: /pages/62c478/
+permalink: /sqlalchemy/orm/extensions/indexable/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

@@ -1,7 +1,7 @@
 ---
 title: examples
 date: 2021-02-20 22:41:40
-permalink: /pages/28c25e/
+permalink: /sqlalchemy/orm/examples/
 categories:
   - 📖好书
   - SqlAlchemy中文文档
@@ -252,8 +252,8 @@ Python配置文件输出可以转储所有测试，或更常见的单个测试�
        ncalls  tottime  percall  cumtime  percall filename:lineno(function)
          1000    0.634    0.001    0.634    0.001 {method 'commit' of 'sqlite3.Connection' objects}
          1000    0.154    0.000    0.154    0.000 {method 'execute' of 'sqlite3.Cursor' objects}
-         1000    0.021    0.000    0.074    0.000 /Users/classic/dev/sqlalchemy/lib/sqlalchemy/sql/compiler.py:1950(_get_colparams)
-         1000    0.015    0.000    0.034    0.000 /Users/classic/dev/sqlalchemy/lib/sqlalchemy/engine/default.py:503(_init_compiled)
+         1000    0.021    0.000    0.074    0.000 /Users/classic/dev/sqlalchemy/orm/lib/sqlalchemy/orm/sql/compiler.py:1950(_get_colparams)
+         1000    0.015    0.000    0.034    0.000 /Users/classic/dev/sqlalchemy/orm/lib/sqlalchemy/orm/engine/default.py:503(_init_compiled)
             1    0.012    0.012    1.091    1.091 examples/performance/single_inserts.py:79(test_core)
 
         ...

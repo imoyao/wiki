@@ -1,7 +1,7 @@
 ---
-title: index
+title: 声明
 date: 2021-02-20 23:15:26
-permalink: /pages/80ceee/
+permalink: /sqlalchemy/orm/extensions/declarative/index/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

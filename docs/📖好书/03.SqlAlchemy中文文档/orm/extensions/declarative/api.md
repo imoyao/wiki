@@ -1,7 +1,7 @@
 ---
-title: api
+title: 声明式API
 date: 2021-02-20 22:41:41
-permalink: /pages/b4c404/
+permalink: /sqlalchemy/orm/extensions/declarative/api/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

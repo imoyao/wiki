@@ -1,7 +1,7 @@
 ---
-title: index
+title: 变化和迁移
 date: 2021-02-20 23:11:45
-permalink: /pages/ab8456/
+permalink: /sqlalchemy/ab8456/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

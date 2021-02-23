@@ -1,7 +1,7 @@
 ---
 title: dml
 date: 2021-02-20 22:41:33
-permalink: /pages/4e3d2d/
+permalink: /sqlalchemy/core/dml/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

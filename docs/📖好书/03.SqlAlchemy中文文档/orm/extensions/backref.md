@@ -1,7 +1,7 @@
 ---
-title: backref
+title: 将关系与Backref关联
 date: 2021-02-20 22:41:39
-permalink: /pages/964e98/
+permalink: /sqlalchemy/orm/extensions/backref/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

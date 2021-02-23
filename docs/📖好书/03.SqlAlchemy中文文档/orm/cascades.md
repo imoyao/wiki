@@ -1,7 +1,7 @@
 ---
-title: cascades
+title: 级联
 date: 2021-02-20 22:41:39
-permalink: /pages/0f061d/
+permalink: /sqlalchemy/orm/cascades/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

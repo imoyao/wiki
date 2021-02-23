@@ -1,7 +1,7 @@
 ---
-title: relationship_persistence
+title: 特殊关系持久性模式
 date: 2021-02-20 22:41:45
-permalink: /pages/8b0bbc/
+permalink: /sqlalchemy/orm/relationship_persistence/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

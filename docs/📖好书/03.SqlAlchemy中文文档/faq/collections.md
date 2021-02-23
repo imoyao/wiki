@@ -1,7 +1,7 @@
 ---
-title: collections
+title: 收集配置和技术
 date: 2021-02-20 22:41:39
-permalink: /pages/23840d/
+permalink: /sqlalchemy/faq/collections/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

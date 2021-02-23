@@ -1,7 +1,7 @@
 ---
-title: scalar_mapping
+title: 映射列和表达式
 date: 2021-02-20 22:41:46
-permalink: /pages/106df9/
+permalink: /sqlalchemy/orm/scalar_mapping/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

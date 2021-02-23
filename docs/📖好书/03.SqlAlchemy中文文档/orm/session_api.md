@@ -1,7 +1,7 @@
 ---
-title: session_api
+title: 会话API
 date: 2021-02-20 22:41:46
-permalink: /pages/0cb10a/
+permalink: /sqlalchemy/orm/session_api/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

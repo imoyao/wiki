@@ -1,7 +1,7 @@
 ---
-title: index
+title: SQLAlchemy Core
 date: 2021-02-20 22:41:31
-permalink: /pages/b43640/
+permalink: /sqlalchemy/core/index/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

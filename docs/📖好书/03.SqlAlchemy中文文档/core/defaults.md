@@ -1,7 +1,7 @@
 ---
-title: defaults
+title: 列插入/更新默认值
 date: 2021-02-20 22:41:33
-permalink: /pages/ae2d8c/
+permalink: /sqlalchemy/core/defaults/
 categories:
   - 📖好书
   - SqlAlchemy中文文档

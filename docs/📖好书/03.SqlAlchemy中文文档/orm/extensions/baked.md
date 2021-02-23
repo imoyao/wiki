@@ -1,7 +1,7 @@
 ---
-title: baked
+title: 烘焙查询
 date: 2021-02-20 22:41:41
-permalink: /pages/e0b666/
+permalink: /sqlalchemy/orm/extensions/baked/
 categories:
   - 📖好书
   - SqlAlchemy中文文档
@@ -135,7 +135,7 @@ Caching](examples.html#examples-caching)中提供了一种演示SQL调用和结�
 
 上述方法使我们获得了非常小的性能优势。通过重新使用[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")，我们保存了`session.query(Model)`构造函数中的Python工作，并调用`过滤器（Model .id == bindparam（'id'））`，它会跳过我们构建Core表达式以及发送它到[`Query.filter()`](query.html#sqlalchemy.orm.query.Query.filter "sqlalchemy.orm.query.Query.filter")。但是，每次调用[`Query.all()`](query.html#sqlalchemy.orm.query.Query.all "sqlalchemy.orm.query.Query.all")时，该方法仍然会重新生成完整的[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象，并且还会发送此全新的[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")到每次的字符串编译步骤，对于像上面这样的简单情况，这可能是大约70％的开销。
 
-为了减少额外的开销，我们需要一些更专门的逻辑，一些方法来记忆选择对象的构造和SQL的构造。Wiki中有一个例子是[BakedQuery](https://bitbucket.org/zzzeek/sqlalchemy/wiki/UsageRecipes/BakedQuery)，它是该功能的先驱，但是在该系统中，我们没有缓存查询的*构造*。为了消除所有的开销，我们需要缓存查询的构造以及SQL编译。Let’s
+为了减少额外的开销，我们需要一些更专门的逻辑，一些方法来记忆选择对象的构造和SQL的构造。Wiki中有一个例子是[BakedQuery](https://bitbucket.org/zzzeek/sqlalchemy/orm/extensions/wiki/UsageRecipes/BakedQuery)，它是该功能的先驱，但是在该系统中，我们没有缓存查询的*构造*。为了消除所有的开销，我们需要缓存查询的构造以及SQL编译。Let’s
 assume we adapted the recipe in this way and made ourselves a method
 `.bake()` that pre-compiles the SQL for the query,
 producing a new object that can be invoked with minimal overhead.
