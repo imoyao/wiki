@@ -622,8 +622,7 @@ it is detected as corresponding to a unique constraint.
             [¶](#sqlalchemy.dialects.postgresql.base.PGInspector.get_view_names.params.include)
             -
 
-            指定要返回哪些类型的视图。作为字符串值（对于单一类型）或元组（对于任意数量的类型）传递。默认为`（'plain'， 'materialized'）`{.docutils
-            .literal}。
+            指定要返回哪些类型的视图。作为字符串值（对于单一类型）或元组（对于任意数量的类型）传递。默认为`（'plain'， 'materialized'）`。
 
             版本1.1中的新功能
 
@@ -866,9 +865,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
 
         定义[`ARRAY`](#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")的比较操作。
 
-        请注意，这些操作除了基类[`types.ARRAY.Comparator`{.xref .py
-        .py-class .docutils
-        .literal}](core_type_basics.html#sqlalchemy.types.ARRAY.Comparator "sqlalchemy.types.ARRAY.Comparator")类提供的操作外，还包括[`types.ARRAY.Comparator.any()`](core_type_basics.html#sqlalchemy.types.ARRAY.Comparator.any "sqlalchemy.types.ARRAY.Comparator.any")和[`types.ARRAY.Comparator.all()`](core_type_basics.html#sqlalchemy.types.ARRAY.Comparator.all "sqlalchemy.types.ARRAY.Comparator.all")
+        请注意，这些操作除了基类[`types.ARRAY.Comparator`](core_type_basics.html#sqlalchemy.types.ARRAY.Comparator "sqlalchemy.types.ARRAY.Comparator")类提供的操作外，还包括[`types.ARRAY.Comparator.any()`](core_type_basics.html#sqlalchemy.types.ARRAY.Comparator.any "sqlalchemy.types.ARRAY.Comparator.any")和[`types.ARRAY.Comparator.all()`](core_type_basics.html#sqlalchemy.types.ARRAY.Comparator.all "sqlalchemy.types.ARRAY.Comparator.all")
 
         ` contained_by  T0> （ T1> 其他 T2> ） T3> ¶ T4>`{.descname}
         :   布尔表达式。测试元素是否是参数数组表达式元素的适当子集。
@@ -893,18 +890,14 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
         -   **item\_type**
             [¶](#sqlalchemy.dialects.postgresql.ARRAY.params.item_type)
             -
-            此数组项目的数据类型。请注意，这里的维数是不相关的，所以像`INTEGER[][]`{.docutils
-            .literal}这样的多维数组被构造为`ARRAY(Integer)`{.docutils
-            .literal}，而不是`ARRAY(ARRAY(Integer))`{.docutils
-            .literal}等等。
+            此数组项目的数据类型。请注意，这里的维数是不相关的，所以像`INTEGER[][]`这样的多维数组被构造为`ARRAY(Integer)`，而不是`ARRAY(ARRAY(Integer))`等等。
         -   **as\_tuple = False**
             [¶](#sqlalchemy.dialects.postgresql.ARRAY.params.as_tuple) -
             指定返回结果是否应该从列表转换为元组。诸如psycopg2的DBAPI默认返回列表。当元组返回时，结果是可散列的。
         -   **dimensions**[¶](#sqlalchemy.dialects.postgresql.ARRAY.params.dimensions)
             – if non-None, the ARRAY will assume a fixed number of
             dimensions.
-            这将导致为此ARRAY发出的DDL包含确切数量的括号子句`[]`{.docutils
-            .literal}，并且还会优化整体类型的性能。请注意，PG数组总是隐含的“无量纲”，这意味着无论它们如何声明，它们都可以存储任意数量的维度。
+            这将导致为此ARRAY发出的DDL包含确切数量的括号子句`[]`，并且还会优化整体类型的性能。请注意，PG数组总是隐含的“无量纲”，这意味着无论它们如何声明，它们都可以存储任意数量的维度。
         -   **zero\_indexes = False**
             [¶](#sqlalchemy.dialects.postgresql.ARRAY.params.zero_indexes)
             -
@@ -976,8 +969,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
         -   **asdecimal**[¶](#sqlalchemy.dialects.postgresql.DOUBLE_PRECISION.params.asdecimal)
             – the same flag as that of [`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric"),
             but defaults to `False`.
-            请注意，将此标志设置为`True`{.docutils
-            .literal}会导致浮点转换。
+            请注意，将此标志设置为`True`会导致浮点转换。
         -   **decimal\_return\_scale**
             [¶](#sqlalchemy.dialects.postgresql.DOUBLE_PRECISION.params.decimal_return_scale)
             -
@@ -988,11 +980,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
 
         -   **\*\* kwargs**
             [¶](#sqlalchemy.dialects.postgresql.DOUBLE_PRECISION.params.**kwargs)
-            - 不建议使用。其他参数在这里被默认的[`Float`{.xref .py
-            .py-class .docutils
-            .literal}](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")类型忽略。对于支持附加参数的特定于数据库的浮点数，请参阅该方言的文档以获取详细信息，例如[`sqlalchemy.dialects.mysql.FLOAT`{.xref
-            .py .py-class .docutils
-            .literal}](mysql.html#sqlalchemy.dialects.mysql.FLOAT "sqlalchemy.dialects.mysql.FLOAT")。
+            - 不建议使用。其他参数在这里被默认的[`Float`](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")类型忽略。对于支持附加参数的特定于数据库的浮点数，请参阅该方言的文档以获取详细信息，例如[`sqlalchemy.dialects.mysql.FLOAT`](mysql.html#sqlalchemy.dialects.mysql.FLOAT "sqlalchemy.dialects.mysql.FLOAT")。
 
 *class* `sqlalchemy.dialects.postgresql。`{.descclassname} `ENUM`{.descname} （ *\* enums*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.postgresql.ENUM "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.Enum`](core_type_basics.html#sqlalchemy.types.Enum "sqlalchemy.types.Enum")
@@ -1081,9 +1069,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
         New in version 0.7.4.
 
      `create`{.descname}(*bind=None*, *checkfirst=True*)[¶](#sqlalchemy.dialects.postgresql.ENUM.create "Permalink to this definition")
-    :   Emit `CREATE TYPE` for this [`ENUM`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.dialects.postgresql.ENUM "sqlalchemy.dialects.postgresql.ENUM").
+    :   Emit `CREATE TYPE` for this [`ENUM`](#sqlalchemy.dialects.postgresql.ENUM "sqlalchemy.dialects.postgresql.ENUM").
 
         如果底层方言不支持Postgresql CREATE TYPE，则不采取任何操作。
 
@@ -1099,9 +1085,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
             exist already before creating.
 
      `drop`{.descname}(*bind=None*, *checkfirst=True*)[¶](#sqlalchemy.dialects.postgresql.ENUM.drop "Permalink to this definition")
-    :   Emit `DROP TYPE` for this [`ENUM`{.xref .py
-        .py-class .docutils
-        .literal}](#sqlalchemy.dialects.postgresql.ENUM "sqlalchemy.dialects.postgresql.ENUM").
+    :   Emit `DROP TYPE` for this [`ENUM`](#sqlalchemy.dialects.postgresql.ENUM "sqlalchemy.dialects.postgresql.ENUM").
 
         如果底层方言不支持Postgresql DROP TYPE，则不采取任何操作。
 
@@ -1353,8 +1337,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
 
             也可以看看
 
-            [`ColumnElement.cast()`{.xref .py .py-meth .docutils
-            .literal}](core_sqlelement.html#sqlalchemy.sql.expression.ColumnElement.cast "sqlalchemy.sql.expression.ColumnElement.cast")
+            [`ColumnElement.cast()`](core_sqlelement.html#sqlalchemy.sql.expression.ColumnElement.cast "sqlalchemy.sql.expression.ColumnElement.cast")
 
     `JSON。`{.descclassname} `__ init __`{.descname} （ *none\_as\_null = False*，*astext\_type = None* ） T5\> [¶ T6\>](#sqlalchemy.dialects.postgresql.JSON.__init__ "Permalink to this definition")
     :   构建一个[`JSON`](#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")类型。
@@ -1366,22 +1349,16 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
             -
 
             如果为True，则将值`None`保留为SQL
-            NULL值，而不是`null`{.docutils
-            .literal}的JSON编码。请注意，当此标志为False时，[`null()`{.xref
-            .py .py-func .docutils
-            .literal}](core_sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")结构仍可用于保留NULL值：
+            NULL值，而不是`null`的JSON编码。请注意，当此标志为False时，[`null()`](core_sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")结构仍可用于保留NULL值：
 
                 from sqlalchemy import null
                 conn.execute(table.insert(), data=null())
 
-            更改为0.9.8版： - 现在支持`none_as_null`{.docutils
-            .literal}和[`null()`{.xref .py .py-func .docutils
-            .literal}](core_sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")以保留NULL值。
+            更改为0.9.8版： - 现在支持`none_as_null`和[`null()`](core_sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")以保留NULL值。
 
             也可以看看
 
-            [`JSON.NULL`{.xref .py .py-attr .docutils
-            .literal}](core_type_basics.html#sqlalchemy.types.JSON.NULL "sqlalchemy.types.JSON.NULL")
+            [`JSON.NULL`](core_type_basics.html#sqlalchemy.types.JSON.NULL "sqlalchemy.types.JSON.NULL")
 
         -   **astext\_type**
             [¶](#sqlalchemy.dialects.postgresql.JSON.params.astext_type)
@@ -1389,9 +1366,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
 
             在索引属性上用于[`JSON.Comparator.astext`{.xref .py .py-attr
             .docutils
-            .literal}](#sqlalchemy.dialects.postgresql.JSON.Comparator.astext "sqlalchemy.dialects.postgresql.JSON.Comparator.astext")访问器的类型。默认为[`types.Text`{.xref
-            .py .py-class .docutils
-            .literal}](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")。
+            .literal}](#sqlalchemy.dialects.postgresql.JSON.Comparator.astext "sqlalchemy.dialects.postgresql.JSON.Comparator.astext")访问器的类型。默认为[`types.Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")。
 
             版本1.1中的新功能
 
@@ -1399,8 +1374,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
     :   [`Comparator`](#sqlalchemy.dialects.postgresql.JSON.Comparator "sqlalchemy.dialects.postgresql.JSON.Comparator")的别名
 
 *class* `sqlalchemy.dialects.postgresql。`{.descclassname} `JSONB`{.descname} （ *none\_as\_null = False*，*astext\_type =无 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.postgresql.JSONB "Permalink to this definition")*
-:   基础：`sqlalchemy.dialects.postgresql.json.JSON`{.xref .py .py-class
-    .docutils .literal}
+:   基础：`sqlalchemy.dialects.postgresql.json.JSON`
 
     表示Postgresql JSONB类型。
 
@@ -1500,8 +1474,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
         -   **asdecimal**[¶](#sqlalchemy.dialects.postgresql.REAL.params.asdecimal)
             – the same flag as that of [`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric"),
             but defaults to `False`.
-            请注意，将此标志设置为`True`{.docutils
-            .literal}会导致浮点转换。
+            请注意，将此标志设置为`True`会导致浮点转换。
         -   **decimal\_return\_scale**
             [¶](#sqlalchemy.dialects.postgresql.REAL.params.decimal_return_scale)
             -
@@ -1512,11 +1485,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
 
         -   **\*\* kwargs**
             [¶](#sqlalchemy.dialects.postgresql.REAL.params.**kwargs) -
-            不建议使用。其他参数在这里被默认的[`Float`{.xref .py
-            .py-class .docutils
-            .literal}](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")类型忽略。对于支持附加参数的特定于数据库的浮点数，请参阅该方言的文档以获取详细信息，例如[`sqlalchemy.dialects.mysql.FLOAT`{.xref
-            .py .py-class .docutils
-            .literal}](mysql.html#sqlalchemy.dialects.mysql.FLOAT "sqlalchemy.dialects.mysql.FLOAT")。
+            不建议使用。其他参数在这里被默认的[`Float`](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")类型忽略。对于支持附加参数的特定于数据库的浮点数，请参阅该方言的文档以获取详细信息，例如[`sqlalchemy.dialects.mysql.FLOAT`](mysql.html#sqlalchemy.dialects.mysql.FLOAT "sqlalchemy.dialects.mysql.FLOAT")。
 
 *class* `sqlalchemy.dialects.postgresql。`{.descclassname} `TSVECTOR`{.descname} [¶](#sqlalchemy.dialects.postgresql.TSVECTOR "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
@@ -1748,8 +1717,7 @@ PostgreSQL DML构造[¶](#postgresql-dml-constructs "Permalink to this headline"
         也可以看看
 
         [INSERT...ON CONFLICT (Upsert)](#postgresql-insert-on-conflict)
-        - 如何使用[`Insert.excluded`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.dialects.postgresql.dml.Insert.excluded "sqlalchemy.dialects.postgresql.dml.Insert.excluded")的示例
+        - 如何使用[`Insert.excluded`](#sqlalchemy.dialects.postgresql.dml.Insert.excluded "sqlalchemy.dialects.postgresql.dml.Insert.excluded")的示例
 
     `on_conflict_do_nothing`{.descname} （ *约束=无*，*index\_elements =无*，*index\_where =无* ） T5\> [¶ T6\>](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_nothing "Permalink to this definition")
     :   为ON CONFLICT子句指定DO NOTHING操作。

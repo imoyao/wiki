@@ -110,9 +110,7 @@ well as query for them, using the `.start` and
     -   **active\_history = False**
         [¶](#sqlalchemy.orm.composite.params.active_history) -
 
-        当`True`时，表示标量属性的“上一个”值在替换时应加载，如果尚未加载。查看[`column_property()`{.xref
-        .py .py-func .docutils
-        .literal}](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")上的同一个标志。
+        当`True`时，表示标量属性的“上一个”值在替换时应加载，如果尚未加载。查看[`column_property()`](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")上的同一个标志。
 
         版本0.7中更改：此标志特别有意义 - 以前它是占位符。
 
@@ -124,9 +122,7 @@ well as query for them, using the `.start` and
         attribute is first accessed on an instance.
         另见[`deferred()`](loading_columns.html#sqlalchemy.orm.deferred "sqlalchemy.orm.deferred")。
     -   **comparator\_factory**[¶](#sqlalchemy.orm.composite.params.comparator_factory)
-        – a class which extends [`CompositeProperty.Comparator`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.descriptor_props.CompositeProperty.Comparator "sqlalchemy.orm.descriptor_props.CompositeProperty.Comparator")
+        – a class which extends [`CompositeProperty.Comparator`](internals.html#sqlalchemy.orm.descriptor_props.CompositeProperty.Comparator "sqlalchemy.orm.descriptor_props.CompositeProperty.Comparator")
         which provides custom SQL clause generation for comparison
         operations.
     -   **doc**[¶](#sqlalchemy.orm.composite.params.doc) – optional
@@ -134,9 +130,7 @@ well as query for them, using the `.start` and
         descriptor.
     -   **info** [¶](#sqlalchemy.orm.composite.params.info) -
 
-        可选数据字典，将填充到此对象的[`MapperProperty.info`{.xref .py
-        .py-attr .docutils
-        .literal}](internals.html#MapperProperty.info "MapperProperty.info")属性中。
+        可选数据字典，将填充到此对象的[`MapperProperty.info`](internals.html#MapperProperty.info "MapperProperty.info")属性中。
 
         0.8版本中的新功能
 
@@ -144,9 +138,7 @@ well as query for them, using the `.start` and
         an [`AttributeExtension`](deprecated.html#sqlalchemy.orm.interfaces.AttributeExtension "sqlalchemy.orm.interfaces.AttributeExtension")
         instance, or list of extensions, which will be prepended to the
         list of attribute listeners for the resulting descriptor placed
-        on the class. **已过时。 T0\>**请参阅[`AttributeEvents`{.xref
-        .py .py-class .docutils
-        .literal}](events.html#sqlalchemy.orm.events.AttributeEvents "sqlalchemy.orm.events.AttributeEvents")。
+        on the class. **已过时。 T0\>**请参阅[`AttributeEvents`](events.html#sqlalchemy.orm.events.AttributeEvents "sqlalchemy.orm.events.AttributeEvents")。
 
 跟踪复合材料上的原位变异[¶](#tracking-in-place-mutations-on-composites "Permalink to this headline")
 ----------------------------------------------------------------------------------------------------

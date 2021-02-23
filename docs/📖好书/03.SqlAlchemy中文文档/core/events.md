@@ -49,8 +49,7 @@ Events](core_events.html)中描述。
         # it to use the return value
         listen(UserContact.phone, 'set', validate_phone, retval=True)
 
-    类似上面的验证函数也会引发异常，例如`ValueError`{.xref .py .py-exc
-    .docutils .literal}来暂停操作。
+    类似上面的验证函数也会引发异常，例如`ValueError`来暂停操作。
 
     [`listen()`](core_event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")函数可以使用几个修饰符。
 
@@ -60,11 +59,7 @@ Events](core_events.html)中描述。
         – When True, indicates that the “set” event would like to
         receive the “old” value being replaced unconditionally, even if
         this requires firing off database loads.
-        请注意，`active_history`也可以直接通过[`column_property()`{.xref .py .py-func
-        .docutils
-        .literal}](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")和[`relationship()`{.xref
-        .py .py-func .docutils
-        .literal}](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")设置。
+        请注意，`active_history`也可以直接通过[`column_property()`](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")和[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")设置。
     -   **propagate=False**[¶](#sqlalchemy.orm.events.AttributeEvents.params.propagate)
         – When True, the listener function will be established not just
         for the class attribute given, but for attributes of the same
@@ -98,22 +93,17 @@ Events](core_events.html)中描述。
 
         -   **target**[¶](#sqlalchemy.orm.events.AttributeEvents.append.params.target)
             – the object instance receiving the event.
-            如果侦听器使用`raw=True`{.docutils
-            .literal}进行注册，则这将是[`InstanceState`{.xref .py
-            .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")对象。
+            如果侦听器使用`raw=True`进行注册，则这将是[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")对象。
         -   **value**[¶](#sqlalchemy.orm.events.AttributeEvents.append.params.value)
             – the value being appended.
-            如果此侦听器使用`retval=True`{.docutils
-            .literal}进行注册，那么侦听器函数必须返回此值或替换它的新值。
+            如果此侦听器使用`retval=True`进行注册，那么侦听器函数必须返回此值或替换它的新值。
         -   **发起人**
             [¶](#sqlalchemy.orm.events.AttributeEvents.append.params.initiator)
             -
 
             表示事件启动的[`attributes.Event`](internals.html#sqlalchemy.orm.attributes.Event "sqlalchemy.orm.attributes.Event")实例。可以通过backref处理程序从其原始值进行修改，以控制链式事件传播。
 
-            在版本0.9.0中更改： `initiator`{.docutils
-            .literal}参数现在作为[`attributes.Event`](internals.html#sqlalchemy.orm.attributes.Event "sqlalchemy.orm.attributes.Event")对象传递，并且可以通过一个backref处理程序反向链接事件链。
+            在版本0.9.0中更改： `initiator`参数现在作为[`attributes.Event`](internals.html#sqlalchemy.orm.attributes.Event "sqlalchemy.orm.attributes.Event")对象传递，并且可以通过一个backref处理程序反向链接事件链。
 
         返回：
 
@@ -141,8 +131,7 @@ Events](core_events.html)中描述。
 
         事件的机制通常包括给定的集合是空的，即使它在被替换时存储对象。
 
-        版本1.0.0新增： [`AttributeEvents.init_collection()`](#sqlalchemy.orm.events.AttributeEvents.init_collection "sqlalchemy.orm.events.AttributeEvents.init_collection")和[`AttributeEvents.dispose_collection()`](#sqlalchemy.orm.events.AttributeEvents.dispose_collection "sqlalchemy.orm.events.AttributeEvents.dispose_collection")事件取代`collection.linker`{.xref
-        .py .py-class .docutils .literal}
+        版本1.0.0新增： [`AttributeEvents.init_collection()`](#sqlalchemy.orm.events.AttributeEvents.init_collection "sqlalchemy.orm.events.AttributeEvents.init_collection")和[`AttributeEvents.dispose_collection()`](#sqlalchemy.orm.events.AttributeEvents.dispose_collection "sqlalchemy.orm.events.AttributeEvents.dispose_collection")事件取代`collection.linker`
 
     `init_collection`{.descname} （ *target*，*collection*，*collection\_adapter* ） [¶ T6\>](#sqlalchemy.orm.events.AttributeEvents.init_collection "Permalink to this definition")
     :   接收'collection init'事件。
@@ -173,10 +162,7 @@ Events](core_events.html)中描述。
 
         -   **target**[¶](#sqlalchemy.orm.events.AttributeEvents.init_collection.params.target)
             – the object instance receiving the event.
-            如果侦听器使用`raw=True`{.docutils
-            .literal}进行注册，则这将是[`InstanceState`{.xref .py
-            .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")对象。
+            如果侦听器使用`raw=True`进行注册，则这将是[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")对象。
         -   **集合**
             [¶](#sqlalchemy.orm.events.AttributeEvents.init_collection.params.collection)
             -
@@ -185,8 +171,7 @@ Events](core_events.html)中描述。
             – the [`CollectionAdapter`](collections.html#sqlalchemy.orm.collections.CollectionAdapter "sqlalchemy.orm.collections.CollectionAdapter")
             that will mediate internal access to the collection.
 
-        版本1.0.0新增： [`AttributeEvents.init_collection()`](#sqlalchemy.orm.events.AttributeEvents.init_collection "sqlalchemy.orm.events.AttributeEvents.init_collection")和[`AttributeEvents.dispose_collection()`](#sqlalchemy.orm.events.AttributeEvents.dispose_collection "sqlalchemy.orm.events.AttributeEvents.dispose_collection")事件取代`collection.linker`{.xref
-        .py .py-class .docutils .literal}
+        版本1.0.0新增： [`AttributeEvents.init_collection()`](#sqlalchemy.orm.events.AttributeEvents.init_collection "sqlalchemy.orm.events.AttributeEvents.init_collection")和[`AttributeEvents.dispose_collection()`](#sqlalchemy.orm.events.AttributeEvents.dispose_collection "sqlalchemy.orm.events.AttributeEvents.dispose_collection")事件取代`collection.linker`
 
      `init_scalar`{.descname}(*target*, *value*, *dict\_*)[¶](#sqlalchemy.orm.events.AttributeEvents.init_scalar "Permalink to this definition")
     :   接收标量“init”事件。
@@ -219,21 +204,13 @@ Events](core_events.html)中描述。
 
         上面，我们将属性`MyClass.some_attribute`初始化为`SOME_CONSTANT`的值。以上代码包含以下功能：
 
-        -   通过在给定的`dict_`{.docutils
-            .literal}中设置值`SOME_CONSTANT`{.docutils
-            .literal}，我们表明该值将被持久化到数据库。**如果我们明确地将它与对象**关联，那么给定的值只能保存到数据库中。给定的`dict_`{.docutils
-            .literal}是映射对象的`__dict__`{.docutils
-            .literal}元素，假定默认的属性检测系统就位。
-        -   通过建立`retval=True`{.docutils
-            .literal}标志，我们从函数返回的值将由属性getter返回。没有这个标志，事件被认为是一个被动的观察者，我们的函数的返回值被忽略。
-        -   如果映射类包含继承子类，那么`propagate=True`{.docutils
-            .literal}标志是有意义的，它也会使用此事件侦听器。没有这个标志，继承的子类将不会使用我们的事件处理程序。
+        -   通过在给定的`dict_`中设置值`SOME_CONSTANT`，我们表明该值将被持久化到数据库。**如果我们明确地将它与对象**关联，那么给定的值只能保存到数据库中。给定的`dict_`是映射对象的`__dict__`元素，假定默认的属性检测系统就位。
+        -   通过建立`retval=True`标志，我们从函数返回的值将由属性getter返回。没有这个标志，事件被认为是一个被动的观察者，我们的函数的返回值被忽略。
+        -   如果映射类包含继承子类，那么`propagate=True`标志是有意义的，它也会使用此事件侦听器。没有这个标志，继承的子类将不会使用我们的事件处理程序。
 
         当我们在给定字典中建立值时，该值将用于由工作单元建立的INSERT语句中。通常，`None`的默认返回值不是作为对象的一部分建立的，以避免响应正常被动的“get”操作而发生对象变化的问题，并避免出现问题是否在属性访问操作期间不应该触发[`AttributeEvents.set()`](#sqlalchemy.orm.events.AttributeEvents.set "sqlalchemy.orm.events.AttributeEvents.set")事件。这不会影响INSERT操作，因为`None`值与任何情况下进入数据库的`NULL`的值匹配；请注意，在INSERT期间跳过了`None`，以确保列和SQL级别的默认功能可以触发。
 
-        当我们应用我们的值时，属性设置事件[`AttributeEvents.set()`](#sqlalchemy.orm.events.AttributeEvents.set "sqlalchemy.orm.events.AttributeEvents.set")以及由[`orm.validates`{.xref
-        .py .py-obj .docutils
-        .literal}](mapped_attributes.html#sqlalchemy.orm.validates "sqlalchemy.orm.validates")提供的相关验证功能****到给定的`dict_`。要使这些事件响应我们新生成的值而调用，请将该值作为普通属性集操作应用于给定对象：
+        当我们应用我们的值时，属性设置事件[`AttributeEvents.set()`](#sqlalchemy.orm.events.AttributeEvents.set "sqlalchemy.orm.events.AttributeEvents.set")以及由[`orm.validates`](mapped_attributes.html#sqlalchemy.orm.validates "sqlalchemy.orm.validates")提供的相关验证功能****到给定的`dict_`。要使这些事件响应我们新生成的值而调用，请将该值作为普通属性集操作应用于给定对象：
 
             SOME_CONSTANT = 3.1415926
 
@@ -247,9 +224,7 @@ Events](core_events.html)中描述。
 
         当设置多个侦听器时，通过将指定`retval=True`的前一个侦听器返回的值作为`value`
 
-        [`AttributeEvents.init_scalar()`](#sqlalchemy.orm.events.AttributeEvents.init_scalar "sqlalchemy.orm.events.AttributeEvents.init_scalar")事件可用于从映射的[`Column`{.xref
-        .py .py-class .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象上建立的默认值和/或可调用值中提取值。有关此示例，请参阅[Attribute
+        [`AttributeEvents.init_scalar()`](#sqlalchemy.orm.events.AttributeEvents.init_scalar "sqlalchemy.orm.events.AttributeEvents.init_scalar")事件可用于从映射的[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象上建立的默认值和/或可调用值中提取值。有关此示例，请参阅[Attribute
         Instrumentation](examples.html#examples-instrumentation)中的“有效列默认值”示例。
 
         版本1.1中的新功能
@@ -258,18 +233,13 @@ Events](core_events.html)中描述。
 
         -   **target**[¶](#sqlalchemy.orm.events.AttributeEvents.init_scalar.params.target)
             – the object instance receiving the event.
-            如果侦听器使用`raw=True`{.docutils
-            .literal}进行注册，则这将是[`InstanceState`{.xref .py
-            .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")对象。
+            如果侦听器使用`raw=True`进行注册，则这将是[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")对象。
         -   **value**[¶](#sqlalchemy.orm.events.AttributeEvents.init_scalar.params.value)
             – the value that is to be returned before this event
-            listener were invoked. 该值以`None`{.docutils
-            .literal}值开始，但如果存在多个侦听器，则该值将成为先前事件处理函数的返回值。
+            listener were invoked. 该值以`None`值开始，但如果存在多个侦听器，则该值将成为先前事件处理函数的返回值。
         -   **dict \_**
             [¶](#sqlalchemy.orm.events.AttributeEvents.init_scalar.params.dict_)
-            - 此映射对象的属性字典。这通常是对象的`__dict__`{.docutils
-            .literal}，但在任何情况下都代表属性系统用于获取此属性实际值的目标。在此字典中放置值会影响该值将在由工作单元生成的INSERT语句中使用。
+            - 此映射对象的属性字典。这通常是对象的`__dict__`，但在任何情况下都代表属性系统用于获取此属性实际值的目标。在此字典中放置值会影响该值将在由工作单元生成的INSERT语句中使用。
 
         也可以看看
 
@@ -295,10 +265,7 @@ Events](core_events.html)中描述。
 
         -   **target**[¶](#sqlalchemy.orm.events.AttributeEvents.remove.params.target)
             – the object instance receiving the event.
-            如果侦听器使用`raw=True`{.docutils
-            .literal}进行注册，则这将是[`InstanceState`{.xref .py
-            .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")对象。
+            如果侦听器使用`raw=True`进行注册，则这将是[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")对象。
         -   **值**
             [¶](#sqlalchemy.orm.events.AttributeEvents.remove.params.value)
             - 被删除的值。
@@ -308,8 +275,7 @@ Events](core_events.html)中描述。
 
             表示事件启动的[`attributes.Event`](internals.html#sqlalchemy.orm.attributes.Event "sqlalchemy.orm.attributes.Event")实例。可以通过backref处理程序从其原始值进行修改，以控制链式事件传播。
 
-            在版本0.9.0中更改： `initiator`{.docutils
-            .literal}参数现在作为[`attributes.Event`](internals.html#sqlalchemy.orm.attributes.Event "sqlalchemy.orm.attributes.Event")对象传递，并且可以通过一个backref处理程序反向链接事件链。
+            在版本0.9.0中更改： `initiator`参数现在作为[`attributes.Event`](internals.html#sqlalchemy.orm.attributes.Event "sqlalchemy.orm.attributes.Event")对象传递，并且可以通过一个backref处理程序反向链接事件链。
 
         返回：
 
@@ -342,28 +308,20 @@ Events](core_events.html)中描述。
 
         -   **target**[¶](#sqlalchemy.orm.events.AttributeEvents.set.params.target)
             – the object instance receiving the event.
-            如果侦听器使用`raw=True`{.docutils
-            .literal}进行注册，则这将是[`InstanceState`{.xref .py
-            .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")对象。
+            如果侦听器使用`raw=True`进行注册，则这将是[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")对象。
         -   **值**
             [¶](#sqlalchemy.orm.events.AttributeEvents.set.params.value)
-            - 正在设置的值。如果此侦听器使用`retval=True`{.docutils
-            .literal}进行注册，那么侦听器函数必须返回此值或替换它的新值。
+            - 正在设置的值。如果此侦听器使用`retval=True`进行注册，那么侦听器函数必须返回此值或替换它的新值。
         -   **oldvalue**
             [¶](#sqlalchemy.orm.events.AttributeEvents.set.params.oldvalue)
-            - 之前的值被替换。这也可能是`NEVER_SET`{.docutils
-            .literal}或`NO_VALUE`{.docutils
-            .literal}的符号。如果侦听器使用`active_history=True`{.docutils
-            .literal}进行注册，则如果现有值当前已卸载或过期，则将从数据库加载该属性的先前值。
+            - 之前的值被替换。这也可能是`NEVER_SET`或`NO_VALUE`的符号。如果侦听器使用`active_history=True`进行注册，则如果现有值当前已卸载或过期，则将从数据库加载该属性的先前值。
         -   **发起人**
             [¶](#sqlalchemy.orm.events.AttributeEvents.set.params.initiator)
             -
 
             表示事件启动的[`attributes.Event`](internals.html#sqlalchemy.orm.attributes.Event "sqlalchemy.orm.attributes.Event")实例。可以通过backref处理程序从其原始值进行修改，以控制链式事件传播。
 
-            在版本0.9.0中更改： `initiator`{.docutils
-            .literal}参数现在作为[`attributes.Event`](internals.html#sqlalchemy.orm.attributes.Event "sqlalchemy.orm.attributes.Event")对象传递，并且可以通过一个backref处理程序反向链接事件链。
+            在版本0.9.0中更改： `initiator`参数现在作为[`attributes.Event`](internals.html#sqlalchemy.orm.attributes.Event "sqlalchemy.orm.attributes.Event")对象传递，并且可以通过一个backref处理程序反向链接事件链。
 
         返回：
 
@@ -398,9 +356,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
     -   映射类
     -   未映射的映射或待映射类的超类（使用`propagate=True`标志）
     -   [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象
-    -   [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")类本身和[`mapper()`{.xref
-        .py .py-func .docutils
-        .literal}](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")函数指示侦听所有映射器。
+    -   [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")类本身和[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")函数指示侦听所有映射器。
 
     在版本0.8.0中更改：映​​射器事件可以与映射类的未映射超类相关联。
 
@@ -421,9 +377,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
         well as any mapper which is the target of this listener.
     -   **raw=False**[¶](#sqlalchemy.orm.events.MapperEvents.params.raw)
         – When True, the “target” argument passed to applicable event
-        listener functions will be the instance’s [`InstanceState`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")
+        listener functions will be the instance’s [`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")
         management object, rather than the mapped instance itself.
     -   **retval = False**
         [¶](#sqlalchemy.orm.events.MapperEvents.params.retval) -
@@ -450,18 +404,14 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
                 # ... (event handling logic) ...
 
-        在函数完成其工作后，每次调用[`orm.configure_mappers()`](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")函数时都会调用[`MapperEvents.after_configured()`](#sqlalchemy.orm.events.MapperEvents.after_configured "sqlalchemy.orm.events.MapperEvents.after_configured")事件。[`orm.configure_mappers()`{.xref
-        .py .py-func .docutils
-        .literal}](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")
+        在函数完成其工作后，每次调用[`orm.configure_mappers()`](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")函数时都会调用[`MapperEvents.after_configured()`](#sqlalchemy.orm.events.MapperEvents.after_configured "sqlalchemy.orm.events.MapperEvents.after_configured")事件。[`orm.configure_mappers()`](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")
         is typically invoked automatically as mappings are first used,
         as well as each time new mappers have been made available and
         new mapper use is detected.
 
         将此事件与[`MapperEvents.mapper_configured()`](#sqlalchemy.orm.events.MapperEvents.mapper_configured "sqlalchemy.orm.events.MapperEvents.mapper_configured")事件进行比较，该事件在配置操作继续时以每个映射器为基础调用；与该事件不同，当调用此事件时，所有交叉配置（例如backrefs）也将可用于任何挂起的映射器。也可以与[`MapperEvents.before_configured()`](#sqlalchemy.orm.events.MapperEvents.before_configured "sqlalchemy.orm.events.MapperEvents.before_configured")相对照，该映射在配置一系列映射器之前调用。
 
-        This event can **only** be applied to the [`Mapper`{.xref .py
-        .py-class .docutils
-        .literal}](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
+        This event can **only** be applied to the [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
         class or [`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")
         function, and not to individual mappings or mapped classes.
         它仅针对整个映射进行调用：
@@ -472,9 +422,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
             def go():
                 # ...
 
-        理论上这个事件在每个应用程序中被调用一次，但实际上在任何时候调用新的映射器都会受到[`orm.configure_mappers()`{.xref
-        .py .py-func .docutils
-        .literal}](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")调用的影响。如果在已经使用现有映射的情况下构建新的映射，则可能再次调用该事件。为了确保一个特定的事件只被调用一次而不再进行，可以应用`once=True`参数（0.9.4中的新值）：
+        理论上这个事件在每个应用程序中被调用一次，但实际上在任何时候调用新的映射器都会受到[`orm.configure_mappers()`](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")调用的影响。如果在已经使用现有映射的情况下构建新的映射，则可能再次调用该事件。为了确保一个特定的事件只被调用一次而不再进行，可以应用`once=True`参数（0.9.4中的新值）：
 
             from sqlalchemy.orm import mapper
 
@@ -508,9 +456,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         警告
 
-        Mapper级别的刷新事件只允许**非常有限的操作**，仅对本地行的属性进行操作，并允许在给定的[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上发出任何SQL。**请完整阅读[Mapper-level
+        Mapper级别的刷新事件只允许**非常有限的操作**，仅对本地行的属性进行操作，并允许在给定的[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上发出任何SQL。**请完整阅读[Mapper-level
         Events](session_events.html#session-persistence-mapper)中的注释以获取使用这些方法的指导原则；通常，[`SessionEvents.before_flush()`](#sqlalchemy.orm.events.SessionEvents.before_flush "sqlalchemy.orm.events.SessionEvents.before_flush")方法对于一般的冲洗更改应该是首选。**
 
         参数：
@@ -524,10 +470,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
             这为特定于此实例的目标数据库上的当前事务提供了一个句柄。
         -   **target**
             [¶](#sqlalchemy.orm.events.MapperEvents.after_delete.params.target)
-            - 被删除的映射实例。如果事件配置为`raw=True`{.docutils
-            .literal}，则这将改为与该实例关联的[`InstanceState`{.xref
-            .py .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
+            - 被删除的映射实例。如果事件配置为`raw=True`，则这将改为与该实例关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
 
         返回：
 
@@ -559,9 +502,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         警告
 
-        Mapper级别的刷新事件只允许**非常有限的操作**，仅对本地行的属性进行操作，并允许在给定的[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上发出任何SQL。**请完整阅读[Mapper-level
+        Mapper级别的刷新事件只允许**非常有限的操作**，仅对本地行的属性进行操作，并允许在给定的[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上发出任何SQL。**请完整阅读[Mapper-level
         Events](session_events.html#session-persistence-mapper)中的注释以获取使用这些方法的指导原则；通常，[`SessionEvents.before_flush()`](#sqlalchemy.orm.events.SessionEvents.before_flush "sqlalchemy.orm.events.SessionEvents.before_flush")方法对于一般的冲洗更改应该是首选。**
 
         参数：
@@ -575,10 +516,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
             这为特定于此实例的目标数据库上的当前事务提供了一个句柄。
         -   **target**[¶](#sqlalchemy.orm.events.MapperEvents.after_insert.params.target)
             – the mapped instance being persisted.
-            如果事件配置为`raw=True`{.docutils
-            .literal}，则这将改为与该实例关联的[`InstanceState`{.xref
-            .py .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
+            如果事件配置为`raw=True`，则这将改为与该实例关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
 
         返回：
 
@@ -618,9 +556,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         警告
 
-        Mapper级别的刷新事件只允许**非常有限的操作**，仅对本地行的属性进行操作，并允许在给定的[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上发出任何SQL。**请完整阅读[Mapper-level
+        Mapper级别的刷新事件只允许**非常有限的操作**，仅对本地行的属性进行操作，并允许在给定的[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上发出任何SQL。**请完整阅读[Mapper-level
         Events](session_events.html#session-persistence-mapper)中的注释以获取使用这些方法的指导原则；通常，[`SessionEvents.before_flush()`](#sqlalchemy.orm.events.SessionEvents.before_flush "sqlalchemy.orm.events.SessionEvents.before_flush")方法对于一般的冲洗更改应该是首选。**
 
         参数：
@@ -634,10 +570,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
             这为特定于此实例的目标数据库上的当前事务提供了一个句柄。
         -   **target**[¶](#sqlalchemy.orm.events.MapperEvents.after_update.params.target)
             – the mapped instance being persisted.
-            如果事件配置为`raw=True`{.docutils
-            .literal}，则这将改为与该实例关联的[`InstanceState`{.xref
-            .py .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
+            如果事件配置为`raw=True`，则这将改为与该实例关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
 
         返回：
 
@@ -663,18 +596,14 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
                 # ... (event handling logic) ...
 
         The [`MapperEvents.before_configured()`](#sqlalchemy.orm.events.MapperEvents.before_configured "sqlalchemy.orm.events.MapperEvents.before_configured")
-        event is invoked each time the [`orm.configure_mappers()`{.xref
-        .py .py-func .docutils
-        .literal}](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")
+        event is invoked each time the [`orm.configure_mappers()`](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")
         function is invoked, before the function has done any of its
         work. [`orm.configure_mappers()`](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")
         is typically invoked automatically as mappings are first used,
         as well as each time new mappers have been made available and
         new mapper use is detected.
 
-        This event can **only** be applied to the [`Mapper`{.xref .py
-        .py-class .docutils
-        .literal}](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
+        This event can **only** be applied to the [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")
         class or [`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")
         function, and not to individual mappings or mapped classes.
         它仅针对整个映射进行调用：
@@ -687,9 +616,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         将此事件与[`MapperEvents.after_configured()`](#sqlalchemy.orm.events.MapperEvents.after_configured "sqlalchemy.orm.events.MapperEvents.after_configured")约束在配置一系列映射器之后调用，以及[`MapperEvents.mapper_configured()`](#sqlalchemy.orm.events.MapperEvents.mapper_configured "sqlalchemy.orm.events.MapperEvents.mapper_configured")尽可能地配置每个映射器。
 
-        理论上这个事件在每个应用程序中被调用一次，但实际上在任何时候调用新的映射器都会受到[`orm.configure_mappers()`{.xref
-        .py .py-func .docutils
-        .literal}](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")调用的影响。如果在已经使用现有映射的情况下构建新的映射，则可能再次调用该事件。为了确保一个特定的事件只被调用一次而不再进行，可以应用`once=True`参数（0.9.4中的新值）：
+        理论上这个事件在每个应用程序中被调用一次，但实际上在任何时候调用新的映射器都会受到[`orm.configure_mappers()`](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")调用的影响。如果在已经使用现有映射的情况下构建新的映射，则可能再次调用该事件。为了确保一个特定的事件只被调用一次而不再进行，可以应用`once=True`参数（0.9.4中的新值）：
 
             from sqlalchemy.orm import mapper
 
@@ -725,9 +652,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         警告
 
-        Mapper级别的刷新事件只允许**非常有限的操作**，仅对本地行的属性进行操作，并允许在给定的[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上发出任何SQL。**请完整阅读[Mapper-level
+        Mapper级别的刷新事件只允许**非常有限的操作**，仅对本地行的属性进行操作，并允许在给定的[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上发出任何SQL。**请完整阅读[Mapper-level
         Events](session_events.html#session-persistence-mapper)中的注释以获取使用这些方法的指导原则；通常，[`SessionEvents.before_flush()`](#sqlalchemy.orm.events.SessionEvents.before_flush "sqlalchemy.orm.events.SessionEvents.before_flush")方法对于一般的冲洗更改应该是首选。**
 
         参数：
@@ -741,10 +666,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
             这为特定于此实例的目标数据库上的当前事务提供了一个句柄。
         -   **target**
             [¶](#sqlalchemy.orm.events.MapperEvents.before_delete.params.target)
-            - 被删除的映射实例。如果事件配置为`raw=True`{.docutils
-            .literal}，则这将改为与该实例关联的[`InstanceState`{.xref
-            .py .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
+            - 被删除的映射实例。如果事件配置为`raw=True`，则这将改为与该实例关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
 
         返回：
 
@@ -776,9 +698,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         警告
 
-        Mapper级别的刷新事件只允许**非常有限的操作**，仅对本地行的属性进行操作，并允许在给定的[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上发出任何SQL。**请完整阅读[Mapper-level
+        Mapper级别的刷新事件只允许**非常有限的操作**，仅对本地行的属性进行操作，并允许在给定的[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上发出任何SQL。**请完整阅读[Mapper-level
         Events](session_events.html#session-persistence-mapper)中的注释以获取使用这些方法的指导原则；通常，[`SessionEvents.before_flush()`](#sqlalchemy.orm.events.SessionEvents.before_flush "sqlalchemy.orm.events.SessionEvents.before_flush")方法对于一般的冲洗更改应该是首选。**
 
         参数：
@@ -792,10 +712,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
             这为特定于此实例的目标数据库上的当前事务提供了一个句柄。
         -   **target**[¶](#sqlalchemy.orm.events.MapperEvents.before_insert.params.target)
             – the mapped instance being persisted.
-            如果事件配置为`raw=True`{.docutils
-            .literal}，则这将改为与该实例关联的[`InstanceState`{.xref
-            .py .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
+            如果事件配置为`raw=True`，则这将改为与该实例关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
 
         返回：
 
@@ -839,9 +756,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         警告
 
-        Mapper级别的刷新事件只允许**非常有限的操作**，仅对本地行的属性进行操作，并允许在给定的[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上发出任何SQL。**请完整阅读[Mapper-level
+        Mapper级别的刷新事件只允许**非常有限的操作**，仅对本地行的属性进行操作，并允许在给定的[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上发出任何SQL。**请完整阅读[Mapper-level
         Events](session_events.html#session-persistence-mapper)中的注释以获取使用这些方法的指导原则；通常，[`SessionEvents.before_flush()`](#sqlalchemy.orm.events.SessionEvents.before_flush "sqlalchemy.orm.events.SessionEvents.before_flush")方法对于一般的冲洗更改应该是首选。**
 
         参数：
@@ -855,10 +770,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
             这为特定于此实例的目标数据库上的当前事务提供了一个句柄。
         -   **target**[¶](#sqlalchemy.orm.events.MapperEvents.before_update.params.target)
             – the mapped instance being persisted.
-            如果事件配置为`raw=True`{.docutils
-            .literal}，则这将改为与该实例关联的[`InstanceState`{.xref
-            .py .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
+            如果事件配置为`raw=True`，则这将改为与该实例关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
 
         返回：
 
@@ -903,9 +815,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
             - 映射的类。
 
      `mapper_configured`{.descname}(*mapper*, *class\_*)[¶](#sqlalchemy.orm.events.MapperEvents.mapper_configured "Permalink to this definition")
-    :   当特定映射器在[`configure_mappers()`{.xref .py .py-func
-        .docutils
-        .literal}](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")调用的范围内完成自己的配置时调用。
+    :   当特定映射器在[`configure_mappers()`](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")调用的范围内完成自己的配置时调用。
 
         示例参数表单：
 
@@ -918,9 +828,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
                 # ... (event handling logic) ...
 
-        当[`orm.configure_mappers()`](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")函数继续执行尚未配置的映射器的当前列表时，会为每个映射器调用[`MapperEvents.mapper_configured()`](#sqlalchemy.orm.events.MapperEvents.mapper_configured "sqlalchemy.orm.events.MapperEvents.mapper_configured")事件。[`orm.configure_mappers()`{.xref
-        .py .py-func .docutils
-        .literal}](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")
+        当[`orm.configure_mappers()`](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")函数继续执行尚未配置的映射器的当前列表时，会为每个映射器调用[`MapperEvents.mapper_configured()`](#sqlalchemy.orm.events.MapperEvents.mapper_configured "sqlalchemy.orm.events.MapperEvents.mapper_configured")事件。[`orm.configure_mappers()`](mapping_api.html#sqlalchemy.orm.configure_mappers "sqlalchemy.orm.configure_mappers")
         is typically invoked automatically as mappings are first used,
         as well as each time new mappers have been made available and
         new mapper use is detected.
@@ -973,9 +881,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
     -   映射类
     -   未映射的映射或待映射类的超类（使用`propagate=True`标志）
     -   [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象
-    -   [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")类本身和[`mapper()`{.xref
-        .py .py-func .docutils
-        .literal}](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")函数指示侦听所有映射器。
+    -   [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")类本身和[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")函数指示侦听所有映射器。
 
     在版本0.8.0中更改：实例事件可以与映射类的未映射超类相关联。
 
@@ -991,9 +897,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
         this listener.
     -   **raw=False**[¶](#sqlalchemy.orm.events.InstanceEvents.params.raw)
         – When True, the “target” argument passed to applicable event
-        listener functions will be the instance’s [`InstanceState`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")
+        listener functions will be the instance’s [`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")
         management object, rather than the mapped instance itself.
 
     `expire`{.descname} （ *target*，*attrs* ） [¶](#sqlalchemy.orm.events.InstanceEvents.expire "Permalink to this definition")
@@ -1016,10 +920,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         -   **target**
             [¶](#sqlalchemy.orm.events.InstanceEvents.expire.params.target)
-            - 映射的实例。如果事件配置为`raw=True`{.docutils
-            .literal}，则这将改为与该实例关联的[`InstanceState`{.xref
-            .py .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
+            - 映射的实例。如果事件配置为`raw=True`，则这将改为与该实例关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
         -   **attrs**[¶](#sqlalchemy.orm.events.InstanceEvents.expire.params.attrs)
             – sequence of attribute names which were expired, or None if
             all attributes were expired.
@@ -1062,16 +963,11 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         -   **target**
             [¶](#sqlalchemy.orm.events.InstanceEvents.init.params.target)
-            - 映射的实例。如果事件配置为`raw=True`{.docutils
-            .literal}，则这将改为与该实例关联的[`InstanceState`{.xref
-            .py .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
+            - 映射的实例。如果事件配置为`raw=True`，则这将改为与该实例关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
         -   **args**[¶](#sqlalchemy.orm.events.InstanceEvents.init.params.args)
-            – positional arguments passed to the `__init__`{.docutils
-            .literal} method. 这是作为一个元组传递的，目前是不可变的。
+            – positional arguments passed to the `__init__` method. 这是作为一个元组传递的，目前是不可变的。
         -   **kwargs**[¶](#sqlalchemy.orm.events.InstanceEvents.init.params.kwargs)
-            – keyword arguments passed to the `__init__`{.docutils
-            .literal} method. 这个结构*可以被修改。*
+            – keyword arguments passed to the `__init__` method. 这个结构*可以被修改。*
 
         也可以看看
 
@@ -1101,10 +997,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         -   **target**
             [¶](#sqlalchemy.orm.events.InstanceEvents.init_failure.params.target)
-            - 映射的实例。如果事件配置为`raw=True`{.docutils
-            .literal}，则这将改为与该实例关联的[`InstanceState`{.xref
-            .py .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
+            - 映射的实例。如果事件配置为`raw=True`，则这将改为与该实例关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
         -   **args**[¶](#sqlalchemy.orm.events.InstanceEvents.init_failure.params.args)
             – positional arguments that were passed to the
             `__init__` method.
@@ -1140,19 +1033,11 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         -   **target**
             [¶](#sqlalchemy.orm.events.InstanceEvents.load.params.target)
-            - 映射的实例。如果事件配置为`raw=True`{.docutils
-            .literal}，则这将改为与该实例关联的[`InstanceState`{.xref
-            .py .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
+            - 映射的实例。如果事件配置为`raw=True`，则这将改为与该实例关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
         -   **context**[¶](#sqlalchemy.orm.events.InstanceEvents.load.params.context)
             – the [`QueryContext`](internals.html#sqlalchemy.orm.query.QueryContext "sqlalchemy.orm.query.QueryContext")
             corresponding to the current [`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")
-            in progress. 例如，在[`Session.merge()`{.xref .py .py-meth
-            .docutils
-            .literal}](session_api.html#sqlalchemy.orm.session.Session.merge "sqlalchemy.orm.session.Session.merge")期间，如果加载不对应于[`Query`{.xref
-            .py .py-class .docutils
-            .literal}](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")，则此参数可能为`None`{.docutils
-            .literal}。
+            in progress. 例如，在[`Session.merge()`](session_api.html#sqlalchemy.orm.session.Session.merge "sqlalchemy.orm.session.Session.merge")期间，如果加载不对应于[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")，则此参数可能为`None`。
 
         也可以看看
 
@@ -1180,10 +1065,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         -   **target**
             [¶](#sqlalchemy.orm.events.InstanceEvents.pickle.params.target)
-            - 映射的实例。如果事件配置为`raw=True`{.docutils
-            .literal}，则这将改为与该实例关联的[`InstanceState`{.xref
-            .py .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
+            - 映射的实例。如果事件配置为`raw=True`，则这将改为与该实例关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
         -   **state\_dict**[¶](#sqlalchemy.orm.events.InstanceEvents.pickle.params.state_dict)
             – the dictionary returned by
             `InstanceState.__getstate__`, containing the state to be pickled.
@@ -1208,10 +1090,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         -   **target**
             [¶](#sqlalchemy.orm.events.InstanceEvents.refresh.params.target)
-            - 映射的实例。如果事件配置为`raw=True`{.docutils
-            .literal}，则这将改为与该实例关联的[`InstanceState`{.xref
-            .py .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
+            - 映射的实例。如果事件配置为`raw=True`，则这将改为与该实例关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
         -   **context**[¶](#sqlalchemy.orm.events.InstanceEvents.refresh.params.context)
             – the [`QueryContext`](internals.html#sqlalchemy.orm.query.QueryContext "sqlalchemy.orm.query.QueryContext")
             corresponding to the current [`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")
@@ -1247,10 +1126,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         -   **target**
             [¶](#sqlalchemy.orm.events.InstanceEvents.refresh_flush.params.target)
-            - 映射的实例。如果事件配置为`raw=True`{.docutils
-            .literal}，则这将改为与该实例关联的[`InstanceState`{.xref
-            .py .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
+            - 映射的实例。如果事件配置为`raw=True`，则这将改为与该实例关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
         -   **flush\_context**[¶](#sqlalchemy.orm.events.InstanceEvents.refresh_flush.params.flush_context)
             – Internal [`UOWTransaction`](internals.html#sqlalchemy.orm.session.UOWTransaction "sqlalchemy.orm.session.UOWTransaction")
             object which handles the details of the flush.
@@ -1275,13 +1151,9 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         -   **target**
             [¶](#sqlalchemy.orm.events.InstanceEvents.unpickle.params.target)
-            - 映射的实例。如果事件配置为`raw=True`{.docutils
-            .literal}，则这将改为与该实例关联的[`InstanceState`{.xref
-            .py .py-class .docutils
-            .literal}](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
+            - 映射的实例。如果事件配置为`raw=True`，则这将改为与该实例关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")状态管理对象。
         -   **state\_dict**[¶](#sqlalchemy.orm.events.InstanceEvents.unpickle.params.state_dict)
-            – the dictionary sent to `InstanceState.__setstate__`{.xref
-            .py .py-class .docutils .literal}, containing the state
+            – the dictionary sent to `InstanceState.__setstate__`, containing the state
             dictionary which was pickled.
 
 会话事件[¶](#session-events "Permalink to this headline")
@@ -1403,18 +1275,10 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         一个“删除上下文”对象，其中包含有关更新的详细信息，包括这些属性：
 
-        > -   `session` - 涉及[`Session`{.xref .py
-        >     .py-class .docutils
-        >     .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
-        > -   `query` - [`Query`{.xref .py .py-class
-        >     .docutils
-        >     .literal}](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象是否调用了此更新操作。
-        > -   `context` [`QueryContext`{.xref .py
-        >     .py-class .docutils
-        >     .literal}](internals.html#sqlalchemy.orm.query.QueryContext "sqlalchemy.orm.query.QueryContext")对象，对应于调用ORM查询。
-        > -   `result` the [`ResultProxy`{.xref .py
-        >     .py-class .docutils
-        >     .literal}](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")
+        > -   `session` - 涉及[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
+        > -   `query` - [`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象是否调用了此更新操作。
+        > -   `context` [`QueryContext`](internals.html#sqlalchemy.orm.query.QueryContext "sqlalchemy.orm.query.QueryContext")对象，对应于调用ORM查询。
+        > -   `result` the [`ResultProxy`](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")
         >     returned as a result of the bulk DELETE operation.
 
     ` after_bulk_update  T0> （ T1>  update_context  T2> ） T3> ¶ T4>`{.descname}
@@ -1450,19 +1314,10 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         一个“更新上下文”对象，其中包含有关更新的详细信息，包括这些属性：
 
-        > -   `session` - 涉及[`Session`{.xref .py
-        >     .py-class .docutils
-        >     .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
-        > -   `query` - [`Query`{.xref .py .py-class
-        >     .docutils
-        >     .literal}](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象是否调用了此更新操作。
-        > -   `context` [`QueryContext`{.xref .py
-        >     .py-class .docutils
-        >     .literal}](internals.html#sqlalchemy.orm.query.QueryContext "sqlalchemy.orm.query.QueryContext")对象，对应于调用ORM查询。
-        > -   `result`{.docutils
-        >     .literal}由于批量UPDATE操作返回的[`ResultProxy`{.xref .py
-        >     .py-class .docutils
-        >     .literal}](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")。
+        > -   `session` - 涉及[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
+        > -   `query` - [`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象是否调用了此更新操作。
+        > -   `context` [`QueryContext`](internals.html#sqlalchemy.orm.query.QueryContext "sqlalchemy.orm.query.QueryContext")对象，对应于调用ORM查询。
+        > -   `result`由于批量UPDATE操作返回的[`ResultProxy`](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")。
 
     ` after_commit  T0> （ T1> 会话 T2> ） T3> ¶ T4>`{.descname}
     :   在提交发生后执行。
@@ -1480,15 +1335,11 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         注意
 
-        [`after_commit()`](#sqlalchemy.orm.events.SessionEvents.after_commit "sqlalchemy.orm.events.SessionEvents.after_commit")钩子不是每次刷新的*，也就是说，[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")可以将SQL发送到数据库多次交易。*要拦截这些事件，请使用[`before_flush()`](#sqlalchemy.orm.events.SessionEvents.before_flush "sqlalchemy.orm.events.SessionEvents.before_flush")，[`after_flush()`](#sqlalchemy.orm.events.SessionEvents.after_flush "sqlalchemy.orm.events.SessionEvents.after_flush")或[`after_flush_postexec()`](#sqlalchemy.orm.events.SessionEvents.after_flush_postexec "sqlalchemy.orm.events.SessionEvents.after_flush_postexec")事件。
+        [`after_commit()`](#sqlalchemy.orm.events.SessionEvents.after_commit "sqlalchemy.orm.events.SessionEvents.after_commit")钩子不是每次刷新的*，也就是说，[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")可以将SQL发送到数据库多次交易。*要拦截这些事件，请使用[`before_flush()`](#sqlalchemy.orm.events.SessionEvents.before_flush "sqlalchemy.orm.events.SessionEvents.before_flush")，[`after_flush()`](#sqlalchemy.orm.events.SessionEvents.after_flush "sqlalchemy.orm.events.SessionEvents.after_flush")或[`after_flush_postexec()`](#sqlalchemy.orm.events.SessionEvents.after_flush_postexec "sqlalchemy.orm.events.SessionEvents.after_flush_postexec")事件。
 
         注意
 
-        当调用[`after_commit()`](#sqlalchemy.orm.events.SessionEvents.after_commit "sqlalchemy.orm.events.SessionEvents.after_commit")事件时，[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")不处于活动事务中，因此无法发出SQL。要发出对应于每个事务的SQL，请使用[`before_commit()`](#sqlalchemy.orm.events.SessionEvents.before_commit "sqlalchemy.orm.events.SessionEvents.before_commit")事件。
+        当调用[`after_commit()`](#sqlalchemy.orm.events.SessionEvents.after_commit "sqlalchemy.orm.events.SessionEvents.after_commit")事件时，[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")不处于活动事务中，因此无法发出SQL。要发出对应于每个事务的SQL，请使用[`before_commit()`](#sqlalchemy.orm.events.SessionEvents.before_commit "sqlalchemy.orm.events.SessionEvents.before_commit")事件。
 
         参数：
 
@@ -1589,13 +1440,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
                 # ... (event handling logic) ...
 
         请注意，只有当针对数据库的*实际*回滚发生时才会触发此事件 -
-        每次[`Session.rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")方法触发时，都会触发*而不是*如果底层的DBAPI事务已经被回滚，则称为“在很多情况下，由于当前事务无效，[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")在此事件期间不会处于“活动”状态。要获取在最后一个回滚进行之后处于活动状态的[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，请使用[`SessionEvents.after_soft_rollback()`](#sqlalchemy.orm.events.SessionEvents.after_soft_rollback "sqlalchemy.orm.events.SessionEvents.after_soft_rollback")事件，检查[`Session.is_active`{.xref
-        .py .py-attr .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session.is_active "sqlalchemy.orm.session.Session.is_active")标志。
+        每次[`Session.rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")方法触发时，都会触发*而不是*如果底层的DBAPI事务已经被回滚，则称为“在很多情况下，由于当前事务无效，[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")在此事件期间不会处于“活动”状态。要获取在最后一个回滚进行之后处于活动状态的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，请使用[`SessionEvents.after_soft_rollback()`](#sqlalchemy.orm.events.SessionEvents.after_soft_rollback "sqlalchemy.orm.events.SessionEvents.after_soft_rollback")事件，检查[`Session.is_active`](session_api.html#sqlalchemy.orm.session.Session.is_active "sqlalchemy.orm.session.Session.is_active")标志。
 
         参数：
 
@@ -1619,10 +1464,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         这对应于嵌套和外部回滚，即调用DBAPI的rollback()方法的最内部回滚，以及只从事务堆栈中自行弹出的封闭回滚调用。
 
-        通过首先检查[`Session.is_active`{.xref .py .py-attr .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session.is_active "sqlalchemy.orm.session.Session.is_active")标志，给定的[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")可用于在最外侧回滚之后调用SQL和[`Session.query()`](session_api.html#sqlalchemy.orm.session.Session.query "sqlalchemy.orm.session.Session.query")
+        通过首先检查[`Session.is_active`](session_api.html#sqlalchemy.orm.session.Session.is_active "sqlalchemy.orm.session.Session.is_active")标志，给定的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")可用于在最外侧回滚之后调用SQL和[`Session.query()`](session_api.html#sqlalchemy.orm.session.Session.query "sqlalchemy.orm.session.Session.query")
 
             @event.listens_for(Session, "after_soft_rollback")
             def do_something(session, previous_transaction):
@@ -1637,11 +1479,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
         -   **previous\_transaction**[¶](#sqlalchemy.orm.events.SessionEvents.after_soft_rollback.params.previous_transaction)
             – The [`SessionTransaction`](session_api.html#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")
             transactional marker object which was just closed.
-            给定[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的当前[`SessionTransaction`{.xref
-            .py .py-class .docutils
-            .literal}](session_api.html#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")可以通过[`Session.transaction`{.xref
-            .py .py-attr .docutils
-            .literal}](session_api.html#sqlalchemy.orm.session.Session.transaction "sqlalchemy.orm.session.Session.transaction")属性获得。
+            给定[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的当前[`SessionTransaction`](session_api.html#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")可以通过[`Session.transaction`](session_api.html#sqlalchemy.orm.session.Session.transaction "sqlalchemy.orm.session.Session.transaction")属性获得。
 
         New in version 0.7.3.
 
@@ -1659,11 +1497,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
                 # ... (event handling logic) ...
 
-        这个事件与[`after_begin()`](#sqlalchemy.orm.events.SessionEvents.after_begin "sqlalchemy.orm.events.SessionEvents.after_begin")不同，它发生在每个[`SessionTransaction`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")整体上，而不是在单个数据库连接上开始事务。它也被嵌套事务和子事务调用，并且总是与相应的[`after_transaction_end()`](#sqlalchemy.orm.events.SessionEvents.after_transaction_end "sqlalchemy.orm.events.SessionEvents.after_transaction_end")事件匹配（假设[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")正常运行）。
+        这个事件与[`after_begin()`](#sqlalchemy.orm.events.SessionEvents.after_begin "sqlalchemy.orm.events.SessionEvents.after_begin")不同，它发生在每个[`SessionTransaction`](session_api.html#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")整体上，而不是在单个数据库连接上开始事务。它也被嵌套事务和子事务调用，并且总是与相应的[`after_transaction_end()`](#sqlalchemy.orm.events.SessionEvents.after_transaction_end "sqlalchemy.orm.events.SessionEvents.after_transaction_end")事件匹配（假设[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")正常运行）。
 
         参数：
 
@@ -1693,9 +1527,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
                 # ... (event handling logic) ...
 
-        这个事件与[`after_commit()`](#sqlalchemy.orm.events.SessionEvents.after_commit "sqlalchemy.orm.events.SessionEvents.after_commit")的不同之处在于它对应于所有正在使用的[`SessionTransaction`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")对象，包括嵌套事务和子事务的对象，并且总是与相应的[`after_transaction_create()`](#sqlalchemy.orm.events.SessionEvents.after_transaction_create "sqlalchemy.orm.events.SessionEvents.after_transaction_create")事件。
+        这个事件与[`after_commit()`](#sqlalchemy.orm.events.SessionEvents.after_commit "sqlalchemy.orm.events.SessionEvents.after_commit")的不同之处在于它对应于所有正在使用的[`SessionTransaction`](session_api.html#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")对象，包括嵌套事务和子事务的对象，并且总是与相应的[`after_transaction_create()`](#sqlalchemy.orm.events.SessionEvents.after_transaction_create "sqlalchemy.orm.events.SessionEvents.after_transaction_create")事件。
 
         参数：
 
@@ -1756,9 +1588,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         注意
 
-        [`before_commit()`](#sqlalchemy.orm.events.SessionEvents.before_commit "sqlalchemy.orm.events.SessionEvents.before_commit")钩子是*不是*每次刷新，也就是说，[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")可以将SQL发送到数据库多次交易。要拦截这些事件，请使用[`before_flush()`](#sqlalchemy.orm.events.SessionEvents.before_flush "sqlalchemy.orm.events.SessionEvents.before_flush")，[`after_flush()`](#sqlalchemy.orm.events.SessionEvents.after_flush "sqlalchemy.orm.events.SessionEvents.after_flush")或[`after_flush_postexec()`](#sqlalchemy.orm.events.SessionEvents.after_flush_postexec "sqlalchemy.orm.events.SessionEvents.after_flush_postexec")事件。
+        [`before_commit()`](#sqlalchemy.orm.events.SessionEvents.before_commit "sqlalchemy.orm.events.SessionEvents.before_commit")钩子是*不是*每次刷新，也就是说，[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")可以将SQL发送到数据库多次交易。要拦截这些事件，请使用[`before_flush()`](#sqlalchemy.orm.events.SessionEvents.before_flush "sqlalchemy.orm.events.SessionEvents.before_flush")，[`after_flush()`](#sqlalchemy.orm.events.SessionEvents.after_flush "sqlalchemy.orm.events.SessionEvents.after_flush")或[`after_flush_postexec()`](#sqlalchemy.orm.events.SessionEvents.after_flush_postexec "sqlalchemy.orm.events.SessionEvents.after_flush_postexec")事件。
 
         参数：
 
@@ -1801,8 +1631,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
         -   **instances**[¶](#sqlalchemy.orm.events.SessionEvents.before_flush.params.instances)
             – Usually `None`, this is the collection
             of objects which can be passed to the
-            [`Session.flush()`{.xref .py .py-meth .docutils
-            .literal}](session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")
+            [`Session.flush()`](session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")
             method (note this usage is deprecated).
 
         也可以看看
@@ -1828,9 +1657,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
                 # ... (event handling logic) ...
 
-        当从会话中删除已删除的对象时，将调用此事件。发生这种情况的典型情况是，当对象被删除的[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的事务被提交时；该对象从删除状态移至分离状态。
+        当从会话中删除已删除的对象时，将调用此事件。发生这种情况的典型情况是，当对象被删除的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的事务被提交时；该对象从删除状态移至分离状态。
 
         当调用[`Session.expunge_all()`](session_api.html#sqlalchemy.orm.session.Session.expunge_all "sqlalchemy.orm.session.Session.expunge_all")或[`Session.close()`](session_api.html#sqlalchemy.orm.session.Session.close "sqlalchemy.orm.session.Session.close")事件时，也会调用在flush中被删除的对象，以及对象是通过[`Session.expunge()`](session_api.html#sqlalchemy.orm.session.Session.expunge "sqlalchemy.orm.session.Session.expunge")单独从删除状态中删除。
 
@@ -1878,9 +1705,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
                 # ... (event handling logic) ...
 
-        这个事件是[`SessionEvents.after_attach()`](#sqlalchemy.orm.events.SessionEvents.after_attach "sqlalchemy.orm.events.SessionEvents.after_attach")事件的一个特例，它只为这个特定的转换调用。它通常在[`Session.add()`](session_api.html#sqlalchemy.orm.session.Session.add "sqlalchemy.orm.session.Session.add")调用期间以及在[`Session.delete()`](session_api.html#sqlalchemy.orm.session.Session.delete "sqlalchemy.orm.session.Session.delete")调用期间调用，前提是对象之前未与[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")（请注意，标记为“已删除”的对象将保持“持久”状态，直到刷新结束）。
+        这个事件是[`SessionEvents.after_attach()`](#sqlalchemy.orm.events.SessionEvents.after_attach "sqlalchemy.orm.events.SessionEvents.after_attach")事件的一个特例，它只为这个特定的转换调用。它通常在[`Session.add()`](session_api.html#sqlalchemy.orm.session.Session.add "sqlalchemy.orm.session.Session.add")调用期间以及在[`Session.delete()`](session_api.html#sqlalchemy.orm.session.Session.delete "sqlalchemy.orm.session.Session.delete")调用期间调用，前提是对象之前未与[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")（请注意，标记为“已删除”的对象将保持“持久”状态，直到刷新结束）。
 
         注意
 
@@ -1888,8 +1713,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
         detect deleted objects, check the `deleted`
         flag sent to the [`SessionEvents.persistent_to_detached()`](#sqlalchemy.orm.events.SessionEvents.persistent_to_detached "sqlalchemy.orm.events.SessionEvents.persistent_to_detached")
         to event after the flush proceeds, or check the
-        [`Session.deleted`{.xref .py .py-attr .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session.deleted "sqlalchemy.orm.session.Session.deleted")
+        [`Session.deleted`](session_api.html#sqlalchemy.orm.session.Session.deleted "sqlalchemy.orm.session.Session.deleted")
         collection within the [`SessionEvents.before_flush()`](#sqlalchemy.orm.events.SessionEvents.before_flush "sqlalchemy.orm.events.SessionEvents.before_flush")
         event if deleted objects need to be intercepted before the
         flush.
@@ -1923,9 +1747,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
                 # ... (event handling logic) ...
 
-        该事件在ORM加载过程中被调用，并且与[`InstanceEvents.load()`](#sqlalchemy.orm.events.InstanceEvents.load "sqlalchemy.orm.events.InstanceEvents.load")事件非常类似地被调用。但是，此处的事件可以链接到[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")类或实例，而不是映射器或类层次结构，并且可以顺利地与其他会话生命周期事件集成。当该事件被调用时，该对象保证出现在会话的身份映射中。
+        该事件在ORM加载过程中被调用，并且与[`InstanceEvents.load()`](#sqlalchemy.orm.events.InstanceEvents.load "sqlalchemy.orm.events.InstanceEvents.load")事件非常类似地被调用。但是，此处的事件可以链接到[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")类或实例，而不是映射器或类层次结构，并且可以顺利地与其他会话生命周期事件集成。当该事件被调用时，该对象保证出现在会话的身份映射中。
 
         参数：
 
@@ -1956,9 +1778,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
                 # ... (event handling logic) ...
 
-        该事件在刷新过程中被调用，类似于在[`SessionEvents.after_flush()`](#sqlalchemy.orm.events.SessionEvents.after_flush "sqlalchemy.orm.events.SessionEvents.after_flush")事件中扫描[`Session.new`{.xref
-        .py .py-attr .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session.new "sqlalchemy.orm.session.Session.new")集合。但是，在这种情况下，当事件被调用时，对象已经移至持久状态。
+        该事件在刷新过程中被调用，类似于在[`SessionEvents.after_flush()`](#sqlalchemy.orm.events.SessionEvents.after_flush "sqlalchemy.orm.events.SessionEvents.after_flush")事件中扫描[`Session.new`](session_api.html#sqlalchemy.orm.session.Session.new "sqlalchemy.orm.session.Session.new")集合。但是，在这种情况下，当事件被调用时，对象已经移至持久状态。
 
         参数：
 
@@ -2020,9 +1840,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
                 # ... (event handling logic) ...
 
-        当一个持久化对象的标识从flush中的数据库中被删除时，该事件被调用，但是该对象在事务完成之前仍然与[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")关联。
+        当一个持久化对象的标识从flush中的数据库中被删除时，该事件被调用，但是该对象在事务完成之前仍然与[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")关联。
 
         如果事务回滚，则对象再次移至持久状态，并调用[`SessionEvents.deleted_to_persistent()`](#sqlalchemy.orm.events.SessionEvents.deleted_to_persistent "sqlalchemy.orm.events.SessionEvents.deleted_to_persistent")事件。如果事务已提交，则该对象将分离，这将发出[`SessionEvents.deleted_to_detached()`](#sqlalchemy.orm.events.SessionEvents.deleted_to_detached "sqlalchemy.orm.events.SessionEvents.deleted_to_detached")事件。
 
@@ -2051,13 +1869,8 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
         当持久对象从会话中被驱逐时，会调用此事件。导致这种情况发生的条件很多，包括：
 
-        -   使用诸如[`Session.expunge()`{.xref .py .py-meth .docutils
-            .literal}](session_api.html#sqlalchemy.orm.session.Session.expunge "sqlalchemy.orm.session.Session.expunge")或[`Session.close()`{.xref
-            .py .py-meth .docutils
-            .literal}](session_api.html#sqlalchemy.orm.session.Session.close "sqlalchemy.orm.session.Session.close")等方法
-        -   当对象是该会话事务的INSERT语句的一部分时，调用[`Session.rollback()`{.xref
-            .py .py-meth .docutils
-            .literal}](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")方法
+        -   使用诸如[`Session.expunge()`](session_api.html#sqlalchemy.orm.session.Session.expunge "sqlalchemy.orm.session.Session.expunge")或[`Session.close()`](session_api.html#sqlalchemy.orm.session.Session.close "sqlalchemy.orm.session.Session.close")等方法
+        -   当对象是该会话事务的INSERT语句的一部分时，调用[`Session.rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")方法
 
         参数：
 
@@ -2153,9 +1966,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
     版本1.0.0中的新功能
 
     ` before_compile  T0> （ T1> 查询 T2> ） T3> ¶ T4>`{.descname}
-    :   在将[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象组成核心[`Select`{.xref
-        .py .py-class .docutils
-        .literal}](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象之前接收该对象。
+    :   在将[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象组成核心[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象之前接收该对象。
 
         示例参数表单：
 
@@ -2234,8 +2045,7 @@ instrumentation.py处理最终用户类的状态跟踪注册。它与分别建�
 
                 # ... (event handling logic) ...
 
-        要获取[`ClassManager`](internals.html#sqlalchemy.orm.instrumentation.ClassManager "sqlalchemy.orm.instrumentation.ClassManager")，请使用`manager_of_class()`{.xref
-        .py .py-func .docutils .literal}。
+        要获取[`ClassManager`](internals.html#sqlalchemy.orm.instrumentation.ClassManager "sqlalchemy.orm.instrumentation.ClassManager")，请使用`manager_of_class()`。
 
     ` class_uninstrument  T0> （ T1>  CLS  T2> ） T3> ¶ T4>`{.descname}
     :   在给定的班级未被打开之前调用。
@@ -2251,7 +2061,6 @@ instrumentation.py处理最终用户类的状态跟踪注册。它与分别建�
 
                 # ... (event handling logic) ...
 
-        要获取[`ClassManager`](internals.html#sqlalchemy.orm.instrumentation.ClassManager "sqlalchemy.orm.instrumentation.ClassManager")，请使用`manager_of_class()`{.xref
-        .py .py-func .docutils .literal}。
+        要获取[`ClassManager`](internals.html#sqlalchemy.orm.instrumentation.ClassManager "sqlalchemy.orm.instrumentation.ClassManager")，请使用`manager_of_class()`。
 
 

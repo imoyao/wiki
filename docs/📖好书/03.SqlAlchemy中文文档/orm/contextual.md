@@ -188,16 +188,13 @@ current thread.
     Sessions](#unitofwork-contextual)。
 
     ` __呼叫__  T0> （ T1>  **千瓦 T2> ） T3> ¶ T4>`{.descname}
-    :   返回当前[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，如果不存在，则使用[`scoped_session.session_factory`{.xref
-        .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.scoping.scoped_session.session_factory "sqlalchemy.orm.scoping.scoped_session.session_factory")创建它。
+    :   返回当前[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，如果不存在，则使用[`scoped_session.session_factory`](#sqlalchemy.orm.scoping.scoped_session.session_factory "sqlalchemy.orm.scoping.scoped_session.session_factory")创建它。
 
         参数：
 
         **\*\*kw**[¶](#sqlalchemy.orm.scoping.scoped_session.__call__.params.**kw)
         – Keyword arguments will be passed to the
-        [`scoped_session.session_factory`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.orm.scoping.scoped_session.session_factory "sqlalchemy.orm.scoping.scoped_session.session_factory")
+        [`scoped_session.session_factory`](#sqlalchemy.orm.scoping.scoped_session.session_factory "sqlalchemy.orm.scoping.scoped_session.session_factory")
         callable, if an existing [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
         is not present. 如果存在[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")并且关键字参数已被传递，则引发[`InvalidRequestError`{.xref
         .py .py-exc .docutils
@@ -210,33 +207,20 @@ current thread.
 
         -   **session\_factory**[¶](#sqlalchemy.orm.scoping.scoped_session.params.session_factory)
             – a factory to create new [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
-            instances. 这通常但不一定是[`sessionmaker`{.xref .py
-            .py-class .docutils
-            .literal}](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")的一个实例。
+            instances. 这通常但不一定是[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")的一个实例。
         -   **scopefunc**
             [¶](#sqlalchemy.orm.scoping.scoped_session.params.scopefunc)
             -
-            定义当前范围的可选函数。如果不通过，[`scoped_session`{.xref
-            .py .py-class .docutils
-            .literal}](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")对象将采用“线程本地”作用域，并将使用Python
-            `threading.local()`{.docutils
-            .literal}来维护当前的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")如果通过，函数应该返回一个可哈希标记；此标记将用作字典中的键以存储和检索当前的[`Session`{.xref
-            .py .py-class .docutils
-            .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。
+            定义当前范围的可选函数。如果不通过，[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")对象将采用“线程本地”作用域，并将使用Python
+            `threading.local()`来维护当前的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")如果通过，函数应该返回一个可哈希标记；此标记将用作字典中的键以存储和检索当前的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。
 
     `配置 T0> （ T1>  ** kwargs  T2> ） T3> ¶ T4>`{.descname}
-    :   重新配置这个[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")使用的[`sessionmaker`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")。
+    :   重新配置这个[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")使用的[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")。
 
         参见[`sessionmaker.configure()`](session_api.html#sqlalchemy.orm.session.sessionmaker.configure "sqlalchemy.orm.session.sessionmaker.configure")。
 
     ` query_property  T0> （ T1>  query_cls =无 T2> ） T3> ¶ T4>`{.descname}
-    :   返回一个类属性，它在调用时针对类和当前[`Session`{.xref .py
-        .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")生成一个[`Query`{.xref
-        .py .py-class .docutils
-        .literal}](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象。
+    :   返回一个类属性，它在调用时针对类和当前[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")生成一个[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象。
 
         例如。：
 
@@ -255,21 +239,11 @@ current thread.
     `除去 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   如果存在，则丢弃当前的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。
 
-        这将首先在当前的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")上调用[`Session.close()`](session_api.html#sqlalchemy.orm.session.Session.close "sqlalchemy.orm.session.Session.close")方法，该方法释放仍然保存的任何现有的事务/连接资源；交易具体回滚。然后[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")被丢弃。在相同范围内的下一次使用时，[`scoped_session`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")将生成一个新的[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象。
+        这将首先在当前的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")上调用[`Session.close()`](session_api.html#sqlalchemy.orm.session.Session.close "sqlalchemy.orm.session.Session.close")方法，该方法释放仍然保存的任何现有的事务/连接资源；交易具体回滚。然后[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")被丢弃。在相同范围内的下一次使用时，[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")将生成一个新的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象。
 
     `session_factory`{.descname} *=无* [¶](#sqlalchemy.orm.scoping.scoped_session.session_factory "Permalink to this definition")
     :   提供给\_\_ init
-        \_\_的session\_factory存储在此属性中，并可以在稍后访问。当需要新的非范围[`Session`{.xref
-        .py .py-class .docutils
-        .literal}](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")或[`Connection`{.xref
-        .py .py-class .docutils
-        .literal}](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")到数据库时，这非常有用。
+        \_\_的session\_factory存储在此属性中，并可以在稍后访问。当需要新的非范围[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")或[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")到数据库时，这非常有用。
 
  *class*`sqlalchemy.util.`{.descclassname}`ScopedRegistry`{.descname}(*createfunc*, *scopefunc*)[¶](#sqlalchemy.util.ScopedRegistry "Permalink to this definition")
 :   基于“范围”功能可以存储单个类的一个或多个实例的注册表。

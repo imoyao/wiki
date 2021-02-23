@@ -205,8 +205,7 @@ API参考[¶](#api-reference "Permalink to this headline")
         -   **数据类型**
             [¶](#sqlalchemy.ext.indexable.index_property.params.datatype)
             -
-            字段为空时使用的缺省数据类型。默认情况下，这是从使用的索引类型派生的；一个整数索引的Python列表，或任何其他风格的索引的Python字典。对于列表，该列表将被初始化为至少`index`{.docutils
-            .literal}个元素的无值列表。
+            字段为空时使用的缺省数据类型。默认情况下，这是从使用的索引类型派生的；一个整数索引的Python列表，或任何其他风格的索引的Python字典。对于列表，该列表将被初始化为至少`index`个元素的无值列表。
         -   **mutable**[¶](#sqlalchemy.ext.indexable.index_property.params.mutable)
             – if False, writes and deletes to the attribute will be
             disallowed.

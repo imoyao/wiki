@@ -428,9 +428,7 @@ API文档[¶](#api-documentation "Permalink to this headline")
 
     -   **target\_collection**
         [¶](#sqlalchemy.ext.associationproxy.association_proxy.params.target_collection)
-        - 我们将代理的属性的名称。该属性通常由[`relationship()`{.xref
-        .py .py-func .docutils
-        .literal}](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")映​​射以链接到目标集合，但也可以是多对一或非标量关系。
+        - 我们将代理的属性的名称。该属性通常由[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")映​​射以链接到目标集合，但也可以是多对一或非标量关系。
     -   **attr**
         [¶](#sqlalchemy.ext.associationproxy.association_proxy.params.attr)
         -
@@ -469,16 +467,13 @@ API文档[¶](#api-documentation "Permalink to this headline")
      `__init__`{.descname}(*target\_collection*, *attr*, *creator=None*, *getset\_factory=None*, *proxy\_factory=None*, *proxy\_bulk\_set=None*, *info=None*)[¶](#sqlalchemy.ext.associationproxy.AssociationProxy.__init__ "Permalink to this definition")
     :   构建一个新的[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")。
 
-        [`association_proxy()`](#sqlalchemy.ext.associationproxy.association_proxy "sqlalchemy.ext.associationproxy.association_proxy")函数在这里作为通常的入口点提供，尽管[`AssociationProxy`{.xref
-        .py .py-class .docutils
-        .literal}](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")可以直接实例化和/或子类化。
+        [`association_proxy()`](#sqlalchemy.ext.associationproxy.association_proxy "sqlalchemy.ext.associationproxy.association_proxy")函数在这里作为通常的入口点提供，尽管[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")可以直接实例化和/或子类化。
 
         参数：
 
         -   **target\_collection**[¶](#sqlalchemy.ext.associationproxy.AssociationProxy.params.target_collection)
             – Name of the collection we’ll proxy to, usually created
-            with [`relationship()`{.xref .py .py-func .docutils
-            .literal}](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship").
+            with [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship").
         -   **attr**[¶](#sqlalchemy.ext.associationproxy.AssociationProxy.params.attr)
             – Attribute on the collected instances we’ll proxy for.
             例如，给定[obj1，obj2]的目标集合，由此代理属性创建的列表将看起来像[getattr（obj1，attr），getattr（obj2，attr）]
@@ -510,9 +505,7 @@ API文档[¶](#api-documentation "Permalink to this headline")
             [¶](#sqlalchemy.ext.associationproxy.AssociationProxy.params.info)
             -
 
-            可选的，将被分配给[`AssociationProxy.info`{.xref .py
-            .py-attr .docutils
-            .literal}](#sqlalchemy.ext.associationproxy.AssociationProxy.info "sqlalchemy.ext.associationproxy.AssociationProxy.info")（如果存在）。
+            可选的，将被分配给[`AssociationProxy.info`](#sqlalchemy.ext.associationproxy.AssociationProxy.info "sqlalchemy.ext.associationproxy.AssociationProxy.info")（如果存在）。
 
             版本1.0.9中的新功能
 
@@ -532,11 +525,9 @@ API文档[¶](#api-documentation "Permalink to this headline")
 
         也可以看看：
 
-        [`AssociationProxy.local_attr`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.ext.associationproxy.AssociationProxy.local_attr "sqlalchemy.ext.associationproxy.AssociationProxy.local_attr")
+        [`AssociationProxy.local_attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.local_attr "sqlalchemy.ext.associationproxy.AssociationProxy.local_attr")
 
-        [`AssociationProxy.remote_attr`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.ext.associationproxy.AssociationProxy.remote_attr "sqlalchemy.ext.associationproxy.AssociationProxy.remote_attr")
+        [`AssociationProxy.remote_attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.remote_attr "sqlalchemy.ext.associationproxy.AssociationProxy.remote_attr")
 
     `包含 T0> （ T1>  OBJ  T2> ） T3> ¶ T4>`{.descname}
     :   使用EXISTS生成代理的“包含”表达式。
@@ -552,13 +543,10 @@ API文档[¶](#api-documentation "Permalink to this headline")
         该表达式将是一个使用基础代理属性的[`RelationshipProperty.Comparator.any()`](internals.html#sqlalchemy.orm.properties.RelationshipProperty.Comparator.any "sqlalchemy.orm.properties.RelationshipProperty.Comparator.any")和/或[`RelationshipProperty.Comparator.has()`](internals.html#sqlalchemy.orm.properties.RelationshipProperty.Comparator.has "sqlalchemy.orm.properties.RelationshipProperty.Comparator.has")运算符的组合产品。
 
     `信息 T0> ¶ T1>`{.descname}
-    :   *inherited from the* [`info`{.xref .py .py-attr .docutils
-        .literal}](internals.html#sqlalchemy.orm.base.InspectionAttrInfo.info "sqlalchemy.orm.base.InspectionAttrInfo.info")
+    :   *inherited from the* [`info`](internals.html#sqlalchemy.orm.base.InspectionAttrInfo.info "sqlalchemy.orm.base.InspectionAttrInfo.info")
         *attribute of* [`InspectionAttrInfo`](internals.html#sqlalchemy.orm.base.InspectionAttrInfo "sqlalchemy.orm.base.InspectionAttrInfo")
 
-        信息字典与对象关联，允许用户定义的数据与这个[`InspectionAttr`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")关联。
+        信息字典与对象关联，允许用户定义的数据与这个[`InspectionAttr`](internals.html#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")关联。
 
         字典在第一次访问时生成。Alternatively, it can be specified as a
         constructor argument to the [`column_property()`](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property"),
@@ -568,19 +556,13 @@ API文档[¶](#api-documentation "Permalink to this headline")
 
         0.8版新增功能：增加了对所有[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")子类的.info支持。
 
-        版本1.0.0更改： [`MapperProperty.info`{.xref .py .py-attr
-        .docutils
-        .literal}](internals.html#MapperProperty.info "MapperProperty.info")也可以通过[`InspectionAttrInfo.info`{.xref
-        .py .py-attr .docutils
-        .literal}](internals.html#sqlalchemy.orm.base.InspectionAttrInfo.info "sqlalchemy.orm.base.InspectionAttrInfo.info")属性在扩展类型上使用，以便它可以应用于更广泛的ORM和扩展结构。
+        版本1.0.0更改： [`MapperProperty.info`](internals.html#MapperProperty.info "MapperProperty.info")也可以通过[`InspectionAttrInfo.info`](internals.html#sqlalchemy.orm.base.InspectionAttrInfo.info "sqlalchemy.orm.base.InspectionAttrInfo.info")属性在扩展类型上使用，以便它可以应用于更广泛的ORM和扩展结构。
 
         也可以看看
 
-        [`QueryableAttribute.info`{.xref .py .py-attr .docutils
-        .literal}](internals.html#sqlalchemy.orm.attributes.QueryableAttribute.info "sqlalchemy.orm.attributes.QueryableAttribute.info")
+        [`QueryableAttribute.info`](internals.html#sqlalchemy.orm.attributes.QueryableAttribute.info "sqlalchemy.orm.attributes.QueryableAttribute.info")
 
-        [`SchemaItem.info`{.xref .py .py-attr .docutils
-        .literal}](core_metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
+        [`SchemaItem.info`](core_metadata.html#sqlalchemy.schema.SchemaItem.info "sqlalchemy.schema.SchemaItem.info")
 
     `is_aliased_class`{.descname} *= False* [¶](#sqlalchemy.ext.associationproxy.AssociationProxy.is_aliased_class "Permalink to this definition")
     :   
@@ -604,34 +586,26 @@ API文档[¶](#api-documentation "Permalink to this headline")
     :   
 
     ` local_attr  T0> ¶ T1>`{.descname}
-    :   由[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")引用的'local'[`MapperProperty`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")。
+    :   由[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")引用的'local'[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")。
 
         New in version 0.7.3.
 
         也可以看看：
 
-        [`AssociationProxy.attr`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.ext.associationproxy.AssociationProxy.attr "sqlalchemy.ext.associationproxy.AssociationProxy.attr")
+        [`AssociationProxy.attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.attr "sqlalchemy.ext.associationproxy.AssociationProxy.attr")
 
-        [`AssociationProxy.remote_attr`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.ext.associationproxy.AssociationProxy.remote_attr "sqlalchemy.ext.associationproxy.AssociationProxy.remote_attr")
+        [`AssociationProxy.remote_attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.remote_attr "sqlalchemy.ext.associationproxy.AssociationProxy.remote_attr")
 
     ` remote_attr  T0> ¶ T1>`{.descname}
-    :   这个[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")引用的'remote'[`MapperProperty`{.xref
-        .py .py-class .docutils
-        .literal}](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")。
+    :   这个[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")引用的'remote'[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")。
 
         New in version 0.7.3.
 
         也可以看看：
 
-        [`AssociationProxy.attr`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.ext.associationproxy.AssociationProxy.attr "sqlalchemy.ext.associationproxy.AssociationProxy.attr")
+        [`AssociationProxy.attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.attr "sqlalchemy.ext.associationproxy.AssociationProxy.attr")
 
-        [`AssociationProxy.local_attr`{.xref .py .py-attr .docutils
-        .literal}](#sqlalchemy.ext.associationproxy.AssociationProxy.local_attr "sqlalchemy.ext.associationproxy.AssociationProxy.local_attr")
+        [`AssociationProxy.local_attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.local_attr "sqlalchemy.ext.associationproxy.AssociationProxy.local_attr")
 
     `标量 T0> ¶ T1>`{.descname}
     :   如果[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")代表本地方的标量关系，则返回`True`。
