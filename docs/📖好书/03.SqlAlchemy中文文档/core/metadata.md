@@ -198,9 +198,9 @@ tables in order of their dependency.
 通过迁移改变模式[¶](#altering-schemas-through-migrations "Permalink to this headline")
 --------------------------------------------------------------------------------------
 
-尽管SQLAlchemy直接支持为模式构造发出CREATE和DROP语句，但通常通过ALTER语句以及其他特定于数据库的构造来更改这些构造的能力超出了SQLAlchemy本身的范围。虽然很容易通过传递字符串到[`Connection.execute()`](connections.html#sqlalchemy.engine.Connection.execute "sqlalchemy.engine.Connection.execute")或通过使用[`DDL`](ddl.html#sqlalchemy.schema.DDL "sqlalchemy.schema.DDL")构造来手动发出ALTER语句和类似事件，但这是常见的做法使用模式迁移工具自动维护与应用程序代码相关的数据库模式。
+尽管 SQLAlchemy 直接支持为模式构造发出 CREATE 和 DROP 语句，但通常通过 ALTER 语句以及其他特定于数据库的构造来更改这些构造的能力超出了 SQLAlchemy 本身的范围。虽然很容易通过传递字符串到[`Connection.execute()`](connections.html#sqlalchemy.engine.Connection.execute "sqlalchemy.engine.Connection.execute")或通过使用[`DDL`](ddl.html#sqlalchemy.schema.DDL "sqlalchemy.schema.DDL")构造来手动发出ALTER语句和类似事件，但这是常见的做法使用模式迁移工具自动维护与应用程序代码相关的数据库模式。
 
-有两种可用于SQLAlchemy的主要迁移工具：
+有两种可用于 SQLAlchemy 的主要迁移工具：
 
 -   [Alembic](http://alembic.zzzcomputing.com) - Written by the author
     of SQLAlchemy, Alembic features a highly customizable environment

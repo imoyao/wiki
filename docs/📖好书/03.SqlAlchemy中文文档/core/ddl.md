@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy中文文档
   - core
 tags:
-  - 
 ---
 定制DDL [¶](#customizing-ddl "Permalink to this headline")
 ==========================================================
@@ -22,14 +21,14 @@ Throughout, we’ve relied upon the `create()` and
 methods of [`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
 and [`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
 in order to issue data definition language (DDL) for all constructs.
-在发布时，调用预定义的操作顺序，并且创建每个表的DDL被无条件地创建，包括与其相关联的所有约束和其他对象。对于需要特定于数据库的DDL的更复杂场景，SQLAlchemy提供了两种技术，可用于根据任何条件添加任何DDL，可以伴随标准的表生成或自身。
+在发布时，调用预定义的操作顺序，并且创建每个表的 DDL 被无条件地创建，包括与其相关联的所有约束和其他对象。对于需要特定于数据库的 DDL 的更复杂场景，SQLAlchemy 提供了两种技术，可用于根据任何条件添加任何 DDL，可以伴随标准的表生成或自身。
 
 自定义DDL [¶](#custom-ddl "Permalink to this headline")
 -------------------------------------------------------
 
 使用[`DDL`](#sqlalchemy.schema.DDL "sqlalchemy.schema.DDL")结构最容易实现自定义DDL短语。这个构造像所有其他的DDL元素一样工作，除了它接受一个字符串，它是要发射的文本：
 
-    event.listen(
+    event.listen(plain
         metadata,
         "after_create",
         DDL("ALTER TABLE users ADD CONSTRAINT "
@@ -37,7 +36,7 @@ in order to issue data definition language (DDL) for all constructs.
             " CHECK (length(user_name) >= 8)")
     )
 
-创建DDL结构库的更全面的方法是使用自定义编译 -
+创建 DDL 结构库的更全面的方法是使用自定义编译 -
 有关详细信息，请参阅[Custom SQL Constructs and Compilation
 Extension](compiler.html)。
 
@@ -65,7 +64,7 @@ Extension](compiler.html)。
 
 [`DDLElement.execute_if.dialect`](#sqlalchemy.schema.DDLElement.execute_if.params.dialect "sqlalchemy.schema.DDLElement.execute_if")关键字也接受字符串方言名称的元组：
 
-    event.listen(
+    event.listen(plain
         mytable,
         "after_create",
         trigger.execute_if(dialect=('postgresql', 'mysql'))
@@ -76,9 +75,9 @@ Extension](compiler.html)。
         trigger.execute_if(dialect=('postgresql', 'mysql'))
     )
 
-[`DDLElement.execute_if()`](#sqlalchemy.schema.DDLElement.execute_if "sqlalchemy.schema.DDLElement.execute_if")方法也可以用于可接收数据库连接的可调用函数。在下面的例子中，我们使用它来有条件地创建CHECK约束，首先在Postgresql目录中查看它是否存在：
+[`DDLElement.execute_if()`](#sqlalchemy.schema.DDLElement.execute_if "sqlalchemy.schema.DDLElement.execute_if")方法也可以用于可接收数据库连接的可调用函数。在下面的例子中，我们使用它来有条件地创建 CHECK 约束，首先在 Postgresql 目录中查看它是否存在：
 
-    def should_create(ddl, target, connection, **kw):
+    def should_create(ddl, target, connection, **kw):plain
         row = connection.execute(
             "select conname from pg_constraint where conname='%s'" %
             ddl.element.name).scalar()
@@ -117,10 +116,10 @@ Extension](compiler.html)。
     ALTER TABLE users DROP CONSTRAINT cst_user_name_length
     DROP TABLE users
 
-使用内置的DDLElement类[¶](#using-the-built-in-ddlelement-classes "Permalink to this headline")
+使用内置的 DDLElement 类[¶](#using-the-built-in-ddlelement-classes "Permalink to this headline")
 ----------------------------------------------------------------------------------------------
 
-`sqlalchemy.schema`包包含提供DDL表达式的SQL表达式结构。例如，要产生一个`CREATE TABLE`语句：
+`sqlalchemy.schema`包包含提供 DDL 表达式的 SQL 表达式结构。例如，要产生一个`CREATE TABLE`语句：
 
     from sqlalchemy.schema import CreateTable
     sqlengine.execute(CreateTable(mytable))
@@ -133,11 +132,11 @@ Extension](compiler.html)。
         col6 INTEGER
     )
 
-在上面，[`CreateTable`](#sqlalchemy.schema.CreateTable "sqlalchemy.schema.CreateTable")构造像任何其他表达式构造一样工作（如`select()`，`table.insert()`等）。所有SQLAlchemy的面向DDL的构造都是[`DDLElement`](#sqlalchemy.schema.DDLElement "sqlalchemy.schema.DDLElement")基类的子类；这是对应于CREATE和DROP以及ALTER的所有对象的基础，不仅在SQLAlchemy中，而且在Alembic
-Migrations中也是如此。可用构造的完整引用位于[DDL Expression Constructs
+在上面，[`CreateTable`](#sqlalchemy.schema.CreateTable "sqlalchemy.schema.CreateTable")构造像任何其他表达式构造一样工作（如`select()`，`table.insert()`等）。所有 SQLAlchemy 的面向 DDL 的构造都是[`DDLElement`](#sqlalchemy.schema.DDLElement "sqlalchemy.schema.DDLElement")基类的子类；这是对应于 CREATE 和 DROP 以及 ALTER 的所有对象的基础，不仅在 SQLAlchemy 中，而且在 Alembic
+Migrations 中也是如此。可用构造的完整引用位于[DDL Expression Constructs
 API](#schema-api-ddl)中。
 
-用户定义的DDL结构也可以创建为[`DDLElement`](#sqlalchemy.schema.DDLElement "sqlalchemy.schema.DDLElement")本身的子类。[Custom
+用户定义的 DDL 结构也可以创建为[`DDLElement`](#sqlalchemy.schema.DDLElement "sqlalchemy.schema.DDLElement")本身的子类。[Custom
 SQL Constructs and Compilation
 Extension](compiler.html)中的文档有几个例子。
 
@@ -149,9 +148,9 @@ etc, the event system is of **limited** use, as methods like
 [`Table.create()`](metadata.html#sqlalchemy.schema.Table.create "sqlalchemy.schema.Table.create")
 and [`MetaData.create_all()`](metadata.html#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")
 will invoke these constructs unconditionally.
-在未来的SQLAlchemy发行版中，包含条件执行的DDL事件系统将考虑目前在所有情况下调用的内置构造。
+在未来的 SQLAlchemy 发行版中，包含条件执行的 DDL 事件系统将考虑目前在所有情况下调用的内置构造。
 
-我们可以用[`AddConstraint`](#sqlalchemy.schema.AddConstraint "sqlalchemy.schema.AddConstraint")和[`DropConstraint`](#sqlalchemy.schema.DropConstraint "sqlalchemy.schema.DropConstraint")结构来说明一个事件驱动的例子，因为事件驱动系统可以用于CHECK和UNIQUE约束，像我们在[`DDLElement.execute_if()`](#sqlalchemy.schema.DDLElement.execute_if "sqlalchemy.schema.DDLElement.execute_if")的前一个例子：
+我们可以用[`AddConstraint`](#sqlalchemy.schema.AddConstraint "sqlalchemy.schema.AddConstraint")和[`DropConstraint`](#sqlalchemy.schema.DropConstraint "sqlalchemy.schema.DropConstraint")结构来说明一个事件驱动的例子，因为事件驱动系统可以用于 CHECK 和 UNIQUE 约束，像我们在[`DDLElement.execute_if()`](#sqlalchemy.schema.DDLElement.execute_if "sqlalchemy.schema.DDLElement.execute_if")的前一个例子：
 
     def should_create(ddl, target, connection, **kw):
         row = connection.execute(
@@ -202,7 +201,7 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
  `sqlalchemy.schema.`{.descclassname}`sort_tables`{.descname}(*tables*, *skip\_fn=None*, *extra\_dependencies=None*)[¶](#sqlalchemy.schema.sort_tables "Permalink to this definition")
 :   根据依赖关系排序[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的集合。
 
-    这是一个依赖排序的排序，它将发射[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，以便它们将遵循其依赖的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象。根据[`ForeignKeyConstraint`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象的存在以及[`Table.add_is_dependent_on()`](metadata.html#sqlalchemy.schema.Table.add_is_dependent_on "sqlalchemy.schema.Table.add_is_dependent_on")添加的显式依赖关系，表依赖于另一个表。
+    这是一个依赖排序的排序，它将发射[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，以便它们将遵循其依赖的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象。根据[`ForeignKeyConstraint`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象的存在以及[`Table.add_is_dependent_on()`](metadata.html#sqlalchemy.schema.Table.add_is_dependent_on "sqlalchemy.schema.Table.add_is_dependent_on")添加的显式依赖关系，表依赖于另一个表。plain
 
     警告
 
@@ -541,7 +540,7 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
  *class*`sqlalchemy.schema.`{.descclassname}`DropTable`{.descname}(*element*, *on=None*, *bind=None*)[¶](#sqlalchemy.schema.DropTable "Permalink to this definition")
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
 
-    表示DROP TABLE语句。
+    表示DROP TABLE语句。plainplain
 
 *class* `sqlalchemy.schema。`{.descclassname} `CreateColumn`{.descname} （ *元素* ） t5 \> [¶ T6\>](#sqlalchemy.schema.CreateColumn "Permalink to this definition")
 :   基础：`sqlalchemy.schema._DDLCompiles`
@@ -641,7 +640,7 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
  *class*`sqlalchemy.schema.`{.descclassname}`DropSequence`{.descname}(*element*, *on=None*, *bind=None*)[¶](#sqlalchemy.schema.DropSequence "Permalink to this definition")
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
 
-    表示DROP SEQUENCE语句。
+    表示DROP SEQUENCE语句。plain
 
  *class*`sqlalchemy.schema.`{.descclassname}`CreateIndex`{.descname}(*element*, *on=None*, *bind=None*)[¶](#sqlalchemy.schema.CreateIndex "Permalink to this definition")
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
@@ -651,7 +650,7 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
  *class*`sqlalchemy.schema.`{.descclassname}`DropIndex`{.descname}(*element*, *on=None*, *bind=None*)[¶](#sqlalchemy.schema.DropIndex "Permalink to this definition")
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
 
-    代表DROP INDEX语句。
+    代表DROP INDEX语句。plain
 
 *class* `sqlalchemy.schema。`{.descclassname} `AddConstraint`{.descname} （ *元素*，*/ t5\>，*\*\* kw* ） [¶](#sqlalchemy.schema.AddConstraint "Permalink to this definition")*
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
@@ -678,7 +677,7 @@ DDL表达式构造API [¶](#ddl-expression-constructs-api "Permalink to this hea
 *class* `sqlalchemy.schema。`{.descclassname} `DropSchema`{.descname} （ *name*，*quote =无cascade = False，*\*\* kw* ） [¶](#sqlalchemy.schema.DropSchema "Permalink to this definition")*
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
 
-    代表DROP SCHEMA语句。
+    代表DROP SCHEMA语句。plain
 
     这里的参数是模式的字符串名称。
 

@@ -4,19 +4,18 @@ date: 2021-02-20 22:41:39
 permalink: /sqlalchemy/faq/ormconfiguration/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - faq
 tags:
-  - 
 ---
 ORM配置[¶](#orm-configuration "Permalink to this headline")
 ===========================================================
 
 -   [我如何映射一个没有主键的表？](#how-do-i-map-a-table-that-has-no-primary-key)
--   [如何配置一个Python保留字或类似的列？](#how-do-i-configure-a-column-that-is-a-python-reserved-word-or-similar)
+-   [如何配置一个 Python 保留字或类似的列？](#how-do-i-configure-a-column-that-is-a-python-reserved-word-or-similar)
 -   [给定一个映射类，如何获得所有列，关系，映射属性等的列表？](#how-do-i-get-a-list-of-all-columns-relationships-mapped-attributes-etc-given-a-mapped-class)
--   [我收到关于“在属性Y下隐式合并列X”的警告或错误](#i-m-getting-a-warning-or-error-about-implicitly-combining-column-x-under-attribute-y)
--   [我正在使用Declarative并使用`and_()`或`or_()`设置primaryjoin /
+-   [我收到关于“在属性 Y 下隐式合并列 X”的警告或错误](#i-m-getting-a-warning-or-error-about-implicitly-combining-column-x-under-attribute-y)
+-   [我正在使用 Declarative 并使用`and_()`或`or_()`设置 primaryjoin /
     secondaryjoin，并且收到有关外键的错误消息。
     T0\>](#i-m-using-declarative-and-setting-primaryjoin-secondaryjoin-using-an-and-or-or-and-i-am-getting-an-error-message-about-foreign-keys)
 -   [Why is `ORDER BY` required with
@@ -29,18 +28,18 @@ ORM配置[¶](#orm-configuration "Permalink to this headline")
 SQLAlchemy
 ORM为了映射到一个特定的表，需要至少有一列表示为主键列；多列即合成主键当然也完全可行。这些列**不是**需要被数据库实际称为主键列，尽管它们是一个好主意。仅作为主键的*行为*是必要的，例如，作为一行的唯一且不可空的标识符。
 
-大多数ORM需要对象具有某种主键，因为内存中的对象必须对应于数据库表中唯一可识别的行；至少，这允许对象可以作为UPDATE和DELETE语句的目标，这些语句只会影响该对象的行，而不会影响其他行。然而，主要关键的重要性远不止于此。在SQLAlchemy中，所有ORM映射对象总是在[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中唯一地使用称为[identity
-map](glossary.html#term-identity-map)的模式链接到其特定的数据库行，该模式是SQLAlchemy使用的工作单元系统，也是ORM使用最常见（也不常见）模式的关键。
+大多数 ORM 需要对象具有某种主键，因为内存中的对象必须对应于数据库表中唯一可识别的行；至少，这允许对象可以作为 UPDATE 和 DELETE 语句的目标，这些语句只会影响该对象的行，而不会影响其他行。然而，主要关键的重要性远不止于此。在 SQLAlchemy 中，所有 ORM 映射对象总是在[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中唯一地使用称为[identity
+map](glossary.html#term-identity-map)的模式链接到其特定的数据库行，该模式是 SQLAlchemy 使用的工作单元系统，也是 ORM 使用最常见（也不常见）模式的关键。
 
 注意
 
-需要注意的是，我们只是在谈论SQLAlchemy
-ORM；一个构建在Core上的应用程序，它仅处理[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造等，**不需要任何主键以任何方式呈现在表格上或与其关联（尽管如此，在SQL中，所有表格都应该具有某种主键，以免需要实际更新或删除特定的行）。**
+需要注意的是，我们只是在谈论 SQLAlchemy
+ORM；一个构建在 Core 上的应用程序，它仅处理[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造等，**不需要任何主键以任何方式呈现在表格上或与其关联（尽管如此，在 SQL 中，所有表格都应该具有某种主键，以免需要实际更新或删除特定的行）。**
 
 几乎在所有情况下，表都有一个所谓的[candidate
 key](glossary.html#term-candidate-key)，它是一列或一系列唯一标识一行的列。如果一个表真的没有这个，并且实际上有完全重复的行，那么这个表就不对应于[第一范式](http://en.wikipedia.org/wiki/First_normal_form)，并且不能被映射。否则，可以直接将任何包含最佳候选键的列应用于映射器：
 
-    class SomeClass(Base):
+    class SomeClass(Base):plainplainplain
         __table__ = some_table_with_no_pk
         __mapper_args__ = {
             'primary_key':[some_table_with_no_pk.c.uid, some_table_with_no_pk.c.bar]
@@ -48,7 +47,7 @@ key](glossary.html#term-candidate-key)，它是一列或一系列唯一标识一
 
 更好的是，当使用完全声明的表元数据时，在这些列上使用`primary_key=True`标志：
 
-    class SomeClass(Base):
+    class SomeClass(Base):plainplainplain
         __tablename__ = "some_table_with_no_pk"
 
         uid = Column(Integer, primary_key=True)
@@ -57,13 +56,13 @@ key](glossary.html#term-candidate-key)，它是一列或一系列唯一标识一
 关系数据库中的所有表都应该有主键。即使是多对多关联表 -
 主键也是两个关联列的组合：
 
-    CREATE TABLE my_association (
+    CREATE TABLE my_association (plain
       user_id INTEGER REFERENCES user(id),
       account_id INTEGER REFERENCES account(id),
       PRIMARY KEY (user_id, account_id)
     )
 
-如何配置一个Python保留字或类似的列？[¶](#how-do-i-configure-a-column-that-is-a-python-reserved-word-or-similar "Permalink to this headline")
+如何配置一个 Python 保留字或类似的列？[¶](#how-do-i-configure-a-column-that-is-a-python-reserved-word-or-similar "Permalink to this headline")
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 在基于列的属性中可以给出映射中所需的任何名称。请参阅[Naming Columns
@@ -77,14 +76,14 @@ Names](orm_mapping_columns.html#mapper-column-distinct-names)。
 
 要获取特定映射类的[`Mapper`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")，请在其上调用[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数：
 
-    from sqlalchemy import inspect
+    from sqlalchemy import inspectplain
 
     mapper = inspect(MyClass)
 
 从那里，所有有关该类的信息都可以通过以下属性访问：
 
 -   [`Mapper.attrs`{](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper.attrs "sqlalchemy.orm.mapper.Mapper.attrs")
-    - 所有映射属性的命名空间。属性本身是[`MapperProperty`](orm_internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")的实例，它们包含可导致映射的SQL表达式或列的附加属性（如果适用）。
+    - 所有映射属性的命名空间。属性本身是[`MapperProperty`](orm_internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")的实例，它们包含可导致映射的 SQL 表达式或列的附加属性（如果适用）。
 -   [`Mapper.column_attrs`{](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper.column_attrs "sqlalchemy.orm.mapper.Mapper.column_attrs")
     -
     映射的属性名称空间限于列和SQL表达式属性。您可能希望使用[`Mapper.columns`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper.columns "sqlalchemy.orm.mapper.Mapper.columns")直接访问[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象。
@@ -96,13 +95,13 @@ Names](orm_mapping_columns.html#mapper-column-distinct-names)。
     [`AssociationProxy`](orm_extensions_associationproxy.html#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")
     and others.
 -   [`Mapper.columns`{](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper.columns "sqlalchemy.orm.mapper.Mapper.columns")
-    - 与映射关联的[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象和其他命名SQL表达式的命名空间。
+    - 与映射关联的[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象和其他命名 SQL 表达式的命名空间。
 -   [`Mapper.mapped_table`{](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper.mapped_table "sqlalchemy.orm.mapper.Mapper.mapped_table")
     - 此映射器映射到的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或其他可选项。
 -   [`Mapper.local_table`{](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper.local_table "sqlalchemy.orm.mapper.Mapper.local_table")
     - 该映射器为“本地”的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")这与[`Mapper.mapped_table`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper.mapped_table "sqlalchemy.orm.mapper.Mapper.mapped_table")的不同之处在于，映射器使用继承映射到组合选择。
 
-我收到了一条警告或错误消息：“隐式地将列X属性Y组合在一起”[¶](#i-m-getting-a-warning-or-error-about-implicitly-combining-column-x-under-attribute-y "Permalink to this headline")
+我收到了一条警告或错误消息：“隐式地将列 X 属性 Y 组合在一起”[¶](#i-m-getting-a-warning-or-error-about-implicitly-combining-column-x-under-attribute-y "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 这种情况是指当映射包含两个由于名称而被映射到相同属性名称的列时，但没有任何迹象表明这是故意的。映射类需要为每个要存储独立值的属性显式名称；当两列具有相同的名称并且没有歧义时，它们属于同一个属性，结果是一列中的值被**复制到另一列中，根据哪列被分配给属性第一。**
@@ -127,11 +126,11 @@ Names](orm_mapping_columns.html#mapper-column-distinct-names)。
         id = Column(Integer, primary_key=True)
         a_id = Column(Integer, ForeignKey('a.id'))
 
-从SQLAlchemy 0.9.5版开始，检测到上述情况，并会警告`A`和`B`的`id`列正在合并同名命名属性`id`，这是一个严重的问题，因为它意味着一个`B`对象的主键总是与它的`A` 。
+从 SQLAlchemy 0.9.5 版开始，检测到上述情况，并会警告`A`和`B`的`id`列正在合并同名命名属性`id`，这是一个严重的问题，因为它意味着一个`B`对象的主键总是与它的`A` 。
 
 解决此问题的映射如下所示：
 
-    class A(Base):
+    class A(Base):plainplainplain
         __tablename__ = 'a'
 
         id = Column(Integer, primary_key=True)
@@ -146,7 +145,7 @@ Suppose we did want `A.id` and `B.id` to be mirrors of each other, despite the f
 `B.a_id` is where `A.id` is
 related. 我们可以使用[`column_property()`](orm_mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")将它们结合在一起：
 
-    class A(Base):
+    class A(Base):plainplainplain
         __tablename__ = 'a'
 
         id = Column(Integer, primary_key=True)
@@ -158,18 +157,18 @@ related. 我们可以使用[`column_property()`](orm_mapping_columns.html#sqlalc
         id = column_property(Column(Integer, primary_key=True), A.id)
         a_id = Column(Integer, ForeignKey('a.id'))
 
-我正在使用Declarative并使用`and_()`或`or_()`设置primaryjoin / secondaryjoin，并且收到有关外键的错误消息。[/ T4\>](#i-m-using-declarative-and-setting-primaryjoin-secondaryjoin-using-an-and-or-or-and-i-am-getting-an-error-message-about-foreign-keys "Permalink to this headline")
+我正在使用 Declarative 并使用`and_()`或`or_()`设置primaryjoin / secondaryjoin，并且收到有关外键的错误消息。[/ T4\>](#i-m-using-declarative-and-setting-primaryjoin-secondaryjoin-using-an-and-or-or-and-i-am-getting-an-error-message-about-foreign-keys "Permalink to this headline")
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 你在做这个吗？:
 
-    class MyClass(Base):
+    class MyClass(Base):plainplain
         # ....
 
         foo = relationship("Dest", primaryjoin=and_("MyClass.id==Dest.foo_id", "MyClass.foo==Dest.bar"))
 
-这是两个字符串表达式的`and_()`，SQLAlchemy不能应用任何映射。Declarative允许[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")参数指定为字符串，并使用`eval()`转换为表达式对象。但是这不会发生在`and_()`表达式内部 -
-这是一种特殊的操作，声明式只适用于传递给primaryjoin或其他参数的字符串的*整体*
+这是两个字符串表达式的`and_()`，SQLAlchemy 不能应用任何映射。Declarative 允许[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")参数指定为字符串，并使用`eval()`转换为表达式对象。但是这不会发生在`and_()`表达式内部 -
+这是一种特殊的操作，声明式只适用于传递给 primaryjoin 或其他参数的字符串的*整体*
 
     class MyClass(Base):
         # ....
@@ -178,14 +177,14 @@ related. 我们可以使用[`column_property()`](orm_mapping_columns.html#sqlalc
 
 或者，如果您需要的对象已经可用，请跳过字符串：
 
-    class MyClass(Base):
+    class MyClass(Base):plain
         # ....
 
         foo = relationship(Dest, primaryjoin=and_(MyClass.id==Dest.foo_id, MyClass.foo==Dest.bar))
 
 同样的想法适用于所有其他参数，如`foreign_keys`：
 
-    # wrong !
+    # wrong !plain
     foo = relationship(Dest, foreign_keys=["Dest.foo_id", "Dest.bar_id"])
 
     # correct !
@@ -225,7 +224,7 @@ SQLAlchemy通过发出一个单独的查询来实现[`orm.subqueryload()`](orm_l
 
 第二个查询嵌入第一个查询作为行的来源。当内部查询使用`OFFSET`和/或`LIMIT`时没有排序，这两个查询可能看不到相同的结果：
 
-    >>> user = session.query(User).options(subqueryload(User.addresses)).first()
+    >>> user = session.query(User).options(subqueryload(User.addresses)).first()plainplain
     -- the "main" query
     SELECT users.id AS users_id
     FROM users
@@ -256,7 +255,7 @@ SQLAlchemy通过发出一个单独的查询来实现[`orm.subqueryload()`](orm_l
     |           4|                2|              2|
     +------------+-----------------+---------------+
 
-以上，我们收到2个`user.id`的`addresses`行，其中1个没有。我们浪费了两行，但实际上并未加载收集。这是一个阴险的错误，因为没有查看SQL和结果，ORM将不会显示出任何问题；如果我们访问`User`的`addresses`，它将为集合发出延迟加载，并且我们不会看到任何实际发生错误的地方。
+以上，我们收到 2 个`user.id`的`addresses`行，其中 1 个没有。我们浪费了两行，但实际上并未加载收集。这是一个阴险的错误，因为没有查看 SQL 和结果，ORM 将不会显示出任何问题；如果我们访问`User`的`addresses`，它将为集合发出延迟加载，并且我们不会看到任何实际发生错误的地方。
 
 此问题的解决方案是始终指定确定性的排序顺序，以便主查询始终返回相同的一组行。这通常意味着您应该在表上的唯一列上使用[`Query.order_by()`](orm_query.html#sqlalchemy.orm.query.Query.order_by "sqlalchemy.orm.query.Query.order_by")。主键是一个很好的选择：
 

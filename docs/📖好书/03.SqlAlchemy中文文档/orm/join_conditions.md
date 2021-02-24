@@ -51,7 +51,7 @@ should be compared. 有多种情况需要定制此行为。
 
 上面的映射，当我们尝试使用它时，会产生错误：
 
-    sqlalchemy.exc.AmbiguousForeignKeysError: Could not determine join
+    sqlalchemy.exc.AmbiguousForeignKeysError: Could not determine joinplain
     condition between parent/child tables on relationship
     Customer.billing_address - there are multiple foreign key
     paths linking the tables.  Specify the 'foreign_keys' argument,
@@ -62,7 +62,7 @@ should be compared. 有多种情况需要定制此行为。
 
 在这种情况下，消息希望我们通过指示每个关键字列应该被考虑，来限定每个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")，并且适当的格式如下：
 
-    class Customer(Base):
+    class Customer(Base):plain
         __tablename__ = 'customer'
         id = Column(Integer, primary_key=True)
         name = Column(String)
@@ -123,10 +123,10 @@ the `Customer.billing_address` relationship from a
         state = Column(String)
         zip = Column(String)
 
-在这个字符串的SQL表达式中，我们使用[`and_()`](core_sqlelement.html#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")连接结构为连接条件建立两个不同的谓词
-- 连接`User.id`和`Address.user_id`列，并将`Address`中的行限制为`city='Boston'`。使用声明时，像[`and_()`](core_sqlelement.html#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")这样的基本SQL函数可以在字符串[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")参数的计算命名空间中自动使用。
+在这个字符串的 SQL 表达式中，我们使用[`and_()`](core_sqlelement.html#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")连接结构为连接条件建立两个不同的谓词
+- 连接`User.id`和`Address.user_id`列，并将`Address`中的行限制为`city='Boston'`。使用声明时，像[`and_()`](core_sqlelement.html#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")这样的基本 SQL 函数可以在字符串[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")参数的计算命名空间中自动使用。
 
-我们在[`primaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")中使用的自定义标准通常仅在SQLAlchemy呈现SQL以加载或表示此关系时才有意义。也就是说，它被用于为了执行每个属性的延迟加载而发出的SQL语句中，或者在查询时构建连接（例如通过[`Query.join()`](query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")）或通过急切的“加入”或“子查询”加载样式。当内存中的对象被操作时，我们可以将任何`Address`对象放入`boston_addresses`集合中，而不管`.city`属性是。对象将保留在集合中，直到属性过期并从应用该条件的数据库重新加载。当发生刷新时，无条件刷新`boston_addresses`内部的对象，将主键`user.id`列的值分配到外键持有的`address.user_id`列。`city`条件在这里没有效果，因为flush过程只关心将主键值同步到引用外键值中。
+我们在[`primaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")中使用的自定义标准通常仅在 SQLAlchemy 呈现 SQL 以加载或表示此关系时才有意义。也就是说，它被用于为了执行每个属性的延迟加载而发出的 SQL 语句中，或者在查询时构建连接（例如通过[`Query.join()`](query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")）或通过急切的“加入”或“子查询”加载样式。当内存中的对象被操作时，我们可以将任何`Address`对象放入`boston_addresses`集合中，而不管`.city`属性是。对象将保留在集合中，直到属性过期并从应用该条件的数据库重新加载。当发生刷新时，无条件刷新`boston_addresses`内部的对象，将主键`user.id`列的值分配到外键持有的`address.user_id`列。`city`条件在这里没有效果，因为 flush 过程只关心将主键值同步到引用外键值中。
 
 创建自定义外部条件[¶](#creating-custom-foreign-conditions "Permalink to this headline")
 ---------------------------------------------------------------------------------------
@@ -159,7 +159,7 @@ the `Customer.billing_address` relationship from a
 
 上面的关系会产生一个连接，如：
 
-    SELECT host_entry.id, host_entry.ip_address, host_entry.content
+    SELECT host_entry.id, host_entry.ip_address, host_entry.contentplainplain
     FROM host_entry JOIN host_entry AS host_entry_1
     ON host_entry_1.ip_address = CAST(host_entry.content AS INET)
 
@@ -169,7 +169,7 @@ and [`remote()`](relationship_api.html#sqlalchemy.orm.remote "sqlalchemy.orm.rem
 [`primaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")
 expression. 此语法表示[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")通常自身应用于给定[`foreign_keys`](relationship_api.html#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")和[`remote_side`](relationship_api.html#sqlalchemy.orm.relationship.params.remote_side "sqlalchemy.orm.relationship")参数的连接条件的注释。当显式连接条件存在时，这些函数可能更简洁，并且还用于无论该列是多次声明还是在复杂的SQL表达式中，都精确地标记“外来”或“远程”列：
 
-    from sqlalchemy.orm import foreign, remote
+    from sqlalchemy.orm import foreign, remoteplain
 
     class HostEntry(Base):
         __tablename__ = 'host_entry'
@@ -194,7 +194,7 @@ when joining with types such as [`postgresql.INET`](dialects_postgresql.html#sql
 and [`postgresql.CIDR`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.CIDR "sqlalchemy.dialects.postgresql.CIDR").
 对于自定义运算符，我们使用[`Operators.op()`](core_sqlelement.html#sqlalchemy.sql.operators.Operators.op "sqlalchemy.sql.operators.Operators.op")函数：
 
-    inet_column.op("<<")(cidr_column)
+    inet_column.op("<<")(cidr_column)plain
 
 然而，如果我们使用这个运算符来构造[`primaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")，那么[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")仍然需要更多的信息。This
 is because when it examines our primaryjoin condition, it specifically
@@ -202,7 +202,7 @@ looks for operators used for **comparisons**, and this is typically a
 fixed list containing known comparison operators such as `==`, `<`, etc.
 因此，对于我们的自定义操作员参与此系统，我们需要使用[`is_comparison`](core_sqlelement.html#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")参数将其注册为比较运算符：
 
-    inet_column.op("<<", is_comparison=True)(cidr_column)
+    inet_column.op("<<", is_comparison=True)(cidr_column)plainplain
 
 一个完整的例子：
 
@@ -225,11 +225,11 @@ fixed list containing known comparison operators such as `==`, `<`, etc.
 
 以上，一个查询如：
 
-    session.query(IPA).join(IPA.network)
+    session.query(IPA).join(IPA.network)plainplain
 
 将呈现为：
 
-    SELECT ip_address.id AS ip_address_id, ip_address.v4address AS ip_address_v4address
+    SELECT ip_address.id AS ip_address_id, ip_address.v4address AS ip_address_v4addressplain
     FROM ip_address JOIN network ON ip_address.v4address << network.v4representation
 
 版本0.9.2中的新功能： - 添加了[`Operators.op.is_comparison`(core_sqlelement.html#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")标志来帮助使用自定义运算符创建[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构。
@@ -248,7 +248,7 @@ well, `Article.magazine_id` is involved in two
 separate relationships; `Article.magazine` and
 `Article.writer`:
 
-    class Magazine(Base):
+    class Magazine(Base):plainplain
         __tablename__ = 'magazine'
 
         id = Column(Integer, primary_key=True)
@@ -330,7 +330,7 @@ To get just \#1 and \#2, we could specify only
 
 但是，当查询`Writer`时，这会影响`Article.writer`不考虑`Article.magazine_id`：
 
-    SELECT article.article_id AS article_article_id,
+    SELECT article.article_id AS article_article_id,plain
         article.magazine_id AS article_magazine_id,
         article.writer_id AS article_writer_id
     FROM article
@@ -338,7 +338,7 @@ To get just \#1 and \#2, we could specify only
 
 因此，为了充分利用＃1，＃2和＃3，我们通过将[`primaryjoin`(relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")完整地与[`foreign_keys`](relationship_api.html#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")参数，或者通过使用[`foreign()`](relationship_api.html#sqlalchemy.orm.foreign "sqlalchemy.orm.foreign")进行注释更简洁：
 
-    class Article(Base):
+    class Article(Base):plainplain
         # ...
 
         writer = relationship(
@@ -346,8 +346,8 @@ To get just \#1 and \#2, we could specify only
             primaryjoin="and_(Writer.id == foreign(Article.writer_id), "
                         "Writer.magazine_id == Article.magazine_id)")
 
-版本1.0.0中已更改：
-ORM将尝试警告何时将列同时用作来自多个关系的同步目标。
+版本 1.0.0 中已更改：
+ORM 将尝试警告何时将列同时用作来自多个关系的同步目标。
 
 非关系比较/物化路径[¶](#non-relational-comparisons-materialized-path "Permalink to this headline")
 --------------------------------------------------------------------------------------------------
@@ -379,7 +379,7 @@ to许多”；当他们在*不同*方面时，这种关系被认为是“多对�
     FROM element
     WHERE element.path LIKE ('/foo/bar2' || '/%') ORDER BY element.path
 
-版本0.9.5中的新增功能：已添加支持以允许在primaryjoin条件以及使用[`ColumnOperators.like()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")
+版本 0.9.5 中的新增功能：已添加支持以允许在 primaryjoin 条件以及使用[`ColumnOperators.like()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")
 
 自我参照多对多关系[¶](#self-referential-many-to-many-relationship "Permalink to this headline")
 -----------------------------------------------------------------------------------------------
@@ -409,7 +409,7 @@ to许多”；当他们在*不同*方面时，这种关系被认为是“多对�
                             backref="left_nodes"
         )
 
-如上所述，SQLAlchemy无法自动知道哪些列应该连接到`right_nodes`和`left_nodes`关系的哪些列。[`primaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")和[`secondaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.secondaryjoin "sqlalchemy.orm.relationship")参数确定了我们想要如何加入关联表。在上面的声明式表格中，当我们在与`Node`类相对应的Python块中声明这些条件时，`id`变量可直接作为[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
+如上所述，SQLAlchemy无法自动知道哪些列应该连接到`right_nodes`和`left_nodes`关系的哪些列。[`primaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")和[`secondaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.secondaryjoin "sqlalchemy.orm.relationship")参数确定了我们想要如何加入关联表。在上面的声明式表格中，当我们在与`Node`类相对应的 Python 块中声明这些条件时，`id`变量可直接作为[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
 
 Alternatively, we can define the [`primaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")
 and [`secondaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.secondaryjoin "sqlalchemy.orm.relationship")
@@ -419,7 +419,7 @@ column object available yet or the `node_to_node`
 table perhaps isn’t yet available.
 当在一个声明性字符串中引用一个普通的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象时，我们使用该表的字符串名称，因为它存在于[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")中：
 
-    class Node(Base):
+    class Node(Base):plainplain
         __tablename__ = 'node'
         id = Column(Integer, primary_key=True)
         label = Column(String)
@@ -464,11 +464,11 @@ table perhaps isn’t yet available.
 
 注意
 
-本节介绍SQLAlchemy的一些新增功能和实验功能。
+本节介绍 SQLAlchemy 的一些新增功能和实验功能。
 
 有时，当人们试图在两个表之间建立一个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")时，为了加入它们，需要多于两个或三个表参与。这是[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的一个区域，它试图推动可能的边界，并且通常需要在SQLAlchemy邮件列表上敲定这些特殊用例的最终解决方案。
 
-在更新版本的SQLAlchemy中，为了提供由多个表组成的复合目标，可以在一些情况下使用[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数。以下是这种连接条件的示例（要求版本0.9.2至少按照原样运行）：
+在更新版本的SQLAlchemy中，为了提供由多个表组成的复合目标，可以在一些情况下使用[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数。以下是这种连接条件的示例（要求版本 0.9.2 至少按照原样运行）：
 
     class A(Base):
         __tablename__ = 'a'
@@ -582,9 +582,9 @@ support any references between `A` and `B` directly.
 构建启用查询的属性[¶](#building-query-enabled-properties "Permalink to this headline")
 --------------------------------------------------------------------------------------
 
-非常雄心勃勃的自定义连接条件可能无法直接持久化，并且在某些情况下甚至可能无法正确加载。要移除等式的持久性部分，请在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上使用标记[`viewonly`](relationship_api.html#sqlalchemy.orm.relationship.params.viewonly "sqlalchemy.orm.relationship")，将其建立为只读属性（写入集合的数据将为在flush()上被忽略）。但是，在极端情况下，请考虑将常规Python属性与[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")结合使用，如下所示：
+非常雄心勃勃的自定义连接条件可能无法直接持久化，并且在某些情况下甚至可能无法正确加载。要移除等式的持久性部分，请在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上使用标记[`viewonly`](relationship_api.html#sqlalchemy.orm.relationship.params.viewonly "sqlalchemy.orm.relationship")，将其建立为只读属性（写入集合的数据将为在 flush()上被忽略）。但是，在极端情况下，请考虑将常规 Python 属性与[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")结合使用，如下所示：
 
-    class User(Base):
+    class User(Base):plainplain
         __tablename__ = 'user'
         id = Column(Integer, primary_key=True)
 

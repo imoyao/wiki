@@ -4,12 +4,11 @@ date: 2021-02-20 22:41:42
 permalink: /sqlalchemy/orm/extensions/declarative/relationships/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
   - extensions
   - declarative
 tags:
-  - 
 ---
 关系配置[¶](#relationship-configuration "Permalink to this headline")
 =====================================================================
@@ -29,7 +28,7 @@ Relationship](tutorial.html#orm-tutorial-relationship)。
     -   [Self-Referential Query
         Strategies](self_referential.html#self-referential-query-strategies)
     -   [配置自引用预加载](self_referential.html#configuring-self-referential-eager-loading)
--   [将关系与Backref链接](backref.html)
+-   [将关系与 Backref 链接](backref.html)
     -   [后退参数](backref.html#backref-arguments)
     -   [单向后退](backref.html#one-way-backrefs)
 -   [配置关系连接的方式](join_conditions.html)
@@ -53,5 +52,5 @@ Relationship](tutorial.html#orm-tutorial-relationship)。
     -   [指向自己的行/相互依赖的行](relationship_persistence.html#rows-that-point-to-themselves-mutually-dependent-rows)
     -   [Mutable Primary Keys / Update
         Cascades](relationship_persistence.html#mutable-primary-keys-update-cascades)
--   [关系API](relationship_api.html)
+-   [关系 API](relationship_api.html)
 

@@ -381,7 +381,7 @@ tags:
 ` sqlalchemy.orm。 T0>  configure_mappers  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
 :   初始化到目前为止已经构建的所有映射器的映射器间关系。
 
-    这个函数可以调用任意次数，但在大多数情况下会自动调用，使用第一次映射，以及每当使用映射和额外尚未配置的映射器已经构建。
+    这个函数可以调用任意次数，但在大多数情况下会自动调用，使用第一次映射，以及每当使用映射和额外尚未配置的映射器已经构建。plain
 
     出现这种情况的要点包括何时将映射类实例化为实例，以及何时使用[`Session.query()`](session_api.html#sqlalchemy.orm.session.Session.query "sqlalchemy.orm.session.Session.query")方法。
 
@@ -402,10 +402,10 @@ tags:
         objects that are known to SQLAlchemy will be fully configured.
         请注意，调用应用程序可能还有其他尚未生成的映射，例如，如果它们尚处于未导入模块中。
 
-` sqlalchemy.orm。 T0>  clear_mappers  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
+`sqlalchemy.orm。 T0>  clear_mappers  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
 :   从所有类中移除所有映射器。
 
-    这个函数从类中移除所有的工具并处理它们相关的映射器。一旦被调用，这些类就会被取消映射，并可以在以后用新的映射器重新映射。
+    这个函数从类中移除所有的工具并处理它们相关的映射器。一旦被调用，这些类就会被取消映射，并可以在以后用新的映射器重新映射。plain
 
     [`clear_mappers()`](#sqlalchemy.orm.clear_mappers "sqlalchemy.orm.clear_mappers")
     is *not* for normal use, as there is literally no valid usage for it
@@ -417,7 +417,7 @@ tags:
  `sqlalchemy.orm.util.`{.descclassname}`identity_key`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.orm.util.identity_key "Permalink to this definition")
 :   生成“身份密钥”元组，就像在[`Session.identity_map`](session_api.html#sqlalchemy.orm.session.Session.identity_map "sqlalchemy.orm.session.Session.identity_map")字典中用作键一样。
 
-    这个函数有几种调用方式：
+    这个函数有几种调用方式：plainplain
 
     -   `identity_key（class， ident）`
 

@@ -4,12 +4,11 @@ date: 2021-02-20 22:41:37
 permalink: /sqlalchemy/core/type_api/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - core
 tags:
-  - 
 ---
-基本类型API [¶](#base-type-api "Permalink to this headline")
+基本类型 API [¶](#base-type-api "Permalink to this headline")
 ============================================================
 
 *class* `sqlalchemy.types。`{.descclassname} `TypeEngine`{.descname} [¶](#sqlalchemy.types.TypeEngine "Permalink to this definition")
@@ -259,17 +258,17 @@ tags:
         New in version 0.7.2.
 
 *class* `sqlalchemy.types。`{.descclassname} `可连接`{.descname} [¶](#sqlalchemy.types.Concatenable "Permalink to this definition")
-:   mixin标志着一种类型支持“连接”，通常是字符串。
+:   mixin 标志着一种类型支持“连接”，通常是字符串。
 
 *class* `sqlalchemy.types。`{.descclassname} `可索引`{.descname} [¶](#sqlalchemy.types.Indexable "Permalink to this definition")
-:   mixin标记类型为支持索引操作，如数组或JSON结构。
+:   mixin 标记类型为支持索引操作，如数组或 JSON 结构。
 
     版本1.1.0中的新功能
 
 *class* `sqlalchemy.types。`{.descclassname} `NullType`{.descname} [¶](#sqlalchemy.types.NullType "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeEngine`](#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    一个未知的类型。
+    一个未知的类型。plain
 
     [`NullType`](#sqlalchemy.types.NullType "sqlalchemy.types.NullType")
     is used as a default type for those cases where a type cannot be
@@ -291,7 +290,7 @@ tags:
  *class*`sqlalchemy.types.`{.descclassname}`Variant`{.descname}(*base*, *mapping*)[¶](#sqlalchemy.types.Variant "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeDecorator`](custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
 
-    一种包装类型，可根据使用的方言在各种实现中进行选择。
+    一种包装类型，可根据使用的方言在各种实现中进行选择。plain
 
     [`Variant`](#sqlalchemy.types.Variant "sqlalchemy.types.Variant")类型通常使用[`TypeEngine.with_variant()`](#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")方法构造。
 

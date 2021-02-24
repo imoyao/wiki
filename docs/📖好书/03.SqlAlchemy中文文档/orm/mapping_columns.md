@@ -20,7 +20,7 @@ tags:
 默认情况下，映射与[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")共享与映射属性相同的名称
 - 具体而言，它匹配[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")上的`Column.key`属性，默认情况下它与`Column.name`相同。
 
-分配给映射到[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的Python属性的名称可以与`Column.name`或`Column.key`不同，只需通过指定正如我们在声明性映射中所说明的那样：
+分配给映射到[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的 Python 属性的名称可以与`Column.name`或`Column.key`不同，只需通过指定正如我们在声明性映射中所说明的那样：
 
     class User(Base):
         __tablename__ = 'user'
@@ -33,14 +33,14 @@ resolves to a column named `user_name`.
 
 映射到现有表格时，可以直接引用[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象：
 
-    class User(Base):
+    class User(Base):plainplainplain
         __table__ = user_table
         id = user_table.c.user_id
         name = user_table.c.user_name
 
 或者在经典的映射中，使用所需的键将其放置在`properties`字典中：
 
-    mapper(User, user_table, properties={
+    mapper(User, user_table, properties={plainplain
        'id': user_table.c.user_id,
        'name': user_table.c.user_name,
     })
@@ -79,7 +79,7 @@ Objects](core_reflection.html)在这种情况下，我们可以利用[`DDLEvents
 
 通常在映射到现有的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象时使用`column_prefix`作为列名前缀的快速方法：
 
-    class User(Base):
+    class User(Base):plainplain
         __table__ = user_table
         __mapper_args__ = {'column_prefix':'_'}
 
@@ -89,12 +89,12 @@ Objects](core_reflection.html)在这种情况下，我们可以利用[`DDLEvents
 Column Naming Schemes from Reflected
 Tables](#mapper-automated-reflection-schemes)中描述的方法。
 
-将column\_property用于列级选项[¶](#using-column-property-for-column-level-options "Permalink to this headline")
+将column\_property 用于列级选项[¶](#using-column-property-for-column-level-options "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------
 
 使用[`column_property()`](#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")函数映射[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")时可以指定选项。该函数明确地创建[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")用于跟踪[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的[`ColumnProperty`](internals.html#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty")；通常，[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")会自动创建它。使用[`column_property()`](#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")，我们可以传递关于如何映射[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的额外参数。下面，我们传递一个选项`active_history`，该选项指定对此列值的更改应导致先前加载的值为前者：
 
-    from sqlalchemy.orm import column_property
+    from sqlalchemy.orm import column_propertyplainplainplain
 
     class User(Base):
         __tablename__ = 'user'
@@ -106,7 +106,7 @@ Tables](#mapper-automated-reflection-schemes)中描述的方法。
 is also used to map a single attribute to multiple columns.
 这个用例映射到一个[`join()`](core_selectable.html#sqlalchemy.sql.expression.join "sqlalchemy.sql.expression.join")，它具有彼此相等的属性：
 
-    class User(Base):
+    class User(Base):plain
         __table__ = user.join(address)
 
         # assign "user.id", "address.user_id" to the
@@ -116,7 +116,7 @@ is also used to map a single attribute to multiple columns.
 有关此用法的更多示例，请参阅[Mapping a Class against Multiple
 Tables](nonstandard_mappings.html#maptojoin)。
 
-需要[`column_property()`](#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")的另一个地方是将SQL表达式指定为映射属性，比如下面我们创建的属性`fullname`，即`firstname`和`lastname`列：
+需要[`column_property()`](#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")的另一个地方是将 SQL 表达式指定为映射属性，比如下面我们创建的属性`fullname`，即`firstname`和`lastname`列：
 
     class User(Base):
         __tablename__ = 'user'
@@ -129,9 +129,9 @@ Tables](nonstandard_mappings.html#maptojoin)。
 Attributes](mapped_sql_expr.html#mapper-sql-expressions)中查看此用法的示例。
 
  `sqlalchemy.orm.`{.descclassname}`column_property`{.descname}(*\*columns*, *\*\*kwargs*)[¶](#sqlalchemy.orm.column_property "Permalink to this definition")
-:   提供用于Mapper的列级属性。
+:   提供用于 Mapper 的列级属性。
 
-    通常可以直接使用[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")元素将基于列的属性应用于映射器的`properties`字典。当给定的列不直接存在于映射器的可选择范围内时使用此函数；示例包括SQL表达式，函数和标量SELECT查询。
+    通常可以直接使用[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")元素将基于列的属性应用于映射器的`properties`字典。当给定的列不直接存在于映射器的可选择范围内时使用此函数；示例包括SQL表达式，函数和标量SELECT查询。plain
 
     不存在于映射器可选择的列将不会被映射器持久化并且是有效的“只读”属性。
 
@@ -193,7 +193,7 @@ Objects](core_reflection.html#metadata-reflection)中描述的反映过程来使
 
 ...将`User`类映射到`user_table`表，仅包括`user_id`和`user_name`列 - 其余未被引用。同理：
 
-    class Address(Base):
+    class Address(Base):plainplain
         __table__ = address_table
         __mapper_args__ = {
             'exclude_properties' : ['street', 'city', 'state', 'zip']
@@ -201,7 +201,7 @@ Objects](core_reflection.html#metadata-reflection)中描述的反映过程来使
 
 ...将`Address`类映射到`address_table`表，其中包括除`street`，`city`之外的所有列。 `state`和`zip`。
 
-使用此映射时，未包含的列将不会在由[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")发出的任何SELECT语句中引用，也不会在表示该列的映射类上存在任何映射属性；分配该名称的属性将不会超出正常Python属性分配的作用。
+使用此映射时，未包含的列将不会在由[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")发出的任何 SELECT 语句中引用，也不会在表示该列的映射类上存在任何映射属性；分配该名称的属性将不会超出正常 Python 属性分配的作用。
 
 在某些情况下，多个列可能具有相同的名称，例如映射到共享某个列名的两个或多个表的连接时。`include_properties`和`exclude_properties`也可以容纳[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象来更准确地描述应该包含或排除哪些列：
 
@@ -220,4 +220,4 @@ Defaults](core_defaults.html#metadata-defaults) including those
 configured by the `default`, `update`, `server_default` and
 `server_onupdate` arguments, will continue to
 function normally even if those [`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
-objects are not mapped. 这是因为在`default`和`update`的情况下，[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象仍然存在于[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中，从而允许默认函数在ORM发出INSERT或UPDATE时发生，而在`server_default`和`server_onupdate`的情况下，关系数据库本身维护这些函数。
+objects are not mapped. 这是因为在`default`和`update`的情况下，[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象仍然存在于[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中，从而允许默认函数在 ORM 发出 INSERT 或 UPDATE 时发生，而在`server_default`和`server_onupdate`的情况下，关系数据库本身维护这些函数。

@@ -4,10 +4,9 @@ date: 2021-02-20 22:41:43
 permalink: /sqlalchemy/orm/mapper_config/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
 tags:
-  - 
 ---
 映射器配置[¶](#mapper-configuration "Permalink to this headline")
 =================================================================
@@ -40,5 +39,5 @@ Tutorial](tutorial.html)并知道如何构建和使用基本的映射器和关�
     -   [自定义版本计数器/类型](versioning.html#custom-version-counters-types)
     -   [服务器端版本计数器](versioning.html#server-side-version-counters)
     -   [编程或条件版本计数器](versioning.html#programmatic-or-conditional-version-counters)
--   [类映射API](mapping_api.html)
+-   [类映射 API](mapping_api.html)
 

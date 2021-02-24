@@ -1,10 +1,10 @@
 ---
-title: SQL和通用函数
+title: SQL 和通用函数
 date: 2021-02-20 22:41:34
 permalink: /sqlalchemy/core/functions/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - core
 tags:
   - 
@@ -12,15 +12,15 @@ tags:
 SQL和通用函数[¶](#module-sqlalchemy.sql.expression "Permalink to this headline")
 ================================================================================
 
-SQLAlchemy已知的关于数据库特定渲染，返回类型和参数行为的SQL函数。通用函数与所有SQL函数一样，使用[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")属性进行调用：
+SQLAlchemy 已知的关于数据库特定渲染，返回类型和参数行为的 SQL 函数。通用函数与所有 SQL 函数一样，使用[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")属性进行调用：
 
     select([func.count()]).select_from(sometable)
 
 请注意，任何不为[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")所知的名称都会按原样生成函数名称
 -
-对SQLAlchemy，内置或用户定义的SQL函数可以调用，已知或未知的SQL函数没有限制。这里的部分只描述了那些SQLAlchemy已经知道使用什么参数和返回类型的函数。
+对 SQLAlchemy，内置或用户定义的 SQL 函数可以调用，已知或未知的 SQL 函数没有限制。这里的部分只描述了那些 SQLAlchemy 已经知道使用什么参数和返回类型的函数。
 
-SQL函数API，工厂和内置函数。
+SQL 函数 API，工厂和内置函数。
 
 *class* `sqlalchemy.sql.functions。`{.descclassname} `AnsiFunction`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.sql.functions.AnsiFunction "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
@@ -246,7 +246,7 @@ SQL函数API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`OrderedSetAgg`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.OrderedSetAgg "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    定义一个返回类型基于传递给[`FunctionElement.within_group()`](#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")方法的表达式定义的排序表达式类型的函数。
+    定义一个返回类型基于传递给[`FunctionElement.within_group()`](#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")方法的表达式定义的排序表达式类型的函数。plain
 
     `array_for_multi_clause`{.descname} *= False* [¶](#sqlalchemy.sql.functions.OrderedSetAgg.array_for_multi_clause "Permalink to this definition")
     :   
@@ -263,7 +263,7 @@ SQL函数API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `ReturnTypeFromArgs`{.descname} （ *\* args*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.sql.functions.ReturnTypeFromArgs "Permalink to this definition")*
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    定义一个返回类型与其参数相同的函数。
+    定义一个返回类型与其参数相同的函数。plain
 
     `标识符`{.descname} *='ReturnTypeFromArgs'* [¶](#sqlalchemy.sql.functions.ReturnTypeFromArgs.identifier "Permalink to this definition")
     :   
@@ -436,7 +436,7 @@ SQL函数API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `localtime`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.sql.functions.localtime "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.AnsiFunction`](#sqlalchemy.sql.functions.AnsiFunction "sqlalchemy.sql.functions.AnsiFunction")
 
-    `标识符`{.descname} *='localtime'* [¶](#sqlalchemy.sql.functions.localtime.identifier "Permalink to this definition")
+    `标识符`{.descname} *='localtime'* [¶](#sqlalchemy.sql.functions.localtime.identifier "Permalink to this definition")plain
     :   
 
     `name`{.descname} *='localtime'* [¶](#sqlalchemy.sql.functions.localtime.name "Permalink to this definition")
@@ -617,7 +617,7 @@ SQL函数API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `session_user`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.sql.functions.session_user "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.AnsiFunction`](#sqlalchemy.sql.functions.AnsiFunction "sqlalchemy.sql.functions.AnsiFunction")
 
-    `标识符`{.descname} *='session\_user'* [¶](#sqlalchemy.sql.functions.session_user.identifier "Permalink to this definition")
+    `标识符`{.descname} *='session\_user'* [¶](#sqlalchemy.sql.functions.session_user.identifier "Permalink to this definition")plain
     :   
 
     `name`{.descname} *='session\_user'* [¶](#sqlalchemy.sql.functions.session_user.name "Permalink to this definition")

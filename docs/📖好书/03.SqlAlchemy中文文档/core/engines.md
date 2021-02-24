@@ -12,14 +12,14 @@ tags:
 引擎配置[¶](#engine-configuration "Permalink to this headline")
 ===============================================================
 
-[`引擎`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")是任何SQLAlchemy应用程序的基础。它是实际数据库及其[DBAPI](glossary.html#term-dbapi)的“主基”，通过连接池和[`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")传递给SQLAlchemy应用程序，该应用程序描述了如何与特定类型的数据库/
+[`引擎`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")是任何 SQLAlchemy 应用程序的基础。它是实际数据库及其[DBAPI](glossary.html#term-dbapi)的“主基”，通过连接池和[`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")传递给SQLAlchemy应用程序，该应用程序描述了如何与特定类型的数据库/
 DBAPI组合。
 
 一般结构如下：
 
 ![](http://sqlalchemy.readthedocs.io/en/latest/_images/sqla_engine_arch.png)
 
-在上面，[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")引用了[`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")和[`Pool`](pooling.html#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")，它们共同解释了DBAPI的模块功能以及数据库的行为。
+在上面，[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")引用了[`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")和[`Pool`](pooling.html#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")，它们共同解释了 DBAPI 的模块功能以及数据库的行为。
 
 只用一个调用就可以创建引擎，[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")：
 
@@ -41,7 +41,7 @@ and [`Pool`](pooling.html#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool") can
 be said to have a *lazy initialization* behavior.
 
 [`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")一旦创建，可以直接用于与数据库进行交互，也可以将其传递给[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象以使用ORM。本节将介绍配置[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的详细信息。下一节[Working
-with Engines and Connections](connections.html)将详细介绍[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的类似API，通常用于非ORM应用程序。
+with Engines and Connections](connections.html)将详细介绍[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的类似 API，通常用于非 ORM 应用程序。
 
 支持的数据库[¶](#supported-databases "Permalink to this headline")
 ------------------------------------------------------------------
@@ -55,11 +55,11 @@ implementations for various backends.
 数据库网址[¶](#database-urls "Permalink to this headline")
 ----------------------------------------------------------
 
-[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")函数根据URL生成一个[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")对象。这些URL遵循[RFC-1738](http://rfc.net/rfc1738.html)，通常可以包含用户名，密码，主机名，数据库名称以及用于其他配置的可选关键字参数。在某些情况下，接受文件路径，而在其他情况下，“数据源名称”替换“主机”和“数据库”部分。数据库URL的典型形式是：
+[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")函数根据URL生成一个[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")对象。这些URL遵循[RFC-1738](http://rfc.net/rfc1738.html)，通常可以包含用户名，密码，主机名，数据库名称以及用于其他配置的可选关键字参数。在某些情况下，接受文件路径，而在其他情况下，“数据源名称”替换“主机”和“数据库”部分。数据库 URL 的典型形式是：
 
     dialect+driver://username:password@host:port/database
 
-方言名称包括SQLAlchemy方言的名称，名称如`sqlite`，`mysql`，`postgresql`，`oracle` ，或`mssql`。drivername是用于使用全部小写字母连接到数据库的DBAPI的名称。如果未指定，则将导入“默认”DBAPI（如果可用）
+方言名称包括SQLAlchemy方言的名称，名称如`sqlite`，`mysql`，`postgresql`，`oracle` ，或`mssql`。drivername 是用于使用全部小写字母连接到数据库的 DBAPI 的名称。如果未指定，则将导入“默认”DBAPI（如果可用）
 - 此默认值通常是该后端可用的最广泛的驱动程序。
 
 以下是常用连接样式的示例。有关所有包含方言的详细信息的完整索引以及第三方方言的链接，请参见[Dialects](dialects_index.html)。
@@ -96,13 +96,13 @@ DBAPI可用，包括MySQL连接器-python和OurSQL：
     # OurSQL
     engine = create_engine('mysql+oursql://scott:tiger@localhost/foo')
 
-有关在[MySQL](dialects_mysql.html)连接到MySQL的更多注意事项。
+有关在[MySQL](dialects_mysql.html)连接到 MySQL 的更多注意事项。
 
 ### 甲骨文[¶ T0\>](#oracle "Permalink to this headline")
 
 Oracle方言使用cx\_oracle作为默认的DBAPI：
 
-    engine = create_engine('oracle://scott:tiger@127.0.0.1:1521/sidname')
+    engine = create_engine('oracle://scott:tiger@127.0.0.1:1521/sidname')plain
 
     engine = create_engine('oracle+cx_oracle://scott:tiger@tnsname')
 
@@ -123,9 +123,9 @@ Server的更多注意事项。
 
 ### SQLite的[¶ T0\>](#sqlite "Permalink to this headline")
 
-SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库。
+SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据库。
 
-由于SQLite连接到本地文件，URL格式略有不同。URL的“文件”部分是数据库的文件名。对于相对文件路径，这需要三个斜杠：
+由于 SQLite 连接到本地文件，URL 格式略有不同。URL 的“文件”部分是数据库的文件名。对于相对文件路径，这需要三个斜杠：
 
     # sqlite://<nohostname>/<path>
     # where <path> is relative:
@@ -133,7 +133,7 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
 
 对于绝对文件路径，三个斜杠后面是绝对路径：
 
-    #Unix/Mac - 4 initial slashes in total
+    #Unix/Mac - 4 initial slashes in totalplainplain
     engine = create_engine('sqlite:////absolute/path/to/foo.db')
     #Windows
     engine = create_engine('sqlite:///C:\\path\\to\\foo.db')
@@ -144,7 +144,7 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
 
     engine = create_engine('sqlite://')
 
-有关在[SQLite](dialects_sqlite.html)连接到SQLite的更多注意事项。
+有关在[SQLite](dialects_sqlite.html)连接到 SQLite 的更多注意事项。
 
 ### 其他[¶ T0\>](#others "Permalink to this headline")
 
@@ -374,7 +374,7 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
 `sqlalchemy。`{.descclassname} `engine_from_config`{.descname} （ *configuration*，*prefix ='sqlalchemy。'*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.engine_from_config "Permalink to this definition")*
 :   使用配置字典创建一个新的引擎实例。
 
-    字典通常由配置文件生成。
+    字典通常由配置文件生成。plain
 
     对`engine_from_config()`感兴趣的键应加上前缀，例如“ `sqlalchemy.url`，`sqlalchemy.echo`等'prefix'参数表示要搜索的前缀。每个匹配键（在前缀被剥离后）都被视为是[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")调用的对应关键字参数。
 
@@ -395,13 +395,13 @@ SQLite默认使用Python内置模块`sqlite3`连接到基于文件的数据库�
         ‘configuration’ dictionary. 关键字参数应该以*不是*为前缀。
 
 ` sqlalchemy.engine.url。 T0>  make_url  T1> （ T2>  name_or_url  T3> ） T4> ¶< / T5>`{.descclassname}
-:   给定一个字符串或unicode实例，产生一个新的URL实例。
+:   给定一个字符串或 unicode 实例，产生一个新的 URL 实例。
 
     给定的字符串根据RFC
     1738规范进行分析。如果传递一个现有的URL对象，只返回该对象。
 
 *class* `sqlalchemy.engine.url。`{.descclassname} `URL`{.descname} （ *drivername*，*=无*，*密码=无*，*主机=无*，*端口=无*，*数据库=无* ，*query = None t\>\> ） [¶](#sqlalchemy.engine.url.URL "Permalink to this definition")*
-:   表示用于连接到数据库的URL的组件。
+:   表示用于连接到数据库的 URL 的组件。
 
     该对象适合直接传递给[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")调用。URL的字段由[`make_url()`](#sqlalchemy.engine.url.make_url "sqlalchemy.engine.url.make_url")函数从字符串中解析。该URL的字符串格式是RFC-1738样式的字符串。
 
@@ -464,13 +464,13 @@ is not used by default for SQLite engines.
 自定义DBAPI连接()参数[¶](#custom-dbapi-connect-arguments "Permalink to this headline")
 --------------------------------------------------------------------------------------
 
-在发布`connect()`调用到底层DBAPI时使用的自定义参数可能以三种不同的方式发布。可以直接从URL字符串中传递基于字符串的参数作为查询参数：
+在发布`connect()`调用到底层 DBAPI 时使用的自定义参数可能以三种不同的方式发布。可以直接从 URL 字符串中传递基于字符串的参数作为查询参数：
 
-    db = create_engine('postgresql://scott:tiger@localhost/test?argument1=foo&argument2=bar')
+    db = create_engine('postgresql://scott:tiger@localhost/test?argument1=foo&argument2=bar')plain
 
-如果SQLAlchemy的数据库连接器知道特定的查询参数，它可能会将其类型从字符串转换为适当的类型。
+如果 SQLAlchemy 的数据库连接器知道特定的查询参数，它可能会将其类型从字符串转换为适当的类型。
 
-[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")还有一个参数`connect_args`，它是一个将传递给`connect()`的附加字典。这可以在需要字符串以外的参数时使用，并且SQLAlchemy的数据库连接器对该参数没有类型转换逻辑：
+[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")还有一个参数`connect_args`，它是一个将传递给`connect()`的附加字典。这可以在需要字符串以外的参数时使用，并且 SQLAlchemy 的数据库连接器对该参数没有类型转换逻辑：
 
     db = create_engine('postgresql://scott:tiger@localhost/test', connect_args = {'argument1':17, 'argument2':'bar'})
 
@@ -484,7 +484,7 @@ is not used by default for SQLite engines.
 配置日志记录[¶](#configuring-logging "Permalink to this headline")
 ------------------------------------------------------------------
 
-Python的标准[logging](http://docs.python.org/library/logging.html)模块用于通过SQLAlchemy实现信息和调试日志输出。这允许SQLAlchemy的日志记录与其他应用程序和库以标准方式集成。The
+Python的标准[logging](http://docs.python.org/library/logging.html)模块用于通过 SQLAlchemy 实现信息和调试日志输出。这允许 SQLAlchemy 的日志记录与其他应用程序和库以标准方式集成。The
 `echo` and `echo_pool` flags
 that are present on [`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine"), as
 well as the `echo_uow` flag used on [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session"),
@@ -495,7 +495,7 @@ all interact with regular loggers.
 -   `sqlalchemy.engine` -
     控制SQL回显。对于SQL查询输出设置为`logging.INFO`，对于查询+结果集输出设置为`logging.DEBUG`。
 -   `sqlalchemy.dialects` -
-    控制SQL方言的自定义日志记录。有关详细信息，请参阅单个方言的文档。
+    控制 SQL 方言的自定义日志记录。有关详细信息，请参阅单个方言的文档。
 -   `sqlalchemy.pool` -
     控制连接池日志记录。设置为`logging.INFO`或更低以记录连接池检出/检入。
 -   `sqlalchemy.orm` -
@@ -510,7 +510,7 @@ all interact with regular loggers.
 
 默认情况下，日志级别在整个`sqlalchemy`名称空间内设置为`logging.WARN`，因此即使在启用了日志记录的应用程序中也不会发生日志操作。
 
-`echo`标志作为[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")等关键字参数以及[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")上的`echo`属性存在，当设置为`True`时，将首先尝试确保启用日志记录。不幸的是，`logging`模块没有提供确定输出是否已经配置的方法（注意我们指的是是否设置了日志配置，而不仅仅是设置日志级别）。因此，任何`echo=True`标志都将导致使用sys.stdout作为目标对`logging.basicConfig()`的调用。它还使用级别名称，时间戳和记录器名称设置默认格式。请注意，此配置具有将**配置为**到任何现有记录器配置的作用。Therefore,
+`echo`标志作为[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")等关键字参数以及[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")上的`echo`属性存在，当设置为`True`时，将首先尝试确保启用日志记录。不幸的是，`logging`模块没有提供确定输出是否已经配置的方法（注意我们指的是是否设置了日志配置，而不仅仅是设置日志级别）。因此，任何`echo=True`标志都将导致使用 sys.stdout 作为目标对`logging.basicConfig()`的调用。它还使用级别名称，时间戳和记录器名称设置默认格式。请注意，此配置具有将**配置为**到任何现有记录器配置的作用。Therefore,
 **when using Python logging, ensure all echo flags are set to False at
 all times**, to avoid getting duplicate log lines.
 
@@ -518,4 +518,4 @@ all times**, to avoid getting duplicate log lines.
 
 注意
 
-SQLAlchemy [`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")通过在当前日志记录级别被检测为`logging.INFO`或`logging.DEBUG`时仅发出日志语句来节省Python函数调用开销。它仅在从连接池获取新连接时才检查此级别。因此，在更改已运行的应用程序的日志记录配置时，当前处于活动状态的任何[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")或更常见的在事务中处于活动状态的[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象都不会记录任何SQL根据新配置直到获取新的[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")（在[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的情况下，这是在当前事务结束并且新的开始之后）。
+SQLAlchemy [`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")通过在当前日志记录级别被检测为`logging.INFO`或`logging.DEBUG`时仅发出日志语句来节省Python函数调用开销。它仅在从连接池获取新连接时才检查此级别。因此，在更改已运行的应用程序的日志记录配置时，当前处于活动状态的任何[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")或更常见的在事务中处于活动状态的[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象都不会记录任何 SQL 根据新配置直到获取新的[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")（在[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的情况下，这是在当前事务结束并且新的开始之后）。

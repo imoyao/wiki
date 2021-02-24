@@ -9,23 +9,23 @@ categories:
 tags:
   - 
 ---
-SQLAlchemy 0.5有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-5 "Permalink to this headline")
+SQLAlchemy 0.5 有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-5 "Permalink to this headline")
 ===========================================================================================
 
 关于本文档
 
-本文档介绍了2008年10月12日发布的SQLAlchemy
-0.4版和2010年1月16日发布的SQLAlchemy 0.5版之间的变化。
+本文档介绍了 2008 年 10 月 12 日发布的 SQLAlchemy
+0.4 版和 2010 年 1 月 16 日发布的 SQLAlchemy 0.5 版之间的变化。
 
-文件日期：2009年8月4日
+文件日期：2009 年 8 月 4 日
 
-本指南记录了影响用户将他们的应用程序从0.4系列SQLAlchemy迁移到0.5的API更改。它也适用于[基本SQLAlchemy](http://oreilly.com/catalog/9780596516147/)中的工作，它只涵盖了0.4，并且似乎甚至还有一些旧的0.3ism。请注意，SQLAlchemy
-0.5删除了许多在0.4系列范围内被弃用的行为，并且也弃用了更多特定于0.4的行为。
+本指南记录了影响用户将他们的应用程序从 0.4 系列 SQLAlchemy 迁移到 0.5 的 API 更改。它也适用于[基本SQLAlchemy](http://oreilly.com/catalog/9780596516147/)中的工作，它只涵盖了 0.4，并且似乎甚至还有一些旧的 0.3ism。请注意，SQLAlchemy
+0.5 删除了许多在 0.4 系列范围内被弃用的行为，并且也弃用了更多特定于 0.4 的行为。
 
 主要文档更改[¶](#major-documentation-changes "Permalink to this headline")
 --------------------------------------------------------------------------
 
-文档的某些部分已经完全重写，可以作为新ORM功能的介绍。特别是，`Query`和`Session`对象在API和行为方面有着明显的区别，从根本上改变了许多基本方式，特别是构建高度自定义的ORM查询并处理陈旧的会话状态，提交和回滚。
+文档的某些部分已经完全重写，可以作为新 ORM 功能的介绍。特别是，`Query`和`Session`对象在 API 和行为方面有着明显的区别，从根本上改变了许多基本方式，特别是构建高度自定义的 ORM 查询并处理陈旧的会话状态，提交和回滚。
 
 -   [ORM Tutorial](http://www.sqlalchemy.org/docs/05/ormtutorial.html)
 -   [会话记录](http://www.sqlalchemy.org/docs/05/session.html)
@@ -39,8 +39,8 @@ test / orm\_test\_deprecations.py]中查看。
 需求变更[¶](#requirements-changes "Permalink to this headline")
 ---------------------------------------------------------------
 
--   Python 2.4或更高版本是必需的。SQLAlchemy 0.4行是Python
-    2.3支持的最后一个版本。
+-   Python 2.4 或更高版本是必需的。SQLAlchemy 0.4 行是 Python
+    2.3 支持的最后一个版本。
 
 对象关系映射[¶](#object-relational-mapping "Permalink to this headline")
 ------------------------------------------------------------------------
@@ -48,7 +48,7 @@ test / orm\_test\_deprecations.py]中查看。
 -   **查询中的列级表达式** -
     详见[教程](http://www.sqlalchemy.org/docs/05/ormtutorial.html)，`Query`有能力创建特定的SELECT语句，而不仅仅是针对整行的那些语句：
 
-        session.query(User.name, func.count(Address.id).label("numaddresses")).join(Address).group_by(User.name)
+        session.query(User.name, func.count(Address.id).label("numaddresses")).join(Address).group_by(User.name)plain
 
     任何多列/实体查询返回的元组都是*命名的*元组：
 
@@ -69,16 +69,16 @@ test / orm\_test\_deprecations.py]中查看。
 -   **Explicit ORM aliases are recommended for aliased joins** - The
     `aliased()` function produces an “alias” of a
     class, which allows fine-grained control of aliases in conjunction
-    with ORM queries. 尽管表级别别名（即`table.alias()`）仍然可用，但ORM级别别名保留了ORM映射对象的语义，这对于继承映射，选项和其他场景很重要。例如。：
+    with ORM queries. 尽管表级别别名（即`table.alias()`）仍然可用，但 ORM 级别别名保留了 ORM 映射对象的语义，这对于继承映射，选项和其他场景很重要。例如。：
 
-        Friend = aliased(Person)
+        Friend = aliased(Person)plain
         session.query(Person, Friend).join((Friend, Person.friends)).all()
 
 -   **query.join()大大增强。** -
-    您现在可以通过多种方式指定联接的目标和ON子句。可以提供单独的目标类，其中SQLA将尝试通过与`table.join(someothertable)`相同的方式通过外键形成连接。可以提供一个目标和一个明确的ON条件，其中ON条件可以是`relation()`名称，实际类描述符或SQL表达式。或者只是`relation()`名称或类描述符的旧方法也适用。请参阅包含几个示例的ORM教程。
+    您现在可以通过多种方式指定联接的目标和 ON 子句。可以提供单独的目标类，其中 SQLA 将尝试通过与`table.join(someothertable)`相同的方式通过外键形成连接。可以提供一个目标和一个明确的 ON 条件，其中 ON 条件可以是`relation()`名称，实际类描述符或 SQL 表达式。或者只是`relation()`名称或类描述符的旧方法也适用。请参阅包含几个示例的 ORM 教程。
 
 -   **声明式推荐用于不需要（且不喜欢）表和映射器之间的抽象的应用程序。 -
-    [/docs/05/reference/ext/declarative.html声明式]模块，它是用于将`Table`，`mapper()`和用户定义的类对象的表达式组合在一起，因为它简化了应用程序配置，确保“每个类一个映射器”模式，并允许全面的配置可用于不同的`mapper()`调用。**单独的`mapper()`和`Table`用法现在称为“古典SQLAlchemy用法”，当然可以自由混合声明。
+    [/docs/05/reference/ext/declarative.html声明式]模块，它是用于将`Table`，`mapper()`和用户定义的类对象的表达式组合在一起，因为它简化了应用程序配置，确保“每个类一个映射器”模式，并允许全面的配置可用于不同的`mapper()`调用。**单独的`mapper()`和`Table`用法现在称为“古典 SQLAlchemy 用法”，当然可以自由混合声明。
 
 -   **.c。属性已从类（即`MyClass.c.somecolumn`）中移除**。与0.4中的情况一样，类级属性可用作查询元素，即`Class.c.propname`现在被`Class.propname`取代，`c`属性继续保留在`Table`对象上，它们表示存在于表上的`Column`对象的名称空间。
 
@@ -88,14 +88,14 @@ test / orm\_test\_deprecations.py]中查看。
 
     遍历列：
 
-        for col in table.c:
+        for col in table.c:plain
             print(col)
 
     使用特定列：
 
-        table.c.somecolumn
+        table.c.somecolumnplain
 
-    类绑定描述符支持完整的Column运算符以及文档化的面向关系的运算符，如`has()`，`any()`，`contains()`等
+    类绑定描述符支持完整的 Column 运算符以及文档化的面向关系的运算符，如`has()`，`any()`，`contains()`等
 
     严重移除`.c.`的原因 is that in 0.5, class-bound
     descriptors carry potentially different meaning, as well as
@@ -115,7 +115,7 @@ test / orm\_test\_deprecations.py]中查看。
     `person` table along the `person_id` column of each table will all have their
     `Class.person_id` attribute mapped to the
     `person_id` column in `person`, and not their subclass table.
-    版本0.4将自动将此行为映射到表格绑定的`Column`对象。In 0.5, this automatic conversion has been removed,
+    版本 0.4 将自动将此行为映射到表格绑定的`Column`对象。In 0.5, this automatic conversion has been removed,
     so that you in fact *can* use table-bound columns as a means to
     override the translations which occur with polymorphic querying;
     this allows `Query` to be able to create
@@ -123,10 +123,10 @@ test / orm\_test\_deprecations.py]中查看。
     setups, as well as portable subqueries, etc.
 
 -   **Session Now Synchronizes Automatically with
-    Transactions.**会话现在默认会自动与事务同步，包括autoflush和autoexpire。除非禁止使用`autocommit`选项，否则交易始终存在。当所有三个标志都设置为默认值时，会话在回滚之后会优雅地恢复，并且很难将陈旧的数据导入会话。有关详细信息，请参阅新的Session文档。
+    Transactions.**会话现在默认会自动与事务同步，包括 autoflush 和 autoexpire。除非禁止使用`autocommit`选项，否则交易始终存在。当所有三个标志都设置为默认值时，会话在回滚之后会优雅地恢复，并且很难将陈旧的数据导入会话。有关详细信息，请参阅新的Session文档。
 
--   **隐式订单被移除**。这将影响依赖于SA的“隐式排序”行为的ORM用户，这些用户声明所有没有`order_by()`的Query对象将ORDER
-    BY的“id”或“oid”列主映射表和所有懒惰/急切加载的集合都会应用类似的排序。在0.5中，必须在`mapper()`和`relation()`对象（如果需要）上显式配置自动排序，否则在使用`Query`时自动排序。
+-   **隐式订单被移除**。这将影响依赖于 SA 的“隐式排序”行为的 ORM 用户，这些用户声明所有没有`order_by()`的 Query 对象将 ORDER
+    BY 的“id”或“oid”列主映射表和所有懒惰/急切加载的集合都会应用类似的排序。在 0.5 中，必须在`mapper()`和`relation()`对象（如果需要）上显式配置自动排序，否则在使用`Query`时自动排序。
 
     To convert an 0.4 mapping to 0.5, such that its ordering behavior
     will be extremely similar to 0.4 or previous, use the
@@ -146,13 +146,13 @@ test / orm\_test\_deprecations.py]中查看。
     set using strings which are evaluated in Python later on (this works
     **only** with declarative, not plain mappers):
 
-        class MyClass(MyDeclarativeBase):
+        class MyClass(MyDeclarativeBase):plainplain
             ...
             'addresses':relation("Address", order_by="Address.id")
 
     在`relation()s`上设置`order_by`通常是个好主意，因为该顺序不会受到影响。除此之外，最佳做法是使用`Query.order_by()`来控制正在加载的主要实体的排序。
 
--   **会话现在是autoflush = True / autoexpire = True / autocommit =
+-   **会话现在是 autoflush = True / autoexpire = True / autocommit =
     False。** - 要设置它，只需调用不带参数的`sessionmaker()`即可。名称`transactional=True`现在是`autocommit=False`。Flushes occur
     upon each query issued (disable with `autoflush=False`), within each `commit()` (as always),
     and before each `begin_nested()` (so rolling
@@ -166,7 +166,7 @@ test / orm\_test\_deprecations.py]中查看。
     `session.add(someitem)` and
     `session.add_all([list of items])` methods
     replace `save()`, `update()`, and `save_or_update()`.
-    这些方法将在整个0.5中保持不推荐。
+    这些方法将在整个 0.5 中保持不推荐。
 
 -   **backref配置没有冗长。** - The `backref()`
     function now uses the `primaryjoin` and
@@ -175,14 +175,14 @@ test / orm\_test\_deprecations.py]中查看。
     stated. 不再需要分别在两个方向上指定`primaryjoin` / `secondaryjoin`。
 
 -   **简化的多态选项。** -
-    ORM的“多态负载”行为已被简化。在0.4中，mapper()有一个名为`polymorphic_fetch`的参数，可以将其配置为`select`或`deferred`。该选项被删除；现在，映射器只会推迟SELECT语句中不存在的任何列。The
+    ORM 的“多态负载”行为已被简化。在 0.4 中，mapper()有一个名为`polymorphic_fetch`的参数，可以将其配置为`select`或`deferred`。该选项被删除；现在，映射器只会推迟SELECT语句中不存在的任何列。The
     actual SELECT statement used is controlled by the
     `with_polymorphic` mapper argument (which is
     also in 0.4 and replaces `select_table`), as
     well as the `with_polymorphic()` method on
     `Query` (also in 0.4).
 
-    对继承类的延迟加载的一个改进是映射器现在在所有情况下都产生了SELECT语句的“优化”版本；也就是说，如果B类从A继承，并且只有B类中存在的几个属性已过期，则刷新操作将只在SELECT语句中包含B的表，并且不会加入A.
+    对继承类的延迟加载的一个改进是映射器现在在所有情况下都产生了 SELECT 语句的“优化”版本；也就是说，如果 B 类从 A 继承，并且只有 B 类中存在的几个属性已过期，则刷新操作将只在 SELECT 语句中包含 B 的表，并且不会加入 A.
 
 -   `Session`上的`execute()`方法将普通字符串转换为`text()`结构，以便绑定参数可以全部指定为“：bindname”而不需要明确地调用`text()`。如果需要“原始”SQL，请使用`session.connection()。execute（“raw text”）`。
 
@@ -191,7 +191,7 @@ test / orm\_test\_deprecations.py]中查看。
 扩展ORM [¶](#extending-the-orm "Permalink to this headline")
 ------------------------------------------------------------
 
-在0.5中，我们正在采取更多方法来修改和扩展ORM。下面是一个总结：
+在 0.5 中，我们正在采取更多方法来修改和扩展 ORM。下面是一个总结：
 
 -   **MapperExtension。 T0\>** - 这是经典的扩展​​类，它仍然存在。Methods
     which should rarely be needed are `create_instance()` and `populate_instance()`.
@@ -202,25 +202,25 @@ test / orm\_test\_deprecations.py]中查看。
     `after_flush_postexec()` methods.
     由于在`before_flush()`之内，您可以自由修改会话的刷新计划，因此建议在`MapperExtension.before_XXX`之上使用此用法，而`MapperExtension`
 -   **AttributeExtension。 T0\>** -
-    这个类现在是公共API的一部分，允许拦截属性上的userland事件，包括属性设置和删除操作以及集合附加和删除。它还允许修改或设置值。文档中描述的`@validates`装饰器提供了一种将任何映射属性标记为由特定类方法“验证”的快速方法。
+    这个类现在是公共 API 的一部分，允许拦截属性上的 userland 事件，包括属性设置和删除操作以及集合附加和删除。它还允许修改或设置值。文档中描述的`@validates`装饰器提供了一种将任何映射属性标记为由特定类方法“验证”的快速方法。
 -   **属性工具定制。** -
-    提供了一个API，用于完全替代SQLAlchemy的属性检测，或者仅仅在某些情况下对其进行扩充。该API是为了Trellis工具包的目的而生成的，但可作为公共API提供。在`/examples/custom_attributes`目录中的分发中提供了一些示例。
+    提供了一个 API，用于完全替代 SQLAlchemy 的属性检测，或者仅仅在某些情况下对其进行扩充。该 API 是为了 Trellis 工具包的目的而生成的，但可作为公共 API 提供。在`/examples/custom_attributes`目录中的分发中提供了一些示例。
 
 模式/类型[¶ T0\>](#schema-types "Permalink to this headline")
 -------------------------------------------------------------
 
--   **没有长度的字符串不会再生成TEXT，它会生成VARCHAR** -
+-   **没有长度的字符串不会再生成 TEXT，它会生成 VARCHAR** -
     当指定长度时，`String`类型不再奇迹般地转换为`Text`
-    。这仅在发出CREATE
-    TABLE时有效，因为它将发出没有长度参数的`VARCHAR`，这在许多（但不是全部）数据库上都无效。要创建TEXT（或CLOB，即无界字符串）列，请使用`Text`类型。
+    。这仅在发出 CREATE
+    TABLE 时有效，因为它将发出没有长度参数的`VARCHAR`，这在许多（但不是全部）数据库上都无效。要创建 TEXT（或 CLOB，即无界字符串）列，请使用`Text`类型。
 
--   **具有mutable = True的PickleType()需要\_\_eq \_\_()方法** -
-    `PickleType`类型需要在mutable =
-    True时比较值。比较`pickle.dumps()`的方法是低效且不可靠的。如果传入的对象没有实现`__eq__()`并且也不是`None`，则使用`dumps()`比较，但会引发警告。对于实现包含所有字典，列表等的`__eq__()`的类型，比较将使用`==`，现在默认情况下可靠。
+-   **具有 mutable = True 的 PickleType()需要\_\_eq \_\_()方法** -
+    `PickleType`类型需要在 mutable =
+    True 时比较值。比较`pickle.dumps()`的方法是低效且不可靠的。如果传入的对象没有实现`__eq__()`并且也不是`None`，则使用`dumps()`比较，但会引发警告。对于实现包含所有字典，列表等的`__eq__()`的类型，比较将使用`==`，现在默认情况下可靠。
 
 -   **convert\_bind\_param() and convert\_result\_value() methods of
     TypeEngine/TypeDecorator are removed.** -
-    不幸的是，O'Reilly的书中记录了这些方法，即使它们在0.3后被弃用。对于类型为`TypeEngine`的用户定义类型，应该使用`bind_processor()`和`result_processor()`方法进行绑定/结果处理。任何用户定义的类型，无论是扩展`TypeEngine`还是`TypeDecorator`，都可以使用以下适配器轻松适应新样式：
+    不幸的是，O'Reilly 的书中记录了这些方法，即使它们在 0.3 后被弃用。对于类型为`TypeEngine`的用户定义类型，应该使用`bind_processor()`和`result_processor()`方法进行绑定/结果处理。任何用户定义的类型，无论是扩展`TypeEngine`还是`TypeDecorator`，都可以使用以下适配器轻松适应新样式：
 
         class AdaptOldConvertMethods(object):
             """A mixin which adapts 0.3-style convert_bind_param and
@@ -243,21 +243,21 @@ test / orm\_test\_deprecations.py]中查看。
             def convert_bind_param(self, value, dialect):
                 return value
 
-    要使用上面的mixin：
+    要使用上面的 mixin：
 
         class MyType(AdaptOldConvertMethods, TypeEngine):
            # ...
 
 -   `Column`和`Table`以及`Table`中的`quote_schema`标志上的`quote`默认值是`None`，这意味着让常规引用规则生效。当`True`时，强制引用引用。当`False`时，引用被强制关闭。
 
--   列`DEFAULT`值DDL现在可以通过`Column（...， server_default ='val'）  t2 >，弃用列（...， PassiveDefault（'val'））`。`default=`现在专用于Python启动的默认值，并且可以与server\_default共存。新的`server_default=FetchedValue()`取代了用于标记列的`PassiveDefault('')`成语受外部触发影响并且没有DDL副作用。
+-   列`DEFAULT`值 DDL 现在可以通过`Column（...， server_default ='val'）  t2 >，弃用列（...， PassiveDefault（'val'））`。`default=`现在专用于 Python 启动的默认值，并且可以与 server\_default共存。新的`server_default=FetchedValue()`取代了用于标记列的`PassiveDefault('')`成语受外部触发影响并且没有 DDL 副作用。
 
 -   SQLite的`DateTime`，`Time`和`Date`类型现在**只接受日期时间对象，而不接受字符串**作为绑定参数输入。如果你想创建自己的“hybrid”类型，它接受字符串并将结果作为日期对象返回（从任何你想要的格式），创建一个`TypeDecorator`，它建立在`String`如果您只需要基于字符串的日期，只需使用`String`即可。
 
--   此外，当与SQLite一起使用时，`DateTime`和`Time`类型现在表示Python
+-   此外，当与 SQLite 一起使用时，`DateTime`和`Time`类型现在表示 Python
     `datetime.datetime`对象的“microseconds”字段与`str(datetime)`相同的方式 - 分数秒，而不是微秒数。那是：
 
-        dt = datetime.datetime(2008, 6, 27, 12, 0, 0, 125)  # 125 usec
+        dt = datetime.datetime(2008, 6, 27, 12, 0, 0, 125)  # 125 usecplainplain
 
         # old way
         '2008-06-27 12:00:00.125'
@@ -265,7 +265,7 @@ test / orm\_test\_deprecations.py]中查看。
         # new way
         '2008-06-27 12:00:00.000125'
 
-    因此，如果现有的基于SQLite文件的数据库打算在0.4和0.5之间使用，则必须升级日期时间列以存储新格式（请注意：请测试一下，我非常肯定它的正确性）：
+    因此，如果现有的基于 SQLite 文件的数据库打算在 0.4 和 0.5 之间使用，则必须升级日期时间列以存储新格式（请注意：请测试一下，我非常肯定它的正确性）：
 
         UPDATE mytable SET somedatecol =
           substr(somedatecol, 0, 19) || '.' || substr((substr(somedatecol, 21, -1) / 1000000), 3, -1);
@@ -275,11 +275,11 @@ test / orm\_test\_deprecations.py]中查看。
         from sqlalchemy.databases.sqlite import DateTimeMixin
         DateTimeMixin.__legacy_microseconds__ = True
 
-默认情况下，连接池不再是threadlocal [¶](#connection-pool-no-longer-threadlocal-by-default "Permalink to this headline")
+默认情况下，连接池不再是 threadlocal [¶](#connection-pool-no-longer-threadlocal-by-default "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------
 
 0.4有一个不幸的默认设置“pool\_threadlocal =
-True”，例如，当在单个线程中使用多个会话时会导致意外行为。这个标志现在在0.5。To
+True”，例如，当在单个线程中使用多个会话时会导致意外行为。这个标志现在在 0.5。To
 re-enable 0.4’s behavior, specify `pool_threadlocal=True` to `create_engine()`, or alternatively use
 the “threadlocal” strategy via `strategy="threadlocal"`.
 
@@ -293,7 +293,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     their argument now, which allows a path to be formulated using
     descriptors, ie. :
 
-        query.options(eagerload_all(User.orders, Order.items, Item.keywords))
+        query.options(eagerload_all(User.orders, Order.items, Item.keywords))plain
 
     为了向后兼容，仍然接受单个数组参数。
 
@@ -302,7 +302,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     length \*args, with a single array accepted for backwards
     compatibility:
 
-        query.join('orders', 'items')
+        query.join('orders', 'items')plain
         query.join(User.orders, Order.items)
 
 -   列和类似的\_()方法中的`in_()`它不再接受`\*args`。
@@ -311,18 +311,18 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 ---------------------------------------------------
 
 -   **entity\_name** -
-    此功能始终存在问题并且很少使用。0.5的更深入充实的用例揭示了导致其被删除的`entity_name`的进一步问题。如果单个类需要不同的映射，请将该类拆分为单独的子类并分别映射它们。一个例子是[wiki：UsageRecipes
+    此功能始终存在问题并且很少使用。0.5 的更深入充实的用例揭示了导致其被删除的`entity_name`的进一步问题。如果单个类需要不同的映射，请将该类拆分为单独的子类并分别映射它们。一个例子是[wiki：UsageRecipes
     / EntityName]。有关基本原理的更多信息，请参见http：//groups.google.c
     om / group / sqlalchemy / browse\_thread / thread /
     9e23a0641a88b96d？hl = en。
 
 -   **get()/load() cleanup**
 
-    `load()`方法已被删除。它的功能是任意的，基本上从Hibernate中复制，它也不是一个特别有意义的方法。
+    `load()`方法已被删除。它的功能是任意的，基本上从 Hibernate 中复制，它也不是一个特别有意义的方法。
 
     要获得同等功能：
 
-        x = session.query(SomeClass).populate_existing().get(7)
+        x = session.query(SomeClass).populate_existing().get(7)plain
 
     `Session.get(cls, id)` and
     `Session.load(cls, id)` have been removed.
@@ -331,7 +331,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
     `MapperExtension.get()`也被删除（就像`MapperExtension.load()`）。要覆盖`Query.get()`的功能，请使用以下子类：
 
-        class MyQuery(Query):
+        class MyQuery(Query):plainplain
             def get(self, ident):
                 # ...
 
@@ -346,7 +346,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     foreignkey，association，private，attributeext，is\_backref
 
     特别是，`attributeext`被替换为`extension` -
-    `AttributeExtension`类现在处于公共API中。
+    `AttributeExtension`类现在处于公共 API 中。
 
 -   `session.Query()`
 
@@ -358,7 +358,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     `join()`, `outerjoin()`,
     `add_entity()` and `add_column()` has been removed. 要将`Query`中的表别名作为结果列，请使用`aliased`结构：
 
-        from sqlalchemy.orm import aliased
+        from sqlalchemy.orm import aliasedplain
         address_alias = aliased(Address)
         print(session.query(User, address_alias).join((address_alias, User.addresses)).all())
 
@@ -369,11 +369,11 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
         这个方法不是很明显，但是具有将惰性加载与特定会话相关联的效果，即使父对象完全分离，当扩展名如`scoped_session()`或旧使用`SessionContextExt`。一些依赖此行为的应用程序可能不再按预期工作；但是更好的编程习惯是在需要从属性访问数据库时始终确保对象存在于会话中。
 -   `mapper（MyClass， mytable）`
 
-    映射类no更长，具有“c”类属性；例如`MyClass.c`
+    映射类 no 更长，具有“c”类属性；例如`MyClass.c`
 
 -   `sqlalchemy.orm.collections`
 
-    prepare\_instrumentation的\_prepare\_instrumentation别名已被删除。
+    prepare\_instrumentation 的\_prepare\_instrumentation别名已被删除。
 
 -   `sqlalchemy.orm`
 
@@ -415,7 +415,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
 -   `sqlalchemy.exc`
 
-    `exc.AssertionError`已被删除，并且使用由内置相同名称的Python替换。
+    `exc.AssertionError`已被删除，并且使用由内置相同名称的 Python 替换。
 
 -   `sqlalchemy.databases.mysql`
 
@@ -426,17 +426,17 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
 -   `sqlalchemy.exceptions`现在是`sqlalchemy.exc`
 
-    该模块仍然可以以旧名称导入，直到0.6。
+    该模块仍然可以以旧名称导入，直到 0.6。
 
 -   `FlushError`，`ConcurrentModificationError`，`UnmappedColumnError` - \>
     sqlalchemy.orm.exc
 
-    这些异常移至orm包。导入'sqlalchemy.orm'将在sqlalchemy.exc中安装别名，直到0.6。
+    这些异常移至 orm 包。导入'sqlalchemy.orm'将在 sqlalchemy.exc 中安装别名，直到 0.6。
 
 -   `sqlalchemy.logging` - \>
     `sqlalchemy.log`
 
-    此内部模块已重命名。使用py2app和类似工具扫描导入时，不再需要特殊的套件。
+    此内部模块已重命名。使用 py2app 和类似工具扫描导入时，不再需要特殊的套件。
 
 -   `session.Query().iterate_instances()` - \>
     `session.Query().instances()`。
@@ -450,7 +450,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
 -   `sqlalchemy.PassiveDefault`
 
-    使用`Column(server_default=...)`将其转换为sqlalchemy.DefaultClause()。
+    使用`Column(server_default=...)`将其转换为 sqlalchemy.DefaultClause()。
 
 -   `session.Query().iterate_instances()`它已被重命名为`instances()`。
 

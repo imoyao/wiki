@@ -9,7 +9,6 @@ categories:
   - extensions
   - declarative
 tags:
-  - 
 ---
 映射类继承层次结构[¶](#mapping-class-inheritance-hierarchies "Permalink to this headline")
 ==========================================================================================
@@ -25,7 +24,7 @@ SQLAlchemy支持三种继承形式：**单表继承**，其中几种类由单个
 
 在连接的表继承中，沿着父类的特定类列表的每个类都由唯一的表来表示。特定实例的全部属性集合表示为沿其继承路径中所有表的连接。在这里，我们首先定义`Employee`类。该表将包含主键列（或多个列），以及由`Employee`表示的每个属性的列。在这种情况下，它只是`name`：
 
-    class Employee(Base):
+    class Employee(Base):plain
         __tablename__ = 'employee'
         id = Column(Integer, primary_key=True)
         name = Column(String(50))
@@ -42,7 +41,7 @@ SQLAlchemy支持三种继承形式：**单表继承**，其中几种类由单个
 
 目前，**只能设置一个鉴别器列**，通常位于层次结构中最底层的类。“级联”多态列还不被支持。
 
-只有在需要多态加载时才需要鉴别器列，正如通常情况一样。它不是直接存在于基本映射表上，而是可以在查询类时使用的派生select语句上定义；但是，这是一个更复杂的配置方案。
+只有在需要多态加载时才需要鉴别器列，正如通常情况一样。它不是直接存在于基本映射表上，而是可以在查询类时使用的派生 select 语句上定义；但是，这是一个更复杂的配置方案。
 
 该映射通过`__mapper_args__`字典接收附加参数。在这里，`type`列明确表示为鉴别器列，`employee`的**多态性标识**也被给出；这是将存储在该类的实例的多态鉴别器列中的值。
 
@@ -91,9 +90,9 @@ a statement.
 
 [`orm.with_polymorphic()`](#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")函数和[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")的[`with_polymorphic()`](query.html#sqlalchemy.orm.query.Query.with_polymorphic "sqlalchemy.orm.query.Query.with_polymorphic")方法会影响[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")从中选择。通常，像这样的查询：
 
-    session.query(Employee).all()
+    session.query(Employee).all()plain
 
-...仅从`employee`表中选择。从数据库加载新鲜数据时，我们的连接表设置将仅使用如下所示的SQL从父表进行查询：
+...仅从`employee`表中选择。从数据库加载新鲜数据时，我们的连接表设置将仅使用如下所示的 SQL 从父表进行查询：
 
     SELECT employee.id AS employee_id,
         employee.name AS employee_name, employee.type AS employee_type
@@ -104,9 +103,9 @@ As attributes are requested from those `Employee`
 objects which are represented in either the `engineer` or `manager` child tables, a second load
 is issued for the columns in that related row, if the data was not
 already loaded.
-因此，在访问这些对象之后，您会看到更多的SQL按以下方式发布：
+因此，在访问这些对象之后，您会看到更多的 SQL 按以下方式发布：
 
-    SELECT manager.id AS manager_id,
+    SELECT manager.id AS manager_id,plain
         manager.manager_data AS manager_manager_data
     FROM manager
     WHERE ? = manager.id
@@ -117,7 +116,7 @@ already loaded.
     WHERE ? = engineer.id
     [2]
 
-在发布少量项目的搜索时（例如使用[`Query.get()`](query.html#sqlalchemy.orm.query.Query.get "sqlalchemy.orm.query.Query.get")时），这种行为可以很好地工作，因为连接表的全部范围不会不必要地引入到SQL语句中。但是当查询大量已知类型很多的行时，可能需要主动加入部分或全部连接的表。`with_polymorphic`功能提供了此功能。
+在发布少量项目的搜索时（例如使用[`Query.get()`](query.html#sqlalchemy.orm.query.Query.get "sqlalchemy.orm.query.Query.get")时），这种行为可以很好地工作，因为连接表的全部范围不会不必要地引入到 SQL 语句中。但是当查询大量已知类型很多的行时，可能需要主动加入部分或全部连接的表。`with_polymorphic`功能提供了此功能。
 
 告诉我们的查询需要多态加载`Engineer`和`Manager`对象，我们可以使用[`orm.with_polymorphic()`](#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")函数创建一个新的别名类与每个继承表的外连接相结合的基表的选择：
 
@@ -171,9 +170,9 @@ string `'*'` to indicate all subclasses:
     # use the 'entity' with a Query object
     session.query(entity).all()
 
-它还接受第三个参数`selectable`，它取代了自动连接创建，并直接从可选给定中进行选择。这个特性通常与后面描述的“具体”继承一起使用，但是可以与任何类型的继承设置一起使用，以便专用SQL用于多态加载：
+它还接受第三个参数`selectable`，它取代了自动连接创建，并直接从可选给定中进行选择。这个特性通常与后面描述的“具体”继承一起使用，但是可以与任何类型的继承设置一起使用，以便专用 SQL 用于多态加载：
 
-    # custom selectable
+    # custom selectableplain
     employee = Employee.__table__
     manager = Manager.__table__
     engineer = Engineer.__table__
@@ -297,7 +296,7 @@ string `'*'` to indicate all subclasses:
 
 [`of_type()`](internals.html#sqlalchemy.orm.interfaces.PropComparator.of_type "sqlalchemy.orm.interfaces.PropComparator.of_type")方法是一个帮助器，它允许沿着[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")路径构建连接，同时将标准缩小到特定的子类。假设`employees`表代表与`Company`对象关联的员工集合。我们将在`employees`表和一个新表`companies`中添加一个`company_id`列：
 
-    class Company(Base):
+    class Company(Base):plain
         __tablename__ = 'company'
         id = Column(Integer, primary_key=True)
         name = Column(String(50))
@@ -334,13 +333,13 @@ When querying from `Company` onto the
 `company` to `employee`, without
 including `engineer` or `manager` in the mix. 如果我们希望具有专门针对`Engineer`类的标准，那么我们可以使用[`of_type()`](internals.html#sqlalchemy.orm.interfaces.PropComparator.of_type "sqlalchemy.orm.interfaces.PropComparator.of_type")运算符告诉那些方法连接或子查询表示子类的连接表：
 
-    session.query(Company).\
+    session.query(Company).\plainplain
         join(Company.employees.of_type(Engineer)).\
         filter(Engineer.engineer_info=='someinfo')
 
-这样的一个长效版本将涉及到在2元组中可选的完整目标：
+这样的一个长效版本将涉及到在 2 元组中可选的完整目标：
 
-    employee = Employee.__table__
+    employee = Employee.__table__plain
     engineer = Engineer.__table__
 
     session.query(Company).\
@@ -360,9 +359,9 @@ including `engineer` or `manager` in the mix. 如果我们希望具有专门针�
                 manager_and_engineer.Manager.manager_data=='somedata')
         )
 
-在上面，我们在`orm.with_polymorhpic()`中使用了`aliased=True`参数，这样`Company`和`manager_and_engineer`转换为别名子查询。某些后端（如SQLite和旧版本的MySQL）无法处理以下格式的FROM子句：
+在上面，我们在`orm.with_polymorhpic()`中使用了`aliased=True`参数，这样`Company`和`manager_and_engineer`转换为别名子查询。某些后端（如 SQLite 和旧版本的 MySQL）无法处理以下格式的 FROM 子句：
 
-    FROM x JOIN (y JOIN z ON <onclause>) ON <onclause>
+    FROM x JOIN (y JOIN z ON <onclause>) ON <onclause>plain
 
 使用`aliased=True`而不是将其呈现为：
 
@@ -370,7 +369,7 @@ including `engineer` or `manager` in the mix. 如果我们希望具有专门针�
 
 上面的连接也可以通过将`of_type()`与多态结构相结合来更简洁地表达：
 
-    manager_and_engineer = with_polymorphic(
+    manager_and_engineer = with_polymorphic(plain
                                 Employee, [Manager, Engineer],
                                 aliased=True)
 
@@ -383,7 +382,7 @@ including `engineer` or `manager` in the mix. 如果我们希望具有专门针�
 
 当嵌入式标准根据子类时，`any()`和`has()`运算符也可以与[`of_type()`](internals.html#sqlalchemy.orm.interfaces.PropComparator.of_type "sqlalchemy.orm.interfaces.PropComparator.of_type")一起使用：
 
-    session.query(Company).\
+    session.query(Company).\plain
             filter(
                 Company.employees.of_type(Engineer).
                     any(Engineer.engineer_info=='someinfo')
@@ -411,7 +410,7 @@ constructs in conjunction with [`Query.join()`](query.html#sqlalchemy.orm.query.
 
 [`joinedload()`](loading_relationships.html#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")，[`subqueryload()`](loading_relationships.html#sqlalchemy.orm.subqueryload "sqlalchemy.orm.subqueryload")，[`contains_eager()`](loading_relationships.html#sqlalchemy.orm.contains_eager "sqlalchemy.orm.contains_eager")和其他负载相关选项也支持使用[`of_type()`](internals.html#sqlalchemy.orm.interfaces.PropComparator.of_type "sqlalchemy.orm.interfaces.PropComparator.of_type")下面我们加载`Company`行，同时热切地加载相关的`Engineer`对象，同时查询`employee`和`engineer`
 
-    session.query(Company).\
+    session.query(Company).\plain
         options(
             subqueryload(Company.employees.of_type(Engineer)).
             subqueryload("machines")
@@ -478,7 +477,7 @@ targets.
             'polymorphic_identity':'engineer'
         }
 
-请注意，派生类Manager和Engineer的映射器省略了`__tablename__`，表示它们没有自己的映射表。
+请注意，派生类 Manager 和 Engineer 的映射器省略了`__tablename__`，表示它们没有自己的映射表。
 
 具体表继承[¶](#concrete-table-inheritance "Permalink to this headline")
 -----------------------------------------------------------------------
@@ -525,7 +524,7 @@ targets.
 
 但是，当使用Declarative时，Declarative假定类之间有继承映射，因为它们已经处于继承关系中。因此，为了以声明方式映射我们的三个类，我们必须在`__mapper_args__`中包含[`orm.mapper.concrete`](mapping_api.html#sqlalchemy.orm.mapper.params.concrete "sqlalchemy.orm.mapper")参数：
 
-    class Employee(Base):
+    class Employee(Base):plain
         __tablename__ = 'employee'
 
         id = Column(Integer, primary_key=True)
@@ -624,11 +623,11 @@ targets.
         FROM engineer
     ) AS pjoin
 
-上面的UNION查询需要为每个子表生成“NULL”列，以适应那些不属于映射的列。
+上面的 UNION 查询需要为每个子表生成“NULL”列，以适应那些不属于映射的列。
 
-为了使用Declarative映射具体继承和多态加载，挑战在于在映射创建时准备好多态联合。实现此目的的一种方法是继续在实际映射类之前定义表元数据，并使用`__table__`将它们指定给每个类：
+为了使用 Declarative 映射具体继承和多态加载，挑战在于在映射创建时准备好多态联合。实现此目的的一种方法是继续在实际映射类之前定义表元数据，并使用`__table__`将它们指定给每个类：
 
-    class Employee(Base):
+    class Employee(Base):plain
         __table__ = employee_table
         __mapper_args__ = {
             'polymorphic_on':pjoin.c.type,
@@ -648,7 +647,7 @@ targets.
 
 另一种方法是使用一个特殊的帮助类，它承担推迟生成[`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象的相当复杂的任务，直到收集到所有表元数据为止，并且映射器将与之关联的多态联合将能得到的。这可以通过[`AbstractConcreteBase`](extensions_declarative_api.html#sqlalchemy.ext.declarative.AbstractConcreteBase "sqlalchemy.ext.declarative.AbstractConcreteBase")和[`ConcreteBase`](extensions_declarative_api.html#sqlalchemy.ext.declarative.ConcreteBase "sqlalchemy.ext.declarative.ConcreteBase")类获得。就我们这里的例子而言，我们使用“混凝土”基础，例如一个`Employee`行本身可以存在，不是`Engineer`或`Manager`。映射将如下所示：
 
-    from sqlalchemy.ext.declarative import ConcreteBase
+    from sqlalchemy.ext.declarative import ConcreteBaseplain
 
     class Employee(ConcreteBase, Base):
         __tablename__ = 'employee'
@@ -686,7 +685,7 @@ targets.
 instantiated directly.
 这里的变化是基本映射器直接映射到可选的“多态联合”，它不再包含`employee`表。在经典的映射中，这是：
 
-    from sqlalchemy.orm import polymorphic_union
+    from sqlalchemy.orm import polymorphic_unionplain
 
     pjoin = polymorphic_union({
         'manager': managers_table,
@@ -707,7 +706,7 @@ instantiated directly.
 
 使用声明助手，[`AbstractConcreteBase`](extensions_declarative_api.html#sqlalchemy.ext.declarative.AbstractConcreteBase "sqlalchemy.ext.declarative.AbstractConcreteBase")助手可以产生这个；该映射将是：
 
-    from sqlalchemy.ext.declarative import AbstractConcreteBase
+    from sqlalchemy.ext.declarative import AbstractConcreteBaseplain
 
     class Employee(AbstractConcreteBase, Base):
         pass
@@ -819,7 +818,7 @@ configure back references in such a configuration the
 `A(object)` and `B(A)`
 bidirectionally reference `C`:
 
-    ajoin = polymorphic_union({
+    ajoin = polymorphic_union({plain
             'a':a_table,
             'b':b_table
         }, 'type', 'ajoin')

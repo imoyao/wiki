@@ -169,17 +169,17 @@ API参考[¶](#api-reference "Permalink to this headline")
 `sqlalchemy.ext.declarative.api。`{.descclassname} `_declarative_constructor`{.descname} （ *self*，*\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.ext.declarative.api._declarative_constructor "Permalink to this definition")
 :   一个简单的构造函数，允许从kwargs初始化。
 
-    使用`kwargs`中的名称和值在构造的实例上设置属性。
+    使用`kwargs`中的名称和值在构造的实例上设置属性。plain
 
     只有作为实例类的属性存在的键才被允许。例如，这些可以是任何映射的列或关系。
 
 ` sqlalchemy.ext.declarative。 T0>  has_inherited_table  T1> （ T2>  CLS  T3> ） T4> ¶< / T5>`{.descclassname}
-:   给定一个类，如果它继承的任何类有一个映射表，则返回True，否则返回False。
+:   给定一个类，如果它继承的任何类有一个映射表，则返回 True，否则返回 False。
 
  `sqlalchemy.ext.declarative.`{.descclassname}`synonym_for`{.descname}(*name*, *map\_column=False*)[¶](#sqlalchemy.ext.declarative.synonym_for "Permalink to this definition")
 :   装饰者，使Python @property成为列的查询同义词。
 
-    [`synonym()`](mapped_attributes.html#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")的装饰版本。正在装饰的函数是'descriptor'，否则将它的参数传递给synonym()：
+    [`synonym()`](mapped_attributes.html#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")的装饰版本。正在装饰的函数是'descriptor'，否则将它的参数传递给synonym()：plainplain
 
         @synonym_for('col')
         @property
@@ -205,7 +205,7 @@ API参考[¶](#api-reference "Permalink to this headline")
         prop = comparable_property(MyComparatorType)
 
  `sqlalchemy.ext.declarative.`{.descclassname}`instrument_declarative`{.descname}(*cls*, *registry*, *metadata*)[¶](#sqlalchemy.ext.declarative.instrument_declarative "Permalink to this definition")
-:   给定一个类，使用给定的注册表（声明可以是任何字典和MetaData对象）声明性地配置类。
+:   给定一个类，使用给定的注册表（声明可以是任何字典和 MetaData 对象）声明性地配置类。
 
 *class* `sqlalchemy.ext.declarative。`{.descclassname} `AbstractConcreteBase`{.descname} [¶](#sqlalchemy.ext.declarative.AbstractConcreteBase "Permalink to this definition")
 :   基础：`sqlalchemy.ext.declarative.api.ConcreteBase`
@@ -389,7 +389,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 
 `__declare_last__()`钩子允许定义由[`MapperEvents.after_configured()`](events.html#sqlalchemy.orm.events.MapperEvents.after_configured "sqlalchemy.orm.events.MapperEvents.after_configured")事件自动调用的类级别函数，该映射假定映射已完成，并且'configure'步骤已经完成：
 
-    class MyClass(Base):
+    class MyClass(Base):plain
         @classmethod
         def __declare_last__(cls):
             ""
@@ -401,13 +401,13 @@ New in version 0.7.3.
 
 像`__declare_last__()`，但是在映射器配置开始时通过[`MapperEvents.before_configured()`](events.html#sqlalchemy.orm.events.MapperEvents.before_configured "sqlalchemy.orm.events.MapperEvents.before_configured")事件调用：
 
-    class MyClass(Base):
+    class MyClass(Base):plainplainplain
         @classmethod
         def __declare_first__(cls):
             ""
             # do something before mappings are configured
 
-版本0.9.3中的新功能
+版本 0.9.3 中的新功能
 
 #### `__abstract__`[¶](#abstract "Permalink to this headline")
 
@@ -442,7 +442,7 @@ Classes](mixins.html#declarative-mixins)），允许子类仅从特殊类扩展�
 
 以上，从`DefaultBase`继承的类将使用一个[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")作为表的注册表，而那些从`OtherBase`继承的类将使用不同的表。表格本身可以在不同的数据库中创建：
 
-    DefaultBase.metadata.create_all(some_engine)
+    DefaultBase.metadata.create_all(some_engine)plain
     OtherBase.metadata_create_all(some_other_engine)
 
 New in version 0.7.3.

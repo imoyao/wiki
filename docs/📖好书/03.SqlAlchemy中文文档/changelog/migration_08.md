@@ -9,22 +9,22 @@ categories:
 tags:
   - 
 ---
-SQLAlchemy 0.8有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-8 "Permalink to this headline")
+SQLAlchemy 0.8 有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-8 "Permalink to this headline")
 ===========================================================================================
 
 关于本文档
 
-本文档介绍了截至2012年10月发布的SQLAlchemy版本0.7，以及预计2013年初发布的SQLAlchemy版本0.8之间的变化。
+本文档介绍了截至 2012 年 10 月发布的 SQLAlchemy 版本 0.7，以及预计 2013 年初发布的 SQLAlchemy 版本 0.8 之间的变化。
 
-文件日期：2012年10月25日更新日期：2013年3月9日
+文件日期：2012 年 10 月 25 日更新日期：2013 年 3 月 9 日
 
 引言[¶ T0\>](#introduction "Permalink to this headline")
 --------------------------------------------------------
 
-本指南介绍了SQLAlchemy
-0.8版中的新增功能，并介绍了影响用户将其应用程序从0.7系列SQLAlchemy迁移到0.8的更改。
+本指南介绍了 SQLAlchemy
+0.8 版中的新增功能，并介绍了影响用户将其应用程序从 0.7 系列 SQLAlchemy 迁移到 0.8 的更改。
 
-SQLAlchemy版本将在1.0版中关闭，而0.5版以后的每个新版本都会减少主要的使用更改。大部分应用现代0.7模式的应用程序应该可以移动到0.8而无需更改。使用0.6甚至0.5模式的应用程序也应该直接迁移到0.8，尽管更大的应用程序可能需要使用每个临时版本进行测试。
+SQLAlchemy 版本将在 1.0 版中关闭，而 0.5 版以后的每个新版本都会减少主要的使用更改。大部分应用现代 0.7 模式的应用程序应该可以移动到 0.8 而无需更改。使用 0.6 甚至 0.5 模式的应用程序也应该直接迁移到 0.8，尽管更大的应用程序可能需要使用每个临时版本进行测试。
 
 平台支持[¶](#platform-support "Permalink to this headline")
 -----------------------------------------------------------
@@ -41,23 +41,23 @@ been the source of some bugs, as well as context managers (that is,
 `try:/except:/else:` blocks which will help with
 code readability.
 
-SQLAlchemy最终也会减少2.5的支持 -
-当2.6达到基线时，SQLAlchemy将转而使用2.6 /
-3.3原地兼容性，去掉`2to3`工具的使用并维护一个源代码库与Python 2和3同时工作。
+SQLAlchemy 最终也会减少 2.5 的支持 -
+当 2.6 达到基线时，SQLAlchemy 将转而使用 2.6 /
+3.3 原地兼容性，去掉`2to3`工具的使用并维护一个源代码库与 Python 2 和 3 同时工作。
 
-新的ORM功能[¶](#new-orm-features "Permalink to this headline")
+新的 ORM 功能[¶](#new-orm-features "Permalink to this headline")
 --------------------------------------------------------------
 
 ### 重写[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构[¶](#rewritten-relationship-mechanics "Permalink to this headline")
 
-0.8特性是一个关于如何[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")确定如何在两个实体之间进行连接的改进且功能强大的系统。新系统包含以下功能：
+0.8 特性是一个关于如何[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")确定如何在两个实体之间进行连接的改进且功能强大的系统。新系统包含以下功能：
 
 -   The `primaryjoin` argument is **no longer
     needed** when constructing a [`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
     against a class that has multiple foreign key paths to the target.
     只需要`foreign_keys`参数来指定应包含的列：
 
-        class Parent(Base):
+        class Parent(Base):plain
             __tablename__ = 'parent'
             id = Column(Integer, primary_key=True)
             child_id_one = Column(Integer, ForeignKey('child.id'))
@@ -93,7 +93,7 @@ SQLAlchemy最终也会减少2.5的支持 -
     Above, the `Folder` refers to its parent
     `Folder` joining from `account_id` to itself, and `parent_id` to
     `folder_id`.
-    当SQLAlchemy构造一个自动连接时，它不再可以假设“远程”一侧的所有列都是别名，而“本地”一侧的所有列都不是这样
+    当 SQLAlchemy 构造一个自动连接时，它不再可以假设“远程”一侧的所有列都是别名，而“本地”一侧的所有列都不是这样
     - `account_id`列是**两边**。所以内部关系机制被完全重写以支持完全不同的系统，由此生成两个`account_id`副本，每个副本包含不同的*注释*以确定它们在语句中的角色。请注意基本热切负载中的连接条件：
 
         SELECT
@@ -113,9 +113,9 @@ SQLAlchemy最终也会减少2.5的支持 -
 
         WHERE folder.folder_id = ? AND folder.account_id = ?
 
--   以前很难的自定义连接条件，如涉及函数和/或CASTing类型的连接条件，现在在大多数情况下会按预期运行：
+-   以前很难的自定义连接条件，如涉及函数和/或 CASTing 类型的连接条件，现在在大多数情况下会按预期运行：
 
-        class HostEntry(Base):
+        class HostEntry(Base):plain
             __tablename__ = 'host_entry'
 
             id = Column(Integer, primary_key=True)
@@ -129,7 +129,7 @@ SQLAlchemy最终也会减少2.5的支持 -
                                 remote_side=ip_address
                             )
 
-    新的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")机制利用了被称为[annotations](glossary.html#term-annotations)的SQLAlchemy概念。这些注释也可以通过[`foreign()`](orm_relationship_api.html#sqlalchemy.orm.foreign "sqlalchemy.orm.foreign")和[`remote()`](orm_relationship_api.html#sqlalchemy.orm.remote "sqlalchemy.orm.remote")函数显式地提供给应用程序代码，作为提高高级配置可读性或直接注入精确度配置，绕过通常的加入检查试探法：
+    新的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")机制利用了被称为[annotations](glossary.html#term-annotations)的 SQLAlchemy 概念。这些注释也可以通过[`foreign()`](orm_relationship_api.html#sqlalchemy.orm.foreign "sqlalchemy.orm.foreign")和[`remote()`](orm_relationship_api.html#sqlalchemy.orm.remote "sqlalchemy.orm.remote")函数显式地提供给应用程序代码，作为提高高级配置可读性或直接注入精确度配置，绕过通常的加入检查试探法：
 
         from sqlalchemy.orm import foreign, remote
 
@@ -158,17 +158,17 @@ Joins](orm_join_conditions.html#relationship-configure-joins) -
 
 ### 新类/对象检查系统[¶](#new-class-object-inspection-system "Permalink to this headline")
 
-许多SQLAlchemy用户正在编写需要检查映射类属性的系统，包括能够获取主键列，对象关系，普通属性等等，通常用于构建数据编组系统，如JSON
-/ XML转换方案，当然还有形式库丰富。
+许多 SQLAlchemy 用户正在编写需要检查映射类属性的系统，包括能够获取主键列，对象关系，普通属性等等，通常用于构建数据编组系统，如 JSON
+/ XML 转换方案，当然还有形式库丰富。
 
-最初，[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")模型是最初的检查点，它们具有良好的文件记录系统。虽然SQLAlchemy
-ORM模型也完全可以反映内容，但这从来就不是一个完全稳定和支持的功能，用户往往不清楚如何获取这些信息。
+最初，[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")模型是最初的检查点，它们具有良好的文件记录系统。虽然 SQLAlchemy
+ORM 模型也完全可以反映内容，但这从来就不是一个完全稳定和支持的功能，用户往往不清楚如何获取这些信息。
 
-现在，0.8为此提供了一致，稳定且完全记录的API，其中包括一个用于映射类，实例，属性和其他Core和ORM构造的检查系统。该系统的入口点是核心级别的[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数。在大多数情况下，被检查的对象已经是SQLAlchemy系统的一部分，比如[`Mapper`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")，[`InstanceState`](orm_internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")，[`Inspector`](core_reflection.html#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")。在某些情况下，添加新对象的工作是在特定上下文中提供检查API，例如[`AliasedInsp`](orm_query.html#sqlalchemy.orm.util.AliasedInsp "sqlalchemy.orm.util.AliasedInsp")和[`AttributeState`](orm_internals.html#sqlalchemy.orm.state.AttributeState "sqlalchemy.orm.state.AttributeState")。
+现在，0.8 为此提供了一致，稳定且完全记录的 API，其中包括一个用于映射类，实例，属性和其他 Core 和 ORM 构造的检查系统。该系统的入口点是核心级别的[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数。在大多数情况下，被检查的对象已经是 SQLAlchemy 系统的一部分，比如[`Mapper`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")，[`InstanceState`](orm_internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")，[`Inspector`](core_reflection.html#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")。在某些情况下，添加新对象的工作是在特定上下文中提供检查 API，例如[`AliasedInsp`](orm_query.html#sqlalchemy.orm.util.AliasedInsp "sqlalchemy.orm.util.AliasedInsp")和[`AttributeState`](orm_internals.html#sqlalchemy.orm.state.AttributeState "sqlalchemy.orm.state.AttributeState")。
 
 一些关键功能的演练如下：
 
-    >>> class User(Base):
+    >>> class User(Base):plainplain
     ...     __tablename__ = 'user'
     ...     id = Column(Integer, primary_key=True)
     ...     name = Column(String)
@@ -280,14 +280,14 @@ ORM模型也完全可以反映内容，但这从来就不是一个完全稳定�
 
 [＃2208 T0\>](http://www.sqlalchemy.org/trac/ticket/2208)
 
-### 新的with\_polymorphic()功能可用于任何地方[¶](#new-with-polymorphic-feature-can-be-used-anywhere "Permalink to this headline")
+### 新的 with\_polymorphic()功能可用于任何地方[¶](#new-with-polymorphic-feature-can-be-used-anywhere "Permalink to this headline")
 
 The [`Query.with_polymorphic()`](orm_query.html#sqlalchemy.orm.query.Query.with_polymorphic "sqlalchemy.orm.query.Query.with_polymorphic")
 method allows the user to specify which tables should be present when
 querying against a joined-table entity.
 不幸的是，这个方法很笨拙，只适用于列表中的第一个实体，否则在内部使用和内部使用都会有尴尬的行为。已添加名为[`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")的对[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")结构的新增强，允许将任何实体“别名”为其自身的“多态”版本，可自由使用任何地方：
 
-    from sqlalchemy.orm import with_polymorphic
+    from sqlalchemy.orm import with_polymorphicplain
     palias = with_polymorphic(Person, [Engineer, Manager])
     session.query(Company).\
                 join(palias, Company.employees).\
@@ -311,7 +311,7 @@ target. This method can now be used to target *any number* of target
 subtypes, by combining it with the new [`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")
 function:
 
-    # use eager loading in conjunction with with_polymorphic targets
+    # use eager loading in conjunction with with_polymorphic targetsplain
     Job_P = with_polymorphic(Job, [SubJob, ExtraJob], aliased=True)
     q = s.query(DataContainer).\
                 join(DataContainer.jobs.of_type(Job_P)).\
@@ -357,7 +357,7 @@ and [`PropComparator.has()`](orm_internals.html#sqlalchemy.orm.interfaces.PropCo
 
 ### 事件可以应用于未映射的超类[¶](#events-can-be-applied-to-unmapped-superclasses "Permalink to this headline")
 
-Mapper和实例事件现在可以与一个未映射的超类相关联，其中这些事件将被映射到这些子类时传播到子类。应该使用`propagate=True`标志。此功能允许将事件与声明性基类关联：
+Mapper 和实例事件现在可以与一个未映射的超类相关联，其中这些事件将被映射到这些子类时传播到子类。应该使用`propagate=True`标志。此功能允许将事件与声明性基类关联：
 
     from sqlalchemy.ext.declarative import declarative_base
 
@@ -379,7 +379,7 @@ Mapper和实例事件现在可以与一个未映射的超类相关联，其中�
 
 Declarative的一个关键特性是能够使用其字符串名称引用其他映射类。类名注册表现在对给定类的拥有模块和包是敏感的。类可以通过表达式中的虚线名称引用：
 
-    class Snack(Base):
+    class Snack(Base):plainplain
         # ...
 
         peanuts = relationship("nuts.Peanut",
@@ -389,7 +389,7 @@ Declarative的一个关键特性是能够使用其字符串名称引用其他映
 
 [＃2338 T0\>](http://www.sqlalchemy.org/trac/ticket/2338)
 
-### 声明式[¶](#new-deferredreflection-feature-in-declarative "Permalink to this headline")中的新DeferredReflection特性
+### 声明式[¶](#new-deferredreflection-feature-in-declarative "Permalink to this headline")中的新 DeferredReflection 特性
 
 “延迟反射”示例已移至声明中的支持功能。这个特性允许只用占位符`Table`元数据构造声明式映射类，直到`prepare()`步骤被调用，给定一个`Engine`充分反映所有表格并建立实际映射。系统支持重写列，单个和联合继承，以及不同的每个引擎基数。现在可以根据在引擎创建时在一个步骤中汇编的现有表创建完整的声明性配置：
 
@@ -426,7 +426,7 @@ the mapped class itself would not be recognized when passed to
 [`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select"),
 [`Select.select_from()`](core_selectable.html#sqlalchemy.sql.expression.Select.select_from "sqlalchemy.sql.expression.Select.select_from"),
 or [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.correlate "sqlalchemy.sql.expression.Select.correlate").
-新的SQL注册系统允许映射类在核心内被接受为FROM子句：
+新的 SQL 注册系统允许映射类在核心内被接受为 FROM 子句：
 
     from sqlalchemy import select
 
@@ -436,16 +436,16 @@ or [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.
 
 [＃2245 T0\>](http://www.sqlalchemy.org/trac/ticket/2245)
 
-### Query.update()支持UPDATE..FROM [¶](#query-update-supports-update-from "Permalink to this headline")
+### Query.update()支持 UPDATE..FROM [¶](#query-update-supports-update-from "Permalink to this headline")
 
-新的UPDATE..FROM机制在query.update()中工作。下面，我们针对`SomeEntity`发出UPDATE，并针对`SomeOtherEntity`添加了一个FROM子句（或等价物，具体取决于后端）：
+新的 UPDATE..FROM 机制在 query.update()中工作。下面，我们针对`SomeEntity`发出UPDATE，并针对`SomeOtherEntity`添加了一个 FROM 子句（或等价物，具体取决于后端）：
 
     query(SomeEntity).\
         filter(SomeEntity.id==SomeOtherEntity.id).\
         filter(SomeOtherEntity.foo=='bar').\
         update({"data":"x"})
 
-特别是，对已加入继承实体的更新是受支持的，前提是UPDATE的目标对要过滤的表是本地的，或者如果父表和子表混合在一起，则它们将显式连接到查询中。下面，给出`Engineer`作为`Person`的联合子类：
+特别是，对已加入继承实体的更新是受支持的，前提是 UPDATE 的目标对要过滤的表是本地的，或者如果父表和子表混合在一起，则它们将显式连接到查询中。下面，给出`Engineer`作为`Person`的联合子类：
 
     query(Engineer).\
             filter(Person.id==Engineer.id).\
@@ -459,21 +459,21 @@ or [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.
 
 [＃2365 T0\>](http://www.sqlalchemy.org/trac/ticket/2365)
 
-### rollback()只会从begin\_nested()[¶](#rollback-will-only-roll-back-dirty-objects-from-a-begin-nested "Permalink to this headline")回滚“脏”对象
+### rollback()只会从 begin\_nested()[¶](#rollback-will-only-roll-back-dirty-objects-from-a-begin-nested "Permalink to this headline")回滚“脏”对象
 
 通过`Session.begin_nested()` -
-在`rollback()`上改变使用SAVEPOINT的用户的行为改变时，只有那些自上次刷新后变脏的对象才会有效过期时，`Session`的其余部分保持不变。这是因为对SAVEPOINT的ROLLBACK不会终止包含事务的隔离，所以不需要过期，除非那些在当前事务中没有刷新的更改。
+在`rollback()`上改变使用 SAVEPOINT 的用户的行为改变时，只有那些自上次刷新后变脏的对象才会有效过期时，`Session`的其余部分保持不变。这是因为对 SAVEPOINT 的 ROLLBACK 不会终止包含事务的隔离，所以不需要过期，除非那些在当前事务中没有刷新的更改。
 
 [＃2452 T0\>](http://www.sqlalchemy.org/trac/ticket/2452)
 
-### 缓存示例现在使用dogpile.cache [¶](#caching-example-now-uses-dogpile-cache "Permalink to this headline")
+### 缓存示例现在使用 dogpile.cache [¶](#caching-example-now-uses-dogpile-cache "Permalink to this headline")
 
-缓存示例现在使用[dogpile.cache](https://dogpilecache.readthedocs.io/)。Dogpile.cache是​​Beaker缓存部分的重写，具有极其简单和快速的操作，并支持分布式锁定。
+缓存示例现在使用[dogpile.cache](https://dogpilecache.readthedocs.io/)。Dogpile.cache 是​​Beaker 缓存部分的重写，具有极其简单和快速的操作，并支持分布式锁定。
 
-请注意，Dogpile示例以及之前的Beaker示例所使用的SQLAlchemy
-API已稍有变化，特别是如Beaker示例所示，需要进行此更改：
+请注意，Dogpile 示例以及之前的 Beaker 示例所使用的 SQLAlchemy
+API 已稍有变化，特别是如 Beaker 示例所示，需要进行此更改：
 
-    --- examples/beaker_caching/caching_query.py
+    --- examples/beaker_caching/caching_query.pyplain
     +++ examples/beaker_caching/caching_query.py
     @@ -222,7 +222,8 @@
 
@@ -497,9 +497,9 @@ API已稍有变化，特别是如Beaker示例所示，需要进行此更改：
 
 ### Core [¶](#fully-extensible-type-level-operator-support-in-core "Permalink to this headline")中完全可扩展的类型级别操作符支持
 
-核心迄今从来没有任何系统为Column和其他表达式结构添加对新SQL运算符的支持，除了[`ColumnOperators.op()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.op "sqlalchemy.sql.operators.ColumnOperators.op")方法，它足以让事情发挥作用。Core从来没有任何系统可以让现有操作员的行为被覆盖。到目前为止，操作符可以被灵活地重新定义的唯一方法是在ORM层中，使用[`column_property()`](orm_mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")给出一个`comparator_factory`参数。因此，像GeoAlchemy这样的第三方库不得不以ORM为中心，并依靠一系列黑客来应用新的操作，并让它们正确传播。
+核心迄今从来没有任何系统为 Column 和其他表达式结构添加对新 SQL 运算符的支持，除了[`ColumnOperators.op()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.op "sqlalchemy.sql.operators.ColumnOperators.op")方法，它足以让事情发挥作用。Core 从来没有任何系统可以让现有操作员的行为被覆盖。到目前为止，操作符可以被灵活地重新定义的唯一方法是在 ORM 层中，使用[`column_property()`](orm_mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")给出一个`comparator_factory`参数。因此，像 GeoAlchemy 这样的第三方库不得不以 ORM 为中心，并依靠一系列黑客来应用新的操作，并让它们正确传播。
 
-Core中的新操作系统添加了一直缺少的钩子，它将新的和重载的操作符与*类型*关联。毕竟，它不是真正的列，CAST运算符或SQL函数，它们真正驱动出现的操作类型，它是表达式的*类型*。实现细节是最小的
+Core中的新操作系统添加了一直缺少的钩子，它将新的和重载的操作符与*类型*关联。毕竟，它不是真正的列，CAST 运算符或 SQL 函数，它们真正驱动出现的操作类型，它是表达式的*类型*。实现细节是最小的
 - 只有一些额外的方法被添加到核心[`ColumnElement`](core_sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")类型中，以便为可选的运算符集咨询它的[`TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")对象。新的或修改的操作可以通过使用[`TypeDecorator`](core_custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")或“全局全面”通过附加新的[`TypeEngine.Comparator`](core_type_api.html#sqlalchemy.types.TypeEngine.Comparator "sqlalchemy.types.TypeEngine.Comparator")
 
 例如，要将对数支持添加到[`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")类型中：
@@ -523,7 +523,7 @@ Core中的新操作系统添加了一直缺少的钩子，它将新的和重载�
     stmt = select([data.c.x.log(data.c.y)]).where(data.c.x.log(2) < value)
     print(conn.execute(stmt).fetchall())
 
-由此产生的新功能立即包括对Postgresql的HSTORE类型的支持，以及与Postgresql的ARRAY类型相关的新操作。它还为现有类型获取更多特定于这些类型的运算符（比如更多字符串，整数和日期运算符）铺平了道路。
+由此产生的新功能立即包括对 Postgresql 的 HSTORE 类型的支持，以及与 Postgresql 的 ARRAY 类型相关的新操作。它还为现有类型获取更多特定于这些类型的运算符（比如更多字符串，整数和日期运算符）铺平了道路。
 
 也可以看看
 
@@ -540,9 +540,9 @@ The [`Insert.values()`](core_dml.html#sqlalchemy.sql.expression.Insert.values "s
 method now supports a list of dictionaries, which will render a
 multi-VALUES statement such as
 `VALUES (<row1>), (<row2>), ...`.
-这只与支持这种语法的后端相关，包括Postgresql，SQLite和MySQL。它与通常的`executemany()`风格的INSERT不同，它保持不变：
+这只与支持这种语法的后端相关，包括Postgresql，SQLite和MySQL。它与通常的`executemany()`风格的 INSERT 不同，它保持不变：
 
-    users.insert().values([
+    users.insert().values([plain
                         {"name": "some name"},
                         {"name": "some other name"},
                         {"name": "yet another name"},
@@ -556,7 +556,7 @@ multi-VALUES statement such as
 
 ### 输入表达式[¶](#type-expressions "Permalink to this headline")
 
-SQL表达式现在可以与类型相关联。Historically, [`TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
+SQL 表达式现在可以与类型相关联。Historically, [`TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 has always allowed Python-side functions which receive both bound
 parameters as well as result row values, passing them through a Python
 side conversion function on the way to/back from the database.
@@ -579,14 +579,14 @@ side conversion function on the way to/back from the database.
             Column('data', LowerString)
     )
 
-上面，`LowerString`类型定义了一个SQL表达式，只要在SELECT语句的columns子句中呈现`test_table.c.data`列时就会发出该表达式：
+上面，`LowerString`类型定义了一个 SQL 表达式，只要在 SELECT 语句的 columns 子句中呈现`test_table.c.data`列时就会发出该表达式：
 
-    >>> print(select([test_table]).where(test_table.c.data == 'HI'))
+    >>> print(select([test_table]).where(test_table.c.data == 'HI'))plainplain
     SELECT lower(test_table.data) AS data
     FROM test_table
     WHERE test_table.data = lower(:data_1)
 
-GeoAlchemy的新版本也大量使用了该功能，以便根据类型规则在SQL中内联嵌入PostGIS表达式。
+GeoAlchemy 的新版本也大量使用了该功能，以便根据类型规则在 SQL 中内联嵌入 PostGIS 表达式。
 
 也可以看看
 
@@ -612,7 +612,7 @@ which returns the [`ClauseElement`](core_sqlelement.html#sqlalchemy.sql.expressi
 itself, such as [`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table"),
 [`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column"),
 [`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select"),
-etc. 这使它可以在Core和ORM结构之间流畅地工作。
+etc. 这使它可以在 Core 和 ORM 结构之间流畅地工作。
 
 ### 新方法[`Select.correlate_except()`](core_selectable.html#sqlalchemy.sql.expression.Select.correlate_except "sqlalchemy.sql.expression.Select.correlate_except") [¶](#new-method-select-correlate-except "Permalink to this headline")
 
@@ -621,7 +621,7 @@ now has a method [`Select.correlate_except()`](core_selectable.html#sqlalchemy.s
 which specifies “correlate on all FROM clauses except those specified”.
 它可用于映射相关子查询应正常关联的场景，除了可选的特定目标：
 
-    class SnortEvent(Base):
+    class SnortEvent(Base):plain
         __tablename__ = "event"
 
         id = Column(Integer, primary_key=True)
@@ -646,7 +646,7 @@ which specifies “correlate on all FROM clauses except those specified”.
 
 ### Postgresql HSTORE类型[¶](#postgresql-hstore-type "Permalink to this headline")
 
-对Postgresql的`HSTORE`类型的支持现在可用作[`postgresql.HSTORE`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")。This
+对 Postgresql 的`HSTORE`类型的支持现在可用作[`postgresql.HSTORE`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")。This
 type makes great usage of the new operator system to provide a full
 range of operators for HSTORE types, including index access,
 concatenation, and containment methods such as `has_key()`, `has_any()`, and `matrix()`:
@@ -692,7 +692,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
         select([mytable.c.arraycol[2]])
     )
 
-在SELECT中切片访问：
+在 SELECT 中切片访问：
 
     result = conn.execute(
         select([mytable.c.arraycol[2:4]])
@@ -700,7 +700,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 在更新中切片更新：
 
-    conn.execute(
+    conn.execute(plain
         mytable.update().values({mytable.c.arraycol[2:3]: [7, 8]})
     )
 
@@ -726,9 +726,9 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 [＃2441 T0\>](http://www.sqlalchemy.org/trac/ticket/2441)
 
-### SQLite [¶](#new-configurable-date-time-types-for-sqlite "Permalink to this headline")的新的，可配置的DATE，TIME类型
+### SQLite [¶](#new-configurable-date-time-types-for-sqlite "Permalink to this headline")的新的，可配置的 DATE，TIME 类型
 
-SQLite没有内置的DATE，TIME或DATETIME类型，而是提供了一些支持将日期和时间值存储为字符串或整数。SQLite的日期和时间类型在0.8中得到了增强，可以针对特定格式进行更多的配置，包括“微秒”部分是可选的，以及其他几乎所有的部分。
+SQLite 没有内置的 DATE，TIME 或 DATETIME 类型，而是提供了一些支持将日期和时间值存储为字符串或整数。SQLite 的日期和时间类型在 0.8 中得到了增强，可以针对特定格式进行更多的配置，包括“微秒”部分是可选的，以及其他几乎所有的部分。
 
     Column('sometimestamp', sqlite.DATETIME(truncate_microseconds=True))
     Column('sometimestamp', sqlite.DATETIME(
@@ -745,7 +745,7 @@ SQLite没有内置的DATE，TIME或DATETIME类型，而是提供了一些支持�
                     )
                 )
 
-非常感谢Nate Dub在Pycon 2012上的冲刺。
+非常感谢 Nate Dub 在 Pycon 2012 上的冲刺。
 
 也可以看看
 
@@ -757,7 +757,7 @@ SQLite没有内置的DATE，TIME或DATETIME类型，而是提供了一些支持�
 
 [＃2363 T0\>](http://www.sqlalchemy.org/trac/ticket/2363)
 
-### 所有方言都支持“COLLATE”；特别是MySQL，Postgresql，SQLite [¶](#collate-supported-across-all-dialects-in-particular-mysql-postgresql-sqlite "Permalink to this headline")
+### 所有方言都支持“COLLATE”；特别是 MySQL，Postgresql，SQLite [¶](#collate-supported-across-all-dialects-in-particular-mysql-postgresql-sqlite "Permalink to this headline")
 
 The “collate” keyword, long accepted by the MySQL dialect, is now
 established on all [`String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
@@ -814,18 +814,18 @@ but hasn’t been inserted into the database yet, is automatically
 expunged from the [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 when it becomes an “orphan”, which means it has been de-associated with
 a parent object that refers to it with `delete-orphan` cascade on the configured [`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship").
-此行为旨在大致反映持久性（即已插入）对象的行为，其中ORM将针对基于拦截事件的孤立成为孤立对象的这些对象发出DELETE。
+此行为旨在大致反映持久性（即已插入）对象的行为，其中 ORM 将针对基于拦截事件的孤立成为孤立对象的这些对象发出 DELETE。
 
 对于由多种父项引用的对象（每个对象指定了`delete-orphan`），行为变化都会发挥作用。典型的例子是一个[association
 object](orm_basic_relationships.html#association-pattern)，它以多对多的模式连接两种其他类型的对象。以前，行为是这样的，只有在与其父母的*all*关联时，待处理对象才会被清除。随着行为的变化，一旦从*与之前关联的父母的任何*去相关联，待处理对象就被清除。此行为旨在更加紧密地匹配持久对象的行为，持久对象与父对象关联后立即删除。
 
-旧版行为的基本原理至少可以追溯到版本0.4，并且基本上是一个防御性的决定，当一个对象仍在为INSERT构建时，试图减轻混淆。但事实是，只要在任何情况下将对象连接到任何新的父对象，对象就会与[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
+旧版行为的基本原理至少可以追溯到版本 0.4，并且基本上是一个防御性的决定，当一个对象仍在为 INSERT 构建时，试图减轻混淆。但事实是，只要在任何情况下将对象连接到任何新的父对象，对象就会与[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 
-如果对象不是首先与那些父母关联，或者如果它已被清除，但随后重新与[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")通过后续的附件事件，但仍未完全关联。在这种情况下，预计数据库会发出完整性错误，因为可能有NOT
-NULL外键列未被填充。ORM决定让这些INSERT尝试发生，这是基于判断一个对象只是部分与其所需的父对象关联，但与其中一些对象有活动关联的对象，通常不是用户错误，而是故意忽略，应该默默跳过
-- 在这里默默地跳过INSERT会导致这种性质的用户错误非常难以调试。
+如果对象不是首先与那些父母关联，或者如果它已被清除，但随后重新与[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")通过后续的附件事件，但仍未完全关联。在这种情况下，预计数据库会发出完整性错误，因为可能有 NOT
+NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基于判断一个对象只是部分与其所需的父对象关联，但与其中一些对象有活动关联的对象，通常不是用户错误，而是故意忽略，应该默默跳过
+- 在这里默默地跳过 INSERT 会导致这种性质的用户错误非常难以调试。
 
-通过将flag `legacy_is_orphan`指定为映射器选项，可以重新为任何[`Mapper`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")启用可能依赖它的应用程序的旧行为。
+通过将 flag `legacy_is_orphan`指定为映射器选项，可以重新为任何[`Mapper`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")启用可能依赖它的应用程序的旧行为。
 
 新的行为允许以下测试用例的工作：
 
@@ -897,13 +897,13 @@ NULL外键列未被填充。ORM决定让这些INSERT尝试发生，这是基于�
 
 使用after\_attach的事件处理程序现在可以假定给定实例与给定会话关联：
 
-    @event.listens_for(Session, "after_attach")
+    @event.listens_for(Session, "after_attach")plain
     def after_attach(session, instance):
         assert instance in session
 
 一些用例要求它以这种方式工作。但是，其他用例要求该项目*不是*，而不是会话的一部分，例如，用于加载实例所需状态的查询首先发出自动刷新，否则会过早刷新目标目的。这些用例应该使用新的“before\_attach”事件：
 
-    @event.listens_for(Session, "before_attach")
+    @event.listens_for(Session, "before_attach")plainplain
     def before_attach(session, instance):
         instance.some_necessary_attribute = session.query(Widget).\
                                                 filter_by(instance.widget_name).\
@@ -911,9 +911,9 @@ NULL外键列未被填充。ORM决定让这些INSERT尝试发生，这是基于�
 
 [＃2464 T0\>](http://www.sqlalchemy.org/trac/ticket/2464)
 
-### 现在查询自动关联，就像select()做[¶](#query-now-auto-correlates-like-a-select-does "Permalink to this headline")
+### 现在查询自动关联，就像 select()做[¶](#query-now-auto-correlates-like-a-select-does "Permalink to this headline")
 
-以前有必要调用[`Query.correlate()`](orm_query.html#sqlalchemy.orm.query.Query.correlate "sqlalchemy.orm.query.Query.correlate")以使列或WHERE子查询与父项相关联：
+以前有必要调用[`Query.correlate()`](orm_query.html#sqlalchemy.orm.query.Query.correlate "sqlalchemy.orm.query.Query.correlate")以使列或 WHERE 子查询与父项相关联：
 
     subq = session.query(Entity.value).\
                     filter(Entity.id==Parent.entity_id).\
@@ -921,7 +921,7 @@ NULL外键列未被填充。ORM决定让这些INSERT尝试发生，这是基于�
                     as_scalar()
     session.query(Parent).filter(subq=="some value")
 
-这是一个普通的`select()`构造的相反行为，默认情况下会采用自动关联。0.8中的上述语句将自动关联：
+这是一个普通的`select()`构造的相反行为，默认情况下会采用自动关联。0.8 中的上述语句将自动关联：
 
     subq = session.query(Entity.value).\
                     filter(Entity.id==Parent.entity_id).\
@@ -940,9 +940,9 @@ and [`Query.correlate()`](orm_query.html#sqlalchemy.orm.query.Query.correlate "s
 has changed slightly such that the SELECT statement will omit the
 “correlated” target from the FROM clause only if the statement is
 actually used in that context.
-另外，在封闭的SELECT语句中作为FROM放置的SELECT语句不再可能“关联”（即省略）FROM子句。
+另外，在封闭的 SELECT 语句中作为 FROM 放置的 SELECT 语句不再可能“关联”（即省略）FROM 子句。
 
-这种改变只会使渲染SQL变得更好，因为在相对于所选内容的FROM对象不足的情况下，不再可能渲染非法SQL：
+这种改变只会使渲染 SQL 变得更好，因为在相对于所选内容的 FROM 对象不足的情况下，不再可能渲染非法 SQL：
 
     from sqlalchemy.sql import table, column, select
 
@@ -958,7 +958,7 @@ actually used in that context.
 
 这是无效的SQL，因为“t1”在任何FROM子句中都没有引用。
 
-现在，在没有包含SELECT的情况下，它会返回：
+现在，在没有包含 SELECT 的情况下，它会返回：
 
     SELECT t1.x, t2.y FROM t1, t2
 
@@ -972,13 +972,13 @@ actually used in that context.
     WHERE t1.x = t2.y AND t1.x =
         (SELECT t1.x, t2.y FROM t2)
 
-预期此更改不会影响任何现有的应用程序，因为相关行为对于正确构建的表达式而言仍然相同。只有在测试场景中依赖于非相关上下文中使用的相关SELECT的无效字符串输出的应用程序才会看到任何更改。
+预期此更改不会影响任何现有的应用程序，因为相关行为对于正确构建的表达式而言仍然相同。只有在测试场景中依赖于非相关上下文中使用的相关 SELECT 的无效字符串输出的应用程序才会看到任何更改。
 
 [＃2668 T0\>](http://www.sqlalchemy.org/trac/ticket/2668)
 
 ### 现在，create\_all()和drop\_all()将授予一个空列表[¶](#create-all-and-drop-all-will-now-honor-an-empty-list-as-such "Permalink to this headline")
 
-现在，方法[`MetaData.create_all()`](core_metadata.html#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")和[`MetaData.drop_all()`](core_metadata.html#sqlalchemy.schema.MetaData.drop_all "sqlalchemy.schema.MetaData.drop_all")将接受[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的列表，这些对象是空的，并且不会发出任何CREATE或DROP语句。以前，一个空的列表与为集合传递`None`相同，并且无条件地为所有项目发出CREATE / DROP。
+现在，方法[`MetaData.create_all()`](core_metadata.html#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")和[`MetaData.drop_all()`](core_metadata.html#sqlalchemy.schema.MetaData.drop_all "sqlalchemy.schema.MetaData.drop_all")将接受[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的列表，这些对象是空的，并且不会发出任何 CREATE 或 DROP 语句。以前，一个空的列表与为集合传递`None`相同，并且无条件地为所有项目发出 CREATE / DROP。
 
 这是一个错误修复，但某些应用程序可能依赖于以前的行为。
 
@@ -993,22 +993,22 @@ fired off according to the actual class passed as a target.
 
 [＃2590 T0\>](http://www.sqlalchemy.org/trac/ticket/2590)
 
-### 与MS-SQL中的子查询进行比较时，不再需要对IN进行“=”的魔术强化[¶](#no-more-magic-coercion-of-to-in-when-comparing-to-subquery-in-ms-sql "Permalink to this headline")
+### 与 MS-SQL 中的子查询进行比较时，不再需要对 IN 进行“=”的魔术强化[¶](#no-more-magic-coercion-of-to-in-when-comparing-to-subquery-in-ms-sql "Permalink to this headline")
 
 我们在MSSQL方言中发现了一个非常古老的行为，它会在尝试像这样做时尝试从用户身上抢救用户：
 
     scalar_subq = select([someothertable.c.id]).where(someothertable.c.data=='foo')
     select([sometable]).where(sometable.c.id==scalar_subq)
 
-SQL Server不允许与标量SELECT进行等同比较，即“x =（SELECT
-something）”。MSSQL方言会将其转换为IN。然而，像“（SELECT something）=
-x”这样的比较会发生同样的事情，总的来说，这种猜测级别超出了SQLAlchemy的通常范围，因此行为被删除。
+SQL Server 不允许与标量 SELECT 进行等同比较，即“x =（SELECT
+something）”。MSSQL 方言会将其转换为 IN。然而，像“（SELECT something）=
+x”这样的比较会发生同样的事情，总的来说，这种猜测级别超出了 SQLAlchemy 的通常范围，因此行为被删除。
 
 [＃2277 T0\>](http://www.sqlalchemy.org/trac/ticket/2277)
 
 ### 修正了[`Session.is_modified()`](orm_session_api.html#sqlalchemy.orm.session.Session.is_modified "sqlalchemy.orm.session.Session.is_modified") [¶](#fixed-the-behavior-of-session-is-modified "Permalink to this headline")
 
-[`Session.is_modified()`](orm_session_api.html#sqlalchemy.orm.session.Session.is_modified "sqlalchemy.orm.session.Session.is_modified")方法接受一个参数`passive`，这基本上不是必须的，参数在所有情况下都应该是`True`当它保留默认的`False`时，它会触及数据库，并经常触发autoflush，它本身会改变结果。在0.8中，`passive`参数将不起作用，并且未加载的属性将永远不会被检查历史记录，因为根据定义，未加载的属性可能没有挂起的状态更改。
+[`Session.is_modified()`](orm_session_api.html#sqlalchemy.orm.session.Session.is_modified "sqlalchemy.orm.session.Session.is_modified")方法接受一个参数`passive`，这基本上不是必须的，参数在所有情况下都应该是`True`当它保留默认的`False`时，它会触及数据库，并经常触发 autoflush，它本身会改变结果。在 0.8 中，`passive`参数将不起作用，并且未加载的属性将永远不会被检查历史记录，因为根据定义，未加载的属性可能没有挂起的状态更改。
 
 也可以看看
 
@@ -1024,9 +1024,9 @@ x”这样的比较会发生同样的事情，总的来说，这种猜测级别�
     s.c.table1_col1
     s.c.table1_col2
 
-在0.8之前，如果[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")具有不同的`Column.key`，则此键将被忽略，与[`Select.apply_labels()`](core_selectable.html#sqlalchemy.sql.expression.Select.apply_labels "sqlalchemy.sql.expression.Select.apply_labels")不一致用过的：
+在 0.8 之前，如果[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")具有不同的`Column.key`，则此键将被忽略，与[`Select.apply_labels()`](core_selectable.html#sqlalchemy.sql.expression.Select.apply_labels "sqlalchemy.sql.expression.Select.apply_labels")不一致用过的：
 
-    # before 0.8
+    # before 0.8plain
     table1 = Table('t1', metadata,
         Column('col1', Integer, key='column_one')
     )
@@ -1053,11 +1053,11 @@ in both cases:
     s.c.table1_column_one # works
     s.c.table1_col1 # AttributeError
 
-关于“name”和“key”的所有其他行为是相同的，包括呈现的SQL仍将使用`<tablename>_<colname>`形式 - 这里强调了防止`Column.key`内容被呈现到`SELECT`语句中，因此`Column.key`中使用的特殊/非ascii字符没有问题。
+关于“name”和“key”的所有其他行为是相同的，包括呈现的 SQL 仍将使用`<tablename>_<colname>`形式 - 这里强调了防止`Column.key`内容被呈现到`SELECT`语句中，因此`Column.key`中使用的特殊/非 ascii 字符没有问题。
 
 [＃2397 T0\>](http://www.sqlalchemy.org/trac/ticket/2397)
 
-### single\_parent警告现在是一个错误[¶](#single-parent-warning-is-now-an-error "Permalink to this headline")
+### single\_parent 警告现在是一个错误[¶](#single-parent-warning-is-now-an-error "Permalink to this headline")
 
 一个[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")是多对一或多对多的，并且指定了“cascade
 ='all，delete-orphan'”，这是一个尴尬但仍然受支持的用例（限制）如果关系没有指定`single_parent=True`选项，现在会引发错误。以前它只会发出警告，但在任何情况下都会在属性系统中立即出现故障。
@@ -1066,17 +1066,17 @@ in both cases:
 
 ### 将`inspector`参数添加到`column_reflect`事件[¶](#adding-the-inspector-argument-to-the-column-reflect-event "Permalink to this headline")
 
-0.7添加了一个名为`column_reflect`的新事件，这样可以反映出列的反射，因为每个列都反映出来。我们得到这个事件有点不对，因为事件没有办法获取用于反射的当前`Inspector`和`Connection`，在来自数据库的附加信息的情况下是必要的。由于这是一个尚未广泛使用的新事件，因此我们将直接向其中添加`inspector`参数：
+0.7 添加了一个名为`column_reflect`的新事件，这样可以反映出列的反射，因为每个列都反映出来。我们得到这个事件有点不对，因为事件没有办法获取用于反射的当前`Inspector`和`Connection`，在来自数据库的附加信息的情况下是必要的。由于这是一个尚未广泛使用的新事件，因此我们将直接向其中添加`inspector`参数：
 
-    @event.listens_for(Table, "column_reflect")
+    @event.listens_for(Table, "column_reflect")plain
     def listen_for_col(inspector, table, column_info):
         # ...
 
 [＃2418 T0\>](http://www.sqlalchemy.org/trac/ticket/2418)
 
-### 禁用排序规则的自动检测，MySQL的套管[¶](#disabling-auto-detect-of-collations-casing-for-mysql "Permalink to this headline")
+### 禁用排序规则的自动检测，MySQL 的套管[¶](#disabling-auto-detect-of-collations-casing-for-mysql "Permalink to this headline")
 
-MySQL方言执行两个调用，一个是非常昂贵的，用于从数据库加载所有可能的排序规则以及第一次`Engine`连接时的套管信息。这些集合都不用于任何SQLAlchemy函数，因此这些调用将被更改为不再自动发射。可能依赖这些集合的应用程序存在于`engine.dialect`上，需要直接调用`_detect_collations()`和`_detect_casing()`。
+MySQL 方言执行两个调用，一个是非常昂贵的，用于从数据库加载所有可能的排序规则以及第一次`Engine`连接时的套管信息。这些集合都不用于任何 SQLAlchemy 函数，因此这些调用将被更改为不再自动发射。可能依赖这些集合的应用程序存在于`engine.dialect`上，需要直接调用`_detect_collations()`和`_detect_casing()`。
 
 [＃2404 T0\>](http://www.sqlalchemy.org/trac/ticket/2404)
 
@@ -1084,12 +1084,12 @@ MySQL方言执行两个调用，一个是非常昂贵的，用于从数据库加
 
 引用`insert()`或`update()`构造中不存在的列会引发错误而不是警告：
 
-    t1 = table('t1', column('x'))
+    t1 = table('t1', column('x'))plain
     t1.insert().values(x=5, z=5) # raises "Unconsumed column names: z"
 
 [＃2415 T0\>](http://www.sqlalchemy.org/trac/ticket/2415)
 
-### Inspector.get\_primary\_keys()已弃用，请使用Inspector.get\_pk\_constraint [¶](#inspector-get-primary-keys-is-deprecated-use-inspector-get-pk-constraint "Permalink to this headline")
+### Inspector.get\_primary\_keys()已弃用，请使用 Inspector.get\_pk\_constraint [¶](#inspector-get-primary-keys-is-deprecated-use-inspector-get-pk-constraint "Permalink to this headline")
 
 `Inspector`上的这两个方法是多余的，其中`get_primary_keys()`将返回与`get_pk_constraint()`相同的信息减去约束的名称：
 
@@ -1109,9 +1109,9 @@ MySQL方言执行两个调用，一个是非常昂贵的，用于从数据库加
     >>> row['foo'] == row['FOO'] == row['Foo']
     True
 
-这是为了一些早期需要的方言的好处，如Oracle和Firebird，但在现代用法中，我们有更准确的方法来处理这两个平台的不区分大小写的行为。
+这是为了一些早期需要的方言的好处，如 Oracle 和 Firebird，但在现代用法中，我们有更准确的方法来处理这两个平台的不区分大小写的行为。
 
-展望未来，只有通过将标志`` `case_sensitive=False` ``传递给`` `create_engine()` ``，此行为才可用，但否则必须从行中请求列名尽可能匹配套管。
+展望未来，只有通过将标志`case_sensitive=False`传递给`create_engine()`，此行为才可用，但否则必须从行中请求列名尽可能匹配套管。
 
 [＃2423 T0\>](http://www.sqlalchemy.org/trac/ticket/2423)
 
@@ -1128,16 +1128,16 @@ third party library imports `InstrumentationManager`, at which point it is injec
 
 ### SQLSoup [¶ T0\>](#sqlsoup "Permalink to this headline")
 
-SQLSoup是一个方便的包，它在SQLAlchemy
-ORM之上提供了一个替代接口。SQLSoup现在被移植到自己的项目中，并单独记录/发布；请参阅[https://bitbucket.org/zzzeek/sqlsoup](https://bitbucket.org/zzzeek/sqlsoup)。
+SQLSoup 是一个方便的包，它在 SQLAlchemy
+ORM 之上提供了一个替代接口。SQLSoup 现在被移植到自己的项目中，并单独记录/发布；请参阅[https://bitbucket.org/zzzeek/sqlsoup](https://bitbucket.org/zzzeek/sqlsoup)。
 
-SQLSoup是一个非常简单的工具，可以从对其使用风格感兴趣的贡献者中受益。
+SQLSoup 是一个非常简单的工具，可以从对其使用风格感兴趣的贡献者中受益。
 
 [＃2262 T0\>](http://www.sqlalchemy.org/trac/ticket/2262)
 
 ### MutableType [¶ T0\>](#mutabletype "Permalink to this headline")
 
-SQLAlchemy ORM中旧的“可变”系统已被删除。这指的是`MutableType`接口，该接口已应用于`PickleType`等类型并有条件地应用于`TypeDecorator`，并且由于很早的SQLAlchemy版本提供了一种方式为ORM检测所谓的“可变”数据结构（如JSON结构和腌渍对象）的变化。然而，实施从来都不合理，并且迫使工作单元使用效率非常低的模式，这导致在冲洗期间对所有对象进行昂贵的扫描。在0.7中引入了[sqlalchemy.ext.mutable](http://docs.sqlalchemy.org/en/latest/orm_extensions_mutable.html)扩展，以便在发生更改时用户定义的数据类型可以将事件适当地发送到工作单元。
+SQLAlchemy ORM中旧的“可变”系统已被删除。这指的是`MutableType`接口，该接口已应用于`PickleType`等类型并有条件地应用于`TypeDecorator`，并且由于很早的 SQLAlchemy 版本提供了一种方式为 ORM 检测所谓的“可变”数据结构（如 JSON 结构和腌渍对象）的变化。然而，实施从来都不合理，并且迫使工作单元使用效率非常低的模式，这导致在冲洗期间对所有对象进行昂贵的扫描。在 0.7 中引入了[sqlalchemy.ext.mutable](http://docs.sqlalchemy.org/en/latest/orm_extensions_mutable.html)扩展，以便在发生更改时用户定义的数据类型可以将事件适当地发送到工作单元。
 
 今天，`MutableType`的使用量预计会很低，因为其效率低下已经有几年了。
 
@@ -1145,6 +1145,6 @@ SQLAlchemy ORM中旧的“可变”系统已被删除。这指的是`MutableType
 
 ### sqlalchemy.exceptions（多年来一直是sqlalchemy.exc）[¶](#sqlalchemy-exceptions-has-been-sqlalchemy-exc-for-years "Permalink to this headline")
 
-我们留下了一个别名`sqlalchemy.exceptions`，试图使一些尚未升级到使用`sqlalchemy.exc`的非常旧的库变得更容易一些。但有些用户仍然对它感到困惑，所以在0.8版本中，我们正在彻底消除这种混淆。
+我们留下了一个别名`sqlalchemy.exceptions`，试图使一些尚未升级到使用`sqlalchemy.exc`的非常旧的库变得更容易一些。但有些用户仍然对它感到困惑，所以在 0.8 版本中，我们正在彻底消除这种混淆。
 
 [＃2433 T0\>](http://www.sqlalchemy.org/trac/ticket/2433)

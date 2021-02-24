@@ -12,8 +12,8 @@ tags:
 事件[¶ T0\>](#events "Permalink to this headline")
 ==================================================
 
-SQLAlchemy包含一个事件API，它将各种各样的钩子发布到SQLAlchemy
-Core和ORM的内部。
+SQLAlchemy 包含一个事件 API，它将各种各样的钩子发布到 SQLAlchemy
+Core 和 ORM 的内部。
 
 New in version 0.7: The system supersedes the previous system of
 “extension”, “proxy”, and “listener” classes.
@@ -21,11 +21,11 @@ New in version 0.7: The system supersedes the previous system of
 事件注册[¶](#event-registration "Permalink to this headline")
 -------------------------------------------------------------
 
-通过一个API点，[`listen()`](#sqlalchemy.event.listen "sqlalchemy.event.listen")函数或[`listens_for()`](#sqlalchemy.event.listens_for "sqlalchemy.event.listens_for")装饰器来订阅事件。这些函数接受一个目标，标识要拦截事件的字符串标识符以及用户定义的监听函数。这两个函数的附加位置和关键字参数可以由特定类型的事件支持，这些类型的事件可以为给定的事件函数指定备用接口，或者基于给定的目标提供关于辅助事件目标的指令。
+通过一个 API 点，[`listen()`](#sqlalchemy.event.listen "sqlalchemy.event.listen")函数或[`listens_for()`](#sqlalchemy.event.listens_for "sqlalchemy.event.listens_for")装饰器来订阅事件。这些函数接受一个目标，标识要拦截事件的字符串标识符以及用户定义的监听函数。这两个函数的附加位置和关键字参数可以由特定类型的事件支持，这些类型的事件可以为给定的事件函数指定备用接口，或者基于给定的目标提供关于辅助事件目标的指令。
 
 事件的名称和相应侦听器函数的参数签名是从类绑定规范方法派生的，该方法绑定到文档中描述的标记类。例如，[`PoolEvents.connect()`](events.html#sqlalchemy.events.PoolEvents.connect "sqlalchemy.events.PoolEvents.connect")的文档指出事件名称为`"connect"`，并且用户定义的侦听器函数应该接收两个位置参数：
 
-    from sqlalchemy.event import listen
+    from sqlalchemy.event import listenplainplain
     from sqlalchemy.pool import Pool
 
     def my_on_connect(dbapi_con, connection_record):
@@ -35,7 +35,7 @@ New in version 0.7: The system supersedes the previous system of
 
 使用[`listens_for()`](#sqlalchemy.event.listens_for "sqlalchemy.event.listens_for")装饰器来收听看起来像：
 
-    from sqlalchemy.event import listens_for
+    from sqlalchemy.event import listens_forplainplain
     from sqlalchemy.pool import Pool
 
     @listens_for(Pool, "connect")
@@ -62,7 +62,7 @@ that accepts `**keyword` arguments, by passing
 
 命名样式按名称传递所有参数，而不管函数签名如何，因此只要名称匹配，可以以任意顺序列出具体参数：
 
-    from sqlalchemy.event import listens_for
+    from sqlalchemy.event import listens_forplain
     from sqlalchemy.pool import Pool
 
     @listens_for(Pool, "connect", named=True)
@@ -72,7 +72,7 @@ that accepts `**keyword` arguments, by passing
 
 在上面，`**kw`的存在告诉[`listens_for()`](#sqlalchemy.event.listens_for "sqlalchemy.event.listens_for")参数应该通过名称而不是位置传递给函数。
 
-版本0.9.0新增：添加可选的`named`参数调度到事件调用。
+版本 0.9.0 新增：添加可选的`named`参数调度到事件调用。
 
 目标[¶ T0\>](#targets "Permalink to this headline")
 ---------------------------------------------------
@@ -107,9 +107,9 @@ that accepts `**keyword` arguments, by passing
 改性剂[¶ T0\>](#modifiers "Permalink to this headline")
 -------------------------------------------------------
 
-有些侦听器允许将修饰符传递给[`listen()`](#sqlalchemy.event.listen "sqlalchemy.event.listen")。这些修饰符有时会为侦听器提供替代调用签名。比如对于ORM事件，一些事件监听器可以有一个返回值来修改后续的处理。默认情况下，没有侦听器需要返回值，但通过传递`retval=True`可以支持此值：
+有些侦听器允许将修饰符传递给[`listen()`](#sqlalchemy.event.listen "sqlalchemy.event.listen")。这些修饰符有时会为侦听器提供替代调用签名。比如对于 ORM 事件，一些事件监听器可以有一个返回值来修改后续的处理。默认情况下，没有侦听器需要返回值，但通过传递`retval=True`可以支持此值：
 
-    def validate_phone(target, value, oldvalue, initiator):
+    def validate_phone(target, value, oldvalue, initiator):plainplain
         """Strip non-numeric characters from a phone number"""
 
         return re.sub(r'(?![0-9])', '', value)
@@ -121,10 +121,10 @@ that accepts `**keyword` arguments, by passing
 事件参考[¶](#event-reference "Permalink to this headline")
 ----------------------------------------------------------
 
-SQLAlchemy Core和SQLAlchemy ORM都具有各种各样的事件钩子：
+SQLAlchemy Core 和 SQLAlchemy ORM 都具有各种各样的事件钩子：
 
 -   **核心事件** - 这些内容在[Core
-    Events](events.html)中进行了描述，并包含特定于连接池生命周期，SQL语句执行，事务生命周期以及模式创建和拆卸的事件挂钩。
+    Events](events.html)中进行了描述，并包含特定于连接池生命周期，SQL 语句执行，事务生命周期以及模式创建和拆卸的事件挂钩。
 -   **ORM Events** - these are described in [ORM
     Events](orm_events.html), and include event hooks specific to class
     and attribute instrumentation, object initialization hooks,
@@ -179,7 +179,7 @@ API参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.event.`{.descclassname}`listens_for`{.descname}(*target*, *identifier*, *\*args*, *\*\*kw*)[¶](#sqlalchemy.event.listens_for "Permalink to this definition")
 :   装饰一个函数作为给定目标+标识符的侦听器。
 
-    例如。：
+    例如。：plainplain
 
         from sqlalchemy import event
         from sqlalchemy.schema import UniqueConstraint
@@ -207,7 +207,7 @@ API参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.event.`{.descclassname}`remove`{.descname}(*target*, *identifier*, *fn*)[¶](#sqlalchemy.event.remove "Permalink to this definition")
 :   删除一个事件监听器。
 
-    这里的参数应该与发送到[`listen()`](#sqlalchemy.event.listen "sqlalchemy.event.listen")的参数完全匹配。所有通过此调用进行的事件注册将通过使用相同参数调用[`remove()`](#sqlalchemy.event.remove "sqlalchemy.event.remove")进行恢复。
+    这里的参数应该与发送到[`listen()`](#sqlalchemy.event.listen "sqlalchemy.event.listen")的参数完全匹配。所有通过此调用进行的事件注册将通过使用相同参数调用[`remove()`](#sqlalchemy.event.remove "sqlalchemy.event.remove")进行恢复。plainplain
 
     例如。：
 
@@ -236,7 +236,7 @@ API参考[¶](#api-reference "Permalink to this headline")
     [`listen()`](#sqlalchemy.event.listen "sqlalchemy.event.listen")
 
  `sqlalchemy.event.`{.descclassname}`contains`{.descname}(*target*, *identifier*, *fn*)[¶](#sqlalchemy.event.contains "Permalink to this definition")
-:   如果给定的target / ident / fn设置为侦听，则返回True。
+:   如果给定的 target / ident / fn 设置为侦听，则返回 True。
 
     版本0.9.0中的新功能
 
