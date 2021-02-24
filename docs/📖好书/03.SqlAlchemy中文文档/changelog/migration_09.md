@@ -14,16 +14,16 @@ SQLAlchemy 0.9有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-9 "Permalink
 
 关于本文档
 
-本文档介绍了2013年5月发布的SQLAlchemy版本0.8和2013年12月30日发布的SQLAlchemy
-0.9版本之间的更改。
+本文档介绍了 2013 年 5 月发布的 SQLAlchemy 版本 0.8 和 2013 年 12 月 30 日发布的 SQLAlchemy
+0.9 版本之间的更改。
 
-文件最后更新日期：2015年6月10日
+文件最后更新日期：2015 年 6 月 10 日
 
 引言[¶ T0\>](#introduction "Permalink to this headline")
 --------------------------------------------------------
 
-本指南介绍了SQLAlchemy
-0.9版中的新增功能，并介绍了影响用户将其应用程序从0.8系列SQLAlchemy迁移到0.9的更改。
+本指南介绍了 SQLAlchemy
+0.9 版中的新增功能，并介绍了影响用户将其应用程序从 0.8 系列 SQLAlchemy 迁移到 0.9 的更改。
 
 请仔细查看[Behavioral Changes -
 ORM](#behavioral-changes-orm-09)和[Behavioral Changes -
@@ -34,15 +34,15 @@ Core](#behavioral-changes-core-09)以了解潜在的向后不兼容变更。
 
 ### 针对Python 2.6及更高版本，Python 3无2to3 [¶](#targeting-python-2-6-and-up-now-python-3-without-2to3 "Permalink to this headline")
 
-0.9版本的第一个成就是消除了对Python
-3兼容性的2to3工具的依赖。为了更简单明了，现在最低版本的Python版本是2.6，它具有与Python
-3的广泛兼容性。现在所有的SQLAlchemy模块和单元测试都可以用2.6前向版的任何Python解释器解释，包括3.1和3.2解释器。
+0.9 版本的第一个成就是消除了对 Python
+3 兼容性的 2to3 工具的依赖。为了更简单明了，现在最低版本的 Python 版本是 2.6，它具有与 Python
+3 的广泛兼容性。现在所有的 SQLAlchemy 模块和单元测试都可以用 2.6 前向版的任何 Python 解释器解释，包括 3.1 和 3.2 解释器。
 
 [＃2671 T0\>](http://www.sqlalchemy.org/trac/ticket/2671)
 
 ### Python 3支持的C扩展[¶](#c-extensions-supported-on-python-3 "Permalink to this headline")
 
-C扩展已经移植到支持Python 3，现在可以在Python 2和Python 3环境中构建。
+C 扩展已经移植到支持 Python 3，现在可以在 Python 2 和 Python 3 环境中构建。
 
 [＃2161 T0\>](http://www.sqlalchemy.org/trac/ticket/2161)
 
@@ -82,9 +82,9 @@ Column Types](orm_composites.html#mapper-composite)中使用映射设置：
                join(select_stmt, User.id == select_stmt.c.id).\
                filter(User.name == 'ed')
 
-上面的语句可预测地呈现如下的SQL：
+上面的语句可预测地呈现如下的 SQL：
 
-    SELECT "user".id AS user_id, "user".name AS user_name
+    SELECT "user".id AS user_id, "user".name AS user_nameplain
     FROM "user" JOIN (SELECT "user".id AS id, "user".name AS name
     FROM "user"
     WHERE "user".id = :id_1) AS anon_1 ON "user".id = anon_1.id
@@ -92,7 +92,7 @@ Column Types](orm_composites.html#mapper-composite)中使用映射设置：
 
 如果我们想要颠倒JOIN的左侧和右侧元素的顺序，文档将导致我们相信我们可以使用[`Query.select_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")来执行此操作：
 
-    q = session.query(User).\
+    q = session.query(User).\plainplain
             select_from(select_stmt).\
             join(User, User.id == select_stmt.c.id).\
             filter(User.name == 'ed')
@@ -124,7 +124,7 @@ replaced with `anon_1` as well.
 
 因此，对于SQLAlchemy 0.9，我们从`select_stmt`中选择的查询产生了我们期望的SQL：
 
-    -- SQLAlchemy 0.9
+    -- SQLAlchemy 0.9plain
     SELECT "user".id AS user_id, "user".name AS user_name
     FROM (SELECT "user".id AS id, "user".name AS name
     FROM "user"
@@ -186,7 +186,7 @@ tests continue to function, then upgrade to 0.9 without issue.
 
 [＃2833 T0\>](http://www.sqlalchemy.org/trac/ticket/2833)
 
-### 关联代理SQL表达式改进和修复[¶](#association-proxy-sql-expression-improvements-and-fixes "Permalink to this headline")
+### 关联代理 SQL 表达式改进和修复[¶](#association-proxy-sql-expression-improvements-and-fixes "Permalink to this headline")
 
 由引用标量关系上的标量值的关联代理实现的`==`和`!=`运算符现在生成更完整的SQL表达式，旨在考虑当比较是针对`None`时，“关联”行是否存在。
 
@@ -236,7 +236,7 @@ tests continue to function, then upgrade to 0.9 without issue.
     FROM b
     WHERE b.id = a.b_id AND b.value IS NULL))
 
-现在在0.9中，检查已被重新编译，以确保A.b\_id行存在，除了`B.value`为非NULL：
+现在在0.9中，检查已被重新编译，以确保A.b\_id 行存在，除了`B.value`为非NULL：
 
     SELECT a.id AS a_id, a.b_id AS a_b_id
     FROM a
@@ -262,7 +262,7 @@ tests continue to function, then upgrade to 0.9 without issue.
 
 ### 关联代理丢失标量返回无[¶](#association-proxy-missing-scalar-returns-none "Permalink to this headline")
 
-如果代理对象不存在，则从标量属性到标量的关联代理现在将返回`None`。这与在SQLAlchemy中缺少多对一返回None的事实一致，所以应该使用代理值。例如。：
+如果代理对象不存在，则从标量属性到标量的关联代理现在将返回`None`。这与在 SQLAlchemy 中缺少多对一返回 None 的事实一致，所以应该使用代理值。例如。：
 
     from sqlalchemy import *
     from sqlalchemy.orm import *
@@ -401,7 +401,7 @@ isn’t new, it was added in SQLAlchemy 0.7.2.
 
 `None` can no longer be used as the “backstop” to
 form an AND condition piecemeal.
-即使某些SQLAlchemy内部函数使用了它，该模式也不是文档模式：
+即使某些 SQLAlchemy 内部函数使用了它，该模式也不是文档模式：
 
     condition = None
 
@@ -411,11 +411,11 @@ form an AND condition piecemeal.
     if condition is not None:
         stmt = stmt.where(condition)
 
-当`conditions`非空时，上述序列将在0.9产生`SELECT .. WHERE ＆lt； condition＆gt； AND NULL`。`None`不再被隐式忽略，而是与`None`在其他上下文中解释时一致。
+当`conditions`非空时，上述序列将在 0.9 产生`SELECT .. WHERE ＆lt； condition＆gt； AND NULL`。`None`不再被隐式忽略，而是与`None`在其他上下文中解释时一致。
 
 对于0.8和0.9，正确的代码应为：
 
-    from sqlalchemy.sql import and_
+    from sqlalchemy.sql import and_plain
 
     if conditions:
         stmt = stmt.where(and_(*conditions))
@@ -431,7 +431,7 @@ form an AND condition piecemeal.
 
     stmt = stmt.where(condition)
 
-在0.8上，这将产生一个SELECT语句，该语句在WHERE子句中总是有`AND true`，而后者不会被接受支持布尔常量（MySQL，MSSQL）。在0.9上，`true`常量将被放在`and_()`连接符中。
+在 0.8 上，这将产生一个 SELECT 语句，该语句在 WHERE 子句中总是有`AND true`，而后者不会被接受支持布尔常量（MySQL，MSSQL）。在 0.9 上，`true`常量将被放在`and_()`连接符中。
 
 也可以看看
 
@@ -440,7 +440,7 @@ conjunctions](#migration-2804)的渲染
 
 ### `create_engine()`的“密码”部分不再将`+`标记视为编码空间[¶](#the-password-portion-of-a-create-engine-no-longer-considers-the-sign-as-an-encoded-space "Permalink to this headline")
 
-无论出于何种原因，Python函数`unquote_plus()`都应用于URL的“password”字段，这是[RFC
+无论出于何种原因，Python 函数`unquote_plus()`都应用于 URL 的“password”字段，这是[RFC
 1738](http://www.ietf.org/rfc/rfc1738.txt)中描述的编码规则的错误应用。它作为加号逃脱了空间。现在URL的字符串只对“：​​”，“@”或“/”进行编码，并且现在也应用于`username`和`password`字段以前它只适用于密码）。在解析时，编码字符被转换，但加号和空格按原样传递：
 
     # password: "pass word + other:words"
@@ -461,14 +461,14 @@ conjunctions](#migration-2804)的渲染
 
 以前，像下面这样的表达式：
 
-    print((column('x') == 'somevalue').collate("en_EN"))
+    print((column('x') == 'somevalue').collate("en_EN"))plain
 
 会产生这样的表达式：
 
     -- 0.8 behavior
     (x = :x_1) COLLATE en_EN
 
-上述内容被MSSQL误解，通常不是针对任何数据库建议的语法。该表达式现在将生成大多数数据库文档所说明的语法：
+上述内容被 MSSQL 误解，通常不是针对任何数据库建议的语法。该表达式现在将生成大多数数据库文档所说明的语法：
 
     -- 0.9 behavior
     x = :x_1 COLLATE en_EN
@@ -477,13 +477,13 @@ conjunctions](#migration-2804)的渲染
 
     print(column('x') == literal('somevalue').collate("en_EN"))
 
-在0.8中，这产生：
+在 0.8 中，这产生：
 
     x = :param_1 COLLATE en_EN
 
-然而在0.9中，现在会产生更准确但可能不是你想要的形式：
+然而在 0.9 中，现在会产生更准确但可能不是你想要的形式：
 
-    x = (:param_1 COLLATE en_EN)
+    x = (:param_1 COLLATE en_EN)plain
 
 The [`ColumnOperators.collate()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.collate "sqlalchemy.sql.operators.ColumnOperators.collate")
 operator now works more appropriately within an `ORDER BY` expression as well, as a specific precedence has been given to
@@ -537,7 +537,7 @@ placed as a result of this call and removes it as a result of calling
 
 [＃2268 T0\>](http://www.sqlalchemy.org/trac/ticket/2268)
 
-### 新的查询选项API； `load_only()`选项[¶](#new-query-options-api-load-only-option "Permalink to this headline")
+### 新的查询选项 API； `load_only()`选项[¶](#new-query-options-api-load-only-option "Permalink to this headline")
 
 The system of loader options such as [`orm.joinedload()`](orm_loading_relationships.html#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload"),
 [`orm.subqueryload()`](orm_loading_relationships.html#sqlalchemy.orm.subqueryload "sqlalchemy.orm.subqueryload"),
@@ -622,7 +622,7 @@ Loader选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 一个新的选项[`load_only()`](orm_loading_columns.html#sqlalchemy.orm.load_only "sqlalchemy.orm.load_only")实现了“推迟一切，但是”的加载方式，只加载给定的列并推迟其余部分：
 
-    from sqlalchemy.orm import load_only
+    from sqlalchemy.orm import load_onlyplain
 
     query(User).options(load_only("name", "fullname"))
 
@@ -657,7 +657,7 @@ Loader选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 -   [`TextClause.bindparams()`](core_sqlelement.html#sqlalchemy.sql.expression.TextClause.bindparams "sqlalchemy.sql.expression.TextClause.bindparams")
     allows bound parameter types and values to be set flexibly:
 
-        # setup values
+        # setup valuesplain
         stmt = text("SELECT id, name FROM user "
               "WHERE name=:name AND timestamp=:timestamp").\
               bindparams(name="ed", timestamp=datetime(2012, 11, 10, 15, 12, 35))
@@ -680,7 +680,7 @@ Loader选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
                       addresses.join(stmt), addresses.c.user_id == stmt.c.id)
 
 
-        # or into a cte():
+        # or into a cte():plainplainplain
         stmt = text("SELECT id, name FROM user").columns(id=Integer, name=String)
         stmt = stmt.cte("x")
 
@@ -769,9 +769,9 @@ specified. 如果`.scale`和`.decimal_return_scale`都不存在，则默认值�
 
 [＃2867 T0\>](http://www.sqlalchemy.org/trac/ticket/2867)
 
-### 用于ORM查询的列包[¶](#column-bundles-for-orm-queries "Permalink to this headline")
+### 用于 ORM 查询的列包[¶](#column-bundles-for-orm-queries "Permalink to this headline")
 
-[`Bundle`](orm_query.html#sqlalchemy.orm.query.Bundle "sqlalchemy.orm.query.Bundle")允许查询一组列，然后在查询返回的元组下面将这些列组合成一个名称。[`Bundle`](orm_query.html#sqlalchemy.orm.query.Bundle "sqlalchemy.orm.query.Bundle")的初始目的是1.允许将“合成”ORM列作为基于列的结果集中的单个值返回，而不是将它们展开到单个列中，并且2.允许在ORM中创建自定义结果集构造，使用专门的列和返回类型，而不涉及映射类的更重量级的机制。
+[`Bundle`](orm_query.html#sqlalchemy.orm.query.Bundle "sqlalchemy.orm.query.Bundle")允许查询一组列，然后在查询返回的元组下面将这些列组合成一个名称。[`Bundle`](orm_query.html#sqlalchemy.orm.query.Bundle "sqlalchemy.orm.query.Bundle")的初始目的是 1.允许将“合成”ORM 列作为基于列的结果集中的单个值返回，而不是将它们展开到单个列中，并且 2.允许在 ORM 中创建自定义结果集构造，使用专门的列和返回类型，而不涉及映射类的更重量级的机制。
 
 也可以看看
 
@@ -786,12 +786,12 @@ basis](#migration-2824)查询时，复合属性现在以其对象形式返回
 ### 服务器端版本计数[¶](#server-side-version-counting "Permalink to this headline")
 
 ORM的版本控制功能（现在也在[Configuring a Version
-Counter](orm_versioning.html#mapper-version-counter)中有记录）现在可以使用服务器端版本计数方案（例如由触发器或数据库系统列生成的版本计数方案）以及条件编程方案在version\_id\_counter函数本身之外。通过为`version_id_generator`参数提供`False`值，ORM将使用已设置的版本标识符，或者同时从每行中获取版本标识符INSERT或发布UPDATE。当使用服务器生成的版本标识符时，强烈建议仅在具有强大RETURNING支持的后端使用此功能（Postgresql，SQL
+Counter](orm_versioning.html#mapper-version-counter)中有记录）现在可以使用服务器端版本计数方案（例如由触发器或数据库系统列生成的版本计数方案）以及条件编程方案在 version\_id\_counter函数本身之外。通过为`version_id_generator`参数提供`False`值，ORM 将使用已设置的版本标识符，或者同时从每行中获取版本标识符 INSERT 或发布 UPDATE。当使用服务器生成的版本标识符时，强烈建议仅在具有强大 RETURNING 支持的后端使用此功能（Postgresql，SQL
 Server；
-Oracle也支持RETURNING，但cx\_oracle驱动程序只有有限的支持），否则额外的SELECT报表将会增加显着的性能开销。在[Server
+Oracle 也支持 RETURNING，但 cx\_oracle驱动程序只有有限的支持），否则额外的SELECT报表将会增加显着的性能开销。在[Server
 Side Version
 Counters](orm_versioning.html#server-side-version-counter)中提供的示例说明了Postgresql
-`xmin`系统列的使用情况，以便将其与ORM的版本控制功能集成在一起。
+`xmin`系统列的使用情况，以便将其与 ORM 的版本控制功能集成在一起。
 
 也可以看看
 
@@ -839,7 +839,7 @@ Counters](orm_versioning.html#server-side-version-counter)
 
 ### Postgresql JSON类型[¶](#postgresql-json-type "Permalink to this headline")
 
-Postgresql方言现在使用[`postgresql.JSON`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")类型来补充[`postgresql.HSTORE`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")类型。
+Postgresql 方言现在使用[`postgresql.JSON`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")类型来补充[`postgresql.HSTORE`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")类型。
 
 也可以看看
 
@@ -906,14 +906,14 @@ auto-generating ad-hoc mappings.
 
 除非出现非常罕见和不寻常的假设情况，否则应该不会产生兼容性问题，但如果出现意外问题，则需要注意这些问题。
 
-### 许多JOIN和LEFT OUTER JOIN表达式将不再被包含（SELECT \* FROM ..）AS ANON\_1 [¶](#many-join-and-left-outer-join-expressions-will-no-longer-be-wrapped-in-select-from-as-anon-1 "Permalink to this headline")
+### 许多 JOIN 和 LEFT OUTER JOIN 表达式将不再被包含（SELECT \* FROM ..）AS ANON\_1 [¶](#many-join-and-left-outer-join-expressions-will-no-longer-be-wrapped-in-select-from-as-anon-1 "Permalink to this headline")
 
-多年以来，SQLAlchemy ORM一直被阻止在现有JOIN的右侧（通常是LEFT OUTER
-JOIN，因为INNER JOIN总是被压平）嵌套JOIN。
+多年以来，SQLAlchemy ORM 一直被阻止在现有 JOIN 的右侧（通常是 LEFT OUTER
+JOIN，因为 INNER JOIN 总是被压平）嵌套 JOIN。
 
     SELECT a.*, b.*, c.* FROM a LEFT OUTER JOIN (b JOIN c ON b.id = c.id) ON a.id
 
-这是因为直到版本**3.7.16**的SQLite无法解析上述格式的语句：
+这是因为直到版本**3.7.16**的 SQLite 无法解析上述格式的语句：
 
     SQLite version 3.7.15.2 2013-01-09 11:53:05
     Enter ".help" for instructions
@@ -924,22 +924,22 @@ JOIN，因为INNER JOIN总是被压平）嵌套JOIN。
     sqlite> select a.id, b.id, c.id from a left outer join (b join c on b.id=c.id) on b.id=a.id;
     Error: no such column: b.id
 
-右外连接当然是解决右括号的另一种方法；这将会非常复杂并且在视觉上很难实现，但幸运的是SQLite不支持RIGHT
+右外连接当然是解决右括号的另一种方法；这将会非常复杂并且在视觉上很难实现，但幸运的是 SQLite 不支持 RIGHT
 OUTER JOIN :)：
 
     sqlite> select a.id, b.id, c.id from b join c on b.id=c.id
        ...> right outer join a on b.id=a.id;
     Error: RIGHT and FULL OUTER JOINs are not currently supported
 
-早在2005年，目前还不清楚其他数据库是否存在这种形式的问题，但今天似乎很清楚，除了SQLite之外，每一个测试数据库都能够支持它（Oracle
-8是一个非常古老的数据库，根本不支持JOIN关键字，但对于Oracle的语法，SQLAlchemy总是有一个简单的重写方案）。更糟糕的是，应用SELECT的SQLAlchemy通常的解决方法通常会降低Postgresql和MySQL等平台的性能：
+早在 2005 年，目前还不清楚其他数据库是否存在这种形式的问题，但今天似乎很清楚，除了 SQLite 之外，每一个测试数据库都能够支持它（Oracle
+8 是一个非常古老的数据库，根本不支持 JOIN 关键字，但对于 Oracle 的语法，SQLAlchemy 总是有一个简单的重写方案）。更糟糕的是，应用 SELECT 的 SQLAlchemy 通常的解决方法通常会降低 Postgresql 和 MySQL 等平台的性能：
 
     SELECT a.*, anon_1.* FROM a LEFT OUTER JOIN (
                     SELECT b.id AS b_id, c.id AS c_id
                     FROM b JOIN c ON b.id = c.id
                 ) AS anon_1 ON a.id=anon_1.b_id
 
-使用连接表继承结构时，像以上形式的JOIN常见；任何时候[`Query.join()`](orm_query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")用于从某个父节点连接到一个连接表子类，或者当类似地使用[`joinedload()`](orm_loading_relationships.html#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")时，SQLAlchemy的ORM将始终确保为避免查询无法在SQLite上运行，嵌套的JOIN永远不会呈现。尽管Core一直支持更加紧凑的形式，但ORM必须避免它。
+使用连接表继承结构时，像以上形式的JOIN常见；任何时候[`Query.join()`](orm_query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")用于从某个父节点连接到一个连接表子类，或者当类似地使用[`joinedload()`](orm_loading_relationships.html#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")时，SQLAlchemy 的 ORM 将始终确保为避免查询无法在 SQLite 上运行，嵌套的 JOIN 永远不会呈现。尽管 Core 一直支持更加紧凑的形式，但 ORM 必须避免它。
 
 在ON子句中存在特殊标准的多对多关系中产生连接时，会出现另外一个问题。考虑像下面这样的热切加载连接：
 
@@ -954,13 +954,13 @@ OUTER JOIN :)：
 上述查询有什么问题？基本上，它会加载很多`order` /
 `order_item`行，其中`item.type ==  t6 > '子项'`不正确。
 
-从SQLAlchemy
-0.9开始，我们采用了一种全新的方法。ORM不再担心在封闭JOIN的右侧嵌套JOIN，现在它将尽可能经常地渲染这些，同时仍然返回正确的结果。当传递SQL语句进行编译时，如果已知该后端不支持右嵌套JOIN，则**dialect编译器**将**重写连接**以适应目标后端（目前只有SQLite
+从 SQLAlchemy
+0.9 开始，我们采用了一种全新的方法。ORM 不再担心在封闭 JOIN 的右侧嵌套 JOIN，现在它将尽可能经常地渲染这些，同时仍然返回正确的结果。当传递 SQL 语句进行编译时，如果已知该后端不支持右嵌套 JOIN，则**dialect编译器**将**重写连接**以适应目标后端（目前只有 SQLite
 - 如果其他后端有这个问题，请让我们知道！）。
 
 所以一个普通的`query(Parent).join(Subclass)`现在通常会产生一个更简单的表达式：
 
-    SELECT parent.id AS parent_id
+    SELECT parent.id AS parent_idplain
     FROM parent JOIN (
             base_table JOIN subclass_table
             ON base_table.id = subclass_table.id) ON parent.id = base_table.parent_id
@@ -981,7 +981,7 @@ OUTER JOIN :)：
     ON order_item.order_id = order.id
 
 所有这些连接在使用特别指定`use_labels=True`的[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")语句进行呈现时（对于ORM发出的所有查询都是如此），这些连接都是“连接重写”
-，这是将所有这些右嵌套连接重写为嵌套SELECT语句的过程，同时保持由[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")使用的相同标签。因此SQLite即使在2013年也不支持这种非常常见的SQL语法的一个数据库本身就具有额外的复杂性，上面的查询被重写为：
+，这是将所有这些右嵌套连接重写为嵌套SELECT语句的过程，同时保持由[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")使用的相同标签。因此 SQLite 即使在 2013 年也不支持这种非常常见的 SQL 语法的一个数据库本身就具有额外的复杂性，上面的查询被重写为：
 
     -- sqlite only!
     SELECT parent.id AS parent_id
@@ -1017,7 +1017,7 @@ OUTER JOIN :)：
 注意
 
 从SQLAlchemy
-1.1开始，当SQLite版本**3.7.16**或更高版本被检测到时，SQLite此功能中的变通方法将自动禁用，因为SQLite修复了对右嵌套连接的支持。
+1.1开始，当SQLite版本**3.7.16**或更高版本被检测到时，SQLite 此功能中的变通方法将自动禁用，因为 SQLite 修复了对右嵌套连接的支持。
 
 现在，[`Join.alias()`](core_selectable.html#sqlalchemy.sql.expression.Join.alias "sqlalchemy.sql.expression.Join.alias")，[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")和[`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")函数支持一个新参数`flat=True`此标志默认情况下不会启用，以帮助实现向后兼容性 -
 但现在，可选择的“polymorhpic”可作为目标而不生成任何子查询：
@@ -1049,7 +1049,7 @@ OUTER JOIN :)：
 
 ### 右连接的内部连接可用于连接的预先加载[¶](#right-nested-inner-joins-available-in-joined-eager-loads "Permalink to this headline")
 
-从版本0.9.4开始，上面提到的右嵌套连接可以在加入的热切加载情况下启用，其中“外部”连接与右侧的“内部”连接。
+从版本 0.9.4 开始，上面提到的右嵌套连接可以在加入的热切加载情况下启用，其中“外部”连接与右侧的“内部”连接。
 
 通常情况下，加入一个像以下这样的热切加载链：
 
@@ -1067,31 +1067,31 @@ items的INNER连接，而无需更改返回的用户行，而是忽略“链接�
 
 由于我们错过了这一点，为了避免进一步的回归，我们通过指定字符串`"nested"`到[`joinedload.innerjoin`](orm_loading_relationships.html#sqlalchemy.orm.joinedload.params.innerjoin "sqlalchemy.orm.joinedload")添加了上述功能：
 
-    query(User).options(joinedload("orders", innerjoin=False).joinedload("items", innerjoin="nested"))
+    query(User).options(joinedload("orders", innerjoin=False).joinedload("items", innerjoin="nested"))plain
 
-这个特性在0.9.4中是新的。
+这个特性在 0.9.4 中是新的。
 
 [＃2976 T0\>](http://www.sqlalchemy.org/trac/ticket/2976)
 
-### ORM可以使用RETURNING [¶](#orm-can-efficiently-fetch-just-generated-insert-update-defaults-using-returning "Permalink to this headline")高效地获取刚生成的INSERT / UPDATE默认值
+### ORM 可以使用 RETURNING [¶](#orm-can-efficiently-fetch-just-generated-insert-update-defaults-using-returning "Permalink to this headline")高效地获取刚生成的INSERT / UPDATE默认值
 
-[`Mapper`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")长期以来支持一个名为`eager_defaults=True`的未公开标志。此标志的作用是，当INSERT或UPDATE进行时，并且该行已知具有服务器生成的默认值时，SELECT会立即跟随它，以便“热切”地加载这些新值。通常，服务器生成的列在对象上被标记为“过期”，因此除非应用程序在刷新后实际访问这些列，否则不会产生开销。因此，`eager_defaults`标志没有多大用处，因为它只能降低性能，并且仅用于支持异常事件方案，用户需要在刷新过程中立即使用默认值。
+[`Mapper`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")长期以来支持一个名为`eager_defaults=True`的未公开标志。此标志的作用是，当 INSERT 或 UPDATE 进行时，并且该行已知具有服务器生成的默认值时，SELECT 会立即跟随它，以便“热切”地加载这些新值。通常，服务器生成的列在对象上被标记为“过期”，因此除非应用程序在刷新后实际访问这些列，否则不会产生开销。因此，`eager_defaults`标志没有多大用处，因为它只能降低性能，并且仅用于支持异常事件方案，用户需要在刷新过程中立即使用默认值。
 
-在0.9版本中，由于版本ID增强，现在`eager_defaults`可以为这些值发出RETURNING子句，因此在具有强大的RETURNING支持特别是Postgresql的后端上，ORM可以获取新生成的默认值SQL表达式值与INSERT或UPDATE内联。`eager_defaults`, when enabled, makes use of RETURNING automatically when the
+在 0.9 版本中，由于版本 ID 增强，现在`eager_defaults`可以为这些值发出 RETURNING 子句，因此在具有强大的 RETURNING 支持特别是 Postgresql 的后端上，ORM 可以获取新生成的默认值 SQL 表达式值与 INSERT 或 UPDATE 内联。`eager_defaults`, when enabled, makes use of RETURNING automatically when the
 target backend and [`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
 supports “implicit returning”.
 
-### 子查询Eager Loading将对某些查询的最内层SELECT应用DISTINCT [¶](#subquery-eager-loading-will-apply-distinct-to-the-innermost-select-for-some-queries "Permalink to this headline")
+### 子查询 Eager Loading 将对某些查询的最内层 SELECT 应用 DISTINCT [¶](#subquery-eager-loading-will-apply-distinct-to-the-innermost-select-for-some-queries "Permalink to this headline")
 
-为了减少在涉及多对一关系时通过子查询预加载可以生成的重复行的数量，当连接将目标列指定为不包含多对一关系的列时，DISTINCT关键字将应用于最内层的SELECT主键，就像在多对一时加载一样。
+为了减少在涉及多对一关系时通过子查询预加载可以生成的重复行的数量，当连接将目标列指定为不包含多对一关系的列时，DISTINCT 关键字将应用于最内层的 SELECT 主键，就像在多对一时加载一样。
 
 也就是说，当从A-\> B进行多对一的子查询加载时：
 
-    SELECT b.id AS b_id, b.name AS b_name, anon_1.b_id AS a_b_id
+    SELECT b.id AS b_id, b.name AS b_name, anon_1.b_id AS a_b_idplain
     FROM (SELECT DISTINCT a_b_id FROM a) AS anon_1
     JOIN b ON b.id = anon_1.a_b_id
 
-由于`a.b_id`是非不同的外键，所以应用DISTINCT以消除多余的`a.b_id`。可以使用flag `distinct_target_key`为特定的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")无条件地打开或关闭行为，将值设置为`True`以无条件开启， `False`表示无条件关闭，而`None`表示当目标SELECT针对不包含完整主键的列时，此功能才会生效。在0.9中，`None`是默认值。
+由于`a.b_id`是非不同的外键，所以应用DISTINCT以消除多余的`a.b_id`。可以使用 flag `distinct_target_key`为特定的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")无条件地打开或关闭行为，将值设置为`True`以无条件开启， `False`表示无条件关闭，而`None`表示当目标 SELECT 针对不包含完整主键的列时，此功能才会生效。在 0.9 中，`None`是默认值。
 
 该选项也被反向移植到0.8，其中`distinct_target_key`选项默认为`False`。
 
@@ -1105,9 +1105,9 @@ supports “implicit returning”.
 
 属性事件沿其“发起者”传递的机制，即与事件开始相关联的对象已被更改；而不是传递`AttributeImpl`，而是传递一个新对象[`attributes.Event`](orm_internals.html#sqlalchemy.orm.attributes.Event "sqlalchemy.orm.attributes.Event")；此对象引用`AttributeImpl`以及“操作令牌”，表示操作是附加，删除或替换操作。
 
-属性事件系统不再查看此“启动器”对象以停止一系列递归属性事件。相反，由于相互依赖的backref处理程序而阻止无限递归的系统已被移至ORM
-backref事件处理程序，该处理程序现在接管确保一系列相互依赖的事件（例如追加到集合A的角色）的角色。
-bs，在响应中设置多对一的属性Ba）并没有进入无穷无尽的递归流。这里的基本原理是，如果给定更多的事件传播的细节和控制权，backref系统最终可以允许发生多于一个级别的操作；典型的情况是集合追加会导致多对一的替换操作，而这又会导致将项目从以前的集合中删除：
+属性事件系统不再查看此“启动器”对象以停止一系列递归属性事件。相反，由于相互依赖的 backref 处理程序而阻止无限递归的系统已被移至 ORM
+backref 事件处理程序，该处理程序现在接管确保一系列相互依赖的事件（例如追加到集合 A 的角色）的角色。
+bs，在响应中设置多对一的属性 Ba）并没有进入无穷无尽的递归流。这里的基本原理是，如果给定更多的事件传播的细节和控制权，backref 系统最终可以允许发生多于一个级别的操作；典型的情况是集合追加会导致多对一的替换操作，而这又会导致将项目从以前的集合中删除：
 
     class Parent(Base):
         __tablename__ = 'parent'
@@ -1175,9 +1175,9 @@ value should be rendered into an inline DDL statement.
 
 ### 模式标识符现在携带自己的引用信息[¶](#schema-identifiers-now-carry-along-their-own-quoting-information "Permalink to this headline")
 
-这种改变简化了Core对所谓“quote”标志的使用，例如传递给[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的`quote`标志。该标志现在已内化在字符串名称本身内，现在它表示为字符串子类[`quoted_name`](core_sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")的一个实例。现在，[`IdentifierPreparer`](core_internals.html#sqlalchemy.sql.compiler.IdentifierPreparer "sqlalchemy.sql.compiler.IdentifierPreparer")完全依赖于由[`quoted_name`](core_sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")对象报告的引用首选项，而不是在大多数情况下检查任何显式的`quote`标志。这里解决的问题包括各种区分大小写的方法（如[`Engine.has_table()`](core_connections.html#sqlalchemy.engine.Engine.has_table "sqlalchemy.engine.Engine.has_table")）以及方言中的类似方法现在可以使用明确引用的名称，而不需要复杂化或引入向后不兼容的更改到那些API（其中许多是第三方），并带有引用标志的详细信息
+这种改变简化了 Core 对所谓“quote”标志的使用，例如传递给[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的`quote`标志。该标志现在已内化在字符串名称本身内，现在它表示为字符串子类[`quoted_name`](core_sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")的一个实例。现在，[`IdentifierPreparer`](core_internals.html#sqlalchemy.sql.compiler.IdentifierPreparer "sqlalchemy.sql.compiler.IdentifierPreparer")完全依赖于由[`quoted_name`](core_sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")对象报告的引用首选项，而不是在大多数情况下检查任何显式的`quote`标志。这里解决的问题包括各种区分大小写的方法（如[`Engine.has_table()`](core_connections.html#sqlalchemy.engine.Engine.has_table "sqlalchemy.engine.Engine.has_table")）以及方言中的类似方法现在可以使用明确引用的名称，而不需要复杂化或引入向后不兼容的更改到那些API（其中许多是第三方），并带有引用标志的详细信息
 -
-特别是更广泛的标识符现在可以与Oracle，Firebird和DB2等所谓的“大写字母”后端正常工作（后端存储和根据不区分大小写的名称使用全部大写报告表和列名称）。
+特别是更广泛的标识符现在可以与 Oracle，Firebird 和 DB2 等所谓的“大写字母”后端正常工作（后端存储和根据不区分大小写的名称使用全部大写报告表和列名称）。
 
 [`quoted_name`](core_sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")对象在内部根据需要使用；但是，如果其他关键字需要固定的引用偏好，则该类可公开使用。
 
@@ -1197,7 +1197,7 @@ value should be rendered into an inline DDL statement.
 select结构现在将布尔列作为二进制表达式在不具有`true`
 / `false`常量beahvior的后端渲染：
 
-    >>> from sqlalchemy import select, and_, false, true
+    >>> from sqlalchemy import select, and_, false, trueplain
     >>> from sqlalchemy.dialects import mysql, postgresql
 
     >>> print(select([t1]).where(t1.c.x).compile(dialect=mysql.dialect()))
@@ -1216,7 +1216,7 @@ constant is present:
 
 [`true()`](core_sqlelement.html#sqlalchemy.sql.expression.true "sqlalchemy.sql.expression.true")可以用作构建表达式的基础：
 
-    >>> expr = true()
+    >>> expr = true()plain
     >>> expr = expr & (t1.c.y > 5)
     >>> print(select([t1]).where(expr))
     SELECT t.x, t.y FROM t WHERE t.y > :y_1
@@ -1244,7 +1244,7 @@ themselves render as `0 = 1` and `1 = 1` for a backend with no boolean constants
 
 ### 现在，标签构造可以在ORDER BY [¶](#label-constructs-can-now-render-as-their-name-alone-in-an-order-by "Permalink to this headline")中作为其名称单独渲染
 
-对于在column子句和SELECT的ORDER BY子句中都使用[`Label`](core_sqlelement.html#sqlalchemy.sql.expression.Label "sqlalchemy.sql.expression.Label")的情况，标签将在ORDER
+对于在 column 子句和 SELECT 的 ORDER BY 子句中都使用[`Label`](core_sqlelement.html#sqlalchemy.sql.expression.Label "sqlalchemy.sql.expression.Label")的情况，标签将在ORDER
 BY子句中呈现为它的名称，假设底层方言报告支持此功能。
 
 例如。例如：
@@ -1260,7 +1260,7 @@ BY子句中呈现为它的名称，假设底层方言报告支持此功能。
 
 0.9之前会呈现为：
 
-    SELECT foo(t.c1) + t.c2 AS expr
+    SELECT foo(t.c1) + t.c2 AS exprplain
     FROM t ORDER BY foo(t.c1) + t.c2
 
 现在呈现为：
@@ -1268,8 +1268,8 @@ BY子句中呈现为它的名称，假设底层方言报告支持此功能。
     SELECT foo(t.c1) + t.c2 AS expr
     FROM t ORDER BY expr
 
-如果标签没有进一步嵌入到ORDER BY中的表达式中，ORDER
-BY只呈现标签，而不是简单的`ASC`或`DESC`。
+如果标签没有进一步嵌入到 ORDER BY 中的表达式中，ORDER
+BY 只呈现标签，而不是简单的`ASC`或`DESC`。
 
 上述格式适用于所有测试过的数据库，但可能与旧数据库版本（MySQL 4？Oracle
 8？等等。）。根据用户报告，我们可以添加将禁用基于数据库版本检测的功能的规则。
@@ -1280,7 +1280,7 @@ BY只呈现标签，而不是简单的`ASC`或`DESC`。
 
 [`RowProxy`](core_connections.html#sqlalchemy.engine.RowProxy "sqlalchemy.engine.RowProxy")对象的行为很像一个元组，但直到现在，如果使用`sorted()`对它们进行排序，则它们不会排序为元组。`__eq__()`方法现在将两边都作为元组进行比较，并且还添加了`__lt__()`方法：
 
-    users.insert().execute(
+    users.insert().execute(plain
             dict(user_id=1, user_name='foo'),
             dict(user_id=2, user_name='bar'),
             dict(user_id=3, user_name='def'),
@@ -1359,7 +1359,7 @@ all [`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchem
 objects that refer to it will be sent a message that they need to
 initialize their parent column.
 这个系统比较复杂，但工作更加扎实；作为奖励，现在有各种各样的[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
-/ [`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")配置场景的测试，并且错误消息已被改进为非常特定于不少于7个不同的错误条件。
+/ [`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")配置场景的测试，并且错误消息已被改进为非常特定于不少于 7 个不同的错误条件。
 
 现在可以正常工作的情景包括：
 
@@ -1395,7 +1395,7 @@ initialize their parent column.
 
 3.  它甚至适用于“多跳” - 也就是说，引用另一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的引用[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")：
 
-        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKey
+        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKeyplain
         >>> metadata = MetaData()
         >>> t2 = Table('t2', metadata, Column('t1id', ForeignKey('t1.id')))
         >>> t3 = Table('t3', metadata, Column('t2t1id', ForeignKey('t2.t1id')))

@@ -66,7 +66,7 @@ Many](basic_relationships.html#relationships-many-to-many)中描述） ：
 
 对`User`类应用`association_proxy`以产生`kw`关系的“视图”，该关系仅显示字符串值`.keyword`与每个`Keyword`对象关联：
 
-    from sqlalchemy.ext.associationproxy import association_proxy
+    from sqlalchemy.ext.associationproxy import association_proxyplain
 
     class User(Base):
         __tablename__ = 'user'
@@ -82,7 +82,7 @@ Many](basic_relationships.html#relationships-many-to-many)中描述） ：
 
 我们现在可以将`.keywords`集合引用为可读写的字符串列表。新的`Keyword`对象是透明地为我们创建的：
 
-    >>> user = User('jek')
+    >>> user = User('jek')plain
     >>> user.keywords.append('cheese inspector')
     >>> user.keywords
     ['cheese inspector']
@@ -99,16 +99,16 @@ Many](basic_relationships.html#relationships-many-to-many)中描述） ：
 创造新价值[¶](#creation-of-new-values "Permalink to this headline")
 -------------------------------------------------------------------
 
-当列表append()事件（或set add()，dictionary \_\_setitem
+当列表 append()事件（或 set add()，dictionary \_\_setitem
 \_\_()或标量赋值事件）被关联代理拦截时，它使用其构造函数实例化“中间”对象的新实例，作为单个论证给定的价值。在我们上面的例子中，一个操作如下：
 
-    user.keywords.append('cheese inspector')
+    user.keywords.append('cheese inspector')plain
 
 由协会代理翻译成操作：
 
     user.kw.append(Keyword('cheese inspector'))
 
-这个例子在这里工作，因为我们设计了`Keyword`的构造函数来接受一个位置参数`keyword`。对于单参数构造函数不可行的情况，可以使用`creator`参数来定制关联代理的创建行为，该参数引用可调用的函数（即Python函数），该函数将产生一个新的对象实例给出单数论证。下面我们用典型的lambda来说明这一点：
+这个例子在这里工作，因为我们设计了`Keyword`的构造函数来接受一个位置参数`keyword`。对于单参数构造函数不可行的情况，可以使用`creator`参数来定制关联代理的创建行为，该参数引用可调用的函数（即 Python 函数），该函数将产生一个新的对象实例给出单数论证。下面我们用典型的 lambda 来说明这一点：
 
     class User(Base):
         # ...
@@ -362,7 +362,7 @@ association proxy.
 查询关联代理[¶](#querying-with-association-proxies "Permalink to this headline")
 --------------------------------------------------------------------------------
 
-[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")具有简单的SQL构造功能，这些功能与使用中的基础[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")）以及目标属性相关。例如，[`RelationshipProperty.Comparator.any()`](internals.html#sqlalchemy.orm.properties.RelationshipProperty.Comparator.any "sqlalchemy.orm.properties.RelationshipProperty.Comparator.any")和[`RelationshipProperty.Comparator.has()`](internals.html#sqlalchemy.orm.properties.RelationshipProperty.Comparator.has "sqlalchemy.orm.properties.RelationshipProperty.Comparator.has")操作是可用的，并且会产生一个“嵌套的”EXISTS子句，如in我们的基本关联对象示例：
+[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")具有简单的 SQL 构造功能，这些功能与使用中的基础[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")）以及目标属性相关。例如，[`RelationshipProperty.Comparator.any()`](internals.html#sqlalchemy.orm.properties.RelationshipProperty.Comparator.any "sqlalchemy.orm.properties.RelationshipProperty.Comparator.any")和[`RelationshipProperty.Comparator.has()`](internals.html#sqlalchemy.orm.properties.RelationshipProperty.Comparator.has "sqlalchemy.orm.properties.RelationshipProperty.Comparator.has")操作是可用的，并且会产生一个“嵌套的”EXISTS 子句，如 in 我们的基本关联对象示例：
 
     >>> print(session.query(User).filter(User.keywords.any(keyword='jek')))
     SELECT user.id AS user_id, user.name AS user_name
@@ -384,7 +384,7 @@ association proxy.
 
 和`.contains()`可用于标量集合的代理：
 
-    >>> print(session.query(User).filter(User.keywords.contains('jek')))
+    >>> print(session.query(User).filter(User.keywords.contains('jek')))plain
     SELECT user.*
     FROM user
     WHERE EXISTS (SELECT 1
@@ -398,7 +398,7 @@ can be used with [`Query.join()`](query.html#sqlalchemy.orm.query.Query.join "sq
 somewhat manually using the [`attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.attr "sqlalchemy.ext.associationproxy.AssociationProxy.attr")
 attribute in a star-args context:
 
-    q = session.query(User).join(*User.keywords.attr)
+    q = session.query(User).join(*User.keywords.attr)plain
 
 版本0.7.3中的新增内容： [`attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.attr "sqlalchemy.ext.associationproxy.AssociationProxy.attr")属性在star-args上下文中。
 
@@ -414,13 +414,13 @@ New in version 0.7.3: [`AssociationProxy.local_attr`](#sqlalchemy.ext.associatio
 and [`AssociationProxy.remote_attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.remote_attr "sqlalchemy.ext.associationproxy.AssociationProxy.remote_attr"),
 synonyms for the actual proxied attributes, and usable for querying.
 
-API文档[¶](#api-documentation "Permalink to this headline")
+API 文档[¶](#api-documentation "Permalink to this headline")
 -----------------------------------------------------------
 
  `sqlalchemy.ext.associationproxy.`{.descclassname}`association_proxy`{.descname}(*target\_collection*, *attr*, *\*\*kw*)[¶](#sqlalchemy.ext.associationproxy.association_proxy "Permalink to this definition")
 :   返回实现目标属性视图的Python属性，该属性引用目标成员上的属性。
 
-    返回的值是[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")的一个实例。
+    返回的值是[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")的一个实例。plain
 
     将一个表示关系的Python属性实现为一组简单值或一个标量值。被代理的属性将模仿目标（列表，字典或集合）的集合类型，或者在一对一关系的情况下，它是一个简单的标量值。
 

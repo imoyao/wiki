@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:36
 permalink: /sqlalchemy/core/sqlelement/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - core
 tags:
   - 
@@ -15,7 +15,7 @@ tags:
 SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表达式支持。所有SQL表达式结构的核心是[`ClauseElement`](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")，它是几个子分支的基础。[`ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")类是用于构造任何类型的SQL表达式的基本单位。
 
 ` sqlalchemy.sql.expression。 T0> 所有_  T1> （ T2>  EXPR  T3> ） T4> ¶< / T5>`{.descclassname}
-:   产生一个ALL表达式。
+:   产生一个 ALL 表达式。
 
     这可能适用于某些方言的数组类型（例如postgresql），或适用于其他方面的子查询（例如mysql）。例如。：
 
@@ -648,7 +648,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     [`true()`](#sqlalchemy.sql.expression.true "sqlalchemy.sql.expression.true")
 
 `sqlalchemy.sql.expression。`{.descclassname} `func`{.descname} *=＆lt； sqlalchemy.sql.functions.\_FunctionGenerator对象＆gt；* [¶](#sqlalchemy.sql.expression.func "Permalink to this definition")
-:   生成SQL函数表达式。
+:   生成 SQL 函数表达式。
 
     [`func`](#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")是一个特殊的对象实例，它基于基于名称的属性生成SQL函数，例如：
 
@@ -858,7 +858,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 
     [`Select.order_by()`](selectable.html#sqlalchemy.sql.expression.Select.order_by "sqlalchemy.sql.expression.Select.order_by")
 
-` sqlalchemy.sql.expression。 T0> 或_  T1> （ T2>  *条款 T3> ） T4> ¶  T5>`{.descclassname}
+`sqlalchemy.sql.expression。 T0> 或_  T1> （ T2>  *条款 T3> ） T4> ¶  T5>`{.descclassname}
 :   生成由`OR`连接的表达式的连接。
 
     例如。：
@@ -891,7 +891,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
  `sqlalchemy.sql.expression.`{.descclassname}`over`{.descname}(*element*, *partition\_by=None*, *order\_by=None*, *range\_=None*, *rows=None*)[¶](#sqlalchemy.sql.expression.over "Permalink to this definition")
 :   针对函数生成[`Over`](#sqlalchemy.sql.expression.Over "sqlalchemy.sql.expression.Over")对象。
 
-    针对聚合或所谓的“窗口”函数，用于支持窗口函数的数据库后端。
+    针对聚合或所谓的“窗口”函数，用于支持窗口函数的数据库后端。plain
 
     [`over()`](#sqlalchemy.sql.expression.over "sqlalchemy.sql.expression.over")
     is usually called using the [`FunctionElement.over()`](functions.html#sqlalchemy.sql.functions.FunctionElement.over "sqlalchemy.sql.functions.FunctionElement.over")
@@ -1121,7 +1121,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 `sqlalchemy.sql.expression。`{.descclassname} `type_coerce`{.descname} （ *表达式*，*类型\_* ） T5\> [¶ T6\>](#sqlalchemy.sql.expression.type_coerce "Permalink to this definition")
 :   将SQL表达式与特定类型关联，而不呈现`CAST`。
 
-    例如。：
+    例如。：plain
 
         from sqlalchemy import type_coerce
 
@@ -2994,7 +2994,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
  *class*`sqlalchemy.sql.expression.`{.descclassname}`TypeCoerce`{.descname}(*expression*, *type\_*)[¶](#sqlalchemy.sql.expression.TypeCoerce "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
-    表示一个Python端的类型强制包装器。
+    表示一个Python端的类型强制包装器。plain
 
     [`TypeCoerce`](#sqlalchemy.sql.expression.TypeCoerce "sqlalchemy.sql.expression.TypeCoerce")
     supplies the [`expression.type_coerce()`](#sqlalchemy.sql.expression.type_coerce "sqlalchemy.sql.expression.type_coerce")

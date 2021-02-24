@@ -1,5 +1,5 @@
 ---
-title: 会话API
+title: 会话 API
 date: 2021-02-20 22:41:46
 permalink: /sqlalchemy/orm/session_api/
 categories:
@@ -1145,7 +1145,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
 
     [`make_transient()`](#sqlalchemy.orm.session.make_transient "sqlalchemy.orm.session.make_transient")
 
-` sqlalchemy.orm.session。 T0>  object_session  T1> （ T2> 实例 T3> ） T4> ¶< / T5>`{.descclassname}
+`sqlalchemy.orm.session。 T0>  object_session  T1> （ T2> 实例 T3> ） T4> ¶< / T5>`{.descclassname}
 :   返回给定实例所属的[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。
 
     这与[`InstanceState.session`{](internals.html#sqlalchemy.orm.state.InstanceState.session "sqlalchemy.orm.state.InstanceState.session")访问器基本相同。详情请参阅该属性。
@@ -1167,7 +1167,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
 这些函数由SQLAlchemy属性检测API提供，以提供处理实例，属性值和历史记录的详细界面。它们中的一些在构建事件监听器函数时很有用，比如[*ORM
 Events*](events.html)中描述的那些函数。
 
-` sqlalchemy.orm.util。 T0>  object_state  T1> （ T2> 实例 T3> ） T4> ¶< / T5>`{.descclassname}
+`sqlalchemy.orm.util。 T0>  object_state  T1> （ T2> 实例 T3> ） T4> ¶< / T5>`{.descclassname}
 :   给定一个对象，返回与该对象关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")。
 
     如果未配置映射，则引发[`sqlalchemy.orm.exc.UnmappedInstanceError`](exceptions.html#sqlalchemy.orm.exc.UnmappedInstanceError "sqlalchemy.orm.exc.UnmappedInstanceError")。
@@ -1245,7 +1245,7 @@ Events*](events.html)中描述的那些函数。
 *class* `sqlalchemy.orm.attributes。`{.descclassname} `历史记录`{.descname} [¶](#sqlalchemy.orm.attributes.History "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.attributes.History`](#sqlalchemy.orm.attributes.History "sqlalchemy.orm.attributes.History")
 
-    已添加，未更改和已删除值的三元组，表示在已检测属性上发生的更改。
+    已添加，未更改和已删除值的三元组，表示在已检测属性上发生的更改。plain
 
     为对象的特定属性获取[`History`](#sqlalchemy.orm.attributes.History "sqlalchemy.orm.attributes.History")对象的最简单方法是使用[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数：
 

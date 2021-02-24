@@ -4,22 +4,21 @@ date: 2021-02-20 22:41:43
 permalink: /sqlalchemy/orm/loading_relationships/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
 tags:
-  - 
 ---
 关系加载技术[¶](#relationship-loading-techniques "Permalink to this headline")
 ==============================================================================
 
-SQLAlchemy的很大一部分是对查询中相关对象加载的方式提供了广泛的控制。这个行为可以在映射器构造时使用[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")函数的`lazy`参数进行配置，也可以使用[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")目的。
+SQLAlchemy 的很大一部分是对查询中相关对象加载的方式提供了广泛的控制。这个行为可以在映射器构造时使用[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")函数的`lazy`参数进行配置，也可以使用[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")目的。
 
 使用Loader策略：延迟加载，预先加载[¶](#using-loader-strategies-lazy-loading-eager-loading "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------
 
 默认情况下，所有的对象间关系都是**延迟加载**。与[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")关联的标量或集合属性包含一个触发器，该属性首次被访问时触发。除了一种情况外，该触发器在访问点发出SQL调用以加载相关对象或对象：
 
-    sql>>> jack.addresses
+    sql>>> jack.addressesplain
     SELECT addresses.id AS addresses_id, addresses.email_address AS addresses_email_address,
     addresses.user_id AS addresses_user_id
     FROM addresses
@@ -27,13 +26,13 @@ SQLAlchemy的很大一部分是对查询中相关对象加载的方式提供了�
     [5]
     [<Address(u'jack@google.com')>, <Address(u'j25@yahoo.com')>]
 
-在没有发出SQL的情况下，对于简单的多对一关系，只能通过其主键标识相关对象，并且该对象已存在于当前的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中。
+在没有发出 SQL 的情况下，对于简单的多对一关系，只能通过其主键标识相关对象，并且该对象已存在于当前的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中。
 
 “load upon attribute access”的默认行为称为“lazy”或“select”加载 -
 名称“select”，因为通常在首次访问属性时会发出“SELECT”语句。
 
 在[Object Relational Tutorial](tutorial.html)中，我们引入了**Eager
-Loading**的概念。我们将`option`与[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象结合使用，以表示在单个SQL查询中应该与父对象同时加载关系。这个被称为[`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")的选项将一个JOIN（缺省为LEFT
+Loading**的概念。我们将`option`与[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象结合使用，以表示在单个 SQL 查询中应该与父对象同时加载关系。这个被称为[`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")的选项将一个JOIN（缺省为LEFT
 OUTER join）连接到该语句，并从与父类相同的结果集中填充标量/集合：
 
     sql>>> jack = session.query(User).\
@@ -46,9 +45,9 @@ OUTER join）连接到该语句，并从与父类相同的结果集中填充标�
     WHERE users.name = ?
     ['jack']
 
-除了“加入急切加载”之外，还有第二种急切加载选项，称为“子查询加载”。这种热切的加载为请求的每个集合都发出额外的SQL语句，并聚合到所有父对象中：
+除了“加入急切加载”之外，还有第二种急切加载选项，称为“子查询加载”。这种热切的加载为请求的每个集合都发出额外的 SQL 语句，并聚合到所有父对象中：
 
-    sql>>> jack = session.query(User).\
+    sql>>> jack = session.query(User).\plain
     ... options(subqueryload('addresses')).\
     ... filter_by(name='jack').all()
     SELECT users.id AS users_id, users.name AS users_name, users.fullname AS users_fullname,
@@ -66,7 +65,7 @@ OUTER join）连接到该语句，并从与父类相同的结果集中填充标�
 
 任何[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的默认**加载器策略**由`lazy`关键字参数配置，该参数默认为`select`这表示一个“选择”语句。下面我们将它设置为`joined`，以便使用JOIN加载`children`关系：
 
-    # load the 'children' collection using LEFT OUTER JOIN
+    # load the 'children' collection using LEFT OUTER JOINplainplain
     class Parent(Base):
         __tablename__ = 'parent'
 
@@ -107,7 +106,7 @@ queries emitted by [`subqueryload()`](#sqlalchemy.orm.subqueryload "sqlalchemy.o
 include the same ordering as used by the parent query.
 没有它，内部查询可能会返回错误的行：
 
-    # incorrect, no ORDER BY
+    # incorrect, no ORDER BYplain
     session.query(User).options(subqueryload(User.addresses)).first()
 
     # incorrect if User.name is not unique
@@ -158,7 +157,7 @@ loading for a particular query, affecting all [`relationship()`](relationship_ap
 
     session.query(MyClass).options(lazyload('*'))
 
-在上面，`lazyload('*')`选项将取代用于该查询的所有[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构的`lazy`设置，那些使用`'dynamic'`风格的加载。例如，如果某些关系指定了`lazy='joined'`或`lazy='subquery'`，则使用`lazyload('*')`所有这些关系使用`'select'`加载，例如在访问每个属性时发出一条SELECT语句。
+在上面，`lazyload('*')`选项将取代用于该查询的所有[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构的`lazy`设置，那些使用`'dynamic'`风格的加载。例如，如果某些关系指定了`lazy='joined'`或`lazy='subquery'`，则使用`lazyload('*')`所有这些关系使用`'select'`加载，例如在访问每个属性时发出一条 SELECT 语句。
 
 该选项不会取代查询中声明的加载器选项，如[`eagerload()`](#sqlalchemy.orm.eagerload "sqlalchemy.orm.eagerload")，[`subqueryload()`](#sqlalchemy.orm.subqueryload "sqlalchemy.orm.subqueryload")等。下面的查询仍将使用`widget`关系的连接加载：
 
@@ -172,7 +171,7 @@ loading for a particular query, affecting all [`relationship()`](relationship_ap
 每个实体的默认加载策略[¶](#per-entity-default-loading-strategies "Permalink to this headline")
 ----------------------------------------------------------------------------------------------
 
-版本0.9.0中的新功能：每个实体的默认加载器策略。
+版本 0.9.0 中的新功能：每个实体的默认加载器策略。
 
 默认加载器策略的一个变体是能够以每个实体为基础设置策略。例如，如果查询`User`和`Address`，我们可以指示`Address`上的所有关系仅使用延迟加载，方法是首先应用[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")对象，然后将`*`指定为链接选项：
 
@@ -187,7 +186,7 @@ The philosophy behind loader strategies is that any set of loading
 schemes can be applied to a particular query, and *the results don’t
 change* - only the number of SQL statements required to fully load
 related objects and collections changes.
-一个特定的查询可能会开始使用所有延迟加载。在上下文中使用它之后，可能会发现总是访问特定的属性或集合，并且更改这些的加载器策略会更有效。该策略可以在没有对查询进行其他修改的情况下进行更改，结果将保持不变，但会发出更少的SQL语句。在理论上（并且在实践中），对于[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")可以做的任何事情都不会让它根据加载器策略的变化加载一组不同的主要或相关对象。
+一个特定的查询可能会开始使用所有延迟加载。在上下文中使用它之后，可能会发现总是访问特定的属性或集合，并且更改这些的加载器策略会更有效。该策略可以在没有对查询进行其他修改的情况下进行更改，结果将保持不变，但会发出更少的 SQL 语句。在理论上（并且在实践中），对于[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")可以做的任何事情都不会让它根据加载器策略的变化加载一组不同的主要或相关对象。
 
 特别是[`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")如何实现不影响以任何方式返回的实体行的结果是它创建了它添加到查询中的连接的匿名别名，以便它们不能被引用查询的其他部分。For
 example, the query below uses [`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload") to
@@ -196,7 +195,7 @@ create a LEFT OUTER JOIN from `users` to
 not valid - the `Address` entity is not named in the
 query:
 
-    >>> jack = session.query(User).\
+    >>> jack = session.query(User).\plain
     ... options(joinedload(User.addresses)).\
     ... filter(User.name=='jack').\
     ... order_by(Address.email_address).all()
@@ -211,7 +210,7 @@ Above, `ORDER BY addresses.email_address` is not
 valid since `addresses` is not in the FROM list.
 加载`User`通过电子邮件地址记录和订购的正确方法是使用[`Query.join()`](query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")：
 
-    >>> jack = session.query(User).\
+    >>> jack = session.query(User).\plain
     ... join(User.addresses).\
     ... filter(User.name=='jack').\
     ... order_by(Address.email_address).all()
@@ -265,13 +264,13 @@ what it does, consider if we were **filtering** on a particular
     WHERE users.name = ? AND addresses.email_address = ?
     ['jack', 'someaddress@foo.com']
 
-在上面，我们可以看到两个JOIN具有非常不同的角色。一个将匹配`User`和`Address`的其中一个行，即`Address.email_address=='someaddress@foo.com'`的连接。The other LEFT OUTER JOIN will match *all*
+在上面，我们可以看到两个 JOIN 具有非常不同的角色。一个将匹配`User`和`Address`的其中一个行，即`Address.email_address=='someaddress@foo.com'`的连接。The other LEFT OUTER JOIN will match *all*
 `Address` rows related to `User`, and is only used to populate the `User.addresses` collection, for those `User` objects that
 are returned.
 
 通过将[`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")的使用更改为另一种加载类型，我们可以更改集合的加载方式，完全独立于用于检索我们想要的实际`User`行的SQL。下面我们将[`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")改成[`subqueryload()`](#sqlalchemy.orm.subqueryload "sqlalchemy.orm.subqueryload")：
 
-    >>> jack = session.query(User).\
+    >>> jack = session.query(User).\plainplain
     ... join(User.addresses).\
     ... options(subqueryload(User.addresses)).\
     ... filter(User.name=='jack').\
@@ -295,27 +294,27 @@ are returned.
 
 -   一对多收藏
 
-> -   当使用默认的延迟加载时，如果加载100个对象，然后访问每个对象的集合，则会发出总共101条SQL语句，尽管每条语句通常都是一个没有任何连接的简单SELECT。
+> -   当使用默认的延迟加载时，如果加载 100 个对象，然后访问每个对象的集合，则会发出总共 101 条 SQL 语句，尽管每条语句通常都是一个没有任何连接的简单 SELECT。
 > -   在使用连接的加载时，100个对象及其集合的加载只会发出一条SQL语句。但是，获取的行的总数将等于所有集合的大小之和，再加上一个具有空集合的每个父对象的额外行。每行还将包含由父项表示的全部列，对每个集合项重复
 >     -
->     SQLAlchemy不会重新获取除主键以外的这些列，但大多数DBAPI（有一些例外）将传输完整数据在任何情况下，每个父母通过电线连接到客户端连接。因此，只有当收集的大小相对较小时，加入的急切加载才有意义。与INNER加入相比，LEFT
->     OUTER JOIN也可以是性能密集型的。
-> -   使用子查询加载时，100个对象的加载将发出两个SQL语句。第二条语句将获取等于所有集合大小总和的行数。使用INNER
+>     SQLAlchemy 不会重新获取除主键以外的这些列，但大多数 DBAPI（有一些例外）将传输完整数据在任何情况下，每个父母通过电线连接到客户端连接。因此，只有当收集的大小相对较小时，加入的急切加载才有意义。与 INNER 加入相比，LEFT
+>     OUTER JOIN 也可以是性能密集型的。
+> -   使用子查询加载时，100 个对象的加载将发出两个 SQL 语句。第二条语句将获取等于所有集合大小总和的行数。使用 INNER
 >     JOIN，并且请求最少的父列，只有主键。因此，当集合较大时，子查询负载才有意义。
 > -   当连接或子查询加载使用多级深度时，加载集合中的集合将乘以以笛卡尔方式获取的行的总数。两种形式的急切加载总是从原始父类加入。
 
 -   多对一参考
 
-> -   当使用默认的延迟加载时，在收集的情况下，100个对象的负载会发出多达101个SQL语句。然而
+> -   当使用默认的延迟加载时，在收集的情况下，100 个对象的负载会发出多达 101 个 SQL 语句。然而
 >     -
->     这是一个明显的例外，因为如果多对一引用是对目标主键的简单外键引用，那么将使用[`Query.get()`](query.html#sqlalchemy.orm.query.Query.get "sqlalchemy.orm.query.Query.get")因此，在这里，如果对象集合引用相对较小的目标对象集合，或者完整的可能目标对象集合已被加载到会话中并被强引用，则使用默认的lazy
+>     这是一个明显的例外，因为如果多对一引用是对目标主键的简单外键引用，那么将使用[`Query.get()`](query.html#sqlalchemy.orm.query.Query.get "sqlalchemy.orm.query.Query.get")因此，在这里，如果对象集合引用相对较小的目标对象集合，或者完整的可能目标对象集合已被加载到会话中并被强引用，则使用默认的 lazy
 >     ='select'\< / t0\>是迄今为止最有效的方法。
-> -   使用连接加载时，100个对象的加载只会发出一条SQL语句。连接将是一个LEFT
+> -   使用连接加载时，100 个对象的加载只会发出一条 SQL 语句。连接将是一个 LEFT
 >     OUTER
->     JOIN，在所有情况下总行数将等于100。如果你知道每个父对象都有一个子对象（即外键引用不是NULL），那么可以将[`innerjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.innerjoin "sqlalchemy.orm.relationship")设置为`True`在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中指定。对于有很多可能的目标引用可能尚未加载的对象加载，使用INNER
+>     JOIN，在所有情况下总行数将等于 100。如果你知道每个父对象都有一个子对象（即外键引用不是 NULL），那么可以将[`innerjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.innerjoin "sqlalchemy.orm.relationship")设置为`True`在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中指定。对于有很多可能的目标引用可能尚未加载的对象加载，使用INNER
 >     JOIN加载加载非常有效。
-> -   子查询加载将为所有子对象发出第二次加载，因此对于100个对象的加载，将会发出两条SQL语句。然而，除了可能在所有情况下子查询加载都可以使用INNER
->     JOIN，而连接加载要求外键不是NULL，这里可能没有太多优势。
+> -   子查询加载将为所有子对象发出第二次加载，因此对于 100 个对象的加载，将会发出两条 SQL 语句。然而，除了可能在所有情况下子查询加载都可以使用 INNER
+>     JOIN，而连接加载要求外键不是 NULL，这里可能没有太多优势。
 
 将显式连接/语句路由到预先加载的集合[¶](#routing-explicit-joins-statements-into-eagerly-loaded-collections "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -323,7 +322,7 @@ are returned.
 [`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")的行为是这样的：自动创建连接，使用匿名别名作为目标，其结果被路由到加载对象的集合和标量引用。通常情况下，查询已经包含了代表特定集合或标量引用的必要连接，并且由连接的加载特性添加的连接是多余的
 - 但您仍然希望集合/引用被填充。
 
-为此SQLAlchemy提供[`contains_eager()`](#sqlalchemy.orm.contains_eager "sqlalchemy.orm.contains_eager")选项。该选项的使用方式与[`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")选项相同，只是假定[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")将显式指定适当的连接。下面，我们指定`User`和`Address`之间的连接，并将其作为加载`User.addresses`的基础：
+为此 SQLAlchemy 提供[`contains_eager()`](#sqlalchemy.orm.contains_eager "sqlalchemy.orm.contains_eager")选项。该选项的使用方式与[`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")选项相同，只是假定[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")将显式指定适当的连接。下面，我们指定`User`和`Address`之间的连接，并将其作为加载`User.addresses`的基础：
 
     class User(Base):
         __tablename__ = 'user'
@@ -340,7 +339,7 @@ are returned.
 
 如果语句的“热切”部分是“别名”，则可以使用[`contains_eager()`](#sqlalchemy.orm.contains_eager "sqlalchemy.orm.contains_eager")的`alias`关键字参数指示它。这是作为对[`aliased()`](query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")或[`Alias`](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")结构的引用发送的：
 
-    # use an alias of the Address entity
+    # use an alias of the Address entityplain
     adalias = aliased(Address)
 
     # construct a Query object which expects the "addresses" results
@@ -366,11 +365,11 @@ needs to be a full path from the starting entity.
 
 ### 使用contains\_eager()加载自定义过滤的收集结果[¶](#using-contains-eager-to-load-a-custom-filtered-collection-result "Permalink to this headline")
 
-当我们使用[`contains_eager()`](#sqlalchemy.orm.contains_eager "sqlalchemy.orm.contains_eager")时，*我们*正在构建将用于填充集合的SQL。由此看来，我们可以选择**修改**集合要存储的值，方法是编写我们的SQL来为集合或标量属性加载元素的子集。
+当我们使用[`contains_eager()`](#sqlalchemy.orm.contains_eager "sqlalchemy.orm.contains_eager")时，*我们*正在构建将用于填充集合的SQL。由此看来，我们可以选择**修改**集合要存储的值，方法是编写我们的 SQL 来为集合或标量属性加载元素的子集。
 
 作为一个例子，我们可以加载一个`User`对象，并通过过滤仅仅将特定的地址加载到它的`.addresses`集合中：
 
-    q = session.query(User).join(User.addresses).\
+    q = session.query(User).join(User.addresses).\plain
                 filter(Address.email.like('%ed%')).\
                 options(contains_eager(User.addresses))
 
@@ -401,7 +400,7 @@ methods are used.
 
 ### 任意语句的高级用法[¶](#advanced-usage-with-arbitrary-statements "Permalink to this headline")
 
-可以更加创造性地使用`alias`参数，因为它可以表示任何一组任意名称以匹配到一个语句中。在它下面链接到一个将一组列对象链接到一个字符串SQL语句的[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")：
+可以更加创造性地使用`alias`参数，因为它可以表示任何一组任意名称以匹配到一个语句中。在它下面链接到一个将一组列对象链接到一个字符串 SQL 语句的[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")：
 
     # label the columns of the addresses table
     eager_columns = select([
@@ -427,11 +426,11 @@ methods are used.
 ORM具有各种边界情况，其中属性的值在本地可用，但是ORM本身并不知晓这一点。还有一些情况是需要用户定义的加载属性系统。为了支持用户定义的加载系统的用例，提供了一个关键函数[`attributes.set_committed_value()`](session_api.html#sqlalchemy.orm.attributes.set_committed_value "sqlalchemy.orm.attributes.set_committed_value")。这个函数基本上等同于Python自己的`setattr()`函数，除了应用于目标对象时，用于确定刷新时间更改的SQLAlchemy的“属性历史记录”系统被绕过；该属性的分配方式与ORM从数据库中加载该属性的方式相同。
 
 使用[`attributes.set_committed_value()`](session_api.html#sqlalchemy.orm.attributes.set_committed_value "sqlalchemy.orm.attributes.set_committed_value")可以与另一个称为[`InstanceEvents.load()`](events.html#sqlalchemy.orm.events.InstanceEvents.load "sqlalchemy.orm.events.InstanceEvents.load")的关键事件组合，以在加载对象时生成属性填充行为。一个这样的例子是双向的“一对一”情况，其中加载一对一的“多对一”一方也应该暗示“一对多”方的价值。SQLAlchemy
-ORM在加载相关对象时不会考虑backrefs，它将“一对一”视为另一个“一对多”，而这恰好是一行。
+ORM 在加载相关对象时不会考虑 backrefs，它将“一对一”视为另一个“一对多”，而这恰好是一行。
 
 鉴于以下映射：
 
-    from sqlalchemy import Integer, ForeignKey, Column
+    from sqlalchemy import Integer, ForeignKey, Columnplain
     from sqlalchemy.orm import relationship, backref
     from sqlalchemy.ext.declarative import declarative_base
 
@@ -456,9 +455,9 @@ ORM在加载相关对象时不会考虑backrefs，它将“一对一”视为另
     FROM a
     WHERE ? = a.b_id
 
-由于`b.a`与`a1`的值相同，因此该SELECT是多余的。我们可以创建一个有效规则来为我们填充这个：
+由于`b.a`与`a1`的值相同，因此该 SELECT 是多余的。我们可以创建一个有效规则来为我们填充这个：
 
-    from sqlalchemy import event
+    from sqlalchemy import eventplain
     from sqlalchemy.orm import attributes
 
     @event.listens_for(A, "load")
@@ -468,7 +467,7 @@ ORM在加载相关对象时不会考虑backrefs，它将“一对一”视为另
 
 现在当我们查询`A`时，我们将从我们的事件中获得`A.b`来自加入的预先加载和`A.b.a`
 
-    sqla1 = s.query(A).first()
+    sqla1 = s.query(A).first()plain
     SELECT a.id AS a_id, a.b_id AS a_b_id, b_1.id AS b_1_id
     FROM a LEFT OUTER JOIN b AS b_1 ON b_1.id = a.b_id
      LIMIT ? OFFSET ?
@@ -552,8 +551,8 @@ Relationship Loader API [¶](#relationship-loader-api "Permalink to this headlin
 `sqlalchemy.orm。`{.descclassname} `eagerload_all`{.descname} （ *\* args*，*\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.orm.eagerload_all "Permalink to this definition")
 :   [`joinedload_all()`](#sqlalchemy.orm.joinedload_all "sqlalchemy.orm.joinedload_all")的同义词
 
-` sqlalchemy.orm。 T0>  immediateload  T1> （ T2>  *键 T3> ） T4> ¶ T5>`{.descclassname}
-:   指示应该使用带有每个属性的SELECT语句的立即加载来加载给定的属性。
+`sqlalchemy.orm。 T0>  immediateload  T1> （ T2>  *键 T3> ） T4> ¶ T5>`{.descclassname}
+:   指示应该使用带有每个属性的 SELECT 语句的立即加载来加载给定的属性。
 
     该函数是[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")接口的一部分，并支持方法链接和独立操作。
 
@@ -680,10 +679,10 @@ Relationship Loader API [¶](#relationship-loader-api "Permalink to this headlin
 
     [`orm.noload()`](#sqlalchemy.orm.noload "sqlalchemy.orm.noload")适用于[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")属性；对于基于列的属性，请参阅[`orm.defer()`](loading_columns.html#sqlalchemy.orm.defer "sqlalchemy.orm.defer")。
 
-` sqlalchemy.orm。 T0>  raiseload  T1> （ T2>  *键 T3> ） T4> ¶ T5>`{.descclassname}
+`sqlalchemy.orm。 T0>  raiseload  T1> （ T2>  *键 T3> ） T4> ¶ T5>`{.descclassname}
 :   指示给定的关系属性应该禁止延迟加载。
 
-    使用[`orm.raiseload()`](#sqlalchemy.orm.raiseload "sqlalchemy.orm.raiseload")配置的关系属性将在访问时引发[`InvalidRequestError`](core_exceptions.html#sqlalchemy.exc.InvalidRequestError "sqlalchemy.exc.InvalidRequestError")。这是有用的典型方式是当应用程序试图确保在特定上下文中访问的所有关系属性已经通过预先加载加载时。与其不必通过SQL日志来确保延迟加载不会发生，这种策略会立即引发它们。
+    使用[`orm.raiseload()`](#sqlalchemy.orm.raiseload "sqlalchemy.orm.raiseload")配置的关系属性将在访问时引发[`InvalidRequestError`](core_exceptions.html#sqlalchemy.exc.InvalidRequestError "sqlalchemy.exc.InvalidRequestError")。这是有用的典型方式是当应用程序试图确保在特定上下文中访问的所有关系属性已经通过预先加载加载时。与其不必通过SQL日志来确保延迟加载不会发生，这种策略会立即引发它们。plain
 
     该函数是[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")接口的一部分，并支持方法链接和独立操作。
 

@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:35
 permalink: /sqlalchemy/core/core/reflection/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - core
 tags:
   - 
@@ -18,11 +18,11 @@ tags:
     >>> [c.name for c in messages.columns]
     ['message_id', 'message_name', 'date']
 
-上面的操作将使用给定的引擎来查询数据库中有关`messages`表的信息，然后将生成[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")，[`ForeignKey`](constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")和其他与此信息相对应的对象就好像[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象是在Python中手动构造的。
+上面的操作将使用给定的引擎来查询数据库中有关`messages`表的信息，然后将生成[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")，[`ForeignKey`](constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")和其他与此信息相对应的对象就好像[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象是在 Python 中手动构造的。
 
 当表被反映时，如果给定的表通过外键引用另一个表，则在表示连接的[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象内创建第二个[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象。在下面，假设表`shopping_cart_items`引用了一个名为`shopping_carts`的表。反映`shopping_cart_items`表的作用是：`shopping_carts`表也将被加载：
 
-    >>> shopping_cart_items = Table('shopping_cart_items', meta, autoload=True, autoload_with=engine)
+    >>> shopping_cart_items = Table('shopping_cart_items', meta, autoload=True, autoload_with=engine)plain
     >>> 'shopping_carts' in meta.tables:
     True
 
@@ -42,7 +42,7 @@ object is created for each distinct table name.
 
 反映表时，可以使用显式值重写单个列；这对指定自定义数据类型，例如可能未在数据库中配置的主键等约束很方便。:
 
-    >>> mytable = Table('mytable', meta,
+    >>> mytable = Table('mytable', meta,plain
     ... Column('id', Integer, primary_key=True),   # override reflected 'id' to have primary key
     ... Column('mydata', Unicode(50)),    # override reflected 'mydata' to be Unicode
     ... autoload=True)
@@ -63,7 +63,7 @@ objects representing the names and types of each column within the view
 
 为此，使用“覆盖”技术，明确指定那些属于主键或具有外键约束的列：
 
-    my_view = Table("some_view", metadata,
+    my_view = Table("some_view", metadata,plain
                     Column("view_id", Integer, primary_key=True),
                     Column("related_thing", Integer, ForeignKey("othertable.thing_id")),
                     autoload=True
@@ -103,7 +103,7 @@ clear or delete all the rows in a database:
  *class*`sqlalchemy.engine.reflection.`{.descclassname}`Inspector`{.descname}(*bind*)[¶](#sqlalchemy.engine.reflection.Inspector "Permalink to this definition")
 :   执行数据库模式检查。
 
-    The Inspector acts as a proxy to the reflection methods of the
+    The Inspector acts as a proxy to the reflection methods of theplain
     [`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect"),
     providing a consistent interface as well as caching support for
     previously fetched metadata.
@@ -428,11 +428,11 @@ clear or delete all the rows in a database:
 
 需要注意的是，反射过程仅使用关系数据库中表示的信息重新创建[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")元数据。按定义，此过程无法还原实际上未存储在数据库中的模式的各个方面。无法反映的国家包括但不限于：
 
--   客户端默认值是Python函数或使用[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的`default`关键字定义的SQL表达式（注意，这与`server_default`不同，具体是什么可通过反射获得）。
+-   客户端默认值是 Python 函数或使用[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的`default`关键字定义的 SQL 表达式（注意，这与`server_default`不同，具体是什么可通过反射获得）。
 -   列信息，例如可能已放入[`Column.info`{](metadata.html#sqlalchemy.schema.Column.info "sqlalchemy.schema.Column.info")字典中的数据
 -   [`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")或[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的`.quote`设置的值
 -   特定[`Sequence`](defaults.html#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")与给定[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的关联
 
-关系数据库在很多情况下也以与SQLAlchemy中指定的格式不同的格式报告表格元数据。从反射返回的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象不能始终依赖于生成与原始Python定义的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象相同的DDL。None服务器端的默认值可以通过强制转换指令（通常Postgresql将包含一个`::<type>`强制转换）或不同于最初指定的引用模式返回。
+关系数据库在很多情况下也以与 SQLAlchemy 中指定的格式不同的格式报告表格元数据。从反射返回的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象不能始终依赖于生成与原始 Python 定义的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象相同的DDL。None服务器端的默认值可以通过强制转换指令（通常Postgresql将包含一个`::<type>`强制转换）或不同于最初指定的引用模式返回。
 
-另一类限制包括反射仅部分或尚未定义的模式结构。最近对反思的改进允许反映视图，索引和外键选项等内容。在撰写本文时，不会反映CHECK约束，表格注释和触发器等结构。
+另一类限制包括反射仅部分或尚未定义的模式结构。最近对反思的改进允许反映视图，索引和外键选项等内容。在撰写本文时，不会反映 CHECK 约束，表格注释和触发器等结构。

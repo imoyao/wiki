@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy中文文档
   - orm
 tags:
-  - 
 ---
 自定义类型[¶](#custom-types "Permalink to this headline")
 =========================================================
@@ -17,8 +16,8 @@ tags:
 重写类型编译[¶](#overriding-type-compilation "Permalink to this headline")
 --------------------------------------------------------------------------
 
-经常需要强制更改类型的“字符串”版本，即在CREATE
-TABLE语句或其他SQL函数（如CAST）中呈现的类型。例如，应用程序可能希望强制为所有平台呈现`BINARY`，除了要呈现其中的`BLOB`之外的所有平台。对于大多数使用情况，现有泛型类型（在本例中为[`LargeBinary`](type_basics.html#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")）的使用是首选。但为了更准确地控制类型，每个方言的编译指令可以与任何类型相关联：
+经常需要强制更改类型的“字符串”版本，即在 CREATE
+TABLE 语句或其他 SQL 函数（如 CAST）中呈现的类型。例如，应用程序可能希望强制为所有平台呈现`BINARY`，除了要呈现其中的`BLOB`之外的所有平台。对于大多数使用情况，现有泛型类型（在本例中为[`LargeBinary`](type_basics.html#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")）的使用是首选。但为了更准确地控制类型，每个方言的编译指令可以与任何类型相关联：
 
     from sqlalchemy.ext.compiler import compiles
     from sqlalchemy.types import BINARY
@@ -475,7 +474,7 @@ is strings that contain non-ASCII characters and are not `u''` objects in Python
 [`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
 which coerces as needed:
 
-    from sqlalchemy.types import TypeDecorator, Unicode
+    from sqlalchemy.types import TypeDecorator, Unicodeplain
 
     class CoerceUTF8(TypeDecorator):
         """Safely coerce Python bytestrings to Unicode
@@ -490,8 +489,8 @@ which coerces as needed:
 
 ### 舍入数字[¶](#rounding-numerics "Permalink to this headline")
 
-某些数据库连接器（如SQL
-Server的数据库连接器）会在小数位数过多的情况下传递Decimal。这是一个让他们满意的食谱：
+某些数据库连接器（如 SQL
+Server 的数据库连接器）会在小数位数过多的情况下传递 Decimal。这是一个让他们满意的食谱：
 
     from sqlalchemy.types import TypeDecorator, Numeric
     from decimal import Decimal
@@ -557,7 +556,7 @@ UUID类型，并以字符串化的十六进制格式存储它们。如果需要�
 
 ### Marshal JSON字符串[¶](#marshal-json-strings "Permalink to this headline")
 
-这种类型使用`simplejson`将Python数据结构封送到/来自JSON。可以修改为使用Python的内置json编码器：
+这种类型使用`simplejson`将 Python 数据结构封送到/来自 JSON。可以修改为使用 Python 的内置 json 编码器：
 
     from sqlalchemy.types import TypeDecorator, VARCHAR
     import json
@@ -591,9 +590,9 @@ Tracking](orm_extensions_mutable.html)中的示例。
 替换现有类型的绑定/结果处理[¶](#replacing-the-bind-result-processing-of-existing-types "Permalink to this headline")
 --------------------------------------------------------------------------------------------------------------------
 
-使用[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")实现绑定/结果级别的大部分类型行为增强。对于需要替换由SQLAlchemy在DBAPI级别应用的特定处理的罕见场景，可以直接对SQLAlchemy类型进行子类化，并且`bind_processor()`或`result_processor()`这样做需要重写`adapt()`方法。此方法是SQLAlchemy在执行语句期间生成特定于DBAPI的类型行为的机制。覆盖它可以使用自定义类型的副本来代替DBAPI特定的类型。下面我们将[`types.TIME`](type_basics.html#sqlalchemy.types.TIME "sqlalchemy.types.TIME")类型进行子类化以具有自定义结果处理行为。`process()`函数将直接从DBAPI游标接收`value`：
+使用[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")实现绑定/结果级别的大部分类型行为增强。对于需要替换由 SQLAlchemy 在 DBAPI 级别应用的特定处理的罕见场景，可以直接对 SQLAlchemy 类型进行子类化，并且`bind_processor()`或`result_processor()`这样做需要重写`adapt()`方法。此方法是 SQLAlchemy 在执行语句期间生成特定于 DBAPI 的类型行为的机制。覆盖它可以使用自定义类型的副本来代替 DBAPI 特定的类型。下面我们将[`types.TIME`](type_basics.html#sqlalchemy.types.TIME "sqlalchemy.types.TIME")类型进行子类化以具有自定义结果处理行为。`process()`函数将直接从DBAPI游标接收`value`：
 
-    class MySpecialTime(TIME):
+    class MySpecialTime(TIME):plain
         def __init__(self, special_argument):
             super(MySpecialTime, self).__init__()
             self.special_argument = special_argument
@@ -618,14 +617,14 @@ Tracking](orm_extensions_mutable.html)中的示例。
         def adapt(self, impltype):
             return MySpecialTime(self.special_argument)
 
-应用SQL级绑定/结果处理[¶](#applying-sql-level-bind-result-processing "Permalink to this headline")
+应用 SQL 级绑定/结果处理[¶](#applying-sql-level-bind-result-processing "Permalink to this headline")
 --------------------------------------------------------------------------------------------------
 
 如在[Augmenting Existing Types](#types-typedecorator)和[Replacing the
 Bind/Result Processing of Existing
-Types](#replacing-processors)部分所见，SQLAlchemy允许在将参数发送到语句时调用Python函数，如以及从数据库加载结果行时，以及在将数据发送到数据库或从数据库发送时对其应用转换。也可以定义SQL级别的转换。这里的基本原理是，只有关系数据库包含一系列必要的功能，才能在应用程序和持久性格式之间强制传入和传出数据。例子包括使用数据库定义的加密/解密函数，以及处理地理数据的存储过程。Postgis对Postgresql的扩展包括一系列SQL函数，这些函数是将数据强制转换为特定格式所必需的。
+Types](#replacing-processors)部分所见，SQLAlchemy 允许在将参数发送到语句时调用 Python 函数，如以及从数据库加载结果行时，以及在将数据发送到数据库或从数据库发送时对其应用转换。也可以定义 SQL 级别的转换。这里的基本原理是，只有关系数据库包含一系列必要的功能，才能在应用程序和持久性格式之间强制传入和传出数据。例子包括使用数据库定义的加密/解密函数，以及处理地理数据的存储过程。Postgis 对 Postgresql 的扩展包括一系列 SQL 函数，这些函数是将数据强制转换为特定格式所必需的。
 
-任何[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")，[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")或[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")子类都可以包含[`TypeEngine.bind_expression()`](type_api.html#sqlalchemy.types.TypeEngine.bind_expression "sqlalchemy.types.TypeEngine.bind_expression")和/或[`TypeEngine.column_expression()`](type_api.html#sqlalchemy.types.TypeEngine.column_expression "sqlalchemy.types.TypeEngine.column_expression")，当定义为返回非`None`值时，应返回要注入SQL语句的[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")表达式，参数或列表达式。例如，要构建将所有传入数据应用于Postgis函数`ST_GeomFromText`的所有传出值和函数`ST_AsText`的`Geometry`类型，我们可以创建我们自己的[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")的子类，它提供这些方法与[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结合使用：
+任何[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")，[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")或[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")子类都可以包含[`TypeEngine.bind_expression()`](type_api.html#sqlalchemy.types.TypeEngine.bind_expression "sqlalchemy.types.TypeEngine.bind_expression")和/或[`TypeEngine.column_expression()`](type_api.html#sqlalchemy.types.TypeEngine.column_expression "sqlalchemy.types.TypeEngine.column_expression")，当定义为返回非`None`值时，应返回要注入SQL语句的[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")表达式，参数或列表达式。例如，要构建将所有传入数据应用于 Postgis 函数`ST_GeomFromText`的所有传出值和函数`ST_AsText`的`Geometry`类型，我们可以创建我们自己的[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")的子类，它提供这些方法与[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结合使用：
 
     from sqlalchemy import func
     from sqlalchemy.types import UserDefinedType
@@ -713,7 +712,7 @@ expression. 例如，如果我们针对表达式的[`label()`](sqlelement.html#s
                     where(message.c.username == "some user")
             ))
 
-`pgp_sym_encrypt`和`pgp_sym_decrypt`函数应用于INSERT和SELECT语句：
+`pgp_sym_encrypt`和`pgp_sym_decrypt`函数应用于 INSERT 和 SELECT 语句：
 
     INSERT INTO message (username, message)
       VALUES (%(username)s, pgp_sym_encrypt(%(message)s, %(pgp_sym_encrypt_1)s))
@@ -766,11 +765,11 @@ class. 用户定义的[`TypeEngine.Comparator`](type_api.html#sqlalchemy.types.T
 
 用法：
 
-    >>> sometable = Table("sometable", metadata, Column("data", MyInt))
+    >>> sometable = Table("sometable", metadata, Column("data", MyInt))plain
     >>> print(sometable.c.data + 5)
     sometable.data goofy :data_1
 
-通过将[`TypeEngine.Comparator`](type_api.html#sqlalchemy.types.TypeEngine.Comparator "sqlalchemy.types.TypeEngine.Comparator")自身实例化为`expr`属性，通过拥有的SQL表达式查阅[`ColumnOperators.__add__()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.__add__ "sqlalchemy.sql.operators.ColumnOperators.__add__")的实现。表达式系统的机制是这样的，即操作继续递归直到表达式对象产生一个新的SQL表达式结构。Above,
+通过将[`TypeEngine.Comparator`](type_api.html#sqlalchemy.types.TypeEngine.Comparator "sqlalchemy.types.TypeEngine.Comparator")自身实例化为`expr`属性，通过拥有的 SQL 表达式查阅[`ColumnOperators.__add__()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.__add__ "sqlalchemy.sql.operators.ColumnOperators.__add__")的实现。表达式系统的机制是这样的，即操作继续递归直到表达式对象产生一个新的 SQL 表达式结构。Above,
 we could just as well have said `self.expr.op("goofy")(other)` instead of `self.op("goofy")(other)`.
 
 New methods added to a [`TypeEngine.Comparator`](type_api.html#sqlalchemy.types.TypeEngine.Comparator "sqlalchemy.types.TypeEngine.Comparator")
@@ -806,7 +805,7 @@ onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.Colu
 
 使用以上类型：
 
-    >>> from sqlalchemy.sql import column
+    >>> from sqlalchemy.sql import columnplain
     >>> print(column('x', MyInteger).factorial())
     x !
 

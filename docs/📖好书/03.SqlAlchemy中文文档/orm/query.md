@@ -1477,7 +1477,7 @@ method:
 
         [`Query.enable_eagerloads()`](#sqlalchemy.orm.query.Query.enable_eagerloads "sqlalchemy.orm.query.Query.enable_eagerloads")
 
-特定于ORM的查询构造[¶](#orm-specific-query-constructs "Permalink to this headline")
+特定于 ORM 的查询构造[¶](#orm-specific-query-constructs "Permalink to this headline")
 -----------------------------------------------------------------------------------
 
  `sqlalchemy.orm.`{.descclassname}`aliased`{.descname}(*element*, *alias=None*, *name=None*, *flat=False*, *adapt\_on\_names=False*)[¶](#sqlalchemy.orm.aliased "Permalink to this definition")

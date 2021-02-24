@@ -4,10 +4,9 @@ date: 2021-02-20 22:41:49
 permalink: /sqlalchemy/orm/session_transaction/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
 tags:
-  - 
 ---
 事务和连接管理[¶](#transactions-and-connection-management "Permalink to this headline")
 =======================================================================================
@@ -75,11 +74,11 @@ objects as new requests to emit SQL statements are received.
         session.rollback()
         raise
 
-### 使用SAVEPOINT [¶](#using-savepoint "Permalink to this headline")
+### 使用 SAVEPOINT [¶](#using-savepoint "Permalink to this headline")
 
-如果底层引擎支持SAVEPOINT事务，可以使用[`begin_nested()`](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")方法描述：
+如果底层引擎支持 SAVEPOINT 事务，可以使用[`begin_nested()`](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")方法描述：
 
-    Session = sessionmaker()
+    Session = sessionmaker()plainplain
     session = Session()
     session.add(u1)
     session.add(u2)
@@ -92,7 +91,7 @@ objects as new requests to emit SQL statements are received.
 
 [`begin_nested()`](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")
 may be called any number of times, which will issue a new SAVEPOINT with
-a unique identifier for each call. 对于每个[`begin_nested()`](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")调用，必须发出相应的[`rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")或[`commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")。（但是请注意，如果返回值用作上下文管理器，即在with-statement中，则此退回/提交由上下文管理器在退出上下文时发出，因此不应显式添加。）
+a unique identifier for each call. 对于每个[`begin_nested()`](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")调用，必须发出相应的[`rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")或[`commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")。（但是请注意，如果返回值用作上下文管理器，即在 with-statement 中，则此退回/提交由上下文管理器在退出上下文时发出，因此不应显式添加。）
 
 当调用[`begin_nested()`](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")时，将无条件发布[`flush()`](session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")（不管`autoflush`设置如何）。这是为了当发生[`rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")时，会话的完整状态已过期，从而导致所有后续的属性/实例访问都引用[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的完整状态在[`begin_nested()`](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")之前被调用。
 
@@ -139,7 +138,7 @@ connection and transaction resources are
 goes back into “autocommit” mode, until [`Session.begin()`](session_api.html#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")
 is called again:
 
-    Session = sessionmaker(bind=engine, autocommit=True)
+    Session = sessionmaker(bind=engine, autocommit=True)plain
     session = Session()
     session.begin()
     try:
@@ -152,7 +151,7 @@ is called again:
         session.rollback()
         raise
 
-[`Session.begin()`](session_api.html#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")方法还返回一个事务标记，该标记与Python
+[`Session.begin()`](session_api.html#sqlalchemy.orm.session.Session.begin "sqlalchemy.orm.session.Session.begin")方法还返回一个事务标记，该标记与 Python
 2.6 `with`语句兼容：
 
     Session = sessionmaker(bind=engine, autocommit=True)
@@ -176,7 +175,7 @@ and [`Transaction.commit()`](core_connections.html#sqlalchemy.engine.Transaction
 as though they are the initiator of the transaction, but in fact may be
 participating in an already ongoing transaction:
 
-    # method_a starts a transaction and calls method_b
+    # method_a starts a transaction and calls method_bplain
     def method_a(session):
         session.begin(subtransactions=True)
         try:
@@ -208,9 +207,9 @@ participating in an already ongoing transaction:
 
 ### 启用两阶段提交[¶](#enabling-two-phase-commit "Permalink to this headline")
 
-对于支持两阶段操作的后端（当前MySQL和PostgreSQL），可以指示会话使用两阶段提交语义。这将协调跨数据库的事务提交，以便在所有数据库中提交或回滚事务。您还可以[`prepare()`](session_api.html#sqlalchemy.orm.session.Session.prepare "sqlalchemy.orm.session.Session.prepare")会话以与未由SQLAlchemy管理的交易进行交互。要使用两阶段事务，请在会话中设置标志`twophase=True`：
+对于支持两阶段操作的后端（当前 MySQL 和 PostgreSQL），可以指示会话使用两阶段提交语义。这将协调跨数据库的事务提交，以便在所有数据库中提交或回滚事务。您还可以[`prepare()`](session_api.html#sqlalchemy.orm.session.Session.prepare "sqlalchemy.orm.session.Session.prepare")会话以与未由 SQLAlchemy 管理的交易进行交互。要使用两阶段事务，请在会话中设置标志`twophase=True`：
 
-    engine1 = create_engine('postgresql://db1')
+    engine1 = create_engine('postgresql://db1')plain
     engine2 = create_engine('postgresql://db2')
 
     Session = sessionmaker(twophase=True)
@@ -230,13 +229,13 @@ participating in an already ongoing transaction:
 
 [Isolation](glossary.html#term-isolation) refers to the behavior of the
 transaction at the database level in relation to other transactions
-occurring concurrently. 有四种众所周知的隔离模式，通常Python
-DBAPI允许通过明确的API或通过特定于数据库的调用来基于每个连接来设置这些模式。
+occurring concurrently. 有四种众所周知的隔离模式，通常 Python
+DBAPI 允许通过明确的 API 或通过特定于数据库的调用来基于每个连接来设置这些模式。
 
 SQLAlchemy的方言在每个[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或per
 [`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")基础上支持可设置的隔离模式，在[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")在[`Connection.execution_options()`](core_connections.html#sqlalchemy.engine.Connection.execution_options "sqlalchemy.engine.Connection.execution_options")级别。
 
-当使用ORM [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")时，它充当引擎和连接的*外观*，但不直接暴露事务隔离。因此，为了影响事务隔离级别，我们需要根据情况对[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")执行操作。
+当使用 ORM [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")时，它充当引擎和连接的*外观*，但不直接暴露事务隔离。因此，为了影响事务隔离级别，我们需要根据情况对[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")执行操作。
 
 也可以看看
 
@@ -254,7 +253,7 @@ Level](dialects_postgresql.html#postgresql-isolation-level)
 
 要在全局范围内设置具有特定隔离级别的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")或[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")，请使用[`create_engine.isolation_level`](core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")参数：
 
-    from sqlalchemy import create_engine
+    from sqlalchemy import create_engineplainplain
     from sqlalchemy.orm import sessionmaker
 
     eng = create_engine(
@@ -272,7 +271,7 @@ Level](dialects_postgresql.html#postgresql-isolation-level)
     session = maker(
         bind=engine.execution_options(isolation_level='SERIALIZABLE'))
 
-对于[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")或[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")配置了多个“绑定”的情况，我们可以完全重新指定`binds`参数，或者if我们只想替换特定的绑定，我们可以使用[`Session.bind_mapper()`](session_api.html#sqlalchemy.orm.session.Session.bind_mapper "sqlalchemy.orm.session.Session.bind_mapper")或[`Session.bind_table()`](session_api.html#sqlalchemy.orm.session.Session.bind_table "sqlalchemy.orm.session.Session.bind_table")方法：
+对于[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")或[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")配置了多个“绑定”的情况，我们可以完全重新指定`binds`参数，或者 if 我们只想替换特定的绑定，我们可以使用[`Session.bind_mapper()`](session_api.html#sqlalchemy.orm.session.Session.bind_mapper "sqlalchemy.orm.session.Session.bind_mapper")或[`Session.bind_table()`](session_api.html#sqlalchemy.orm.session.Session.bind_table "sqlalchemy.orm.session.Session.bind_table")方法：
 
     session = maker()
     session.bind_mapper(
@@ -282,14 +281,14 @@ Level](dialects_postgresql.html#postgresql-isolation-level)
 
 #### 设置单个事务的隔离[¶](#setting-isolation-for-individual-transactions "Permalink to this headline")
 
-关于隔离级别的一个关键警告是该设置无法在事务已经开始的[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上安全地修改。数据库无法更改正在进行的事务的隔离级别，并且某些DBAPI和SQLAlchemy方言在此区域中具有不一致的行为。有些可能会隐式地发出ROLLBACK，有些可能隐式地发出COMMIT，有些可能会在下一个事务之前忽略该设置。因此，如果在事务已经在使用时设置此选项，则SQLAlchemy会发出警告。[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象不为我们提供用于事务尚未开始的事务中的[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")。So
+关于隔离级别的一个关键警告是该设置无法在事务已经开始的[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上安全地修改。数据库无法更改正在进行的事务的隔离级别，并且某些 DBAPI 和 SQLAlchemy 方言在此区域中具有不一致的行为。有些可能会隐式地发出 ROLLBACK，有些可能隐式地发出 COMMIT，有些可能会在下一个事务之前忽略该设置。因此，如果在事务已经在使用时设置此选项，则 SQLAlchemy 会发出警告。[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象不为我们提供用于事务尚未开始的事务中的[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")。So
 here, we need to pass execution options to the [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 at the start of a transaction by passing
 [`Session.connection.execution_options`](session_api.html#sqlalchemy.orm.session.Session.connection.params.execution_options "sqlalchemy.orm.session.Session.connection")
 provided by the [`Session.connection()`](session_api.html#sqlalchemy.orm.session.Session.connection "sqlalchemy.orm.session.Session.connection")
 method:
 
-    from sqlalchemy.orm import Session
+    from sqlalchemy.orm import Sessionplain
 
     sess = Session(bind=engine)
     sess.connection(execution_options={'isolation_level': 'SERIALIZABLE'})
@@ -307,7 +306,7 @@ that has multiple binds or some other custom scheme for
 we can pass additional arguments to [`Session.connection()`](session_api.html#sqlalchemy.orm.session.Session.connection "sqlalchemy.orm.session.Session.connection")
 in order to affect how the bind is procured:
 
-    sess = my_sesssionmaker()
+    sess = my_sesssionmaker()plainplainplain
 
     # set up a transaction for the bind associated with
     # the User mapper
@@ -323,14 +322,14 @@ in order to affect how the bind is procured:
 
 [`Session.connection.execution_options`](session_api.html#sqlalchemy.orm.session.Session.connection.params.execution_options "sqlalchemy.orm.session.Session.connection")参数仅在针对事务中特定绑定的**第一次**调用[`Session.connection()`](session_api.html#sqlalchemy.orm.session.Session.connection "sqlalchemy.orm.session.Session.connection")时才被接受。如果事务已经在目标连接上开始，则会发出警告：
 
-    >>> session = Session(eng)
+    >>> session = Session(eng)plainplainplainplainplain
     >>> session.execute("select 1")
     <sqlalchemy.engine.result.ResultProxy object at 0x1017a6c50>
     >>> session.connection(execution_options={'isolation_level': 'SERIALIZABLE'})
     sqlalchemy/orm_session.py:310: SAWarning: Connection is already established
     for the given bind; execution_options ignored
 
-版本0.9.9新增：将[`Session.connection.execution_options`(session_api.html#sqlalchemy.orm.session.Session.connection.params.execution_options "sqlalchemy.orm.session.Session.connection")参数添加到[`Session.connection()`](session_api.html#sqlalchemy.orm.session.Session.connection "sqlalchemy.orm.session.Session.connection")。
+版本 0.9.9 新增：将[`Session.connection.execution_options`(session_api.html#sqlalchemy.orm.session.Session.connection.params.execution_options "sqlalchemy.orm.session.Session.connection")参数添加到[`Session.connection()`](session_api.html#sqlalchemy.orm.session.Session.connection "sqlalchemy.orm.session.Session.connection")。
 
 ### 使用事件跟踪事务状态[¶](#tracking-transaction-state-with-events "Permalink to this headline")
 
@@ -347,9 +346,9 @@ established), a [`Session`](session_api.html#sqlalchemy.orm.session.Session "sql
 can be made to participate within that transaction by just binding the
 [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 to that [`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection").
-通常的基本原理是测试套件允许ORM代码使用[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")自由运行，包括调用[`Session.commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")的能力，其中整个数据库交互被回滚：
+通常的基本原理是测试套件允许 ORM 代码使用[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")自由运行，包括调用[`Session.commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")的能力，其中整个数据库交互被回滚：
 
-    from sqlalchemy.orm import sessionmaker
+    from sqlalchemy.orm import sessionmakerplain
     from sqlalchemy import create_engine
     from unittest import TestCase
 
@@ -386,15 +385,15 @@ to that [`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlal
             # return connection to the Engine
             self.connection.close()
 
-在上面，我们发布了[`Session.commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")以及[`Transaction.rollback()`](core_connections.html#sqlalchemy.engine.Transaction.rollback "sqlalchemy.engine.Transaction.rollback")。这是一个例子，我们可以利用[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象维护*subtransactions*的能力，或嵌套的begin
-/ commit-or-rollback对，其中只有最外面的begin /
-commit对实际上提交事务，或者如果最外面的块回滚，则所有内容都回滚。
+在上面，我们发布了[`Session.commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")以及[`Transaction.rollback()`](core_connections.html#sqlalchemy.engine.Transaction.rollback "sqlalchemy.engine.Transaction.rollback")。这是一个例子，我们可以利用[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象维护*subtransactions*的能力，或嵌套的 begin
+/ commit-or-rollback 对，其中只有最外面的 begin /
+commit 对实际上提交事务，或者如果最外面的块回滚，则所有内容都回滚。
 
 支持回滚测试
 
 除了需要在测试本身范围内实际调用[`Session.rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")的测试外，上述配方适用于任何类型的数据库启用测试。上面的配方可以扩展，使得[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")总是运行在每个事务开始时建立的SAVEPOINT范围内的所有操作，以便测试还可以将“事务”回滚为同时仍然保留在从未犯下的较大“交易”的范围内，并使用两个额外事件：
 
-    from sqlalchemy import event
+    from sqlalchemy import eventplainplainplain
 
 
     class SomeTest(TestCase):

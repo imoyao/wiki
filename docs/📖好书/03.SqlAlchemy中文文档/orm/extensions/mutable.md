@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:43
 permalink: /sqlalchemy/orm/extensions/mutable/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
   - extensions
 tags:
@@ -13,7 +13,7 @@ tags:
 突变跟踪[¶](#module-sqlalchemy.ext.mutable "Permalink to this headline")
 ========================================================================
 
-提供对跟踪对标量值进行就地更改的支持，这些标量值将在拥有父对象时传播到ORM更改事件中。
+提供对跟踪对标量值进行就地更改的支持，这些标量值将在拥有父对象时传播到 ORM 更改事件中。
 
 New in version 0.7: [`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")
 replaces SQLAlchemy’s legacy approach to in-place mutations of scalar
@@ -23,10 +23,10 @@ values; see [Mutation event extension, supersedes
 建立标量列值的可变性[¶](#establishing-mutability-on-scalar-column-values "Permalink to this headline")
 ------------------------------------------------------------------------------------------------------
 
-一个“可变”结构的典型例子是Python字典。在[Column and Data
-Types](core_types.html)中介绍的示例之后，我们从一个自定义类型开始，它将Python字典在持久化之前编组为JSON字符串：
+一个“可变”结构的典型例子是 Python 字典。在[Column and Data
+Types](core_types.html)中介绍的示例之后，我们从一个自定义类型开始，它将 Python 字典在持久化之前编组为 JSON 字符串：
 
-    from sqlalchemy.types import TypeDecorator, VARCHAR
+    from sqlalchemy.types import TypeDecorator, VARCHARplain
     import json
 
     class JSONEncodedDict(TypeDecorator):
@@ -44,12 +44,12 @@ Types](core_types.html)中介绍的示例之后，我们从一个自定义类型
                 value = json.loads(value)
             return value
 
-`json`的用法仅用于示例。[`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")扩展名可用于目标Python类型可变的任何类型，包括[`PickleType`](core_type_basics.html#sqlalchemy.types.PickleType "sqlalchemy.types.PickleType")，[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")等。
+`json`的用法仅用于示例。[`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")扩展名可用于目标 Python 类型可变的任何类型，包括[`PickleType`](core_type_basics.html#sqlalchemy.types.PickleType "sqlalchemy.types.PickleType")，[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")等。
 
 当使用[`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")扩展名时，该值本身会跟踪引用它的所有父项。下面，我们演示一下[`MutableDict`](#sqlalchemy.ext.mutable.MutableDict "sqlalchemy.ext.mutable.MutableDict")字典对象的简单版本，它将[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")
-mixin应用于普通的Python字典：
+mixin 应用于普通的 Python 字典：
 
-    from sqlalchemy.ext.mutable import Mutable
+    from sqlalchemy.ext.mutable import Mutableplain
 
     class MutableDict(Mutable, dict):
         @classmethod
@@ -77,7 +77,7 @@ mixin应用于普通的Python字典：
             dict.__delitem__(self, key)
             self.changed()
 
-上面的字典类采用子类化Python内置的`dict`的方法来生成一个dict子类，该子类通过`__setitem__`发送所有的突变事件。There are variants on this approach, such
+上面的字典类采用子类化 Python 内置的`dict`的方法来生成一个dict子类，该子类通过`__setitem__`发送所有的突变事件。There are variants on this approach, such
 as subclassing `UserDict.UserDict` or
 `collections.MutableMapping`; the part that’s
 important to this example is that the [`Mutable.changed()`](#sqlalchemy.ext.mutable.Mutable.changed "sqlalchemy.ext.mutable.Mutable.changed")
@@ -120,7 +120,7 @@ place.
 
 对`MyDataClass.data`成员进行任何就地更改都会将该属性标记为父对象上的“脏”：
 
-    >>> from sqlalchemy.orm import Session
+    >>> from sqlalchemy.orm import Sessionplainplain
 
     >>> sess = Session()
     >>> m1 = MyDataClass(data={'value1':'foo'})
@@ -144,7 +144,7 @@ place.
 
 [`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")扩展的关键依赖于`weakref.WeakKeyDictionary`在值对象上的位置，该对象存储了键入该属性的父映射对象的映射名称，它们与此值关联。`WeakKeyDictionary` objects are not picklable, due to the fact that they contain
 weakrefs and function callbacks.
-在我们的例子中，这是一件好事，因为如果这个字典是可挑选的，它可能会导致我们的值对象的pickle大小过大，而这些对象是在父级上下文之外自行挑选的。这里的开发人员责任只是提供一个从pickle流中排除[`_parents()`](#sqlalchemy.ext.mutable.MutableBase._parents "sqlalchemy.ext.mutable.MutableBase._parents")集合的`__getstate__`方法：
+在我们的例子中，这是一件好事，因为如果这个字典是可挑选的，它可能会导致我们的值对象的 pickle 大小过大，而这些对象是在父级上下文之外自行挑选的。这里的开发人员责任只是提供一个从 pickle 流中排除[`_parents()`](#sqlalchemy.ext.mutable.MutableBase._parents "sqlalchemy.ext.mutable.MutableBase._parents")集合的`__getstate__`方法：
 
     class MyMutableType(Mutable):
         def __getstate__(self):
@@ -165,17 +165,17 @@ setstate\_\_上恢复它们​​）：
             self.update(state)
 
 如果可变值对象被粘贴到一个或多个也是pickle一部分的父对象上，那么[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")
-mixin将重新建立[`Mutable._parents`](#sqlalchemy.ext.mutable.Mutable._parents "sqlalchemy.ext.mutable.Mutable._parents")
+mixin 将重新建立[`Mutable._parents`](#sqlalchemy.ext.mutable.Mutable._parents "sqlalchemy.ext.mutable.Mutable._parents")
 
 在复合材料上建立可变性[¶](#establishing-mutability-on-composites "Permalink to this headline")
 ----------------------------------------------------------------------------------------------
 
-组合是一种特殊的ORM特性，它允许为单个标量属性分配一个对象值，该值表示来自底层映射表中一个或多个列的“合成”信息。通常的例子是几何“点”，并在[Composite
+组合是一种特殊的 ORM 特性，它允许为单个标量属性分配一个对象值，该值表示来自底层映射表中一个或多个列的“合成”信息。通常的例子是几何“点”，并在[Composite
 Column Types](composites.html#mapper-composite)中介绍。
 
-在版本0.7中更改： [`orm.composite()`](composites.html#sqlalchemy.orm.composite "sqlalchemy.orm.composite")的内部已大大简化，默认情况下不再启用就地突变检测；相反，用户定义的值必须自行检测更改并将其传播给所有拥有的父项。[`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")扩展提供了helper类[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")，它是[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")类中的轻微变体。
+在版本 0.7 中更改： [`orm.composite()`](composites.html#sqlalchemy.orm.composite "sqlalchemy.orm.composite")的内部已大大简化，默认情况下不再启用就地突变检测；相反，用户定义的值必须自行检测更改并将其传播给所有拥有的父项。[`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")扩展提供了helper类[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")，它是[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")类中的轻微变体。
 
-与[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")一样，用户定义的组合类将[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")作为一个mixin的子类，并通过[`MutableComposite.changed()`](#sqlalchemy.ext.mutable.MutableComposite.changed "sqlalchemy.ext.mutable.MutableComposite.changed")方法。对于复合类，通常通过使用Python描述符（即`@property`）或者通过特殊的Python方法`__setattr__()`来进行检测。Below we expand upon the `Point` class introduced in [Composite Column
+与[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")一样，用户定义的组合类将[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")作为一个 mixin 的子类，并通过[`MutableComposite.changed()`](#sqlalchemy.ext.mutable.MutableComposite.changed "sqlalchemy.ext.mutable.MutableComposite.changed")方法。对于复合类，通常通过使用 Python 描述符（即`@property`）或者通过特殊的Python方法`__setattr__()`来进行检测。Below we expand upon the `Point` class introduced in [Composite Column
 Types](composites.html#mapper-composite) to subclass
 [`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")
 and to also route attribute set events via `__setattr__` to the [`MutableComposite.changed()`](#sqlalchemy.ext.mutable.MutableComposite.changed "sqlalchemy.ext.mutable.MutableComposite.changed")
@@ -326,7 +326,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `Mutable`{.descname} [¶](#sqlalchemy.ext.mutable.Mutable "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
-    Mixin定义变化事件向父对象的透明传播。
+    Mixin定义变化事件向父对象的透明传播。plainplain
 
     有关使用信息，请参阅[Establishing Mutability on Scalar Column
     Values](#mutable-scalars)中的示例。
@@ -424,7 +424,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableComposite`{.descname} [¶](#sqlalchemy.ext.mutable.MutableComposite "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
-    Mixin，定义SQLAlchemy“复合”对象上的变化事件的透明传播给其拥有的父对象或父对象。
+    Mixin，定义SQLAlchemy“复合”对象上的变化事件的透明传播给其拥有的父对象或父对象。plain
 
     有关使用信息，请参阅[Establishing Mutability on
     Composites](#mutable-composites)中的示例。

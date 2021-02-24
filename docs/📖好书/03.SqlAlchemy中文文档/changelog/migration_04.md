@@ -14,8 +14,8 @@ SQLAlchemy 0.4有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-4 "Permalink
 
 关于本文档
 
-本文档介绍了2008年10月14日发布的SQLAlchemy
-0.3版和2007年10月12日发布的SQLAlchemy 0.4版之间的变化。
+本文档介绍了 2008 年 10 月 14 日发布的 SQLAlchemy
+0.3 版和 2007 年 10 月 12 日发布的 SQLAlchemy 0.4 版之间的变化。
 
 文件日期：2008年3月21日
 
@@ -24,7 +24,7 @@ SQLAlchemy 0.4有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-4 "Permalink
 
 如果您使用任何ORM功能，请确保从`sqlalchemy.orm`导入：
 
-    from sqlalchemy import *
+    from sqlalchemy import *plain
     from sqlalchemy.orm import *
 
 Secondly, anywhere you used to say `engine=`,
@@ -49,11 +49,11 @@ Secondly, anywhere you used to say `engine=`,
 
 In 0.3, “`from sqlachemy import *`” would import all
 of sqlachemy’s sub-modules into your namespace.
-版本0.4不再将子模块导入名称空间。这可能意味着您需要在代码中添加额外的导入。
+版本 0.4 不再将子模块导入名称空间。这可能意味着您需要在代码中添加额外的导入。
 
-在0.3中，此代码起作用：
+在 0.3 中，此代码起作用：
 
-    from sqlalchemy import *
+    from sqlalchemy import *plain
 
     class UTCDateTime(types.TypeDecorator):
         pass
@@ -77,7 +77,7 @@ of sqlachemy’s sub-modules into your namespace.
 Query具有与外部生成匹配的内在胆量，并且有更多技巧。所有结果缩小都通过`filter()`和`filter_by()`，限制/偏移可以通过数组切片或`limit()` /
 `offset()`，加入是通过`join()`和`outerjoin()`（或者更手动地通过`select_from()`作为手动形成的标准）。
 
-为避免弃用警告，您必须对您的03代码进行一些更改
+为避免弃用警告，您必须对您的 03 代码进行一些更改
 
 User.query.get\_by（\*\* kwargs）
 
@@ -85,7 +85,7 @@ User.query.get\_by（\*\* kwargs）
 
 User.query.select\_by（\*\* kwargs）
 
-    User.query.filter_by(**kwargs).all()
+    User.query.filter_by(**kwargs).all()plain
 
 User.query.select()
 
@@ -123,7 +123,7 @@ User.query.select()
     # and an id > 5 (mixing clauses with kwargs)
     filter(Address.user.has(User.id > 5, name='ed'))
 
-`Column`集合在`.c`属性中的映射类上仍然可用。请注意，基于属性的表达式仅适用于映射类的映射属性。`.c`仍然用于访问常规表中的列和SQL表达式生成的可选对象。
+`Column`集合在`.c`属性中的映射类上仍然可用。请注意，基于属性的表达式仅适用于映射类的映射属性。`.c`仍然用于访问常规表中的列和 SQL 表达式生成的可选对象。
 
 #### 自动连接别名[¶](#automatic-join-aliasing "Permalink to this headline")
 
@@ -139,7 +139,7 @@ User.query.select()
 以上将使用别名从订单 -
 \>项目创建两个连接。每个后面的`filter()`调用都会将其表格标准调整为别名标准。要获取`Item`对象，请使用`add_entity()`并使用`id`定位每个连接：
 
-    session.query(Order).join('items', id='j1', aliased=True).
+    session.query(Order).join('items', id='j1', aliased=True).plain
     filter(Item.name == 'item 1').join('items', aliased=True, id='j2').
     filter(Item.name == 'item 3').add_entity(Item, id='j1').add_entity(Item, id='j2')
 
@@ -147,7 +147,7 @@ User.query.select()
 
 #### 自我引用查询[¶](#self-referential-queries "Permalink to this headline")
 
-所以query.join()现在可以生成别名。这给了我们什么？自引用查询！连接可以在没有任何`Alias`对象的情况下完成：
+所以 query.join()现在可以生成别名。这给了我们什么？自引用查询！连接可以在没有任何`Alias`对象的情况下完成：
 
     # standard self-referential TreeNode mapper with backref
     mapper(TreeNode, tree_nodes, properties={
@@ -178,15 +178,15 @@ User.query.select()
 
 `query.load()`（或`session.refresh()`）的热切版本。如果已经存在于会话中，则从查询加载的每个实例（包括所有急切加载的项目）都会立即刷新：
 
-    session.query(Blah).populate_existing().all()
+    session.query(Blah).populate_existing().all()plainplain
 
 ### 关系[¶ T0\>](#relations "Permalink to this headline")
 
-#### 嵌入到更新/插入中的SQL子句[¶](#sql-clauses-embedded-in-updates-inserts "Permalink to this headline")
+#### 嵌入到更新/插入中的 SQL 子句[¶](#sql-clauses-embedded-in-updates-inserts "Permalink to this headline")
 
-对于在`flush()`期间嵌入式执行SQL子句，直接嵌入UPDATE或INSERT中：
+对于在`flush()`期间嵌入式执行 SQL 子句，直接嵌入 UPDATE 或 INSERT 中：
 
-    myobject.foo = mytable.c.value + 1
+    myobject.foo = mytable.c.value + 1plain
 
     user.pwhash = func.md5(password)
 
@@ -196,9 +196,9 @@ User.query.select()
 
 #### 自引用和周期性快速加载[¶](#self-referential-and-cyclical-eager-loading "Permalink to this headline")
 
-由于我们的alias-fu已经改进，所以`relation()`可以沿同一个表加入\*任意次数\*；你告诉它你想走多深。让我们更清楚地显示自引用的`TreeNode`：
+由于我们的 alias-fu 已经改进，所以`relation()`可以沿同一个表加入\*任意次数\*；你告诉它你想走多深。让我们更清楚地显示自引用的`TreeNode`：
 
-    nodes = Table('nodes', metadata,
+    nodes = Table('nodes', metadata,plain
          Column('id', Integer, primary_key=True),
          Column('parent_id', Integer, ForeignKey('nodes.id')),
          Column('name', String(30)))
@@ -230,9 +230,9 @@ User.query.select()
 
 #### 复合类型[¶](#composite-types "Permalink to this headline")
 
-这是Hibernate阵营的一员。复合类型允许您定义一个由多个列（或者一列，如果需要）组成的自定义数据类型。让我们定义一个新的类型，`Point`。存储x / y坐标：
+这是 Hibernate 阵营的一员。复合类型允许您定义一个由多个列（或者一列，如果需要）组成的自定义数据类型。让我们定义一个新的类型，`Point`。存储x / y坐标：
 
-    class Point(object):
+    class Point(object):plain
         def __init__(self, x, y):
             self.x = x
             self.y = y
@@ -257,7 +257,7 @@ User.query.select()
 
 然后，映射它！我们将创建一个存储两个`Point`对象的`Vertex`对象：
 
-    class Vertex(object):
+    class Vertex(object):plainplain
         def __init__(self, start, end):
             self.start = start
             self.end = end
@@ -276,9 +276,9 @@ User.query.select()
     # works in queries too
     q = session.query(Vertex).filter(Vertex.start == Point(3, 4))
 
-如果您想定义映射属性在表达式中使用时生成SQL子句的方式，请创建您自己的`sqlalchemy.orm.PropComparator`子类，定义任何常用运算符（如`__eq__()`，`__le__()`等），并将它发送到`composite()`。复合类型也可以作为主键，并可用于`query.get()`中：
+如果您想定义映射属性在表达式中使用时生成 SQL 子句的方式，请创建您自己的`sqlalchemy.orm.PropComparator`子类，定义任何常用运算符（如`__eq__()`，`__le__()`等），并将它发送到`composite()`。复合类型也可以作为主键，并可用于`query.get()`中：
 
-    # a Document class which uses a composite Version
+    # a Document class which uses a composite Versionplain
     # object as primary key
     document = query.get(Version(1, 'a'))
 
@@ -304,7 +304,7 @@ User.query.select()
 
 一些方便的查询选项。`undefer_group()`将一组“延迟”列标记为undeferred：
 
-    mapper(Class, table, properties={
+    mapper(Class, table, properties={plain
         'foo' : deferred(table.c.foo, group='group1'),
         'bar' : deferred(table.c.bar, group='group1'),
         'bat' : deferred(table.c.bat, group='group1'),
@@ -340,11 +340,11 @@ types cover many needs:
     # or any function you like
     relation(Item, collection_class=mapped_collection(lambda entity: entity.a + entity.b))
 
-需要为新API更新现有的0.3 `dict`样和自由格式的对象派生集合类。在大多数情况下，这只是将一些装饰器添加到类定义中的问题。
+需要为新 API 更新现有的 0.3 `dict`样和自由格式的对象派生集合类。在大多数情况下，这只是将一些装饰器添加到类定义中的问题。
 
 #### 从外部表/子查询映射关系[¶](#mapped-relations-from-external-tables-subqueries "Permalink to this headline")
 
-这个特性静静地出现在0.3中，但在0.4下得到了改进，这要归功于能够将子查询转换为表的子查询转换为针对该表的别名的子查询。这对于急切加载，查询中的别名加入等是关键的。当您只需要添加一些额外的列或子查询时，它可以减少对select语句创建映射器的需要：
+这个特性静静地出现在 0.3 中，但在 0.4 下得到了改进，这要归功于能够将子查询转换为表的子查询转换为针对该表的别名的子查询。这对于急切加载，查询中的别名加入等是关键的。当您只需要添加一些额外的列或子查询时，它可以减少对 select 语句创建映射器的需要：
 
     mapper(User, users, properties={
            'fullname': column_property((users.c.firstname + users.c.lastname).label('fullname')),
@@ -355,7 +355,7 @@ types cover many needs:
 
 一个典型的查询如下所示：
 
-    SELECT (SELECT count(1) FROM posts WHERE users.id = posts.user_id) AS count,
+    SELECT (SELECT count(1) FROM posts WHERE users.id = posts.user_id) AS count,plain
     users.firstname || users.lastname AS fullname,
     users.id AS users_id, users.firstname AS users_firstname, users.lastname AS users_lastname
     FROM users ORDER BY users.oid
@@ -367,9 +367,9 @@ types cover many needs:
 
 ### 会话[¶ T0\>](#sessions "Permalink to this headline")
 
-#### 新会话创建范式； SessionContext，assignmapper已弃用[¶](#new-session-create-paradigm-sessioncontext-assignmapper-deprecated "Permalink to this headline")
+#### 新会话创建范式； SessionContext，assignmapper 已弃用[¶](#new-session-create-paradigm-sessioncontext-assignmapper-deprecated "Permalink to this headline")
 
-没错，整个shebang被两个配置函数取代。使用它们将产生自0.1以来我们已经具有的最多0.1sh的感觉（即，最少量的打字）。
+没错，整个 shebang 被两个配置函数取代。使用它们将产生自 0.1 以来我们已经具有的最多 0.1sh 的感觉（即，最少量的打字）。
 
 在您定义`engine`（或任何地方）的位置配置您自己的`Session`类：
 
@@ -386,7 +386,7 @@ types cover many needs:
 
 如果您需要后期配置会话，请使用引擎进行配置，稍后使用`configure()`添加它：
 
-    Session.configure(bind=create_engine(...))
+    Session.configure(bind=create_engine(...))plain
 
 All the behaviors of `SessionContext` and the
 `query` and `__init__` methods
@@ -422,7 +422,7 @@ with both `sessionmaker` as well as
 
 #### 会话再次默认为弱引用[¶](#sessions-are-again-weak-referencing-by-default "Permalink to this headline")
 
-默认情况下，Session中的weak\_identity\_map标志现在设置为`True`。自动从会话中删除外部推断和超出范围的实例。但是，存在“脏”变化的项目将保持强引用状态，直到这些变化被刷新为止，此时对象将恢复为弱引用（这对'可变'类型也适用，如可选属性）。将weak\_identity\_map设置为`False`为使用会话的用户恢复旧的强引用行为，如缓存。
+默认情况下，Session 中的 weak\_identity\_map标志现在设置为`True`。自动从会话中删除外部推断和超出范围的实例。但是，存在“脏”变化的项目将保持强引用状态，直到这些变化被刷新为止，此时对象将恢复为弱引用（这对'可变'类型也适用，如可选属性）。将weak\_identity\_map 设置为`False`为使用会话的用户恢复旧的强引用行为，如缓存。
 
 #### 自动事务会话[¶](#auto-transactional-sessions "Permalink to this headline")
 
@@ -447,7 +447,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
 `commit()`和`rollback()`，以及`begin()`现在直接在`Session`上。不需要为任何事情使用`SessionTransaction`（它仍然在后台）。
 
-    Session = sessionmaker(autoflush=True, transactional=False)
+    Session = sessionmaker(autoflush=True, transactional=False)plain
 
     sess = Session()
     sess.begin()
@@ -458,7 +458,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
 与封闭的引擎级别（即非ORM）事务共享`Session`非常简单：
 
-    Session = sessionmaker(autoflush=True, transactional=False)
+    Session = sessionmaker(autoflush=True, transactional=False)plain
 
     conn = engine.connect()
     trans = conn.begin()
@@ -499,7 +499,7 @@ naging
 
 #### `sqlalchemy.types.TypeDecorator` [¶](#custom-subclasses-of-sqlalchemy-types-typedecorator "Permalink to this headline")
 
-有一个用于子类化TypeDecorator的[新API](http://www.sqlalchemy.org/docs/04/types.html#types_custom)。在某些情况下使用0.3
+有一个用于子类化TypeDecorator的[新 API](http://www.sqlalchemy.org/docs/04/types.html#types_custom)。在某些情况下使用0.3
 API会导致编译错误。
 
 SQL表达式[¶](#sql-expressions "Permalink to this headline")
@@ -512,14 +512,14 @@ T0\>SQL更容易阅读，并与计划优化器缓存兼容。请查看教程中�
 [http://www.sqlalchemy.org/docs/ 04 / sqlexpression.html
 T1\>](http://www.sqlalchemy.org/docs/04/sqlexpression.html)
 
-### 生成select()构造[¶](#generative-select-constructs "Permalink to this headline")
+### 生成 select()构造[¶](#generative-select-constructs "Permalink to this headline")
 
 这绝对是通过`select()`进行的。请参阅htt
 p：//www.sqlalchemy.org/docs/04/sqlexpression.html\#sql\_transf orm。
 
 ### 新的操作员系统[¶](#new-operator-system "Permalink to this headline")
 
-SQL运算符和或多或少每个SQL关键字都被抽象到编译器层。他们现在可以智能地操作，并且可以识别类型/后端，请参阅：[http：//www.sq](http://www.sq)
+SQL 运算符和或多或少每个 SQL 关键字都被抽象到编译器层。他们现在可以智能地操作，并且可以识别类型/后端，请参阅：[http：//www.sq](http://www.sq)
 lalchemy.org/docs/04/sqlexpression.html\#sql\_operators
 
 ### 所有`type`关键字参数重命名为`type_` [¶](#all-type-keyword-arguments-renamed-to-type "Permalink to this headline")
@@ -530,9 +530,9 @@ lalchemy.org/docs/04/sqlexpression.html\#sql\_operators
 
 ### in\_函数更改为接受序列或可选[¶](#in-function-changed-to-accept-sequence-or-selectable "Permalink to this headline")
 
-in\_函数现在将一系列值或可选值作为其唯一参数。以前传入值作为位置参数的API仍然有效，但现在已被弃用。这意味着
+in\_函数现在将一系列值或可选值作为其唯一参数。以前传入值作为位置参数的 API 仍然有效，但现在已被弃用。这意味着
 
-    my_table.select(my_table.c.id.in_(1,2,3)
+    my_table.select(my_table.c.id.in_(1,2,3)plain
     my_table.select(my_table.c.id.in_(*listOfIds)
 
 应改为
@@ -545,7 +545,7 @@ in\_函数现在将一系列值或可选值作为其唯一参数。以前传入�
 
 ### `MetaData`, `BoundMetaData`, `DynamicMetaData`...[¶](#metadata-boundmetadata-dynamicmetadata "Permalink to this headline")
 
-在0.3.x系列中，不赞成使用`MetaData`和`ThreadLocalMetaData`的`BoundMetaData`和`DynamicMetaData`。0.4的旧名称已被删除。更新很简单：
+在 0.3.x 系列中，不赞成使用`MetaData`和`ThreadLocalMetaData`的`BoundMetaData`和`DynamicMetaData`。0.4 的旧名称已被删除。更新很简单：
 
     +-------------------------------------+-------------------------+
     |If You Had                           | Now Use                 |
@@ -567,7 +567,7 @@ in\_函数现在将一系列值或可选值作为其唯一参数。以前传入�
 
 您现在可以加载表定义，并通过一次传递从整个数据库或模式自动创建`Table`对象：
 
-    >>> metadata = MetaData(myengine, reflect=True)
+    >>> metadata = MetaData(myengine, reflect=True)plain
     >>> metadata.tables.keys()
     ['table_a', 'table_b', 'table_c', '...']
 
@@ -583,13 +583,13 @@ SQL执行[¶](#sql-execution "Permalink to this headline")
 
 ### 连接池事件[¶](#connection-pool-events "Permalink to this headline")
 
-连接池现在会在创建新的DB-API连接时触发事件，检出并检入池中。例如，您可以使用它们在新连接上执行会话范围的SQL安装语句。
+连接池现在会在创建新的 DB-API 连接时触发事件，检出并检入池中。例如，您可以使用它们在新连接上执行会话范围的 SQL 安装语句。
 
 ### Oracle引擎已修复[¶](#oracle-engine-fixed "Permalink to this headline")
 
-在0.3.11中，Oracle引擎中存在关于如何处理主键的错误。这些错误可能会导致在其他引擎（如sqlite）中正常工作的程序在使用Oracle引擎时失败。在0.4版本中，Oracle引擎已经过修改，修复了这些主键问题。
+在 0.3.11 中，Oracle 引擎中存在关于如何处理主键的错误。这些错误可能会导致在其他引擎（如 sqlite）中正常工作的程序在使用 Oracle 引擎时失败。在 0.4 版本中，Oracle 引擎已经过修改，修复了这些主键问题。
 
-### Oracle的输出参数[¶](#out-parameters-for-oracle "Permalink to this headline")
+### Oracle 的输出参数[¶](#out-parameters-for-oracle "Permalink to this headline")
 
     result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)
     assert result.out_parameters == {'y':10, 'z':75}

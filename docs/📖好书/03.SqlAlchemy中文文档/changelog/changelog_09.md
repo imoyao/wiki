@@ -4,10 +4,9 @@ date: 2021-02-20 22:41:29
 permalink: /sqlalchemy/b2578e/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - changelog
 tags:
-  - 
 ---
 0.9 Changelog [¶](#changelog "Permalink to this headline")
 ==========================================================
@@ -25,7 +24,7 @@ tags:
     pool attempted to reconnect after being invalidated and failed; the
     stale connection would remain present and would be used on a
     subsequent attempt.
-    这个问题在1.0.2之后的1.0系列中有更大的影响，因为它还向事件处理程序提供了一个空白的`.info`字典；在1.0.2之前，`.info`字典仍然是前一个。[¶](#change-4c50f070b6a282e0335d9fb87a2131cc)
+    这个问题在 1.0.2 之后的 1.0 系列中有更大的影响，因为它还向事件处理程序提供了一个空白的`.info`字典；在 1.0.2 之前，`.info`字典仍然是前一个。[¶](#change-4c50f070b6a282e0335d9fb87a2131cc)
 
     参考文献：[＃3497](http://www.sqlalchemy.org/trac/ticket/3497)
 
@@ -34,18 +33,18 @@ tags:
 -   **[oracle] [bug] [py3k]**Fixed support for cx\_Oracle version 5.2,
     which was tripping up SQLAlchemy’s version detection under Python 3
     and inadvertently not using the correct unicode mode for Python 3.
-    这会导致绑定变量被错误地解释为NULL，并且行无声无息地返回。[¶](#change-0b5a9411f0cb0fb5b9ed763837dacee7)
+    这会导致绑定变量被错误地解释为 NULL，并且行无声无息地返回。[¶](#change-0b5a9411f0cb0fb5b9ed763837dacee7)
 
     参考文献：[＃3491](http://www.sqlalchemy.org/trac/ticket/3491)
 
 0.9.10 [¶ T0\>](#change-0.9.10 "Permalink to this headline")
 ------------------------------------------------------------
 
-发布日期：2015年7月22日
+发布日期：2015 年 7 月 22 日
 
 ### ORM [¶ T0\>](#change-0.9.10-orm "Permalink to this headline")
 
--   **[orm] [feature]**向由[`Query.column_descriptions`](orm_query.html#sqlalchemy.orm.query.Query.column_descriptions "sqlalchemy.orm.query.Query.column_descriptions")返回的字典添加了一个新条目`"entity"`。这是指由表达式引用的主要ORM映射类或别名类。与`"type"`的现有条目相比，即使从列表达式中提取，它也将始终是映射实体，如果给定表达式是纯粹核心表达式，它将始终为None。另见[＃3403](http://www.sqlalchemy.org/trac/ticket/3403)，它修复了此功能中的回归，该功能在0.9.10中未发布，但在1.0版本中发布。[¶](#change-ca4fc751ceaa91a33992ee87c9a525a3)
+-   **[orm] [feature]**向由[`Query.column_descriptions`](orm_query.html#sqlalchemy.orm.query.Query.column_descriptions "sqlalchemy.orm.query.Query.column_descriptions")返回的字典添加了一个新条目`"entity"`。这是指由表达式引用的主要 ORM 映射类或别名类。与`"type"`的现有条目相比，即使从列表达式中提取，它也将始终是映射实体，如果给定表达式是纯粹核心表达式，它将始终为 None。另见[＃3403](http://www.sqlalchemy.org/trac/ticket/3403)，它修复了此功能中的回归，该功能在 0.9.10 中未发布，但在 1.0 版本中发布。[¶](#change-ca4fc751ceaa91a33992ee87c9a525a3)
 
     参考文献：[＃3320](http://www.sqlalchemy.org/trac/ticket/3320)
 
@@ -57,7 +56,7 @@ tags:
     [`Query.join()`](orm_query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")
     or [`Query.select_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")
     has been called, a warning is emitted.
-    从1.0.0b5开始，这会引发错误。[¶](#change-af136f4c0f377ed2650ebb765f409144)
+    从 1.0.0b5 开始，这会引发错误。[¶](#change-af136f4c0f377ed2650ebb765f409144)
 
     参考文献：[＃3349](http://www.sqlalchemy.org/trac/ticket/3349)
 
@@ -84,7 +83,7 @@ tags:
 
 ### SQL [¶ T0\>](#change-0.9.10-sql "Permalink to this headline")
 
--   **[sql] [feature]**增加了对[`Insert.from_select()`](core_dml.html#sqlalchemy.sql.expression.Insert.from_select "sqlalchemy.sql.expression.Insert.from_select")中存在的SELECT所使用的CTE的官方支持。这种行为意外地一直运行到0.9.9，当它由于作为[＃3248](http://www.sqlalchemy.org/trac/ticket/3248)的一部分的不相关更改而不再起作用时。请注意，这是在SELECT之前的INSERT之后的WITH子句的呈现；在INSERT，UPDATE，DELETE顶层呈现的CTE的全部功能是针对以后版本的一项新功能。[¶](#change-f8414532972c2d7d0d9d856124692667)
+-   **[sql] [feature]**增加了对[`Insert.from_select()`](core_dml.html#sqlalchemy.sql.expression.Insert.from_select "sqlalchemy.sql.expression.Insert.from_select")中存在的 SELECT 所使用的 CTE 的官方支持。这种行为意外地一直运行到 0.9.9，当它由于作为[＃3248](http://www.sqlalchemy.org/trac/ticket/3248)的一部分的不相关更改而不再起作用时。请注意，这是在 SELECT 之前的 INSERT 之后的 WITH 子句的呈现；在 INSERT，UPDATE，DELETE 顶层呈现的 CTE 的全部功能是针对以后版本的一项新功能。[¶](#change-f8414532972c2d7d0d9d856124692667)
 
     参考文献：[＃3418](http://www.sqlalchemy.org/trac/ticket/3418)
 
@@ -94,25 +93,25 @@ tags:
 
     参考文献：[＃3362](http://www.sqlalchemy.org/trac/ticket/3362)
 
-### 的PostgreSQL [¶ T0\>](#change-0.9.10-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.9.10-postgresql "Permalink to this headline")
 
 -   **[postgresql]
-    [bug]**修复了长期存在的bug，其中psycopg2方言使用的[`Enum`](core_type_basics.html#sqlalchemy.types.Enum "sqlalchemy.types.Enum")类型与非ascii值和`native_enum=False`将无法正确解码返回结果。这源于PG [`postgresql.ENUM`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ENUM "sqlalchemy.dialects.postgresql.ENUM")类型曾经是没有“非本地”选项的独立类型。[¶](#change-f48ebfdbd81e4166cec7fa2687c381e8)
+    [bug]**修复了长期存在的 bug，其中 psycopg2 方言使用的[`Enum`](core_type_basics.html#sqlalchemy.types.Enum "sqlalchemy.types.Enum")类型与非 ascii 值和`native_enum=False`将无法正确解码返回结果。这源于 PG [`postgresql.ENUM`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ENUM "sqlalchemy.dialects.postgresql.ENUM")类型曾经是没有“非本地”选项的独立类型。[¶](#change-f48ebfdbd81e4166cec7fa2687c381e8)
 
     参考文献：[＃3354](http://www.sqlalchemy.org/trac/ticket/3354)
 
-### MySQL的[¶ T0\>](#change-0.9.10-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.9.10-mysql "Permalink to this headline")
 
 -   **[mysql] [bug]
-    [pymysql]**修正了使用unicode参数使用“executemany”操作时对PyMySQL的Unicode支持。SQLAlchemy现在将语句以及绑定参数作为unicode对象传递，因为PyMySQL通常在内部使用字符串插值来生成最终语句，而在executemany的情况下，仅在最后语句中执行“编码”步骤。[¶
+    [pymysql]**修正了使用 unicode 参数使用“executemany”操作时对 PyMySQL 的 Unicode 支持。SQLAlchemy 现在将语句以及绑定参数作为 unicode 对象传递，因为 PyMySQL 通常在内部使用字符串插值来生成最终语句，而在 executemany 的情况下，仅在最后语句中执行“编码”步骤。[¶
     T0\>](#change-5898fc79f1b4c5e52fc6ecd0a9319733)
 
     参考文献：[＃3337](http://www.sqlalchemy.org/trac/ticket/3337)
 
--   **[mysql] [bug] [py3k]**修正了Py3K上没有正确使用`ord()`函数的[`mysql.BIT`](dialects_mysql.html#sqlalchemy.dialects.mysql.BIT "sqlalchemy.dialects.mysql.BIT")类型。请求礼貌David
+-   **[mysql] [bug] [py3k]**修正了 Py3K 上没有正确使用`ord()`函数的[`mysql.BIT`](dialects_mysql.html#sqlalchemy.dialects.mysql.BIT "sqlalchemy.dialects.mysql.BIT")类型。请求礼貌 David
     Marin。[¶](#change-966802f406201dd8d7ea0b0b85d328ec)
 
-    参考文献：[＃3333](http://www.sqlalchemy.org/trac/ticket/3333)，[请求github：158](https://github.com/zzzeek/sqlalchemy/pull/158)
+    参考文献：[＃3333](http://www.sqlalchemy.org/trac/ticket/3333)，[请求 github：158](https://github.com/zzzeek/sqlalchemy/pull/158)
 
 ### 源码[¶ T0\>](#change-0.9.10-sqlite "Permalink to this headline")
 
@@ -139,7 +138,7 @@ tags:
 
     参考文献：[＃3406](http://www.sqlalchemy.org/trac/ticket/3406)
 
--   **[bug] [ext]**固定从0.9.9开始的回归，其中[`as_declarative()`](orm_extensions_declarative_api.html#sqlalchemy.ext.declarative.as_declarative "sqlalchemy.ext.declarative.as_declarative")符号已从`sqlalchemy.ext.declarative`名称空间中移除。 [¶
+-   **[bug] [ext]**固定从 0.9.9 开始的回归，其中[`as_declarative()`](orm_extensions_declarative_api.html#sqlalchemy.ext.declarative.as_declarative "sqlalchemy.ext.declarative.as_declarative")符号已从`sqlalchemy.ext.declarative`名称空间中移除。 [¶
     T7\>](#change-d74f0c6b46400abe7e625144366f5e3e)
 
     参考文献：[＃3324](http://www.sqlalchemy.org/trac/ticket/3324)
@@ -147,7 +146,7 @@ tags:
 0.9.9 [¶ T0\>](#change-0.9.9 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布日期：2015年3月10日
+发布日期：2015 年 3 月 10 日
 
 ### ORM [¶ T0\>](#change-0.9.9-orm "Permalink to this headline")
 
@@ -169,7 +168,7 @@ tags:
     except also calls [`Connection.invalidate()`](core_connections.html#sqlalchemy.engine.Connection.invalidate "sqlalchemy.engine.Connection.invalidate")
     on all connections, guaranteeing that they will not be returned to
     the connection pool.
-    这在例如情况下是有用的在进一步使用连接不安全时处理gevent超时，即使是回滚。[¶](#change-81f7e383b3862c1f1b3ec7f7a6e0aafe)
+    这在例如情况下是有用的在进一步使用连接不安全时处理 gevent 超时，即使是回滚。[¶](#change-81f7e383b3862c1f1b3ec7f7a6e0aafe)
 
 -   **[orm] [bug]**Fixed bugs in ORM object comparisons where comparison
     of many-to-one `!= None` would fail if the
@@ -190,10 +189,10 @@ tags:
 -   **[orm] [bug]**Fixed bug where TypeError raised when
     [`Query.join()`](orm_query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")
     called with unknown kw arguments would raise its own TypeError due
-    to broken formatting. 请求Malthe
-    Borch提出请求。[¶](#change-ec432e8e77803ef9276f98ec61867b39)
+    to broken formatting. 请求 Malthe
+    Borch 提出请求。[¶](#change-ec432e8e77803ef9276f98ec61867b39)
 
-    参考文献：[请求github：147](https://github.com/zzzeek/sqlalchemy/pull/147)
+    参考文献：[请求 github：147](https://github.com/zzzeek/sqlalchemy/pull/147)
 
 -   **[orm] [bug]**Fixed bug in lazy loading SQL construction whereby a
     complex primaryjoin that referred to the same “local” column
@@ -203,7 +202,7 @@ tags:
 
     参考文献：[＃3300](http://www.sqlalchemy.org/trac/ticket/3300)
 
--   **[orm] [bug]**“通配符”加载器选项，特别是由[`orm.load_only()`](orm_loading_columns.html#sqlalchemy.orm.load_only "sqlalchemy.orm.load_only")选项设置的选项，以覆盖未明确提及的所有属性，现在考虑给定实体的超类，如果该实体使用继承映射进行映射，那么超类中的属性名也从加载中省略。此外，多态判别器列无条件地包含在列表中，就像主键列一样，所以即使设置了load\_only()，子类型的多态加载也能正常运行。[¶
+-   **[orm] [bug]**“通配符”加载器选项，特别是由[`orm.load_only()`](orm_loading_columns.html#sqlalchemy.orm.load_only "sqlalchemy.orm.load_only")选项设置的选项，以覆盖未明确提及的所有属性，现在考虑给定实体的超类，如果该实体使用继承映射进行映射，那么超类中的属性名也从加载中省略。此外，多态判别器列无条件地包含在列表中，就像主键列一样，所以即使设置了 load\_only()，子类型的多态加载也能正常运行。[¶
     t0 \>](#change-cb85bfd5b9268fd26d4bb6655f9647fc)
 
     参考文献：[＃3287](http://www.sqlalchemy.org/trac/ticket/3287)
@@ -213,7 +212,7 @@ tags:
     before it fetched results, particularly when row processors can’t be
     formed, the cursor would stay open with results pending and not
     actually be closed.
-    对于像Pypy这样的解释器来说，这通常只是一个问题，在这种解释器中，光标没有立即被GC化，并且在某些情况下会导致事务/锁的打开时间超过所需的时间。[¶](#change-eb4c6d7da5a58814047869eac9bfc873)
+    对于像 Pypy 这样的解释器来说，这通常只是一个问题，在这种解释器中，光标没有立即被 GC 化，并且在某些情况下会导致事务/锁的打开时间超过所需的时间。[¶](#change-eb4c6d7da5a58814047869eac9bfc873)
 
     参考文献：[＃3285](http://www.sqlalchemy.org/trac/ticket/3285)
 
@@ -273,7 +272,7 @@ tags:
 
 ### SQL [¶ T0\>](#change-0.9.9-sql "Permalink to this headline")
 
--   **[sql] [bug]**将`native_enum`标志添加到[`Enum`](core_type_basics.html#sqlalchemy.types.Enum "sqlalchemy.types.Enum")的`__repr__()`与Alembic自动生成一起使用时很重要。拉请求礼貌Dimitris
+-   **[sql] [bug]**将`native_enum`标志添加到[`Enum`](core_type_basics.html#sqlalchemy.types.Enum "sqlalchemy.types.Enum")的`__repr__()`与 Alembic 自动生成一起使用时很重要。拉请求礼貌 Dimitris
     Theodorou。[¶](#change-3577552ba354e8d369dededa4f306eb8)
 
     参考文献：[pull request
@@ -310,13 +309,13 @@ tags:
     reflection if column reflect events were used to alter the .key of
     reflected [`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
     objects so that the link\_to\_name becomes significant.
-    当目标列具有不同的键并使用link\_to\_name引用时，也通过类似的方式修复了对列类型的支持。[¶](#change-4174c5d38944ec13bc76cc10181274df)
+    当目标列具有不同的键并使用 link\_to\_name 引用时，也通过类似的方式修复了对列类型的支持。[¶](#change-4174c5d38944ec13bc76cc10181274df)
 
     参考文献：[＃3298](http://www.sqlalchemy.org/trac/ticket/3298)，[＃1765](http://www.sqlalchemy.org/trac/ticket/1765)
 
-### 的PostgreSQL [¶ T0\>](#change-0.9.9-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.9.9-postgresql "Permalink to this headline")
 
--   **[postgresql] [feature]**使用`postgresql_concurrently`添加了对使用Postgresql索引的`CONCURRENTLY`关键字的支持。请求Iuri de Silvio提出请求。
+-   **[postgresql] [feature]**使用`postgresql_concurrently`添加了对使用 Postgresql 索引的`CONCURRENTLY`关键字的支持。请求 Iuri de Silvio 提出请求。
 
     也可以看看
 
@@ -325,10 +324,10 @@ tags:
 
     [¶](#change-2a4614f79e145b5f9d8a3861d75f3006)
 
-    参考：[拉请求bitbucket：45](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/45)
+    参考：[拉请求 bitbucket：45](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/45)
 
--   **[postgresql] [bug]**使用psycopg2时修复了对Postgresql
-    UUID类型与ARRAY类型的支持。psycopg2方言现在使用psycopg2.extras.register\_uuid()挂钩，以便始终将UUID值作为UUID()对象传递给DBAPI或从DBAPI传递。[`UUID.as_uuid`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.UUID.params.as_uuid "sqlalchemy.dialects.postgresql.UUID")标志仍然有效，除非使用psycopg2，否则我们需要在禁用时将返回的UUID对象转换回字符串。[¶](#change-fc15276f16d5f99614d8b4a54fecfaa5)
+-   **[postgresql] [bug]**使用 psycopg2 时修复了对 Postgresql
+    UUID 类型与 ARRAY 类型的支持。psycopg2 方言现在使用 psycopg2.extras.register\_uuid()挂钩，以便始终将 UUID 值作为 UUID()对象传递给 DBAPI 或从 DBAPI 传递。[`UUID.as_uuid`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.UUID.params.as_uuid "sqlalchemy.dialects.postgresql.UUID")标志仍然有效，除非使用 psycopg2，否则我们需要在禁用时将返回的 UUID 对象转换回字符串。[¶](#change-fc15276f16d5f99614d8b4a54fecfaa5)
 
     参考文献：[＃2940](http://www.sqlalchemy.org/trac/ticket/2940)
 
@@ -337,14 +336,14 @@ tags:
     SQLAlchemy’s converters must be disabled; additionally, the newly
     added psycopg2 extension `extras.register_default_jsonb` is used to establish a JSON deserializer passed to the
     dialect via the `json_deserializer` argument.
-    还修复了Postgresql集成测试，它实际上并未将JSONB类型与JSON类型相反。请求Mateusz
-    Susik提供。[¶](#change-c632de8dde067c70ccf363e6daeedb9e)
+    还修复了 Postgresql 集成测试，它实际上并未将 JSONB 类型与 JSON 类型相反。请求 Mateusz
+    Susik 提供。[¶](#change-c632de8dde067c70ccf363e6daeedb9e)
 
-    参考文献：[请求github：145](https://github.com/zzzeek/sqlalchemy/pull/145)
+    参考文献：[请求 github：145](https://github.com/zzzeek/sqlalchemy/pull/145)
 
 -   **[postgresql]
-    [bug]**在注册HSTORE类型时，修复了使用“array\_oid”标志的旧版psycopg2版本\<2.4.3，该版本不支持该标志，以及使用native
-    json串行器钩子“register\_default\_json”与用户定义的json\_deserializer在psycopg2版本\<2.5上，其中不包含本地json
+    [bug]**在注册 HSTORE 类型时，修复了使用“array\_oid”标志的旧版 psycopg2 版本\<2.4.3，该版本不支持该标志，以及使用 native
+    json 串行器钩子“register\_default\_json”与用户定义的 json\_deserializer 在 psycopg2 版本\<2.5 上，其中不包含本地 json
     ¶
 
 -   **[postgresql] [bug]**Fixed bug where Postgresql dialect would fail
@@ -357,22 +356,22 @@ tags:
 
     参考文献：[＃3174](http://www.sqlalchemy.org/trac/ticket/3174)
 
-### MySQL的[¶ T0\>](#change-0.9.9-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.9.9-mysql "Permalink to this headline")
 
 -   **[mysql]
-    [bug]**增加了对'utf8\_bin'排序检查周围的MySQLdb方言的版本检查，因为这在MySQL服务器\<5.0中失败。¶
+    [bug]**增加了对'utf8\_bin'排序检查周围的 MySQLdb 方言的版本检查，因为这在 MySQL 服务器\<5.0 中失败。¶
 
     参考文献：[＃3274](http://www.sqlalchemy.org/trac/ticket/3274)
 
--   **[mysql] [change]** `gaerdbms`方言不再需要，并且发出弃用警告。Google现在建议直接使用MySQLdb方言。[¶](#change-8ad918e4ff23a5c688ab088a851b3d84)
+-   **[mysql] [change]** `gaerdbms`方言不再需要，并且发出弃用警告。Google 现在建议直接使用 MySQLdb 方言。[¶](#change-8ad918e4ff23a5c688ab088a851b3d84)
 
     参考文献：[＃3275](http://www.sqlalchemy.org/trac/ticket/3275)
 
 ### 源码[¶ T0\>](#change-0.9.9-sqlite "Permalink to this headline")
 
 -   **[sqlite]
-    [feature]**在SQLite中增加了对部分索引（例如使用WHERE子句）的支持。请求Kai
-    Groner提供的请求。
+    [feature]**在 SQLite 中增加了对部分索引（例如使用 WHERE 子句）的支持。请求 Kai
+    Groner 提供的请求。
 
     也可以看看
 
@@ -384,8 +383,8 @@ tags:
     bitbucket：42](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/42)
 
 -   **[sqlite]
-    [feature]**为SQLCipher后端添加了新的SQLite后端。该后端使用pysqlcipher
-    Python驱动程序提供加密的SQLite数据库，这与pysqlite驱动程序非常相似。
+    [feature]**为 SQLCipher 后端添加了新的 SQLite 后端。该后端使用 pysqlcipher
+    Python 驱动程序提供加密的 SQLite 数据库，这与 pysqlite 驱动程序非常相似。
 
     也可以看看
 
@@ -397,10 +396,10 @@ tags:
 
 -   **[bug] [ext] [py3k]**Fixed bug where the association proxy list
     class would not interpret slices correctly under Py3K.
-    拉尔请求礼貌Gilles
+    拉尔请求礼貌 Gilles
     Dartiguelongue。[¶](#change-10dacdfe5eb7c9ab611635de10cb4708)
 
-    参考文献：[请求github：154](https://github.com/zzzeek/sqlalchemy/pull/154)
+    参考文献：[请求 github：154](https://github.com/zzzeek/sqlalchemy/pull/154)
 
 -   **[bug] [examples]**Updated the [Versioning with a History
     Table](orm_examples.html#examples-versioned-history) example such
@@ -422,7 +421,7 @@ tags:
 0.9.8 [¶ T0\>](#change-0.9.8 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布日期：2014年10月13日
+发布日期：2014 年 10 月 13 日
 
 ### ORM [¶ T0\>](#change-0.9.8-orm "Permalink to this headline")
 
@@ -440,12 +439,12 @@ tags:
     [`event.listen()`](core_event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")
     with the same arguments would fail, for those events where the
     listener function is wrapped.
-    断言将在registry.py中发生。这一说法现在已经被纳入重复数据删除检查中，并带来更简单的方法来检查重复数据删除的额外好处。[¶](#change-65925a14215a5f14359c76d2e3b04bae)
+    断言将在 registry.py 中发生。这一说法现在已经被纳入重复数据删除检查中，并带来更简单的方法来检查重复数据删除的额外好处。[¶](#change-65925a14215a5f14359c76d2e3b04bae)
 
     参考文献：[＃3199](http://www.sqlalchemy.org/trac/ticket/3199)
 
 -   **[orm]
-    [bug]**固定警告，当复杂的自引用primaryjoin包含函数时会发出警告，同时指定remote\_side；警告会建议设置“远程端”。如果remote\_side不存在，它现在只会发射。[¶](#change-dc9752643faf4e960c03910d74b7c380)
+    [bug]**固定警告，当复杂的自引用 primaryjoin 包含函数时会发出警告，同时指定 remote\_side；警告会建议设置“远程端”。如果 remote\_side 不存在，它现在只会发射。[¶](#change-dc9752643faf4e960c03910d74b7c380)
 
     参考文献：[＃3194](http://www.sqlalchemy.org/trac/ticket/3194)
 
@@ -467,12 +466,12 @@ tags:
     used to initialize the dialect within the “first connect” event;
     dialects will usually perform their own queries in this phase, and
     none of the current available options should be applied here.
-    特别是，“自动提交”选项会导致尝试在此初始连接中自动提交，由于[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的非标准状态，该选项将因AttributeError失败。[¶](#change-5ea92686db96cba0e79afedbcc6adf59)
+    特别是，“自动提交”选项会导致尝试在此初始连接中自动提交，由于[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的非标准状态，该选项将因 AttributeError 失败。[¶](#change-5ea92686db96cba0e79afedbcc6adf59)
 
     参考文献：[＃3200](http://www.sqlalchemy.org/trac/ticket/3200)
 
 -   **[engine]
-    [bug]**用于确定受INSERT或UPDATE影响的列的字符串键现在在对“编译缓存”缓存键作出贡献时被排序。这些键以前没有确定性地排序，这意味着相同的语句可以在相同的键上多次缓存，从内存和性能两个方面来说都是这样。[¶](#change-6a98e0632754dd817947fcd39bd2a627)
+    [bug]**用于确定受 INSERT 或 UPDATE 影响的列的字符串键现在在对“编译缓存”缓存键作出贡献时被排序。这些键以前没有确定性地排序，这意味着相同的语句可以在相同的键上多次缓存，从内存和性能两个方面来说都是这样。[¶](#change-6a98e0632754dd817947fcd39bd2a627)
 
     参考文献：[＃3165](http://www.sqlalchemy.org/trac/ticket/3165)
 
@@ -489,7 +488,7 @@ tags:
 -   **[sql] [bug]**An adjustment to table/index reflection such that if
     an index reports a column that isn’t found to be present in the
     table, a warning is emitted and the column is skipped.
-    对于一些特殊的系统列情况，可能会发生这种情况，正如Oracle观察到的那样。[¶](#change-c1ac48f9d293ea2e5f282a620ff1a9cc)
+    对于一些特殊的系统列情况，可能会发生这种情况，正如 Oracle 观察到的那样。[¶](#change-c1ac48f9d293ea2e5f282a620ff1a9cc)
 
     参考文献：[＃3180](http://www.sqlalchemy.org/trac/ticket/3180)
 
@@ -500,22 +499,22 @@ tags:
     参考文献：[＃3154](http://www.sqlalchemy.org/trac/ticket/3154)
 
 -   **[sql]
-    [bug]**修正了由[＃3067](http://www.sqlalchemy.org/trac/ticket/3067)导致的0.9.7回归与错误的单元测试的结合，使得所谓的“模式”类型如[`Boolean`](core_type_basics.html#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")和[`Enum`](core_type_basics.html#sqlalchemy.types.Enum "sqlalchemy.types.Enum")不能再被腌制。[¶](#change-ae836fdd12b932ca0dfa9804e5b52282)
+    [bug]**修正了由[＃3067](http://www.sqlalchemy.org/trac/ticket/3067)导致的 0.9.7 回归与错误的单元测试的结合，使得所谓的“模式”类型如[`Boolean`](core_type_basics.html#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")和[`Enum`](core_type_basics.html#sqlalchemy.types.Enum "sqlalchemy.types.Enum")不能再被腌制。[¶](#change-ae836fdd12b932ca0dfa9804e5b52282)
 
     参考文献：[＃3144](http://www.sqlalchemy.org/trac/ticket/3144)，[＃3067](http://www.sqlalchemy.org/trac/ticket/3067)
 
-### 的PostgreSQL [¶ T0\>](#change-0.9.8-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.9.8-postgresql "Permalink to this headline")
 
 -   **[postgresql] [feature]
-    [pg8000]**通过pg8000驱动程序为“理智的多行数”添加支持，主要适用于使用ORM进行版本控制时。该功能基于使用的pg8000
-    1.9.14或更高版本进行版本检测。拉托洛克洛请求礼貌。[¶](#change-348b76a1618d3c820757eb094ebca1ef)
+    [pg8000]**通过 pg8000 驱动程序为“理智的多行数”添加支持，主要适用于使用 ORM 进行版本控制时。该功能基于使用的 pg8000
+    1.9.14 或更高版本进行版本检测。拉托洛克洛请求礼貌。[¶](#change-348b76a1618d3c820757eb094ebca1ef)
 
-    参考文献：[请求github：125](https://github.com/zzzeek/sqlalchemy/pull/125)
+    参考文献：[请求 github：125](https://github.com/zzzeek/sqlalchemy/pull/125)
 
 -   **[postgresql]
-    [bug]**重新审视此问题在0.9.5中首次被修补，显然psycopg2的`.closed`访问器并不像我们假设的那样可靠，所以我们添加了一个当检测到is-disconnect场景时，显式检查异常消息“SSL
-    SYSCALL错误：错误的文件描述符”和“SSL
-    SYSCALL错误：EOF检测到”。我们将继续咨询psycopg2的connection.closed作为第一次检查。[¶](#change-f9a3e851447589d85ac72da3b5ae6f96)
+    [bug]**重新审视此问题在 0.9.5 中首次被修补，显然 psycopg2 的`.closed`访问器并不像我们假设的那样可靠，所以我们添加了一个当检测到 is-disconnect 场景时，显式检查异常消息“SSL
+    SYSCALL 错误：错误的文件描述符”和“SSL
+    SYSCALL 错误：EOF 检测到”。我们将继续咨询 psycopg2 的 connection.closed 作为第一次检查。[¶](#change-f9a3e851447589d85ac72da3b5ae6f96)
 
     参考文献：[＃3021](http://www.sqlalchemy.org/trac/ticket/3021)
 
@@ -524,44 +523,44 @@ tags:
     than a JSON-encoded `'null'`.
     为了支持这种情况，更改如下：
 
-    -   现在可以指定[`null()`](core_sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")值，这将始终导致产生该语句的NULL值。
-    -   添加了一个新参数[`JSON.none_as_null`](dialects_mysql.html#sqlalchemy.dialects.mysql.JSON.params.none_as_null "sqlalchemy.dialects.mysql.JSON")，当True表示Python
-        `None`值应该作为SQL
-        NULL执行，而不是JSON编码`'null'`
+    -   现在可以指定[`null()`](core_sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")值，这将始终导致产生该语句的 NULL 值。
+    -   添加了一个新参数[`JSON.none_as_null`](dialects_mysql.html#sqlalchemy.dialects.mysql.JSON.params.none_as_null "sqlalchemy.dialects.mysql.JSON")，当 True 表示 Python
+        `None`值应该作为 SQL
+        NULL 执行，而不是 JSON 编码`'null'`
 
-    对于非psycopg2的DBAPI，即pg8000，也会修复NULL的空值。
+    对于非 psycopg2 的 DBAPI，即 pg8000，也会修复 NULL 的空值。
 
     [¶](#change-5e8390463893d41899dc2296b9ed0f34)
 
     参考文献：[＃3159](http://www.sqlalchemy.org/trac/ticket/3159)
 
 -   **[postgresql] [bug]**
-    DBAPI错误的异常包装系统现在可以容纳非标准DBAPI异常，例如psycopg2
-    TransactionRollbackError。这些异常现在将使用`sqlalchemy.exc`中最接近的可用子类进行引发，如果是TransactionRollbackError，`sqlalchemy.exc.OperationalError`。[¶](#change-90221b5e6266d9262bf64826feba9769)
+    DBAPI 错误的异常包装系统现在可以容纳非标准 DBAPI 异常，例如 psycopg2
+    TransactionRollbackError。这些异常现在将使用`sqlalchemy.exc`中最接近的可用子类进行引发，如果是 TransactionRollbackError，`sqlalchemy.exc.OperationalError`。[¶](#change-90221b5e6266d9262bf64826feba9769)
 
     参考文献：[＃3075](http://www.sqlalchemy.org/trac/ticket/3075)
 
--   **[postgresql] [bug]**修正了[`postgresql.array`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.array "sqlalchemy.dialects.postgresql.array")对象中的一个错误，其中与普通Python列表的比较将无法使用正确的数组构造函数。拉请求礼貌Andrew。[¶](#change-7f25bb6d60f7a1279948396ac86574bb)
+-   **[postgresql] [bug]**修正了[`postgresql.array`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.array "sqlalchemy.dialects.postgresql.array")对象中的一个错误，其中与普通 Python 列表的比较将无法使用正确的数组构造函数。拉请求礼貌 Andrew。[¶](#change-7f25bb6d60f7a1279948396ac86574bb)
 
-    参考文献：[＃3141](http://www.sqlalchemy.org/trac/ticket/3141)，[请求github：124](https://github.com/zzzeek/sqlalchemy/pull/124)
+    参考文献：[＃3141](http://www.sqlalchemy.org/trac/ticket/3141)，[请求 github：124](https://github.com/zzzeek/sqlalchemy/pull/124)
 
 -   **[postgresql]
     [bug]**为函数添加了支持的[`FunctionElement.alias()`](core_functions.html#sqlalchemy.sql.functions.FunctionElement.alias "sqlalchemy.sql.functions.FunctionElement.alias")方法。
-    `func`构造。以前，此方法的行为未定义。当前行为模仿0.9.4之前的行为，即该函数被转换为具有给定别名的单列FROM子句，其中列本身是匿名命名的。[¶](#change-aaaa4815736728bec50c929a09c7fa5a)
+    `func`构造。以前，此方法的行为未定义。当前行为模仿 0.9.4 之前的行为，即该函数被转换为具有给定别名的单列 FROM 子句，其中列本身是匿名命名的。[¶](#change-aaaa4815736728bec50c929a09c7fa5a)
 
     参考文献：[＃3137](http://www.sqlalchemy.org/trac/ticket/3137)
 
-### MySQL的[¶ T0\>](#change-0.9.8-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.9.8-mysql "Permalink to this headline")
 
 -   **[mysql] [bug] [mysqlconnector]**Mysqlconnector as of version 2.0,
     probably as a side effect of the python 3 merge, now does not expect
     percent signs (e.g. as used as the modulus operator and others) to
     be doubled, even when using the “pyformat” bound parameter format
     (this change is not documented by Mysqlconnector).
-    当检测模运算符是否应该呈现为`%%`或`%`时，方言现在检查py2k和mysqlconnector小于2.0版。[¶](#change-32126a623ef93ac44e3e9243d1260fca)
+    当检测模运算符是否应该呈现为`%%`或`%`时，方言现在检查 py2k 和 mysqlconnector 小于 2.0 版。[¶](#change-32126a623ef93ac44e3e9243d1260fca)
 
 -   **[mysql] [bug] [mysqlconnector]** Unicode
-    SQL现在传递给MySQLconnector 2.0及更高版本；对于Py2k和MySQL
+    SQL 现在传递给 MySQLconnector 2.0 及更高版本；对于 Py2k 和 MySQL
     \<2.0，字符串被编码。¶
 
 ### 源码[¶ T0\>](#change-0.9.8-sqlite "Permalink to this headline")
@@ -571,7 +570,7 @@ tags:
     cursor.description as ‘dbname.tablename.colname’, instead of
     ‘tablename.colname’ as it normally does for a UNION (note that it’s
     supposed to just be ‘colname’ for both, but we work around it).
-    此处的列转换逻辑已被调整为检索最右侧的标记，而不是第二个标记，因此它适用于这两种情况。解决方法礼貌Tony
+    此处的列转换逻辑已被调整为检索最右侧的标记，而不是第二个标记，因此它适用于这两种情况。解决方法礼貌 Tony
     Roberts。[¶](#change-fa653d4ec018e069a52b2268725c5b88)
 
     参考文献：[＃3211](http://www.sqlalchemy.org/trac/ticket/3211)
@@ -579,8 +578,8 @@ tags:
 ### MSSQL [¶ T0\>](#change-0.9.8-mssql "Permalink to this headline")
 
 -   **[mssql]
-    [bug]**修复了pymssql方言中的版本字符串检测问题，以便与Microsoft SQL
-    Azure一起使用，它将单词“SQL Server”更改为“SQL Azure”。[¶ t2
+    [bug]**修复了 pymssql 方言中的版本字符串检测问题，以便与 Microsoft SQL
+    Azure 一起使用，它将单词“SQL Server”更改为“SQL Azure”。[¶ t2
     \>](#change-80d8c2f1d6da858394e3f7fcf143fa10)
 
     参考文献：[＃3151](http://www.sqlalchemy.org/trac/ticket/3151)
@@ -607,31 +606,31 @@ tags:
     参考文献：[＃3208](http://www.sqlalchemy.org/trac/ticket/3208)
 
 -   **[bug]
-    [ext]**修正了订购清单中的bug，如果reorder\_on\_append标志被设置为True，则在收集替换事件期间将抛出物品的顺序。该修复确保排序列表仅影响与该对象显式关联的列表。[¶](#change-f63e94a1795bd303f88294c462bd3b95)
+    [ext]**修正了订购清单中的 bug，如果 reorder\_on\_append 标志被设置为 True，则在收集替换事件期间将抛出物品的顺序。该修复确保排序列表仅影响与该对象显式关联的列表。[¶](#change-f63e94a1795bd303f88294c462bd3b95)
 
     参考文献：[＃3191](http://www.sqlalchemy.org/trac/ticket/3191)
 
 -   修正了[`ext.mutable.MutableDict`](orm_extensions_mutable.html#sqlalchemy.ext.mutable.MutableDict "sqlalchemy.ext.mutable.MutableDict")无法实现`update()`字典方法的错误，因此无法捕捉更改。**[bug]
-    [ext]**拉请求马特Chisholm。[¶](#change-8d9ef3d42e12a3991355d6db0d7e0590)
+    [ext]**拉请求马特 Chisholm。[¶](#change-8d9ef3d42e12a3991355d6db0d7e0590)
 
 -   **[bug] [ext]**Fixed bug where a custom subclass of
     [`ext.mutable.MutableDict`](orm_extensions_mutable.html#sqlalchemy.ext.mutable.MutableDict "sqlalchemy.ext.mutable.MutableDict")
     would not show up in a “coerce” operation, and would instead return
     a plain [`ext.mutable.MutableDict`](orm_extensions_mutable.html#sqlalchemy.ext.mutable.MutableDict "sqlalchemy.ext.mutable.MutableDict").
-    拉请求马特Chisholm。[¶](#change-2995e85c7b79e5acb0500b5f7bef1116)
+    拉请求马特 Chisholm。[¶](#change-2995e85c7b79e5acb0500b5f7bef1116)
 
 -   **[bug] [pool]**Fixed bug in connection pool logging where the
     “connection checked out” debug logging message would not emit if the
     logging were set up using `logging.setLevel()`,
     rather than using the `echo_pool` flag.
-    已经添加了测试来声明这个日志记录。这是在0.9.0中引入的回归。[¶](#change-45bc7ea621ab2ad2ee138f5a0f4af495)
+    已经添加了测试来声明这个日志记录。这是在 0.9.0 中引入的回归。[¶](#change-45bc7ea621ab2ad2ee138f5a0f4af495)
 
     参考文献：[＃3168](http://www.sqlalchemy.org/trac/ticket/3168)
 
 0.9.7 [¶ T0\>](#change-0.9.7 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布日期：2014年7月22日
+发布日期：2014 年 7 月 22 日
 
 ### ORM [¶ T0\>](#change-0.9.7-orm "Permalink to this headline")
 
@@ -663,7 +662,7 @@ tags:
     work with multi-table updates, and needs to be set to
     synchronize\_session=False or synchronize\_session=’fetch’; a
     warning is now emitted.
-    在1.0中，这将被提升为一个完整的例外。[¶](#change-93ffe57d97cc97b691e1697f532fa023)
+    在 1.0 中，这将被提升为一个完整的例外。[¶](#change-93ffe57d97cc97b691e1697f532fa023)
 
     参考文献：[＃3117](http://www.sqlalchemy.org/trac/ticket/3117)
 
@@ -684,8 +683,8 @@ tags:
     参考文献：[＃3106](http://www.sqlalchemy.org/trac/ticket/3106)
 
 -   **[orm]
-    [bug]**修复了涉及动态属性的错误，这又是从版本0.9.5开始的[＃3060](http://www.sqlalchemy.org/trac/ticket/3060)的回归。与lazy
-    ='dynamic'的自引用关系会在flush操作中引发TypeError。[¶](#change-cfc1f15148c259394c9b3b373392bc15)
+    [bug]**修复了涉及动态属性的错误，这又是从版本 0.9.5 开始的[＃3060](http://www.sqlalchemy.org/trac/ticket/3060)的回归。与 lazy
+    ='dynamic'的自引用关系会在 flush 操作中引发 TypeError。[¶](#change-cfc1f15148c259394c9b3b373392bc15)
 
     参考文献：[＃3099](http://www.sqlalchemy.org/trac/ticket/3099)
 
@@ -730,7 +729,7 @@ tags:
     types to require names as well, as these implicitly create a
     constraint, even if the ultimate target backend were one that does
     not require generation of the constraint such as Postgresql.
-    这些特定约束的命名约定的机制已重新组织，以便在DDL编译时完成命名确定，而不是在约束/表构造时完成命令。[¶](#change-346b9ff8fbd8e4eac954bf271b4c6ad6)
+    这些特定约束的命名约定的机制已重新组织，以便在 DDL 编译时完成命名确定，而不是在约束/表构造时完成命令。[¶](#change-346b9ff8fbd8e4eac954bf271b4c6ad6)
 
     参考文献：[＃3067](http://www.sqlalchemy.org/trac/ticket/3067)
 
@@ -741,13 +740,13 @@ tags:
 
     参考文献：[＃3090](http://www.sqlalchemy.org/trac/ticket/3090)
 
--   修正了多值[`Insert`](core_dml.html#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")构造无法检查给定的字面SQL表达式第一个以后的值的问题。[**[sql]
+-   修正了多值[`Insert`](core_dml.html#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")构造无法检查给定的字面 SQL 表达式第一个以后的值的问题。[**[sql]
     [bug]**](#change-9f3a810c852f582cfa2eef2e268ec4ef)
 
     参考文献：[＃3069](http://www.sqlalchemy.org/trac/ticket/3069)
 
 -   **[sql]
-    [bug]**在Python版本\<2.6.5的dialect\_kwargs迭代中添加了一个“str()”步骤，解决了“no
+    [bug]**在 Python 版本\<2.6.5 的 dialect\_kwargs 迭代中添加了一个“str()”步骤，解决了“no
     unicode="" keyword="" arg”关键字在一些反射过程中引用。¶
 
     参考文献：[＃3123](http://www.sqlalchemy.org/trac/ticket/3123)
@@ -759,29 +758,29 @@ tags:
 
     参考文献：[＃3122](http://www.sqlalchemy.org/trac/ticket/3122)
 
-### 的PostgreSQL [¶ T0\>](#change-0.9.7-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.9.7-postgresql "Permalink to this headline")
 
--   **[postgresql] [feature]**添加kw参数`postgresql_regconfig`到[`ColumnOperators.match()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.match "sqlalchemy.sql.operators.ColumnOperators.match")运算符，允许指定“reg
-    config”参数发送到`to_tsquery()`函数。请求Jonathan
-    Vanasco提供。[¶](#change-d5177977fbaffd2ad0990c4ebf70a9ae)
+-   **[postgresql] [feature]**添加 kw 参数`postgresql_regconfig`到[`ColumnOperators.match()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.match "sqlalchemy.sql.operators.ColumnOperators.match")运算符，允许指定“reg
+    config”参数发送到`to_tsquery()`函数。请求 Jonathan
+    Vanasco 提供。[¶](#change-d5177977fbaffd2ad0990c4ebf70a9ae)
 
     References: [\#3078](http://www.sqlalchemy.org/trac/ticket/3078),
     [pull request
     bitbucket:22](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/22)
 
--   **[postgresql] [feature]**通过[`JSONB`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSONB "sqlalchemy.dialects.postgresql.JSONB")增加了对Postgresql
-    JSONB的支持。请求礼貌Damian
+-   **[postgresql] [feature]**通过[`JSONB`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSONB "sqlalchemy.dialects.postgresql.JSONB")增加了对 Postgresql
+    JSONB 的支持。请求礼貌 Damian
     Dimmich。[¶](#change-b66794b4e3bffb82595c82694c32733b)
 
-    参考文献：[请求github：101](https://github.com/zzzeek/sqlalchemy/pull/101)
+    参考文献：[请求 github：101](https://github.com/zzzeek/sqlalchemy/pull/101)
 
 -   **[postgresql] [bug]
-    [pg8000]**修正了0.9.5版本中新增的pg8000隔离级别功能导致的错误，其中引擎级别的隔离级别参数会在连接时产生错误[¶
+    [pg8000]**修正了 0.9.5 版本中新增的 pg8000 隔离级别功能导致的错误，其中引擎级别的隔离级别参数会在连接时产生错误[¶
     t2 \>](#change-42d4d4dfd75600d1aca8205469504bb4)
 
     参考文献：[＃3134](http://www.sqlalchemy.org/trac/ticket/3134)
 
-### MySQL的[¶ T0\>](#change-0.9.7-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.9.7-mysql "Permalink to this headline")
 
 -   **[mysql] [bug]**MySQL error 2014 “commands out of sync” appears to
     be raised as a ProgrammingError, not OperationalError, in modern
@@ -807,11 +806,11 @@ tags:
 
 ### MSSQL [¶ T0\>](#change-0.9.7-mssql "Permalink to this headline")
 
--   **[mssql] [feature]**为SQL Server 2008启用“多值插入”。拉尔请求Albert
-    Cervin礼貌。还扩展了对“IDENTITY
-    INSERT”模式的检查，以便在语句的VALUE子句中存在身份钥匙时包含该身份钥匙。[¶](#change-e5ab682c0b41fbfd0dcfb6c0fa0578f2)
+-   **[mssql] [feature]**为 SQL Server 2008 启用“多值插入”。拉尔请求 Albert
+    Cervin 礼貌。还扩展了对“IDENTITY
+    INSERT”模式的检查，以便在语句的 VALUE 子句中存在身份钥匙时包含该身份钥匙。[¶](#change-e5ab682c0b41fbfd0dcfb6c0fa0578f2)
 
-    参考文献：[请求github：98](https://github.com/zzzeek/sqlalchemy/pull/98)
+    参考文献：[请求 github：98](https://github.com/zzzeek/sqlalchemy/pull/98)
 
 -   **[mssql] [bug]**Added statement encoding to the “SET
     IDENTITY\_INSERT” statements which operate when an explicit INSERT
@@ -834,8 +833,8 @@ tags:
     参考文献：[＃3091](http://www.sqlalchemy.org/trac/ticket/3091)
 
 -   **[mssql]
-    [bug]**修复了由[＃3025](http://www.sqlalchemy.org/trac/ticket/3025)引起的0.9.5的回归，其中用于确定“默认模式”的查询在SQL
-    Server 2000中无效。对于SQL Server
+    [bug]**修复了由[＃3025](http://www.sqlalchemy.org/trac/ticket/3025)引起的 0.9.5 的回归，其中用于确定“默认模式”的查询在 SQL
+    Server 2000 中无效。对于 SQL Server
     2000，我们回到缺省方言的“模式名称”参数，该参数是可配置的，但默认为'dbo'。[¶](#change-82de60fa2e391061691dd22349c22f5e)
 
     参考文献：[＃3025](http://www.sqlalchemy.org/trac/ticket/3025)
@@ -852,7 +851,7 @@ tags:
 ### 杂项[¶ T0\>](#change-0.9.7-misc "Permalink to this headline")
 
 -   **[bug] [tests]**修正了“python setup.py
-    test”没有正确调用distutils的错误，并且在测试套件结束时会发出错误。[T2\>](#change-7731e09fca20d7106d8a5a6a10e341f1)
+    test”没有正确调用 distutils 的错误，并且在测试套件结束时会发出错误。[T2\>](#change-7731e09fca20d7106d8a5a6a10e341f1)
 
 -   **[bug] [declarative]**Fixed bug when the declarative
     `__abstract__` flag was not being distinguished
@@ -864,21 +863,21 @@ tags:
 0.9.6 [¶ T0\>](#change-0.9.6 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布日期：2014年6月23日
+发布日期：2014 年 6 月 23 日
 
 ### ORM [¶ T0\>](#change-0.9.6-orm "Permalink to this headline")
 
 -   **[orm]
     [bug]**恢复[＃3060](http://www.sqlalchemy.org/trac/ticket/3060)的更改
     - 这是一个工作单元修复，通过[＃3061
-    t3在1.0中更全面地更新\>。](http://www.sqlalchemy.org/trac/ticket/3061)不幸的是，[＃3060](http://www.sqlalchemy.org/trac/ticket/3060)中的修复产生了一个新问题，即多对一属性的急切加载可以产生一个解释为属性更改的事件。[¶](#change-b34ddce636d140c62cb6b43b92ce3464)
+    t3 在 1.0 中更全面地更新\>。](http://www.sqlalchemy.org/trac/ticket/3061)不幸的是，[＃3060](http://www.sqlalchemy.org/trac/ticket/3060)中的修复产生了一个新问题，即多对一属性的急切加载可以产生一个解释为属性更改的事件。[¶](#change-b34ddce636d140c62cb6b43b92ce3464)
 
     参考文献：[＃3060](http://www.sqlalchemy.org/trac/ticket/3060)
 
 0.9.5 [¶ T0\>](#change-0.9.5 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布日期：2014年6月23日
+发布日期：2014 年 6 月 23 日
 
 ### ORM [¶ T0\>](#change-0.9.5-orm "Permalink to this headline")
 
@@ -886,7 +885,7 @@ tags:
     further to allow a join condition that is strictly from a single
     column to itself, translated through some kind of SQL function or
     expression.
-    这是一种实验，但概念的第一个证明是“物化路径”连接条件，其中路径字符串使用“like”与自身进行比较。[`ColumnOperators.like()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")运算符也被添加到在primaryjoin条件中使用的有效运算符列表中。[¶](#change-b14ee29d17139fd41dceb132ae75ee3a)
+    这是一种实验，但概念的第一个证明是“物化路径”连接条件，其中路径字符串使用“like”与自身进行比较。[`ColumnOperators.like()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")运算符也被添加到在 primaryjoin 条件中使用的有效运算符列表中。[¶](#change-b14ee29d17139fd41dceb132ae75ee3a)
 
     参考文献：[＃3029](http://www.sqlalchemy.org/trac/ticket/3029)
 
@@ -932,7 +931,7 @@ tags:
 -   **[orm] [bug]**Modified the behavior of [`orm.load_only()`](orm_loading_columns.html#sqlalchemy.orm.load_only "sqlalchemy.orm.load_only")
     such that primary key columns are always added to the list of
     columns to be “undeferred”; otherwise, the ORM can’t load the row’s
-    identity. 显然，可以推迟映射的主键，并且ORM将失败，这并没有改变。But
+    identity. 显然，可以推迟映射的主键，并且 ORM 将失败，这并没有改变。But
     as load\_only is essentially saying “defer all but X”, it’s more
     critical that PK cols not be part of this
     deferral.[¶](#change-25bfed359ea9ffac545b3582739da0c4)
@@ -942,24 +941,24 @@ tags:
 -   **[orm] [bug]**Fixed a few edge cases which arise in the so-called
     “row switch” scenario, where an INSERT/DELETE can be turned into an
     UPDATE.
-    在这种情况下，将多对一关系设置为无，或者在某些情况下将标量属性设置为无，可能不会将其检测为值的净更改，因此UPDATE不会重置上一行中的内容。这是由于一些尚未解决的方式属性历史的工作方式隐含地假设None不是真正的“改变”以前未设置的属性。另见[＃3061](http://www.sqlalchemy.org/trac/ticket/3061)。
+    在这种情况下，将多对一关系设置为无，或者在某些情况下将标量属性设置为无，可能不会将其检测为值的净更改，因此 UPDATE 不会重置上一行中的内容。这是由于一些尚未解决的方式属性历史的工作方式隐含地假设 None 不是真正的“改变”以前未设置的属性。另见[＃3061](http://www.sqlalchemy.org/trac/ticket/3061)。
 
     注意
 
     This change has been **REVERTED** in 0.9.6.
-    完整的修补程序将在SQLAlchemy 1.0版中。
+    完整的修补程序将在 SQLAlchemy 1.0 版中。
 
     [¶](#change-7dee9371466176d8e4b29c007477a68a)
 
     参考文献：[＃3060](http://www.sqlalchemy.org/trac/ticket/3060)
 
 -   **[orm]
-    [bug]**与[＃3060](http://www.sqlalchemy.org/trac/ticket/3060)相关，已对工作单元进行了调整，以使相关的多对一对象的加载稍微更积极在要删除的自引用对象的图形的情况下；如果未设置passive\_deletes，则相关对象的负载将帮助确定正确的删除顺序。[](#change-075684cfd4ae61fbe83f5b7c147fcc8a)
+    [bug]**与[＃3060](http://www.sqlalchemy.org/trac/ticket/3060)相关，已对工作单元进行了调整，以使相关的多对一对象的加载稍微更积极在要删除的自引用对象的图形的情况下；如果未设置 passive\_deletes，则相关对象的负载将帮助确定正确的删除顺序。[](#change-075684cfd4ae61fbe83f5b7c147fcc8a)
 
 -   **[orm] [bug]**Fixed bug in SQLite join rewriting where anonymized
     column names due to repeats would not correctly be rewritten in
     subqueries.
-    这会影响任何类型的子查询+连接的SELECT查询。[¶](#change-fa2ca744e5fa4caa260e51dbac157f2e)
+    这会影响任何类型的子查询+连接的 SELECT 查询。[¶](#change-fa2ca744e5fa4caa260e51dbac157f2e)
 
     参考文献：[＃3057](http://www.sqlalchemy.org/trac/ticket/3057)
 
@@ -990,7 +989,7 @@ tags:
     [\#2907](http://www.sqlalchemy.org/trac/ticket/2907), in that the
     “reset on return” feature calls out to the Connection/Transaction in
     order to handle it, where “disconnect detection” might be caught.
-    然而，[＃2985](http://www.sqlalchemy.org/trac/ticket/2985)中最近发生的变化可能会导致这种情况出现，因为“连接无效”操作的速度更快，因为问题在0.9.4上的可重复性高于0.9.3。
+    然而，[＃2985](http://www.sqlalchemy.org/trac/ticket/2985)中最近发生的变化可能会导致这种情况出现，因为“连接无效”操作的速度更快，因为问题在 0.9.4 上的可重复性高于 0.9.3。
 
     现在在任何可能出现失效的部分添加检查，以暂停对失效的连接进一步禁止的操作。这包括在引擎级别和池级别的两个修补程序。虽然在高度并发的基因事件中观察到这个问题，但理论上可以发生在连接关闭操作内发生断开连接的任何情况下。
 
@@ -1008,7 +1007,7 @@ tags:
     [`expression.between.symmetric`](core_sqlelement.html#sqlalchemy.sql.expression.between.params.symmetric "sqlalchemy.sql.expression.between"),
     when set to True renders “BETWEEN SYMMETRIC”.
     还添加了一个新的否定运算符“notbetween\_op”，该运算符现在允许像`〜col.between（x， y）`这样的表达式呈现为“ col NOT BETWEEN x AND
-    y“，而不是一个带括号的NOT字符串。[¶](#change-af7cd160da5802d1180fd83faee35afd)
+    y“，而不是一个带括号的 NOT 字符串。[¶](#change-af7cd160da5802d1180fd83faee35afd)
 
     参考文献：[＃2990](http://www.sqlalchemy.org/trac/ticket/2990)
 
@@ -1020,7 +1019,7 @@ tags:
 
     参考文献：[＃3044](http://www.sqlalchemy.org/trac/ticket/3044)
 
--   修复了当[`Table.update()`](core_metadata.html#sqlalchemy.schema.Table.update "sqlalchemy.schema.Table.update")和[`Table.delete()`](core_metadata.html#sqlalchemy.schema.Table.delete "sqlalchemy.schema.Table.delete")在空的时候会产生一个空的WHERE子句的问题。**[sql]
+-   修复了当[`Table.update()`](core_metadata.html#sqlalchemy.schema.Table.update "sqlalchemy.schema.Table.update")和[`Table.delete()`](core_metadata.html#sqlalchemy.schema.Table.delete "sqlalchemy.schema.Table.delete")在空的时候会产生一个空的 WHERE 子句的问题。**[sql]
     [bug]** [`and_()`](core_sqlelement.html#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")或[`or_()`](core_sqlelement.html#sqlalchemy.sql.expression.or_ "sqlalchemy.sql.expression.or_")或其他空白表达。这与[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")的一致。[¶](#change-74c445dabb61781a9bd829c5df7d80df)
 
     这个改变也被**回退**为：0.8.7
@@ -1061,50 +1060,50 @@ tags:
 
     参考文献：[＃1068](http://www.sqlalchemy.org/trac/ticket/1068)，[＃3020](http://www.sqlalchemy.org/trac/ticket/3020)
 
--   **[sql] [bug]**将[`Function`](core_functions.html#sqlalchemy.sql.functions.Function "sqlalchemy.sql.functions.Function")的导入恢复到`sqlalchemy.sql.expression`导入命名空间，该空间在0.9开始时被删除[¶
+-   **[sql] [bug]**将[`Function`](core_functions.html#sqlalchemy.sql.functions.Function "sqlalchemy.sql.functions.Function")的导入恢复到`sqlalchemy.sql.expression`导入命名空间，该空间在 0.9 开始时被删除[¶
     T7\>](#change-3cdb36857fd1906309e4a9c1af99bbea)
 
-### 的PostgreSQL [¶ T0\>](#change-0.9.5-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.9.5-postgresql "Permalink to this headline")
 
--   **[postgresql] [feature]**在使用pg8000
-    DBAPI时增加了对AUTOCOMMIT隔离级别的支持。拉托洛克洛请求礼貌。[¶](#change-911649ad2c23d32ab5dc1670d45c095c)
+-   **[postgresql] [feature]**在使用 pg8000
+    DBAPI 时增加了对 AUTOCOMMIT 隔离级别的支持。拉托洛克洛请求礼貌。[¶](#change-911649ad2c23d32ab5dc1670d45c095c)
 
-    参考文献：[请求github：88](https://github.com/zzzeek/sqlalchemy/pull/88)
+    参考文献：[请求 github：88](https://github.com/zzzeek/sqlalchemy/pull/88)
 
--   **[postgresql] [feature]**将新标志[`ARRAY.zero_indexes`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY.params.zero_indexes "sqlalchemy.dialects.postgresql.ARRAY")添加到Postgresql
-    [`ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型。当设置为`True`时，在传递到数据库之前，值为1将被添加到所有数组索引值，从而允许Python样式的基于零的索引和基于Postgresql
-    one的索引之间具有更好的互操作性。请求礼貌Alexey
+-   **[postgresql] [feature]**将新标志[`ARRAY.zero_indexes`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY.params.zero_indexes "sqlalchemy.dialects.postgresql.ARRAY")添加到 Postgresql
+    [`ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型。当设置为`True`时，在传递到数据库之前，值为 1 将被添加到所有数组索引值，从而允许 Python 样式的基于零的索引和基于 Postgresql
+    one 的索引之间具有更好的互操作性。请求礼貌 Alexey
     Terentev。[¶](#change-4fa3bed78a6be8258c6b3e5fd7f621f3)
 
-    参考文献：[＃2785](http://www.sqlalchemy.org/trac/ticket/2785)，[拉取请求bitbucket：18](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/18)
+    参考文献：[＃2785](http://www.sqlalchemy.org/trac/ticket/2785)，[拉取请求 bitbucket：18](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/18)
 
--   **[postgresql] [bug]**为PG [`HSTORE`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")类型添加了`hashable=False`标志，这是允许ORM跳过尝试在混合列/实体列表中请求ORM映射的HSTORE列时“散列”。补丁礼貌GunnlaugurÞórBriem。[¶](#change-d1fc26504bf95db6331661b1c716fa84)
+-   **[postgresql] [bug]**为 PG [`HSTORE`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")类型添加了`hashable=False`标志，这是允许 ORM 跳过尝试在混合列/实体列表中请求 ORM 映射的 HSTORE 列时“散列”。补丁礼貌 GunnlaugurÞórBriem。[¶](#change-d1fc26504bf95db6331661b1c716fa84)
 
     这个改变也被**回退**为：0.8.7
 
     参考文献：[＃3053](http://www.sqlalchemy.org/trac/ticket/3053)
 
 -   **[postgresql]
-    [bug]**添加了一个新的“断开连接”消息“连接意外关闭”。这似乎与更新版本的SSL有关。拉提请求Antti
-    Haapala礼貌。[¶](#change-b4544c9476cfd8dbf4900f17cafbea73)
+    [bug]**添加了一个新的“断开连接”消息“连接意外关闭”。这似乎与更新版本的 SSL 有关。拉提请求 Antti
+    Haapala 礼貌。[¶](#change-b4544c9476cfd8dbf4900f17cafbea73)
 
     这个改变也被**回退**为：0.8.7
 
-    参考：[拉取请求bitbucket：13](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/13)
+    参考：[拉取请求 bitbucket：13](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/13)
 
--   **[postgresql] [bug]**当确定异常是否为“断开”错误时，现在查阅psycopg2
+-   **[postgresql] [bug]**当确定异常是否为“断开”错误时，现在查阅 psycopg2
     `.closed`访问器；理想情况下，这应该不需要对异常消息进行任何其他检查来检测断开连接，但是我们将保留现有的消息作为后备消息。这应该能够处理新的情况，如“SSL
     EOF”条件。拉德请求礼貌德克米勒。[¶](#change-28077f9da4dc99fa0ea9c3c26c2206b0)
 
-    参考文献：[＃3021](http://www.sqlalchemy.org/trac/ticket/3021)，[请求github：87](https://github.com/zzzeek/sqlalchemy/pull/87)
+    参考文献：[＃3021](http://www.sqlalchemy.org/trac/ticket/3021)，[请求 github：87](https://github.com/zzzeek/sqlalchemy/pull/87)
 
 -   **[postgresql]
-    [enhancement]**在Postgresql方言中添加了一个新类型的[`postgresql.OID`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.OID "sqlalchemy.dialects.postgresql.OID")。虽然“oid”通常是PG中的私有类型，但在现代版本中并未公开，但有一些PG用例，例如可能暴露这些类型的大对象支持，以及某些用户报告的模式反射用例。
+    [enhancement]**在 Postgresql 方言中添加了一个新类型的[`postgresql.OID`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.OID "sqlalchemy.dialects.postgresql.OID")。虽然“oid”通常是 PG 中的私有类型，但在现代版本中并未公开，但有一些 PG 用例，例如可能暴露这些类型的大对象支持，以及某些用户报告的模式反射用例。
     [¶ T0\>](#change-3abc7a84a2cd2a4a6b699bf9051e8c4f)
 
     参考文献：[＃3002](http://www.sqlalchemy.org/trac/ticket/3002)
 
-### MySQL的[¶ T0\>](#change-0.9.5-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.9.5-mysql "Permalink to this headline")
 
 -   **[mysql] [bug]**Fixed bug where column names added to
     `mysql_length` parameter on an index needed to
@@ -1116,11 +1115,11 @@ tags:
     参考文献：[＃3085](http://www.sqlalchemy.org/trac/ticket/3085)
 
 -   **[mysql]
-    [bug]**增加了对使用等号在索引中包含KEY\_BLOCK\_SIZE的表来反映表的支持。拉请求礼貌肖恩McGivern。[¶](#change-d8934497b6707c20ed9dc43c8386e63d)
+    [bug]**增加了对使用等号在索引中包含 KEY\_BLOCK\_SIZE 的表来反映表的支持。拉请求礼貌肖恩 McGivern。[¶](#change-d8934497b6707c20ed9dc43c8386e63d)
 
     这个改变也被**回退**为：0.8.7
 
-    参考文献：[拉取请求bitbucket：15](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/15)
+    参考文献：[拉取请求 bitbucket：15](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/15)
 
 ### MSSQL [¶ T0\>](#change-0.9.5-mssql "Permalink to this headline")
 
@@ -1149,7 +1148,7 @@ tags:
 
 -   **[feature]
     [examples]**添加了一个使用最新关系功能说明物化路径的新示例。Jack
-    Zhou提供的例子。[¶](#change-b027ac056997c7e3f7a6fa31de610989)
+    Zhou 提供的例子。[¶](#change-b027ac056997c7e3f7a6fa31de610989)
 
     参考文献：[pull request
     bitbucket：21](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/21)
@@ -1177,7 +1176,7 @@ tags:
 -   **[bug] [ext]**Fixed bug where [`MutableDict.setdefault()`](orm_extensions_mutable.html#sqlalchemy.ext.mutable.MutableDict.setdefault "sqlalchemy.ext.mutable.MutableDict.setdefault")
     didn’t return the existing or new value (this bug was not released
     in any 0.8 version).
-    请求礼貌托马斯Hervé。[¶](#change-6faeea1f65b0b63436eba3a21a4eff20)
+    请求礼貌托马斯 Hervé。[¶](#change-6faeea1f65b0b63436eba3a21a4eff20)
 
     这个改变也被**回退**为：0.8.7
 
@@ -1189,12 +1188,12 @@ tags:
     `String(40)` from less-supported
     `Text` in
     `StringTest.test_literal_backslashes`.
-    Pullreq礼貌Jan. [¶](#change-aa048eb945e5e5d48d5efed1dd7c64c2)
+    Pullreq 礼貌 Jan. [¶](#change-aa048eb945e5e5d48d5efed1dd7c64c2)
 
-    参考：[请求github：95](https://github.com/zzzeek/sqlalchemy/pull/95)
+    参考：[请求 github：95](https://github.com/zzzeek/sqlalchemy/pull/95)
 
--   **[bug] [tests] [py3k]**更正了运行测试时涉及`imp`模块和Python
-    3.3或更高版本的一些弃用警告。拉请求马特Chisholm。[¶](#change-0482bb06234a4584cf24a7b5f94ba4e7)
+-   **[bug] [tests] [py3k]**更正了运行测试时涉及`imp`模块和 Python
+    3.3 或更高版本的一些弃用警告。拉请求马特 Chisholm。[¶](#change-0482bb06234a4584cf24a7b5f94ba4e7)
 
     References: [\#2830](http://www.sqlalchemy.org/trac/ticket/2830),
     [pull request
@@ -1203,21 +1202,21 @@ tags:
 0.9.4 [¶ T0\>](#change-0.9.4 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布日期：2014年3月28日
+发布日期：2014 年 3 月 28 日
 
 ### 一般[¶ T0\>](#change-0.9.4-general "Permalink to this headline")
 
 -   **[general]
-    [feature]**为pytest添加了支持以运行测试。除了鼻子之外，这个跑步者目前正在得到支持，并且可能会更喜欢前进。SQLAlchemy使用的鼻插件系统已经拆分出来，因此它也可以在pytest下运行。目前还没有计划放弃对鼻子的支持，我们希望测试套件本身可以继续尽可能不受测试平台的影响。有关使用pytest运行测试的更新信息，请参阅文件README.unittests.rst。
+    [feature]**为 pytest 添加了支持以运行测试。除了鼻子之外，这个跑步者目前正在得到支持，并且可能会更喜欢前进。SQLAlchemy 使用的鼻插件系统已经拆分出来，因此它也可以在 pytest 下运行。目前还没有计划放弃对鼻子的支持，我们希望测试套件本身可以继续尽可能不受测试平台的影响。有关使用 pytest 运行测试的更新信息，请参阅文件 README.unittests.rst。
 
-    通过多次指定`--db`和/或`--dburi`标志，测试插件系统也得到了增强，以支持一次运行多个数据库URL的测试。这不会为每个数据库运行整个测试套件，而是允许特定于某些后端的测试用例在运行测试时使用该后端。当使用pytest作为测试运行器时，系统还会多次运行特定的测试套件，每个数据库运行一次，特别是“方言套件”中的那些测试。计划是Alembic还将使用增强型系统，并允许Alembic在一次运行中针对多个后端运行迁移操作测试，包括Alembic本身未包含的第三方后端。第三方方言和扩展也被鼓励将SQLAlchemy的测试套件作为基础进行标准化；请参阅README.dialects.rst文件以了解从SQLAlchemy测试平台构建的背景。
+    通过多次指定`--db`和/或`--dburi`标志，测试插件系统也得到了增强，以支持一次运行多个数据库 URL 的测试。这不会为每个数据库运行整个测试套件，而是允许特定于某些后端的测试用例在运行测试时使用该后端。当使用 pytest 作为测试运行器时，系统还会多次运行特定的测试套件，每个数据库运行一次，特别是“方言套件”中的那些测试。计划是 Alembic 还将使用增强型系统，并允许 Alembic 在一次运行中针对多个后端运行迁移操作测试，包括 Alembic 本身未包含的第三方后端。第三方方言和扩展也被鼓励将 SQLAlchemy 的测试套件作为基础进行标准化；请参阅 README.dialects.rst 文件以了解从 SQLAlchemy 测试平台构建的背景。
 
     [¶](#change-8b07998904f97052927cddc00d64a109)
 
 -   **[general] [bug]**Adjusted `setup.py` file to
     support the possible future removal of the
     `setuptools.Feature` extension from setuptools.
-    如果此关键字不存在，则使用setuptools进行设置仍然会成功，而不会退回到distutils。可以通过设置DISABLE\_SQLALCHEMY\_CEXT环境变量来禁用C扩展构建。无论setuptools是否可用，该变量都适用。[¶](#change-aa9491d98f1ead53e0464652e0816e71)
+    如果此关键字不存在，则使用 setuptools 进行设置仍然会成功，而不会退回到 distutils。可以通过设置 DISABLE\_SQLALCHEMY\_CEXT 环境变量来禁用 C 扩展构建。无论 setuptools 是否可用，该变量都适用。[¶](#change-aa9491d98f1ead53e0464652e0816e71)
 
     这个改变也是**backported**到：0.8.6
 
@@ -1233,9 +1232,9 @@ tags:
 ### ORM [¶ T0\>](#change-0.9.4-orm "Permalink to this headline")
 
 -   **[orm]
-    [feature]**添加了新的参数[`orm.mapper.confirm_deleted_rows`](orm_mapping_api.html#sqlalchemy.orm.mapper.params.confirm_deleted_rows "sqlalchemy.orm.mapper")。默认为True，表示一系列DELETE语句应该确认游标的行数与匹配的主键的数量相匹配；在大多数情况下（除了使用version\_id时），此行为已被取消以支持自引用ON
+    [feature]**添加了新的参数[`orm.mapper.confirm_deleted_rows`](orm_mapping_api.html#sqlalchemy.orm.mapper.params.confirm_deleted_rows "sqlalchemy.orm.mapper")。默认为 True，表示一系列 DELETE 语句应该确认游标的行数与匹配的主键的数量相匹配；在大多数情况下（除了使用 version\_id 时），此行为已被取消以支持自引用 ON
     DELETE
-    CASCADE的异常边缘情况；为了适应这种情况，该消息现在只是一个警告，而不是一个例外，并且该标志可用于指示一种映射，该映射需要这种性质的自引用级联删除。另请参阅[＃2403](http://www.sqlalchemy.org/trac/ticket/2403)以了解原始更改的背景。[¶](#change-9e23c7c28f359372f92c6661ec54a74f)
+    CASCADE 的异常边缘情况；为了适应这种情况，该消息现在只是一个警告，而不是一个例外，并且该标志可用于指示一种映射，该映射需要这种性质的自引用级联删除。另请参阅[＃2403](http://www.sqlalchemy.org/trac/ticket/2403)以了解原始更改的背景。[¶](#change-9e23c7c28f359372f92c6661ec54a74f)
 
     参考文献：[＃3007](http://www.sqlalchemy.org/trac/ticket/3007)
 
@@ -1252,7 +1251,7 @@ tags:
     and [`event.listens_for()`](core_event.html#sqlalchemy.event.listens_for "sqlalchemy.event.listens_for").
     这是一个方便的功能，它将包装给定的侦听器，使其仅被调用一次。[¶](#change-aef7530390a87c53f08a067e5881ebc8)
 
--   **[orm] [feature]**为[`relationship.innerjoin`](orm_relationship_api.html#sqlalchemy.orm.relationship.params.innerjoin "sqlalchemy.orm.relationship")添加了一个新选项，用于指定字符串`"nested"`。当设置为`"nested"`而不是`True`时，连接的“链接”将在现有外部连接的右侧加入内部连接，而不是链接为一串外连接。这可能应该是0.9发布时的默认行为，因为我们在ORM中引入了右嵌套连接的功能，但是我们现在将其保留为非默认值以避免更多的意外。
+-   **[orm] [feature]**为[`relationship.innerjoin`](orm_relationship_api.html#sqlalchemy.orm.relationship.params.innerjoin "sqlalchemy.orm.relationship")添加了一个新选项，用于指定字符串`"nested"`。当设置为`"nested"`而不是`True`时，连接的“链接”将在现有外部连接的右侧加入内部连接，而不是链接为一串外连接。这可能应该是 0.9 发布时的默认行为，因为我们在 ORM 中引入了右嵌套连接的功能，但是我们现在将其保留为非默认值以避免更多的意外。
 
     也可以看看
 
@@ -1305,7 +1304,7 @@ tags:
     table, when the primaryjoin includes some kind of discriminator
     against the parent table, such as
     `and_(parent.id == child.parent_id, parent.deleted == False)`.
-    虽然这个主要连接对于一对多来说没有多大意义，但在应用于多对一时更为常见，并且一对多来自后向参考。在这种情况下，从`child`加载行将保持`parent.deleted == False`就像在查询中一样，因此将其放到FROM子句中并执行笛卡尔积。现在，新行为将适当替换该参数的本地“parent.deleted”值。尽管通常情况下，真实世界的应用程序可能都希望在任何情况下都使用不同的primaryjoin作为o2m端。[¶](#change-c7ec7a2b899f6d33f4ef3c25d538daa0)
+    虽然这个主要连接对于一对多来说没有多大意义，但在应用于多对一时更为常见，并且一对多来自后向参考。在这种情况下，从`child`加载行将保持`parent.deleted == False`就像在查询中一样，因此将其放到 FROM 子句中并执行笛卡尔积。现在，新行为将适当替换该参数的本地“parent.deleted”值。尽管通常情况下，真实世界的应用程序可能都希望在任何情况下都使用不同的 primaryjoin 作为 o2m 端。[¶](#change-c7ec7a2b899f6d33f4ef3c25d538daa0)
 
     参考文献：[＃2948](http://www.sqlalchemy.org/trac/ticket/2948)
 
@@ -1341,8 +1340,8 @@ tags:
     这个断言是针对其他情况的，并且在无意中捕捉到这个断言。[¶](#change-8aae354a4b3ff011dd6d9e53507c279f)
 
 -   **[orm] [bug]
-    [sqlite]**更多解决SQLite“加入重写”；在0.9.3发布之前实施的[＃2967](http://www.sqlalchemy.org/trac/ticket/2967)修复影响了UNION包含嵌套连接的情况。“加入重写”是一种具有广泛可能性的特性，也是我们多年来推出的第一个错综复杂的“SQL重写”特性，所以我们对其进行了大量迭代（与急切加载在0.2
-    / 0.3系列中，多晶型负荷在0.4 /
+    [sqlite]**更多解决 SQLite“加入重写”；在 0.9.3 发布之前实施的[＃2967](http://www.sqlalchemy.org/trac/ticket/2967)修复影响了 UNION 包含嵌套连接的情况。“加入重写”是一种具有广泛可能性的特性，也是我们多年来推出的第一个错综复杂的“SQL 重写”特性，所以我们对其进行了大量迭代（与急切加载在 0.2
+    / 0.3 系列中，多晶型负荷在 0.4 /
     0.5）。我们应该很快到那里，谢谢你的支持：）。[¶](#change-f9391466ff5f05d8025167143cffb3a3)
 
     参考文献：[＃2969](http://www.sqlalchemy.org/trac/ticket/2969)
@@ -1350,7 +1349,7 @@ tags:
 ### 发动机[¶ T0\>](#change-0.9.4-engine "Permalink to this headline")
 
 -   **[engine]
-    [feature]**为方言级事件添加了一些新的事件机制；初始实现允许事件处理程序重新定义任意方言在DBAPI游标上调用execute()或executemany()的特定机制。在这个半公开和实验性的新事件中，支持一些即将到来的事务相关的扩展。[¶](#change-0fbd5944c2467b0bab55d0a60ee42790)
+    [feature]**为方言级事件添加了一些新的事件机制；初始实现允许事件处理程序重新定义任意方言在 DBAPI 游标上调用 execute()或 executemany()的特定机制。在这个半公开和实验性的新事件中，支持一些即将到来的事务相关的扩展。[¶](#change-0fbd5944c2467b0bab55d0a60ee42790)
 
 -   **[engine] [feature]**An event listener can now be associated with a
     [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine"),
@@ -1374,8 +1373,8 @@ tags:
     this is the “quick” executor that is used for things like when a
     sequence is executed ahead of an INSERT statement, as well as for
     dialect startup checks like unicode returns, charset, etc.
-    这里已经调用了[`ConnectionEvents.before_cursor_execute()`](core_events.html#sqlalchemy.events.ConnectionEvents.before_cursor_execute "sqlalchemy.events.ConnectionEvents.before_cursor_execute")事件。这里的“executemany”标志现在总是被设置为False，因为这个事件总是对应于一次执行。以前，如果我们代表executemany
-    INSERT语句执行操作，则标志可能为True。[¶](#change-2bdaf42f4d681b56c349b95939f392fb)
+    这里已经调用了[`ConnectionEvents.before_cursor_execute()`](core_events.html#sqlalchemy.events.ConnectionEvents.before_cursor_execute "sqlalchemy.events.ConnectionEvents.before_cursor_execute")事件。这里的“executemany”标志现在总是被设置为 False，因为这个事件总是对应于一次执行。以前，如果我们代表 executemany
+    INSERT 语句执行操作，则标志可能为 True。[¶](#change-2bdaf42f4d681b56c349b95939f392fb)
 
 ### SQL [¶ T0\>](#change-0.9.4-sql "Permalink to this headline")
 
@@ -1383,7 +1382,7 @@ tags:
     [feature]**增加了对布尔值的文字渲染的支持，例如“true”/“false”或“1”/“0”。[¶](#change-ae73b72c5883a6bfadd83231bbc945cb)
 
 -   **[sql] [feature]**添加了一个新特性[`schema.conv()`](core_constraints.html#sqlalchemy.schema.conv "sqlalchemy.schema.conv")，其目的是将约束名称标记为已经应用了命名约定。Alembic
-    0.6.4版本中的Alembic迁移将使用此标记，以便在迁移脚本中显示约束条件，并标记名称已受命名约定。[¶](#change-eb76a93c5c1ba58cc198d3783e1d4d74)
+    0.6.4 版本中的 Alembic 迁移将使用此标记，以便在迁移脚本中显示约束条件，并标记名称已受命名约定。[¶](#change-eb76a93c5c1ba58cc198d3783e1d4d74)
 
 -   **[sql] [feature]**The new dialect-level keyword argument system for
     schema-level constructs has been enhanced in order to assist with
@@ -1392,12 +1391,12 @@ tags:
 
     例如，诸如[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")之类的结构将在构建之后再次接受[`Index.kwargs`](core_constraints.html#sqlalchemy.schema.Index.kwargs "sqlalchemy.schema.Index.kwargs")集合内的临时关键字参数：
 
-        idx = Index('a', 'b')
+        idx = Index('a', 'b')plainplainplainplain
         idx.kwargs['mysql_someargument'] = True
 
     为了适应在构建时允许自定义参数的用例，现在允许此注册：[`DialectKWArgs.argument_for()`](core_sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.argument_for "sqlalchemy.sql.base.DialectKWArgs.argument_for")方法：
 
-        Index.argument_for('mysql', 'someargument', False)
+        Index.argument_for('mysql', 'someargument', False)plainplain
 
         idx = Index('a', 'b', mysql_someargument=True)
 
@@ -1426,10 +1425,10 @@ tags:
 -   **[sql] [bug]**Fixed an 0.9 regression where a [`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
     that failed to reflect correctly wouldn’t be removed from the parent
     [`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData"),
-    even though in an invalid state. Pullreq礼貌Roman
+    even though in an invalid state. Pullreq 礼貌 Roman
     Podoliaka。[¶](#change-ba95c9ab0ff11216d8fe5bb713e2398c)
 
-    参考文献：[＃2988](http://www.sqlalchemy.org/trac/ticket/2988)，[请求github：78](https://github.com/zzzeek/sqlalchemy/pull/78)
+    参考文献：[＃2988](http://www.sqlalchemy.org/trac/ticket/2988)，[请求 github：78](https://github.com/zzzeek/sqlalchemy/pull/78)
 
 -   **[sql] [bug]**[`MetaData.naming_convention`](core_metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")
     feature will now also apply to [`CheckConstraint`](core_constraints.html#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")
@@ -1461,7 +1460,7 @@ tags:
     [`FromClause.corresponding_column()`](core_selectable.html#sqlalchemy.sql.expression.FromClause.corresponding_column "sqlalchemy.sql.expression.FromClause.corresponding_column")
     still being usable here (it can now return a column that is only in
     selectable.c.\_all\_columns and not otherwise named).
-    我们仍然需要确定这个清单最终可能在哪里，因此强调了新的集合。理论上它会成为iter（selectable.c）的结果，但这意味着迭代的长度将不再与keys()的长度匹配，并且需要检出行为。[T0\>](#change-6c78e246b3394d4e4b227f1f06cc54ef)
+    我们仍然需要确定这个清单最终可能在哪里，因此强调了新的集合。理论上它会成为 iter（selectable.c）的结果，但这意味着迭代的长度将不再与 keys()的长度匹配，并且需要检出行为。[T0\>](#change-6c78e246b3394d4e4b227f1f06cc54ef)
 
     参考文献：[＃2974](http://www.sqlalchemy.org/trac/ticket/2974)
 
@@ -1471,11 +1470,11 @@ tags:
     such as applying the resulting [`TextAsFrom`](core_selectable.html#sqlalchemy.sql.expression.TextAsFrom "sqlalchemy.sql.expression.TextAsFrom")
     object to a union.[¶](#change-650edc97a13474c853b5c10a976a29f0)
 
-### 的PostgreSQL [¶ T0\>](#change-0.9.4-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.9.4-postgresql "Permalink to this headline")
 
--   **[postgresql] [feature]**启用了“理智的多行计数”检查psycopg2
-    DBAPI，因为它似乎在psycopg2
-    2.0.9中受支持。[¶](#change-f238b48f610767a520453ae382fb1992)
+-   **[postgresql] [feature]**启用了“理智的多行计数”检查 psycopg2
+    DBAPI，因为它似乎在 psycopg2
+    2.0.9 中受支持。[¶](#change-f238b48f610767a520453ae382fb1992)
 
     这个改变也是**backported**到：0.8.6
 
@@ -1483,35 +1482,35 @@ tags:
     0.9.3’s compatibility enhancements where index reflection on
     Postgresql versions specific to only the 8.1, 8.2 series again
     broke, surrounding the ever problematic int2vector type.
-    虽然int2vector支持从8.1开始的数组操作，但显然它只支持从8.3开始的对于varchar的CAST。[¶](#change-9708a66fcf11605de634853699c1df71)
+    虽然 int2vector 支持从 8.1 开始的数组操作，但显然它只支持从 8.3 开始的对于 varchar 的 CAST。[¶](#change-9708a66fcf11605de634853699c1df71)
 
     这个改变也是**backported**到：0.8.6
 
     参考文献：[＃3000](http://www.sqlalchemy.org/trac/ticket/3000)
 
-### MySQL的[¶ T0\>](#change-0.9.4-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.9.4-mysql "Permalink to this headline")
 
 -   **[mysql]
-    [bug]**调整了mysql-connector-python的设置；在Py2K中，“支持unicode语句”标志现在为False，因此SQLAlchemy会在发送到数据库之前将*SQL字符串*（注意：*不是*参数）编码为字节。这似乎允许所有与unicode相关的测试通过mysql连接器，包括那些使用非ascii表/列名称的测试，以及使用unicode在cursor.executemany()下的TEXT类型的一些测试。[¶
+    [bug]**调整了 mysql-connector-python 的设置；在 Py2K 中，“支持 unicode 语句”标志现在为 False，因此 SQLAlchemy 会在发送到数据库之前将*SQL 字符串*（注意：*不是*参数）编码为字节。这似乎允许所有与 unicode 相关的测试通过 mysql 连接器，包括那些使用非 ascii 表/列名称的测试，以及使用 unicode 在 cursor.executemany()下的 TEXT 类型的一些测试。[¶
     T0\>](#change-8fd1f3c05b103698df571c4d15925738)
 
 ### 预言[¶ T0\>](#change-0.9.4-oracle "Permalink to this headline")
 
 -   **[oracle]
-    [feature]**在cx\_Oracle方言中添加了一个新的引擎选项`coerce_to_unicode=True`，该方法将Python c2\_Oracle
-    outputtypehandler方法恢复为Python 2下的Python
-    unicode转换，在0.9.2中由于[＃2911](http://www.sqlalchemy.org/trac/ticket/2911)。尽管有性能方面的问题，但一些使用案例希望unicode
-    coersion对所有字符串值都是无条件的。请求礼貌Christoph
+    [feature]**在 cx\_Oracle 方言中添加了一个新的引擎选项`coerce_to_unicode=True`，该方法将 Python c2\_Oracle
+    outputtypehandler 方法恢复为 Python 2 下的 Python
+    unicode 转换，在 0.9.2 中由于[＃2911](http://www.sqlalchemy.org/trac/ticket/2911)。尽管有性能方面的问题，但一些使用案例希望 unicode
+    coersion 对所有字符串值都是无条件的。请求礼貌 Christoph
     Zwerschke。[¶](#change-3a96f2348877f517e9c2f5950d4c1d1b)
 
-    参考文献：[＃2911](http://www.sqlalchemy.org/trac/ticket/2911)，[请求github：74](https://github.com/zzzeek/sqlalchemy/pull/74)
+    参考文献：[＃2911](http://www.sqlalchemy.org/trac/ticket/2911)，[请求 github：74](https://github.com/zzzeek/sqlalchemy/pull/74)
 
 -   **[oracle] [bug]**增加了新的数据类型[`oracle.DATE`](dialects_oracle.html#sqlalchemy.dialects.oracle.DATE "sqlalchemy.dialects.oracle.DATE")，它是[`DateTime`](core_type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")的子类。As
     Oracle has no “datetime” type per se, it instead has only
     `DATE`, it is appropriate here that the
     `DATE` type as present in the Oracle dialect be
     an instance of [`DateTime`](core_type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime").
-    这个问题不会改变任何类型的行为，因为在任何情况下数据转换都由DBAPI处理，但改进的子类布局将有助于检查跨数据库兼容性类型的用例。还从Oracle方言中删除了大写的`DATETIME`，因为此类型在该上下文中不起作用。[¶](#change-5861886a0faf27d02c29bdac44e39a74)
+    这个问题不会改变任何类型的行为，因为在任何情况下数据转换都由 DBAPI 处理，但改进的子类布局将有助于检查跨数据库兼容性类型的用例。还从 Oracle 方言中删除了大写的`DATETIME`，因为此类型在该上下文中不起作用。[¶](#change-5861886a0faf27d02c29bdac44e39a74)
 
     参考文献：[＃2987](http://www.sqlalchemy.org/trac/ticket/2987)
 
@@ -1528,11 +1527,11 @@ tags:
     参考文献：[＃2997](http://www.sqlalchemy.org/trac/ticket/2997)
 
 -   **[bug] [automap]
-    [ext]**添加了对automap的支持，以便在两个处于已连接继承关系的类之间不应该创建关系的情况下，将子类链接回这些外键到超类。[¶](#change-50822a3d39ca486f3c066ca9821edd45)
+    [ext]**添加了对 automap 的支持，以便在两个处于已连接继承关系的类之间不应该创建关系的情况下，将子类链接回这些外键到超类。[¶](#change-50822a3d39ca486f3c066ca9821edd45)
 
     参考文献：[＃3004](http://www.sqlalchemy.org/trac/ticket/3004)
 
--   **[bug] [tests]**修复了一些错误的`u''`字符串，它们会阻止测试在Py3.2中传递。补丁礼貌Arfrever
+-   **[bug] [tests]**修复了一些错误的`u''`字符串，它们会阻止测试在 Py3.2 中传递。补丁礼貌 Arfrever
     Frehtes Taifersar
     Arahesis。[¶](#change-65600f5e6f7388343eecd3b62edfa06e)
 
@@ -1540,7 +1539,7 @@ tags:
 
 -   **[bug] [pool]**Fixed small issue in [`SingletonThreadPool`](core_pooling.html#sqlalchemy.pool.SingletonThreadPool "sqlalchemy.pool.SingletonThreadPool")
     where the current connection to be returned might get inadvertently
-    cleaned out during the “cleanup” process. 补丁礼貌jd23.
+    cleaned out during the “cleanup” process. 补丁礼貌 jd23.
     [¶](#change-fe5f6bf9974e7d6f327cb0f51b761366)
 
 -   **[bug] [ext] [py3k]**Fixed bug in association proxy where assigning
@@ -1552,17 +1551,17 @@ tags:
     user-provided “getter” to no longer receive values of
     `None` when fetching scalar values from a target
     that is non-present.
-    此更改引入的None检查现在移入默认getter，因此用户提供的getter也将再次接收None值。[¶](#change-30555d2dbceb91ce584663b6726101d0)
+    此更改引入的 None 检查现在移入默认 getter，因此用户提供的 getter 也将再次接收 None 值。[¶](#change-30555d2dbceb91ce584663b6726101d0)
 
     参考文献：[＃2810](http://www.sqlalchemy.org/trac/ticket/2810)
 
 -   **[bug]
-    [examples]**修正了版本级别示例中的列级别INSERT默认值会阻止写入历史值NULL的错误。[¶](#change-e0ab0a5338c4fe508e1a11411752a73c)
+    [examples]**修正了版本级别示例中的列级别 INSERT 默认值会阻止写入历史值 NULL 的错误。[¶](#change-e0ab0a5338c4fe508e1a11411752a73c)
 
 0.9.3 [¶ T0\>](#change-0.9.3 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布日期：2014年2月19日
+发布日期：2014 年 2 月 19 日
 
 ### ORM [¶ T0\>](#change-0.9.3-orm "Permalink to this headline")
 
@@ -1584,7 +1583,7 @@ tags:
     usage of an exists() construct would fail to be rewritten properly,
     such as when the exists is mapped to a column\_property in an
     intricate nested-join scenario.
-    还修复了一个有点相关的问题，如果目标是别名表，而不是单独的别名列，那么在SELECT语句的columns子句上连接重写将失败。[¶](#change-bcd89a790df27cfdcae2a8109b61d16e)
+    还修复了一个有点相关的问题，如果目标是别名表，而不是单独的别名列，那么在 SELECT 语句的 columns 子句上连接重写将失败。[¶](#change-bcd89a790df27cfdcae2a8109b61d16e)
 
     参考文献：[＃2967](http://www.sqlalchemy.org/trac/ticket/2967)
 
@@ -1597,8 +1596,8 @@ tags:
     参考文献：[＃2949](http://www.sqlalchemy.org/trac/ticket/2949)
 
 -   **[orm]
-    [bug]**改进了组合属性的初始化逻辑，例如调用`MyClass.attribute`不需要执行configure
-    mappers步骤。它会在没有任何错误的情况下工作。[¶](#change-af92c4a9aa53d0e18016cc10a0c419db)
+    [bug]**改进了组合属性的初始化逻辑，例如调用`MyClass.attribute`不需要执行 configure
+    mappers 步骤。它会在没有任何错误的情况下工作。[¶](#change-af92c4a9aa53d0e18016cc10a0c419db)
 
     参考文献：[＃2935](http://www.sqlalchemy.org/trac/ticket/2935)
 
@@ -1663,7 +1662,7 @@ tags:
 
 -   **[sql] [bug]**Fixed regression in new “naming convention” feature
     where conventions would fail if the referred table in a foreign key
-    contained a schema name. 请求礼貌Thomas
+    contained a schema name. 请求礼貌 Thomas
     Farvour。[¶](#change-32e5f45f2c9cbe4cd6ccc0326087b300)
 
     参考文献：[pull request
@@ -1673,17 +1672,17 @@ tags:
     [`bindparam()`](core_sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")
     constructs would fail if the bind were constructed with a callable,
     rather than a direct value.
-    这阻止了ORM表达式使用“literal\_binds”编译器标志进行呈现。[¶](#change-e2e7387ca4e9c810c4f780765399985c)
+    这阻止了 ORM 表达式使用“literal\_binds”编译器标志进行呈现。[¶](#change-e2e7387ca4e9c810c4f780765399985c)
 
-### 的PostgreSQL [¶ T0\>](#change-0.9.3-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.9.3-postgresql "Permalink to this headline")
 
--   **[postgresql] [feature]**将[`TypeEngine.python_type`](core_type_api.html#sqlalchemy.types.TypeEngine.python_type "sqlalchemy.types.TypeEngine.python_type")便利访问器添加到[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型中。请求礼貌Alexey
+-   **[postgresql] [feature]**将[`TypeEngine.python_type`](core_type_api.html#sqlalchemy.types.TypeEngine.python_type "sqlalchemy.types.TypeEngine.python_type")便利访问器添加到[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型中。请求礼貌 Alexey
     Terentev。[¶](#change-2887ae0aba411e9eb86f31766ab46817)
 
-    参考：[请求github：64](https://github.com/zzzeek/sqlalchemy/pull/64)
+    参考：[请求 github：64](https://github.com/zzzeek/sqlalchemy/pull/64)
 
 -   **[postgresql]
-    [bug]**增加了psycopg2断开连接检测的附加信息，“无法将数据发送到服务器”，补充了现有的“无法接收来自服务器的数据”并被用户观察到。
+    [bug]**增加了 psycopg2 断开连接检测的附加信息，“无法将数据发送到服务器”，补充了现有的“无法接收来自服务器的数据”并被用户观察到。
     [¶ T2\>](#change-6799209a311c3dc94eac58c106af18da)
 
     这个改变也被**backported**修改为：0.8.5
@@ -1692,8 +1691,8 @@ tags:
 
 -   **[postgresql] [bug]**
 
-    > Postgresql在Postgresql的旧版本（之前的版本）以及其他PG引擎（如Redshift）（假设Redshift的版本报告为\<8.1）时对postgresql反射行为的支持得到了改进。\<
-    > span=""\>查询“索引”以及“主键”依赖于检查所谓的“int2vector”数据类型，该数据类型在8.1之前拒绝胁迫数组，导致查询中使用的“ANY()”运算符失败。当PG版本\<8.1被使用时，大量的搜索引擎已经找到了非常黑客但推荐的pg核心开发者查询，因此索引和主键约束反映现在可用于这些版本。\<
+    > Postgresql 在 Postgresql 的旧版本（之前的版本）以及其他 PG 引擎（如 Redshift）（假设 Redshift 的版本报告为\<8.1）时对 postgresql 反射行为的支持得到了改进。\<
+    > span=""\>查询“索引”以及“主键”依赖于检查所谓的“int2vector”数据类型，该数据类型在 8.1 之前拒绝胁迫数组，导致查询中使用的“ANY()”运算符失败。当 PG 版本\<8.1 被使用时，大量的搜索引擎已经找到了非常黑客但推荐的 pg 核心开发者查询，因此索引和主键约束反映现在可用于这些版本。\<
     > span=""\>
 
     [¶](#change-f41983d269d6edd9b36005f803524707)
@@ -1712,23 +1711,23 @@ tags:
     参考文献：[＃2291](http://www.sqlalchemy.org/trac/ticket/2291)
 
 -   **[postgresql] [bug]**增加了对“show
-    standard\_conforming\_strings”的新增dialect启动查询的服务器版本检测；因为这个变量是从PG
-    8.2开始添加的，所以我们跳过PG版本的查询，它们报告早于版本字符串的版本。[¶](#change-4f3cfb3c174030c18a138b13afe7a215)
+    standard\_conforming\_strings”的新增 dialect 启动查询的服务器版本检测；因为这个变量是从 PG
+    8.2 开始添加的，所以我们跳过 PG 版本的查询，它们报告早于版本字符串的版本。[¶](#change-4f3cfb3c174030c18a138b13afe7a215)
 
     参考文献：[＃2946](http://www.sqlalchemy.org/trac/ticket/2946)
 
-### MySQL的[¶ T0\>](#change-0.9.3-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.9.3-mysql "Permalink to this headline")
 
--   **[mysql] [feature]**添加了新的特定于MySQL的[`mysql.DATETIME`](dialects_mysql.html#sqlalchemy.dialects.mysql.DATETIME "sqlalchemy.dialects.mysql.DATETIME")，其中包括小数秒支持；还增加了对[`mysql.TIMESTAMP`](dialects_mysql.html#sqlalchemy.dialects.mysql.TIMESTAMP "sqlalchemy.dialects.mysql.TIMESTAMP")的小数秒支持。DBAPI支持是有限的，尽管小数秒被MySQL
-    Connector / Python支持。补丁由Geert JM
-    Vanderkelen提供。[¶](#change-ab9ba4668cce1a333145dd002a487a27)
+-   **[mysql] [feature]**添加了新的特定于 MySQL 的[`mysql.DATETIME`](dialects_mysql.html#sqlalchemy.dialects.mysql.DATETIME "sqlalchemy.dialects.mysql.DATETIME")，其中包括小数秒支持；还增加了对[`mysql.TIMESTAMP`](dialects_mysql.html#sqlalchemy.dialects.mysql.TIMESTAMP "sqlalchemy.dialects.mysql.TIMESTAMP")的小数秒支持。DBAPI 支持是有限的，尽管小数秒被 MySQL
+    Connector / Python 支持。补丁由 Geert JM
+    Vanderkelen 提供。[¶](#change-ab9ba4668cce1a333145dd002a487a27)
 
     这个改变也被**backported**修改为：0.8.5
 
     参考文献：[＃2941](http://www.sqlalchemy.org/trac/ticket/2941)
 
 -   **[mysql] [bug]**添加了对`分区 BY`和`PARTITIONS`
-    MySQL的支持将表关键字指定为`mysql_partition_by='value'`和`mysql_partitions='value'`至[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")。拉玛请求提供Marcus
+    MySQL 的支持将表关键字指定为`mysql_partition_by='value'`和`mysql_partitions='value'`至[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")。拉玛请求提供 Marcus
     McCurdy。[¶](#change-985ed90f90095c4b537ea36d3c1ac546)
 
     这个改变也被**backported**修改为：0.8.5
@@ -1741,7 +1740,7 @@ tags:
     (e.g. pymysql) from working in Py3K, where a check for “connection
     charset” would fail due to Py3K’s more strict value comparison
     rules.
-    这个调用在任何情况下都没有考虑到数据库版本，因为服务器版本在那时仍然是None，所以整个方法被简化为依赖于connection.character\_set\_name()。[¶
+    这个调用在任何情况下都没有考虑到数据库版本，因为服务器版本在那时仍然是 None，所以整个方法被简化为依赖于 connection.character\_set\_name()。[¶
     t0 \>](#change-73d5f7e864d7ffd3bf7060a3a52e6d34)
 
     这个改变也被**backported**修改为：0.8.5
@@ -1749,9 +1748,9 @@ tags:
     参考文献：[＃2933](http://www.sqlalchemy.org/trac/ticket/2933)
 
 -   **[mysql] [bug]
-    [cymysql]**修正了cymysql方言中诸如`'33a-MariaDB'`等版本字符串无法正确解析的错误。拉请求马特施密特。[¶](#change-cec15bf8dc76d9d68418cad966e2a9f1)
+    [cymysql]**修正了 cymysql 方言中诸如`'33a-MariaDB'`等版本字符串无法正确解析的错误。拉请求马特施密特。[¶](#change-cec15bf8dc76d9d68418cad966e2a9f1)
 
-    参考文献：[＃2934](http://www.sqlalchemy.org/trac/ticket/2934)，[请求github：69](https://github.com/zzzeek/sqlalchemy/pull/69)
+    参考文献：[＃2934](http://www.sqlalchemy.org/trac/ticket/2934)，[请求 github：69](https://github.com/zzzeek/sqlalchemy/pull/69)
 
 ### 源码[¶ T0\>](#change-0.9.3-sqlite "Permalink to this headline")
 
@@ -1763,8 +1762,8 @@ tags:
     attempt.[¶](#change-daa887aa6b3dccbb6a979e6d7ecfd2cb)
 
 -   **[sqlite]
-    [bug]**支持已经添加到SQLite类型反射，以完全支持[http://www.sqlite.org/datatype3.html中指定的“类型关联”
-    T2\>。](http://www.sqlite.org/datatype3.html)在此方案中，位于类型名称中的`INT`，`CHAR`，`BLOB`或`REAL`等关键字通常会将类型与五个亲缘之一。请求礼貌Erich Blume。
+    [bug]**支持已经添加到 SQLite 类型反射，以完全支持[http://www.sqlite.org/datatype3.html 中指定的“类型关联”
+    T2\>。](http://www.sqlite.org/datatype3.html)在此方案中，位于类型名称中的`INT`，`CHAR`，`BLOB`或`REAL`等关键字通常会将类型与五个亲缘之一。请求礼貌 Erich Blume。
 
     也可以看看
 
@@ -1772,14 +1771,14 @@ tags:
 
     [¶](#change-c8dda32a20ab1a2a6020cd0b56a025cf)
 
-    参考文献：[请求github：65](https://github.com/zzzeek/sqlalchemy/pull/65)
+    参考文献：[请求 github：65](https://github.com/zzzeek/sqlalchemy/pull/65)
 
 ### 杂项[¶ T0\>](#change-0.9.3-misc "Permalink to this headline")
 
 -   **[feature]
-    [examples]**为版本化行示例添加了可选的“changed”列，以及支持版本化的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")具有显式[`schema`](core_metadata.html#sqlalchemy.schema.Table.params.schema "sqlalchemy.schema.Table")请求礼貌jplaverdure。[¶](#change-6e2fa11bc1b490afa61009b74983d414)
+    [examples]**为版本化行示例添加了可选的“changed”列，以及支持版本化的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")具有显式[`schema`](core_metadata.html#sqlalchemy.schema.Table.params.schema "sqlalchemy.schema.Table")请求礼貌 jplaverdure。[¶](#change-6e2fa11bc1b490afa61009b74983d414)
 
-    参考文献：[请求github：41](https://github.com/zzzeek/sqlalchemy/pull/41)
+    参考文献：[请求 github：41](https://github.com/zzzeek/sqlalchemy/pull/41)
 
 -   **[bug] [ext]**Fixed bug where the [`AutomapBase`](orm_extensions_automap.html#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")
     class of the new automap extension would fail if classes were
@@ -1789,7 +1788,7 @@ tags:
 0.9.2 [¶ T0\>](#change-0.9.2 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布时间：2014年2月2日
+发布时间：2014 年 2 月 2 日
 
 ### ORM [¶ T0\>](#change-0.9.2-orm "Permalink to this headline")
 
@@ -1803,7 +1802,7 @@ tags:
 
     [¶](#change-2dc2e780e8373cbbb7b3d14048f7f7dd)
 
--   **[orm] [feature]**为提供[`join()`](core_selectable.html#sqlalchemy.sql.expression.join "sqlalchemy.sql.expression.join")结构作为[`relationship.secondary`](orm_relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")的目标，支持得到了改进。复杂的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")连接条件。该更改包括对查询连接的调整，加入的预加载以不呈现SELECT子查询，更改为延迟加载以使“辅助”目标正确包含在SELECT中，并更改为声明以更好地支持指定join()对象以班级为目标。
+-   **[orm] [feature]**为提供[`join()`](core_selectable.html#sqlalchemy.sql.expression.join "sqlalchemy.sql.expression.join")结构作为[`relationship.secondary`](orm_relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")的目标，支持得到了改进。复杂的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")连接条件。该更改包括对查询连接的调整，加入的预加载以不呈现 SELECT 子查询，更改为延迟加载以使“辅助”目标正确包含在 SELECT 中，并更改为声明以更好地支持指定 join()对象以班级为目标。
 
     新的使用案例有点实验性，但增加了新的文档部分。
 
@@ -1815,12 +1814,12 @@ tags:
     [¶](#change-a8b3a5b9943f34a153c535d66ec180f9)
 
 -   当一个迭代器对象被传递给[`class_mapper()`](orm_mapping_api.html#sqlalchemy.orm.class_mapper "sqlalchemy.orm.class_mapper")或类似的错误消息时，修正错误消息，其中错误将无法在字符串格式上呈现。**[orm]
-    [bug]**Pullleq礼貌Kyle
+    [bug]**Pullleq 礼貌 Kyle
     Stark。[¶](#change-1c3f8f5feedf0bfccec2acf81dc4d612)
 
     这个改变也被**backported**修改为：0.8.5
 
-    参考文献：[请求github：58](https://github.com/zzzeek/sqlalchemy/pull/58)
+    参考文献：[请求 github：58](https://github.com/zzzeek/sqlalchemy/pull/58)
 
 -   **[orm] [bug]**Fixed bug in new [`TextAsFrom`](core_selectable.html#sqlalchemy.sql.expression.TextAsFrom "sqlalchemy.sql.expression.TextAsFrom")
     construct where [`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")-
@@ -1829,12 +1828,12 @@ tags:
     objects that [`TextAsFrom`](core_selectable.html#sqlalchemy.sql.expression.TextAsFrom "sqlalchemy.sql.expression.TextAsFrom")
     generates, thereby making it not usable as a target in
     [`Query.from_statement()`](orm_query.html#sqlalchemy.orm.query.Query.from_statement "sqlalchemy.orm.query.Query.from_statement").
-    还修复了[`Query.from_statement()`](orm_query.html#sqlalchemy.orm.query.Query.from_statement "sqlalchemy.orm.query.Query.from_statement")结构，使其不会将[`TextAsFrom`](core_selectable.html#sqlalchemy.sql.expression.TextAsFrom "sqlalchemy.sql.expression.TextAsFrom")误认为[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")结构。当调用`Text.columns()`方法以适应[`text.typemap`](core_sqlelement.html#sqlalchemy.sql.expression.text.params.typemap "sqlalchemy.sql.expression.text")参数时，此bug也是0.9回归。[¶](#change-87563ee95139d715f8d0326c80758a47)
+    还修复了[`Query.from_statement()`](orm_query.html#sqlalchemy.orm.query.Query.from_statement "sqlalchemy.orm.query.Query.from_statement")结构，使其不会将[`TextAsFrom`](core_selectable.html#sqlalchemy.sql.expression.TextAsFrom "sqlalchemy.sql.expression.TextAsFrom")误认为[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")结构。当调用`Text.columns()`方法以适应[`text.typemap`](core_sqlelement.html#sqlalchemy.sql.expression.text.params.typemap "sqlalchemy.sql.expression.text")参数时，此 bug 也是 0.9 回归。[¶](#change-87563ee95139d715f8d0326c80758a47)
 
     参考文献：[＃2932](http://www.sqlalchemy.org/trac/ticket/2932)
 
 -   **[orm]
-    [bug]**在属性“set”操作的范围内添加了一个新的指令，用于在属性需要延迟加载“old”值的情况下禁用autoflush，如在替换一对一值或某种多对一时。此时的刷新否则会发生在属性为None且可能导致NULL违反的地方。[¶](#change-6dde90e6801f9bdf0bec0d5ba49cd086)
+    [bug]**在属性“set”操作的范围内添加了一个新的指令，用于在属性需要延迟加载“old”值的情况下禁用 autoflush，如在替换一对一值或某种多对一时。此时的刷新否则会发生在属性为 None 且可能导致 NULL 违反的地方。[¶](#change-6dde90e6801f9bdf0bec0d5ba49cd086)
 
     参考文献：[＃2921](http://www.sqlalchemy.org/trac/ticket/2921)
 
@@ -1844,7 +1843,7 @@ tags:
     joined table inheritance) could fail if a user-defined
     [`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
     subclass were used in the expression.
-    在这种情况下，子类将无法传播适应所需的ORM特定“注释”。“表达注解”系统已被纠正以解释这种情况。[¶](#change-03749d6f654c1889673b5e0c12e79baf)
+    在这种情况下，子类将无法传播适应所需的 ORM 特定“注释”。“表达注解”系统已被纠正以解释这种情况。[¶](#change-03749d6f654c1889673b5e0c12e79baf)
 
     参考文献：[＃2918](http://www.sqlalchemy.org/trac/ticket/2918)
 
@@ -1863,7 +1862,7 @@ tags:
 ### 发动机[¶ T0\>](#change-0.9.2-engine "Permalink to this headline")
 
 -   **[engine] [feature]
-    [pool]**添加了一个新的池事件[`PoolEvents.invalidate()`](core_events.html#sqlalchemy.events.PoolEvents.invalidate "sqlalchemy.events.PoolEvents.invalidate")。当DBAPI连接被标记为“invaldated”并从池中丢弃时调用。[¶](#change-8b18bdd2f4b3ca051745c279938e63c4)
+    [pool]**添加了一个新的池事件[`PoolEvents.invalidate()`](core_events.html#sqlalchemy.events.PoolEvents.invalidate "sqlalchemy.events.PoolEvents.invalidate")。当 DBAPI 连接被标记为“invaldated”并从池中丢弃时调用。[¶](#change-8b18bdd2f4b3ca051745c279938e63c4)
 
 ### SQL [¶ T0\>](#change-0.9.2-sql "Permalink to this headline")
 
@@ -1871,7 +1870,7 @@ tags:
     T8\>](#change-4f8918d438f70e33f0202a0ebf9ab58b)
 
 -   **[sql]
-    [feature]**添加了一项新功能，允许自动命名约定应用于[`Constraint`](core_constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")和[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")对象。根据Wiki中的配方，新功能使用架构事件来设置名称，因为各种架构对象都相互关联。The
+    [feature]**添加了一项新功能，允许自动命名约定应用于[`Constraint`](core_constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")和[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")对象。根据 Wiki 中的配方，新功能使用架构事件来设置名称，因为各种架构对象都相互关联。The
     events then expose a configuration system through a new argument
     [`MetaData.naming_convention`](core_metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData").
     This system allows production of both simple and custom naming
@@ -1906,7 +1905,7 @@ tags:
     参考文献：[＃2910](http://www.sqlalchemy.org/trac/ticket/2910)
 
 -   **[sql]
-    [feature]**增强了模式构造和某些SQL构造接受特定于方言的关键字参数的系统。This
+    [feature]**增强了模式构造和某些 SQL 构造接受特定于方言的关键字参数的系统。This
     system includes commonly the [`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
     and [`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")
     constructs, which accept a wide variety of dialect-specific
@@ -1920,7 +1919,7 @@ tags:
     and also newly added kwarg capability to
     [`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")
     and [`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey").
-    改变之处在于参与方言现在可以为这些结构指定可接受的参数列表，如果为特定方言指定了无效关键字，则允许引发参数错误。如果关键字的方言部分无法识别，则仅发出警告；尽管系统实际上会使用setuptools入口点来定位非本地方言，但仍支持在卸载该第三方方言的环境中使用某些特定方言特定参数的用例。方言也必须明确地选择加入这个系统，以便不使用这个系统的外部方言不会受到影响。[¶](#change-2df4f7fe29c0f5aa2f957f4a89b0d74d)
+    改变之处在于参与方言现在可以为这些结构指定可接受的参数列表，如果为特定方言指定了无效关键字，则允许引发参数错误。如果关键字的方言部分无法识别，则仅发出警告；尽管系统实际上会使用 setuptools 入口点来定位非本地方言，但仍支持在卸载该第三方方言的环境中使用某些特定方言特定参数的用例。方言也必须明确地选择加入这个系统，以便不使用这个系统的外部方言不会受到影响。[¶](#change-2df4f7fe29c0f5aa2f957f4a89b0d74d)
 
     参考文献：[＃2866](http://www.sqlalchemy.org/trac/ticket/2866)
 
@@ -1929,9 +1928,9 @@ tags:
     [`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")
     will not be changed unless that schema matches that of the parent
     table.
-    也就是说，如果表“schema\_a.user”具有“schema\_b.order.id”的外键，则不论“schema”参数是否传递给[`Table.tometadata()`](core_metadata.html#sqlalchemy.schema.Table.tometadata "sqlalchemy.schema.Table.tometadata")但是，如果表“schema\_a.user”引用“schema\_a.order.id”，则会在父表和引用表上更新“schema\_a”的存在。这是一种行为改变，因此不可能回到0.8；假设之前的行为是非常有问题的，并且不太可能有人依赖它。
+    也就是说，如果表“schema\_a.user”具有“schema\_b.order.id”的外键，则不论“schema”参数是否传递给[`Table.tometadata()`](core_metadata.html#sqlalchemy.schema.Table.tometadata "sqlalchemy.schema.Table.tometadata")但是，如果表“schema\_a.user”引用“schema\_a.order.id”，则会在父表和引用表上更新“schema\_a”的存在。这是一种行为改变，因此不可能回到 0.8；假设之前的行为是非常有问题的，并且不太可能有人依赖它。
 
-    此外，还添加了一个新参数[`Table.tometadata.referred_schema_fn`](core_metadata.html#sqlalchemy.schema.Table.tometadata.params.referred_schema_fn "sqlalchemy.schema.Table.tometadata")。这指的是一个可调用函数，它将用于确定tometadata操作中遇到的任何[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")的新引用模式。这个可调用的函数可以用来恢复到之前的行为或者定制如何在每个约束的基础上处理引用的模式。
+    此外，还添加了一个新参数[`Table.tometadata.referred_schema_fn`](core_metadata.html#sqlalchemy.schema.Table.tometadata.params.referred_schema_fn "sqlalchemy.schema.Table.tometadata")。这指的是一个可调用函数，它将用于确定 tometadata 操作中遇到的任何[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")的新引用模式。这个可调用的函数可以用来恢复到之前的行为或者定制如何在每个约束的基础上处理引用的模式。
 
     [¶](#change-d4cf4109c92f5c593c0eb29a55e23b2f)
 
@@ -1944,14 +1943,14 @@ tags:
 
 -   **[sql] [bug] [py3k]**Fixed bug where “literal binds” wouldn’t work
     with a bound parameter that’s a binary type.
-    一个类似但不同的问题在0.8中得到了解决。[¶](#change-f7ed7a7bdd579cfb59afaf713ec2da5c)
+    一个类似但不同的问题在 0.8 中得到了解决。[¶](#change-f7ed7a7bdd579cfb59afaf713ec2da5c)
 
 -   **[sql] [bug]**Fixed regression whereby the “annotation” system used
     by the ORM was leaking into the names used by standard functions in
     [`sqlalchemy.sql.functions`](core_functions.html#module-sqlalchemy.sql.functions "sqlalchemy.sql.functions"),
     such as `func.coalesce()` and
     `func.max()`.
-    在ORM属性中使用这些函数，从而生成它们的注释版本可能会破坏在SQL中呈现的实际函数名称。[¶](#change-182243baf075d92a029213dbd8041026)
+    在 ORM 属性中使用这些函数，从而生成它们的注释版本可能会破坏在 SQL 中呈现的实际函数名称。[¶](#change-182243baf075d92a029213dbd8041026)
 
     参考文献：[＃2927](http://www.sqlalchemy.org/trac/ticket/2927)
 
@@ -1968,31 +1967,31 @@ tags:
 
     参考文献：[＃2924](http://www.sqlalchemy.org/trac/ticket/2924)，[＃2848](http://www.sqlalchemy.org/trac/ticket/2848)
 
--   **[sql] [bug]**与[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")内联创建的[`UniqueConstraint`](core_constraints.html#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")将被跳过。Pullreq礼貌Derek
+-   **[sql] [bug]**与[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")内联创建的[`UniqueConstraint`](core_constraints.html#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")将被跳过。Pullreq 礼貌 Derek
     Harland。[¶](#change-808b13e7a37e3b773154107db0509031)
 
-    参考：[拉取请求bitbucket：11](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/11)
+    参考：[拉取请求 bitbucket：11](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/11)
 
 -   **[sql] [bug] [orm]**Fixed the multiple-table “UPDATE..FROM”
     construct, only usable on MySQL, to correctly render the SET clause
     among multiple columns with the same name across tables.
-    这也将仅用于非主表的SET子句中用于绑定参数的名称更改为“\_
+    这也将仅用于非主表的 SET 子句中用于绑定参数的名称更改为“\_
     ”；因为通常直接使用[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象指定此参数，所以不应该对应用程序产生影响。
-    T1\> T0\>该修订对ORM中的[`Table.update()`](core_metadata.html#sqlalchemy.schema.Table.update "sqlalchemy.schema.Table.update")以及[`Query.update()`](orm_query.html#sqlalchemy.orm.query.Query.update "sqlalchemy.orm.query.Query.update")生效。[¶](#change-e78b46088d529294a0abdee2cd8fe000)
+    T1\> T0\>该修订对 ORM 中的[`Table.update()`](core_metadata.html#sqlalchemy.schema.Table.update "sqlalchemy.schema.Table.update")以及[`Query.update()`](orm_query.html#sqlalchemy.orm.query.Query.update "sqlalchemy.orm.query.Query.update")生效。[¶](#change-e78b46088d529294a0abdee2cd8fe000)
 
     参考文献：[＃2912](http://www.sqlalchemy.org/trac/ticket/2912)
 
 ### 架构[¶ T0\>](#change-0.9.2-schema "Permalink to this headline")
 
--   **[schema] [bug]**将`sqlalchemy.schema.SchemaVisitor`还原到`.schema`模块。Pullreq礼貌Sean
+-   **[schema] [bug]**将`sqlalchemy.schema.SchemaVisitor`还原到`.schema`模块。Pullreq 礼貌 Sean
     Dague。[¶](#change-3a49a58c161e46ce5b9d89e2758041b3)
 
-    参考文献：[请求github：57](https://github.com/zzzeek/sqlalchemy/pull/57)
+    参考文献：[请求 github：57](https://github.com/zzzeek/sqlalchemy/pull/57)
 
-### 的PostgreSQL [¶ T0\>](#change-0.9.2-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.9.2-postgresql "Permalink to this headline")
 
 -   **[postgresql]
-    [feature]**添加了一个新的方言级参数`postgresql_ignore_search_path`；这个参数被[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")构造函数和[`MetaData.reflect()`](core_metadata.html#sqlalchemy.schema.MetaData.reflect "sqlalchemy.schema.MetaData.reflect")方法所接受。当用于Postgresql时，即使名称存在于`search_path`中，指定远程模式名称的外键引用表也将保留该模式名称；从0.7.3开始的默认行为就是`search_path`中的模式不会被复制到反映的[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")对象。文档已经更新，详细描述了`pg_get_constraintdef()`函数的行为，以及`postgresql_ignore_search_path`特性如何基本确定我们是否会遵守此函数报告的模式限定或不。
+    [feature]**添加了一个新的方言级参数`postgresql_ignore_search_path`；这个参数被[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")构造函数和[`MetaData.reflect()`](core_metadata.html#sqlalchemy.schema.MetaData.reflect "sqlalchemy.schema.MetaData.reflect")方法所接受。当用于 Postgresql 时，即使名称存在于`search_path`中，指定远程模式名称的外键引用表也将保留该模式名称；从 0.7.3 开始的默认行为就是`search_path`中的模式不会被复制到反映的[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")对象。文档已经更新，详细描述了`pg_get_constraintdef()`函数的行为，以及`postgresql_ignore_search_path`特性如何基本确定我们是否会遵守此函数报告的模式限定或不。
 
     也可以看看
 
@@ -2003,10 +2002,10 @@ tags:
 
     参考文献：[＃2922](http://www.sqlalchemy.org/trac/ticket/2922)
 
-### MySQL的[¶ T0\>](#change-0.9.2-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.9.2-mysql "Permalink to this headline")
 
 -   **[mysql]
-    [bug]**添加到cymysql方言的一些缺失方法，包括\_get\_server\_version\_info()和\_detect\_charset()。Pullreq礼貌Hajime
+    [bug]**添加到 cymysql 方言的一些缺失方法，包括\_get\_server\_version\_info()和\_detect\_charset()。Pullreq 礼貌 Hajime
     Nakagami。[¶](#change-c9d1183ac37b97cd9bba811e075e7ee1)
 
     这个改变也被**backported**修改为：0.8.5
@@ -2018,13 +2017,13 @@ tags:
     adaptions” of SQL types, where a more specific type is adapted to a
     more generic one - this use case is needed by some third party tools
     such as `sqlacodegen`.
-    这个测试套件中需要修复的特定情况是将[`mysql.ENUM`](dialects_mysql.html#sqlalchemy.dialects.mysql.ENUM "sqlalchemy.dialects.mysql.ENUM")向下转换为[`types.Enum`](core_type_basics.html#sqlalchemy.types.Enum "sqlalchemy.types.Enum")，并将SQLite日期类型转换为通用日期类型。`adapt()`方法需要在这里变得更具体，以抵消在基础[`TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")中删除“catch
-    all”`**kwargs`在0.9中被删除的类。[¶](#change-c46c51b91fba93f95b0a32692149e285)
+    这个测试套件中需要修复的特定情况是将[`mysql.ENUM`](dialects_mysql.html#sqlalchemy.dialects.mysql.ENUM "sqlalchemy.dialects.mysql.ENUM")向下转换为[`types.Enum`](core_type_basics.html#sqlalchemy.types.Enum "sqlalchemy.types.Enum")，并将 SQLite 日期类型转换为通用日期类型。`adapt()`方法需要在这里变得更具体，以抵消在基础[`TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")中删除“catch
+    all”`**kwargs`在 0.9 中被删除的类。[¶](#change-c46c51b91fba93f95b0a32692149e285)
 
     参考文献：[＃2917](http://www.sqlalchemy.org/trac/ticket/2917)
 
 -   **[mysql] [bug]** MySQL
-    CAST编译现在考虑了诸如“charset”和“collat​​ion”之类的字符串类型的方面。While
+    CAST 编译现在考虑了诸如“charset”和“collat​​ion”之类的字符串类型的方面。While
     MySQL wants all character- based CAST calls to use the CHAR type, we
     now create a real CHAR object at CAST time and copy over all the
     parameters it has, so that an expression like
@@ -2035,8 +2034,8 @@ tags:
     dialect and to the default dialect system overall, such that any
     dialect can add extra “tests” to the on-first-connect “does this
     DBAPI return unicode directly?” detection.
-    在这种情况下，我们正在使用明确的“utf8\_bin”排序规则类型（在检查此排序规则可用后）专门针对“utf8”编码添加一个检查以检测MySQLdb
-    1.2.3版中观察到的一些错误的unicode行为。虽然MySQLdb自1.2.4起解决了此问题，但此处的检查应防止回归。该更改还允许“unicode”检查登录引擎日志，这在以前并非如此。[¶](#change-5306ccbcd637857024e7f7526badb84e)
+    在这种情况下，我们正在使用明确的“utf8\_bin”排序规则类型（在检查此排序规则可用后）专门针对“utf8”编码添加一个检查以检测 MySQLdb
+    1.2.3 版中观察到的一些错误的 unicode 行为。虽然 MySQLdb 自 1.2.4 起解决了此问题，但此处的检查应防止回归。该更改还允许“unicode”检查登录引擎日志，这在以前并非如此。[¶](#change-5306ccbcd637857024e7f7526badb84e)
 
     参考文献：[＃2906](http://www.sqlalchemy.org/trac/ticket/2906)
 
@@ -2047,15 +2046,15 @@ tags:
     over the task of calling commit() or rollback() for the “reset on
     return” behavior of [`Pool`](core_pooling.html#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")
     if the transaction was not otherwise completed.
-    这解决了当没有显式回滚或提交时连接关闭时，像MySQL两阶段那样的挑剔事务将被正确关闭的问题（例如，在这种情况下，不再提出“XAER\_RMFAIL”
+    这解决了当没有显式回滚或提交时连接关闭时，像 MySQL 两阶段那样的挑剔事务将被正确关闭的问题（例如，在这种情况下，不再提出“XAER\_RMFAIL”
     - 注意这仅在日志记录中显示因为异常不会在池重置内传播）。This issue
     would arise e.g. when using an orm [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
     with `twophase` set, and then
     [`Session.close()`](orm_session_api.html#sqlalchemy.orm.session.Session.close "sqlalchemy.orm.session.Session.close")
     is called without an explicit rollback or commit.
-    此更改还具有以下效果，即在非自动提交模式下使用[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象时，您现在将在日志中看到明确的“ROLLBACK”，无论会话被丢弃的方式如何。感谢Jeff
-    Dairiki和Laurence
-    Rowe将此问题隔离开来。[¶](#change-f9af1f23fa7c0156a51404d81df8f88c)
+    此更改还具有以下效果，即在非自动提交模式下使用[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象时，您现在将在日志中看到明确的“ROLLBACK”，无论会话被丢弃的方式如何。感谢 Jeff
+    Dairiki 和 Laurence
+    Rowe 将此问题隔离开来。[¶](#change-f9af1f23fa7c0156a51404d81df8f88c)
 
     参考文献：[＃2907](http://www.sqlalchemy.org/trac/ticket/2907)
 
@@ -2067,7 +2066,7 @@ tags:
 
 ### MSSQL [¶ T0\>](#change-0.9.2-mssql "Permalink to this headline")
 
--   **[mssql] [feature]**为[`UniqueConstraint`](core_constraints.html#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")和[`PrimaryKeyConstraint`](core_constraints.html#sqlalchemy.schema.PrimaryKeyConstraint "sqlalchemy.schema.PrimaryKeyConstraint")结构添加了一个选项`mssql_clustered`在SQL Server上，这将`CLUSTERED`关键字添加到DDL中的约束结构中。Pullreq礼貌Derek
+-   **[mssql] [feature]**为[`UniqueConstraint`](core_constraints.html#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")和[`PrimaryKeyConstraint`](core_constraints.html#sqlalchemy.schema.PrimaryKeyConstraint "sqlalchemy.schema.PrimaryKeyConstraint")结构添加了一个选项`mssql_clustered`在 SQL Server 上，这将`CLUSTERED`关键字添加到 DDL 中的约束结构中。Pullreq 礼貌 Derek
     Harland。[¶](#change-2f279749d1dbc19d2dcab58b0a56c870)
 
     参考：[拉取请求bitbucket：11](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/11)
@@ -2084,13 +2083,13 @@ tags:
     running in Python 3, all strings are also unconditionally coerced to
     unicode but it does *not* incur this overhead, meaning that
     cx\_Oracle is failing to use performant techniques in Py2K.
-    由于SQLAlchemy无法轻松地以每列为基础选择此类型的处理程序类型，因此无条件地组装处理程序，从而将开销添加到所有字符串访问。
+    由于 SQLAlchemy 无法轻松地以每列为基础选择此类型的处理程序类型，因此无条件地组装处理程序，从而将开销添加到所有字符串访问。
 
-    所以这个逻辑已经被SQLAlchemy自己的unicode转换系统所替代，现在它只在Py2K中对需要unicode的列起作用。当使用C扩展时，SQLAlchemy的系统似乎比cx\_Oracle快2-3倍。此外，SQLAlchemy的unicode转换功能得到了增强，因此当需要“条件”转换器（现在需要用于Oracle后端）时，“已经是unicode”的检查现在在C中执行，不再引入大量开销。
+    所以这个逻辑已经被 SQLAlchemy 自己的 unicode 转换系统所替代，现在它只在 Py2K 中对需要 unicode 的列起作用。当使用 C 扩展时，SQLAlchemy 的系统似乎比 cx\_Oracle 快 2-3 倍。此外，SQLAlchemy 的 unicode 转换功能得到了增强，因此当需要“条件”转换器（现在需要用于 Oracle 后端）时，“已经是 unicode”的检查现在在 C 中执行，不再引入大量开销。
 
-    此更改对cx\_Oracle后端有两个影响。一个是Py2K中没有被Unicode类型或convert\_unicode
-    = True明确请求的字符串值现在将返回为`str`，而不是`unicode` -
-    此行为与后端如MySQL。另外，当使用cx\_Oracle后端请求unicode值时，如果C扩展名*not*被使用，现在每列有一个额外的isinstance()检查开销。这种权衡已经被制定出来，因为它可以被解决，并且不会给可能的大部分非Unicode字符串的Oracle结果列带来性能负担。
+    此更改对 cx\_Oracle 后端有两个影响。一个是 Py2K 中没有被 Unicode 类型或 convert\_unicode
+    = True 明确请求的字符串值现在将返回为`str`，而不是`unicode` -
+    此行为与后端如 MySQL。另外，当使用 cx\_Oracle 后端请求 unicode 值时，如果 C 扩展名*not*被使用，现在每列有一个额外的 isinstance()检查开销。这种权衡已经被制定出来，因为它可以被解决，并且不会给可能的大部分非 Unicode 字符串的 Oracle 结果列带来性能负担。
 
     [¶](#change-2cd0a6583e825c62477ab7a3d4770de9)
 
@@ -2108,14 +2107,14 @@ tags:
 -   **[bug] [cextensions] [py3k]**Fixed an issue where the C extensions
     in Py3K are using the wrong API to specify the top-level module
     function, which breaks in Python 3.4b2.
-    Py3.4b2将PyMODINIT\_FUNC改为返回“void”而不是`PyObject *`，所以我们现在确保使用“PyMODINIT\_FUNC”而不是` PyObject *`。拉请求礼貌cgohlke。[¶](#change-98b1a028c00831d12344a81c2928019c)
+    Py3.4b2 将 PyMODINIT\_FUNC 改为返回“void”而不是`PyObject *`，所以我们现在确保使用“PyMODINIT\_FUNC”而不是`PyObject *`。拉请求礼貌 cgohlke。[¶](#change-98b1a028c00831d12344a81c2928019c)
 
-    参考文献：[请求github：55](https://github.com/zzzeek/sqlalchemy/pull/55)
+    参考文献：[请求 github：55](https://github.com/zzzeek/sqlalchemy/pull/55)
 
 0.9.1 [¶ T0\>](#change-0.9.1 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布时间：2014年1月5日
+发布时间：2014 年 1 月 5 日
 
 ### ORM [¶ T0\>](#change-0.9.1-orm "Permalink to this headline")
 
@@ -2140,7 +2139,7 @@ tags:
     inspect.getargspec() on it in order to detect a legacy calling
     signature for certain events, and apparently there’s no way to do
     this with a partial object.
-    相反，我们跳过了传统支票并采用现代风格；检查本身现在只发生在SessionEvents.after\_bulk\_update和SessionEvents.after\_bulk\_delete事件中。如果分配给“部分”事件侦听器，那么这两个事件将需要新的签名样式。[¶](#change-8aeefcaaa4a378dba8faa4278d991e73)
+    相反，我们跳过了传统支票并采用现代风格；检查本身现在只发生在 SessionEvents.after\_bulk\_update 和 SessionEvents.after\_bulk\_delete 事件中。如果分配给“部分”事件侦听器，那么这两个事件将需要新的签名样式。[¶](#change-8aeefcaaa4a378dba8faa4278d991e73)
 
     参考文献：[＃2905](http://www.sqlalchemy.org/trac/ticket/2905)
 
@@ -2156,7 +2155,7 @@ tags:
 -   **[orm] [bug]**Fixed regression where we don’t check the given name
     against the correct string class when setting up a backref based on
     a name, therefore causing the error “too many values to unpack”.
-    这与Py3k转换有关。[¶](#change-53e42d12ab61af327a7559207a6211b4)
+    这与 Py3k 转换有关。[¶](#change-53e42d12ab61af327a7559207a6211b4)
 
     参考文献：[＃2901](http://www.sqlalchemy.org/trac/ticket/2901)
 
@@ -2181,7 +2180,7 @@ tags:
     这个“映射类的内部集合”现在使用对这些类本身的弱引用。[¶](#change-0f3dd659714e45e0f577963d43d7d5aa)
 
 -   **[bug] [orm]
-    [declarative]**一个准回归，显然在0.8中，您可以在声明式中设置一个类级属性，以直接引用一个[`InstrumentedAttribute`](orm_internals.html#sqlalchemy.orm.attributes.InstrumentedAttribute "sqlalchemy.orm.attributes.InstrumentedAttribute")超类或类本身，它或多或少地像一个同义词；在0.9中，这没有设置足够的簿记来跟上来自[＃2789](http://www.sqlalchemy.org/trac/ticket/2789)的更自由化的后退逻辑。尽管这个用例从来没有被直接考虑过，但是现在通过声明在“setattr()”级别以及设置子类时检测到，并且镜像/重命名属性现在设置为[`synonym()`](orm_mapped_attributes.html#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")。[¶](#change-4bf7b34989a71c9289696d84c85cc213)
+    [declarative]**一个准回归，显然在 0.8 中，您可以在声明式中设置一个类级属性，以直接引用一个[`InstrumentedAttribute`](orm_internals.html#sqlalchemy.orm.attributes.InstrumentedAttribute "sqlalchemy.orm.attributes.InstrumentedAttribute")超类或类本身，它或多或少地像一个同义词；在 0.9 中，这没有设置足够的簿记来跟上来自[＃2789](http://www.sqlalchemy.org/trac/ticket/2789)的更自由化的后退逻辑。尽管这个用例从来没有被直接考虑过，但是现在通过声明在“setattr()”级别以及设置子类时检测到，并且镜像/重命名属性现在设置为[`synonym()`](orm_mapped_attributes.html#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")。[¶](#change-4bf7b34989a71c9289696d84c85cc213)
 
     参考文献：[＃2900](http://www.sqlalchemy.org/trac/ticket/2900)
 
@@ -2191,7 +2190,7 @@ tags:
     and [`or_()`](core_sqlelement.html#sqlalchemy.sql.expression.or_ "sqlalchemy.sql.expression.or_")
     can now accept Python generators as a single argument, e.g.:
 
-        and_(x == y for x, y in tuples)
+        and_(x == y for x, y in tuples)plainplain
 
     这里的逻辑查找单个参数`*args`，其中第一个元素是`types.GeneratorType`的实例。
 
@@ -2207,7 +2206,7 @@ tags:
 0.9.0 [¶ T0\>](#change-0.9.0 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布日期：2013年12月30日
+发布日期：2013 年 12 月 30 日
 
 ### ORM [¶ T0\>](#change-0.9.0-orm "Permalink to this headline")
 
@@ -2232,8 +2231,8 @@ tags:
     也可以看看
 
     [include\_backrefs=False option for
-    @validates](migration_09.html#feature-1535)的include\_backrefs =
-    False选项
+    @validates](migration_09.html#feature-1535)的 include\_backrefs =
+    False 选项
 
     [¶](#change-45720dc1b5014ca04cc355970a4a77ae)
 
@@ -2243,16 +2242,16 @@ tags:
     `FOR UPDATE` clause of a `SELECT` is added with the new [`Query.with_for_update()`](orm_query.html#sqlalchemy.orm.query.Query.with_for_update "sqlalchemy.orm.query.Query.with_for_update")
     method, to complement the new
     [`GenerativeSelect.with_for_update()`](core_selectable.html#sqlalchemy.sql.expression.GenerativeSelect.with_for_update "sqlalchemy.sql.expression.GenerativeSelect.with_for_update")
-    method. 请求提供Mario Lassnig提供的请求。
+    method. 请求提供 Mario Lassnig 提供的请求。
 
     也可以看看
 
     [New FOR UPDATE support on select(),
-    Query()](migration_09.html#feature-github-42)上的新FOR UPDATE支持
+    Query()](migration_09.html#feature-github-42)上的新 FOR UPDATE 支持
 
     [¶](#change-1144ec1f7338720f8b1ea74ccda5f49b)
 
-    参考文献：[请求github：42](https://github.com/zzzeek/sqlalchemy/pull/42)
+    参考文献：[请求 github：42](https://github.com/zzzeek/sqlalchemy/pull/42)
 
 -   **[orm] [bug]**调整[`subqueryload()`](orm_loading_relationships.html#sqlalchemy.orm.subqueryload "sqlalchemy.orm.subqueryload")策略，确保查询在加载过程开始后运行；这是为了使得子查询优先于其他装载者，因为其他的加载者可能在错误的时间因为其他的预先/非加载情况而触及相同的属性。[](#change-596ed6934e304cb10692a3ddea823f90)
 
@@ -2296,10 +2295,10 @@ tags:
     instrumentation system; pull request courtesy Eduardo
     Schettino.[¶](#change-c178432e123c26d95767915cfd94145b)
 
-    参考文献：[请求github：40](https://github.com/zzzeek/sqlalchemy/pull/40)
+    参考文献：[请求 github：40](https://github.com/zzzeek/sqlalchemy/pull/40)
 
 -   **[orm]
-    [bug]**关于描述符的一些改进，如混合，同义词，合成，用户定义的描述符等。[`AliasedClass`](orm_query.html#sqlalchemy.orm.util.AliasedClass "sqlalchemy.orm.util.AliasedClass")继续进行的属性适配变得更加健壮，例如，如果描述符返回另一个插装属性，而不是复合SQL表达式元素，则操作仍将继续。Addtionally,
+    [bug]**关于描述符的一些改进，如混合，同义词，合成，用户定义的描述符等。[`AliasedClass`](orm_query.html#sqlalchemy.orm.util.AliasedClass "sqlalchemy.orm.util.AliasedClass")继续进行的属性适配变得更加健壮，例如，如果描述符返回另一个插装属性，而不是复合 SQL 表达式元素，则操作仍将继续。Addtionally,
     the “adapted” operator will retain its class; previously, a change
     in class from `InstrumentedAttribute` to
     `QueryableAttribute` (a superclass) would
@@ -2314,7 +2313,7 @@ tags:
     [`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
     will now prevent attribute history from being written on behalf of
     the target attribute.
-    如果对象没有被写入Session.dirty列表，如果它发生了变化，这会产生影响。以前，该对象将出现在Session.dirty中，但在刷新期间不会发生代表修改后的属性的更改。该属性仍然会发出诸如backref事件和用户定义的事件之类的事件，并且仍然会从backrefs中接收到突变。
+    如果对象没有被写入 Session.dirty 列表，如果它发生了变化，这会产生影响。以前，该对象将出现在 Session.dirty 中，但在刷新期间不会发生代表修改后的属性的更改。该属性仍然会发出诸如 backref 事件和用户定义的事件之类的事件，并且仍然会从 backrefs 中接收到突变。
 
     也可以看看
 
@@ -2363,7 +2362,7 @@ tags:
 
     参考文献：[＃2865](http://www.sqlalchemy.org/trac/ticket/2865)
 
--   修正了在Py2K中使用[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")时，unicode文字不会被接受为声明式中类或其他参数的字符串名称的错误。**[bug]
+-   修正了在 Py2K 中使用[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")时，unicode 文字不会被接受为声明式中类或其他参数的字符串名称的错误。**[bug]
     [orm] [declarative]** \> [¶
     T5\>](#change-abd40b717be4a66e010edbce0f8dacb6)
 
@@ -2403,7 +2402,7 @@ tags:
     connection pool was dumped; normally the waiter should break out due
     to a notify\_all() but it’s possible this notify\_all() is missed in
     very slim cases.
-    这是在0.8.0中首次引入的逻辑的扩展，这个问题偶尔会在压力测试中被观察到。[¶](#change-33f71100778b84fb526ebd50c7e9468d)
+    这是在 0.8.0 中首次引入的逻辑的扩展，这个问题偶尔会在压力测试中被观察到。[¶](#change-33f71100778b84fb526ebd50c7e9468d)
 
     这个改变也被**backported**修改为：0.8.4
 
@@ -2413,8 +2412,8 @@ tags:
     ASCII-encoded when a pre-DBAPI [`StatementError`](core_exceptions.html#sqlalchemy.exc.StatementError "sqlalchemy.exc.StatementError")
     were raised within [`Connection.execute()`](core_connections.html#sqlalchemy.engine.Connection.execute "sqlalchemy.engine.Connection.execute"),
     causing encoding errors for non-ASCII statements.
-    字符串化现在保留在Python
-    unicode中，从而避免编码错误。[¶](#change-d789c97206bbfdf6d74064846660d3db)
+    字符串化现在保留在 Python
+    unicode 中，从而避免编码错误。[¶](#change-d789c97206bbfdf6d74064846660d3db)
 
     这个改变也被**backported**修改为：0.8.4
 
@@ -2423,8 +2422,8 @@ tags:
 -   **[engine] [bug]**The [`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")
     routine and the related [`make_url()`](core_engines.html#sqlalchemy.engine.url.make_url "sqlalchemy.engine.url.make_url")
     function no longer considers the `+` sign to be
-    a space within the password field. 解析已经与RFC
-    1738完全匹配，因为`username`和`password`只有`:`，`@` ，和`/`进行编码。
+    a space within the password field. 解析已经与 RFC
+    1738 完全匹配，因为`username`和`password`只有`:`，`@` ，和`/`进行编码。
 
     也可以看看
 
@@ -2477,26 +2476,26 @@ tags:
     [`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select"),
     and also includes support for the SQL standard
     `FOR UPDATE OF` clause.
-    ORM还包含一个新的相应方法[`Query.with_for_update()`](orm_query.html#sqlalchemy.orm.query.Query.with_for_update "sqlalchemy.orm.query.Query.with_for_update")。请求提供Mario
-    Lassnig提供的请求。
+    ORM 还包含一个新的相应方法[`Query.with_for_update()`](orm_query.html#sqlalchemy.orm.query.Query.with_for_update "sqlalchemy.orm.query.Query.with_for_update")。请求提供 Mario
+    Lassnig 提供的请求。
 
     也可以看看
 
     [New FOR UPDATE support on select(),
-    Query()](migration_09.html#feature-github-42)上的新FOR UPDATE支持
+    Query()](migration_09.html#feature-github-42)上的新 FOR UPDATE 支持
 
     [¶](#change-80575a82c6ca1e11cdf9bba117d2a012)
 
-    参考文献：[请求github：42](https://github.com/zzzeek/sqlalchemy/pull/42)
+    参考文献：[请求 github：42](https://github.com/zzzeek/sqlalchemy/pull/42)
 
--   **[sql] [feature]**通过字符串将返回的浮点值强制转换为Python
+-   **[sql] [feature]**通过字符串将返回的浮点值强制转换为 Python
     `Decimal`时使用的精度现在可配置。The flag
     `decimal_return_scale` is now supported by all
     [`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")
     and [`Float`](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")
     types, which will ensure this many digits are taken from the native
     floating point value when it is converted to string.
-    如果不存在，则该类型将使用`.scale`的值，如果类型支持此设置并且它不是None。否则，使用原始的默认长度10。
+    如果不存在，则该类型将使用`.scale`的值，如果类型支持此设置并且它不是 None。否则，使用原始的默认长度 10。
 
     也可以看看
 
@@ -2513,7 +2512,7 @@ tags:
     `autoincrement=False` set, would attempt to fire
     the Sequence on INSERT for backends that don’t support sequences,
     when presented with an INSERT missing the primary key value.
-    这将发生在像SQLite，MySQL这样的非序列后端上。[¶](#change-17f346ee6ecd1268fbc24fa52ca6fbb7)
+    这将发生在像 SQLite，MySQL 这样的非序列后端上。[¶](#change-17f346ee6ecd1268fbc24fa52ca6fbb7)
 
     这个改变也被**backported**修改为：0.8.5
 
@@ -2523,7 +2522,7 @@ tags:
     method where the order of the given names would not be taken into
     account when generating the INSERT statement, thus producing a
     mismatch versus the column names in the given SELECT statement.
-    还注意到[`Insert.from_select()`](core_dml.html#sqlalchemy.sql.expression.Insert.from_select "sqlalchemy.sql.expression.Insert.from_select")意味着不能使用Python端插入默认值，因为该语句没有VALUES子句。[¶](#change-8201a57e8a671eba9a5e14fb1d129e71)
+    还注意到[`Insert.from_select()`](core_dml.html#sqlalchemy.sql.expression.Insert.from_select "sqlalchemy.sql.expression.Insert.from_select")意味着不能使用 Python 端插入默认值，因为该语句没有 VALUES 子句。[¶](#change-8201a57e8a671eba9a5e14fb1d129e71)
 
     这个改变也被**backported**修改为：0.8.5
 
@@ -2537,11 +2536,11 @@ tags:
     function. 然而，与[`type_coerce()`](core_sqlelement.html#sqlalchemy.sql.expression.type_coerce "sqlalchemy.sql.expression.type_coerce")不同，只有当非子句元素值传递给[`cast()`](core_sqlelement.html#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")时才会生效。一个现有的类型化构造将保留其类型。[¶](#change-dd267693c4318fbd71e8ff2f00c3839c)
 
 -   [`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")类更积极地检查给定的列参数。**[sql]
-    [bug]**如果不是字符串，它会检查该对象是否至少是一个[`ColumnClause`](core_sqlelement.html#sqlalchemy.sql.expression.ColumnClause "sqlalchemy.sql.expression.ColumnClause")或解析为1的对象，并且`.table`属性（如果存在）指的是一个[`TableClause`](core_selectable.html#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")或子类，而不像[`Alias`](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")。否则，会引发[`ArgumentError`](core_exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。[¶](#change-8089bd064566ab520c8d752d8f44b7ea)
+    [bug]**如果不是字符串，它会检查该对象是否至少是一个[`ColumnClause`](core_sqlelement.html#sqlalchemy.sql.expression.ColumnClause "sqlalchemy.sql.expression.ColumnClause")或解析为 1 的对象，并且`.table`属性（如果存在）指的是一个[`TableClause`](core_selectable.html#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")或子类，而不像[`Alias`](core_selectable.html#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")。否则，会引发[`ArgumentError`](core_exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。[¶](#change-8089bd064566ab520c8d752d8f44b7ea)
 
     参考文献：[＃2883](http://www.sqlalchemy.org/trac/ticket/2883)
 
--   **[sql] [bug]** [`ColumnOperators.collate()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.collate "sqlalchemy.sql.operators.ColumnOperators.collate")运算符的优先规则已被修改，因此COLLATE运算符的优先级低于比较运算符。这样做的结果是应用于比较的COLLATE不会在比较周围产生括号，而后者不会被MSSQL等后端解析。对于通过将`Operators.collate()`应用于比较表达式的单个元素而不是整个比较表达式来解决此问题的设置，此更改是向后兼容的。
+-   **[sql] [bug]** [`ColumnOperators.collate()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.collate "sqlalchemy.sql.operators.ColumnOperators.collate")运算符的优先规则已被修改，因此 COLLATE 运算符的优先级低于比较运算符。这样做的结果是应用于比较的 COLLATE 不会在比较周围产生括号，而后者不会被 MSSQL 等后端解析。对于通过将`Operators.collate()`应用于比较表达式的单个元素而不是整个比较表达式来解决此问题的设置，此更改是向后兼容的。
 
     也可以看看
 
@@ -2569,19 +2568,19 @@ tags:
 
     参考文献：[＃2868](http://www.sqlalchemy.org/trac/ticket/2868)
 
-### 的PostgreSQL [¶ T0\>](#change-0.9.0-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.9.0-postgresql "Permalink to this headline")
 
--   **[postgresql] [feature]**使用新的[`JSON`](dialects_mysql.html#sqlalchemy.dialects.mysql.JSON "sqlalchemy.dialects.mysql.JSON")类型添加了对Postgresql
-    JSON的支持。非常感谢Nathan
-    Rice实施和测试这个。[¶](#change-7b58abc6472e6a9756729e397c6ee060)
+-   **[postgresql] [feature]**使用新的[`JSON`](dialects_mysql.html#sqlalchemy.dialects.mysql.JSON "sqlalchemy.dialects.mysql.JSON")类型添加了对 Postgresql
+    JSON 的支持。非常感谢 Nathan
+    Rice 实施和测试这个。[¶](#change-7b58abc6472e6a9756729e397c6ee060)
 
-    参考文献：[＃2581](http://www.sqlalchemy.org/trac/ticket/2581)，[请求github：50](https://github.com/zzzeek/sqlalchemy/pull/50)
+    参考文献：[＃2581](http://www.sqlalchemy.org/trac/ticket/2581)，[请求 github：50](https://github.com/zzzeek/sqlalchemy/pull/50)
 
--   **[postgresql] [feature]**通过[`postgresql.TSVECTOR`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.TSVECTOR "sqlalchemy.dialects.postgresql.TSVECTOR")类型增加了对Postgresql
-    TSVECTOR的支持。请求礼貌Noufal
+-   **[postgresql] [feature]**通过[`postgresql.TSVECTOR`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.TSVECTOR "sqlalchemy.dialects.postgresql.TSVECTOR")类型增加了对 Postgresql
+    TSVECTOR 的支持。请求礼貌 Noufal
     Ibrahim。[¶](#change-77977fae5177b45781690c834e63d13f)
 
-    参考：[拉取请求bitbucket：8](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/8)
+    参考：[拉取请求 bitbucket：8](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/8)
 
 -   **[postgresql] [bug]**Fixed bug where index reflection would
     mis-interpret indkey values when using the pypostgresql adapter,
@@ -2592,12 +2591,12 @@ tags:
 
     参考文献：[＃2855](http://www.sqlalchemy.org/trac/ticket/2855)
 
--   **[postgresql] [bug]**现在使用psycopg2
-    UNICODEARRAY扩展来处理带有psycopg2 +普通“native
-    unicode”模式的unicode数组，这与UNICODE扩展的使用方式一样[¶](#change-0d74908c0a46fa09168e385eecb4f0a1)
+-   **[postgresql] [bug]**现在使用 psycopg2
+    UNICODEARRAY 扩展来处理带有 psycopg2 +普通“native
+    unicode”模式的 unicode 数组，这与 UNICODE 扩展的使用方式一样[¶](#change-0d74908c0a46fa09168e385eecb4f0a1)
 
 -   **[postgresql]
-    [bug]**修正了ENUM中的值没有针对单引号转义的错误。请注意，这对于手动转义单引号的现有解决方法是向后不兼容的。
+    [bug]**修正了 ENUM 中的值没有针对单引号转义的错误。请注意，这对于手动转义单引号的现有解决方法是向后不兼容的。
 
     也可以看看
 
@@ -2608,9 +2607,9 @@ tags:
 
     参考文献：[＃2878](http://www.sqlalchemy.org/trac/ticket/2878)
 
-### MySQL的[¶ T0\>](#change-0.9.0-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.9.0-mysql "Permalink to this headline")
 
--   **[mysql] [bug]**改进了SQL类型在`__repr__()`中生成的系统，特别是关于宽整型/数字/字符类型各种关键字参数。The
+-   **[mysql] [bug]**改进了 SQL 类型在`__repr__()`中生成的系统，特别是关于宽整型/数字/字符类型各种关键字参数。The
     `__repr__()` is important for use with Alembic
     autogenerate for when Python code is rendered in a migration
     script.[¶](#change-aff523a757357ad13ae691047b8183cd)
@@ -2629,15 +2628,15 @@ tags:
 
 -   **[mssql] [bug] [pymssql]**Added “Net-Lib error during Connection
     reset by peer” message to the list of messages checked for
-    “disconnect” within the pymssql dialect. 礼貌John
+    “disconnect” within the pymssql dialect. 礼貌 John
     Anderson。[¶](#change-f1ee7d7ea1eb2a0cb21a50ae1dea3fe9)
 
     这个改变也被**backported**修改为：0.8.5
 
-    参考文献：[请求github：51](https://github.com/zzzeek/sqlalchemy/pull/51)
+    参考文献：[请求 github：51](https://github.com/zzzeek/sqlalchemy/pull/51)
 
--   **[mssql] [bug]**修正了在0.8.0版本中引入索引的`DROP INDEX`如果索引处于备用模式中，MSSQL将不正确地渲染； schemaname /
-    tablename将被颠倒。该格式也进行了修改以符合当前的MSSQL文档。Courtesy
+-   **[mssql] [bug]**修正了在 0.8.0 版本中引入索引的`DROP INDEX`如果索引处于备用模式中，MSSQL 将不正确地渲染； schemaname /
+    tablename 将被颠倒。该格式也进行了修改以符合当前的 MSSQL 文档。Courtesy
     Derek Harland。[¶](#change-b65b88da0221c3f0bb0c2443185a5221)
 
     这个改变也被**backported**修改为：0.8.4
@@ -2648,7 +2647,7 @@ tags:
 ### 预言[¶ T0\>](#change-0.9.0-oracle "Permalink to this headline")
 
 -   **[oracle]
-    [bug]**增加了ORA-02396“最大空闲时间”的错误代码到cx\_oracle的“is
+    [bug]**增加了 ORA-02396“最大空闲时间”的错误代码到 cx\_oracle 的“is
     disconnect”代码列表。[¶](#change-9be5ac15b91d5ec132c4a6b689d5d15e)
 
     这个改变也被**backported**修改为：0.8.4
@@ -2671,24 +2670,24 @@ tags:
     参考文献：[＃2897](http://www.sqlalchemy.org/trac/ticket/2897)
 
 -   **[firebird]
-    [bug]**修正了Firebird索引反射中索引内的列未正确排序的错误；现在它们按照RDB
+    [bug]**修正了 Firebird 索引反射中索引内的列未正确排序的错误；现在它们按照 RDB
     \$
-    FIELD\_POSITION的顺序排序。[¶](#change-eea51d8b16bb72d519c6f5a9cb105561)
+    FIELD\_POSITION 的顺序排序。[¶](#change-eea51d8b16bb72d519c6f5a9cb105561)
 
     这个改变也被**backported**修改为：0.8.5
 
 -   **[firebird] [bug]**Changed the queries used by Firebird to list
     table and view names to query from the `rdb$relations` view instead of the `rdb$relation_fields` and `rdb$view_relations` views.
-    新旧查询的变体在许多常见问题和博客中都有提及，但新的查询直接来自“Firebird常见问题解答”，它似乎是最正式的信息来源。[¶](#change-70bdabe000861535a7e228956add9020)
+    新旧查询的变体在许多常见问题和博客中都有提及，但新的查询直接来自“Firebird 常见问题解答”，它似乎是最正式的信息来源。[¶](#change-70bdabe000861535a7e228956add9020)
 
     参考文献：[＃2898](http://www.sqlalchemy.org/trac/ticket/2898)
 
 ### 杂项[¶ T0\>](#change-0.9.0-misc "Permalink to this headline")
 
--   **[removed]**“informix”和“informixdb”方言已被删除；该代码现在可作为Bitbucket上的单独存储库提供。自从首次添加informixdb方言以来，IBM-DB项目已经提供了生产级别的Informix支持。[¶](#change-577e7805c86d301deafe2f47a2840148)
+-   **[removed]**“informix”和“informixdb”方言已被删除；该代码现在可作为 Bitbucket 上的单独存储库提供。自从首次添加 informixdb 方言以来，IBM-DB 项目已经提供了生产级别的 Informix 支持。[¶](#change-577e7805c86d301deafe2f47a2840148)
 
 -   **[bug]
-    [declarative]**错误消息，当一个字符串arg发送到[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")，它没有解析为类或映射器时，它的工作方式与当收到一个非字符串arg时，它表明有配置错误的关系的名字。[¶](#change-b9609d3e6665e3b2e9cbc73bb84adebc)
+    [declarative]**错误消息，当一个字符串 arg 发送到[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")，它没有解析为类或映射器时，它的工作方式与当收到一个非字符串 arg 时，它表明有配置错误的关系的名字。[¶](#change-b9609d3e6665e3b2e9cbc73bb84adebc)
 
     这个改变也被**backported**修改为：0.8.5
 
@@ -2702,29 +2701,29 @@ tags:
 
     参考文献：[＃2869](http://www.sqlalchemy.org/trac/ticket/2869)
 
--   **[bug] [examples]**修正了阻止history\_meta
-    recipe使用超过一层深度的连接继承方案的错误。[¶](#change-51a37bd7516f5c6879964cfd09f1be56)
+-   **[bug] [examples]**修正了阻止 history\_meta
+    recipe 使用超过一层深度的连接继承方案的错误。[¶](#change-51a37bd7516f5c6879964cfd09f1be56)
 
 0.9.0b1 [¶ T0\>](#change-0.9.0b1 "Permalink to this headline")
 --------------------------------------------------------------
 
-发布日期：2013年10月26日
+发布日期：2013 年 10 月 26 日
 
 ### 一般[¶ T0\>](#change-0.9.0b1-general "Permalink to this headline")
 
--   **[general] [feature] [py3k]**将C扩展移植到Python
-    3，并将在任何受支持的CPython
-    2或3环境下构建。[¶](#change-63557d61147791e2c67e8fe819f1b2b2)
+-   **[general] [feature] [py3k]**将 C 扩展移植到 Python
+    3，并将在任何受支持的 CPython
+    2 或 3 环境下构建。[¶](#change-63557d61147791e2c67e8fe819f1b2b2)
 
     参考文献：[＃2161](http://www.sqlalchemy.org/trac/ticket/2161)
 
 -   **[general] [feature] [py3k]**现在，Python
-    2和3的代码库已经“就地”了，运行2to3的需求已被删除。兼容性现在在Python
-    2.6上正向运行。[¶](#change-e1f88f4751daaf8c4bf39213780dfc1f)
+    2 和 3 的代码库已经“就地”了，运行 2to3 的需求已被删除。兼容性现在在 Python
+    2.6 上正向运行。[¶](#change-e1f88f4751daaf8c4bf39213780dfc1f)
 
     参考文献：[＃2671](http://www.sqlalchemy.org/trac/ticket/2671)
 
--   **[general]**对程序包的大量重构已重新组织了许多Core模块的导入结构以及ORM模块的某些方面。In
+-   **[general]**对程序包的大量重构已重新组织了许多 Core 模块的导入结构以及 ORM 模块的某些方面。In
     particular `sqlalchemy.sql` has been broken out
     into several more modules than before so that the very large size of
     `sqlalchemy.sql.expression` is now pared down.
@@ -2737,8 +2736,8 @@ tags:
 ### ORM [¶ T0\>](#change-0.9.0b1-orm "Permalink to this headline")
 
 -   **[orm] [feature]**添加了[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
-    `distinct_target_key`的新选项。这使得子查询预热加载器策略能够将DISTINCT应用到最内层的SELECT子查询中，以协助处理与该关系相对应的最内层查询生成重复行的情况（目前还没有解决内部dupe行问题的一般解决方案但是，当加入最内层子查询之外的子查询会产生欺骗）。当标志被设置为`True`时，DISTINCT被无条件渲染，当它被设置为`None`时，如果最内层关系针对不包含完整的主键。该选项在0.8中默认为False（例如，在所有情况下默认关闭），0.9中的None（例如默认为自动）。感谢Alexander
-    Koval为此提供帮助。
+    `distinct_target_key`的新选项。这使得子查询预热加载器策略能够将 DISTINCT 应用到最内层的 SELECT 子查询中，以协助处理与该关系相对应的最内层查询生成重复行的情况（目前还没有解决内部 dupe 行问题的一般解决方案但是，当加入最内层子查询之外的子查询会产生欺骗）。当标志被设置为`True`时，DISTINCT 被无条件渲染，当它被设置为`None`时，如果最内层关系针对不包含完整的主键。该选项在 0.8 中默认为 False（例如，在所有情况下默认关闭），0.9 中的 None（例如默认为自动）。感谢 Alexander
+    Koval 为此提供帮助。
 
     也可以看看
 
@@ -2830,7 +2829,7 @@ tags:
     other database-provided versioning features, or via an optional
     programmatic value, by setting
     `version_id_generator=False`.
-    当使用服务器生成的版本标识符时，ORM将在可用时使用RETURNING立即加载新版本值，否则它将发出第二个SELECT。[¶](#change-ebb167a81b388b8ac090fa33246c48a2)
+    当使用服务器生成的版本标识符时，ORM 将在可用时使用 RETURNING 立即加载新版本值，否则它将发出第二个 SELECT。[¶](#change-ebb167a81b388b8ac090fa33246c48a2)
 
     参考文献：[＃2793](http://www.sqlalchemy.org/trac/ticket/2793)
 
@@ -2860,9 +2859,9 @@ tags:
 
     参考文献：[＃2268](http://www.sqlalchemy.org/trac/ticket/2268)
 
--   **[orm] [feature]**属性事件通过`AttributeImpl`作为“启动器”标记传递的机制已更改；该对象现在是一个名为[`attributes.Event`](orm_internals.html#sqlalchemy.orm.attributes.Event "sqlalchemy.orm.attributes.Event")的特定于事件的对象。此外，属性系统不再基于匹配的“启动器”令牌停止事件；这个逻辑已经被移动到特定于ORM
-    backref事件处理程序，这是一个属性事件重新传播到随后的append / set /
-    remove操作的典型源。如果方案不使用backref处理程序，那么模拟backrefs行为的最终用户代码现在必须确保递归事件传播方案被暂停。使用这个新系统，当一个对象被追加到一个集合上时，backref处理程序现在可以执行“双跳”操作，与一个新的多对一关联，与之前的多对一关联，然后从以前的集合中删除。在此更改之前，不会发生从上一个集合中删除的最后一步。
+-   **[orm] [feature]**属性事件通过`AttributeImpl`作为“启动器”标记传递的机制已更改；该对象现在是一个名为[`attributes.Event`](orm_internals.html#sqlalchemy.orm.attributes.Event "sqlalchemy.orm.attributes.Event")的特定于事件的对象。此外，属性系统不再基于匹配的“启动器”令牌停止事件；这个逻辑已经被移动到特定于 ORM
+    backref 事件处理程序，这是一个属性事件重新传播到随后的 append / set /
+    remove 操作的典型源。如果方案不使用 backref 处理程序，那么模拟 backrefs 行为的最终用户代码现在必须确保递归事件传播方案被暂停。使用这个新系统，当一个对象被追加到一个集合上时，backref 处理程序现在可以执行“双跳”操作，与一个新的多对一关联，与之前的多对一关联，然后从以前的集合中删除。在此更改之前，不会发生从上一个集合中删除的最后一步。
 
     也可以看看
 
@@ -2878,9 +2877,9 @@ tags:
     ORM is now configured to allow simple nesting of joins of the form
     `a JOIN (b JOIN c ON b.id=c.id) ON a.id=b.id`,
     rather than forcing the right side into a `SELECT` subquery.
-    这应该允许大多数后端显着提高性能，特别是MySQL。多年来一直存在这种变化的数据库后端SQLite现在通过将`SELECT`子查询的生成从ORM移动到SQL编译器来解决；所以SQLite上的右嵌套连接最终仍然会以`SELECT`呈现，而所有其他后端不再受此替代方法的影响。
+    这应该允许大多数后端显着提高性能，特别是 MySQL。多年来一直存在这种变化的数据库后端 SQLite 现在通过将`SELECT`子查询的生成从 ORM 移动到 SQL 编译器来解决；所以 SQLite 上的右嵌套连接最终仍然会以`SELECT`呈现，而所有其他后端不再受此替代方法的影响。
 
-    作为这种改变的一部分，已经在[`orm.aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")，[`Join.alias()`](core_selectable.html#sqlalchemy.sql.expression.Join.alias "sqlalchemy.sql.expression.Join.alias")中添加了一个新的参数`flat=True`和[`orm.with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")函数，该函数允许生成一个JOIN的“别名”，它将匿名别名应用于连接中的每个组件表，而不是生成子查询。
+    作为这种改变的一部分，已经在[`orm.aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")，[`Join.alias()`](core_selectable.html#sqlalchemy.sql.expression.Join.alias "sqlalchemy.sql.expression.Join.alias")中添加了一个新的参数`flat=True`和[`orm.with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")函数，该函数允许生成一个 JOIN 的“别名”，它将匿名别名应用于连接中的每个组件表，而不是生成子查询。
 
     也可以看看
 
@@ -2907,7 +2906,7 @@ tags:
 
 -   **[orm] [bug]**Fixed bug where [`Query.exists()`](orm_query.html#sqlalchemy.orm.query.Query.exists "sqlalchemy.orm.query.Query.exists")
     failed to work correctly without any WHERE criterion.
-    礼貌弗拉基米尔Magamedov。[¶](#change-ef9f61eaff6e736d97c7a7096da10f37)
+    礼貌弗拉基米尔 Magamedov。[¶](#change-ef9f61eaff6e736d97c7a7096da10f37)
 
     This change is also **backported** to: 0.8.3
 
@@ -2932,8 +2931,8 @@ tags:
 
     参考文献：[＃2786](http://www.sqlalchemy.org/trac/ticket/2786)
 
--   **[orm] [bug]**性能修正与加载映射实体时使用[`defer()`](orm_loading_columns.html#sqlalchemy.orm.defer "sqlalchemy.orm.defer")选项有关。在加载时将每个对象的延迟可调用应用于实例的函数开销显着高于仅从该行加载数据的开销（请注意，`defer()`旨在减少DB
-    /网络开销，不一定函数调用计数）；在所有情况下，函数调用开销都小于从列中加载数据的开销。每个负载创建的“惰性可调用”对象的数量也从N（结果中的总延迟值）减少到1（延迟列的总数）。[¶](#change-e1a708dde5288510230755ac690de45b)
+-   **[orm] [bug]**性能修正与加载映射实体时使用[`defer()`](orm_loading_columns.html#sqlalchemy.orm.defer "sqlalchemy.orm.defer")选项有关。在加载时将每个对象的延迟可调用应用于实例的函数开销显着高于仅从该行加载数据的开销（请注意，`defer()`旨在减少 DB
+    /网络开销，不一定函数调用计数）；在所有情况下，函数调用开销都小于从列中加载数据的开销。每个负载创建的“惰性可调用”对象的数量也从 N（结果中的总延迟值）减少到 1（延迟列的总数）。[¶](#change-e1a708dde5288510230755ac690de45b)
 
     This change is also **backported** to: 0.8.3
 
@@ -2993,8 +2992,8 @@ tags:
 -   **[orm] [bug]**Fixed bug where list instrumentation would fail to
     represent a setslice of `[0:0]` correctly, which
     in particular could occur when using `insert(0, item)` with the association proxy.
-    由于Python集合中的一些怪癖，使用Python
-    3而不是2的可能性更大。[¶](#change-e7e01f7d15796a940fa6608c2a24096c)
+    由于 Python 集合中的一些怪癖，使用 Python
+    3 而不是 2 的可能性更大。[¶](#change-e7e01f7d15796a940fa6608c2a24096c)
 
     This change is also **backported** to: 0.8.3, 0.7.11
 
@@ -3005,7 +3004,7 @@ tags:
     “passive” flag passed to it; as this defaults to
     `PASSIVE_OFF`, the function will by default
     query the database if the value is not present.
-    这是一个行为变化与0.8。
+    这是一个行为变化与 0.8。
 
     也可以看看
 
@@ -3028,7 +3027,7 @@ tags:
     significantly, the inverse operation `Cls.scalar != None` *would* return `Cls` rows for which
     `Cls.associated` was non-present.
 
-    对`Cls.scalar ！= 'somevalue'`的情况也进行了修改，使其更像是直接的SQL比较；只有存在`Cls.associated`的行以及`Associated.scalar`不为NULL，并且不等于`'somevalue'`。以前，这将是一个简单的`NOT EXISTS`。
+    对`Cls.scalar ！= 'somevalue'`的情况也进行了修改，使其更像是直接的 SQL 比较；只有存在`Cls.associated`的行以及`Associated.scalar`不为 NULL，并且不等于`'somevalue'`。以前，这将是一个简单的`NOT EXISTS`。
 
     Also added a special use case where you can call
     `Cls.scalar.has()` with no arguments, when
@@ -3050,7 +3049,7 @@ tags:
     fetched when joining/joinedloading across a many-to-many
     relationship to a single-table-inheriting subclass with a specific
     discriminator value, due to “secondary” rows that would come back.
-    现在，“辅助”表和右侧表在内部加入了多对多关系的所有ORM连接的括号内，以便可以精确地过滤左右连接。最终通过[＃2587](http://www.sqlalchemy.org/trac/ticket/2587)中概述的右嵌套连接解决了这个问题，从而实现了这一改变。
+    现在，“辅助”表和右侧表在内部加入了多对多关系的所有 ORM 连接的括号内，以便可以精确地过滤左右连接。最终通过[＃2587](http://www.sqlalchemy.org/trac/ticket/2587)中概述的右嵌套连接解决了这个问题，从而实现了这一改变。
 
     也可以看看
 
@@ -3062,7 +3061,7 @@ tags:
 
     参考文献：[＃2369](http://www.sqlalchemy.org/trac/ticket/2369)
 
--   **[orm] [bug]** [`Query.select_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")方法的“自动别名”行为已被关闭。具体行为现在可以通过一个新方法[`Query.select_entity_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_entity_from "sqlalchemy.orm.query.Query.select_entity_from")获得。这里的自动别名行为从来没有很好的文档记录，并且通常不是我们所期望的，因为[`Query.select_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")已经变得更加倾向于控制JOIN的呈现方式。[`Query.select_entity_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_entity_from "sqlalchemy.orm.query.Query.select_entity_from")也将在0.8中可用，以便依赖于自动别名的应用程序可以将其应用程序移至使用此方法。
+-   **[orm] [bug]** [`Query.select_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")方法的“自动别名”行为已被关闭。具体行为现在可以通过一个新方法[`Query.select_entity_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_entity_from "sqlalchemy.orm.query.Query.select_entity_from")获得。这里的自动别名行为从来没有很好的文档记录，并且通常不是我们所期望的，因为[`Query.select_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")已经变得更加倾向于控制 JOIN 的呈现方式。[`Query.select_entity_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_entity_from "sqlalchemy.orm.query.Query.select_entity_from")也将在 0.8 中可用，以便依赖于自动别名的应用程序可以将其应用程序移至使用此方法。
 
     也可以看看
 
@@ -3114,8 +3113,8 @@ tags:
 
 -   **[engine] [bug] [oracle]**Dialect.initialize() is not called a
     second time if an [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")
-    is recreated, due to a disconnect error. 这解决了Oracle
-    8方言中的一个特定问题，但通常dialect.initialize()阶段应该只能用于每种方言一次。[¶](#change-3d8267e6caa813efc145b77d062c77ad)
+    is recreated, due to a disconnect error. 这解决了 Oracle
+    8 方言中的一个特定问题，但通常 dialect.initialize()阶段应该只能用于每种方言一次。[¶](#change-3d8267e6caa813efc145b77d062c77ad)
 
     This change is also **backported** to: 0.8.3
 
@@ -3137,7 +3136,7 @@ tags:
 
     这个改变也被**backported**修改为：0.8.2
 
-    参考文献：[请求github：6](https://github.com/zzzeek/sqlalchemy/pull/6)
+    参考文献：[请求 github：6](https://github.com/zzzeek/sqlalchemy/pull/6)
 
 -   **[engine] [bug]**The regexp used by the [`make_url()`](core_engines.html#sqlalchemy.engine.url.make_url "sqlalchemy.engine.url.make_url")
     function now parses ipv6 addresses, e.g. surrounded by
@@ -3158,8 +3157,8 @@ tags:
 
 ### SQL [¶ T0\>](#change-0.9.0b1-sql "Permalink to this headline")
 
--   **[sql] [feature]**通过[`Inspector.get_unique_constraints()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_unique_constraints "sqlalchemy.engine.reflection.Inspector.get_unique_constraints")方法增加了对“唯一约束”反射的支持。感谢Roman
-    Podolyaka的补丁。[¶](#change-e911a8b7deaa9ca6726dfc5d21dfd76d)
+-   **[sql] [feature]**通过[`Inspector.get_unique_constraints()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_unique_constraints "sqlalchemy.engine.reflection.Inspector.get_unique_constraints")方法增加了对“唯一约束”反射的支持。感谢 Roman
+    Podolyaka 的补丁。[¶](#change-e911a8b7deaa9ca6726dfc5d21dfd76d)
 
     这个改变也被**backported**修改为：0.8.4
 
@@ -3171,7 +3170,7 @@ tags:
     constructs will now interpret ORM entities as target tables to be
     operated upon, e.g.:
 
-        from sqlalchemy import insert, update, delete
+        from sqlalchemy import insert, update, deleteplainplainplainplainplainplainplainplainplainplainplainplain
 
         ins = insert(SomeMappedClass).values(x=5)
 
@@ -3186,7 +3185,7 @@ tags:
 -   **[sql] [feature] [postgresql] [mysql]**The Postgresql and MySQL
     dialects now support reflection/inspection of foreign key options,
     including ON UPDATE, ON DELETE.
-    Postgresql也反映了MATCH，DEFERRABLE和INITIALLY。Coutesy
+    Postgresql 也反映了 MATCH，DEFERRABLE 和 INITIALLY。Coutesy
     ijl。[¶](#change-8eb029cbdea1c892a1ad62622f54cdba)
 
     参考文献：[＃2183](http://www.sqlalchemy.org/trac/ticket/2183)
@@ -3233,7 +3232,7 @@ tags:
     [\#2823](http://www.sqlalchemy.org/trac/ticket/2823)
 
 -   **[sql]
-    [feature]**打字系统现在处理渲染“文字束缚”值的任务，例如，值通常是绑定参数，但由于上下文必须呈现为字符串，通常位于DDL结构中，例如CHECK约束和索引（请注意，DDL从[＃2742](http://www.sqlalchemy.org/trac/ticket/2742)使用“文字绑定”值）
+    [feature]**打字系统现在处理渲染“文字束缚”值的任务，例如，值通常是绑定参数，但由于上下文必须呈现为字符串，通常位于 DDL 结构中，例如 CHECK 约束和索引（请注意，DDL 从[＃2742](http://www.sqlalchemy.org/trac/ticket/2742)使用“文字绑定”值）
     。一个新的方法[`TypeEngine.literal_processor()`](core_type_api.html#sqlalchemy.types.TypeEngine.literal_processor "sqlalchemy.types.TypeEngine.literal_processor")作为基础，并且添加[`TypeDecorator.process_literal_param()`](core_custom_types.html#sqlalchemy.types.TypeDecorator.process_literal_param "sqlalchemy.types.TypeDecorator.process_literal_param")以允许包装本地文字渲染方法。
 
     也可以看看
@@ -3264,7 +3263,7 @@ tags:
 -   **[sql] [feature]**为[`insert()`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.dml.insert "sqlalchemy.dialects.postgresql.dml.insert")结构[`Insert.from_select()`](core_dml.html#sqlalchemy.sql.expression.Insert.from_select "sqlalchemy.sql.expression.Insert.from_select")添加了新方法。Given
     a list of columns and a selectable, renders
     `INSERT INTO (table) (columns) SELECT ..`.
-    虽然此功能在0.9中突出显示，但它也被反向移植到了0.8.3。
+    虽然此功能在 0.9 中突出显示，但它也被反向移植到了 0.8.3。
 
     也可以看看
 
@@ -3308,7 +3307,7 @@ tags:
     and [`Boolean`](core_type_basics.html#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")
     types now bypass any custom (e.g. TypeDecorator) type in use when
     producing the CHECK constraint for the “non native” type.
-    这样自定义类型不会被包含在CHECK中的表达式中，因为这个表达式违背了“impl”值而不是“装饰”值。[¶](#change-a5059e2a0d6f7ae306b16d71a6884f3f)
+    这样自定义类型不会被包含在 CHECK 中的表达式中，因为这个表达式违背了“impl”值而不是“装饰”值。[¶](#change-a5059e2a0d6f7ae306b16d71a6884f3f)
 
     This change is also **backported** to: 0.8.3
 
@@ -3329,7 +3328,7 @@ tags:
     postgresql, mysql, and mssql to ensure that any literal SQL
     expression values are rendered directly as literals, instead of as
     bound parameters, within a CREATE INDEX statement.
-    这也改变了其他DDL的渲染方案，如约束。[¶](#change-6f6cd0ca9e6e5050ad6d52b884122ea9)
+    这也改变了其他 DDL 的渲染方案，如约束。[¶](#change-6f6cd0ca9e6e5050ad6d52b884122ea9)
 
     This change is also **backported** to: 0.8.3
 
@@ -3376,18 +3375,18 @@ tags:
 
     参考文献：[＃2780](http://www.sqlalchemy.org/trac/ticket/2780)
 
--   **[sql] [bug]**对于[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")结构的相关行为的多个修复，在0.8.0中首次引入：
+-   **[sql] [bug]**对于[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")结构的相关行为的多个修复，在 0.8.0 中首次引入：
 
-    -   为了满足这样的用例，其中FROM条目应该向外关联到一个包含另一个的SELECT，然后包含这个SELECT，当通过[`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.correlate "sqlalchemy.sql.expression.Select.correlate")建立显式相关性时，前提是目标选择位于WHERE
+    -   为了满足这样的用例，其中 FROM 条目应该向外关联到一个包含另一个的 SELECT，然后包含这个 SELECT，当通过[`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.correlate "sqlalchemy.sql.expression.Select.correlate")建立显式相关性时，前提是目标选择位于 WHERE
         / ORDER BY /
-        columns子句所包含的链中，而不仅仅是嵌套的FROM子句。This makes
+        columns 子句所包含的链中，而不仅仅是嵌套的 FROM 子句。This makes
         [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.correlate "sqlalchemy.sql.expression.Select.correlate")
         act more compatibly to that of 0.7 again while still maintaining
         the new “smart” correlation.
-    -   当不使用显式关联时，通常的“隐式”关联将其行为限制为立即封闭的SELECT，以最大化与0.7应用程序的兼容性，并且还防止在这种情况下嵌套FROM之间的相关性，保持与0.8.0
-        / 0.8的兼容性。 1。
-    -   [`Select.correlate_except()`](core_selectable.html#sqlalchemy.sql.expression.Select.correlate_except "sqlalchemy.sql.expression.Select.correlate_except")方法在所有情况下都不会阻止给定的FROM子句相关，并且也会导致FROM子句完全被错误地省略（更像0.7会做的），这已经固定。
-    -   调用select.correlate\_except（None）将按照预期将所有FROM子句输入到相关中。
+    -   当不使用显式关联时，通常的“隐式”关联将其行为限制为立即封闭的 SELECT，以最大化与 0.7 应用程序的兼容性，并且还防止在这种情况下嵌套 FROM 之间的相关性，保持与 0.8.0
+        / 0.8 的兼容性。 1。
+    -   [`Select.correlate_except()`](core_selectable.html#sqlalchemy.sql.expression.Select.correlate_except "sqlalchemy.sql.expression.Select.correlate_except")方法在所有情况下都不会阻止给定的 FROM 子句相关，并且也会导致 FROM 子句完全被错误地省略（更像 0.7 会做的），这已经固定。
+    -   调用 select.correlate\_except（None）将按照预期将所有 FROM 子句输入到相关中。
 
     [¶](#change-ec66deaad21dd8b26baa4f0b315154b4)
 
@@ -3416,15 +3415,15 @@ tags:
 
     参考文献：[＃2728](http://www.sqlalchemy.org/trac/ticket/2728)
 
--   **[sql] [bug]**删除了来自基类[`ColumnOperators`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")类的“未实现”`__iter__()`调用，而这是在0.8中引入的。
-    0，以防止在自定义运算符上实现`__getitem__()`方法，然后在该对象上错误地调用`list()`时出现无限的内存增长循环，导致列元素报告它们实际上是可迭代类型，当您尝试迭代时会抛出错误。没有真正的方式让双方都在这里，所以我们坚持使用Python的最佳实践。仔细在自定义运算符上实现`__getitem__()`！[¶](#change-413cb4c102d2705b115721cf5917ed43)
+-   **[sql] [bug]**删除了来自基类[`ColumnOperators`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")类的“未实现”`__iter__()`调用，而这是在 0.8 中引入的。
+    0，以防止在自定义运算符上实现`__getitem__()`方法，然后在该对象上错误地调用`list()`时出现无限的内存增长循环，导致列元素报告它们实际上是可迭代类型，当您尝试迭代时会抛出错误。没有真正的方式让双方都在这里，所以我们坚持使用 Python 的最佳实践。仔细在自定义运算符上实现`__getitem__()`！[¶](#change-413cb4c102d2705b115721cf5917ed43)
 
     这个改变也被**backported**修改为：0.8.2
 
     参考文献：[＃2726](http://www.sqlalchemy.org/trac/ticket/2726)
 
 -   **[sql]
-    [bug]**固定回归到0.7.9，如果CTE的名称在多个FROM子句中被引用，那么它的名称可能不会被正确引用。[¶](#change-97b9ec01528f6ce1a103f8b8800d8b35)
+    [bug]**固定回归到 0.7.9，如果 CTE 的名称在多个 FROM 子句中被引用，那么它的名称可能不会被正确引用。[¶](#change-97b9ec01528f6ce1a103f8b8800d8b35)
 
     This change is also **backported** to: 0.8.3, 0.7.11
 
@@ -3452,13 +3451,13 @@ tags:
 
     参考文献：[＃2835](http://www.sqlalchemy.org/trac/ticket/2835)
 
--   **[sql] [bug]**错误的kw arg“schema”已从[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")对象中删除。这是一个无所作为的偶然犯罪；当使用这个kw
-    arg时，在0.8.3中发出警告。[¶](#change-f9093cc2030bb467e2b99b6844eee451)
+-   **[sql] [bug]**错误的 kw arg“schema”已从[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")对象中删除。这是一个无所作为的偶然犯罪；当使用这个 kw
+    arg 时，在 0.8.3 中发出警告。[¶](#change-f9093cc2030bb467e2b99b6844eee451)
 
     参考文献：[＃2831](http://www.sqlalchemy.org/trac/ticket/2831)
 
 -   **[sql]
-    [bug]**对“引用”标识符的处理方式进行了重新修改，而不是依赖传递的各种`quote=True`标志，这些标志被转换为丰富的字符串对象，其中包含引用信息，这些信息被传递到通用模式结构（如[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")等）。这解决了各种方法的问题，这些方法没有正确地遵守“quote”标志，例如[`Engine.has_table()`](core_connections.html#sqlalchemy.engine.Engine.has_table "sqlalchemy.engine.Engine.has_table")和相关方法。[`quoted_name`](core_sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")对象是一个字符串子类，如果需要也可以明确使用；该对象将保持传递的引用偏好，并且还将绕过由大写符号标准化的方言（如Oracle，Firebird和DB2）执行的“名称规范化”。结果是，“大写”后端现在可以使用强制引用的名称，如小写引用的名称和新的保留字。
+    [bug]**对“引用”标识符的处理方式进行了重新修改，而不是依赖传递的各种`quote=True`标志，这些标志被转换为丰富的字符串对象，其中包含引用信息，这些信息被传递到通用模式结构（如[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")等）。这解决了各种方法的问题，这些方法没有正确地遵守“quote”标志，例如[`Engine.has_table()`](core_connections.html#sqlalchemy.engine.Engine.has_table "sqlalchemy.engine.Engine.has_table")和相关方法。[`quoted_name`](core_sqlelement.html#sqlalchemy.sql.elements.quoted_name "sqlalchemy.sql.elements.quoted_name")对象是一个字符串子类，如果需要也可以明确使用；该对象将保持传递的引用偏好，并且还将绕过由大写符号标准化的方言（如 Oracle，Firebird 和 DB2）执行的“名称规范化”。结果是，“大写”后端现在可以使用强制引用的名称，如小写引用的名称和新的保留字。
 
     也可以看看
 
@@ -3481,17 +3480,17 @@ tags:
 
     参考文献：[＃1765](http://www.sqlalchemy.org/trac/ticket/1765)
 
-### 的PostgreSQL [¶ T0\>](#change-0.9.0b1-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.9.0b1-postgresql "Permalink to this headline")
 
--   **[postgresql] [feature]**已添加对Postgresql
-    9.2范围类型的支持。目前，没有提供类型转换，因此目前可以直接使用字符串或psycopg2
-    2.5范围扩展类型。补丁礼貌Chris
+-   **[postgresql] [feature]**已添加对 Postgresql
+    9.2 范围类型的支持。目前，没有提供类型转换，因此目前可以直接使用字符串或 psycopg2
+    2.5 范围扩展类型。补丁礼貌 Chris
     Withers。[¶](#change-d1e23a832aab5d9d980590ac352028c9)
 
     这个改变也被**backported**修改为：0.8.2
 
--   **[postgresql] [feature]**在使用psycopg2
-    DBAPI时增加了对“AUTOCOMMIT”隔离的支持。该关键字可通过`isolation_level`执行选项使用。Pope礼貌Roman
+-   **[postgresql] [feature]**在使用 psycopg2
+    DBAPI 时增加了对“AUTOCOMMIT”隔离的支持。该关键字可通过`isolation_level`执行选项使用。Pope 礼貌 Roman
     Podolyaka。[¶](#change-0c25a8156ec52fca32278f7939a5ec93)
 
     这个改变也被**backported**修改为：0.8.2
@@ -3507,21 +3506,21 @@ tags:
     参考文献：[＃2840](http://www.sqlalchemy.org/trac/ticket/2840)
 
 -   **[postgresql]
-    [bug]**从列的服务器默认值的反射中删除了128个字符的截断；此代码原始来自PG系统视图，它为了可读性而截断了字符串。[¶](#change-c7b42a13889c2700394a72cd53fdf578)
+    [bug]**从列的服务器默认值的反射中删除了 128 个字符的截断；此代码原始来自 PG 系统视图，它为了可读性而截断了字符串。[¶](#change-c7b42a13889c2700394a72cd53fdf578)
 
     This change is also **backported** to: 0.8.3
 
     参考文献：[＃2844](http://www.sqlalchemy.org/trac/ticket/2844)
 
--   **[postgresql] [bug]**括号将应用于复合SQL表达式，并在CREATE
-    INDEX语句的列表中呈现。[¶](#change-90c077a62f3393fc602fa4e68ef713bd)
+-   **[postgresql] [bug]**括号将应用于复合 SQL 表达式，并在 CREATE
+    INDEX 语句的列表中呈现。[¶](#change-90c077a62f3393fc602fa4e68ef713bd)
 
     This change is also **backported** to: 0.8.3
 
     参考文献：[＃2742](http://www.sqlalchemy.org/trac/ticket/2742)
 
 -   **[postgresql]
-    [bug]**修复了Postgresql版本字符串在前缀“Postgresql”或“EnterpriseDB”之前的前缀不会被解析的错误。Courtesy
+    [bug]**修复了 Postgresql 版本字符串在前缀“Postgresql”或“EnterpriseDB”之前的前缀不会被解析的错误。Courtesy
     Scott Schaefer。[¶](#change-7a2ed752121c34c9b56e49bf4745e646)
 
     This change is also **backported** to: 0.8.3
@@ -3543,34 +3542,34 @@ tags:
 -   **[postgresql] [bug]**Fixed bug in HSTORE type where keys/values
     that contained backslashed quotes would not be escaped correctly
     when using the “non native” (i.e. non-psycopg2) means of translating
-    HSTORE data. 补丁由Ryan
-    Kelly提供。[¶](#change-a284671030fa2fb228bace39dcecba09)
+    HSTORE data. 补丁由 Ryan
+    Kelly 提供。[¶](#change-a284671030fa2fb228bace39dcecba09)
 
     这个改变也被**backported**修改为：0.8.2
 
     参考文献：[＃2766](http://www.sqlalchemy.org/trac/ticket/2766)
 
 -   **[postgresql]
-    [bug]**修复了多列Postgresql索引中的列顺序将以错误顺序反映的错误。Courtesy
+    [bug]**修复了多列 Postgresql 索引中的列顺序将以错误顺序反映的错误。Courtesy
     Roman Podolyaka。[¶](#change-fd3a75fa26f5e1303ec1daf1ede035e9)
 
     这个改变也被**backported**修改为：0.8.2
 
     参考文献：[＃2767](http://www.sqlalchemy.org/trac/ticket/2767)
 
-### MySQL的[¶ T0\>](#change-0.9.0b1-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.9.0b1-mysql "Permalink to this headline")
 
 -   **[mysql] [feature]**The `mysql_length`
     parameter used with [`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")
     can now be passed as a dictionary of column names/lengths, for use
-    with composite indexes. 非常感谢Roman
-    Podolyaka提供的补丁。[¶](#change-d0a8eb2d08437d50b589f473fab54468)
+    with composite indexes. 非常感谢 Roman
+    Podolyaka 提供的补丁。[¶](#change-d0a8eb2d08437d50b589f473fab54468)
 
     这个改变也被**backported**修改为：0.8.2
 
     参考文献：[＃2704](http://www.sqlalchemy.org/trac/ticket/2704)
 
--   **[mysql] [feature]**现在，MySQL [`mysql.SET`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET "sqlalchemy.dialects.mysql.SET")类型具有与[`mysql.ENUM`](dialects_mysql.html#sqlalchemy.dialects.mysql.ENUM "sqlalchemy.dialects.mysql.ENUM")相同的自动引用行为。设置值时不需要引号，但是存在的引号将会随警告一起自动检测。这也有助于Alembic，其中SET类型不会用引号渲染。[¶](#change-8d6f26937d8905e155c0deb811a65b8c)
+-   **[mysql] [feature]**现在，MySQL [`mysql.SET`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET "sqlalchemy.dialects.mysql.SET")类型具有与[`mysql.ENUM`](dialects_mysql.html#sqlalchemy.dialects.mysql.ENUM "sqlalchemy.dialects.mysql.ENUM")相同的自动引用行为。设置值时不需要引号，但是存在的引号将会随警告一起自动检测。这也有助于 Alembic，其中 SET 类型不会用引号渲染。[¶](#change-8d6f26937d8905e155c0deb811a65b8c)
 
     参考文献：[＃2817](http://www.sqlalchemy.org/trac/ticket/2817)
 
@@ -3582,10 +3581,10 @@ tags:
     0.9; this keyword will now render again, raising errors on MySQL as
     it is not understood - the same behavior will also apply to the
     `initially` keyword.
-    在0.8中，关键字将保持忽略，但会发出警告。此外，`match`关键字现在会在0.9上产生一个[`CompileError`](core_exceptions.html#sqlalchemy.exc.CompileError "sqlalchemy.exc.CompileError")，并在0.8上发出警告；这个关键字不仅被MySQL默默地忽略，而且打破了ON
-    UPDATE / ON DELETE选项。
+    在 0.8 中，关键字将保持忽略，但会发出警告。此外，`match`关键字现在会在 0.9 上产生一个[`CompileError`](core_exceptions.html#sqlalchemy.exc.CompileError "sqlalchemy.exc.CompileError")，并在 0.8 上发出警告；这个关键字不仅被 MySQL 默默地忽略，而且打破了 ON
+    UPDATE / ON DELETE 选项。
 
-    要使用在MySQL上不呈现或呈现不同的[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")，请使用自定义编译选项。这个用法的一个例子已经添加到文档中，请参阅[MySQL
+    要使用在 MySQL 上不呈现或呈现不同的[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")，请使用自定义编译选项。这个用法的一个例子已经添加到文档中，请参阅[MySQL
     Foreign Keys](dialects_mysql.html#mysql-foreign-keys)。
 
     [¶](#change-e43926dc67636d3ba7e0744c194355b2)
@@ -3613,7 +3612,7 @@ tags:
 
     参考文献：[＃2768](http://www.sqlalchemy.org/trac/ticket/2768)
 
--   **[mysql] [bug]**为`mysql+gaerdbms`方言添加了另一个条件，用于检测所谓的“开发”模式，我们应该使用`rdbms_mysqldb`补丁礼貌Brett
+-   **[mysql] [bug]**为`mysql+gaerdbms`方言添加了另一个条件，用于检测所谓的“开发”模式，我们应该使用`rdbms_mysqldb`补丁礼貌 Brett
     Slatkin。[¶](#change-b93865e4329f3662cd5b2933bf555218)
 
     这个改变也被**backported**修改为：0.8.2
@@ -3625,41 +3624,41 @@ tags:
     and [`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")
     will not render the `DEFERRABLE` keyword on the
     MySQL dialect.
-    很长一段时间，我们放弃了这一点，因为不可延迟的外键与延迟的外键的行为不同，但有些环境只是禁用MySQL上的FK，所以我们在这里不会引起注意。[t0
+    很长一段时间，我们放弃了这一点，因为不可延迟的外键与延迟的外键的行为不同，但有些环境只是禁用 MySQL 上的 FK，所以我们在这里不会引起注意。[t0
     \>](#change-43e1dfe4d4c7f5082a4ca7f2271b21b0)
 
     这个改变也被**backported**修改为：0.8.2
 
     参考文献：[＃2721](http://www.sqlalchemy.org/trac/ticket/2721)
 
--   **[mysql] [bug]**版本5.5,5.6的MySQL保留字更新，Hanno
-    Schlichting提供。[¶](#change-8770e442e32764b20ee2132358bc9d6d)
+-   **[mysql] [bug]**版本 5.5,5.6 的 MySQL 保留字更新，Hanno
+    Schlichting 提供。[¶](#change-8770e442e32764b20ee2132358bc9d6d)
 
     This change is also **backported** to: 0.8.3, 0.7.11
 
     参考文献：[＃2791](http://www.sqlalchemy.org/trac/ticket/2791)
 
 -   **[mysql]
-    [bug]**修复并测试反射中的MySQL外键选项的解析；这补充了[＃2183](http://www.sqlalchemy.org/trac/ticket/2183)中的工作，我们开始支持外键选项的反映，例如ON
+    [bug]**修复并测试反射中的 MySQL 外键选项的解析；这补充了[＃2183](http://www.sqlalchemy.org/trac/ticket/2183)中的工作，我们开始支持外键选项的反映，例如 ON
     UPDATE / ON DELETE
     cascade。[¶](#change-1fad8db7eac7a5daf1d143084dbc55af)
 
     参考文献：[＃2839](http://www.sqlalchemy.org/trac/ticket/2839)
 
 -   **[mysql]
-    [bug]**改进了对cymysql驱动程序的支持，支持版本0.6.5，礼貌Hajime
+    [bug]**改进了对 cymysql 驱动程序的支持，支持版本 0.6.5，礼貌 Hajime
     Nakagami。[¶](#change-e98fa083392ee258da3be2f4cc463340)
 
 ### 源码[¶ T0\>](#change-0.9.0b1-sqlite "Permalink to this headline")
 
--   **[sqlite] [bug]**新添加的SQLite
-    DATETIME参数storage\_format和regexp显然没有完全正确地实现；当论据被接受时，实际上它们将不起作用；这已被修复。[¶](#change-e196956853a1c770ffc96aa3ebdb0027)
+-   **[sqlite] [bug]**新添加的 SQLite
+    DATETIME 参数 storage\_format 和 regexp 显然没有完全正确地实现；当论据被接受时，实际上它们将不起作用；这已被修复。[¶](#change-e196956853a1c770ffc96aa3ebdb0027)
 
     This change is also **backported** to: 0.8.3
 
     参考文献：[＃2781](http://www.sqlalchemy.org/trac/ticket/2781)
 
--   **[sqlite] [bug]**将[`sqlalchemy.types.BIGINT`](core_type_basics.html#sqlalchemy.types.BIGINT "sqlalchemy.types.BIGINT")添加到可以通过SQLite方言反映的类型名称列表；礼貌罗素斯图尔特。[¶](#change-ed8a730c977ad5352148eb228c2b3a31)
+-   **[sqlite] [bug]**将[`sqlalchemy.types.BIGINT`](core_type_basics.html#sqlalchemy.types.BIGINT "sqlalchemy.types.BIGINT")添加到可以通过 SQLite 方言反映的类型名称列表；礼貌罗素斯图尔特。[¶](#change-ed8a730c977ad5352148eb228c2b3a31)
 
     这个改变也被**backported**修改为：0.8.2
 
@@ -3667,30 +3666,30 @@ tags:
 
 ### MSSQL [¶ T0\>](#change-0.9.0b1-mssql "Permalink to this headline")
 
--   当在SQL Server
-    2000上查询信息模式时，删除了在0.8.1中添加的CAST调用，以帮助解决驱动程序问题，这在2000年显然不兼容。**[mssql]
-    [bug]**CAST保持适用于SQL Server
-    2005及更高版本。[¶](#change-02967c3908e9232b5bde5a7b76c9cd7b)
+-   当在 SQL Server
+    2000 上查询信息模式时，删除了在 0.8.1 中添加的 CAST 调用，以帮助解决驱动程序问题，这在 2000 年显然不兼容。**[mssql]
+    [bug]**CAST 保持适用于 SQL Server
+    2005 及更高版本。[¶](#change-02967c3908e9232b5bde5a7b76c9cd7b)
 
     这个改变也被**backported**修改为：0.8.2
 
     参考文献：[＃2747](http://www.sqlalchemy.org/trac/ticket/2747)
 
--   **[mssql] [bug] [pyodbc]**使用Python 3 +
-    pyodbc修复MSSQL，包括正确传递语句[¶](#change-bea87c5d2f97257ad289ce3893861719)
+-   **[mssql] [bug] [pyodbc]**使用 Python 3 +
+    pyodbc 修复 MSSQL，包括正确传递语句[¶](#change-bea87c5d2f97257ad289ce3893861719)
 
     参考文献：[＃2355](http://www.sqlalchemy.org/trac/ticket/2355)
 
 ### 预言[¶ T0\>](#change-0.9.0b1-oracle "Permalink to this headline")
 
 -   **[oracle] [feature]
-    [py3k]**使用cx\_oracle的Oracle单元测试现在可以在Python
-    3下完全传递。[¶](#change-d164453835dc47719c20c02f5a49d116)
+    [py3k]**使用 cx\_oracle 的 Oracle 单元测试现在可以在 Python
+    3 下完全传递。[¶](#change-d164453835dc47719c20c02f5a49d116)
 
 -   **[oracle] [bug]**Fixed bug where Oracle table reflection using
     synonyms would fail if the synonym and the table were in different
-    remote schemas. 补丁修复Kyle
-    Derr礼貌。[¶](#change-7db6754b84c59e26d48cb6796899ee20)
+    remote schemas. 补丁修复 Kyle
+    Derr 礼貌。[¶](#change-7db6754b84c59e26d48cb6796899ee20)
 
     This change is also **backported** to: 0.8.3
 
@@ -3699,7 +3698,7 @@ tags:
 ### 火鸟[¶ T0\>](#change-0.9.0b1-firebird "Permalink to this headline")
 
 -   **[firebird]
-    [feature]**为kinterbasdb和fdb方言添加了新的标志`retaining=True`。这将控制发送到DBAPI连接的`commit()`和`rollback()`方法的`retaining`标志的值。由于历史原因，该标志在0.8.2中默认为`True`，但在0.9.0b1中，该标志默认为`False`。[¶](#change-9175f0322dec423ed80f93115ad65aae)
+    [feature]**为 kinterbasdb 和 fdb 方言添加了新的标志`retaining=True`。这将控制发送到 DBAPI 连接的`commit()`和`rollback()`方法的`retaining`标志的值。由于历史原因，该标志在 0.8.2 中默认为`True`，但在 0.9.0b1 中，该标志默认为`False`。[¶](#change-9175f0322dec423ed80f93115ad65aae)
 
     这个改变也被**backported**修改为：0.8.2
 
@@ -3725,7 +3724,7 @@ tags:
 
 ### 杂项[¶ T0\>](#change-0.9.0b1-misc "Permalink to this headline")
 
--   **[feature]**将`system=True`添加到[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")中，将列标记为系统自动创建的列数据库（例如Postgresql
+-   **[feature]**将`system=True`添加到[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")中，将列标记为系统自动创建的列数据库（例如 Postgresql
     `oid`或`xmin`）。该列将从`CREATE TABLE`语句中省略，但否则可用于查询。另外，通过生成返回`None`的规则，可以将[`CreateColumn`](core_ddl.html#sqlalchemy.schema.CreateColumn "sqlalchemy.schema.CreateColumn")结构应用于允许跳过列的自定义编译规则。[¶](#change-4376b4db83754e008ed7559a50c2b16c)
 
     This change is also **backported** to: 0.8.3
@@ -3735,7 +3734,7 @@ tags:
 
     This change is also **backported** to: 0.8.3
 
--   **[feature] [core]**为[`UpdateBase.returning()`](core_dml.html#sqlalchemy.sql.expression.UpdateBase.returning "sqlalchemy.sql.expression.UpdateBase.returning")添加了一个名为[`ValuesBase.return_defaults()`](core_dml.html#sqlalchemy.sql.expression.ValuesBase.return_defaults "sqlalchemy.sql.expression.ValuesBase.return_defaults")的新变体。这允许将任意列添加到语句的RETURNING子句中，而不会干扰编译器通常的“隐式返回”功能，该功能用于有效提取新生成的主键值。为支持后端，所有获取值的字典存在于[`ResultProxy.returned_defaults`](core_connections.html#sqlalchemy.engine.ResultProxy.returned_defaults "sqlalchemy.engine.ResultProxy.returned_defaults")。[¶](#change-c6ae54dff0bc9fddf9cbe1f7a37fcd59)
+-   **[feature] [core]**为[`UpdateBase.returning()`](core_dml.html#sqlalchemy.sql.expression.UpdateBase.returning "sqlalchemy.sql.expression.UpdateBase.returning")添加了一个名为[`ValuesBase.return_defaults()`](core_dml.html#sqlalchemy.sql.expression.ValuesBase.return_defaults "sqlalchemy.sql.expression.ValuesBase.return_defaults")的新变体。这允许将任意列添加到语句的 RETURNING 子句中，而不会干扰编译器通常的“隐式返回”功能，该功能用于有效提取新生成的主键值。为支持后端，所有获取值的字典存在于[`ResultProxy.returned_defaults`](core_connections.html#sqlalchemy.engine.ResultProxy.returned_defaults "sqlalchemy.engine.ResultProxy.returned_defaults")。[¶](#change-c6ae54dff0bc9fddf9cbe1f7a37fcd59)
 
     参考文献：[＃2793](http://www.sqlalchemy.org/trac/ticket/2793)
 
@@ -3746,7 +3745,7 @@ tags:
 
 -   **[bug]
     [examples]**在版本控制示例中创建的历史记录表中添加了“autoincrement =
-    False”，因为该表在任何情况下都不应该有autoinc，Patrick Schmid提供[¶
+    False”，因为该表在任何情况下都不应该有 autoinc，Patrick Schmid 提供[¶
     T2\>](#change-95b0a27ef450ed818ac940e3ded22313)
 
     This change is also **backported** to: 0.8.3
@@ -3756,21 +3755,21 @@ tags:
     up when it tried to check that column for being a
     [`MutableComposite`](orm_extensions_mutable.html#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")
     (which it isn’t).
-    礼貌asldevi。[¶](#change-de133057736a5ba4eb2f13b2226d6189)
+    礼貌 asldevi。[¶](#change-de133057736a5ba4eb2f13b2226d6189)
 
     这个改变也被**backported**修改为：0.8.2
 
 -   **[bug] [examples]**Fixed an issue with the “versioning” recipe
     whereby a many-to-one reference could produce a meaningless version
     for the target, even though it was not changed, when backrefs were
-    present. 补丁由Matt
-    Chisholm提供。[¶](#change-b0dcd18db52ac8a72250f771c09f4c4f)
+    present. 补丁由 Matt
+    Chisholm 提供。[¶](#change-b0dcd18db52ac8a72250f771c09f4c4f)
 
     这个改变也被**backported**修改为：0.8.2
 
--   **[requirements]**现在需要Python
-    [mock](https://pypi.python.org/pypi/mock)库来运行单元测试套件。作为Python
-    3.3的标准库的一部分，以前的Python安装将需要安装它，以便运行单元测试或使用外部方言的`sqlalchemy.testing`包。[T2\>](#change-47f2cda56e1d7a6b9dffa4b1b316855a)
+-   **[requirements]**现在需要 Python
+    [mock](https://pypi.python.org/pypi/mock)库来运行单元测试套件。作为 Python
+    3.3 的标准库的一部分，以前的 Python 安装将需要安装它，以便运行单元测试或使用外部方言的`sqlalchemy.testing`包。[T2\>](#change-47f2cda56e1d7a6b9dffa4b1b316855a)
 
     这个改变也被**backported**修改为：0.8.2
 

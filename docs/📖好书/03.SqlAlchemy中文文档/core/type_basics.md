@@ -21,7 +21,7 @@ SQLAlchemy为大多数常用数据库数据类型提供了抽象，并提供了�
     ...               Column('login', String(32))
     ...              )
 
-SQLAlchemy在发布`CREATE TABLE时将使用Integer`和`String(32)`
+SQLAlchemy 在发布`CREATE TABLE时将使用Integer`和`String(32)`
 t4\>语句，并在从数据库读回行`SELECTed`时再次使用它。接受类型的函数（比如[`Column()`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")）通常会接受一个类型类或实例；
 `Integer`相当于`Integer()`，在这种情况下没有构造参数。
 
@@ -481,7 +481,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
 *class* `sqlalchemy.types。`{.descclassname} `Text`{.descname} （ *length = None*，*= None*，*convert\_unicode = False*，*unicode\_error = None*，*\_warn\_on\_bytestring = False ） [¶ T10\>](#sqlalchemy.types.Text "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.String`](#sqlalchemy.types.String "sqlalchemy.types.String")
 
-    可变大小的字符串类型。
+    可变大小的字符串类型。plain
 
     在SQL中，通常对应于CLOB或TEXT。也可以采用Python
     unicode对象，并在绑定参数中对数据库的编码进行编码（结果集相反）。通常，TEXT对象没有长度；而一些数据库在这里会接受一个长度的参数，它会被别人拒绝。
@@ -556,7 +556,7 @@ SQL标准和多个供应商类型[¶](#sql-standard-and-multiple-vendor-types "P
 the “generic” types, the SQL standard/multi-vendor types have **no**
 guarantee of working on all backends, and will only work on those
 backends that explicitly support them by name.
-也就是说，类型将始终使用`CREATE TABLE`发布DDL中的确切名称。
+也就是说，类型将始终使用`CREATE TABLE`发布 DDL 中的确切名称。
 
 *class* `sqlalchemy.types。`{.descclassname} `ARRAY`{.descname} （ *item\_type*，*as\_tuple = False dimensions = None，*zero\_indexes = False* ） [¶](#sqlalchemy.types.ARRAY "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.Indexable`](type_api.html#sqlalchemy.types.Indexable "sqlalchemy.types.Indexable")，[`sqlalchemy.types.Concatenable`](type_api.html#sqlalchemy.types.Concatenable "sqlalchemy.types.Concatenable")，[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
@@ -725,7 +725,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `BIGINT`{.descname} [¶](#sqlalchemy.types.BIGINT "Permalink to this definition")
 :   基础：[`sqlalchemy.types.BigInteger`](#sqlalchemy.types.BigInteger "sqlalchemy.types.BigInteger")
 
-    SQL BIGINT类型。
+    SQL BIGINT类型。plain
 
 *class* `sqlalchemy.types。`{.descclassname} `BINARY`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.BINARY "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
@@ -926,7 +926,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `REAL`{.descname} （ *precision = None*，*asdecimal = False*，*decimal\_return\_scale = None*，*\*\* kwargs* ） [¶](#sqlalchemy.types.REAL "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Float`](#sqlalchemy.types.Float "sqlalchemy.types.Float")
 
-    SQL REAL类型。
+    SQL REAL类型。plain
 
 *class* `sqlalchemy.types。`{.descclassname} `SMALLINT`{.descname} [¶](#sqlalchemy.types.SMALLINT "Permalink to this definition")
 :   基础：[`sqlalchemy.types.SmallInteger`](#sqlalchemy.types.SmallInteger "sqlalchemy.types.SmallInteger")
@@ -936,7 +936,7 @@ backends that explicitly support them by name.
  *class*`sqlalchemy.types.`{.descclassname}`TEXT`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.types.TEXT "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Text`](#sqlalchemy.types.Text "sqlalchemy.types.Text")
 
-    SQL TEXT类型。
+    SQL TEXT类型。plain
 
  *class*`sqlalchemy.types.`{.descclassname}`TIME`{.descname}(*timezone=False*)[¶](#sqlalchemy.types.TIME "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Time`](#sqlalchemy.types.Time "sqlalchemy.types.Time")
@@ -951,7 +951,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `VARBINARY`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.VARBINARY "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
 
-    SQL VARBINARY类型。
+    SQL VARBINARY类型。plain
 
 *class* `sqlalchemy.types。`{.descclassname} `VARCHAR`{.descname} （ *length =无*，*= None*，*convert\_unicode = False*，*unicode\_error = None*，*\_warn\_on\_bytestring = False ） [¶ T10\>](#sqlalchemy.types.VARCHAR "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.String`](#sqlalchemy.types.String "sqlalchemy.types.String")
@@ -963,7 +963,7 @@ backends that explicitly support them by name.
 
 数据库特定类型也可用于从每个数据库的方言模块导入。请参阅您感兴趣的数据库的[Dialects](dialects_index.html)参考。
 
-例如，MySQL有一个`BIGINT`类型，而PostgreSQL有一个`INET`类型。要使用这些，请明确从模块中导入它们：
+例如，MySQL 有一个`BIGINT`类型，而PostgreSQL有一个`INET`类型。要使用这些，请明确从模块中导入它们：
 
     from sqlalchemy.dialects import mysql
 
@@ -974,7 +974,7 @@ backends that explicitly support them by name.
 
 或者一些PostgreSQL类型：
 
-    from sqlalchemy.dialects import postgresql
+    from sqlalchemy.dialects import postgresqlplain
 
     table = Table('foo', metadata,
         Column('ipaddress', postgresql.INET),
@@ -993,9 +993,9 @@ backends that explicitly support them by name.
                Column('inetaddr', INET)
     )
 
-如上所述，INTEGER和VARCHAR类型最终来自sqlalchemy.types，INET特定于Postgresql方言。
+如上所述，INTEGER 和 VARCHAR 类型最终来自 sqlalchemy.types，INET 特定于 Postgresql 方言。
 
-某些方言级别类型与SQL标准类型具有相同的名称，但也提供了其他参数。例如，MySQL实现了包括附加参数（如collat​​ion和charset）的所有字符和字符串类型：
+某些方言级别类型与 SQL 标准类型具有相同的名称，但也提供了其他参数。例如，MySQL 实现了包括附加参数（如 collat​​ion 和 charset）的所有字符和字符串类型：
 
     from sqlalchemy.dialects.mysql import VARCHAR, TEXT
 

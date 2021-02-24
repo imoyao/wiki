@@ -4,10 +4,9 @@ date: 2021-02-20 22:41:47
 permalink: /sqlalchemy/orm/session_state_management/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
 tags:
-  - 
 ---
 状态管理[¶](#state-management "Permalink to this headline")
 ===========================================================
@@ -18,7 +17,7 @@ Quickie介绍对象状态[¶](#quickie-intro-to-object-states "Permalink to this
 了解实例在会话中可以具有的状态很有帮助：
 
 -   **Transient** -
-    一个不在会话中的实例，不会保存到数据库中；即它没有数据库身份。这种对象与ORM唯一的关系是它的类有一个与它关联的`mapper()`。
+    一个不在会话中的实例，不会保存到数据库中；即它没有数据库身份。这种对象与 ORM 唯一的关系是它的类有一个与它关联的`mapper()`。
 
 -   **Pending** - when you [`add()`](session_api.html#sqlalchemy.orm.session.Session.add "sqlalchemy.orm.session.Session.add")
     a transient instance, it becomes pending.
@@ -30,7 +29,7 @@ Quickie介绍对象状态[¶](#quickie-intro-to-object-states "Permalink to this
 -   **已删除** -
     在刷新中已删除的实例，但事务尚未完成。处于这种状态的对象本质上与“挂起”状态相反；当会话的事务提交时，对象将移至分离状态。或者，当会话的事务回滚时，被删除的对象将*返回*为持久状态。
 
-    版本1.1中已更改：“已删除”状态是与“持久”状态不同的新添加的会话对象状态。
+    版本 1.1 中已更改：“已删除”状态是与“持久”状态不同的新添加的会话对象状态。
 
 -   **Detached** -
     与数据库中的记录相对应或先前对应的实例，但当前不在任何会话中。分离的对象将包含数据库标识标记，但是因为它与会话没有关联，所以不知道该数据库标识是否实际存在于目标数据库中。分离的对象可以正常使用，除非它们无法加载先前标记为“已过期”的未加载属性或属性。
@@ -69,7 +68,7 @@ Events](session_events.html#session-lifecycle-events)部分，以及如何以编
 
 可以使用常规的“包含”语义测试存在性：
 
-    if obj in session:
+    if obj in session:plainplain
         print("Object is present")
 
 会话还跟踪所有新创建的（即挂起的）对象，自上次加载或保存之后发生更改的所有对象（即“脏”）以及标记为已删除的所有对象：
@@ -96,13 +95,13 @@ Events](session_events.html#session-lifecycle-events)部分，以及如何以编
 会话参照行为[¶](#session-referencing-behavior "Permalink to this headline")
 ---------------------------------------------------------------------------
 
-会话中的对象是*弱引用的*。这意味着，当它们在外部应用程序中取消引用时，它们也会从[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中超出范围，并且会受到Python解释器的垃圾回收。例外情况包括挂起的对象，标记为已删除的对象或挂起更改的持久对象。完全刷新后，这些集合全部为空，并且所有对象都被弱引用。
+会话中的对象是*弱引用的*。这意味着，当它们在外部应用程序中取消引用时，它们也会从[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中超出范围，并且会受到 Python 解释器的垃圾回收。例外情况包括挂起的对象，标记为已删除的对象或挂起更改的持久对象。完全刷新后，这些集合全部为空，并且所有对象都被弱引用。
 
 要使[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中的对象保持强引用状态，通常只需要一个简单的方法。外部管理的强引用行为的示例包括将对象加载到与其主键相关的本地字典中，或者将对象加载到它们需要保持引用的时间范围内的列表或集合中。如果需要，可以将这些集合与[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")关联，方法是将它们放入[`Session.info`](session_api.html#sqlalchemy.orm.session.Session.info "sqlalchemy.orm.session.Session.info")字典中。
 
 基于事件的方法也是可行的。当所有对象保持在[persistent](glossary.html#term-persistent)状态时，为所有对象提供“强引用”行为的简单配方如下所示：
 
-    from sqlalchemy import event
+    from sqlalchemy import eventplain
 
     def strong_reference_session(session):
         @event.listens_for(session, "pending_to_persistent")
@@ -200,7 +199,7 @@ is an extremely useful method for many purposes.
 
 让我们使用User和Address对象的规范例子：
 
-    class User(Base):
+    class User(Base):plain
         __tablename__ = 'user'
 
         id = Column(Integer, primary_key=True)
@@ -222,7 +221,7 @@ is an extremely useful method for many purposes.
 
 我们现在创建`a1`，一个会话之外的对象，我们要在现有的`Address`之上合并：
 
-    >>> existing_a1 = u1.addresses[0]
+    >>> existing_a1 = u1.addresses[0]plain
     >>> a1 = Address(id=existing_a1.id)
 
 如果我们这样说，会发生一个惊喜：
@@ -234,7 +233,7 @@ is an extremely useful method for many purposes.
     with identity key (<class '__main__.Address'>, (1,)) conflicts with
     persistent instance <Address at 0x12a25d0>
 
-这是为什么 ？我们没有注意到我们的瀑布。将`a1.user`赋值给级联到`User.addresses`的backref的持久对象，并使我们的`a1`对象处于挂起状态，就好像我们已经添加它。现在我们在会话中有*两个*
+这是为什么 ？我们没有注意到我们的瀑布。将`a1.user`赋值给级联到`User.addresses`的 backref 的持久对象，并使我们的`a1`对象处于挂起状态，就好像我们已经添加它。现在我们在会话中有*两个*
 `Address`对象：
 
     >>> a1 = Address()
@@ -285,7 +284,7 @@ Where above, both `user_id` and `user` are assigned to, and change events are em
 
 或者在对象上有我们不想要的状态？检查`__dict__`是检查以下内容的快速方法：
 
-    >>> a1 = Address(id=existing_a1, user_id=user.id)
+    >>> a1 = Address(id=existing_a1, user_id=user.id)plain
     >>> a1.user
     >>> a1.__dict__
     {'_sa_instance_state': <sqlalchemy.orm.state.InstanceState object at 0x1298d10>,
@@ -303,7 +302,7 @@ Where above, both `user_id` and `user` are assigned to, and change events are em
 
 清除从会话中删除对象，将持久实例发送到分离状态，并将待处理实例发送到瞬态：
 
-    session.expunge(obj1)
+    session.expunge(obj1)plainplain
 
 要删除所有项目，请调用[`expunge_all()`](session_api.html#sqlalchemy.orm.session.Session.expunge_all "sqlalchemy.orm.session.Session.expunge_all")（此方法以前称为`clear()`）。
 
@@ -318,33 +317,33 @@ Where above, both `user_id` and `user` are assigned to, and change events are em
 
 上面的`User`对象是持久的，并且有一系列属性存在；如果我们要查看它的`__dict__`，我们会看到加载状态：
 
-    >>> user.__dict__
+    >>> user.__dict__plain
     {
       'id': 1, 'name': u'user1',
       '_sa_instance_state': <...>,
     }
 
-其中`id`和`name`指数据库中的那些列。`_sa_instance_state`是SQLAlchemy内部使用的非数据库持久化值（它指向实例的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")）。虽然与本节不直接相关，但如果我们想要了解它，我们应该使用[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数来访问它）。
+其中`id`和`name`指数据库中的那些列。`_sa_instance_state`是 SQLAlchemy 内部使用的非数据库持久化值（它指向实例的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")）。虽然与本节不直接相关，但如果我们想要了解它，我们应该使用[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数来访问它）。
 
 此时，我们的`User`对象中的状态与加载的数据库行的状态匹配。但是在使用诸如[`Session.expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")之类的方法使对象过期时，我们看到状态被删除：
 
-    >>> session.expire(user)
+    >>> session.expire(user)plainplain
     >>> user.__dict__
     {'_sa_instance_state': <...>}
 
-我们看到，虽然内部“状态”仍然存在，但与`id`和`name`列对应的值已消失。如果我们要访问这些列中的一个并且正在观察SQL，我们会看到：
+我们看到，虽然内部“状态”仍然存在，但与`id`和`name`列对应的值已消失。如果我们要访问这些列中的一个并且正在观察 SQL，我们会看到：
 
-    >>> print(user.name)
+    >>> print(user.name)plain
     SELECT user.id AS user_id, user.name AS user_name
     FROM user
     WHERE user.id = ?
     (1,)
     user1
 
-以上，在访问过期属性`user.name`时，ORM通过发出用户行的SELECT来启动[lazy
+以上，在访问过期属性`user.name`时，ORM 通过发出用户行的 SELECT 来启动[lazy
 load](glossary.html#term-lazy-load)以从数据库中检索最新状态这个用户提到的。之后，再次填充`__dict__`：
 
-    >>> user.__dict__
+    >>> user.__dict__plainplain
     {
       'id': 1, 'name': u'user1',
       '_sa_instance_state': <...>,
@@ -352,16 +351,16 @@ load](glossary.html#term-lazy-load)以从数据库中检索最新状态这个用
 
 注意
 
-当我们在`__dict__`里面查看时，为了看到SQLAlchemy用对象属性做些什么，我们**不应该修改`__dict__`的内容。直接，至少就SQLAlchemy
-ORM所维护的属性而言（SQLA领域之外的其他属性都可以）。**这是因为SQLAlchemy使用[descriptors](glossary.html#term-descriptors)来跟踪我们对对象所做的更改，并且当我们直接修改`__dict__`时，ORM将无法跟踪我们改变了一些。
+当我们在`__dict__`里面查看时，为了看到 SQLAlchemy 用对象属性做些什么，我们**不应该修改`__dict__`的内容。直接，至少就SQLAlchemy
+ORM所维护的属性而言（SQLA领域之外的其他属性都可以）。**这是因为 SQLAlchemy 使用[descriptors](glossary.html#term-descriptors)来跟踪我们对对象所做的更改，并且当我们直接修改`__dict__`时，ORM 将无法跟踪我们改变了一些。
 
 [`expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")和[`refresh()`](session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")的另一个关键行为是丢弃对象上所有未刷新的更改。也就是说，如果我们要修改`User`上的属性：
 
-    >>> user.name = 'user2'
+    >>> user.name = 'user2'plain
 
 但是我们在没有先调用[`flush()`](session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")的情况下调用[`expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")，我们的`'user2'`的未决值将被丢弃：
 
-    >>> session.expire(user)
+    >>> session.expire(user)plain
     >>> user.name
     'user1'
 
@@ -375,19 +374,19 @@ ORM所维护的属性而言（SQLA领域之外的其他属性都可以）。**�
     # expire only attributes obj1.attr1, obj1.attr2
     session.expire(obj1, ['attr1', 'attr2'])
 
-[`refresh()`](session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")方法有一个类似的接口，但不是过期，而是立即为对象的行发出立即的SELECT：
+[`refresh()`](session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")方法有一个类似的接口，但不是过期，而是立即为对象的行发出立即的 SELECT：
 
-    # reload all attributes on obj1
+    # reload all attributes on obj1plain
     session.refresh(obj1)
 
 [`refresh()`](session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")也接受字符串属性名称列表，但与[`expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")不同，期望至少有一个名称是列映射属性的名称：
 
-    # reload obj1.attr1, obj1.attr2
+    # reload obj1.attr1, obj1.attr2plain
     session.refresh(obj1, ['attr1', 'attr2'])
 
 [`Session.expire_all()`](session_api.html#sqlalchemy.orm.session.Session.expire_all "sqlalchemy.orm.session.Session.expire_all")方法允许我们实时调用[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中包含的所有对象的[`Session.expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")
 
-    session.expire_all()
+    session.expire_all()plainplain
 
 ### 什么实际上加载[¶](#what-actually-loads "Permalink to this headline")
 
@@ -407,7 +406,7 @@ ORM所维护的属性而言（SQLA领域之外的其他属性都可以）。**�
 
 事务隔离
 
-当然，大多数数据库能够一次处理多个事务，甚至包含相同的数据行。当关系数据库处理涉及相同表或行的多个事务时，这是数据库的[isolation](glossary.html#term-isolation)方面起作用的时候。不同数据库的隔离行为差异很大，甚至可以将单个数据库配置为以不同方式运行（通过所谓的隔离级别设置）。从这个意义上说，[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")不能完全预测何时第二次发出的相同SELECT语句肯定会返回我们已有的数据，或者将返回新数据。因此，作为最佳猜测，它假设在事务范围内，除非知道已经发出SQL表达式来修改特定行，否则不需要刷新行，除非明确告知这样做。
+当然，大多数数据库能够一次处理多个事务，甚至包含相同的数据行。当关系数据库处理涉及相同表或行的多个事务时，这是数据库的[isolation](glossary.html#term-isolation)方面起作用的时候。不同数据库的隔离行为差异很大，甚至可以将单个数据库配置为以不同方式运行（通过所谓的隔离级别设置）。从这个意义上说，[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")不能完全预测何时第二次发出的相同 SELECT 语句肯定会返回我们已有的数据，或者将返回新数据。因此，作为最佳猜测，它假设在事务范围内，除非知道已经发出 SQL 表达式来修改特定行，否则不需要刷新行，除非明确告知这样做。
 
 当需要强制对象从数据库中重新加载其数据时，会使用[`Session.expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")和[`Session.refresh()`](session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")方法，那些知道当前数据状态可能已过时的情况。其原因可能包括：
 
@@ -418,7 +417,7 @@ ORM所维护的属性而言（SQLA领域之外的其他属性都可以）。**�
     method;
 -   如果应用程序试图获取已知在并发事务中修改的数据，并且还知道隔离规则实际上允许此数据可见。
 
-第二个要点有一个重要的警告，即“还知道隔离规则实际上允许这些数据可见”。这意味着不能认为发生在另一个数据库连接上的UPDATE在本地仍然可见；在很多情况下，它不会。这就是为什么如果希望使用[`expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")或[`refresh()`](session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")来查看正在进行的事务之间的数据，理解隔离行为是非常重要的。
+第二个要点有一个重要的警告，即“还知道隔离规则实际上允许这些数据可见”。这意味着不能认为发生在另一个数据库连接上的 UPDATE 在本地仍然可见；在很多情况下，它不会。这就是为什么如果希望使用[`expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")或[`refresh()`](session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")来查看正在进行的事务之间的数据，理解隔离行为是非常重要的。
 
 也可以看看
 

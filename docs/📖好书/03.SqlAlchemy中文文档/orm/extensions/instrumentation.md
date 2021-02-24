@@ -15,7 +15,7 @@ tags:
 
 可扩展的类仪器。
 
-[`sqlalchemy.ext.instrumentation`](#module-sqlalchemy.ext.instrumentation "sqlalchemy.ext.instrumentation")包在ORM中提供了备用的类工具系统。类工具是指ORM如何在维护数据的类上放置属性，并跟踪对该数据的更改，以及安装在类上的事件挂钩。
+[`sqlalchemy.ext.instrumentation`](#module-sqlalchemy.ext.instrumentation "sqlalchemy.ext.instrumentation")包在 ORM 中提供了备用的类工具系统。类工具是指 ORM 如何在维护数据的类上放置属性，并跟踪对该数据的更改，以及安装在类上的事件挂钩。
 
 注意
 
@@ -24,7 +24,7 @@ tags:
 有关如何使用检测扩展的示例，请参阅示例[Attribute
 Instrumentation](examples.html#examples-instrumentation)。
 
-在版本0.8中更改： [`sqlalchemy.orm.instrumentation`](events.html#module-sqlalchemy.orm.instrumentation "sqlalchemy.orm.instrumentation")被拆分出来，以便将与非标准检测相关的所有功能移出到[`sqlalchemy.ext.instrumentation`](#module-sqlalchemy.ext.instrumentation "sqlalchemy.ext.instrumentation")导入时，模块将自身安装在[`sqlalchemy.orm.instrumentation`](events.html#module-sqlalchemy.orm.instrumentation "sqlalchemy.orm.instrumentation")中，以便生效，包括识别映射类上的`__sa_instrumentation_manager__`以及[`instrumentation_finders`](#sqlalchemy.ext.instrumentation.instrumentation_finders "sqlalchemy.ext.instrumentation.instrumentation_finders")
+在版本 0.8 中更改： [`sqlalchemy.orm.instrumentation`](events.html#module-sqlalchemy.orm.instrumentation "sqlalchemy.orm.instrumentation")被拆分出来，以便将与非标准检测相关的所有功能移出到[`sqlalchemy.ext.instrumentation`](#module-sqlalchemy.ext.instrumentation "sqlalchemy.ext.instrumentation")导入时，模块将自身安装在[`sqlalchemy.orm.instrumentation`](events.html#module-sqlalchemy.orm.instrumentation "sqlalchemy.orm.instrumentation")中，以便生效，包括识别映射类上的`__sa_instrumentation_manager__`以及[`instrumentation_finders`](#sqlalchemy.ext.instrumentation.instrumentation_finders "sqlalchemy.ext.instrumentation.instrumentation_finders")
 \>被用来确定类仪器的分辨率。
 
 API参考[¶](#api-reference "Permalink to this headline")
@@ -47,7 +47,7 @@ API参考[¶](#api-reference "Permalink to this headline")
     一旦[`sqlalchemy.ext.instrumentation`](#module-sqlalchemy.ext.instrumentation "sqlalchemy.ext.instrumentation")模块被导入后，通过SQLAlchemy工具解析来查询此属性。如果自定义查找器安装在全局instrumentation\_finders列表中，则它们可能会选择或不选择此属性。
 
 *class* `sqlalchemy.orm.instrumentation。`{.descclassname} `InstrumentationFactory`{.descname} [¶](#sqlalchemy.orm.instrumentation.InstrumentationFactory "Permalink to this definition")
-:   新的ClassManager实例的工厂。
+:   新的 ClassManager 实例的工厂。
 
  *class*`sqlalchemy.ext.instrumentation.`{.descclassname}`InstrumentationManager`{.descname}(*class\_*)[¶](#sqlalchemy.ext.instrumentation.InstrumentationManager "Permalink to this definition")
 :   用户定义的类工具扩展。
@@ -114,13 +114,13 @@ API参考[¶](#api-reference "Permalink to this headline")
 `sqlalchemy.ext.instrumentation。`{.descclassname} `instrumentation_finders`{.descname} *= [＆lt；函数find\_native\_user\_instrumentation\_hook at 0x7f43​​0c541230＆gt；]* [¶](#sqlalchemy.ext.instrumentation.instrumentation_finders "Permalink to this definition")
 :   可扩展的可调用序列，返回仪器实现
 
-    当一个类被注册时，每个可调用对象将被传递一个类对象。如果返回None，则会查询序列中的下一个查找器。否则，返回必须是符合sqlalchemy.ext.instrumentation.INSTRUMENTATION\_MANAGER相同准则的检测工厂。
+    当一个类被注册时，每个可调用对象将被传递一个类对象。如果返回None，则会查询序列中的下一个查找器。否则，返回必须是符合sqlalchemy.ext.instrumentation.INSTRUMENTATION\_MANAGER相同准则的检测工厂。plainplain
 
     默认情况下，唯一的查找程序是find\_native\_user\_instrumentation\_hook，它搜索INSTRUMENTATION\_MANAGER。如果所有查找器都返回None，则使用标准的ClassManager工具。
 
 *class* `sqlalchemy.ext.instrumentation。`{.descclassname} `ExtendedInstrumentationRegistry`{.descname} [¶](#sqlalchemy.ext.instrumentation.ExtendedInstrumentationRegistry "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.instrumentation.InstrumentationFactory`](#sqlalchemy.orm.instrumentation.InstrumentationFactory "sqlalchemy.orm.instrumentation.InstrumentationFactory")
 
-    扩展[`InstrumentationFactory`](#sqlalchemy.orm.instrumentation.InstrumentationFactory "sqlalchemy.orm.instrumentation.InstrumentationFactory")以增加簿记，以适应多种类别的经理。
+    扩展[`InstrumentationFactory`](#sqlalchemy.orm.instrumentation.InstrumentationFactory "sqlalchemy.orm.instrumentation.InstrumentationFactory")以增加簿记，以适应多种类别的经理。plain
 
 

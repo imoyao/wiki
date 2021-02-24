@@ -1,5 +1,5 @@
 ---
-title: 关系API
+title: 关系 API
 date: 2021-02-20 22:41:45
 permalink: /sqlalchemy/orm/relationship_api/
 categories:
@@ -558,7 +558,7 @@ tags:
  `sqlalchemy.orm.`{.descclassname}`backref`{.descname}(*name*, *\*\*kwargs*)[¶](#sqlalchemy.orm.backref "Permalink to this definition")
 :   使用显式关键字参数创建一个后端引用，这些参数是可以发送到[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的相同参数。
 
-    与[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的`backref`关键字参数一起使用以代替字符串参数，例如：
+    与[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的`backref`关键字参数一起使用以代替字符串参数，例如：plain
 
         'items':relationship(
             SomeItem, backref=backref('parent', lazy='subquery'))
@@ -585,8 +585,8 @@ tags:
     有关动态加载的更多详细信息，请参见[Dynamic Relationship
     Loaders](collections.html#dynamic-relationship)部分。
 
-` sqlalchemy.orm。 T0> 外国 T1> （ T2>  EXPR  T3> ） T4> ¶ T5 >`{.descclassname}
-:   使用“外部”注释标注一个primaryjoin表达式的一部分。
+`sqlalchemy.orm。 T0> 外国 T1> （ T2>  EXPR  T3> ） T4> ¶ T5 >`{.descclassname}
+:   使用“外部”注释标注一个 primaryjoin 表达式的一部分。
 
     有关使用说明，请参阅[Creating Custom Foreign
     Conditions](join_conditions.html#relationship-custom-foreign)部分。
