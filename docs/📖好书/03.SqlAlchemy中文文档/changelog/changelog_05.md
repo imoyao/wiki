@@ -4,10 +4,9 @@ date: 2021-02-20 22:41:28
 permalink: /sqlalchemy/77563b/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - changelog
 tags:
-  - 
 ---
 0.5 Changelog [¶](#changelog "Permalink to this headline")
 ==========================================================
@@ -19,39 +18,39 @@ tags:
 
 ### SQL [¶ T0\>](#change-0.5.9-sql "Permalink to this headline")
 
--   **[sql]**修复表达式包中的错误self\_group()调用。[¶](#change-2b3dbc23ccb7c7fba44587cc3e64c2b4)
+-   **[sql]**修复表达式包中的错误 self\_group()调用。[¶](#change-2b3dbc23ccb7c7fba44587cc3e64c2b4)
 
     参考文献：[＃1661](http://www.sqlalchemy.org/trac/ticket/1661)
 
 0.5.8 [¶ T0\>](#change-0.5.8 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布时间：2010年1月16日
+发布时间：2010 年 1 月 16 日
 
 ### SQL [¶ T0\>](#change-0.5.8-sql "Permalink to this headline")
 
 -   **[sql]**
-    Column上的copy()方法现在支持未初始化的未命名的Column对象。这样可以方便地创建声明式助手，这些助手可以在多个子类中放置公共列。[¶](#change-cfd691fb4a1a3dc9cc52fbd338afb03e)
+    Column 上的 copy()方法现在支持未初始化的未命名的 Column 对象。这样可以方便地创建声明式助手，这些助手可以在多个子类中放置公共列。[¶](#change-cfd691fb4a1a3dc9cc52fbd338afb03e)
 
--   **[sql]**像Sequence()这样的默认生成器可以在copy()操作中正确转换。[¶](#change-33eee31f1b1df00ed8abad9a8b9bb7d4)
+-   **[sql]**像 Sequence()这样的默认生成器可以在 copy()操作中正确转换。[¶](#change-33eee31f1b1df00ed8abad9a8b9bb7d4)
 
 -   **[sql]**Sequence() and other DefaultGenerator objects are accepted
     as the value for the “default” and “onupdate” keyword arguments of
     Column, in addition to being accepted
     positionally.[¶](#change-357782766666ec6efb3f7d938d277a2d)
 
--   修复了一个列算术错误，它影响了包含独立列表达式的克隆选择列的列对应关系。**[sql]**这个bug通常只在执行0.6
-    via时使用更新的ORM行为时才会引人注意，但在SQL表达式级别也更加正确。[¶](#change-8bee8818221b5bb1cf4c4108b3aa9610)
+-   修复了一个列算术错误，它影响了包含独立列表达式的克隆选择列的列对应关系。**[sql]**这个 bug 通常只在执行 0.6
+    via 时使用更新的 ORM 行为时才会引人注意，但在 SQL 表达式级别也更加正确。[¶](#change-8bee8818221b5bb1cf4c4108b3aa9610)
 
     参考文献：[＃1568](http://www.sqlalchemy.org/trac/ticket/1568)，[＃1617](http://www.sqlalchemy.org/trac/ticket/1617)
 
-### 的PostgreSQL [¶ T0\>](#change-0.5.8-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.5.8-postgresql "Permalink to this headline")
 
 -   **[postgresql]**The extract() function, which was slightly improved
     in 0.5.7, needed a lot more work to generate the correct typecast
     (the typecasts appear to be necessary in PG’s EXTRACT quite a lot of
     the time).
-    现在使用基于PG的日期/时间/间隔算术文档的规则字典生成类型转换。它也接受text()构造，它在0.5.7中被打破。[¶](#change-dd873689e69524aaf89929bdce508264)
+    现在使用基于 PG 的日期/时间/间隔算术文档的规则字典生成类型转换。它也接受 text()构造，它在 0.5.7 中被打破。[¶](#change-dd873689e69524aaf89929bdce508264)
 
     参考文献：[＃1647](http://www.sqlalchemy.org/trac/ticket/1647)
 
@@ -64,7 +63,7 @@ tags:
 0.5.7 [¶ T0\>](#change-0.5.7 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布于：2009年12月26日星期六
+发布于：2009 年 12 月 26 日星期六
 
 ### ORM [¶ T0\>](#change-0.5.7-orm "Permalink to this headline")
 
@@ -91,20 +90,20 @@ tags:
 
     参考文献：[＃1054](http://www.sqlalchemy.org/trac/ticket/1054)
 
--   **[orm]**如果要合并的给定对象中的属性也为None，则Session.merge()现在可以正确覆盖多对一或uselist
-    = False属性为None。[¶\< /
+-   **[orm]**如果要合并的给定对象中的属性也为 None，则 Session.merge()现在可以正确覆盖多对一或 uselist
+    = False 属性为 None。[¶\< /
     T2\>](#change-5f51b3a5ed232849fed023e0e50c68c0)
 
 -   **[orm]**修复了合并包含空主键标识符的临时对象时发生的不必要的选择。[¶](#change-7971259a1cd52e28cfaaca415345964d)
 
     参考文献：[＃1618](http://www.sqlalchemy.org/trac/ticket/1618)
 
--   **[orm]**传递给relation()，column\_property()等的“extension”属性的可变集合将不会在多个工具调用中发生变化或共享，从而防止将重复的扩展（如backref
+-   **[orm]**传递给 relation()，column\_property()等的“extension”属性的可变集合将不会在多个工具调用中发生变化或共享，从而防止将重复的扩展（如 backref
     populator）插入到列表中。[¶](#change-4250173297f3d118a49e5b7b3dabe57e)
 
     参考文献：[＃1585](http://www.sqlalchemy.org/trac/ticket/1585)
 
--   **[orm]**修复了对CompositeProperty上的get\_committed\_value()的调用。[¶](#change-1dc4c6e7d74bb61d6fa728e67a228d6d)
+-   **[orm]**修复了对 CompositeProperty 上的 get\_committed\_value()的调用。[¶](#change-1dc4c6e7d74bb61d6fa728e67a228d6d)
 
     参考文献：[＃1504](http://www.sqlalchemy.org/trac/ticket/1504)
 
@@ -126,8 +125,8 @@ tags:
     now works across join conditions where the two compared types are
     not exactly the same class, but share the same “affinity” - i.e.
     Integer and SmallInteger.
-    还允许反射类型和非反射类型的组合使用0.5样式类型的反射，例如PGText /
-    Text（注意0.6反映类型作为其通用版本）。[¶](#change-56b79c2153a808998c71d6d836429bd8)
+    还允许反射类型和非反射类型的组合使用 0.5 样式类型的反射，例如 PGText /
+    Text（注意 0.6 反映类型作为其通用版本）。[¶](#change-56b79c2153a808998c71d6d836429bd8)
 
     参考文献：[＃1556](http://www.sqlalchemy.org/trac/ticket/1556)
 
@@ -175,16 +174,16 @@ tags:
 
     参考文献：[＃1641](http://www.sqlalchemy.org/trac/ticket/1641)
 
-### 的PostgreSQL [¶ T0\>](#change-0.5.7-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.5.7-postgresql "Permalink to this headline")
 
--   **[postgresql]**通过新的postgres.PGDoublePrecision对象添加了对反映DOUBLE
-    PRECISION类型的支持。这是0.6中的postgresql.DOUBLE\_PRECISION。[¶](#change-285f02813a233d1a64010965c7e7d46e)
+-   **[postgresql]**通过新的 postgres.PGDoublePrecision 对象添加了对反映 DOUBLE
+    PRECISION 类型的支持。这是 0.6 中的 postgresql.DOUBLE\_PRECISION。[¶](#change-285f02813a233d1a64010965c7e7d46e)
 
     参考文献：[＃1085](http://www.sqlalchemy.org/trac/ticket/1085)
 
--   **[postgresql]**添加了对INTERVAL类型的INTERVAL YEAR TO
-    MONTH和INTERVAL DAY TO
-    SECOND语法的支持。[¶](#change-9869dc611263b6a47738adeb046e8e92)
+-   **[postgresql]**添加了对 INTERVAL 类型的 INTERVAL YEAR TO
+    MONTH 和 INTERVAL DAY TO
+    SECOND 语法的支持。[¶](#change-9869dc611263b6a47738adeb046e8e92)
 
     参考文献：[＃460](http://www.sqlalchemy.org/trac/ticket/460)
 
@@ -192,21 +191,21 @@ tags:
 
     参考文献：[＃1576](http://www.sqlalchemy.org/trac/ticket/1576)
 
--   **[postgresql]**修正了extract()在应用“timestamp”转换时将运算符优先级规则应用于“::”运算符
+-   **[postgresql]**修正了 extract()在应用“timestamp”转换时将运算符优先级规则应用于“::”运算符
     - 确保正确的括号。[¶](#change-16cb8f29ef1c6da912d1c738ae74068d)
 
     参考文献：[＃1611](http://www.sqlalchemy.org/trac/ticket/1611)
 
 ### 源码[¶ T0\>](#change-0.5.7-sqlite "Permalink to this headline")
 
--   **[sqlite]** sqlite方言正确地为处于备用模式中的表生成CREATE
+-   **[sqlite]** sqlite 方言正确地为处于备用模式中的表生成 CREATE
     INDEX。[¶](#change-38abbb1aa83741482b4943a46d20a835)
 
     参考文献：[＃1439](http://www.sqlalchemy.org/trac/ticket/1439)
 
 ### MSSQL [¶ T0\>](#change-0.5.7-mssql "Permalink to this headline")
 
--   **[mssql]**在构建pyodbc连接参数时将TrustedConnection的名称更改为Trusted\_Connection
+-   **[mssql]**在构建 pyodbc 连接参数时将 TrustedConnection 的名称更改为 Trusted\_Connection
     [¶](#change-b91807fd16a6879d886a98e03172a36b)
 
     参考文献：[＃1561](http://www.sqlalchemy.org/trac/ticket/1561)
@@ -216,29 +215,29 @@ tags:
 -   **[oracle]**The “table\_names” dialect function, used by MetaData
     .reflect(), omits “index overflow tables”, a system table generated
     by Oracle when “index only tables” with overflow are used.
-    这些表不能通过SQL访问，不能反映。[¶](#change-8da4a36b631015a25392cbcab3c7ad04)
+    这些表不能通过 SQL 访问，不能反映。[¶](#change-8da4a36b631015a25392cbcab3c7ad04)
 
     参考文献：[＃1637](http://www.sqlalchemy.org/trac/ticket/1637)
 
 ### 杂项[¶ T0\>](#change-0.5.7-misc "Permalink to this headline")
 
--   **[ext]**在构造类之后（即通过类级属性分配），可以将列添加到联合表声明式超类中，并且该列将向下传播到子类。这是相反的情况，固定在0.5.6.
+-   **[ext]**在构造类之后（即通过类级属性分配），可以将列添加到联合表声明式超类中，并且该列将向下传播到子类。这是相反的情况，固定在 0.5.6.
     [¶](#change-ed2a389aec169db8a34e5c988818084f)
 
     参考文献：[＃1570](http://www.sqlalchemy.org/trac/ticket/1570)，[＃1523](http://www.sqlalchemy.org/trac/ticket/1523)
 
--   **[ext]**修正了分片示例中的轻微不准确性。比较ORM中列的等价性最好使用col1.shares\_lineage（col2）。[¶](#change-e611ebfe687b0c2ef99c6348a9a40b35)
+-   **[ext]**修正了分片示例中的轻微不准确性。比较 ORM 中列的等价性最好使用 col1.shares\_lineage（col2）。[¶](#change-e611ebfe687b0c2ef99c6348a9a40b35)
 
     参考文献：[＃1491](http://www.sqlalchemy.org/trac/ticket/1491)
 
--   **[ext]**从ShardedQuery中移除未使用的load()方法。[¶](#change-c23faacc23d4d5d4fcf2fbc5a6a00340)
+-   **[ext]**从 ShardedQuery 中移除未使用的 load()方法。[¶](#change-c23faacc23d4d5d4fcf2fbc5a6a00340)
 
     参考文献：[＃1606](http://www.sqlalchemy.org/trac/ticket/1606)
 
 0.5.6 [¶ T0\>](#change-0.5.6 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布于：2009年9月12日
+发布于：2009 年 9 月 12 日
 
 ### ORM [¶ T0\>](#change-0.5.6-orm "Permalink to this headline")
 
@@ -246,12 +245,12 @@ tags:
 
     参考文献：[＃1300](http://www.sqlalchemy.org/trac/ticket/1300)
 
--   **[orm]**修正了一个不允许多对多双向引用的一边声明自己为“viewonly”的bug
+-   **[orm]**修正了一个不允许多对多双向引用的一边声明自己为“viewonly”的 bug
     [¶](#change-21bec2bccd75a800dce74b993437f025)
 
     参考文献：[＃1507](http://www.sqlalchemy.org/trac/ticket/1507)
 
--   **[orm]**添加了一个断言，用于阻止@validates函数或其他AttributeExtension加载未加载的集合，使内部状态可能损坏。[¶](#change-413bce465d70e4b30ba74d205de21bbc)
+-   **[orm]**添加了一个断言，用于阻止@validates 函数或其他 AttributeExtension 加载未加载的集合，使内部状态可能损坏。[¶](#change-413bce465d70e4b30ba74d205de21bbc)
 
     参考文献：[＃1526](http://www.sqlalchemy.org/trac/ticket/1526)
 
@@ -278,7 +277,7 @@ tags:
 
 -   **[orm]**从关系()中挤出更多不必要的“延迟加载”。当一个集合发生变化时，除非设置了“single\_parent
     =
-    True”，否则另一端的多对一后退将不会触发加载“旧”值。多对一的直接分配仍会加载“旧”值，以便更新该值上的backref集合，该集合可能已存在于会话中，从而维护0.5行为契约。[¶
+    True”，否则另一端的多对一后退将不会触发加载“旧”值。多对一的直接分配仍会加载“旧”值，以便更新该值上的 backref 集合，该集合可能已存在于会话中，从而维护 0.5 行为契约。[¶
     t0 \>](#change-271faabb70c445bb48c86563489eabe9)
 
     参考文献：[＃1483](http://www.sqlalchemy.org/trac/ticket/1483)
@@ -290,18 +289,18 @@ tags:
 
     参考文献：[＃1480](http://www.sqlalchemy.org/trac/ticket/1480)
 
--   **[orm]**改进了对MapperProperty对象的支持，覆盖了非具体继承设置的继承映射器
+-   **[orm]**改进了对 MapperProperty 对象的支持，覆盖了非具体继承设置的继承映射器
     -
     属性扩展不会随机相互碰撞。[¶](#change-0a60b4eab11c772d6c8d654d52bf3c4b)
 
     参考文献：[＃1488](http://www.sqlalchemy.org/trac/ticket/1488)
 
--   **[orm]** UPDATE和DELETE不支持ORDER
-    BY，LIMIT，OFFSET等。在标准的SQL中。如果调用了limit()，offset()，order\_by()，group\_by()或distinct()，则Query.update()和Query.delete()现在会引发异常。[¶](#change-0d4f1ab1ab6b39d352893b946e2af9d9)
+-   **[orm]** UPDATE 和 DELETE 不支持 ORDER
+    BY，LIMIT，OFFSET 等。在标准的 SQL 中。如果调用了 limit()，offset()，order\_by()，group\_by()或 distinct()，则 Query.update()和 Query.delete()现在会引发异常。[¶](#change-0d4f1ab1ab6b39d352893b946e2af9d9)
 
     参考文献：[＃1487](http://www.sqlalchemy.org/trac/ticket/1487)
 
--   **[orm]**将AttributeExtension添加到sqlalchemy.orm .\_\_ all \_\_
+-   **[orm]**将 AttributeExtension 添加到 sqlalchemy.orm .\_\_ all \_\_
     [¶](#change-cd80ef9fe6dc09fc2205346b05be66a4)
 
 -   **[orm]**Improved error message when query() is called with a
@@ -310,11 +309,11 @@ tags:
 
     参考文献：[＃1476](http://www.sqlalchemy.org/trac/ticket/1476)
 
--   **[orm]**使用False或0作为多态鉴别符，现在可以在基类和子类上使用[¶](#change-622cc5e00f4af851cab2ca4cdbe9816a)
+-   **[orm]**使用 False 或 0 作为多态鉴别符，现在可以在基类和子类上使用[¶](#change-622cc5e00f4af851cab2ca4cdbe9816a)
 
     参考文献：[＃1440](http://www.sqlalchemy.org/trac/ticket/1440)
 
--   **[orm]**添加了enable\_assertions（False）以查询哪些功能会禁用预期状态的常用断言
+-   **[orm]**添加了 enable\_assertions（False）以查询哪些功能会禁用预期状态的常用断言
     - 查询子类用于设计自定义状态。请参阅[http://www.sqlalchemy.org/ trac
     / wiki / UsageRecipes /
     PreFilteredQuery](http://www.sqlalchemy.org/trac/wiki/UsageRecipes/PreFilteredQuery)为例。[¶](#change-86add61f8d0b31f3db1dafe61599f9fd)
@@ -339,14 +338,14 @@ tags:
 
     参考文献：[＃1522](http://www.sqlalchemy.org/trac/ticket/1522)
 
--   **[orm]**修复了一个有点假设的问题，它会导致使用旧的polymorphic\_union函数计算映射器的错误主键
+-   **[orm]**修复了一个有点假设的问题，它会导致使用旧的 polymorphic\_union 函数计算映射器的错误主键
     - 但这是旧东西。[¶](#change-06567c7b80f2bf5f775fcdac8f4fb117)
 
     参考文献：[＃1486](http://www.sqlalchemy.org/trac/ticket/1486)
 
 ### SQL [¶ T0\>](#change-0.5.6-sql "Permalink to this headline")
 
--   **[sql]**修复了column.copy()来复制默认值和onupdates。[¶](#change-3a5e144720affd0b71e0cea44d85fa80)
+-   **[sql]**修复了 column.copy()来复制默认值和 onupdates。[¶](#change-3a5e144720affd0b71e0cea44d85fa80)
 
     参考文献：[＃1373](http://www.sqlalchemy.org/trac/ticket/1373)
 
@@ -355,24 +354,24 @@ tags:
     causing various errors within more complex SQL
     transformations.[¶](#change-99749b627af38a3ab394a246b4f50b4e)
 
--   **[sql]**一元表达式（如DISTINCT）将其类型处理传播到结果集，从而允许像unicode之类的转换发生。[¶](#change-a2da94cbd3d65ae38ac60a995fca7496)
+-   **[sql]**一元表达式（如 DISTINCT）将其类型处理传播到结果集，从而允许像 unicode 之类的转换发生。[¶](#change-a2da94cbd3d65ae38ac60a995fca7496)
 
     参考文献：[＃1420](http://www.sqlalchemy.org/trac/ticket/1420)
 
--   **[sql]**修正了Table和Column中的错误，传递“info”参数的空字典会引发异常。[¶](#change-42423bddc5c58508e18ba4802e3cfd52)
+-   **[sql]**修正了 Table 和 Column 中的错误，传递“info”参数的空字典会引发异常。[¶](#change-42423bddc5c58508e18ba4802e3cfd52)
 
     参考文献：[＃1482](http://www.sqlalchemy.org/trac/ticket/1482)
 
 ### 预言[¶ T0\>](#change-0.5.6-oracle "Permalink to this headline")
 
--   **[oracle]**针对Oracle别名的Backported
-    0.6修复不会被截断[¶](#change-2cbd246043e6f11db78ec4d9bcf2b6cd)
+-   **[oracle]**针对 Oracle 别名的 Backported
+    0.6 修复不会被截断[¶](#change-2cbd246043e6f11db78ec4d9bcf2b6cd)
 
     参考文献：[＃1309](http://www.sqlalchemy.org/trac/ticket/1309)
 
 ### 杂项[¶ T0\>](#change-0.5.6-misc "Permalink to this headline")
 
--   **[ext]**由associationproxy生成的集合代理现在可以被pickleable。但是，用户定义的proxy\_factory除非定义\_\_getstate\_\_和\_\_setstate
+-   **[ext]**由 associationproxy 生成的集合代理现在可以被 pickleable。但是，用户定义的 proxy\_factory 除非定义\_\_getstate\_\_和\_\_setstate
     \_\_，否则仍然不可选。[¶](#change-4093be8cbdab495564f9ccc28298b34f)
 
     参考文献：[＃1446](http://www.sqlalchemy.org/trac/ticket/1446)
@@ -390,7 +389,7 @@ tags:
 
     参考文献：[＃1527](http://www.sqlalchemy.org/trac/ticket/1527)
 
--   **[ext]**在构造类之后（即，通过类级属性分配），可以将列添加到联接表子类中。该列一直被添加到底层表，但现在映射器将重新构建它的“连接”以包含新列，而不是引发“没有这样的列”的错误，而是使用column\_property()代替“。[¶\<
+-   **[ext]**在构造类之后（即，通过类级属性分配），可以将列添加到联接表子类中。该列一直被添加到底层表，但现在映射器将重新构建它的“连接”以包含新列，而不是引发“没有这样的列”的错误，而是使用 column\_property()代替“。[¶\<
     / T0\>](#change-d11b075fc91fd14dae4a242abd35198a)
 
     参考文献：[＃1523](http://www.sqlalchemy.org/trac/ticket/1523)
@@ -400,18 +399,18 @@ tags:
 0.5.5 [¶ T0\>](#change-0.5.5 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布于：2009年7月13日
+发布于：2009 年 7 月 13 日
 
 ### 一般[¶ T0\>](#change-0.5.5-general "Permalink to this headline")
 
--   **[general]**单元测试已从unittest迁移到nose。有关如何运行测试的信息，请参阅README.unittests。[¶](#change-b291919579ac2922c1861f30d9c48534)
+-   **[general]**单元测试已从 unittest 迁移到 nose。有关如何运行测试的信息，请参阅 README.unittests。[¶](#change-b291919579ac2922c1861f30d9c48534)
 
     参考文献：[＃970](http://www.sqlalchemy.org/trac/ticket/970)
 
 ### ORM [¶ T0\>](#change-0.5.5-orm "Permalink to this headline")
 
 -   **[orm]**
-    relation()的“foreign\_keys”参数现在将以与primaryjoin和secondaryjoin相同的方式自动传播到backref。For
+    relation()的“foreign\_keys”参数现在将以与 primaryjoin 和 secondaryjoin 相同的方式自动传播到 backref。For
     the extremely rare use case where the backref of a relation() has
     intentionally different “foreign\_keys” configured, both sides now
     need to be configured explicitly (if they do in fact require this
@@ -419,18 +418,18 @@ tags:
     note...).[¶](#change-4e7cee15f685dfecf68097230f6e27be)
 
 -   **[orm]**
-    ...唯一已知的（实际上非​​常罕见的）用例，其中在向前/向后侧使用不同的foreign\_keys设置，部分指向其自己的列的组合外键，已被增强，使得关系的fk-\>自身方面不会用于确定关系方向。[¶](#change-24fc47177d47aae7dc806a78788115f0)
+    ...唯一已知的（实际上非​​常罕见的）用例，其中在向前/向后侧使用不同的 foreign\_keys 设置，部分指向其自己的列的组合外键，已被增强，使得关系的 fk-\>自身方面不会用于确定关系方向。[¶](#change-24fc47177d47aae7dc806a78788115f0)
 
--   **[orm]** Session.mapper现在*已弃用*。
+-   **[orm]** Session.mapper 现在*已弃用*。
 
-    如果你想让一个独立的对象成为会话的一部分，请调用session.add()。否则，现在在[http://www.sqlalchemy.org/trac/wiki/UsageRecipes/SessionAwareMapper](http://www.sqlalchemy.org/trac/wiki/UsageRecipes/SessionAwareMapper)中记录了一个DIY版本的Session.mapper。该方法将在整个0.6版本中保持不推荐使用。
+    如果你想让一个独立的对象成为会话的一部分，请调用 session.add()。否则，现在在[http://www.sqlalchemy.org/trac/wiki/UsageRecipes/SessionAwareMapper](http://www.sqlalchemy.org/trac/wiki/UsageRecipes/SessionAwareMapper)中记录了一个 DIY 版本的 Session.mapper。该方法将在整个 0.6 版本中保持不推荐使用。
 
     [¶](#change-5ec7b4a36de5fda6af191af1682064eb)
 
 -   **[orm]**Fixed Query being able to join() from individual columns of
     a joined-table subclass entity, i.e. query(SubClass.foo,
     SubcClass.bar).join().
-    在大多数情况下，会出现错误“无法找到要从中加入的FROM子句”。在其他一些情况下，结果将以基类而不是子类的形式返回
+    在大多数情况下，会出现错误“无法找到要从中加入的 FROM 子句”。在其他一些情况下，结果将以基类而不是子类的形式返回
     -
     因此需要调整依赖此错误结果的应用程序。[¶](#change-17862f643537dcbc4df0471a4553a0bd)
 
@@ -439,13 +438,13 @@ tags:
 -   **[orm]**Fixed a bug involving contains\_eager(), which would apply
     itself to a secondary (i.e. lazy) load in a particular rare case,
     producing cartesian products.
-    改进了对二级负载query.options()的整体定位。[¶](#change-45cab12e273914c4095fe6753eb613b7)
+    改进了对二级负载 query.options()的整体定位。[¶](#change-45cab12e273914c4095fe6753eb613b7)
 
     参考文献：[＃1461](http://www.sqlalchemy.org/trac/ticket/1461)
 
--   **[orm]**修正了在0.5.4中引入的缺陷，因此当清除默认持有的列时复合类型失败。[¶](#change-103ff88cc328345956bf43128d6228a2)
+-   **[orm]**修正了在 0.5.4 中引入的缺陷，因此当清除默认持有的列时复合类型失败。[¶](#change-103ff88cc328345956bf43128d6228a2)
 
--   **[orm]**修正了另一个0.5.4的bug，即当整个对象被序列化时，可变属性（即PickleType）不会被正确地反序列化。[¶](#change-a4bd6f267de2ee8961aca6a80454335c)
+-   **[orm]**修正了另一个 0.5.4 的 bug，即当整个对象被序列化时，可变属性（即 PickleType）不会被正确地反序列化。[¶](#change-a4bd6f267de2ee8961aca6a80454335c)
 
     参考文献：[＃1426](http://www.sqlalchemy.org/trac/ticket/1426)
 
@@ -453,13 +452,13 @@ tags:
     exception if any synonyms were in
     use.[¶](#change-9786df0adacfa866cdc2f8a7e8ef1ba4)
 
--   **[orm]**修复了潜在的内存泄漏，因为先前被剔除的对象放回到会话中将不会被完全垃圾收集，除非Session被明确关闭。[¶](#change-41602c4224b47194b140b47ade7dc16f)
+-   **[orm]**修复了潜在的内存泄漏，因为先前被剔除的对象放回到会话中将不会被完全垃圾收集，除非 Session 被明确关闭。[¶](#change-41602c4224b47194b140b47ade7dc16f)
 
--   **[orm]**修正了基于列表的属性，如pickletype和PGArray，无法合并()的错误。[¶](#change-c44cbe8c9a172ffd50841eca0f7e0e4b)
+-   **[orm]**修正了基于列表的属性，如 pickletype 和 PGArray，无法合并()的错误。[¶](#change-c44cbe8c9a172ffd50841eca0f7e0e4b)
 
--   **[orm]**修复了非工作属性.set\_committed\_value函数。[¶](#change-fddc914c8b585115272b6107670f7d9a)
+-   **[orm]**修复了非工作属性.set\_committed\_value 函数。[¶](#change-fddc914c8b585115272b6107670f7d9a)
 
--   **[orm]**修剪InstanceState的pickle格式，这会进一步减少pickled实例的内存占用。格式应该与0.5.4和之前的格式向后兼容。[¶](#change-38276e4fa1687abecb695e85c17bf6c0)
+-   **[orm]**修剪 InstanceState 的 pickle 格式，这会进一步减少 pickled 实例的内存占用。格式应该与 0.5.4 和之前的格式向后兼容。[¶](#change-38276e4fa1687abecb695e85c17bf6c0)
 
 -   **[orm]**sqlalchemy.orm.join and sqlalchemy.orm.outerjoin are now
     added to \_\_all\_\_ in sqlalchemy.orm. \* [¶
@@ -478,39 +477,39 @@ tags:
 -   **[sql]**Removed an obscure feature of execute() (including
     connection, engine, Session) whereby a bindparam() construct can be
     sent as a key to the params dictionary.
-    这个用法是没有记录的，并且是一个问题的核心，由text()构造隐式创建的bindparam()对象可能与放置在params字典中的字符串具有相同的散列值，并且在计算时可能会导致不适当的匹配最终绑定参数。对这种情况的内部检查会增加参数呈现的关键任务的显着延迟，因此行为将被删除。对于任何可能使用此功能的应用程序来说，这是一个向后不兼容的变化，但是该功能从未被记录过。[¶](#change-b94ba806169e988459d7239aad691687)
+    这个用法是没有记录的，并且是一个问题的核心，由 text()构造隐式创建的 bindparam()对象可能与放置在 params 字典中的字符串具有相同的散列值，并且在计算时可能会导致不适当的匹配最终绑定参数。对这种情况的内部检查会增加参数呈现的关键任务的显着延迟，因此行为将被删除。对于任何可能使用此功能的应用程序来说，这是一个向后不兼容的变化，但是该功能从未被记录过。[¶](#change-b94ba806169e988459d7239aad691687)
 
 ### 杂项[¶ T0\>](#change-0.5.5-misc "Permalink to this headline")
 
--   **[engine/pool]**为StaticPool实现了recreate()。[¶](#change-8d79519ee7c9700dfa29d6abe4cdc84f)
+-   **[engine/pool]**为 StaticPool 实现了 recreate()。[¶](#change-8d79519ee7c9700dfa29d6abe4cdc84f)
 
 0.5.4p2 [¶ T0\>](#change-0.5.4p2 "Permalink to this headline")
 --------------------------------------------------------------
 
-发布时间：2009年5月26日
+发布时间：2009 年 5 月 26 日
 
 ### SQL [¶ T0\>](#change-0.5.4p2-sql "Permalink to this headline")
 
--   **[sql]**修复了不基于参数或不是executemany()风格的SQL异常打印。[¶](#change-62b7b5ea2627c1a58405b73e6485a68a)
+-   **[sql]**修复了不基于参数或不是 executemany()风格的 SQL 异常打印。[¶](#change-62b7b5ea2627c1a58405b73e6485a68a)
 
-### 的PostgreSQL [¶ T0\>](#change-0.5.4p2-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.5.4p2-postgresql "Permalink to this headline")
 
--   **[postgresql]**弃用硬编码的TIMESTAMP函数，该函数在用作func.TIMESTAMP（value）时会呈现“TIMESTAMP值”。由于PostgreSQL不允许在此上下文中使用绑定参数，因此在某些平台上发生这种情况。硬编码的大写字母也是不合适的，还有很多其他的PG需要我们支持。相反，使用文本结构即select（[“timestamp
+-   **[postgresql]**弃用硬编码的 TIMESTAMP 函数，该函数在用作 func.TIMESTAMP（value）时会呈现“TIMESTAMP 值”。由于 PostgreSQL 不允许在此上下文中使用绑定参数，因此在某些平台上发生这种情况。硬编码的大写字母也是不合适的，还有很多其他的 PG 需要我们支持。相反，使用文本结构即 select（[“timestamp
     '12 / 05/09'”]）。[¶](#change-bb7bb4c34e0e00220dd3155755cebe15)
 
 0.5.4p1 [¶ T0\>](#change-0.5.4p1 "Permalink to this headline")
 --------------------------------------------------------------
 
-发布日期：2009年5月18日
+发布日期：2009 年 5 月 18 日
 
 ### ORM [¶ T0\>](#change-0.5.4p1-orm "Permalink to this headline")
 
--   **[orm]**修正了0.5.4中引入的一个属性错误，当merge()与一个不完整的对象一起使用时会发生。[¶](#change-fe8595c476f4a3e16ce1856812832d7c)
+-   **[orm]**修正了 0.5.4 中引入的一个属性错误，当 merge()与一个不完整的对象一起使用时会发生。[¶](#change-fe8595c476f4a3e16ce1856812832d7c)
 
 0.5.4 [¶ T0\>](#change-0.5.4 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布于：2009年5月17日
+发布于：2009 年 5 月 17 日
 
 ### ORM [¶ T0\>](#change-0.5.4-orm "Permalink to this headline")
 
@@ -518,7 +517,7 @@ tags:
     Sessions/flush() in conjunction with large mapper graphs, large
     numbers of objects:
 
-    -   从flush()进程中删除了所有\*
+    -   从 flush()进程中删除了所有\*
         O（N）扫描行为，即扫描整个会话的操作，包括非常昂贵的，错误地假定主键值在非情况下正在改变的操作。
         -   如果现有主键属性被修改为新值，则可能会调用全扫描的一个边缘案例。
     -   The Session’s “weak referencing” behavior is now *full* - no
@@ -526,36 +525,36 @@ tags:
         related items/collections in its \_\_dict\_\_.
         对象中的后退处理和其他循环不再影响会话丢失对未修改对象的所有引用的能力。具有挂起更改的对象仍然强烈维护，直到刷新。
 
-        通过将垃圾收集项目的“复活”过程移动到仅与映射“可变”属性（即PickleType，复合关联）的映射相关，该实现还提高了性能。这消除了gc过程的开销并简化了内部行为。
+        通过将垃圾收集项目的“复活”过程移动到仅与映射“可变”属性（即 PickleType，复合关联）的映射相关，该实现还提高了性能。这消除了 gc 过程的开销并简化了内部行为。
 
-        如果“可变”属性更改是一个对象的唯一更改，然后该对象被解引用，那么当UPDATE发布时，映射器将无法访问其他属性状态。对于某些MapperExtensions，这可能会有所不同。
+        如果“可变”属性更改是一个对象的唯一更改，然后该对象被解引用，那么当 UPDATE 发布时，映射器将无法访问其他属性状态。对于某些 MapperExtensions，这可能会有所不同。
 
-        此更改还会影响内部属性API，但不会影响AttributeExtension界面或任何公开记录的属性函数。
+        此更改还会影响内部属性 API，但不会影响 AttributeExtension 界面或任何公开记录的属性函数。
 
-    -   工作单元不再为flush()期间的mapper完整图形生成一个“dependency”处理器图表，而是仅为代表具有未决更改对象的映射器创建此类处理器。这在映射器的大型互连图的上下文中节省了大量的方法调用。
-    -   缓存了先前每次刷新多次出现的浪费的“表格排序”操作，也从flush()中删除了重要的方法调用计数。
-    -   其他多余的行为已经在mapper.\_save\_obj()中简化了。
+    -   工作单元不再为 flush()期间的 mapper 完整图形生成一个“dependency”处理器图表，而是仅为代表具有未决更改对象的映射器创建此类处理器。这在映射器的大型互连图的上下文中节省了大量的方法调用。
+    -   缓存了先前每次刷新多次出现的浪费的“表格排序”操作，也从 flush()中删除了重要的方法调用计数。
+    -   其他多余的行为已经在 mapper.\_save\_obj()中简化了。
 
     [¶](#change-8c507593c28a9c706a8b28b9bb6a4906)
 
     参考文献：[＃1398](http://www.sqlalchemy.org/trac/ticket/1398)
 
--   **[orm]**修改了DynamicAttributeImpl上的query\_cls以接受AppenderQuery的完整混合版本，该版本允许对AppenderMixin进行子类化。[¶](#change-02d1af2be8f7649b6004f9e563fc9e85)
+-   **[orm]**修改了 DynamicAttributeImpl 上的 query\_cls 以接受 AppenderQuery 的完整混合版本，该版本允许对 AppenderMixin 进行子类化。[¶](#change-02d1af2be8f7649b6004f9e563fc9e85)
 
 -   **[orm]**“多态鉴别器”列可以是主键的一部分，并且将填充正确的鉴别符值。[¶](#change-9afb5ea823566aaac340ca1fdcd9d108)
 
     参考文献：[＃1300](http://www.sqlalchemy.org/trac/ticket/1300)
 
--   **[orm]**修正了评估者无法评估IS
-    NULL子句的情况。[¶](#change-765bf6633bf8d6d51c59b3bf1dc71045)
+-   **[orm]**修正了评估者无法评估 IS
+    NULL 子句的情况。[¶](#change-765bf6633bf8d6d51c59b3bf1dc71045)
 
--   **[orm]**修正了“动态”关系的“集合集合”功能，以正确启动事件。以前只能将一个集合分配给待处理的父实例，否则修改后的事件不会被正确触发。Set集合现在兼容merge()，修复。[¶](#change-33e14ebeceaa52fab11e805acf5eb04e)
+-   **[orm]**修正了“动态”关系的“集合集合”功能，以正确启动事件。以前只能将一个集合分配给待处理的父实例，否则修改后的事件不会被正确触发。Set 集合现在兼容 merge()，修复。[¶](#change-33e14ebeceaa52fab11e805acf5eb04e)
 
     参考文献：[＃1352](http://www.sqlalchemy.org/trac/ticket/1352)
 
--   **[orm]**允许对使用检测描述符构造的PropertyOption对象进行酸洗；以前，在酸洗一个加载了基于描述符的选项的对象（比如query.options（eagerload（MyClass.foo））时会发生pickle错误。[¶](#change-0f4934965e99f59451b514175a5478a7)
+-   **[orm]**允许对使用检测描述符构造的 PropertyOption 对象进行酸洗；以前，在酸洗一个加载了基于描述符的选项的对象（比如 query.options（eagerload（MyClass.foo））时会发生 pickle 错误。[¶](#change-0f4934965e99f59451b514175a5478a7)
 
--   如果“延迟加载”SQL子句与get()使用的子句相匹配，但包含某些硬编码参数，则懒惰加载程序将不会使用get()。**[orm]**以前，懒惰策略会失败，get()。理想情况下，get()将用于硬编码参数，但这需要进一步开发。[¶](#change-08b2a4944a9b24faa36cfd730f464541)
+-   如果“延迟加载”SQL 子句与 get()使用的子句相匹配，但包含某些硬编码参数，则懒惰加载程序将不会使用 get()。**[orm]**以前，懒惰策略会失败，get()。理想情况下，get()将用于硬编码参数，但这需要进一步开发。[¶](#change-08b2a4944a9b24faa36cfd730f464541)
 
     参考文献：[＃1357](http://www.sqlalchemy.org/trac/ticket/1357)
 
@@ -566,7 +565,7 @@ tags:
 
     参考文献：[＃1391](http://www.sqlalchemy.org/trac/ticket/1391)
 
--   **[orm]**修复了autoflush干扰session.merge()的另一个位置。autoflush在merge()now期间被完全禁用。[¶](#change-68a6b0a8471cb14cc06532a4b3ee39ec)
+-   **[orm]**修复了 autoflush 干扰 session.merge()的另一个位置。autoflush 在 merge()now 期间被完全禁用。[¶](#change-68a6b0a8471cb14cc06532a4b3ee39ec)
 
     参考文献：[＃1360](http://www.sqlalchemy.org/trac/ticket/1360)
 
@@ -583,8 +582,8 @@ tags:
 
 -   **[orm]**使用继承映射器的固定模糊映射器编译问题会导致未初始化的属性[¶](#change-b92b0b122859758ffdb16e6c35539077)
 
--   **[orm]**会话的固定文档weak\_identity\_map -
-    默认值为True，表示正在使用的弱引用地图。[¶](#change-fa6a44199fecae4da34ff430bf581a4c)
+-   **[orm]**会话的固定文档 weak\_identity\_map -
+    默认值为 True，表示正在使用的弱引用地图。[¶](#change-fa6a44199fecae4da34ff430bf581a4c)
 
 -   **[orm]**Fixed a unit of work issue whereby the foreign key
     attribute on an item contained within a collection owned by an
@@ -593,16 +592,16 @@ tags:
 
     参考文献：[＃1376](http://www.sqlalchemy.org/trac/ticket/1376)
 
--   **[orm]**修复了使用预先加载关系的Query.update()和Query.delete()失败。[¶](#change-98f3b9a092c02fbbc7ad6057d90ff7b9)
+-   **[orm]**修复了使用预先加载关系的 Query.update()和 Query.delete()失败。[¶](#change-98f3b9a092c02fbbc7ad6057d90ff7b9)
 
     参考文献：[＃1378](http://www.sqlalchemy.org/trac/ticket/1378)
 
--   **[orm]**在foreign\_keys或remote\_side集合中指定二进制primaryjoin条件的列现在是错误的。而以前它只是无意义的，但会以非确定性的方式获得成功。[¶](#change-dc9f22bb714dcf5a5310cb3c1a45ec33)
+-   **[orm]**在 foreign\_keys 或 remote\_side 集合中指定二进制 primaryjoin 条件的列现在是错误的。而以前它只是无意义的，但会以非确定性的方式获得成功。[¶](#change-dc9f22bb714dcf5a5310cb3c1a45ec33)
 
 ### SQL [¶ T0\>](#change-0.5.4-sql "Permalink to this headline")
 
 -   **[sql]**Back-ported the “compiler” extension from SQLA 0.6.
-    这是一个标准化的接口，允许创建自定义的ClauseElement子类和编译器。特别是当您想要构建具有特定于数据库的编译的构造时，它可以作为text()的替代方法。有关详细信息，请参阅扩展文档。[¶](#change-89258126655ed4679dfaa9df772ac8ba)
+    这是一个标准化的接口，允许创建自定义的 ClauseElement 子类和编译器。特别是当您想要构建具有特定于数据库的编译的构造时，它可以作为 text()的替代方法。有关详细信息，请参阅扩展文档。[¶](#change-89258126655ed4679dfaa9df772ac8ba)
 
 -   **[sql]**Exception messages are truncated when the list of bound
     parameters is larger than 10, preventing enormous multi-page
@@ -618,7 +617,7 @@ tags:
     SQLite.[¶](#change-01d31f576dc5491eb4674d5a24c5dd32)
 
 -   **[sql]**修复了\_\_clause\_element
-    \_\_()风格构造（即声明性列）构造的ForeignKey上的\_\_repr
+    \_\_()风格构造（即声明性列）构造的 ForeignKey 上的\_\_repr
     \_\_()和其他\_get\_colspec()方法。[¶](#change-898794cdf1dd9645bd1fd9efac46a7f0)
 
     参考文献：[＃1353](http://www.sqlalchemy.org/trac/ticket/1353)
@@ -628,34 +627,34 @@ tags:
 -   **[schema] [1341] [ticket: 594]**Added a quote\_schema() method to
     the IdentifierPreparer class so that dialects can override how
     schemas get handled.
-    这使得MSSQL方言可以将模式视为多部分标识符，如'database.owner'。[¶](#change-794d23381cdd544ab4c3b79eab6cac16)
+    这使得 MSSQL 方言可以将模式视为多部分标识符，如'database.owner'。[¶](#change-794d23381cdd544ab4c3b79eab6cac16)
 
-### MySQL的[¶ T0\>](#change-0.5.4-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.5.4-mysql "Permalink to this headline")
 
--   **[mysql]**如果外键引用远程模式中的表，则反映FOREIGN
-    KEY结构将考虑虚线schema.tablename组合。[¶](#change-e9757b5037798376d36b7052c50712f6)
+-   **[mysql]**如果外键引用远程模式中的表，则反映 FOREIGN
+    KEY 结构将考虑虚线 schema.tablename 组合。[¶](#change-e9757b5037798376d36b7052c50712f6)
 
     参考文献：[＃1405](http://www.sqlalchemy.org/trac/ticket/1405)
 
 ### 源码[¶ T0\>](#change-0.5.4-sqlite "Permalink to this headline")
 
--   **[sqlite]**修正了SLBoolean类型，以便它只将1作为True。[¶](#change-4450dd533e773dd96f7a084af9a2a7ca)
+-   **[sqlite]**修正了 SLBoolean 类型，以便它只将 1 作为 True。[¶](#change-4450dd533e773dd96f7a084af9a2a7ca)
 
     参考文献：[＃1402](http://www.sqlalchemy.org/trac/ticket/1402)
 
--   **[sqlite]**更正浮点类型，以便在反射时正确映射到SLFloat类型。[¶](#change-7cd77e4e92c89a03ee8a6bd01ea65288)
+-   **[sqlite]**更正浮点类型，以便在反射时正确映射到 SLFloat 类型。[¶](#change-7cd77e4e92c89a03ee8a6bd01ea65288)
 
     参考文献：[＃1273](http://www.sqlalchemy.org/trac/ticket/1273)
 
 ### MSSQL [¶ T0\>](#change-0.5.4-mssql "Permalink to this headline")
 
--   **[mssql]**修改了保存点逻辑的工作方式，以防止它跨过非保存点导向的例程。Savepoint支持仍然是非常实验性的。[¶](#change-34b2f02d462e1dad2f952dfca3b176d2)
+-   **[mssql]**修改了保存点逻辑的工作方式，以防止它跨过非保存点导向的例程。Savepoint 支持仍然是非常实验性的。[¶](#change-34b2f02d462e1dad2f952dfca3b176d2)
 
--   **[mssql]**添加MSSQL的保留字，涵盖版本2008和以前的所有版本。[¶](#change-2dfd6cf98bed7b00fa27c24db33e98ef)
+-   **[mssql]**添加 MSSQL 的保留字，涵盖版本 2008 和以前的所有版本。[¶](#change-2dfd6cf98bed7b00fa27c24db33e98ef)
 
     参考文献：[＃1310](http://www.sqlalchemy.org/trac/ticket/1310)
 
--   **[mssql]**更正了信息模式的问题，不适用于基于二进制排序规则的数据库。清理信息模式，因为它现在只被mssql使用。[¶](#change-a58e32c6e4a30bcfc4a03e4bb2997895)
+-   **[mssql]**更正了信息模式的问题，不适用于基于二进制排序规则的数据库。清理信息模式，因为它现在只被 mssql 使用。[¶](#change-a58e32c6e4a30bcfc4a03e4bb2997895)
 
     参考文献：[＃1343](http://www.sqlalchemy.org/trac/ticket/1343)
 
@@ -668,11 +667,11 @@ tags:
 0.5.3 [¶ T0\>](#change-0.5.3 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布日期：2009年3月24日
+发布日期：2009 年 3 月 24 日
 
 ### ORM [¶ T0\>](#change-0.5.3-orm "Permalink to this headline")
 
--   **[orm]**不推荐使用session.flush()的“objects”参数。表示父对象与子对象之间链接的状态不支持链接一侧而不是另一侧的“刷新”状态，因此支持此操作会导致误导结果。[¶](#change-db1d72103852cfcb972a2119cd1e8100)
+-   **[orm]**不推荐使用 session.flush()的“objects”参数。表示父对象与子对象之间链接的状态不支持链接一侧而不是另一侧的“刷新”状态，因此支持此操作会导致误导结果。[¶](#change-db1d72103852cfcb972a2119cd1e8100)
 
     参考文献：[＃1315](http://www.sqlalchemy.org/trac/ticket/1315)
 
@@ -683,9 +682,9 @@ tags:
     etc.[¶](#change-e7587d306012f7b240f0e8d0b47973bd)
 
 -   **[orm]**Query.join() can now construct multiple FROM clauses, if
-    needed. 如查询（A，B）.join（A.x）.join（B.y）可能会说SELECT
-    A.\*，B\*从A JOIN X，B JOIN
-    Y.急切的加载也可以加入到多个FROM子句中。[¶](#change-1ea1a46ef46bddd4113e372777bbdd7b)
+    needed. 如查询（A，B）.join（A.x）.join（B.y）可能会说 SELECT
+    A.\*，B\*从 A JOIN X，B JOIN
+    Y.急切的加载也可以加入到多个 FROM 子句中。[¶](#change-1ea1a46ef46bddd4113e372777bbdd7b)
 
     参考文献：[＃1337](http://www.sqlalchemy.org/trac/ticket/1337)
 
@@ -702,7 +701,7 @@ tags:
 -   **[orm]**a session.expire() on a particular collection attribute
     will clear any pending backref additions as well, so that the next
     access correctly returns only what was present in the database.
-    尽管我们正在考虑彻底删除flush（[objects]）特性，但为某种程度的解决方案提供了一些解决方法。[¶](#change-442895d66bb3ffff66fa2aaa04e5a00f)
+    尽管我们正在考虑彻底删除 flush（[objects]）特性，但为某种程度的解决方案提供了一些解决方法。[¶](#change-442895d66bb3ffff66fa2aaa04e5a00f)
 
     参考文献：[＃1315](http://www.sqlalchemy.org/trac/ticket/1315)
 
@@ -722,33 +721,33 @@ tags:
 
     参考文献：[＃1306](http://www.sqlalchemy.org/trac/ticket/1306)
 
--   **[orm]**向InstrumentationManager添加了“post\_configure\_attribute”方法，以便“listen\_for\_events.py”示例再次运行。[¶](#change-1e7641278419404b4ccff781a8493eef)
+-   **[orm]**向 InstrumentationManager 添加了“post\_configure\_attribute”方法，以便“listen\_for\_events.py”示例再次运行。[¶](#change-1e7641278419404b4ccff781a8493eef)
 
     参考文献：[＃1314](http://www.sqlalchemy.org/trac/ticket/1314)
 
 -   **[orm]**a forward and complementing backwards reference which are
     both of the same direction, i.e. ONETOMANY or MANYTOONE, is now
     detected, and an error message is raised.
-    稍后保存疯狂的CircularDependencyErrors。[¶](#change-1416ba36c9a6db7488347ac2f1836434)
+    稍后保存疯狂的 CircularDependencyErrors。[¶](#change-1416ba36c9a6db7488347ac2f1836434)
 
 -   **[orm]**Fixed bugs in Query regarding simultaneous selection of
     multiple joined-table inheritance entities with common base classes:
 
     -   先前在“A JOIN B”上应用于“B”的适配将错误地部分应用于“A”。
-    -   关系的比较（即A.related == someb）没有得到适应的时候，他们应该。
+    -   关系的比较（即 A.related == someb）没有得到适应的时候，他们应该。
     -   其他过滤器，如查询（A）.join（A.bs）.filter（B.foo
         =='bar'），错误地将“B.foo”改写为“A”。
 
     [¶](#change-82634554436213406975972cc9a9185f)
 
 -   **[orm]**Fixed adaptation of EXISTS clauses via any(), has(), etc.
-    结合左侧的别名对象和右侧的of\_type()。[¶](#change-192d36e5463caf99edcc9d7d3b1d9ccc)
+    结合左侧的别名对象和右侧的 of\_type()。[¶](#change-192d36e5463caf99edcc9d7d3b1d9ccc)
 
     参考文献：[＃1325](http://www.sqlalchemy.org/trac/ticket/1325)
 
--   **[orm]**在sqlalchemy.orm.attributes中添加了一个属性助手方法`set_committed_value`。给定一个对象，属性名称和值，会将该对象的值设置为其“已提交”状态的一部分，即可以理解为已从数据库加载的状态。帮助创建本土收集装载机等。[¶](#change-2a46f035edea7feda9d9d6a572b6975f)
+-   **[orm]**在 sqlalchemy.orm.attributes 中添加了一个属性助手方法`set_committed_value`。给定一个对象，属性名称和值，会将该对象的值设置为其“已提交”状态的一部分，即可以理解为已从数据库加载的状态。帮助创建本土收集装载机等。[¶](#change-2a46f035edea7feda9d9d6a572b6975f)
 
--   **[orm]**当传递了非映射器/类的检测描述符时，查询不会失败，并出现weakref错误，并引发“无效的列经验”。[¶](#change-7dae2aa4d2d51b88a2c767d11a880027)
+-   **[orm]**当传递了非映射器/类的检测描述符时，查询不会失败，并出现 weakref 错误，并引发“无效的列经验”。[¶](#change-7dae2aa4d2d51b88a2c767d11a880027)
 
 -   **[orm]**Query.group\_by() properly takes into account aliasing
     applied to the FROM clause, such as with select\_from(), using
@@ -760,7 +759,7 @@ tags:
 -   **[sql]**An alias() of a select() will convert to a “scalar
     subquery” when used in an unambiguously scalar context, i.e. it’s
     used in a comparison operation.
-    这同样适用于使用query.subquery()的ORM。[¶](#change-f4c329ebf5d4f8d39ed26796f4776135)
+    这同样适用于使用 query.subquery()的 ORM。[¶](#change-f4c329ebf5d4f8d39ed26796f4776135)
 
 -   **[sql]**Fixed missing \_label attribute on Function object, others
     when used in a select() with use\_labels (such as when used in an
@@ -771,7 +770,7 @@ tags:
 
 -   **[sql]**anonymous alias names now truncate down to the max length
     allowed by the dialect.
-    对于像Oracle这样的数据库来说，它的字符限制非常小，因此更为重要。[¶](#change-f925a1a1d2ef2848907b27d9344a9157)
+    对于像 Oracle 这样的数据库来说，它的字符限制非常小，因此更为重要。[¶](#change-f925a1a1d2ef2848907b27d9344a9157)
 
     参考文献：[＃1309](http://www.sqlalchemy.org/trac/ticket/1309)
 
@@ -780,19 +779,19 @@ tags:
 
 -   **[sql]**The per-dialect cache used by TypeEngine to cache
     dialect-specific types is now a WeakKeyDictionary.
-    这样可以防止方言对象被永久引用到创建任意数量的引擎或方言的应用程序中。有一个小的性能损失，将在0.6中得到解决。[¶](#change-c60dd590c50147430235f1343500fc91)
+    这样可以防止方言对象被永久引用到创建任意数量的引擎或方言的应用程序中。有一个小的性能损失，将在 0.6 中得到解决。[¶](#change-c60dd590c50147430235f1343500fc91)
 
     参考文献：[＃1299](http://www.sqlalchemy.org/trac/ticket/1299)
 
-### 的PostgreSQL [¶ T0\>](#change-0.5.3-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.5.3-postgresql "Permalink to this headline")
 
 -   **[postgresql]**遇到具有多个表达式的索引时，索引反射不会失败。[¶](#change-dcbcca3e16a72bb4257afe818c178a07)
 
--   **[postgresql]**将PGUuid和PGBit类型添加到sqlalchemy.databases.postgres。[¶](#change-a08e9891d7c2750db9f6802c3d168768)
+-   **[postgresql]**将 PGUuid 和 PGBit 类型添加到 sqlalchemy.databases.postgres。[¶](#change-a08e9891d7c2750db9f6802c3d168768)
 
     参考文献：[＃1327](http://www.sqlalchemy.org/trac/ticket/1327)
 
--   **[postgresql]**在域中指定这些类型时，未知PG类型的反应不会崩溃。[¶](#change-23ab1c01c10410310246fe16a0c49afe)
+-   **[postgresql]**在域中指定这些类型时，未知 PG 类型的反应不会崩溃。[¶](#change-23ab1c01c10410310246fe16a0c49afe)
 
     参考文献：[＃1327](http://www.sqlalchemy.org/trac/ticket/1327)
 
@@ -806,40 +805,40 @@ tags:
 
 ### MSSQL [¶ T0\>](#change-0.5.3-mssql "Permalink to this headline")
 
--   **[mssql]**初步支持pymssql 1.0.1
+-   **[mssql]**初步支持 pymssql 1.0.1
     [¶](#change-3194055f787560d6f9ffd8ff886494d5)
 
--   **[mssql]**更正了mssql中max\_identifier\_length不受尊重的问题。[¶](#change-deccb81a88d339fadb2c73679aa3bdb9)
+-   **[mssql]**更正了 mssql 中 max\_identifier\_length 不受尊重的问题。[¶](#change-deccb81a88d339fadb2c73679aa3bdb9)
 
 ### 杂项[¶ T0\>](#change-0.5.3-misc "Permalink to this headline")
 
--   **[extensions]**修正了序列化程序中的一个递归酸洗问题，由EXISTS或其他嵌入式FROM结构触发。[¶](#change-d808456099666feebbfc2d6d0319c26f)
+-   **[extensions]**修正了序列化程序中的一个递归酸洗问题，由 EXISTS 或其他嵌入式 FROM 结构触发。[¶](#change-d808456099666feebbfc2d6d0319c26f)
 
--   **[extensions]**声明式定位“inherits”类，使用\_\_bases\_\_进行搜索，跳过子类本地的mixins。[¶](#change-8ff5afad7258930672d81ad7e55e1cd4)
+-   **[extensions]**声明式定位“inherits”类，使用\_\_bases\_\_进行搜索，跳过子类本地的 mixins。[¶](#change-8ff5afad7258930672d81ad7e55e1cd4)
 
 -   **[extensions]**即使明确给出了“继承”映射器参数，声明式数字也不会连接表继承主连接条件。[¶](#change-5b4c354d7202eb0cead4c9fdac357c17)
 
--   **[extensions]**如果它是一个字符串，Declarative将正确地解释backref()中的“foreign\_keys”参数。[¶](#change-4c8e2bad941cf4481721c166b8fc630d)
+-   **[extensions]**如果它是一个字符串，Declarative 将正确地解释 backref()中的“foreign\_keys”参数。[¶](#change-4c8e2bad941cf4481721c166b8fc630d)
 
 -   **[extensions]**Declarative will accept a table-bound column as a
     property when used in conjunction with \_\_table\_\_, if the column
     is already present in \_\_table\_\_.
-    该列将以与添加到mapper()属性字典相同的方式重新映射到给定键。[¶](#change-3b8983c231c5a078b26bdd1615b26546)
+    该列将以与添加到 mapper()属性字典相同的方式重新映射到给定键。[¶](#change-3b8983c231c5a078b26bdd1615b26546)
 
 0.5.2 [¶ T0\>](#change-0.5.2 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布于：2009年1月24日
+发布于：2009 年 1 月 24 日
 
 ### ORM [¶ T0\>](#change-0.5.2-orm "Permalink to this headline")
 
--   **[orm]**进一步改进了0.5.1关于放置在多对多关系上的删除孤立级联的警告。首先，坏消息是：这个警告将适用于多对多以及多对一的关系。这是必要的，因为在这两种情况下，SQLA在确定“孤立”状态时都不会扫描整套潜在父母
+-   **[orm]**进一步改进了 0.5.1 关于放置在多对多关系上的删除孤立级联的警告。首先，坏消息是：这个警告将适用于多对多以及多对一的关系。这是必要的，因为在这两种情况下，SQLA 在确定“孤立”状态时都不会扫描整套潜在父母
     -
-    对于持久对象，它只检测到一个in-python解除关联事件以将该对象建立为“孤儿”。接下来，好消息是：通过外键或关联表来支持一对一，或者通过关联表来支持一对多，可以设置一个新的标志single\_parent
+    对于持久对象，它只检测到一个 in-python 解除关联事件以将该对象建立为“孤儿”。接下来，好消息是：通过外键或关联表来支持一对一，或者通过关联表来支持一对多，可以设置一个新的标志 single\_parent
     =
-    True，该标志指示链接到该关系的对象只意味着有一个单亲。如果在Python中发生多个父关联事件，该关系将引发错误。[¶](#change-5cdc10aa381b945a9fb6df668bae7f5c)
+    True，该标志指示链接到该关系的对象只意味着有一个单亲。如果在 Python 中发生多个父关联事件，该关系将引发错误。[¶](#change-5cdc10aa381b945a9fb6df668bae7f5c)
 
--   **[orm]**从0.5.1调整属性检测更改，以完全建立在超类已经完全检测后创建映射器的子类的检测。[¶](#change-ac6a6c886cc28b8a4624799f3a67e800)
+-   **[orm]**从 0.5.1 调整属性检测更改，以完全建立在超类已经完全检测后创建映射器的子类的检测。[¶](#change-ac6a6c886cc28b8a4624799f3a67e800)
 
     参考文献：[＃1292](http://www.sqlalchemy.org/trac/ticket/1292)
 
@@ -848,8 +847,8 @@ tags:
     would prematurely expunge the
     instance.[¶](#change-252f8ac693af8a64d5cbaa517d732448)
 
--   **[orm]**修复了一个急切的加载错误，即自引用加载加载会阻止其他加载，自引用或不加载，从而正确加入父JOIN。感谢Alex
-    K创造了一个伟大的测试案例。[¶](#change-e2b026833b662fec2ba7e60e9fd8dba1)
+-   **[orm]**修复了一个急切的加载错误，即自引用加载加载会阻止其他加载，自引用或不加载，从而正确加入父 JOIN。感谢 Alex
+    K 创造了一个伟大的测试案例。[¶](#change-e2b026833b662fec2ba7e60e9fd8dba1)
 
 -   **[orm]**session.expire() and related methods will not expire()
     unloaded deferred attributes.
@@ -875,7 +874,7 @@ tags:
 
 ### MSSQL [¶ T0\>](#change-0.5.2-mssql "Permalink to this headline")
 
--   **[mssql]**恢复了convert\_unicode处理。结果正在通过而没有转换。[¶](#change-0c390545c0b67d6ec4a1bc02bbd89894)
+-   **[mssql]**恢复了 convert\_unicode 处理。结果正在通过而没有转换。[¶](#change-0c390545c0b67d6ec4a1bc02bbd89894)
 
     参考文献：[＃1291](http://www.sqlalchemy.org/trac/ticket/1291)
 
@@ -883,23 +882,23 @@ tags:
 
     参考文献：[＃1282](http://www.sqlalchemy.org/trac/ticket/1282)
 
--   **[mssql] [Ticket:1289]**修改表反射代码，在构造表时只使用kwargs
+-   **[mssql] [Ticket:1289]**修改表反射代码，在构造表时只使用 kwargs
     [¶](#change-2db326e86e2e0155290796bca98be830)
 
 0.5.1 [¶ T0\>](#change-0.5.1 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布于：2009年1月17日
+发布于：2009 年 1 月 17 日
 
 ### ORM [¶ T0\>](#change-0.5.1-orm "Permalink to this headline")
 
--   **[orm]**删除了一个内部连接缓存，当重复发出query.join()给ad-hoc
-    selectables时可能会泄漏内存。[¶](#change-5f7ebabe0cc040a9dfe4ff0e48f322df)
+-   **[orm]**删除了一个内部连接缓存，当重复发出 query.join()给 ad-hoc
+    selectables 时可能会泄漏内存。[¶](#change-5f7ebabe0cc040a9dfe4ff0e48f322df)
 
 -   **[orm]**The “clear()”, “save()”, “update()”, “save\_or\_update()”
     Session methods have been deprecated, replaced by “expunge\_all()”
     and “add()”.
-    “expunge\_all()”也被添加到ScopedSession中。[¶](#change-77cb4815db5b7492e88c260f9285a6d9)
+    “expunge\_all()”也被添加到 ScopedSession 中。[¶](#change-77cb4815db5b7492e88c260f9285a6d9)
 
 -   **[orm]**对“no mapped
     table”异常进行了现代化处理，并为声明式添加了更明确的\_\_table \_\_ /
@@ -914,24 +913,24 @@ tags:
 
     参考文献：[＃1237](http://www.sqlalchemy.org/trac/ticket/1237)
 
--   **[orm]**添加了一个新的关系()关键字back\_populates。这允许使用显式关系来配置反向引用。在创建具体映射器层次结构与其他类之间的双向关系时，这是必需的。[¶](#change-3a079ea5d41a22d7814b5d922e478025)
+-   **[orm]**添加了一个新的关系()关键字 back\_populates。这允许使用显式关系来配置反向引用。在创建具体映射器层次结构与其他类之间的双向关系时，这是必需的。[¶](#change-3a079ea5d41a22d7814b5d922e478025)
 
     参考文献：[＃1237](http://www.sqlalchemy.org/trac/ticket/1237)，[＃781](http://www.sqlalchemy.org/trac/ticket/781)
 
--   **[orm]**为具体映射器上指定的relation()对象添加的测试覆盖率。[¶](#change-9d5221a68f4c01b3524dfd39940a7643)
+-   **[orm]**为具体映射器上指定的 relation()对象添加的测试覆盖率。[¶](#change-9d5221a68f4c01b3524dfd39940a7643)
 
     参考文献：[＃1237](http://www.sqlalchemy.org/trac/ticket/1237)
 
 -   **[orm]**Query.from\_self() as well as query.subquery() both disable
     the rendering of eager joins inside the subquery produced.
-    通过一个新的query.enable\_eagerloads()生成功能公共地提供“禁用所有渴望加入”功能。[¶](#change-f7d09fa52c66733af926a77dcc6889b8)
+    通过一个新的 query.enable\_eagerloads()生成功能公共地提供“禁用所有渴望加入”功能。[¶](#change-f7d09fa52c66733af926a77dcc6889b8)
 
     参考文献：[＃1276](http://www.sqlalchemy.org/trac/ticket/1276)
 
 -   **[orm]**Added a rudimental series of set operations to Query that
     receive Query objects as arguments, including union(), union\_all(),
     intersect(), except\_(), insertsect\_all(), except\_all().
-    有关示例，请参阅Query.union()的API文档。[¶](#change-d84677c9459d45a1aa0c69a534f2dcf6)
+    有关示例，请参阅 Query.union()的 API 文档。[¶](#change-d84677c9459d45a1aa0c69a534f2dcf6)
 
 -   **[orm]**Fixed bug that prevented Query.join() and eagerloads from
     attaching to a query that selected from a union or aliased
@@ -941,7 +940,7 @@ tags:
 
     参考文献：[＃1237](http://www.sqlalchemy.org/trac/ticket/1237)
 
--   **[orm]**使用保持持久性的最终InstrumentedAttribute对象构造现在的仪器类属性。\_CompileOnAttr
+-   **[orm]**使用保持持久性的最终 InstrumentedAttribute 对象构造现在的仪器类属性。\_CompileOnAttr
     / \_\_ getattribute
     \_\_()方法已被删除。最终结果是，基于列的映射类属性现在可以在类级完全使用，而无需调用映射器编译操作，从而大大简化了声明中的典型使用模式。[¶](#change-d942c9f0feaf7f8fe8d86dd5f3846838)
 
@@ -956,29 +955,29 @@ tags:
     clause would be
     rendered.[¶](#change-1cae8adff596e0421b11143747cac92f)
 
--   **[orm]**不建议使用多对多关系中的delete-orphan。这会产生误导或错误的结果，因为SQLA不检索m2m的“父母”的完整列表。要使用m2m表获得删除孤立行为，请使用explcit关联类，以便将各个关联行视为父项。[¶](#change-12c056541bc4fd04c59756c40cb8e530)
+-   **[orm]**不建议使用多对多关系中的 delete-orphan。这会产生误导或错误的结果，因为 SQLA 不检索 m2m 的“父母”的完整列表。要使用 m2m 表获得删除孤立行为，请使用 explcit 关联类，以便将各个关联行视为父项。[¶](#change-12c056541bc4fd04c59756c40cb8e530)
 
     参考文献：[＃1281](http://www.sqlalchemy.org/trac/ticket/1281)
 
 -   **[orm]**delete-orphan cascade always requires delete cascade.
-    现在指定delete-orphan而不删除会引发弃用警告。[¶](#change-1bfde55510fa78321ebc2a86ed56639d)
+    现在指定 delete-orphan 而不删除会引发弃用警告。[¶](#change-1bfde55510fa78321ebc2a86ed56639d)
 
     参考文献：[＃1281](http://www.sqlalchemy.org/trac/ticket/1281)
 
 ### SQL [¶ T0\>](#change-0.5.1-sql "Permalink to this headline")
 
--   **[sql]**改进了处理列名中的百分号的方法。增加了更多测试。MySQL和PostgreSQL方言仍然不会为包含百分号的标识符发出正确的CREATE
-    TABLE语句。[¶](#change-f22d8d0a0f98407735a67c6d3dcc1181)
+-   **[sql]**改进了处理列名中的百分号的方法。增加了更多测试。MySQL 和 PostgreSQL 方言仍然不会为包含百分号的标识符发出正确的 CREATE
+    TABLE 语句。[¶](#change-f22d8d0a0f98407735a67c6d3dcc1181)
 
     参考文献：[＃1256](http://www.sqlalchemy.org/trac/ticket/1256)
 
 ### 架构[¶ T0\>](#change-0.5.1-schema "Permalink to this headline")
 
--   **[schema]**索引现在接受列导向的InstrumentedAttributes（即基于列的映射类属性）作为列参数。[¶](#change-2cbce9f8f05e9d65a6b86934e8c67a99)
+-   **[schema]**索引现在接受列导向的 InstrumentedAttributes（即基于列的映射类属性）作为列参数。[¶](#change-2cbce9f8f05e9d65a6b86934e8c67a99)
 
     参考文献：[＃1214](http://www.sqlalchemy.org/trac/ticket/1214)
 
--   **[schema]**没有名称的列（如声明式）不会在请求字符串输出时引发NoneType错误（例如在堆栈跟踪中）。[¶](#change-2c9147ef2ccab23fc1b8801fe1dcbde9)
+-   **[schema]**没有名称的列（如声明式）不会在请求字符串输出时引发 NoneType 错误（例如在堆栈跟踪中）。[¶](#change-2c9147ef2ccab23fc1b8801fe1dcbde9)
 
 -   **[schema]**Fixed bug when overriding a Column with a ForeignKey on
     a reflected table, where derived columns (i.e. the “virtual” columns
@@ -987,10 +986,10 @@ tags:
 
     参考文献：[＃1278](http://www.sqlalchemy.org/trac/ticket/1278)
 
-### MySQL的[¶ T0\>](#change-0.5.1-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.5.1-mysql "Permalink to this headline")
 
--   **[mysql]**在MySQL
-    4.1中添加缺少的关键字，以便它们正确转义。[¶](#change-72b1b1a78ead597e7b1f225bc193c234)
+-   **[mysql]**在 MySQL
+    4.1 中添加缺少的关键字，以便它们正确转义。[¶](#change-72b1b1a78ead597e7b1f225bc193c234)
 
 ### MSSQL [¶ T0\>](#change-0.5.1-mssql "Permalink to this headline")
 
@@ -998,50 +997,50 @@ tags:
 
     参考文献：[＃1280](http://www.sqlalchemy.org/trac/ticket/1280)
 
--   **[mssql]**修改了mssql中的do\_begin处理，使用Cursor而不是Connection，因此它与DBAPI兼容。[¶](#change-f6267ad5ec64ce02c5d649e0a9656e15)
+-   **[mssql]**修改了 mssql 中的 do\_begin 处理，使用 Cursor 而不是 Connection，因此它与 DBAPI 兼容。[¶](#change-f6267ad5ec64ce02c5d649e0a9656e15)
 
--   **[mssql]**通过更改对mssql不支持的savepoint\_release的处理，更正了adodbapi上的SAVEPOINT支持。[¶](#change-50f4cc34e316267b64a62baad731764e)
+-   **[mssql]**通过更改对 mssql 不支持的 savepoint\_release 的处理，更正了 adodbapi 上的 SAVEPOINT 支持。[¶](#change-50f4cc34e316267b64a62baad731764e)
 
 ### 杂项[¶ T0\>](#change-0.5.1-misc "Permalink to this headline")
 
--   **[declarative]**现在可以在没有自己表的子类上指定Column对象（即使用单个表继承）。这些列将附加到基表中，但只能由子类映射。[¶](#change-1576364825a1be661c97e91433441123)
+-   **[declarative]**现在可以在没有自己表的子类上指定 Column 对象（即使用单个表继承）。这些列将附加到基表中，但只能由子类映射。[¶](#change-1576364825a1be661c97e91433441123)
 
 -   **[declarative]**对于连接和单个继承子类，子类只映射那些已经映射到超类的列和那些在子类上显式映射的列。默认情况下，表中存在的其他列将从映射中排除，可通过向\_\_
-    mapper\_args \_\_传递空的exclude\_properties
-    \>。这使得定义它们自己的列的单一继承类是映射这些列的唯一类。除非明确设置了exclude\_properties参数，否则效果实际上是比通常使用显式mapper()调用更有组织的映射。[¶
+    mapper\_args \_\_传递空的 exclude\_properties
+    \>。这使得定义它们自己的列的单一继承类是映射这些列的唯一类。除非明确设置了 exclude\_properties 参数，否则效果实际上是比通常使用显式 mapper()调用更有组织的映射。[¶
     t2 \>](#change-adcaa17526d45c7edf13c8a1451209c3)
 
--   **[declarative]**将新的Column对象添加到使用\_\_table
+-   **[declarative]**将新的 Column 对象添加到使用\_\_table
     \_\_指定现有表的声明类中是错误的。[¶](#change-5aa4c8c1650f1958b4b640fd1d5b28e8)
 
 0.5.0 [¶ T0\>](#change-0.5.0 "Permalink to this headline")
 ----------------------------------------------------------
 
-发布时间：2009年1月6日
+发布时间：2009 年 1 月 6 日
 
 ### 一般[¶ T0\>](#change-0.5.0-general "Permalink to this headline")
 
--   **[general]**文档已被转换为Sphinx。特别是，生成的API文档已经构建为一个完整的“API参考”部分，该部分组织编辑文档以及生成的文档字符串。部分和API文档之间的交叉链接大大改进，提供了一个基于javascript的搜索功能，并提供了所有类，函数和成员的完整索引。[¶](#change-eea66a331a882cd7bbab29da2a14aace)
+-   **[general]**文档已被转换为 Sphinx。特别是，生成的 API 文档已经构建为一个完整的“API 参考”部分，该部分组织编辑文档以及生成的文档字符串。部分和 API 文档之间的交叉链接大大改进，提供了一个基于 javascript 的搜索功能，并提供了所有类，函数和成员的完整索引。[¶](#change-eea66a331a882cd7bbab29da2a14aace)
 
 -   **[general]**
-    setup.py现在只能选择性地导入setuptools。如果不存在，使用distutils。新的“pip”安装程序建议使用easy\_install，因为它以更简化的方式进行安装。[¶](#change-3a9d633de48ce51f826b6d7223742ad6)
+    setup.py 现在只能选择性地导入 setuptools。如果不存在，使用 distutils。新的“pip”安装程序建议使用 easy\_install，因为它以更简化的方式进行安装。[¶](#change-3a9d633de48ce51f826b6d7223742ad6)
 
--   **[general]**在示例文件夹中添加了PostGIS集成的一个非常基本的插图。[¶](#change-32af7159db8d14dc32feb73b2f845e43)
+-   **[general]**在示例文件夹中添加了 PostGIS 集成的一个非常基本的插图。[¶](#change-32af7159db8d14dc32feb73b2f845e43)
 
 ### ORM [¶ T0\>](#change-0.5.0-orm "Permalink to this headline")
 
 -   **[orm]**Query.with\_polymorphic() now accepts a third argument
     “discriminator” which will replace the value of
     mapper.polymorphic\_on for that query.
-    映射器本身不再需要设置polymorphic\_on，即使映射器具有polymorphic\_identity。未设置时，默认情况下，映射器将非多态加载。在一起，这两个特性允许非多态混凝土继承设置在每个查询的基础上使用多态加载，因为在所有情况下使用多态时，具体设置很容易出现许多问题。[¶](#change-b7910c83dd3b7784efb8dc7292ea337b)
+    映射器本身不再需要设置 polymorphic\_on，即使映射器具有 polymorphic\_identity。未设置时，默认情况下，映射器将非多态加载。在一起，这两个特性允许非多态混凝土继承设置在每个查询的基础上使用多态加载，因为在所有情况下使用多态时，具体设置很容易出现许多问题。[¶](#change-b7910c83dd3b7784efb8dc7292ea337b)
 
--   **[orm]** dynamic\_loader接受query\_class
-    =来自定义用于动态集合和由它构建的查询的Query类。[¶](#change-e31793af1ffe0503ed92f4a18d66ec82)
+-   **[orm]** dynamic\_loader 接受 query\_class
+    =来自定义用于动态集合和由它构建的查询的 Query 类。[¶](#change-e31793af1ffe0503ed92f4a18d66ec82)
 
 -   **[orm]**query.order\_by() accepts None which will remove any
     pending order\_by state from the query, as well as cancel out any
     mapper/relation configured ordering.
-    这对于重写在dynamic\_loader()中指定的顺序很有用。[¶](#change-06ef25b63d4278d910e873a167d4ce8a)
+    这对于重写在 dynamic\_loader()中指定的顺序很有用。[¶](#change-06ef25b63d4278d910e873a167d4ce8a)
 
     参考文献：[＃1079](http://www.sqlalchemy.org/trac/ticket/1079)
 
@@ -1079,25 +1078,25 @@ tags:
 
 -   **[orm]**Custom comparator classes used in conjunction with
     column\_property(), relation() etc.
-    可以在比较器上定义新的比较方法，该方法将通过InstrumentedAttribute上的\_\_getattr
+    可以在比较器上定义新的比较方法，该方法将通过 InstrumentedAttribute 上的\_\_getattr
     \_\_()变为可用。对于同义词()或可比较属性()而言，首先在用户定义的描述符上解析属性，然后在用户定义的比较器上解析属性。[¶](#change-5fb674658bd173367fadd8284d26c377)
 
--   **[orm]**新增了ScopedSession.is\_active访问者。[¶](#change-6421b8358dfa43d30aa98dd6a905645a)
+-   **[orm]**新增了 ScopedSession.is\_active 访问者。[¶](#change-6421b8358dfa43d30aa98dd6a905645a)
 
     参考文献：[＃976](http://www.sqlalchemy.org/trac/ticket/976)
 
--   **[orm]**可以将映射的属性和列对象作为键传递给query.update（{}）。[¶](#change-aaabaeccae30500a5e174c86899db3d5)
+-   **[orm]**可以将映射的属性和列对象作为键传递给 query.update（{}）。[¶](#change-aaabaeccae30500a5e174c86899db3d5)
 
     参考文献：[＃1262](http://www.sqlalchemy.org/trac/ticket/1262)
 
--   传递给表达式level()或update()的values()的映射属性将使用映射列的键，而不是映射属性的键。[**[orm]**](#change-2176eccd58bfc9b9738a8f634805d5bb)
+-   传递给表达式 level()或 update()的 values()的映射属性将使用映射列的键，而不是映射属性的键。[**[orm]**](#change-2176eccd58bfc9b9738a8f634805d5bb)
 
--   **[orm]**更正了Query.delete()和Query.update()与绑定参数无法正常工作的问题。[¶](#change-4249b9419e01bc5e574864acd9dbd888)
+-   **[orm]**更正了 Query.delete()和 Query.update()与绑定参数无法正常工作的问题。[¶](#change-4249b9419e01bc5e574864acd9dbd888)
 
     参考文献：[＃1242](http://www.sqlalchemy.org/trac/ticket/1242)
 
 -   **[orm]**
-    Query.select\_from()，from\_statement()确保给定的参数分别是FromClause或Text
+    Query.select\_from()，from\_statement()确保给定的参数分别是 FromClause 或 Text
     / Select / Union。[¶](#change-48951eb96c4072874e12e9ef16b39e5c)
 
 -   **[orm]**Query() can be passed a “composite” attribute as a column
@@ -1126,7 +1125,7 @@ tags:
 -   **[orm]**Duplicate items in a list-based collection will be
     maintained when issuing INSERTs to a “secondary” table in a
     many-to-many relation.
-    假设m2m表具有唯一或主键约束，这将引发预期的约束违规，而不是悄悄地丢弃重复的条目。请注意，旧行为仍然是一对多关系，因为在这种情况下，收集条目不会导致INSERT语句，并且SQLA不会手动管理集合。[¶](#change-1a61f53a8bf148ab3f8311330af61a4e)
+    假设 m2m 表具有唯一或主键约束，这将引发预期的约束违规，而不是悄悄地丢弃重复的条目。请注意，旧行为仍然是一对多关系，因为在这种情况下，收集条目不会导致 INSERT 语句，并且 SQLA 不会手动管理集合。[¶](#change-1a61f53a8bf148ab3f8311330af61a4e)
 
     参考文献：[＃1232](http://www.sqlalchemy.org/trac/ticket/1232)
 
@@ -1134,16 +1133,16 @@ tags:
     same manner as session.query()
     can.[¶](#change-446311bba6705a3c6633528ee49a0946)
 
--   **[orm]**与NULL的多对一关系的比较根据not
-    \_()。[¶](#change-aaa084b509a29822e580970c9ed27105)正确转换为IS NOT
+-   **[orm]**与 NULL 的多对一关系的比较根据 not
+    \_()。[¶](#change-aaa084b509a29822e580970c9ed27105)正确转换为 IS NOT
     NULL。
 
--   **[orm]**为了确保显式的primaryjoin /
-    secondaryjoin是ClauseElement实例，添加额外的检查以防止以后出现更多混淆错误。[¶](#change-19b4a3d892b5556548dee40f3e860baf)
+-   **[orm]**为了确保显式的 primaryjoin /
+    secondaryjoin 是 ClauseElement 实例，添加额外的检查以防止以后出现更多混淆错误。[¶](#change-19b4a3d892b5556548dee40f3e860baf)
 
     参考文献：[＃1087](http://www.sqlalchemy.org/trac/ticket/1087)
 
--   **[orm]**改进了mapper()检查非类的类。[¶](#change-e8d33d06a02c7657be959fbfa2fe38a6)
+-   **[orm]**改进了 mapper()检查非类的类。[¶](#change-e8d33d06a02c7657be959fbfa2fe38a6)
 
     参考文献：[＃1236](http://www.sqlalchemy.org/trac/ticket/1236)
 
@@ -1154,27 +1153,27 @@ tags:
 
     参考文献：[＃5051](http://www.sqlalchemy.org/trac/ticket/5051)
 
--   **[orm]**将PropertyLoader的名称更改为RelationProperty，以与所有其他名称保持一致。PropertyLoader仍然是一个同义词。[¶](#change-d186907ddc6b3f823c7b0bc6fb4d8b02)
+-   **[orm]**将 PropertyLoader 的名称更改为 RelationProperty，以与所有其他名称保持一致。PropertyLoader 仍然是一个同义词。[¶](#change-d186907ddc6b3f823c7b0bc6fb4d8b02)
 
--   **[orm]**修复了在分片API中导致总线错误的“double
-    iter()”调用，从0.4版本中删除了错误的result.close()。[¶](#change-9baac05bdfa8c85bd5e3615095d36406)
+-   **[orm]**修复了在分片 API 中导致总线错误的“double
+    iter()”调用，从 0.4 版本中删除了错误的 result.close()。[¶](#change-9baac05bdfa8c85bd5e3615095d36406)
 
     参考文献：[＃1099](http://www.sqlalchemy.org/trac/ticket/1099)，[＃1228](http://www.sqlalchemy.org/trac/ticket/1228)
 
--   **[orm]**使Session.merge级联不会触发autoflush。修复了过早插入缺失值的合并实例。[¶](#change-5e2248787d968939e4e9d2f8e559e18b)
+-   **[orm]**使 Session.merge 级联不会触发 autoflush。修复了过早插入缺失值的合并实例。[¶](#change-5e2248787d968939e4e9d2f8e559e18b)
 
 -   **[orm]**Two fixes to help prevent out-of-band columns from being
     rendered in polymorphic\_union inheritance scenarios (which then
     causes extra tables to be rendered in the FROM clause causing
     cartesian products):
 
-    > -   对a-\> b-\>
-    >     c继承情况的“列自适应”改进可以更好地定位通过多个间接级别相互关联的列，而不是渲染未经过修改的列。
+    > -   对 a-\> b-\>
+    >     c 继承情况的“列自适应”改进可以更好地定位通过多个间接级别相互关联的列，而不是渲染未经过修改的列。
     > -   “多态鉴别器”列仅针对正在查询的实际映射器呈现。该列不会从子类或超类映射器“拉入”，因为它不是必需的。
 
     [¶](#change-6555cfb0451b569305186ee8a0689589)
 
--   **[orm]**修复了ShardedSession.execute()中的shard\_id参数。[¶](#change-66fe0a8f3b46c831a3b3b83a3f3de315)
+-   **[orm]**修复了 ShardedSession.execute()中的 shard\_id 参数。[¶](#change-66fe0a8f3b46c831a3b3b83a3f3de315)
 
     参考文献：[＃1072](http://www.sqlalchemy.org/trac/ticket/1072)
 
@@ -1191,11 +1190,11 @@ tags:
     参考文献：[＃1256](http://www.sqlalchemy.org/trac/ticket/1256)
 
 -   **[sql]**sqlalchemy.sql.expression.Function is now a public class.
-    它可以按照强制风格提供用户定义的SQL函数，包括预先建立的行为。postgis.py例子说明了这种用法。[¶](#change-af7e9ecbc72bdb194a01c553c0e3aaaf)
+    它可以按照强制风格提供用户定义的 SQL 函数，包括预先建立的行为。postgis.py 例子说明了这种用法。[¶](#change-af7e9ecbc72bdb194a01c553c0e3aaaf)
 
 -   **[sql]**PickleType now favors == comparison by default, if the
     incoming object (such as a dict) implements \_\_eq\_\_().
-    如果对象没有实现\_\_eq \_\_()和mutable =
+    如果对象没有实现\_\_eq \_\_()和 mutable =
     True，则会引发弃用警告。[¶](#change-79be4984bd311cf1c3cc7aa0ee2c225b)
 
 -   **[sql]**Fixed the import weirdness in sqlalchemy.sql to not export
@@ -1203,19 +1202,19 @@ tags:
 
     参考文献：[＃1215](http://www.sqlalchemy.org/trac/ticket/1215)
 
--   **[sql]**使用相同的ForeignKey对象会重复引发错误，而不会在稍后以静默方式失败。[¶](#change-053010ae5db7a1ef1c0cad28255e6e1a)
+-   **[sql]**使用相同的 ForeignKey 对象会重复引发错误，而不会在稍后以静默方式失败。[¶](#change-053010ae5db7a1ef1c0cad28255e6e1a)
 
     参考文献：[＃1238](http://www.sqlalchemy.org/trac/ticket/1238)
 
 -   **[sql]**Added NotImplementedError for params() method on
     Insert/Update/Delete constructs.
-    这些项目目前不支持这种功能，与values()相比，这也有点误导。[¶](#change-b7deff0590fd52cd195b8b32345f2fe9)
+    这些项目目前不支持这种功能，与 values()相比，这也有点误导。[¶](#change-b7deff0590fd52cd195b8b32345f2fe9)
 
 -   **[sql]**Reflected foreign keys will properly locate their
     referenced column, even if the column was given a “key” attribute
     different from the reflected name.
-    这是通过一个名为“link\_to\_name”的ForeignKey /
-    ForeignKeyConstraint上的新标志实现的，如果True表示给定的名称是引用列的名称，而不是其分配的键。[¶](#change-a1565732582db1a51b3aab75c0add31e)
+    这是通过一个名为“link\_to\_name”的 ForeignKey /
+    ForeignKeyConstraint 上的新标志实现的，如果 True 表示给定的名称是引用列的名称，而不是其分配的键。[¶](#change-a1565732582db1a51b3aab75c0add31e)
 
     参考文献：[＃650](http://www.sqlalchemy.org/trac/ticket/650)
 
@@ -1232,15 +1231,15 @@ tags:
 
 -   **[sql]**union() and union\_all() will not whack any order\_by()
     that has been applied to the select()s inside.
-    如果你union()一个select()和order\_by()（大概支持LIMIT /
-    OFFSET），你还应该调用self\_group()来应用括号。[¶](#change-9aeae9fe877bc5208fc96c2c0187ce15)
+    如果你 union()一个 select()和 order\_by()（大概支持 LIMIT /
+    OFFSET），你还应该调用 self\_group()来应用括号。[¶](#change-9aeae9fe877bc5208fc96c2c0187ce15)
 
-### MySQL的[¶ T0\>](#change-0.5.0-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.5.0-mysql "Permalink to this headline")
 
 -   **[mysql]**
     text()构造中的“％”符号会自动转义为“%%”。由于这种变化的后向不兼容性，如果在字符串中检测到'%%'，则会发出警告。[¶](#change-8658ecc046653e3b8297dd6a91e62d3c)
 
--   **[mysql]**修正在反射期间FK列不存在时异常引发的问题。[¶](#change-dc5635e0b09e6d0ef90551f1458bfa1f)
+-   **[mysql]**修正在反射期间 FK 列不存在时异常引发的问题。[¶](#change-dc5635e0b09e6d0ef90551f1458bfa1f)
 
     参考文献：[＃1241](http://www.sqlalchemy.org/trac/ticket/1241)
 
@@ -1248,7 +1247,7 @@ tags:
 
 ### 源码[¶ T0\>](#change-0.5.0-sqlite "Permalink to this headline")
 
--   **[sqlite]**表反射现在存储列的实际DefaultClause值。[¶](#change-84584072c8de1c3fe482627927fd714f)
+-   **[sqlite]**表反射现在存储列的实际 DefaultClause 值。[¶](#change-84584072c8de1c3fe482627927fd714f)
 
     参考文献：[＃1266](http://www.sqlalchemy.org/trac/ticket/1266)
 
@@ -1256,9 +1255,9 @@ tags:
 
 ### MSSQL [¶ T0\>](#change-0.5.0-mssql "Permalink to this headline")
 
--   **[mssql]**新增了一个新的MSGenericBinary类型。这映射到二进制类型，因此它可以实现将长度指定类型视为固定宽度二进制类型和非长度类型作为未绑定变量长度二进制类型的特定行为。[¶](#change-c8d0719e80c9b09957d73e77785af6bd)
+-   **[mssql]**新增了一个新的 MSGenericBinary 类型。这映射到二进制类型，因此它可以实现将长度指定类型视为固定宽度二进制类型和非长度类型作为未绑定变量长度二进制类型的特定行为。[¶](#change-c8d0719e80c9b09957d73e77785af6bd)
 
--   **[mssql]**添加新类型：MSVarBinary和MSImage
+-   **[mssql]**添加新类型：MSVarBinary 和 MSImage
     [¶](#change-8f66fc574e3c160f44588cf02ca284e3)
 
     参考文献：[＃1249](http://www.sqlalchemy.org/trac/ticket/1249)
@@ -1267,11 +1266,11 @@ tags:
     MSDateTimeOffset, and MSDateTime2
     types[¶](#change-5c00e393c842b417f4285b3a178aadcb)
 
--   **[mssql]**重构日期/时间类型。`smalldatetime`数据类型不再仅截断为日期，现在将映射到MSSmallDateTime类型。[¶](#change-b759863e8434ae6cea17a2115098b806)
+-   **[mssql]**重构日期/时间类型。`smalldatetime`数据类型不再仅截断为日期，现在将映射到 MSSmallDateTime 类型。[¶](#change-b759863e8434ae6cea17a2115098b806)
 
     参考文献：[＃1254](http://www.sqlalchemy.org/trac/ticket/1254)
 
--   **[mssql]**更正了Numerics接受int的问题。[¶](#change-7ad24f536d7b91e2dd7a3b2b99a19727)
+-   **[mssql]**更正了 Numerics 接受 int 的问题。[¶](#change-7ad24f536d7b91e2dd7a3b2b99a19727)
 
 -   **[mssql]**将`char_length`映射到`LEN()`函数。[¶](#change-75b12696700d5e57f4fe29cdbc7ec8ac)
 
@@ -1288,8 +1287,8 @@ tags:
 
     参考文献：[＃1249](http://www.sqlalchemy.org/trac/ticket/1249)
 
--   **[mssql]** `get_default_schema_name`现在基于用户的默认模式从数据库反映出来。这只适用于MSSQL
-    2005及更高版本。[¶](#change-804ce8c8340ab54b256a14785ec30540)
+-   **[mssql]** `get_default_schema_name`现在基于用户的默认模式从数据库反映出来。这只适用于 MSSQL
+    2005 及更高版本。[¶](#change-804ce8c8340ab54b256a14785ec30540)
 
     参考文献：[＃1258](http://www.sqlalchemy.org/trac/ticket/1258)
 
@@ -1297,38 +1296,38 @@ tags:
 
     参考文献：[＃1248](http://www.sqlalchemy.org/trac/ticket/1248)
 
--   **[mssql]**对连接字符串参数的更改有利于DSN作为pyodbc的默认规范。有关详细的用法说明，请参阅mssql.py
+-   **[mssql]**对连接字符串参数的更改有利于 DSN 作为 pyodbc 的默认规范。有关详细的用法说明，请参阅 mssql.py
     docstring。[¶](#change-a286cda677ccfa3f76731e7a3199818b)
 
 -   **[mssql]**增加了保存点的实验性支持。它目前不能完全用于会话。[¶](#change-4c4a5e9e4b9c08f355846e1f696f9a30)
 
 -   **[mssql]**支持三个列可空性级别：NULL，NOT
-    NULL和数据库配置的默认值。默认的Column配置（nullable =
-    True）现在将在DDL中生成NULL。以前没有发布规范，数据库默认会生效（通常是NULL，但并不总是）。要显式请求数据库缺省值，请配置nullable
+    NULL 和数据库配置的默认值。默认的 Column 配置（nullable =
+    True）现在将在 DDL 中生成 NULL。以前没有发布规范，数据库默认会生效（通常是 NULL，但并不总是）。要显式请求数据库缺省值，请配置 nullable
     =
-    None的列，并且不会在DDL中发出规范。这是向后不兼容的行为。[¶](#change-149c046864d1ddbacc3fd459c9370503)
+    None 的列，并且不会在 DDL 中发出规范。这是向后不兼容的行为。[¶](#change-149c046864d1ddbacc3fd459c9370503)
 
     参考文献：[＃1243](http://www.sqlalchemy.org/trac/ticket/1243)
 
 ### 预言[¶ T0\>](#change-0.5.0-oracle "Permalink to this headline")
 
--   **[oracle]**调整create\_xid()的格式来修复两阶段提交。我们现在已经有Oracle两阶段提交的现场报告，可以正确处理这种变化。[¶](#change-a43e314d4f2cf68b62002484aaf006e4)
+-   **[oracle]**调整 create\_xid()的格式来修复两阶段提交。我们现在已经有 Oracle 两阶段提交的现场报告，可以正确处理这种变化。[¶](#change-a43e314d4f2cf68b62002484aaf006e4)
 
--   **[oracle]**添加了OracleNVarchar类型，生成了NVARCHAR2，并且还使用了Unicode的子类，以便默认情况下convert\_unicode
+-   **[oracle]**添加了 OracleNVarchar 类型，生成了 NVARCHAR2，并且还使用了 Unicode 的子类，以便默认情况下 convert\_unicode
     =
-    True。NVARCHAR2会自动反映到这种类型中，所以这些列在反射表上传递unicode，没有显式的convert\_unicode
-    = True标志。[¶](#change-03197feb9b2b7658cf40cfe853e5f05c)
+    True。NVARCHAR2 会自动反映到这种类型中，所以这些列在反射表上传递 unicode，没有显式的 convert\_unicode
+    = True 标志。[¶](#change-03197feb9b2b7658cf40cfe853e5f05c)
 
     参考文献：[＃1233](http://www.sqlalchemy.org/trac/ticket/1233)
 
--   **[oracle]**修正了防止接收某些类型的参数的错误；非常感谢wwu.edu
+-   **[oracle]**修正了防止接收某些类型的参数的错误；非常感谢 wwu.edu
     huddlej！[¶](#change-b72444e553b994170040c0428fbf65d0)
 
     参考文献：[＃1265](http://www.sqlalchemy.org/trac/ticket/1265)
 
 ### 杂项[¶ T0\>](#change-0.5.0-misc "Permalink to this headline")
 
--   **[dialect]**在处理元数据时用于编码列名称的方言中添加了一个新的description\_encoding属性。这通常默认为utf-8.
+-   **[dialect]**在处理元数据时用于编码列名称的方言中添加了一个新的 description\_encoding 属性。这通常默认为 utf-8.
     [¶](#change-da970a157a1834cd79c819f5c3f2540d)
 
 -   **[engine/pool]**
@@ -1337,34 +1336,34 @@ tags:
     参考文献：[＃1246](http://www.sqlalchemy.org/trac/ticket/1246)
 
 -   **[engine/pool]**
-    NullPool支持在失败行为中重新连接。[¶](#change-bc7d2b0fc90717fe3325c56e15f4283d)
+    NullPool 支持在失败行为中重新连接。[¶](#change-bc7d2b0fc90717fe3325c56e15f4283d)
 
     参考文献：[＃1094](http://www.sqlalchemy.org/trac/ticket/1094)
 
--   **[engine/pool]**使用pool.manage（dbapi）时，为初始池创建添加了互斥锁。这可以防止轻微的“笨蛋”行为，否则会在重载启动时发生。[¶](#change-75ce0f6341ffdfdd61a122e4b20f355b)
+-   **[engine/pool]**使用 pool.manage（dbapi）时，为初始池创建添加了互斥锁。这可以防止轻微的“笨蛋”行为，否则会在重载启动时发生。[¶](#change-75ce0f6341ffdfdd61a122e4b20f355b)
 
     参考文献：[＃799](http://www.sqlalchemy.org/trac/ticket/799)
 
 -   **[engine/pool]**
-    \_execute\_clauseelement()返回为私有方法。在ConnectionProxy可用的情况下，子类化Connection不是必需的。[¶](#change-0b049b47c08c88cb2921ec8fa213c7dd)
+    \_execute\_clauseelement()返回为私有方法。在 ConnectionProxy 可用的情况下，子类化 Connection 不是必需的。[¶](#change-0b049b47c08c88cb2921ec8fa213c7dd)
 
 -   **[documentation]**
     Tickets。[¶](#change-8627c67839907a4a8ac4b47976556828)
 
     参考文献：[＃1149](http://www.sqlalchemy.org/trac/ticket/1149)，[＃1200](http://www.sqlalchemy.org/trac/ticket/1200)
 
--   **[documentation]**添加关于create\_session()的注释默认值。[¶](#change-e55294d74e10af807807f871712b0880)
+-   **[documentation]**添加关于 create\_session()的注释默认值。[¶](#change-e55294d74e10af807807f871712b0880)
 
--   **[documentation]**添加了有关metadata.reflect()的部分。[¶](#change-270e327e2fc5e5129363645f1bbf17a9)
+-   **[documentation]**添加了有关 metadata.reflect()的部分。[¶](#change-270e327e2fc5e5129363645f1bbf17a9)
 
--   **[documentation]**已更新TypeDecorator部分。[¶](#change-5fd98e9cb67ac4d2452ca17a5cb7d03f)
+-   **[documentation]**已更新 TypeDecorator 部分。[¶](#change-5fd98e9cb67ac4d2452ca17a5cb7d03f)
 
 -   **[documentation]**由于最近对此功能的混淆，重写了文档的“threadlocal”策略部分。[¶](#change-bc0ede0d6a7a62f229788a0cc644a33b)
 
 -   **[documentation]**从继承中删除了过期的'polymorphic\_fetch'和'select\_table'文档，重写了“连接表继承”的后半部分。[¶](#change-6f07fa2dced69d5f8b9840955c2152b6)
 
--   **[documentation]**记录了comparator\_factory
-    kwarg，增加了新的doc部分“Custom
+-   **[documentation]**记录了 comparator\_factory
+    kwarg，增加了新的 doc 部分“Custom
     Comparators”。[¶](#change-38b473492814598fc57602ec7a2e240a)
 
 -   **[postgres]**
@@ -1372,23 +1371,23 @@ tags:
 
     参考文献：[＃1267](http://www.sqlalchemy.org/trac/ticket/1267)
 
--   **[postgres]**与server\_side\_cursors一起调用alias.execute()不会引发AttributeError。[¶](#change-4632b52224527c408a498d9cd920b87f)
+-   **[postgres]**与 server\_side\_cursors 一起调用 alias.execute()不会引发 AttributeError。[¶](#change-4632b52224527c408a498d9cd920b87f)
 
--   **[postgres]**增加了对PostgreSQL的索引反射支持，使用了由Ken
-    Kuhlman提交的一个长期被忽略的优秀补丁。[¶](#change-7f7eca144e08cf2cfce5a0ea42a49236)
+-   **[postgres]**增加了对 PostgreSQL 的索引反射支持，使用了由 Ken
+    Kuhlman 提交的一个长期被忽略的优秀补丁。[¶](#change-7f7eca144e08cf2cfce5a0ea42a49236)
 
     参考文献：[＃714](http://www.sqlalchemy.org/trac/ticket/714)
 
 -   **[associationproxy]**关联代理属性可以在课程级别自行提供，例如，
-    MyClass.aproxy。以前这个评估为None。[¶](#change-5b9a3396875da1271c6cb891adaaaa46)
+    MyClass.aproxy。以前这个评估为 None。[¶](#change-5b9a3396875da1271c6cb891adaaaa46)
 
--   **[declarative]**由backref()接受为字符串的完整参数列表包括'primaryjoin'，'secondaryjoin'，'secondary'，'foreign\_keys'，'remote\_side'，'order\_by'。[¶
+-   **[declarative]**由 backref()接受为字符串的完整参数列表包括'primaryjoin'，'secondaryjoin'，'secondary'，'foreign\_keys'，'remote\_side'，'order\_by'。[¶
     T2\>](#change-33380ccfcfce84e083d372599c2b9832)
 
 0.5.0rc4 [¶ T0\>](#change-0.5.0rc4 "Permalink to this headline")
 ----------------------------------------------------------------
 
-发布时间：2008年11月14日
+发布时间：2008 年 11 月 14 日
 
 ### 一般[¶ T0\>](#change-0.5.0rc4-general "Permalink to this headline")
 
@@ -1399,38 +1398,38 @@ tags:
 
 -   **[orm]**Query.count() has been enhanced to do the “right thing” in
     a wider variety of cases.
-    它现在可以计算多实体查询以及基于列的查询。请注意，这意味着如果您在没有任何加入标准的情况下查询（A，B）.count()，它将计算A
-    \* B的笛卡尔乘积。任何针对基于列的实体的查询都会自动发出“SELECT
+    它现在可以计算多实体查询以及基于列的查询。请注意，这意味着如果您在没有任何加入标准的情况下查询（A，B）.count()，它将计算 A
+    \* B 的笛卡尔乘积。任何针对基于列的实体的查询都会自动发出“SELECT
     count（1）FROM（SELECT
-    ...）”，以便返回真实的行计数，即query（func.count（A.name））之类的查询。
+    ...）”，以便返回真实的行计数，即 query（func.count（A.name））之类的查询。
     .count()将返回一个值，因为该查询将返回一行。[¶](#change-e706abaafd4163571c3b5fcd73799ba3)
 
--   **[orm]**很多性能调整。对各种ORM操作的粗略猜测使其比0.5.0rc3快10％，比0.4.8高25-30％。[¶](#change-849958bf53fe31d2e33d918bdfd33bdd)
+-   **[orm]**很多性能调整。对各种 ORM 操作的粗略猜测使其比 0.5.0rc3 快 10％，比 0.4.8 高 25-30％。[¶](#change-849958bf53fe31d2e33d918bdfd33bdd)
 
 -   **[orm]**错误修正和行为改变[¶](#change-999726fd1a9b23baf51053bd59286402)
 
--   **[orm]**调整InstanceState上增强的垃圾收集，以更好地防止由于状态丢失导致的错误。[¶](#change-89395a39a61e30e16768f166ecf74f13)
+-   **[orm]**调整 InstanceState 上增强的垃圾收集，以更好地防止由于状态丢失导致的错误。[¶](#change-89395a39a61e30e16768f166ecf74f13)
 
 -   **[orm]**当针对多个实体执行时，Query.get()返回更多信息错误消息。[¶](#change-f42b51bc7c7c3769ecbdf41f431dd6e7)
 
     参考文献：[＃1220](http://www.sqlalchemy.org/trac/ticket/1220)
 
--   **[orm]**在Cls.relation.in中恢复NotImplementedError
+-   **[orm]**在 Cls.relation.in 中恢复 NotImplementedError
     \_()[¶](#change-ab894d2d68d342df5dc9eeb9cbd09b0c)
 
     参考文献：[＃1140](http://www.sqlalchemy.org/trac/ticket/1140)，[＃1221](http://www.sqlalchemy.org/trac/ticket/1221)
 
--   **[orm]**固定PendingDeprecationWarning涉及relation()中的order\_by参数。[¶](#change-22fe0443a88de30a1342a3a099b22329)
+-   **[orm]**固定 PendingDeprecationWarning 涉及 relation()中的 order\_by 参数。[¶](#change-22fe0443a88de30a1342a3a099b22329)
 
     参考文献：[＃1226](http://www.sqlalchemy.org/trac/ticket/1226)
 
 ### SQL [¶ T0\>](#change-0.5.0rc4-sql "Permalink to this headline")
 
--   **[sql]**删除Connection对象的'properties'属性，应该使用Connection.info。[¶](#change-5224b4a3507abcf1fe778389eaf02902)
+-   **[sql]**删除 Connection 对象的'properties'属性，应该使用 Connection.info。[¶](#change-5224b4a3507abcf1fe778389eaf02902)
 
 -   **[sql]**Restored “active rowcount” fetch before ResultProxy
     autocloses the cursor.
-    这在0.5rc3中被删除。[¶](#change-6f2b6ddaa306d06266d2c436ea5ca0e9)
+    这在 0.5rc3 中被删除。[¶](#change-6f2b6ddaa306d06266d2c436ea5ca0e9)
 
 -   **[sql]**Rearranged the load\_dialect\_impl() method in
     TypeDecorator such that it will take effect even if the user-defined
@@ -1441,10 +1440,10 @@ tags:
 
 -   **[mssql]**大量的清理和修复来纠正极限和偏移问题[¶](#change-02d361683d4caaf79aca978254b4d825)
 
--   **[mssql]**需要将子查询作为二进制表达式的一部分转换为使用IN和NOT
-    IN语法的正确情况。[¶](#change-614a34b39f33b0ee777ad0be205f9d25)
+-   **[mssql]**需要将子查询作为二进制表达式的一部分转换为使用 IN 和 NOT
+    IN 语法的正确情况。[¶](#change-614a34b39f33b0ee777ad0be205f9d25)
 
--   **[mssql]**固定E符号问题，阻止插入小于1E-6的十进制值的能力。[¶](#change-c54f50ebca87d4604d60f5e0f79671a9)
+-   **[mssql]**固定 E 符号问题，阻止插入小于 1E-6 的十进制值的能力。[¶](#change-c54f50ebca87d4604d60f5e0f79671a9)
 
     参考文献：[＃1216](http://www.sqlalchemy.org/trac/ticket/1216)
 
@@ -1452,7 +1451,7 @@ tags:
 
     参考文献：[＃1217](http://www.sqlalchemy.org/trac/ticket/1217)
 
--   **[mssql]**解决了将零长度项目投射到varchar的问题。现在它可以正确调整CAST。[¶](#change-602cb2c9da1ddce66cf973e04b4f44fa)
+-   **[mssql]**解决了将零长度项目投射到 varchar 的问题。现在它可以正确调整 CAST。[¶](#change-602cb2c9da1ddce66cf973e04b4f44fa)
 
 ### 杂项[¶ T0\>](#change-0.5.0rc4-misc "Permalink to this headline")
 
@@ -1468,20 +1467,20 @@ tags:
 
 -   **[ext]**使用声明式时，现在可以在\_\_mapper\_args\_\_中使用自定义的“inherit\_condition”。[¶](#change-ead812e3dcdf543e63ae4eb41cb6e786)
 
--   **[ext]**固定的基于字符串的“remote\_side”，“order\_by”等在backref()中使用时不能正确传播。[¶](#change-d703da716eeb441018b2fabb134131b1)
+-   **[ext]**固定的基于字符串的“remote\_side”，“order\_by”等在 backref()中使用时不能正确传播。[¶](#change-d703da716eeb441018b2fabb134131b1)
 
 0.5.0rc3 [¶ T0\>](#change-0.5.0rc3 "Permalink to this headline")
 ----------------------------------------------------------------
 
-发布时间：2008年11月7日
+发布时间：2008 年 11 月 7 日
 
 ### ORM [¶ T0\>](#change-0.5.0rc3-orm "Permalink to this headline")
 
--   **[orm]**为SessionExtension添加了两个新的挂钩：after\_bulk\_delete()和after\_bulk\_update()。在对查询进行批量删除()操作后调用after\_bulk\_delete()。对查询进行批量更新()操作后调用after\_bulk\_update()。[¶](#change-38a7a9ceedebd3ec3a3cd628c4cbae6c)
+-   **[orm]**为 SessionExtension 添加了两个新的挂钩：after\_bulk\_delete()和 after\_bulk\_update()。在对查询进行批量删除()操作后调用 after\_bulk\_delete()。对查询进行批量更新()操作后调用 after\_bulk\_update()。[¶](#change-38a7a9ceedebd3ec3a3cd628c4cbae6c)
 
--   **[orm]**“不等于”，简单多对一关系与实例的比较不会落入EXISTS子句中，而是会比较外键列。[¶](#change-5dc36955ff448a52543110b78b8fb9a8)
+-   **[orm]**“不等于”，简单多对一关系与实例的比较不会落入 EXISTS 子句中，而是会比较外键列。[¶](#change-5dc36955ff448a52543110b78b8fb9a8)
 
--   **[orm]**删除了将一个集合与一个迭代进行比较的非真实工作用例。使用contains()来测试集合成员资格。[¶](#change-bcd58afe9c7ed7adbd952b916c4cd2c3)
+-   **[orm]**删除了将一个集合与一个迭代进行比较的非真实工作用例。使用 contains()来测试集合成员资格。[¶](#change-bcd58afe9c7ed7adbd952b916c4cd2c3)
 
 -   **[orm]**改进了别名()对象的行为，以便更精确地调整生成的表达式，这特别有助于自引用比较。[¶](#change-d85456f650e249dc2dcf7b525c28e126)
 
@@ -1497,10 +1496,10 @@ tags:
     aliased-bound descriptor which would lose the left
     alias.[¶](#change-3d6adbfb55e19cfd355c9cbb5c452e23)
 
--   **[orm]**改进了weakref标识映射内存管理，不再需要使用mutexing，为具有挂起更改的InstanceState以惰性方式重新生成垃圾收集实例。[¶](#change-2fdd25ee1e71530dd4e6a0e6a5d7634e)
+-   **[orm]**改进了 weakref 标识映射内存管理，不再需要使用 mutexing，为具有挂起更改的 InstanceState 以惰性方式重新生成垃圾收集实例。[¶](#change-2fdd25ee1e71530dd4e6a0e6a5d7634e)
 
 -   **[orm]**
-    InstanceState对象现在会在处置时删除对自身的循环引用，以将其保留在循环垃圾回收之外。[¶](#change-0fcd457e5ee2b0c4d942be9f0514327b)
+    InstanceState 对象现在会在处置时删除对自身的循环引用，以将其保留在循环垃圾回收之外。[¶](#change-0fcd457e5ee2b0c4d942be9f0514327b)
 
 -   **[orm]**relation() won’t hide unrelated ForeignKey errors inside of
     the “please specify primaryjoin” message when determining join
@@ -1533,51 +1532,51 @@ tags:
     that cascade and flush operations will not initialize unloaded
     attributes and collections, leaving them intact for a lazy-load
     later on.
-    Backref事件仍然为待定实例初始化attrbutes和集合。[¶](#change-e08ca53c8d86d8b83e4a311722d70cd9)
+    Backref 事件仍然为待定实例初始化 attrbutes 和集合。[¶](#change-e08ca53c8d86d8b83e4a311722d70cd9)
 
     参考文献：[＃1202](http://www.sqlalchemy.org/trac/ticket/1202)
 
 ### SQL [¶ T0\>](#change-0.5.0rc3-sql "Permalink to this headline")
 
 -   **[sql]**SQL compiler optimizations and complexity reduction.
-    编译典型select()构造的调用次数比0.5.0rc2少20％。[¶](#change-4e7f0b4700c725c4a2c9cc64c36318a6)
+    编译典型 select()构造的调用次数比 0.5.0rc2 少 20％。[¶](#change-4e7f0b4700c725c4a2c9cc64c36318a6)
 
 -   **[sql]**Dialects can now generate label names of adjustable length.
     将参数“label\_length =
-    ”传递给create\_engine()以调整动态生成的列标签中最多有多少个字符，即“somecolumn
+    ”传递给 create\_engine()以调整动态生成的列标签中最多有多少个字符，即“somecolumn
     AS somelabel”。
-    T0\>任何小于6的值都会生成一个最小尺寸的标签，由一个下划线和一个数字计数器组成。编译器使用dialect.max\_identifier\_length的值作为默认值。[¶](#change-c5d75ff2e08bff5447d3ee8f93bd1820)
+    T0\>任何小于 6 的值都会生成一个最小尺寸的标签，由一个下划线和一个数字计数器组成。编译器使用 dialect.max\_identifier\_length 的值作为默认值。[¶](#change-c5d75ff2e08bff5447d3ee8f93bd1820)
 
     参考文献：[＃1211](http://www.sqlalchemy.org/trac/ticket/1211)
 
--   **[sql]**简化对ResultProxy的检查，“无结果自动关闭”仅基于cursor.description的存在。所有关于返回行的语句的基于正则表达式的猜测已被删除。[¶](#change-cf6a1fa1ded84fbb9322d461f0a8bfeb)
+-   **[sql]**简化对 ResultProxy 的检查，“无结果自动关闭”仅基于 cursor.description 的存在。所有关于返回行的语句的基于正则表达式的猜测已被删除。[¶](#change-cf6a1fa1ded84fbb9322d461f0a8bfeb)
 
     参考文献：[＃1212](http://www.sqlalchemy.org/trac/ticket/1212)
 
--   **[sql]**直接执行union()构造会正确设置结果行处理。[¶](#change-8542c7fbeca3c824f9292b2c0c753b65)
+-   **[sql]**直接执行 union()构造会正确设置结果行处理。[¶](#change-8542c7fbeca3c824f9292b2c0c753b65)
 
     参考文献：[＃1194](http://www.sqlalchemy.org/trac/ticket/1194)
 
--   **[sql]**“OID”或“ROWID”列的内部概念已被删除。它基本上没有被任何方言使用，并且现在可以使用psycopg2的cursor.lastrowid，因为INSERT..RETURNING可用。[¶](#change-19fdbca4f61b7fc504e390b8b486bd95)
+-   **[sql]**“OID”或“ROWID”列的内部概念已被删除。它基本上没有被任何方言使用，并且现在可以使用 psycopg2 的 cursor.lastrowid，因为 INSERT..RETURNING 可用。[¶](#change-19fdbca4f61b7fc504e390b8b486bd95)
 
--   **[sql]**删除了所有FromClause对象上的“default\_order\_by()”方法。[¶](#change-746ae8a34836c9f89ff26e4dfefd0801)
+-   **[sql]**删除了所有 FromClause 对象上的“default\_order\_by()”方法。[¶](#change-746ae8a34836c9f89ff26e4dfefd0801)
 
--   **[sql]**修复了table.tometadata()方法，以便将传入的模式参数传播到ForeignKey构造。[¶](#change-7d19f5c441dd8c3c88fde27a171a6170)
+-   **[sql]**修复了 table.tometadata()方法，以便将传入的模式参数传播到 ForeignKey 构造。[¶](#change-7d19f5c441dd8c3c88fde27a171a6170)
 
--   **[sql]**略微改变了IN运算符的行为，以便与空集合进行比较。现在导致与自己的不平等比较。更便携，但打破了非纯函数的存储过程。[¶](#change-7c5ade464b6936417497cfde871aad5e)
+-   **[sql]**略微改变了 IN 运算符的行为，以便与空集合进行比较。现在导致与自己的不平等比较。更便携，但打破了非纯函数的存储过程。[¶](#change-7c5ade464b6936417497cfde871aad5e)
 
-### MySQL的[¶ T0\>](#change-0.5.0rc3-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.5.0rc3-mysql "Permalink to this headline")
 
 -   **[mysql]**Fixed foreign key reflection in the edge case where a
     Table’s explicit schema= is the same as the schema (database) the
     connection is attached
     to.[¶](#change-71d35a417c7941d33fa99cd0465a0727)
 
--   **[mysql]**不再需要表反射中的include\_columns为小写。[¶](#change-99f4355bd2b87a5f286bbf59cf8bc8a5)
+-   **[mysql]**不再需要表反射中的 include\_columns 为小写。[¶](#change-99f4355bd2b87a5f286bbf59cf8bc8a5)
 
 ### 预言[¶ T0\>](#change-0.5.0rc3-oracle "Permalink to this headline")
 
--   **[oracle]**为Oracle语言写了一个文档字符串。很显然，Ohloh“少数源代码评论”标签开始刺痛：）。[¶](#change-b2d74160c560863704ae165259a375be)
+-   **[oracle]**为 Oracle 语言写了一个文档字符串。很显然，Ohloh“少数源代码评论”标签开始刺痛：）。[¶](#change-b2d74160c560863704ae165259a375be)
 
 -   **[oracle]**Removed FIRST\_ROWS() optimize flag when using
     LIMIT/OFFSET, can be reenabled with optimize\_limits=True
@@ -1587,14 +1586,14 @@ tags:
 
 -   **[oracle]**错误修正和行为改变[¶](#change-008e6e9fe2ae6723730008d372f3e2b3)
 
--   **[oracle]**在create\_engine()上将auto\_convert\_lobs设置为False也会指示OracleBinary类型返回未更改的cx\_oracle
-    LOB对象。[¶](#change-6230e778d3864d6e75bfb537df9f4019)
+-   **[oracle]**在 create\_engine()上将 auto\_convert\_lobs 设置为 False 也会指示 OracleBinary 类型返回未更改的 cx\_oracle
+    LOB 对象。[¶](#change-6230e778d3864d6e75bfb537df9f4019)
 
 ### 杂项[¶ T0\>](#change-0.5.0rc3-misc "Permalink to this headline")
 
--   **[ext]**添加了新的扩展名sqlalchemy.ext.serializer。提供镜像Pickle /
-    Unpickle，以及dump()和loads()的Serializer /
-    Deserializer“classes”。这个序列化器实现了一个“外部对象”pickler，它在pickle流之外保存关键的上下文敏感对象，包括引擎，会话，元数据，表/列和映射器，并且可以在以后使用任何引擎/元数据/会话来恢复pickle供应商。这不是用于酸洗常规对象实例，这些对象实例可以在没有任何特殊逻辑的情况下进行选择，而是用于酸洗表达式对象和完整的Query对象，这样所有映射器/引擎/会话依赖关系可以在不打开时恢复。[T0\>](#change-8744852a94323ea2fbca283f3a688d6d)
+-   **[ext]**添加了新的扩展名 sqlalchemy.ext.serializer。提供镜像 Pickle /
+    Unpickle，以及 dump()和 loads()的 Serializer /
+    Deserializer“classes”。这个序列化器实现了一个“外部对象”pickler，它在 pickle 流之外保存关键的上下文敏感对象，包括引擎，会话，元数据，表/列和映射器，并且可以在以后使用任何引擎/元数据/会话来恢复 pickle 供应商。这不是用于酸洗常规对象实例，这些对象实例可以在没有任何特殊逻辑的情况下进行选择，而是用于酸洗表达式对象和完整的 Query 对象，这样所有映射器/引擎/会话依赖关系可以在不打开时恢复。[T0\>](#change-8744852a94323ea2fbca283f3a688d6d)
 
 -   **[ext]**Fixed bug preventing declarative-bound “column” objects
     from being used in
@@ -1611,7 +1610,7 @@ tags:
 0.5.0rc2 [¶ T0\>](#change-0.5.0rc2 "Permalink to this headline")
 ----------------------------------------------------------------
 
-发布日期：2008年10月12日
+发布日期：2008 年 10 月 12 日
 
 ### ORM [¶ T0\>](#change-0.5.0rc2-orm "Permalink to this headline")
 
@@ -1625,29 +1624,29 @@ tags:
     now honors the insert order of the objects
     given.[¶](#change-6f0c82ba7e9d929eb20bf24b7363ad34)
 
--   **[orm]**修正了映射器中与RLock有关的bug，它可能在重入映射器编译()调用时死锁，这是在ForeignKey对象内部使用声明性构造时发生的。[¶](#change-0809d581f494798f25857c9aae8d002b)
+-   **[orm]**修正了映射器中与 RLock 有关的 bug，它可能在重入映射器编译()调用时死锁，这是在 ForeignKey 对象内部使用声明性构造时发生的。[¶](#change-0809d581f494798f25857c9aae8d002b)
 
 -   **[orm]**
-    ScopedSession.query\_property现在接受一个query\_cls工厂，覆盖会话配置的query\_cls。[¶](#change-c54cba17c56398a1c5b08c1b84a02ddf)
+    ScopedSession.query\_property 现在接受一个 query\_cls 工厂，覆盖会话配置的 query\_cls。[¶](#change-c54cba17c56398a1c5b08c1b84a02ddf)
 
 -   **[orm]**Fixed shared state bug interfering with
     ScopedSession.mapper’s ability to apply default \_\_init\_\_
     implementations on object
     subclasses.[¶](#change-32756406d7766861ec920823351f7333)
 
--   **[orm]**固定Query上的切片（即query
-    [x：y]），以便零长度切片正常工作，切片两端都是None。[¶](#change-e1cf8921386e47618a71f91c9f397141)
+-   **[orm]**固定 Query 上的切片（即 query
+    [x：y]），以便零长度切片正常工作，切片两端都是 None。[¶](#change-e1cf8921386e47618a71f91c9f397141)
 
     参考文献：[＃1177](http://www.sqlalchemy.org/trac/ticket/1177)
 
--   **[orm]**添加了一个说明Celko的“嵌套集”作为SQLA映射的例子。[¶](#change-7481c2d6bb456c0af61a6a6c09fba5f1)
+-   **[orm]**添加了一个说明 Celko 的“嵌套集”作为 SQLA 映射的例子。[¶](#change-7481c2d6bb456c0af61a6a6c09fba5f1)
 
 -   **[orm]**contains\_eager() with an alias argument works even when
     the alias is embedded in a SELECT, as when sent to the Query via
     query.select\_from().[¶](#change-73a352c45698be882a53ca36f295ef17)
 
 -   **[orm]**
-    contains\_eager()用法现在与一个Query相兼容，该查询还包含常规的负载和限制/偏移量，因为这些列被添加到Query生成的子查询中。[/
+    contains\_eager()用法现在与一个 Query 相兼容，该查询还包含常规的负载和限制/偏移量，因为这些列被添加到 Query 生成的子查询中。[/
     T2\>](#change-48074ef8f2ae70e97dd4181ed0391fc0)
 
     参考文献：[＃1180](http://www.sqlalchemy.org/trac/ticket/1180)
@@ -1656,12 +1655,12 @@ tags:
     it (regression from
     0.4).[¶](#change-85bf1511ee8b4b14e75649f2b44a7e13)
 
--   **[orm]**从object\_mapper()和class\_mapper()中删除了“raiseerror”关键字参数。如果给定的类/实例没有映射，这些函数会在所有情况下引发。[¶](#change-0e2181a984be58fab18171e6dfaa9cb8)
+-   **[orm]**从 object\_mapper()和 class\_mapper()中删除了“raiseerror”关键字参数。如果给定的类/实例没有映射，这些函数会在所有情况下引发。[¶](#change-0e2181a984be58fab18171e6dfaa9cb8)
 
--   **[orm]**修正了autocommit =
-    False会话中session.transaction.commit()未启动新事务[¶](#change-73e385a22a5f13ca33fa594da9156975)
+-   **[orm]**修正了 autocommit =
+    False 会话中 session.transaction.commit()未启动新事务[¶](#change-73e385a22a5f13ca33fa594da9156975)
 
--   **[orm]**对Session.identity\_map的弱引用行为进行一些调整以减少异步GC副作用。[¶](#change-b1a04e4b706f1e6f85dc123694f84b1b)
+-   **[orm]**对 Session.identity\_map 的弱引用行为进行一些调整以减少异步 GC 副作用。[¶](#change-b1a04e4b706f1e6f85dc123694f84b1b)
 
 -   **[orm]**调整会话对新“干净”对象的刷新后记帐，以便更好地防止在对象上进行异步操作。[¶](#change-5f0c28140f7322c81248e44c6f16543f)
 
@@ -1675,20 +1674,20 @@ tags:
 
     参考文献：[＃1074](http://www.sqlalchemy.org/trac/ticket/1074)
 
-### MySQL的[¶ T0\>](#change-0.5.0rc2-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.5.0rc2-mysql "Permalink to this headline")
 
 -   **[mysql]**临时表现在可以反映。[¶](#change-e747128d425bac8915c3340c83f4bfcd)
 
 ### 源码[¶ T0\>](#change-0.5.0rc2-sqlite "Permalink to this headline")
 
--   **[sqlite]**整体SQLite日期/时间绑定/结果处理使用正则表达式和格式化字符串，而不是strptime
-    / strftime，一般支持1900之前的日期，日期为微秒。[/
+-   **[sqlite]**整体 SQLite 日期/时间绑定/结果处理使用正则表达式和格式化字符串，而不是 strptime
+    / strftime，一般支持 1900 之前的日期，日期为微秒。[/
     T2\>](#change-de2f3457a9881a2d5d58e60866dca3ee)
 
     参考文献：[＃968](http://www.sqlalchemy.org/trac/ticket/968)
 
--   **[sqlite]**字符串（和Unicode的，UnicodeText的等）在sqlite方言中禁用convert\_unicode逻辑，以调整pysqlite
-    2.5.0的新要求，即只接受Python unicode对象；
+-   **[sqlite]**字符串（和 Unicode 的，UnicodeText 的等）在 sqlite 方言中禁用 convert\_unicode 逻辑，以调整 pysqlite
+    2.5.0 的新要求，即只接受 Python unicode 对象；
     [http://itsystementwicklung.de/pipermail/list-pysqlite/2008-March/000018.html
     T0\>](http://itsystementwicklung.de/pipermail/list-pysqlite/2008-March/000018.html)[¶
     T1\>](#change-4b26a6e311de808b495a135487eb4a35)
@@ -1704,40 +1703,40 @@ tags:
 0.5.0rc1 [¶ T0\>](#change-0.5.0rc1 "Permalink to this headline")
 ----------------------------------------------------------------
 
-发布日期：2008年9月11日
+发布日期：2008 年 9 月 11 日
 
 ### ORM [¶ T0\>](#change-0.5.0rc1-orm "Permalink to this headline")
 
--   **[orm]**查询现在具有delete()和update（values）方法。这允许使用Query对象执行批量删除/更新。[¶](#change-8c84c46f35760eb2ceb74f595d9c2088)
+-   **[orm]**查询现在具有 delete()和 update（values）方法。这允许使用 Query 对象执行批量删除/更新。[¶](#change-8c84c46f35760eb2ceb74f595d9c2088)
 
 -   **[orm]**The RowTuple object returned by Query(\*cols) now features
     keynames which prefer mapped attribute names over column keys,
     column keys over column names, i.e. Query(Class.foo, Class.bar) will
     have names “foo” and “bar” even if those are not the names of the
     underlying Column objects.
-    直接的Column对象，如Query（table.c.col）将返回Column的“key”属性。[¶](#change-653915646165f193a73800ec694ef476)
+    直接的 Column 对象，如 Query（table.c.col）将返回 Column 的“key”属性。[¶](#change-653915646165f193a73800ec694ef476)
 
--   **[orm]**向Query添加标量()和值()方法，每个方法返回单个标量值。scalar()不接受任何参数，大致等价于first()[0]，value()接受单个列表达式，并且大致等价于values（expr）.next()[0]。[¶
+-   **[orm]**向 Query 添加标量()和值()方法，每个方法返回单个标量值。scalar()不接受任何参数，大致等价于 first()[0]，value()接受单个列表达式，并且大致等价于 values（expr）.next()[0]。[¶
     t0 \>](#change-bc299fb9b9d12f2bc21df15e57b86e7d)
 
--   **[orm]**改进了在实体的query()列表中放置SQL表达式时确定FROM子句的情况。特别是标量子查询不应该将其内部的FROM对象“泄漏”到包含查询中。[¶](#change-aa571bda5c49dd455a2b376e55d22ccf)
+-   **[orm]**改进了在实体的 query()列表中放置 SQL 表达式时确定 FROM 子句的情况。特别是标量子查询不应该将其内部的 FROM 对象“泄漏”到包含查询中。[¶](#change-aa571bda5c49dd455a2b376e55d22ccf)
 
--   **[orm]**将一个关系()从一个映射类连接到一个映射子类，其中映射子类配置了单个表继承，将包含一个IN子句，该子句将联接类的子类型限制为在加入的ON子句中请求的那些。这对于热切加载连接以及query.join()都有效。请注意，在某些情况下，IN子句将出现在查询的WHERE子句中，因为此歧视具有多个触发点。[¶](#change-d69b4c7364bc587c6c1f189243e71ada)
+-   **[orm]**将一个关系()从一个映射类连接到一个映射子类，其中映射子类配置了单个表继承，将包含一个 IN 子句，该子句将联接类的子类型限制为在加入的 ON 子句中请求的那些。这对于热切加载连接以及 query.join()都有效。请注意，在某些情况下，IN 子句将出现在查询的 WHERE 子句中，因为此歧视具有多个触发点。[¶](#change-d69b4c7364bc587c6c1f189243e71ada)
 
 -   **[orm]**AttributeExtension has been refined such that the event is
     fired before the mutation actually occurs.
-    此外，append()和set()方法现在必须返回给定值，该值用作要在变异操作中使用的值。这允许创建在动作实际发生之前引发的验证AttributeListeners，并且可以在给定值使用之前将其改变为其他值。[¶](#change-5284be0f6bd79911d5fbc38bb1d9844e)
+    此外，append()和 set()方法现在必须返回给定值，该值用作要在变异操作中使用的值。这允许创建在动作实际发生之前引发的验证 AttributeListeners，并且可以在给定值使用之前将其改变为其他值。[¶](#change-5284be0f6bd79911d5fbc38bb1d9844e)
 
 -   **[orm]**
-    column\_property()，composite\_property()和relation()现在使用“extension”关键字参数接受一个或一系列AttributeExtensions
+    column\_property()，composite\_property()和 relation()现在使用“extension”关键字参数接受一个或一系列 AttributeExtensions
     [¶](#change-5e040c7be045989474bef052f124b0e7)
 
 -   **[orm]**query.order\_by().get() silently drops the “ORDER BY” from
     the query issued by GET but does not raise an
     exception.[¶](#change-bc9ecda64807b38920f7cb6826c2c4d4)
 
--   **[orm]**添加了一个Validator
-    AttributeExtension，以及一个@validates装饰器，它以与@reconstructor类似的方式使用，并将方法标记为验证一个或多个映射属性。[/
+-   **[orm]**添加了一个 Validator
+    AttributeExtension，以及一个@validates 装饰器，它以与@reconstructor 类似的方式使用，并将方法标记为验证一个或多个映射属性。[/
     T2\>](#change-ef2dee6873ef902b11bbee01803f4ae5)
 
 -   **[orm]**class.someprop.in\_() raises NotImplementedError pending
@@ -1764,18 +1763,18 @@ tags:
     参考文献：[＃1128](http://www.sqlalchemy.org/trac/ticket/1128)
 
 -   **[orm]**
-    Session和其他人的“extension”参数现在可以有选择地作为列表，支持发送到多个SessionExtension实例的事件。会话在Session.extensions中放置SessionExtensions。[¶](#change-37fc8438846c6b43c7d59ef8a7a828d4)
+    Session 和其他人的“extension”参数现在可以有选择地作为列表，支持发送到多个 SessionExtension 实例的事件。会话在 Session.extensions 中放置 SessionExtensions。[¶](#change-37fc8438846c6b43c7d59ef8a7a828d4)
 
--   **[orm]**重新调用flush()会引发错误。这也可以作为一个基本但不是万无一失的检查Session.flush()的并发调用。[¶](#change-011d4fb8d5a8e138821dc28600012a05)
+-   **[orm]**重新调用 flush()会引发错误。这也可以作为一个基本但不是万无一失的检查 Session.flush()的并发调用。[¶](#change-011d4fb8d5a8e138821dc28600012a05)
 
--   **[orm]**使用显式连接标准（即不在关系中）改进了连接到连接表继承子类时query.join()的行为。[¶](#change-c25ec40209007cd9ba2064bebfb34232)
+-   **[orm]**使用显式连接标准（即不在关系中）改进了连接到连接表继承子类时 query.join()的行为。[¶](#change-c25ec40209007cd9ba2064bebfb34232)
 
 -   **[orm]**@orm.attributes.reconstitute and
     MapperExtension.reconstitute have been renamed to @orm.reconstructor
     and
     MapperExtension.reconstruct\_instance[¶](#change-1fb74025f94dc7b21831167635777693)
 
--   **[orm]**修复了从基类继承的子类的@reconstructor钩子。[¶](#change-cd79264b3790d04f0e63b83903fa5ed8)
+-   **[orm]**修复了从基类继承的子类的@reconstructor 钩子。[¶](#change-cd79264b3790d04f0e63b83903fa5ed8)
 
     参考文献：[＃1129](http://www.sqlalchemy.org/trac/ticket/1129)
 
@@ -1784,11 +1783,11 @@ tags:
     is required if the class represents state using attribute names
     other than the column’s keynames; default-generated values now get
     populated properly upon flush.
-    另外，属性设置为None的组合比较正确。[¶](#change-508bd3c6df6fae18dd5395584def48c6)
+    另外，属性设置为 None 的组合比较正确。[¶](#change-508bd3c6df6fae18dd5395584def48c6)
 
     参考文献：[＃1132](http://www.sqlalchemy.org/trac/ticket/1132)
 
--   **[orm]**由attributes.get\_history()返回的可迭代元素的三元组现在可以是列表和元组的混合。（以前的成员总是列表。）[¶](#change-178fc756263765b259ff38672eac1c02)
+-   **[orm]**由 attributes.get\_history()返回的可迭代元素的三元组现在可以是列表和元组的混合。（以前的成员总是列表。）[¶](#change-178fc756263765b259ff38672eac1c02)
 
 -   **[orm]**Fixed bug whereby changing a primary key attribute on an
     entity where the attribute’s previous value had been expired would
@@ -1797,11 +1796,11 @@ tags:
 
     参考文献：[＃1151](http://www.sqlalchemy.org/trac/ticket/1151)
 
--   **[orm]**修正了自定义的检测错误，其中get\_instance\_dict()未针对未由ORM加载的新构建的实例调用。[¶](#change-ef27e7fe8139e580bcb3c9ce33434365)
+-   **[orm]**修正了自定义的检测错误，其中 get\_instance\_dict()未针对未由 ORM 加载的新构建的实例调用。[¶](#change-ef27e7fe8139e580bcb3c9ce33434365)
 
 -   **[orm]**Session.delete() adds the given object to the session if
     not already present.
-    这是一个从0.4开始的回归bug。[¶](#change-3c5325abcfbe1c8301b63a8ec8e57185)
+    这是一个从 0.4 开始的回归 bug。[¶](#change-3c5325abcfbe1c8301b63a8ec8e57185)
 
     参考文献：[＃1150](http://www.sqlalchemy.org/trac/ticket/1150)
 
@@ -1809,7 +1808,7 @@ tags:
     unit-of-work logging is now application-level only, not per-session
     level.[¶](#change-5e86c8cc2cb9ead3e00ebc093e0a7715)
 
--   **[orm]**从InstrumentedAttribute中删除了冲突的contains()运算符，该运算符不接受escape
+-   **[orm]**从 InstrumentedAttribute 中删除了冲突的 contains()运算符，该运算符不接受 escape
     kwaarg。[¶ T5\>](#change-da6822c97f484346929c37f0beaa3376)
 
     参考文献：[＃1153](http://www.sqlalchemy.org/trac/ticket/1153)
@@ -1821,7 +1820,7 @@ tags:
 
     参考文献：[＃1068](http://www.sqlalchemy.org/trac/ticket/1068)
 
--   存在()构造不会将其包含的元素列表“导出”为FROM子句，从而可以在SELECT的columns子句中更有效地使用它们。[**[sql]**](#change-73494969fdc62e43dc91f1870944fca3)
+-   存在()构造不会将其包含的元素列表“导出”为 FROM 子句，从而可以在 SELECT 的 columns 子句中更有效地使用它们。[**[sql]**](#change-73494969fdc62e43dc91f1870944fca3)
 
 -   **[sql]**and\_() and or\_() now generate a ColumnElement, allowing
     boolean expressions as result columns, i.e. select([and\_(1,
@@ -1833,44 +1832,44 @@ tags:
     be selectable by orm.query (they already had most ColumnElement
     semantics).[¶](#change-671d11640be75b25d117c6f76193c982)
 
--   **[sql]**将select\_from()方法添加到exists()构造中，该构造变得与常规select()更加兼容。[¶](#change-f5e8b1bf0c1545cc9b8fc7694e96dae5)
+-   **[sql]**将 select\_from()方法添加到 exists()构造中，该构造变得与常规 select()更加兼容。[¶](#change-f5e8b1bf0c1545cc9b8fc7694e96dae5)
 
--   **[sql]**添加了func.min()，func.max()，func.sum()作为“通用函数”，它基本上允许自动确定返回类型。有助于在SQLite上使用日期，小数类型和其他类型。[¶](#change-53f291443975e20e506406053e65f6cf)
+-   **[sql]**添加了 func.min()，func.max()，func.sum()作为“通用函数”，它基本上允许自动确定返回类型。有助于在 SQLite 上使用日期，小数类型和其他类型。[¶](#change-53f291443975e20e506406053e65f6cf)
 
     参考文献：[＃1160](http://www.sqlalchemy.org/trac/ticket/1160)
 
--   **[sql]**将decimal.Decimal添加为“自动检测”类型；绑定参数和泛型函数会在使用Decimal时将它们的类型设置为Numeric。[¶](#change-6ff5aacb0dc2056dbbd9f12959e418ce)
+-   **[sql]**将 decimal.Decimal 添加为“自动检测”类型；绑定参数和泛型函数会在使用 Decimal 时将它们的类型设置为 Numeric。[¶](#change-6ff5aacb0dc2056dbbd9f12959e418ce)
 
 ### 架构[¶ T0\>](#change-0.5.0rc1-schema "Permalink to this headline")
 
 -   **[schema]**Added “sorted\_tables” accessor to MetaData, which
     returns Table objects sorted in order of dependency as a list.
-    这弃用了MetaData.table\_iterator()方法。“reverse =
-    False”关键字参数也已从util.sort\_tables()中移除；使用Python'反转'函数来反转结果。[¶](#change-118cc36016ff77010dc9ebd38a2678f8)
+    这弃用了 MetaData.table\_iterator()方法。“reverse =
+    False”关键字参数也已从 util.sort\_tables()中移除；使用 Python'反转'函数来反转结果。[¶](#change-118cc36016ff77010dc9ebd38a2678f8)
 
     参考文献：[＃1033](http://www.sqlalchemy.org/trac/ticket/1033)
 
 -   **[schema]**所有数字类型的'length'参数已被重命名为'scale'。'length'已被弃用，仍然被警告接受。[¶](#change-3df1db57d8636e669fca26f35905d319)
 
--   **[schema]**为用户定义的类型（convert\_result\_value，convert\_bind\_param）降低了0.3兼容性。[¶](#change-82b664ad8775fd4fd75ba2bb61a042fa)
+-   **[schema]**为用户定义的类型（convert\_result\_value，convert\_bind\_param）降低了 0.3 兼容性。[¶](#change-82b664ad8775fd4fd75ba2bb61a042fa)
 
-### MySQL的[¶ T0\>](#change-0.5.0rc1-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.5.0rc1-mysql "Permalink to this headline")
 
 -   **[mysql]**
-    MSInteger，MSBigInteger，MSTinyInteger，MSSmallInteger和MSYear的'length'参数已被重命名为'display\_width'。[¶](#change-9c928b587925101f54296fee7112b28f)
+    MSInteger，MSBigInteger，MSTinyInteger，MSSmallInteger 和 MSYear 的'length'参数已被重命名为'display\_width'。[¶](#change-9c928b587925101f54296fee7112b28f)
 
--   **[mysql]**新增MSMediumInteger类型[¶](#change-3399af5fdccc23ec4d96046c565e26d0)
+-   **[mysql]**新增 MSMediumInteger 类型[¶](#change-3399af5fdccc23ec4d96046c565e26d0)
 
     参考文献：[＃1146](http://www.sqlalchemy.org/trac/ticket/1146)
 
--   **[mysql]**函数func.utc\_timestamp()编译为UTC\_TIMESTAMP，没有括号，与executemany()结合使用时，似乎会阻碍它。[¶](#change-b6f48386c65fadd6348b47240cc99ec7)
+-   **[mysql]**函数 func.utc\_timestamp()编译为 UTC\_TIMESTAMP，没有括号，与 executemany()结合使用时，似乎会阻碍它。[¶](#change-b6f48386c65fadd6348b47240cc99ec7)
 
 ### 预言[¶ T0\>](#change-0.5.0rc1-oracle "Permalink to this headline")
 
 -   **[oracle]**limit/offset no longer uses ROW NUMBER OVER to limit
     rows, and instead uses subqueries in conjunction with a special
-    Oracle optimization comment. 允许LIMIT /
-    OFFSET与DISTINCT配合使用。[¶](#change-d9478b7f320c9377cddae1d8f9c36234)
+    Oracle optimization comment. 允许 LIMIT /
+    OFFSET 与 DISTINCT 配合使用。[¶](#change-d9478b7f320c9377cddae1d8f9c36234)
 
     参考文献：[＃536](http://www.sqlalchemy.org/trac/ticket/536)
 
@@ -1879,7 +1878,7 @@ tags:
 
     参考文献：[＃1155](http://www.sqlalchemy.org/trac/ticket/1155)
 
--   **[oracle]**将BFILE添加到反射类型名称[¶](#change-2fa10c574344332c1b619fb675705c5f)
+-   **[oracle]**将 BFILE 添加到反射类型名称[¶](#change-2fa10c574344332c1b619fb675705c5f)
 
     参考文献：[＃1121](http://www.sqlalchemy.org/trac/ticket/1121)
 
@@ -1889,22 +1888,22 @@ tags:
 
     参考文献：[＃1161](http://www.sqlalchemy.org/trac/ticket/1161)
 
--   **[declarative]**修正了当基于字符串的primaryjoin条件与backref结合使用时会发生的异常抛出。[¶](#change-0ba243ba7ed677b185afb4d1c3d0e1ff)
+-   **[declarative]**修正了当基于字符串的 primaryjoin 条件与 backref 结合使用时会发生的异常抛出。[¶](#change-0ba243ba7ed677b185afb4d1c3d0e1ff)
 
 0.5.0beta3 [¶ T0\>](#change-0.5.0beta3 "Permalink to this headline")
 --------------------------------------------------------------------
 
-发布日期：2008年8月4日
+发布日期：2008 年 8 月 4 日
 
 ### ORM [¶ T0\>](#change-0.5.0beta3-orm "Permalink to this headline")
 
 -   **[orm]**
-    SQLAlchemy映射器的“entity\_name”功能已被删除。有关基本原理，请参阅[http://tinyurl.com/6nm2ne](http://tinyurl.com/6nm2ne)
+    SQLAlchemy 映射器的“entity\_name”功能已被删除。有关基本原理，请参阅[http://tinyurl.com/6nm2ne](http://tinyurl.com/6nm2ne)
     [¶](#change-8d0377fde42fb91d7baf63fb6d636deb)
 
 -   **[orm]**the “autoexpire” flag on Session, sessionmaker(), and
     scoped\_session() has been renamed to “expire\_on\_commit”.
-    它不会影响rollback()的到期行为。[¶](#change-bec0f44885ce43df3d6ec5dc39c4df0b)
+    它不会影响 rollback()的到期行为。[¶](#change-bec0f44885ce43df3d6ec5dc39c4df0b)
 
 -   **[orm]**修复了可能发生在映射器延迟加载的继承属性内的无限循环错误。[¶](#change-ed7c40591d86e7dfb1b66e9045605828)
 
@@ -1915,17 +1914,17 @@ tags:
     begin.[¶](#change-3f45c3231436d347592f6b1ae72ebb22)
 
 -   **[orm]**
-    relation()的'cascade'参数接受None作为一个值，这相当于没有级联。[¶](#change-0491ac7a585bbfa7d31851026a02f775)
+    relation()的'cascade'参数接受 None 作为一个值，这相当于没有级联。[¶](#change-0491ac7a585bbfa7d31851026a02f775)
 
--   **[orm]**对动态关系的一个重要修复允许在flush()之后正确地清除“修改的”历史。[¶](#change-1cdefc4329206214d319913c733149d1)
+-   **[orm]**对动态关系的一个重要修复允许在 flush()之后正确地清除“修改的”历史。[¶](#change-1cdefc4329206214d319913c733149d1)
 
 -   **[orm]**user-defined @properties on a class are detected and left
     in place during mapper initialization.
-    这意味着，如果@property处于阻止状态（并且列未重新映射为不同名称），则同名的表绑定列根本不会被映射，也不会应用来自继承类的检测属性。相同的规则适用于使用include\_properties
+    这意味着，如果@property 处于阻止状态（并且列未重新映射为不同名称），则同名的表绑定列根本不会被映射，也不会应用来自继承类的检测属性。相同的规则适用于使用 include\_properties
     /
-    exclude\_properties集合排除的名称。[¶](#change-0bfbb308a2e6b5996f8f092eecc39f27)
+    exclude\_properties 集合排除的名称。[¶](#change-0bfbb308a2e6b5996f8f092eecc39f27)
 
--   **[orm]**添加了一个名为after\_attach()的新SessionExtension挂钩。这通过add()，add\_all()，delete()和merge()在对象的连接点处调用。[¶](#change-8052b127a0d4287b2c71b35d67278832)
+-   **[orm]**添加了一个名为 after\_attach()的新 SessionExtension 挂钩。这通过 add()，add\_all()，delete()和 merge()在对象的连接点处调用。[¶](#change-8052b127a0d4287b2c71b35d67278832)
 
 -   **[orm]**当继承其继承的映射器的列时，从另一个继承的映射器将使用该继承映射器中指定的任何重新分配的属性名称。以前，如果“Base”已将“base\_id”重新分配给名称“id”，则“SubBase（Base）”仍会获得名为“base\_id”的属性。这可以通过在每个子映射中显式声明列来解决，但这在使用声明时是不可行的，也是不可能的。[¶](#change-bd87173d091ba1e2327191216517b2ef)
 
@@ -1940,7 +1939,7 @@ tags:
 -   **[orm]**Some improvements to the \_CompileOnAttr mechanism which
     should reduce the probability of “Attribute x was not replaced
     during compile” warnings.
-    （这通常适用于SQLA黑客，如Elixir开发人员）。[¶](#change-b9a53af1efbb14f9f161dc08e827613b)
+    （这通常适用于 SQLA 黑客，如 Elixir 开发人员）。[¶](#change-b9a53af1efbb14f9f161dc08e827613b)
 
 -   **[orm]**Fixed bug whereby the “unsaved, pending instance”
     FlushError raised for a pending orphan would not take superclass
@@ -1957,14 +1956,14 @@ tags:
 -   **[sql]**simple label names in ORDER BY expressions render as
     themselves, and not as a re-statement of their corresponding
     expression.
-    此功能目前仅适用于SQLite，MySQL和PostgreSQL。它可以在其他方言上启用，因为每个方言都支持这种行为。[¶](#change-183ed96a85af7c197f43c2af7c82e74f)
+    此功能目前仅适用于 SQLite，MySQL 和 PostgreSQL。它可以在其他方言上启用，因为每个方言都支持这种行为。[¶](#change-183ed96a85af7c197f43c2af7c82e74f)
 
     参考文献：[＃1068](http://www.sqlalchemy.org/trac/ticket/1068)
 
-### MySQL的[¶ T0\>](#change-0.5.0beta3-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.5.0beta3-mysql "Permalink to this headline")
 
--   **[mysql]**在CREATE
-    TABLE中使用的MSEnum值的引用现在是可选的，将根据需要按需引用。（引用总是可选的，以便与现有表一起使用。）[¶](#change-e39adf863f851364eaafbfc3b919e72e)
+-   **[mysql]**在 CREATE
+    TABLE 中使用的 MSEnum 值的引用现在是可选的，将根据需要按需引用。（引用总是可选的，以便与现有表一起使用。）[¶](#change-e39adf863f851364eaafbfc3b919e72e)
 
     参考文献：[＃1110](http://www.sqlalchemy.org/trac/ticket/1110)
 
@@ -1973,7 +1972,7 @@ tags:
 -   **[ext]**Class-bound attributes sent as arguments to relation()’s
     remote\_side and foreign\_keys parameters are now accepted, allowing
     them to be used with declarative.
-    此外修复了涉及order\_by的错误，将其与指定的加载类型一起指定为类绑定属性。[¶](#change-235189d186b64a7c7ade47234481c74d)
+    此外修复了涉及 order\_by 的错误，将其与指定的加载类型一起指定为类绑定属性。[¶](#change-235189d186b64a7c7ade47234481c74d)
 
 -   **[ext]**调整列的声明性初始化，以便非重命名列以与非声明性映射器相同的方式初始化。这允许继承映射器特别设置其相同名称的“id”列，使得父“id”列在子列上更受欢迎，从而在请求该值时减少数据库往返行程。[¶
     t0 \>](#change-e3f67c763727b1ddccb145473793027a)
@@ -1981,7 +1980,7 @@ tags:
 0.5.0beta2 [¶ T0\>](#change-0.5.0beta2 "Permalink to this headline")
 --------------------------------------------------------------------
 
-发布日期：2008年7月14日
+发布日期：2008 年 7 月 14 日
 
 ### ORM [¶ T0\>](#change-0.5.0beta2-orm "Permalink to this headline")
 
@@ -1995,7 +1994,7 @@ tags:
 
 -   **[orm]**如果没有指定列或映射器，query()会引发一条信息错误消息。[¶](#change-fa0caf8275a26fd9e51067cf5d068e20)
 
--   **[orm]**在继续之前，懒加载器现在会触发自动刷新。这允许集合或标量关系的expire()在autoflush的上下文中正常工作。[¶](#change-d224e9594aed7cff19ba7094b073085e)
+-   **[orm]**在继续之前，懒加载器现在会触发自动刷新。这允许集合或标量关系的 expire()在 autoflush 的上下文中正常工作。[¶](#change-d224e9594aed7cff19ba7094b073085e)
 
 -   **[orm]**column\_property() attributes which represent SQL
     expressions or columns that are not present in the mapped tables
@@ -2012,46 +2011,46 @@ tags:
 
     参考文献：[＃1082](http://www.sqlalchemy.org/trac/ticket/1082)
 
--   **[orm]**固定query.join()与连接中的column-only子句和SQL表达式ON子句结合使用时。[¶](#change-cab45795f7c17a76dab0cf71132cf3cd)
+-   **[orm]**固定 query.join()与连接中的 column-only 子句和 SQL 表达式 ON 子句结合使用时。[¶](#change-cab45795f7c17a76dab0cf71132cf3cd)
 
 -   **[orm]**
-    mapper()中的“allow\_column\_override”标志已被删除。这个标志实际上总是被误解。它的特定功能可以通过include\_properties
+    mapper()中的“allow\_column\_override”标志已被删除。这个标志实际上总是被误解。它的特定功能可以通过 include\_properties
     /
-    exclude\_properties映射参数获得。[¶](#change-1997755407d1a2cb2fe8e85e87a44d98)
+    exclude\_properties 映射参数获得。[¶](#change-1997755407d1a2cb2fe8e85e87a44d98)
 
 -   **[orm]**Repaired \_\_str\_\_() method on
     Query.[¶](#change-f6f8762af002e7d0e73abc9712199669)
 
     参考文献：[＃1066](http://www.sqlalchemy.org/trac/ticket/1066)
 
--   **[orm]**即使定义了table /
-    mapper特定绑定，Session.bind也会被用作默认值。[¶](#change-94cddf78a6e3719011b7fb8e0fd99f57)
+-   **[orm]**即使定义了 table /
+    mapper 特定绑定，Session.bind 也会被用作默认值。[¶](#change-94cddf78a6e3719011b7fb8e0fd99f57)
 
 ### SQL [¶ T0\>](#change-0.5.0beta2-sql "Permalink to this headline")
 
--   **[sql]**添加了新的match()运算符，用于执行全文搜索。支持PostgreSQL，SQLite，MySQL，MS-SQL和Oracle后端。[¶](#change-30e5ded1589c7de935e27d16fc9ce66f)
+-   **[sql]**添加了新的 match()运算符，用于执行全文搜索。支持 PostgreSQL，SQLite，MySQL，MS-SQL 和 Oracle 后端。[¶](#change-30e5ded1589c7de935e27d16fc9ce66f)
 
 ### 架构[¶ T0\>](#change-0.5.0beta2-schema "Permalink to this headline")
 
--   **[schema]**为Table添加了前缀选项，该选项接受在CREATE
-    TABLE语句中的CREATE之后插入的字符串列表。[](#change-b49475628d312e4c651103bd44dc0215)
+-   **[schema]**为 Table 添加了前缀选项，该选项接受在 CREATE
+    TABLE 语句中的 CREATE 之后插入的字符串列表。[](#change-b49475628d312e4c651103bd44dc0215)
 
     参考文献：[＃1075](http://www.sqlalchemy.org/trac/ticket/1075)
 
--   **[schema]**默认情况下，Unicode，UnicodeText类型现在设置了“assert\_unicode”和“convert\_unicode”，但接受这些值的覆盖\*\*
+-   **[schema]**默认情况下，Unicode，UnicodeText 类型现在设置了“assert\_unicode”和“convert\_unicode”，但接受这些值的覆盖\*\*
     kwargs。[¶](#change-8a11f0840cf8a84fce22bd2015c35557)
 
 ### 源码[¶ T0\>](#change-0.5.0beta2-sqlite "Permalink to this headline")
 
--   **[sqlite]**修改SQLite的“微秒”表示以匹配str（somedatetime）的输出，即微秒以字符串格式表示为小数秒。这使SQLA的SQLite日期类型与直接使用Pysqlite（它只是调用str()）保存的日期时间兼容。请注意，这与SQLA
-    0.4生成的SQLite数据库文件中的现有微秒值不兼容。
+-   **[sqlite]**修改 SQLite 的“微秒”表示以匹配 str（somedatetime）的输出，即微秒以字符串格式表示为小数秒。这使 SQLA 的 SQLite 日期类型与直接使用 Pysqlite（它只是调用 str()）保存的日期时间兼容。请注意，这与 SQLA
+    0.4 生成的 SQLite 数据库文件中的现有微秒值不兼容。
 
     要在全球范围内获得旧的行为：
 
     > from sqlalchemy.databases.sqlite import DateTimeMixin
     > DateTimeMixin .\_\_ legacy\_microseconds\_\_ = True
 
-    要获取单个DateTime类型的行为：
+    要获取单个 DateTime 类型的行为：
 
     > t = sqlite.SLDateTime()t .\_\_ legacy\_microseconds\_\_ = True
 
@@ -2063,8 +2062,8 @@ tags:
 
 -   **[sqlite]**SQLite Date, DateTime, and Time types only accept Python
     datetime objects now, not strings.
-    如果您想使用SQLite将日期格式化为字符串，请使用String类型。如果您希望他们尽管接受字符串作为输入，仍然返回datetime对象，请围绕String创建TypeDecorator
-    - SQLA不鼓励此模式。[¶](#change-356bd5509442671308af59a77f38afbd)
+    如果您想使用 SQLite 将日期格式化为字符串，请使用 String 类型。如果您希望他们尽管接受字符串作为输入，仍然返回 datetime 对象，请围绕 String 创建 TypeDecorator
+    - SQLA 不鼓励此模式。[¶](#change-356bd5509442671308af59a77f38afbd)
 
 ### 杂项[¶ T0\>](#change-0.5.0beta2-misc "Permalink to this headline")
 
@@ -2079,7 +2078,7 @@ tags:
 0.5.0beta1 [¶ T0\>](#change-0.5.0beta1 "Permalink to this headline")
 --------------------------------------------------------------------
 
-发布于：2008年6月12日
+发布于：2008 年 6 月 12 日
 
 ### 一般[¶ T0\>](#change-0.5.0beta1-general "Permalink to this headline")
 
@@ -2091,28 +2090,28 @@ tags:
 -   **[orm]**
     polymorphic\_union()函数如果与列的名称不同，它将尊重每个列的“键”。[¶](#change-82d1bf98ab627972f0337511ff68952a)
 
--   **[orm]**修复了0.4个仅限于防止复合列与继承映射器正常工作的错误[¶](#change-40f4ed47012478d45197ff8e06350ea0)
+-   **[orm]**修复了 0.4 个仅限于防止复合列与继承映射器正常工作的错误[¶](#change-40f4ed47012478d45197ff8e06350ea0)
 
     参考文献：[＃1199](http://www.sqlalchemy.org/trac/ticket/1199)
 
 -   **[orm]**Fixed RLock-related bug in mapper which could deadlock upon
     reentrant mapper compile() calls, something that occurs when using
     declarative constructs inside of ForeignKey objects.
-    从0.5开始。[¶](#change-c716495e2a464fb8ce720403397e97de)
+    从 0.5 开始。[¶](#change-c716495e2a464fb8ce720403397e97de)
 
 -   **[orm]**修正了阻止主键复合类型发生变异的复合类型的错误。[¶](#change-6da5dc80f326fc681ebf9c54a5ffa9c6)
 
     参考文献：[＃1213](http://www.sqlalchemy.org/trac/ticket/1213)
 
--   **[orm]**新增了ScopedSession.is\_active访问者。[¶](#change-e60b511fbaf0001cde702449ecb0104a)
+-   **[orm]**新增了 ScopedSession.is\_active 访问者。[¶](#change-e60b511fbaf0001cde702449ecb0104a)
 
     参考文献：[＃976](http://www.sqlalchemy.org/trac/ticket/976)
 
--   **[orm]**类绑定存取器可以用作relation()order\_by的参数。[¶](#change-ba55e63a03bb8ec099147f6a87c61615)
+-   **[orm]**类绑定存取器可以用作 relation()order\_by 的参数。[¶](#change-ba55e63a03bb8ec099147f6a87c61615)
 
     参考文献：[＃939](http://www.sqlalchemy.org/trac/ticket/939)
 
--   **[orm]**修复了ShardedSession.execute()中的shard\_id参数。[¶](#change-bd5038cfd61379dab45f5b5efb96d141)
+-   **[orm]**修复了 ShardedSession.execute()中的 shard\_id 参数。[¶](#change-bd5038cfd61379dab45f5b5efb96d141)
 
     参考文献：[＃1072](http://www.sqlalchemy.org/trac/ticket/1072)
 
@@ -2124,13 +2123,13 @@ tags:
     参考文献：[＃1246](http://www.sqlalchemy.org/trac/ticket/1246)
 
 -   **[sql]**
-    NullPool支持在失败行为中重新连接。[¶](#change-16e86878cd9e70fedc4666e21ba59cf5)
+    NullPool 支持在失败行为中重新连接。[¶](#change-16e86878cd9e70fedc4666e21ba59cf5)
 
     参考文献：[＃1094](http://www.sqlalchemy.org/trac/ticket/1094)
 
 -   **[sql]**The per-dialect cache used by TypeEngine to cache
     dialect-specific types is now a WeakKeyDictionary.
-    这样可以防止方言对象被永久引用到创建任意数量的引擎或方言的应用程序中。有一个小的性能损失，将在0.6中得到解决。[¶](#change-1a0630c7f407b3faf362899ef82ad169)
+    这样可以防止方言对象被永久引用到创建任意数量的引擎或方言的应用程序中。有一个小的性能损失，将在 0.6 中得到解决。[¶](#change-1a0630c7f407b3faf362899ef82ad169)
 
     参考文献：[＃1299](http://www.sqlalchemy.org/trac/ticket/1299)
 
@@ -2140,55 +2139,55 @@ tags:
     pysqlite which raise an error when fetchone() called with no rows
     present.[¶](#change-df3932569fdafeb934c94108dca3f10c)
 
-### MySQL的[¶ T0\>](#change-0.5.0beta1-mysql "Permalink to this headline")
+### MySQL 的[¶ T0\>](#change-0.5.0beta1-mysql "Permalink to this headline")
 
--   **[mysql]**修正在反射期间FK列不存在时异常引发的问题。[¶](#change-8e90da9f21562be95b0bfbd2c9e027d6)
+-   **[mysql]**修正在反射期间 FK 列不存在时异常引发的问题。[¶](#change-8e90da9f21562be95b0bfbd2c9e027d6)
 
     参考文献：[＃1241](http://www.sqlalchemy.org/trac/ticket/1241)
 
 ### 预言[¶ T0\>](#change-0.5.0beta1-oracle "Permalink to this headline")
 
--   **[oracle]**修正了防止接收某些类型的参数的错误；非常感谢wwu.edu
+-   **[oracle]**修正了防止接收某些类型的参数的错误；非常感谢 wwu.edu
     huddlej！[¶](#change-4b9a389dc0d41e5883225b92c038f6b6)
 
     参考文献：[＃1265](http://www.sqlalchemy.org/trac/ticket/1265)
 
 ### 火鸟[¶ T0\>](#change-0.5.0beta1-firebird "Permalink to this headline")
 
--   **[firebird]**新增了对插入（仅限2.0+），更新和删除（仅限2.1+）返回值的支持。[¶](#change-f80867c91e5a7fd60be40e84b6b45c1c)
+-   **[firebird]**新增了对插入（仅限 2.0+），更新和删除（仅限 2.1+）返回值的支持。[¶](#change-f80867c91e5a7fd60be40e84b6b45c1c)
 
 ### 杂项[¶ T0\>](#change-0.5.0beta1-misc "Permalink to this headline")
 
--   由mapper添加的“\_\_init\_\_”触发器/修饰器现在试图精确地镜像原始\_\_init\_\_的参数签名。'\_sa\_session'的传递不再是隐式的，你必须在你的构造函数中允许this关键字参数。[¶](#change-4c74f38b423ff53dcd4b7fa1966af84d)
+-   由 mapper 添加的“\_\_init\_\_”触发器/修饰器现在试图精确地镜像原始\_\_init\_\_的参数签名。'\_sa\_session'的传递不再是隐式的，你必须在你的构造函数中允许 this 关键字参数。[¶](#change-4c74f38b423ff53dcd4b7fa1966af84d)
 
--   ClassState被重命名为ClassManager。[¶](#change-980210cb8cdd5ceea64cd04baa489570)
+-   ClassState 被重命名为 ClassManager。[¶](#change-980210cb8cdd5ceea64cd04baa489570)
 
--   类可以通过提供\_\_sa\_instrumentation\_manager\_\_属性来提供他们自己的InstrumentationManager。[¶](#change-9cbc088fadfe2d0e1f287573f9baa15e)
+-   类可以通过提供\_\_sa\_instrumentation\_manager\_\_属性来提供他们自己的 InstrumentationManager。[¶](#change-9cbc088fadfe2d0e1f287573f9baa15e)
 
--   自定义检测可以使用任何机制将ClassManager与类关联起来，并将InstanceState与实例关联起来。这些对象的属性仍然是SQLAlchemy的本地工具使用的默认关联机制。[¶](#change-e6063cfb03c99c975326810501e82cdc)
+-   自定义检测可以使用任何机制将 ClassManager 与类关联起来，并将 InstanceState 与实例关联起来。这些对象的属性仍然是 SQLAlchemy 的本地工具使用的默认关联机制。[¶](#change-e6063cfb03c99c975326810501e82cdc)
 
--   将实例对象中的entity\_name，\_sa\_session\_id和\_instance\_key移至实例状态。这些值仍旧以旧的方式提供，现在已弃用，并使用附加到该类的描述符。访问时会发出弃用警告。[¶](#change-d0e462bbc183d7226f97f17ecbb388a2)
+-   将实例对象中的 entity\_name，\_sa\_session\_id 和\_instance\_key 移至实例状态。这些值仍旧以旧的方式提供，现在已弃用，并使用附加到该类的描述符。访问时会发出弃用警告。[¶](#change-d0e462bbc183d7226f97f17ecbb388a2)
 
--   prepare\_instrumentation的\_prepare\_instrumentation别名已被删除。[¶](#change-4c81de802c5b169c064df29a7b362856)
+-   prepare\_instrumentation 的\_prepare\_instrumentation 别名已被删除。[¶](#change-4c81de802c5b169c064df29a7b362856)
 
--   sqlalchemy.exceptions已更名为sqlalchemy.exc。该模块可以用任何名称导入。[¶](#change-f109a7bb053325a3920397d52b10afba)
+-   sqlalchemy.exceptions 已更名为 sqlalchemy.exc。该模块可以用任何名称导入。[¶](#change-f109a7bb053325a3920397d52b10afba)
 
 -   ORM-related exceptions are now defined in sqlalchemy.orm.exc.
-    在导入sqlalchemy.orm期间，ConcurrentModificationError，FlushError和UnmappedColumnError兼容性别名安装在sqlalchemy.exc中。[¶](#change-5787d3423a68487bb24c139973934eed)
+    在导入 sqlalchemy.orm 期间，ConcurrentModificationError，FlushError 和 UnmappedColumnError 兼容性别名安装在 sqlalchemy.exc 中。[¶](#change-5787d3423a68487bb24c139973934eed)
 
--   sqlalchemy.logging已重命名为sqlalchemy.log。[¶](#change-2d6f76209ea09a87b60ecfd470463e1e)
+-   sqlalchemy.logging 已重命名为 sqlalchemy.log。[¶](#change-2d6f76209ea09a87b60ecfd470463e1e)
 
--   已删除sqlalchemy.exc中警告定义的过渡性sqlalchemy.log.SADeprecationWarning别名。[¶](#change-11111e8dff7ace83b711108d6ca580af)
+-   已删除 sqlalchemy.exc 中警告定义的过渡性 sqlalchemy.log.SADeprecationWarning 别名。[¶](#change-11111e8dff7ace83b711108d6ca580af)
 
 -   exc.AssertionError has been removed and usage replaced with Python’s
     built-in
     AssertionError.[¶](#change-37d168fda1270d938e3c6dbec83f764b)
 
--   MapperExtensions附加到多个entity\_name
-    =一个类的主映射器的行为已被更改。为类定义的第一个mapper()是符合MapperExtension'instrument\_class'，'init\_instance'和'init\_failed'事件的唯一映射器。这是倒退不相容的；之前定义的最后一个映射器的扩展将接收这些事件。[¶](#change-31be20aa80e30309ce588ebcaab5bdab)
+-   MapperExtensions 附加到多个 entity\_name
+    =一个类的主映射器的行为已被更改。为类定义的第一个 mapper()是符合 MapperExtension'instrument\_class'，'init\_instance'和'init\_failed'事件的唯一映射器。这是倒退不相容的；之前定义的最后一个映射器的扩展将接收这些事件。[¶](#change-31be20aa80e30309ce588ebcaab5bdab)
 
--   **[postgres]**增加了对Postgres的索引反射支持，使用Ken
-    Kuhlman提交的一个我们长期忽略的很好的补丁。[¶](#change-de2200a740660664c93871010b7c242f)
+-   **[postgres]**增加了对 Postgres 的索引反射支持，使用 Ken
+    Kuhlman 提交的一个我们长期忽略的很好的补丁。[¶](#change-de2200a740660664c93871010b7c242f)
 
     参考文献：[＃714](http://www.sqlalchemy.org/trac/ticket/714)
 

@@ -1,5 +1,5 @@
 ---
-title: 不推荐使用的ORM事件接口
+title: 不推荐使用的 ORM 事件接口
 date: 2021-02-20 22:41:40
 permalink: /sqlalchemy/orm/deprecated/
 categories:
@@ -7,26 +7,25 @@ categories:
   - SqlAlchemy中文文档
   - orm
 tags:
-  - 
 ---
-不推荐使用的ORM事件接口[¶](#module-sqlalchemy.orm.interfaces "Permalink to this headline")
+不推荐使用的 ORM 事件接口[¶](#module-sqlalchemy.orm.interfaces "Permalink to this headline")
 ==========================================================================================
 
-本节描述了最初存在于SQLAlchemy
-0.1中的基于类的ORM事件接口，该接口在SQLAlchemy
-0.5之前有更多类型的事件。非ORM模拟在[Deprecated Event
+本节描述了最初存在于 SQLAlchemy
+0.1 中的基于类的 ORM 事件接口，该接口在 SQLAlchemy
+0.5 之前有更多类型的事件。非 ORM 模拟在[Deprecated Event
 Interfaces](core_interfaces.html)中描述。
 
-从版本0.7开始弃用：从SQLAlchemy
-0.7开始，[Events](core_event.html)中描述的新事件系统取代了扩展/代理/侦听器系统，为所有不需要的事件提供一致的接口用于子类化。
+从版本 0.7 开始弃用：从 SQLAlchemy
+0.7 开始，[Events](core_event.html)中描述的新事件系统取代了扩展/代理/侦听器系统，为所有不需要的事件提供一致的接口用于子类化。
 
-Mapper事件[¶](#mapper-events "Permalink to this headline")
+Mapper 事件[¶](#mapper-events "Permalink to this headline")
 ----------------------------------------------------------
 
 *class* `sqlalchemy.orm.interfaces。`{.descclassname} `MapperExtension`{.descname} [¶](#sqlalchemy.orm.interfaces.MapperExtension "Permalink to this definition")
 :   [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")事件挂钩的基本实现。
 
-    注意
+    注意plain
 
     [`MapperExtension`](#sqlalchemy.orm.interfaces.MapperExtension "sqlalchemy.orm.interfaces.MapperExtension")已弃用。请参阅[`event.listen()`](core_event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")以及[`MapperEvents`](events.html#sqlalchemy.orm.events.MapperEvents "sqlalchemy.orm.events.MapperEvents")。
 

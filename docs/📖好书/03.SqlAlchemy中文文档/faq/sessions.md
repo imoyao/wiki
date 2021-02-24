@@ -4,30 +4,29 @@ date: 2021-02-20 22:41:39
 permalink: /sqlalchemy/faq/sessions/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - faq
 tags:
-  - 
 ---
 会话/查询[¶](#sessions-queries "Permalink to this headline")
 ============================================================
 
 -   [我正在使用我的会话重新加载数据，但没有看到我在别处提交的更改](#i-m-re-loading-data-with-my-session-but-it-isn-t-seeing-changes-that-i-committed-elsewhere)
 -   [“此会话的事务由于刷新期间的先前异常而回滚。”（或类似的）](#this-session-s-transaction-has-been-rolled-back-due-to-a-previous-exception-during-flush-or-similar)
-    -   [但为什么flush()坚持发布ROLLBACK？](#but-why-does-flush-insist-on-issuing-a-rollback)
-    -   [但为什么自动调用ROLLBACK不够？为什么我必须再次ROLLBACK？](#but-why-isn-t-the-one-automatic-call-to-rollback-enough-why-must-i-rollback-again)
+    -   [但为什么 flush()坚持发布 ROLLBACK？](#but-why-does-flush-insist-on-issuing-a-rollback)
+    -   [但为什么自动调用 ROLLBACK 不够？为什么我必须再次 ROLLBACK？](#but-why-isn-t-the-one-automatic-call-to-rollback-enough-why-must-i-rollback-again)
 -   [我如何进行查询，以便每次查询都添加特定的过滤器？](#how-do-i-make-a-query-that-always-adds-a-certain-filter-to-every-query)
 -   [我创建了一个针对外部联接的映射，并且在查询返回行时，不返回对象。为什么不呢？](#i-ve-created-a-mapping-against-an-outer-join-and-while-the-query-returns-rows-no-objects-are-returned-why-not)
--   [我使用`joinedload()`或`lazy=False`创建JOIN / OUTER
-    JOIN，并且在尝试添加WHERE时SQLAlchemy未构造正确的查询，ORDER
-    BY，LIMIT等（依赖于（OUTER）JOIN）](#i-m-using-joinedload-or-lazy-false-to-create-a-join-outer-join-and-sqlalchemy-is-not-constructing-the-correct-query-when-i-try-to-add-a-where-order-by-limit-etc-which-relies-upon-the-outer-join)
+-   [我使用`joinedload()`或`lazy=False`创建 JOIN / OUTER
+    JOIN，并且在尝试添加 WHERE 时 SQLAlchemy 未构造正确的查询，ORDER
+    BY，LIMIT 等（依赖于（OUTER）JOIN）](#i-m-using-joinedload-or-lazy-false-to-create-a-join-outer-join-and-sqlalchemy-is-not-constructing-the-correct-query-when-i-try-to-add-a-where-order-by-limit-etc-which-relies-upon-the-outer-join)
 -   [查询没有`__len__()`，为什么不能？](#query-has-no-len-why-not)
--   [如何使用带有ORM查询的文本SQL？](#how-do-i-use-textual-sql-with-orm-queries)
+-   [如何使用带有 ORM 查询的文本 SQL？](#how-do-i-use-textual-sql-with-orm-queries)
 -   [我在调用`Session.delete(myobject)`，并且它不会从父集合中移除！](#i-m-calling-session-delete-myobject-and-it-isn-t-removed-from-the-parent-collection)
 -   [当我加载对象时为什么不调用`__init__()`？](#why-isn-t-my-init-called-when-i-load-objects)
--   [如何在SA的ORM中使用ON DELETE
+-   [如何在 SA 的 ORM 中使用 ON DELETE
     CASCADE？](#how-do-i-use-on-delete-cascade-with-sa-s-orm)
--   [我将实例中的“foo\_id”属性设置为“7”，但“foo”属性仍然是`None` - 不应该使用id＃7加载Foo吗？ t0
+-   [我将实例中的“foo\_id”属性设置为“7”，但“foo”属性仍然是`None` - 不应该使用 id＃7 加载 Foo 吗？ t0
     \>](#i-set-the-foo-id-attribute-on-my-instance-to-7-but-the-foo-attribute-is-still-none-shouldn-t-it-have-loaded-foo-with-id-7)
 -   [我如何走路与给定对象相关的所有对象？](#how-do-i-walk-all-objects-that-are-related-to-a-given-object)
 -   [有没有一种方法可以在不查询关键字并获取包含该关键字的行的引用的情况下仅自动获取唯一关键字（或其他类型的对象）？](#is-there-a-way-to-automagically-have-only-unique-keywords-or-other-kinds-of-objects-without-doing-a-query-for-the-keyword-and-getting-a-reference-to-the-row-containing-that-keyword)
@@ -41,9 +40,9 @@ tags:
 
 [隔离级别](https://en.wikipedia.org/wiki/Isolation_%28database_systems%29)
 
-简而言之，可序列化的隔离级别通常意味着，一旦在事务中选择了一系列行，每次重新发出该SELECT时都会得到*相同的数据*。如果您处于隔离级别较低的“可重复读取”级别，则会看到新添加的行（不再看到已删除的行），但对于已加载**的行，您将不会看到任何变化。只有在较低的隔离级别时，例如“读取提交”，是否有可能看到一行数据改变其价值。
+简而言之，可序列化的隔离级别通常意味着，一旦在事务中选择了一系列行，每次重新发出该 SELECT 时都会得到*相同的数据*。如果您处于隔离级别较低的“可重复读取”级别，则会看到新添加的行（不再看到已删除的行），但对于已加载**的行，您将不会看到任何变化。只有在较低的隔离级别时，例如“读取提交”，是否有可能看到一行数据改变其价值。
 
-有关使用SQLAlchemy ORM时控制隔离级别的信息，请参阅[Setting Transaction
+有关使用 SQLAlchemy ORM 时控制隔离级别的信息，请参阅[Setting Transaction
 Isolation
 Levels](orm_session_transaction.html#session-transaction-isolation)。
 
@@ -85,7 +84,7 @@ or [`Session.close()`](orm_session_api.html#sqlalchemy.orm.session.Session.close
 
 它通常对应于捕获[`Session.flush()`](orm_session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")或[`Session.commit()`](orm_session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")中的异常并且没有正确处理异常的应用程序。例如：
 
-    from sqlalchemy import create_engine, Column, Integer
+    from sqlalchemy import create_engine, Column, Integerplainplainplain
     from sqlalchemy.orm import sessionmaker
     from sqlalchemy.ext.declarative import declarative_base
 
@@ -113,7 +112,7 @@ or [`Session.close()`](orm_session_api.html#sqlalchemy.orm.session.Session.close
 
 [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的用法应该符合类似于以下的结构：
 
-    try:
+    try:plain
         <use session>
         session.commit()
     except:
@@ -122,19 +121,19 @@ or [`Session.close()`](orm_session_api.html#sqlalchemy.orm.session.Session.close
     finally:
        session.close()  # optional, depends on use case
 
-许多事情可能导致尝试/除了冲刷除外失败。您应始终对会话操作进行某种“构架”，以便连接和事务资源具有确定的边界，否则应用程序并未真正控制其资源的使用。这并不是说你需要在应用程序中放置try
+许多事情可能导致尝试/除了冲刷除外失败。您应始终对会话操作进行某种“构架”，以便连接和事务资源具有确定的边界，否则应用程序并未真正控制其资源的使用。这并不是说你需要在应用程序中放置 try
 /
-except块，相反，这将是一个可怕的想法。您应该构建您的应用程序，以便在会话操作周围有一个（或几个）“框架”点。
+except 块，相反，这将是一个可怕的想法。您应该构建您的应用程序，以便在会话操作周围有一个（或几个）“框架”点。
 
 有关如何组织[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")使用情况的详细讨论，请参阅[When
 do I construct a Session, when do I commit it, and when do I close
 it?](orm_session_basics.html#session-faq-whentocreate)。
 
-### 但为什么flush()坚持发布ROLLBACK？[¶](#but-why-does-flush-insist-on-issuing-a-rollback "Permalink to this headline")
+### 但为什么 flush()坚持发布 ROLLBACK？[¶](#but-why-does-flush-insist-on-issuing-a-rollback "Permalink to this headline")
 
-如果[`Session.flush()`](orm_session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")可以部分完成然后不回滚会很好，但是这超出了它当前的能力，因为它的内部簿记必须被修改，以便它可以在任何时候被暂停时间，并与已刷新到数据库的内容完全一致。虽然这在理论上是可行的，但是由于许多数据库操作在任何情况下都需要ROLLBACK，所以增强的有用性大大降低了。特别是Postgres有一些操作，一旦失败，交易不允许继续：
+如果[`Session.flush()`](orm_session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")可以部分完成然后不回滚会很好，但是这超出了它当前的能力，因为它的内部簿记必须被修改，以便它可以在任何时候被暂停时间，并与已刷新到数据库的内容完全一致。虽然这在理论上是可行的，但是由于许多数据库操作在任何情况下都需要 ROLLBACK，所以增强的有用性大大降低了。特别是 Postgres 有一些操作，一旦失败，交易不允许继续：
 
-    test=> create table foo(id integer primary key);
+    test=> create table foo(id integer primary key);plain
     NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "foo_pkey" for table "foo"
     CREATE TABLE
     test=> begin;
@@ -150,13 +149,13 @@ it?](orm_session_basics.html#session-faq-whentocreate)。
     test=> insert into foo values(2);
     ERROR:  current transaction is aborted, commands ignored until end of transaction block
 
-SQLAlchemy提供的解决这两个问题的方法是通过[`Session.begin_nested()`](orm_session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")支持SAVEPOINT。通过使用[`Session.begin_nested()`](orm_session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")，您可以构建一个可能在事务内失败的操作，然后在保持封闭事务的同时“回滚”到失败前的点。
+SQLAlchemy 提供的解决这两个问题的方法是通过[`Session.begin_nested()`](orm_session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")支持SAVEPOINT。通过使用[`Session.begin_nested()`](orm_session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")，您可以构建一个可能在事务内失败的操作，然后在保持封闭事务的同时“回滚”到失败前的点。
 
-### 但为什么不是自动调用ROLLBACK足够？为什么我必须再次ROLLBACK？[¶](#but-why-isn-t-the-one-automatic-call-to-rollback-enough-why-must-i-rollback-again "Permalink to this headline")
+### 但为什么不是自动调用 ROLLBACK 足够？为什么我必须再次 ROLLBACK？[¶](#but-why-isn-t-the-one-automatic-call-to-rollback-enough-why-must-i-rollback-again "Permalink to this headline")
 
 这也是[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")提供了一个一致的接口并拒绝猜测它正在使用的上下文的问题。例如，[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")支持多个级别内的“成帧”。比如，假设你有一个装饰器`@with_session()`，它这样做了：
 
-    def with_session(fn):
+    def with_session(fn):plain
        def go(*args, **kw):
            session.begin(subtransactions=True)
            try:
@@ -216,7 +215,7 @@ combination of subtransactions and real SAVEPOINTs.
 我已经创建了一个针对外部连接的映射，并且在查询返回行时，不会返回任何对象。为什么不呢？[¶](#i-ve-created-a-mapping-against-an-outer-join-and-while-the-query-returns-rows-no-objects-are-returned-why-not "Permalink to this headline")
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-由外部联接返回的行可能包含NULL作为主键的一部分，因为主键是两个表的组合。[`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象会忽略没有可接受主键的传入行。Based
+由外部联接返回的行可能包含 NULL 作为主键的一部分，因为主键是两个表的组合。[`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象会忽略没有可接受主键的传入行。Based
 on the setting of the `allow_partial_pks` flag on
 [`mapper()`](orm_mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper"),
 a primary key is accepted if the value has at least one non-NULL value,
@@ -234,12 +233,12 @@ Loading](orm_loading_relationships.html#zen-of-eager-loading)。
 查询没有`__len__()`，为什么不呢？[¶](#query-has-no-len-why-not "Permalink to this headline")
 ----------------------------------------------------------------------------------------------------------------
 
-应用于对象的Python `__len__()`魔术方法允许使用`len()`内建来确定集合的长度。It’s intuitive that a SQL query object
+应用于对象的 Python `__len__()`魔术方法允许使用`len()`内建来确定集合的长度。It’s intuitive that a SQL query object
 would link `__len__()` to the [`Query.count()`](orm_query.html#sqlalchemy.orm.query.Query.count "sqlalchemy.orm.query.Query.count")
 method, which emits a SELECT COUNT.
-这是不可能的原因是因为评估查询作为列表会导致两个SQL调用，而不是一个：
+这是不可能的原因是因为评估查询作为列表会导致两个 SQL 调用，而不是一个：
 
-    class Iterates(object):
+    class Iterates(object):plainplain
         def __len__(self):
             print("LEN!")
             return 5
@@ -252,10 +251,10 @@ method, which emits a SELECT COUNT.
 
 输出：
 
-    ITER!
+    ITER!plain
     LEN!
 
-如何在ORM查询中使用文本SQL？[¶](#how-do-i-use-textual-sql-with-orm-queries "Permalink to this headline")
+如何在 ORM 查询中使用文本 SQL？[¶](#how-do-i-use-textual-sql-with-orm-queries "Permalink to this headline")
 --------------------------------------------------------------------------------------------------------
 
 看到：
@@ -278,41 +277,41 @@ Collections](orm_session_basics.html#session-deleting-from-collections)。
 有关此行为的描述，请参阅[Constructors and Object
 Initialization](orm_constructors.html#mapping-constructors)。
 
-如何在SA的ORM中使用ON DELETE CASCADE？[¶](#how-do-i-use-on-delete-cascade-with-sa-s-orm "Permalink to this headline")
+如何在 SA 的 ORM 中使用 ON DELETE CASCADE？[¶](#how-do-i-use-on-delete-cascade-with-sa-s-orm "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------
 
-SQLAlchemy将始终为当前加载在[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中的相关行发布UPDATE或DELETE语句。对于未加载的行，默认情况下，它会发出SELECT语句来加载这些行并将其删除/删除；换句话说，它假定没有配置ON
-DELETE CASCADE。要将SQLAlchemy配置为与ON DELETE
-CASCADE配合使用，请参阅[Using Passive
+SQLAlchemy 将始终为当前加载在[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中的相关行发布 UPDATE 或 DELETE 语句。对于未加载的行，默认情况下，它会发出 SELECT 语句来加载这些行并将其删除/删除；换句话说，它假定没有配置 ON
+DELETE CASCADE。要将 SQLAlchemy 配置为与 ON DELETE
+CASCADE 配合使用，请参阅[Using Passive
 Deletes](orm_collections.html#passive-deletes)。
 
-我将我的实例的“foo\_id”属性设置为“7”，但“foo”属性仍然是`None` - 它不应该使用id＃7加载Foo吗？[T2\>](#i-set-the-foo-id-attribute-on-my-instance-to-7-but-the-foo-attribute-is-still-none-shouldn-t-it-have-loaded-foo-with-id-7 "Permalink to this headline")
+我将我的实例的“foo\_id”属性设置为“7”，但“foo”属性仍然是`None` - 它不应该使用 id＃7 加载 Foo 吗？[T2\>](#i-set-the-foo-id-attribute-on-my-instance-to-7-but-the-foo-attribute-is-still-none-shouldn-t-it-have-loaded-foo-with-id-7 "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-ORM的构造方式不是支持从外键属性更改驱动的即时关系群体 -
+ORM 的构造方式不是支持从外键属性更改驱动的即时关系群体 -
 而是设计为以相反方式工作 -
-外键属性由ORM在幕后处理，最终用户自然建立对象关系。因此，设置`o.foo`的推荐方法就是这样做 - 设置它！:
+外键属性由 ORM 在幕后处理，最终用户自然建立对象关系。因此，设置`o.foo`的推荐方法就是这样做 - 设置它！:
 
-    foo = Session.query(Foo).get(7)
+    foo = Session.query(Foo).get(7)plain
     o.foo = foo
     Session.commit()
 
 操纵外键属性当然是完全合法的。但是，将外键属性设置为新值目前不会触发它所涉及的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的“过期”事件。这意味着对于以下顺序：
 
-    o = Session.query(SomeClass).first()
+    o = Session.query(SomeClass).first()plain
     assert o.foo is None  # accessing an un-set attribute sets it to None
     o.foo_id = 7
 
 `o.foo` is initialized to `None`
 when we first accessed it. 设置`o.foo_id = 7`的值为“7” - 所以`o.foo`仍然是`None`：
 
-    # attribute is already set to None, has not been
+    # attribute is already set to None, has not beenplain
     # reconciled with o.foo_id = 7 yet
     assert o.foo is None
 
-对于基于外键变异的`o.foo`加载通常会在commit后自然实现，它们都会刷新新的外键值并过期所有状态：
+对于基于外键变异的`o.foo`加载通常会在 commit 后自然实现，它们都会刷新新的外键值并过期所有状态：
 
-    Session.commit()  # expires all attributes
+    Session.commit()  # expires all attributesplainplainplain
 
     foo_7 = Session.query(Foo).get(7)
 
@@ -320,7 +319,7 @@ when we first accessed it. 设置`o.foo_id = 7`的值为“7” - 所以`o.foo`�
 
 更简单的操作是单独使用属性 - 这可以使用[`Session.expire()`](orm_session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")对任何[persistent](glossary.html#term-persistent)对象执行：
 
-    o = Session.query(SomeClass).first()
+    o = Session.query(SomeClass).first()plain
     o.foo_id = 7
     Session.expire(o, ['foo'])  # object must be persistent for this
 
@@ -330,7 +329,7 @@ when we first accessed it. 设置`o.foo_id = 7`的值为“7” - 所以`o.foo`�
 
 请注意，如果对象不是持久对象，而是出现在[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中，则称为[pending](glossary.html#term-pending)。这意味着该对象的行尚未被插入到数据库中。对于这样的对象，在插入行之前设置`foo_id`没有意义。否则还没有行：
 
-    new_obj = SomeClass()
+    new_obj = SomeClass()plain
     new_obj.foo_id = 7
 
     Session.add(new_obj)
@@ -348,19 +347,19 @@ when we first accessed it. 设置`o.foo_id = 7`的值为“7” - 所以`o.foo`�
 非持久对象的属性加载
 
 上面的“等待”行为的一个变体是如果我们在[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上使用flag
-`load_on_pending`。当这个标志被设置时，懒惰的加载器将在INSERT进行之前为`new_obj.foo`发出；这种方法的另一个变体是使用[`Session.enable_relationship_loading()`](orm_session_api.html#sqlalchemy.orm.session.Session.enable_relationship_loading "sqlalchemy.orm.session.Session.enable_relationship_loading")方法，该方法可以将对象“附加”到[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，使得多对一关系根据外键属性加载，而不管对象处于任何特定状态。Both
+`load_on_pending`。当这个标志被设置时，懒惰的加载器将在 INSERT 进行之前为`new_obj.foo`发出；这种方法的另一个变体是使用[`Session.enable_relationship_loading()`](orm_session_api.html#sqlalchemy.orm.session.Session.enable_relationship_loading "sqlalchemy.orm.session.Session.enable_relationship_loading")方法，该方法可以将对象“附加”到[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，使得多对一关系根据外键属性加载，而不管对象处于任何特定状态。Both
 techniques are **not recommended for general use**; they were added to
 suit specific programming scenarios encountered by users which involve
 the repurposing of the ORM’s usual object states.
 
-配方[ExpireRelationshipOnFKChange](http://www.sqlalchemy.org/trac/wiki/UsageRecipes/ExpireRelationshipOnFKChange)具有使用SQLAlchemy事件的示例，以便将外键属性的设置与多对一关系进行协调。
+配方[ExpireRelationshipOnFKChange](http://www.sqlalchemy.org/trac/wiki/UsageRecipes/ExpireRelationshipOnFKChange)具有使用 SQLAlchemy 事件的示例，以便将外键属性的设置与多对一关系进行协调。
 
 我如何走遍与给定对象相关的所有对象？[¶](#how-do-i-walk-all-objects-that-are-related-to-a-given-object "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------------
 
 具有与其相关的其他对象的对象将对应于映射器之间设置的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构。这个代码片段会迭代所有的对象，并修正周期：
 
-    from sqlalchemy import inspect
+    from sqlalchemy import inspectplain
 
 
     def walk(obj):
@@ -385,7 +384,7 @@ the repurposing of the ORM’s usual object states.
 
 该功能可以演示如下：
 
-    Base = declarative_base()
+    Base = declarative_base()plain
 
 
     class A(Base):
@@ -415,7 +414,7 @@ the repurposing of the ORM’s usual object states.
 
 输出：
 
-    <__main__.A object at 0x10303b190>
+    <__main__.A object at 0x10303b190>plain
     <__main__.B object at 0x103025210>
     <__main__.B object at 0x10303b0d0>
     <__main__.C object at 0x103025490>

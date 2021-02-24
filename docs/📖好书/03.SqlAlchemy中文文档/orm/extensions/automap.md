@@ -146,7 +146,7 @@ name we use. 如果我们的模式包含表`user`和`address`，我们可以定�
     a1 = session.query(Address).first()
     print (a1.user)
 
-以上，其中一个更复杂的细节是，我们说明了覆盖automap将创建的[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")对象之一。为此，我们需要确保名称与automap通常会生成的名称相匹配，因为从automap的角度来看，关系名称将是`User.address_collection`和引用的类名称，被称为`address`，即使我们在我们使用这个类时将它称为`Address`。
+以上，其中一个更复杂的细节是，我们说明了覆盖 automap 将创建的[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")对象之一。为此，我们需要确保名称与 automap 通常会生成的名称相匹配，因为从 automap 的角度来看，关系名称将是`User.address_collection`和引用的类名称，被称为`address`，即使我们在我们使用这个类时将它称为`Address`。
 
 重写命名方案[¶](#overriding-naming-schemes "Permalink to this headline")
 ------------------------------------------------------------------------
@@ -224,7 +224,7 @@ case”方案和集合名称的“pluralizer”：
     `SET NULL` for a nullable set of columns, the
     option [`passive_deletes`](relationship_api.html#sqlalchemy.orm.relationship.params.passive_deletes "sqlalchemy.orm.relationship")
     flag is set to `True` in the set of relationship
-    keyword arguments. 请注意，并非所有后端都支持ON DELETE的反射。
+    keyword arguments. 请注意，并非所有后端都支持 ON DELETE 的反射。
 
     版本1.0.0中的新功能： -
     当生成一对多关系并建立默认级联`all时，automap将检测不可为空的外键约束， t2 > delete-orphan`如果是的话；此外，如果约束指定`CASCADE`的[`ForeignKeyConstraint.ondelete`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint.params.ondelete "sqlalchemy.schema.ForeignKeyConstraint")为非空或`SET  tt> NULL / t9>表示可空列，还添加passive_deletes=True`选项。
@@ -303,7 +303,7 @@ generate many-to-many relationships, e.g. those which contain a
 
 [`sqlalchemy.ext.automap`](#module-sqlalchemy.ext.automap "sqlalchemy.ext.automap")不会在两个处于继承关系的类之间生成任何关系。也就是说，有两个等级给出如下：
 
-    class Employee(Base):
+    class Employee(Base):plain
         __tablename__ = 'employee'
         id = Column(Integer, primary_key=True)
         type = Column(String(50))
@@ -320,7 +320,7 @@ generate many-to-many relationships, e.g. those which contain a
 
 从`Engineer`到`Employee`的外键不是用于关系，而是用于在两个类之间建立连接的继承。
 
-请注意，这意味着automap不会为从子类链接到超类的外键生成*任何*关系。如果映射具有从子类到超类的实际关系，那么这些映射需要是明确的。下面，我们有两个独立的从`Engineer`到`Employee`的外键，我们需要设置我们想要的关系以及`inherit_condition` ，因为这些不是SQLAlchemy可以猜测的东西：
+请注意，这意味着 automap 不会为从子类链接到超类的外键生成*任何*关系。如果映射具有从子类到超类的实际关系，那么这些映射需要是明确的。下面，我们有两个独立的从`Engineer`到`Employee`的外键，我们需要设置我们想要的关系以及`inherit_condition` ，因为这些不是 SQLAlchemy 可以猜测的东西：
 
     class Employee(Base):
         __tablename__ = 'employee'
@@ -346,7 +346,7 @@ generate many-to-many relationships, e.g. those which contain a
 
 ### 处理简单的命名冲突[¶](#handling-simple-naming-conflicts "Permalink to this headline")
 
-在映射过程中命名冲突的情况下，根据需要覆盖[`classname_for_table()`](#sqlalchemy.ext.automap.classname_for_table "sqlalchemy.ext.automap.classname_for_table")，[`name_for_scalar_relationship()`](#sqlalchemy.ext.automap.name_for_scalar_relationship "sqlalchemy.ext.automap.name_for_scalar_relationship")和[`name_for_collection_relationship()`](#sqlalchemy.ext.automap.name_for_collection_relationship "sqlalchemy.ext.automap.name_for_collection_relationship")中的任何一个。例如，如果automap试图命名与现有列相同的多对一关系，则可以有条件地选择替代约定。给定一个模式：
+在映射过程中命名冲突的情况下，根据需要覆盖[`classname_for_table()`](#sqlalchemy.ext.automap.classname_for_table "sqlalchemy.ext.automap.classname_for_table")，[`name_for_scalar_relationship()`](#sqlalchemy.ext.automap.name_for_scalar_relationship "sqlalchemy.ext.automap.name_for_scalar_relationship")和[`name_for_collection_relationship()`](#sqlalchemy.ext.automap.name_for_collection_relationship "sqlalchemy.ext.automap.name_for_collection_relationship")中的任何一个。例如，如果 automap 试图命名与现有列相同的多对一关系，则可以有条件地选择替代约定。给定一个模式：
 
     CREATE TABLE table_a (
         id INTEGER PRIMARY KEY
@@ -389,7 +389,7 @@ Names](mapping_columns.html#mapper-column-distinct-names)区别命名列的方�
 
     Base.prepare(engine, reflect=True)
 
-将Automap与显式声明一起使用[¶](#using-automap-with-explicit-declarations "Permalink to this headline")
+将 Automap 与显式声明一起使用[¶](#using-automap-with-explicit-declarations "Permalink to this headline")
 ------------------------------------------------------------------------------------------------------
 
 如前所述，automap不依赖于反射，并且可以使用[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")集合中任何[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的集合。由此可见，automap也可以用于生成缺失的关系，给出一个完全定义表元数据的完整模型：
@@ -437,7 +437,7 @@ API参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.ext.automap.`{.descclassname}`automap_base`{.descname}(*declarative\_base=None*, *\*\*kw*)[¶](#sqlalchemy.ext.automap.automap_base "Permalink to this definition")
 :   生成声明式自动映射基础。
 
-    该函数生成一个新的基类，它是[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类的产物，也是[`declarative.declarative_base()`](declarative_api.html#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")生成的声明基。
+    该函数生成一个新的基类，它是[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类的产物，也是[`declarative.declarative_base()`](declarative_api.html#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")生成的声明基。plainplain
 
     除`declarative_base`以外的所有参数都是直接传递给[`declarative.declarative_base()`](declarative_api.html#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")函数的关键字参数。
 
@@ -454,7 +454,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.automap。`{.descclassname} `AutomapBase`{.descname} [¶](#sqlalchemy.ext.automap.AutomapBase "Permalink to this definition")
 :   “自动映射”模式的基类。
 
-    可以将[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类与由[`declarative.declarative_base()`](declarative_api.html#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")函数生成的“声明性基本”类进行比较。在实践中，[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类总是作为一个mixin与一个实际的声明基础一起使用。
+    可以将[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类与由[`declarative.declarative_base()`](declarative_api.html#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")函数生成的“声明性基本”类进行比较。在实践中，[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类总是作为一个mixin与一个实际的声明基础一起使用。plain
 
     通常使用[`automap_base()`](#sqlalchemy.ext.automap.automap_base "sqlalchemy.ext.automap.automap_base")函数即时创建一个新的子类化的[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")。
 
@@ -555,7 +555,7 @@ API参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.ext.automap.`{.descclassname}`name_for_scalar_relationship`{.descname}(*base*, *local\_cls*, *referred\_cls*, *constraint*)[¶](#sqlalchemy.ext.automap.name_for_scalar_relationship "Permalink to this definition")
 :   对于标量对象引用，返回应该用于从一个类引用到另一个类的属性名称。
 
-    默认的实现是：
+    默认的实现是：plain
 
         return referred_cls.__name__.lower()
 
@@ -579,7 +579,7 @@ API参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.ext.automap.`{.descclassname}`name_for_collection_relationship`{.descname}(*base*, *local\_cls*, *referred\_cls*, *constraint*)[¶](#sqlalchemy.ext.automap.name_for_collection_relationship "Permalink to this definition")
 :   返回应该用于从一个类引用到另一个类的属性名称作为集合引用。
 
-    默认的实现是：
+    默认的实现是：plain
 
         return referred_cls.__name__.lower() + "_collection"
 
@@ -600,10 +600,10 @@ API参考[¶](#api-reference "Permalink to this headline")
         – the [`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")
         that is being inspected to produce this relationship.
 
-` sqlalchemy.ext.automap。 T0>  generate_relationship  T1> （ T2> 碱 T3>，方向 T4>， return_fn  T5>， attrname  T6>， local_cls  T7>， referred_cls  T8>， **千瓦 T9> ） T10 > ¶ T11>`{.descclassname}
+`sqlalchemy.ext.automap。 T0>  generate_relationship  T1> （ T2> 碱 T3>，方向 T4>， return_fn  T5>， attrname  T6>， local_cls  T7>， referred_cls  T8>， **千瓦 T9> ） T10 > ¶ T11>`{.descclassname}
 :   代表两个映射类生成[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")或[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")。
 
-    该函数的一个替代实现可以使用[`AutomapBase.prepare.generate_relationship`](#sqlalchemy.ext.automap.AutomapBase.prepare.params.generate_relationship "sqlalchemy.ext.automap.AutomapBase.prepare")参数指定。
+    该函数的一个替代实现可以使用[`AutomapBase.prepare.generate_relationship`](#sqlalchemy.ext.automap.AutomapBase.prepare.params.generate_relationship "sqlalchemy.ext.automap.AutomapBase.prepare")参数指定。plain
 
     这个函数的默认实现如下：
 

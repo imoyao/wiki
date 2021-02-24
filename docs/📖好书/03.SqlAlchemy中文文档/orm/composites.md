@@ -4,26 +4,25 @@ date: 2021-02-20 22:41:39
 permalink: /sqlalchemy/orm/composites/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
 tags:
-  - 
 ---
 复合列类型[¶](#composite-column-types "Permalink to this headline")
 ===================================================================
 
-一组列可以与单个用户定义的数据类型相关联。ORM提供了一个单一的属性，它表示使用您提供的类的列组。
+一组列可以与单个用户定义的数据类型相关联。ORM 提供了一个单一的属性，它表示使用您提供的类的列组。
 
-在版本0.7中更改：复合材料已经过简化，不再“隐藏”基础列的属性。另外，就地突变不再是自动的；请参阅以下关于启用可变性以支持就地更改跟踪的部分。
+在版本 0.7 中更改：复合材料已经过简化，不再“隐藏”基础列的属性。另外，就地突变不再是自动的；请参阅以下关于启用可变性以支持就地更改跟踪的部分。
 
-在版本0.9中更改：在面向列的[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")构造中使用时，复合材料将返回它们的对象形式，而不是单个列。请参阅[Composite
+在版本 0.9 中更改：在面向列的[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")构造中使用时，复合材料将返回它们的对象形式，而不是单个列。请参阅[Composite
 attributes are now returned as their object form when queried on a
 per-attribute
 basis](changelog_migration_09.html#migration-2824)查询时，复合属性现在以其对象形式返回。
 
 一个简单的例子表示成对的列作为`Point`对象。`Point`表示如`.x`和`.y`这样的一对：
 
-    class Point(object):
+    class Point(object):plain
         def __init__(self, x, y):
             self.x = x
             self.y = y
@@ -46,7 +45,7 @@ basis](changelog_migration_09.html#migration-2824)查询时，复合属性现在
 
 我们将创建一个映射到一个表`vertices`，它将两个点表示为`x1/y1`和`x2/y2`。这些通常被创建为[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象。然后，[`composite()`](#sqlalchemy.orm.composite "sqlalchemy.orm.composite")函数用于分配新属性，这些新属性将通过`Point`类表示一组列。
 
-    from sqlalchemy import Column, Integer
+    from sqlalchemy import Column, Integerplainplain
     from sqlalchemy.orm import composite
     from sqlalchemy.ext.declarative import declarative_base
 
@@ -75,7 +74,7 @@ We can now persist and use `Vertex` instances, as
 well as query for them, using the `.start` and
 `.end` attributes against ad-hoc `Point` instances:
 
-    >>> v = Vertex(start=Point(3, 4), end=Point(5, 6))
+    >>> v = Vertex(start=Point(3, 4), end=Point(5, 6))plainplainplain
     >>> session.add(v)
     >>> q = session.query(Vertex).filter(Vertex.start == Point(3, 4))
     sql>>> print(q.first().start)
@@ -94,9 +93,9 @@ well as query for them, using the `.start` and
     Point(x=3, y=4)
 
  `sqlalchemy.orm.`{.descclassname}`composite`{.descname}(*class\_*, *\*attrs*, *\*\*kwargs*)[¶](#sqlalchemy.orm.composite "Permalink to this definition")
-:   返回一个组合的基于列的属性以用于Mapper。
+:   返回一个组合的基于列的属性以用于 Mapper。
 
-    完整的使用示例请参见映射文档部分[Composite Column
+    完整的使用示例请参见映射文档部分[Composite Columnplain
     Types](#mapper-composite)。
 
     [`composite()`](#sqlalchemy.orm.composite "sqlalchemy.orm.composite")返回的[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")是[`CompositeProperty`](internals.html#sqlalchemy.orm.descriptor_props.CompositeProperty "sqlalchemy.orm.descriptor_props.CompositeProperty")。
@@ -148,7 +147,7 @@ mixin，该任务在很大程度上是自动化的，它使用事件将每个用
 Mutability on
 Composites](extensions_mutable.html#mutable-composites)中的示例。
 
-在版本0.7中更改：现有合成值的就地更改不再自动进行跟踪；该功能被[`MutableComposite`](extensions_mutable.html#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")类所取代。
+在版本 0.7 中更改：现有合成值的就地更改不再自动进行跟踪；该功能被[`MutableComposite`](extensions_mutable.html#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")类所取代。
 
 重新定义复合材料的比较操作[¶](#redefining-comparison-operations-for-composites "Permalink to this headline")
 ------------------------------------------------------------------------------------------------------------
@@ -160,7 +159,7 @@ we specify a custom [`CompositeProperty.Comparator`](internals.html#sqlalchemy.o
 class to define existing or new operations.
 下面我们说明“大于”运算符，实现与“大于”基数相同的表达式：
 
-    from sqlalchemy.orm.properties import CompositeProperty
+    from sqlalchemy.orm.properties import CompositePropertyplain
     from sqlalchemy import sql
 
     class PointComparator(CompositeProperty.Comparator):

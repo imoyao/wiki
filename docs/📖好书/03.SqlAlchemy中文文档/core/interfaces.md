@@ -4,27 +4,26 @@ date: 2021-02-20 22:41:35
 permalink: /sqlalchemy/core/interfaces/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - core
 tags:
-  - 
 ---
 弃用的事件接口[¶](#module-sqlalchemy.interfaces "Permalink to this headline")
 =============================================================================
 
-本节介绍SQLAlchemy 0.5中引入的基于类的核心事件接口。ORM模拟在[Deprecated
+本节介绍 SQLAlchemy 0.5 中引入的基于类的核心事件接口。ORM 模拟在[Deprecated
 ORM Event Interfaces](orm_deprecated.html)中描述。
 
-从版本0.7开始弃用：
+从版本 0.7 开始弃用：
 [Events](event.html)中描述的新事件系统取代了扩展/代理/侦听器系统，为所有事件提供一致的接口，而无需子类化。
 
 执行，连接和光标事件[¶](#execution-connection-and-cursor-events "Permalink to this headline")
 ---------------------------------------------------------------------------------------------
 
 *class* `sqlalchemy.interfaces。`{.descclassname} `ConnectionProxy`{.descname} [¶](#sqlalchemy.interfaces.ConnectionProxy "Permalink to this definition")
-:   允许通过Connections拦截语句执行。
+:   允许通过 Connections 拦截语句执行。
 
-    注意
+    注意plain
 
     [`ConnectionProxy`](#sqlalchemy.interfaces.ConnectionProxy "sqlalchemy.interfaces.ConnectionProxy")已弃用。请参阅[`ConnectionEvents`](events.html#sqlalchemy.events.ConnectionEvents "sqlalchemy.events.ConnectionEvents")。
 
@@ -89,7 +88,7 @@ ORM Event Interfaces](orm_deprecated.html)中描述。
 *class* `sqlalchemy.interfaces。`{.descclassname} `PoolListener`{.descname} [¶](#sqlalchemy.interfaces.PoolListener "Permalink to this definition")
 :   钩入[`Pool`](pooling.html#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")中连接的生命周期。
 
-    注意
+    注意plain
 
     [`PoolListener`](#sqlalchemy.interfaces.PoolListener "sqlalchemy.interfaces.PoolListener")
     is deprecated. 请参阅[`PoolEvents`](events.html#sqlalchemy.events.PoolEvents "sqlalchemy.events.PoolEvents")。

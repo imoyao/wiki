@@ -1,21 +1,20 @@
 ---
-title: ORM扩展
+title: ORM 扩展
 date: 2021-02-20 23:15:02
 permalink: /sqlalchemy/orm/extensions/index/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
   - extensions
 tags:
-  - 
 ---
-ORM扩展[¶](#orm-extensions "Permalink to this headline")
+ORM 扩展[¶](#orm-extensions "Permalink to this headline")
 ========================================================
 
-SQLAlchemy提供了各种可用的ORM扩展，它们为核心行为增加了额外的功能。
+SQLAlchemy 提供了各种可用的 ORM 扩展，它们为核心行为增加了额外的功能。
 
-扩展几乎完全基于公共核心和ORM
+扩展几乎完全基于公共核心和 ORM
 API，应鼓励用户阅读其源代码以进一步理解其行为。特别是“水平分割”，“混合属性”和“突变跟踪”扩展非常简洁。
 
 -   [关联代理](associationproxy.html)

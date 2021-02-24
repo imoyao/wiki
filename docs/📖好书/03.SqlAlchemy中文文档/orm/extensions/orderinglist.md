@@ -4,11 +4,10 @@ date: 2021-02-20 22:41:43
 permalink: /sqlalchemy/orm/extensions/orderinglist/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
   - extensions
 tags:
-  - 
 ---
 订购清单[¶](#module-sqlalchemy.ext.orderinglist "Permalink to this headline")
 =============================================================================
@@ -22,7 +21,7 @@ relationships. 它将拦截在[`relationship()`](relationship_api.html#sqlalchem
 
 示例：一个`slide`表，其中每一行引用相关`bullet`表中的零个或多个条目。幻灯片中的项目符号将根据`bullet`表中的`position`列的值依次显示。当条目在内存中重新排序时，`position`属性的值应该更新以反映新的排序顺序：
 
-    Base = declarative_base()
+    Base = declarative_base()plainplainplain
 
     class Slide(Base):
         __tablename__ = 'slide'
@@ -43,7 +42,7 @@ relationships. 它将拦截在[`relationship()`](relationship_api.html#sqlalchem
 
 [`OrderingList`](#sqlalchemy.ext.orderinglist.OrderingList "sqlalchemy.ext.orderinglist.OrderingList")对象自动执行此任务，管理集合中所有`Bullet`对象上的`position`属性。它是使用[`ordering_list()`](#sqlalchemy.ext.orderinglist.ordering_list "sqlalchemy.ext.orderinglist.ordering_list")工厂构造的：
 
-    from sqlalchemy.ext.orderinglist import ordering_list
+    from sqlalchemy.ext.orderinglist import ordering_listplain
 
     Base = declarative_base()
 
@@ -83,17 +82,17 @@ only provides limited functionality when a primary key column or unique
 column is the target of the sort. 不支持或存在问题的操作包括：
 
 > -   两个条目必须交换价值。这在主键或唯一约束的情况下不直接支持，因为这意味着至少需要先暂时删除一行，或者在交换机发生时将其更改为第三个中性值。
-> -   必须删除一个条目才能为新条目腾出空间。SQLAlchemy的工作单元在单次刷新内的DELETE之前执行所有INSERT。在主键的情况下，它将交易UPDATE语句的同一主键的INSERT
+> -   必须删除一个条目才能为新条目腾出空间。SQLAlchemy 的工作单元在单次刷新内的 DELETE 之前执行所有 INSERT。在主键的情况下，它将交易 UPDATE 语句的同一主键的 INSERT
 >     /
->     DELETE，以减少此限制的影响，但这不会发生在UNIQUE列上。未来的功能将允许“DELETE
+>     DELETE，以减少此限制的影响，但这不会发生在 UNIQUE 列上。未来的功能将允许“DELETE
 >     before
 >     INSERT”行为成为可能，以缓解这一限制，虽然此功能要求在映射器级别对要以这种方式处理的列组进行显式配置。
 
 [`ordering_list()`](#sqlalchemy.ext.orderinglist.ordering_list "sqlalchemy.ext.orderinglist.ordering_list")
 takes the name of the related object’s ordering attribute as an
-argument. 默认情况下，[`ordering_list()`](#sqlalchemy.ext.orderinglist.ordering_list "sqlalchemy.ext.orderinglist.ordering_list")中对象位置的从零开始的整数索引与排序属性同步：索引0将获得位置0，索引1位置1等。要开始以1或其他整数进行编号，请提供`count_from=1`。
+argument. 默认情况下，[`ordering_list()`](#sqlalchemy.ext.orderinglist.ordering_list "sqlalchemy.ext.orderinglist.ordering_list")中对象位置的从零开始的整数索引与排序属性同步：索引 0 将获得位置 0，索引 1 位置 1 等。要开始以 1 或其他整数进行编号，请提供`count_from=1`。
 
-API参考[¶](#api-reference "Permalink to this headline")
+API 参考[¶](#api-reference "Permalink to this headline")
 -------------------------------------------------------
 
  `sqlalchemy.ext.orderinglist.`{.descclassname}`ordering_list`{.descname}(*attr*, *count\_from=None*, *\*\*kw*)[¶](#sqlalchemy.ext.orderinglist.ordering_list "Permalink to this definition")
@@ -126,10 +125,10 @@ API参考[¶](#api-reference "Permalink to this headline")
     其他参数传递给[`OrderingList`](#sqlalchemy.ext.orderinglist.OrderingList "sqlalchemy.ext.orderinglist.OrderingList")构造函数。
 
 `sqlalchemy.ext.orderinglist。`{.descclassname} `count_from_0`{.descname} （ *index*，*collection* ） T5\> [¶ T6\>](#sqlalchemy.ext.orderinglist.count_from_0 "Permalink to this definition")
-:   编号功能：从0开始的连续整数。
+:   编号功能：从 0 开始的连续整数。
 
 `sqlalchemy.ext.orderinglist。`{.descclassname} `count_from_1`{.descname} （ *index*，*collection* ） T5\> [¶ T6\>](#sqlalchemy.ext.orderinglist.count_from_1 "Permalink to this definition")
-:   编号功能：从1开始的连续整数。
+:   编号功能：从 1 开始的连续整数。
 
 ` sqlalchemy.ext.orderinglist。 T0>  count_from_n_factory  T1> （ T2> 启动 T3> ） T4> ¶< / T5>`{.descclassname}
 :   编号功能：从任意启动开始的连续整数。
@@ -137,7 +136,7 @@ API参考[¶](#api-reference "Permalink to this headline")
  *class*`sqlalchemy.ext.orderinglist.`{.descclassname}`OrderingList`{.descname}(*ordering\_attr=None*, *ordering\_func=None*, *reorder\_on\_append=False*)[¶](#sqlalchemy.ext.orderinglist.OrderingList "Permalink to this definition")
 :   基础：`__builtin__.list`
 
-    管理其子女的位置信息的自定义列表。
+    管理其子女的位置信息的自定义列表。plain
 
     [`OrderingList`](#sqlalchemy.ext.orderinglist.OrderingList "sqlalchemy.ext.orderinglist.OrderingList")对象通常使用[`ordering_list()`](#sqlalchemy.ext.orderinglist.ordering_list "sqlalchemy.ext.orderinglist.ordering_list")工厂函数设置，与[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")函数结合使用。
 

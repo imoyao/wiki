@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy中文文档
   - faq
 tags:
-  - 
 ---
 收集配置和技术[¶](#collection-configuration-and-techniques "Permalink to this headline")
 ========================================================================================
@@ -64,19 +63,19 @@ explicitly or via array slices:
 
 警告
 
-“动态”加载器仅适用于**集合**。使用具有多对一，一对一或uselist =
-False关系的“动态”加载器是无效的。在这些情况下，较新版本的SQLAlchemy会发出警告或异常。
+“动态”加载器仅适用于**集合**。使用具有多对一，一对一或 uselist =
+False 关系的“动态”加载器是无效的。在这些情况下，较新版本的 SQLAlchemy 会发出警告或异常。
 
 ### 设置Noload，RaiseLoad [¶](#setting-noload-raiseload "Permalink to this headline")
 
 即使访问，“noload”关系也不会从数据库加载。它使用`lazy='noload'`配置：
 
-    class MyClass(Base):
+    class MyClass(Base):plain
         __tablename__ = 'some_table'
 
         children = relationship(MyOtherClass, lazy='noload')
 
-在上面，`children`集合是完全可写的，并且对它的更改将被持久保存到数据库以及本地可用于在添加时读取。但是，当`MyClass`实例刚从数据库加载时，`children`集合保持为空。noload策略也可以使用[`orm.noload()`](loading_relationships.html#sqlalchemy.orm.noload "sqlalchemy.orm.noload")加载程序选项以查询选项为基础。
+在上面，`children`集合是完全可写的，并且对它的更改将被持久保存到数据库以及本地可用于在添加时读取。但是，当`MyClass`实例刚从数据库加载时，`children`集合保持为空。noload 策略也可以使用[`orm.noload()`](loading_relationships.html#sqlalchemy.orm.noload "sqlalchemy.orm.noload")加载程序选项以查询选项为基础。
 
 或者，“加载”加载关系会引发一个[`InvalidRequestError`{.xref .py .py-exc
 .docutils
@@ -96,7 +95,7 @@ False关系的“动态”加载器是无效的。在这些情况下，较新版
 使用[`passive_deletes`](relationship_api.html#sqlalchemy.orm.relationship.params.passive_deletes "sqlalchemy.orm.relationship")禁用DELETE操作上的子对象加载，并结合数据库上的“ON
 DELETE（CASCADE | SET NULL）”来自动级联删除子对象：
 
-    class MyClass(Base):
+    class MyClass(Base):plain
         __tablename__ = 'mytable'
         id = Column(Integer, primary_key=True)
         children = relationship("MyOtherClass",
@@ -114,10 +113,10 @@ DELETE（CASCADE | SET NULL）”来自动级联删除子对象：
 
 要使用“ON DELETE CASCADE”，底层数据库引擎必须支持外键。
 
--   使用MySQL时，必须选择适当的存储引擎。有关详细信息，请参阅[CREATE
+-   使用 MySQL 时，必须选择适当的存储引擎。有关详细信息，请参阅[CREATE
     TABLE arguments including Storage
     Engines](dialects_mysql.html#mysql-storage-engines)。
--   在使用SQLite时，必须明确启用外键支持。有关详细信息，请参见[Foreign
+-   在使用 SQLite 时，必须明确启用外键支持。有关详细信息，请参见[Foreign
     Key Support](dialects_sqlite.html#sqlite-foreign-keys)。
 
 当应用[`passive_deletes`](relationship_api.html#sqlalchemy.orm.relationship.params.passive_deletes "sqlalchemy.orm.relationship")时，当`MyClass`的实例标记为删除时，`children`关系不会被加载到内存中。The
@@ -138,7 +137,7 @@ deleted by the database.
 
 映射一对多或多对多关系会导致通过父实例上的属性访问值的集合。默认情况下，这个集合是一个`list`：
 
-    class Parent(Base):
+    class Parent(Base):plain
         __tablename__ = 'parent'
         parent_id = Column(Integer, primary_key=True)
 
@@ -148,7 +147,7 @@ deleted by the database.
     parent.children.append(Child())
     print(parent.children[0])
 
-集合不限于列表。通过在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中指定[`collection_class`](relationship_api.html#sqlalchemy.orm.relationship.params.collection_class "sqlalchemy.orm.relationship")选项，可以使用集合，可变序列和几乎任何其他可充当容器的Python对象来代替默认列表：
+集合不限于列表。通过在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中指定[`collection_class`](relationship_api.html#sqlalchemy.orm.relationship.params.collection_class "sqlalchemy.orm.relationship")选项，可以使用集合，可变序列和几乎任何其他可充当容器的 Python 对象来代替默认列表：
 
     class Parent(Base):
         __tablename__ = 'parent'
@@ -297,7 +296,7 @@ Proxies](extensions_associationproxy.html#composite-association-proxy)。
 自定义集合实现[¶](#custom-collection-implementations "Permalink to this headline")
 ----------------------------------------------------------------------------------
 
-您也可以将自己的类型用于收藏。在简单情况下，从`list`或`set`进行插入，添加自定义行为是所有必需的。在其他情况下，需要特殊的装饰器来告诉SQLAlchemy有关集合如何操作的更多细节。
+您也可以将自己的类型用于收藏。在简单情况下，从`list`或`set`进行插入，添加自定义行为是所有必需的。在其他情况下，需要特殊的装饰器来告诉 SQLAlchemy 有关集合如何操作的更多细节。
 
 我需要一个自定义集合实现吗？
 
@@ -350,13 +349,13 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
 
 由于`append`，这个类看起来像列表一样，但是`__emulates__`强制它设置为类似的。`remove`已知是设置界面的一部分，并将进行检测。
 
-但是这个类还不行：需要一点点粘合剂才能适应SQLAlchemy的使用。ORM需要知道使用哪些方法来追加，删除和迭代集合的成员。当使用像`list`或`set`这样的类型时，适当的方法是众所周知的，并在出现时自动使用。这个集合类没有提供预期的`add`方法，因此我们必须通过装饰器为ORM提供显式映射。
+但是这个类还不行：需要一点点粘合剂才能适应SQLAlchemy的使用。ORM需要知道使用哪些方法来追加，删除和迭代集合的成员。当使用像`list`或`set`这样的类型时，适当的方法是众所周知的，并在出现时自动使用。这个集合类没有提供预期的`add`方法，因此我们必须通过装饰器为 ORM 提供显式映射。
 
 ### 通过装饰器注释自定义集合[¶](#annotating-custom-collections-via-decorators "Permalink to this headline")
 
 装饰器可用于标记ORM管理集合所需的各种方法。当你的课堂并不完全满足其容器类型的常规界面，或者你想用另一种方法完成工作时使用它们。
 
-    from sqlalchemy.orm.collections import collection
+    from sqlalchemy.orm.collections import collectionplainplain
 
     class SetLike(object):
         __emulates__ = set
@@ -376,7 +375,7 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
 
 这就是完成这个例子所需要的一切。SQLAlchemy将通过`append`方法添加实例。`remove`和`__iter__`是集合的默认方法，将用于删除和迭代。缺省方法也可以更改：
 
-    from sqlalchemy.orm.collections import collection
+    from sqlalchemy.orm.collections import collectionplain
 
     class MyList(list):
         @collection.remover
@@ -387,12 +386,12 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
         def hey_use_this_instead_for_iteration(self):
             # ...
 
-没有要求成为名单，或者根本不需要设置。集合类可以是任何形状，只要它们具有标记为SQLAlchemy使用的append，remove和iterate接口即可。将使用映射实体作为单个参数调用Append和Remove方法，并且不带任何参数调用迭代器方法，并且必须返回一个迭代器。
+没有要求成为名单，或者根本不需要设置。集合类可以是任何形状，只要它们具有标记为 SQLAlchemy 使用的 append，remove 和 iterate 接口即可。将使用映射实体作为单个参数调用 Append 和 Remove 方法，并且不带任何参数调用迭代器方法，并且必须返回一个迭代器。
 
 *class* `sqlalchemy.orm.collections。`{.descclassname} `集合`{.descname} [¶](#sqlalchemy.orm.collections.collection "Permalink to this definition")
 :   实体集合类的装饰器。
 
-    装饰者分为两组：注释和截取食谱。
+    装饰者分为两组：注释和截取食谱。plain
 
     注释装饰器（appender，remover，iterator，linker，converter，inward\_instrumented）表示方法的用途并且不带任何参数。他们不是与parens写的：
 
@@ -585,9 +584,9 @@ user-defined versions of `__setitem__()` or
             # do something with key
             super(MyMappedCollection, self).__delitem__(key, _sa_initiator)
 
-ORM理解`dict`接口就像列表和集合一样，如果您选择继承`dict`或在类中提供字典集合行为，它将自动处理所有类字典方法鸭子类。但是，必须修饰appender和remover方法
+ORM理解`dict`接口就像列表和集合一样，如果您选择继承`dict`或在类中提供字典集合行为，它将自动处理所有类字典方法鸭子类。但是，必须修饰 appender 和 remover 方法
 -
-默认情况下，SQLAlchemy基本字典接口中没有兼容方法。迭代将经过`itervalues()`，除非另有修饰。
+默认情况下，SQLAlchemy 基本字典接口中没有兼容方法。迭代将经过`itervalues()`，除非另有修饰。
 
 注意
 
@@ -601,7 +600,7 @@ ORM理解`dict`接口就像列表和集合一样，如果您选择继承`dict`�
 *class* `sqlalchemy.orm.collections。`{.descclassname} `MappedCollection`{.descname} （ *keyfunc* ）\< / T5\> [¶ T6\>](#sqlalchemy.orm.collections.MappedCollection "Permalink to this definition")
 :   基础：`__builtin__.dict`
 
-    基本的基于字典的集合类。
+    基本的基于字典的集合类。plain
 
     使用集合类需要的最小包语义扩展字典。`set`和`remove`是通过键控函数实现的：任何可调用的方法都需要一个对象并返回一个用作字典键的对象。
 
@@ -647,7 +646,7 @@ ORM理解`dict`接口就像列表和集合一样，如果您选择继承`dict`�
 
     # ... relationship(..., collection_class=MyAwesomeList)
 
-ORM将这种方法用于内置插件，当`list`，`set`或`dict`被直接使用时，静静地替换一个普通的子类。
+ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使用时，静静地替换一个普通的子类。
 
 集合内部[¶](#collection-internals "Permalink to this headline")
 ---------------------------------------------------------------
@@ -694,7 +693,7 @@ ORM将这种方法用于内置插件，当`list`，`set`或`dict`被直接使用
  *class*`sqlalchemy.orm.collections.`{.descclassname}`CollectionAdapter`{.descname}(*attr*, *owner\_state*, *data*)[¶](#sqlalchemy.orm.collections.CollectionAdapter "Permalink to this definition")
 :   ORM和任意Python集合之间的桥梁。
 
-    代理基本级集合操作（​​追加，删除，迭代）到基础Python集合，并为进入或离开集合的实体发出添加/删除事件。
+    代理基本级集合操作（​​追加，删除，迭代）到基础Python集合，并为进入或离开集合的实体发出添加/删除事件。plain
 
     ORM仅使用[`CollectionAdapter`](#sqlalchemy.orm.collections.CollectionAdapter "sqlalchemy.orm.collections.CollectionAdapter")来与实体集合进行交互。
 
@@ -716,7 +715,7 @@ ORM将这种方法用于内置插件，当`list`，`set`或`dict`被直接使用
 ` sqlalchemy.orm.collections。 T0>  prepare_instrumentation  T1> （ T2> 工厂 T3> ） T4> ¶< / T5>`{.descclassname}
 :   为将来使用作为集合类工厂准备一个可调用的函数。
 
-    给定一个集合类工厂（无论类型还是无参数），返回另一个工厂，在调用时将生成兼容的实例。
+    给定一个集合类工厂（无论类型还是无参数），返回另一个工厂，在调用时将生成兼容的实例。plain
 
     该函数负责将collection\_class = list转换为collection\_class =
     InstrumentedList的运行时行为。

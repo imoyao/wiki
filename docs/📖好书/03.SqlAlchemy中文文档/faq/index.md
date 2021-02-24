@@ -4,10 +4,9 @@ date: 2021-02-20 23:13:24
 permalink: /sqlalchemy/faq/index/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - faq
 tags:
-  - 
 ---
 常见问题[¶](#frequently-asked-questions "Permalink to this headline")
 =====================================================================

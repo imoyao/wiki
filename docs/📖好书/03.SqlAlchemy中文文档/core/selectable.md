@@ -54,7 +54,7 @@ subclasses).
  `sqlalchemy.sql.expression.`{.descclassname}`except_`{.descname}(*\*selects*, *\*\*kwargs*)[¶](#sqlalchemy.sql.expression.except_ "Permalink to this definition")
 :   返回多个可选项的`EXCEPT`。
 
-    返回的对象是[`CompoundSelect`](#sqlalchemy.sql.expression.CompoundSelect "sqlalchemy.sql.expression.CompoundSelect")的一个实例。
+    返回的对象是[`CompoundSelect`](#sqlalchemy.sql.expression.CompoundSelect "sqlalchemy.sql.expression.CompoundSelect")的一个实例。plain
 
     \*选择
     :   [`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")实例列表。
@@ -1842,7 +1842,7 @@ subclasses).
 *class* `sqlalchemy.sql.expression。`{.descclassname} `FromClause`{.descname} [¶](#sqlalchemy.sql.expression.FromClause "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.Selectable`](#sqlalchemy.sql.expression.Selectable "sqlalchemy.sql.expression.Selectable")
 
-    表示可以在`SELECT`语句的`FROM`子句中使用的元素。
+    表示可以在`SELECT`语句的`FROM`子句中使用的元素。plain
 
     最常见的[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")形式是[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`select()`](#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构。所有[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象共有的主要特征包括：
 
@@ -3688,7 +3688,7 @@ subclasses).
 *class* `sqlalchemy.sql.expression。`{.descclassname} `选择`{.descname} （ *columns =无*，*whereclause = None*，*from\_obj = None*，*distinct = False*，*具有=无*，*correlate = t9\>，*前缀=无*，*后缀=无*，*\*\* kwargs* ） [](#sqlalchemy.sql.expression.Select "Permalink to this definition") \>*
 :   基础：[`sqlalchemy.sql.expression.HasPrefixes`](#sqlalchemy.sql.expression.HasPrefixes "sqlalchemy.sql.expression.HasPrefixes")，[`sqlalchemy.sql.expression.HasSuffixes`](#sqlalchemy.sql.expression.HasSuffixes "sqlalchemy.sql.expression.HasSuffixes")，[`sqlalchemy.sql.expression.GenerativeSelect`](#sqlalchemy.sql.expression.GenerativeSelect "sqlalchemy.sql.expression.GenerativeSelect")
 
-    代表一个`SELECT`语句。
+    代表一个`SELECT`语句。plain
 
      `__init__`{.descname}(*columns=None*, *whereclause=None*, *from\_obj=None*, *distinct=False*, *having=None*, *correlate=True*, *prefixes=None*, *suffixes=None*, *\*\*kwargs*)[¶](#sqlalchemy.sql.expression.Select.__init__ "Permalink to this definition")
     :   构建一个新的[`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象。
