@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy 中文文档
   - orm
 tags:
-  - 
 ---
 更改属性行为[¶](#changing-attribute-behavior "Permalink to this headline")
 ==========================================================================
@@ -17,7 +16,7 @@ tags:
 
 向属性添加“验证”例程的一种快速方法是使用[`validates()`](#sqlalchemy.orm.validates "sqlalchemy.orm.validates")装饰器。属性验证器可以引发异常，停止变更属性值的过程，或者可以将给定值更改为不同的值。与所有属性扩展一样，验证器只能由普通的用户级代码调用；当 ORM 填充对象时它们不会被发出：
 
-    from sqlalchemy.orm import validatesplain
+    from sqlalchemy.orm import validatesplainplain
 
     class EmailAddress(Base):
         __tablename__ = 'address'
@@ -53,7 +52,7 @@ supports reception of these events by specifying
 `include_removes=True` to the decorator.
 当设置此标志时，验证函数必须接收一个额外的布尔参数，如果`True`表明该操作是删除：
 
-    from sqlalchemy.orm import validatesplain
+    from sqlalchemy.orm import validatesplainplainplainplain
 
     class User(Base):
         # ...
@@ -71,7 +70,7 @@ supports reception of these events by specifying
 
 使用`include_backrefs=False`选项也可以定制相互依赖的验证器通过 backref 链接的情况；当设置为`False`时，此选项可防止发生验证功能，如果事件是由于 backref 引起的：
 
-    from sqlalchemy.orm import validatesplain
+    from sqlalchemy.orm import validatesplainplainplain
 
     class User(Base):
         # ...
@@ -127,7 +126,7 @@ emitted, even though an append occurs to `some_user.addresses` - the event is ca
 为属性生成修改后行为的更全面的方法是使用[descriptors](glossary.html#term-descriptors)。这些通常在 Python 中使用`property()`函数使用。描述符的标准 SQLAlchemy 技术是创建一个简单的描述符，并使其从具有不同名称的映射属性读取/写入。下面我们使用 Python
 2.6 样式的属性来说明这一点：
 
-    class EmailAddress(Base):plainplain
+    class EmailAddress(Base):plainplainplainplainplain
         __tablename__ = 'email_address'
 
         id = Column(Integer, primary_key=True)
@@ -152,7 +151,7 @@ attribute does not have the usual expression semantics usable with
 [`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query").
 为了提供这些，我们改用如下的[`hybrid`](extensions_hybrid.html#module-sqlalchemy.ext.hybrid "sqlalchemy.ext.hybrid")扩展名：
 
-    from sqlalchemy.ext.hybrid import hybrid_propertyplain
+    from sqlalchemy.ext.hybrid import hybrid_propertyplainplain
 
     class EmailAddress(Base):
         __tablename__ = 'email_address'
@@ -191,7 +190,7 @@ setter 行为外，还在类级别使用时提供了 SQL 表达式，也就是�
 
 [`hybrid_property`](extensions_hybrid.html#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")还允许我们改变属性的行为，包括定义在实例级别与类/表达级别访问属性时使用[`hybrid_property.expression()`](extensions_hybrid.html#sqlalchemy.ext.hybrid.hybrid_property.expression "sqlalchemy.ext.hybrid.hybrid_property.expression")修饰符。比如，如果我们想自动添加一个主机名，我们可以定义两组字符串操作逻辑：
 
-    class EmailAddress(Base):
+    class EmailAddress(Base):plain
         __tablename__ = 'email_address'
 
         id = Column(Integer, primary_key=True)
@@ -255,7 +254,7 @@ Attributes](extensions_hybrid.html)中了解更多关于混合动力的信息。
 
 并在实例级别：
 
-    >>> m1 = MyClass(status='x')plainplain
+    >>> m1 = MyClass(status='x')plainplainplainplain
     >>> m1.status, m1.job_status
     ('x', 'x')
 
@@ -267,7 +266,7 @@ Attributes](extensions_hybrid.html)中了解更多关于混合动力的信息。
 
 除了简单的镜像之外，也可以使用[`synonym()`](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")来引用用户定义的[descriptor](glossary.html#term-descriptor)。我们可以用`@property`提供我们的`status`同义词：
 
-    class MyClass(Base):plain
+    class MyClass(Base):plainplain
         __tablename__ = 'my_table'
 
         id = Column(Integer, primary_key=True)
@@ -295,7 +294,7 @@ Attributes](extensions_hybrid.html)中了解更多关于混合动力的信息。
             return "Status: " + self.status
 
 虽然[`synonym()`](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")对于简单镜像很有用，但使用[hybrid
-attribute](#mapper-hybrids)特性更好地处理了在描述符中增强属性行为的用例，朝向Python描述符。从技术上讲，一个[`synonym()`](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")可以完成[`hybrid_property`](extensions_hybrid.html#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")所能做的所有事情，因为它还支持注入自定义 SQL 功能，但混合使用更为简单的情况。
+attribute](#mapper-hybrids)特性更好地处理了在描述符中增强属性行为的用例，朝向 Python 描述符。从技术上讲，一个[`synonym()`](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")可以完成[`hybrid_property`](extensions_hybrid.html#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")所能做的所有事情，因为它还支持注入自定义 SQL 功能，但混合使用更为简单的情况。
 
  `sqlalchemy.orm.`{.descclassname}`synonym`{.descname}(*name*, *map\_column=None*, *descriptor=None*, *comparator\_factory=None*, *doc=None*, *info=None*)[¶](#sqlalchemy.orm.synonym "Permalink to this definition")
 :   将属性名称表示为映射属性的同义词，因为该属性将镜像另一个属性的值和表达式行为。
@@ -358,7 +357,7 @@ attribute](#mapper-hybrids)特性更好地处理了在描述符中增强属性�
 -------------------------------------------------------------------
 
 SQLAlchemy
-ORM 和 Core 表达式语言使用的“操作符”是完全可定制的。例如，比较表达式`User.name == 'ed'`使用Python内置的运算符本身称为`operator.eq`
+ORM 和 Core 表达式语言使用的“操作符”是完全可定制的。例如，比较表达式`User.name == 'ed'`使用 Python 内置的运算符本身称为`operator.eq`
 -
 可修改 SQLAlchemy 与此类运算符关联的实际 SQL 构造。新操作也可以与列表达式相关联。发生在列表达式上的运算符在类型级别上被直接重新定义
 - 请参阅[Redefining and Creating New

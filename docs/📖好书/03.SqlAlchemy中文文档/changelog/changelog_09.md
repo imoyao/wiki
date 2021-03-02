@@ -1391,12 +1391,12 @@ tags:
 
     例如，诸如[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")之类的结构将在构建之后再次接受[`Index.kwargs`](core_constraints.html#sqlalchemy.schema.Index.kwargs "sqlalchemy.schema.Index.kwargs")集合内的临时关键字参数：
 
-        idx = Index('a', 'b')plainplainplainplain
+        idx = Index('a', 'b')plainplainplainplainplainplainplainplainplainplain
         idx.kwargs['mysql_someargument'] = True
 
     为了适应在构建时允许自定义参数的用例，现在允许此注册：[`DialectKWArgs.argument_for()`](core_sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.argument_for "sqlalchemy.sql.base.DialectKWArgs.argument_for")方法：
 
-        Index.argument_for('mysql', 'someargument', False)plainplain
+        Index.argument_for('mysql', 'someargument', False)plainplainplainplainplainplainplainplain
 
         idx = Index('a', 'b', mysql_someargument=True)
 
@@ -2069,7 +2069,7 @@ tags:
 -   **[mssql] [feature]**为[`UniqueConstraint`](core_constraints.html#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")和[`PrimaryKeyConstraint`](core_constraints.html#sqlalchemy.schema.PrimaryKeyConstraint "sqlalchemy.schema.PrimaryKeyConstraint")结构添加了一个选项`mssql_clustered`在 SQL Server 上，这将`CLUSTERED`关键字添加到 DDL 中的约束结构中。Pullreq 礼貌 Derek
     Harland。[¶](#change-2f279749d1dbc19d2dcab58b0a56c870)
 
-    参考：[拉取请求bitbucket：11](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/11)
+    参考：[拉取请求 bitbucket：11](https://bitbucket.org/zzzeek/sqlalchemy/pull-request/11)
 
 ### 预言[¶ T0\>](#change-0.9.2-oracle "Permalink to this headline")
 
@@ -2190,7 +2190,7 @@ tags:
     and [`or_()`](core_sqlelement.html#sqlalchemy.sql.expression.or_ "sqlalchemy.sql.expression.or_")
     can now accept Python generators as a single argument, e.g.:
 
-        and_(x == y for x, y in tuples)plainplain
+        and_(x == y for x, y in tuples)plainplainplainplainplainplain
 
     这里的逻辑查找单个参数`*args`，其中第一个元素是`types.GeneratorType`的实例。
 

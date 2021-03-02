@@ -654,7 +654,7 @@ tags:
     constructs will now interpret ORM entities as target tables to be
     operated upon, e.g.:
 
-        from sqlalchemy import insert, update, deleteplainplainplainplain
+        from sqlalchemy import insert, update, deleteplainplainplainplainplainplainplain
 
         ins = insert(SomeMappedClass).values(x=5)
 
@@ -1559,7 +1559,7 @@ tags:
 
     参考文献：[＃2664](http://www.sqlalchemy.org/trac/ticket/2664)
 
-### 的PostgreSQL [¶ T0\>](#change-0.8.0-postgresql "Permalink to this headline")
+### 的 PostgreSQL [¶ T0\>](#change-0.8.0-postgresql "Permalink to this headline")
 
 -   **[postgresql] [feature]**Added support for Postgresql’s traditional
     SUBSTRING function syntax, renders as “SUBSTRING(x FROM y FOR z)”
@@ -1666,23 +1666,23 @@ tags:
     construct without it interfering with the entities being selected.
     基本上，这样的陈述：
 
-        ua = aliased(User)plainplainplainplain
+        ua = aliased(User)plainplainplainplainplainplain
         session.query(User.name).select_from(ua).join(User, User.name > ua.name)
 
     将保持 SELECT 的列子句作为来自未指定的“用户”，如指定的那样；
     select\_from 只发生在 FROM 子句中：
 
-        SELECT users.name AS users_name FROM users AS users_1plain
+        SELECT users.name AS users_name FROM users AS users_1plainplainplainplainplainplainplain
         JOIN users ON users.name < users_1.name
 
     请注意，此行为与[`Query.select_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")的原始较旧用例形成对比，这是使用不同的可选项重新表示映射实体的情况：
 
-        session.query(User.name).\plainplain
+        session.query(User.name).\plainplainplainplainplain
           select_from(user_table.select().where(user_table.c.id > 5))
 
     其中产生：
 
-        SELECT anon_1.name AS anon_1_name FROM (SELECT users.id AS id,plainplainplain
+        SELECT anon_1.name AS anon_1_name FROM (SELECT users.id AS id,plainplainplainplainplainplainplain
         users.name AS name FROM users WHERE users.id > :id_1) AS anon_1
 
     后一个用例的“别名”行为阻碍了前一个用例。该方法现在特别考虑像[`expression.select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")或[`expression.alias()`](core_selectable.html#sqlalchemy.sql.expression.alias "sqlalchemy.sql.expression.alias")这样的 SQL 表达式，与像[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")
@@ -1806,7 +1806,7 @@ tags:
     in some cases won’t get in the way of this comparison.
     以前，表达式如下所示：
 
-        expr1 = mycolumn > 2plainplainplainplain
+        expr1 = mycolumn > 2plainplainplainplainplainplain
         bool(expr1 == expr1)
 
     Would evaluate as `False`, even though this is
@@ -2007,7 +2007,7 @@ tags:
     session.begin\_nested() will now only expire those objects that had
     net changes within the scope of that transaction, that is objects
     which were dirty or were modified on a flush.
-    这允许begin\_nested()的典型用例（修改对象的一小部分子集）将数据从未在该子事务中修改的较大的封闭对象集中留下。[T0\>](#change-1df6e3552ee895cd48952f95c0f0730a)
+    这允许 begin\_nested()的典型用例（修改对象的一小部分子集）将数据从未在该子事务中修改的较大的封闭对象集中留下。[T0\>](#change-1df6e3552ee895cd48952f95c0f0730a)
 
     参考文献：[＃2452](http://www.sqlalchemy.org/trac/ticket/2452)
 
@@ -2045,7 +2045,7 @@ tags:
     参考文献：[＃2592](http://www.sqlalchemy.org/trac/ticket/2592)
 
 -   **[orm]
-    [feature]**默认查询“自动关联”，与select()一样。以前，在另一个查询中用作子查询将需要显式调用correlate()方法，以便将内部表与外部关联起来。与往常一样，关联（无）禁用关联。[¶](#change-895b051922d21bb69c4c67ce5309b066)
+    [feature]**默认查询“自动关联”，与 select()一样。以前，在另一个查询中用作子查询将需要显式调用 correlate()方法，以便将内部表与外部关联起来。与往常一样，关联（无）禁用关联。[¶](#change-895b051922d21bb69c4c67ce5309b066)
 
     参考文献：[＃2179](http://www.sqlalchemy.org/trac/ticket/2179)
 

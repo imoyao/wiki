@@ -15,7 +15,7 @@ tags:
 回想一下[When do I construct a Session, when do I commit it, and when do
 I close
 it?](session_basics.html#session-faq-whentocreate)，引入了“session
-scopes”的概念，重点放在web应用程序和练习将[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的作用域与 Web 请求的作用域相关联。大多数现代 Web 框架都包含集成工具，因此可以自动管理[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的范围，并且应该尽可能使用这些工具。
+scopes”的概念，重点放在 web 应用程序和练习将[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的作用域与 Web 请求的作用域相关联。大多数现代 Web 框架都包含集成工具，因此可以自动管理[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的范围，并且应该尽可能使用这些工具。
 
 SQLAlchemy 包括其自己的帮助对象，这有助于建立用户定义的[`会话`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")范围。它也被第三方集成系统用来帮助构建他们的集成方案。
 
@@ -27,8 +27,8 @@ SQLAlchemy 包括其自己的帮助对象，这有助于建立用户定义的[`�
 \< /
 t0\>或](http://packages.python.org/Flask-SQLAlchemy/)[zope.sqlalchemy](http://pypi.python.org/pypi/zope.sqlalchemy)。
 
-通过调用它来构造一个[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")，传递一个**工厂**，可以创建新的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象。一个工厂只是在调用时产生一个新的对象，而在Session的情况下，最常见的工厂就是本节前面介绍的sessionmaker。
-[``](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")[``](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")下面我们来说明这个用法：
+通过调用它来构造一个[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")，传递一个**工厂**，可以创建新的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象。一个工厂只是在调用时产生一个新的对象，而在 Session 的情况下，最常见的工厂就是本节前面介绍的 sessionmaker。
+[](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")[``](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")下面我们来说明这个用法：
 
     >>> from sqlalchemy.orm import scoped_session
     >>> from sqlalchemy.orm import sessionmaker
@@ -56,7 +56,7 @@ t0\>或](http://packages.python.org/Flask-SQLAlchemy/)[zope.sqlalchemy](http://p
 此时，[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")对象为“空”，并在再次调用时创建**新**
 [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。如下图所示，这与我们之前的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")不一样：
 
-    >>> new_session = Session()plain
+    >>> new_session = Session()plainplain
     >>> new_session is some_session
     False
 
@@ -67,7 +67,7 @@ t0\>或](http://packages.python.org/Flask-SQLAlchemy/)[zope.sqlalchemy](http://p
 
 [`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")的工作很简单；为所有需要的人保留一个[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。作为对这个[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")产生更多透明访问的手段，[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")还包含**代理行为**，这意味着注册表本身可以被视为类似直接[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")；当在这个对象上调用方法时，它们被**代理**到由注册表维护的基础[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")：
 
-    Session = scoped_session(some_factory)
+    Session = scoped_session(some_factory)plain
 
     # equivalent to:
     #
@@ -104,13 +104,13 @@ registry, but only within the scope of a single thread.
 
 正如在[When do I construct a Session, when do I commit it, and when do I
 close
-it?](session_basics.html#session-faq-whentocreate)，Web应用程序围绕**Web请求的概念构建
+it?](session_basics.html#session-faq-whentocreate)，Web应用程序围绕**Web 请求的概念构建
 t2\>，并且将这样的应用程序与[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")集成通常意味着[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")将与该请求相关联。**事实证明，大多数 Python
 Web 框架（异常框架 Twisted 和 Tornado 等显着异常）都以简单的方式使用线程，以便在一个*工作线程*。当请求结束时，工作线程被释放到可用于处理另一请求的工作者池中。
 
 Web 请求和线程的这种简单对应意味着将[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")与线程相关联意味着它也与该线程内运行的 Web 请求相关联，反之亦然，前提是[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")因此，使用[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")作为将[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")与Web应用程序集成的快速方法是一种常见做法。下面的序列图说明了这个流程：
 
-    Web Server          Web Framework        SQLAlchemy ORM Codeplain
+    Web Server          Web Framework        SQLAlchemy ORM Codeplainplainplain
     --------------      --------------       ------------------------------
     startup        ->   Web framework        # Session registry is established
                         initializes          Session = scoped_session(sessionmaker())
@@ -141,7 +141,7 @@ Web 请求和线程的这种简单对应意味着将[`Session`](session_api.html
     outgoing web    <-
     response
 
-使用上述流程，将[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")与Web应用程序集成的过程有两个要求：
+使用上述流程，将[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")与 Web 应用程序集成的过程有两个要求：
 
 1.  首次启动Web应用程序时，创建一个[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")注册表，确保该对象可由应用程序的其余部分访问。
 2.  确保在 Web 请求结束时调用[`scoped_session.remove()`](#sqlalchemy.orm.scoping.scoped_session.remove "sqlalchemy.orm.scoping.scoped_session.remove")，通常通过与 Web 框架的事件系统集成以建立“请求结束”事件。
@@ -165,7 +165,7 @@ current thread.
 
 [`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")对象的“线程本地”范围的默认行为只是“范围”[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的众多选项之一。自定义范围可以基于任何现有的“我们正在处理的事物”的系统来定义。
 
-假设一个 web 框架定义了一个库函数`get_current_request()`。使用此框架构建的应用程序可以随时调用此函数，并且结果将是表示当前正在处理的请求的某种`Request`对象。如果`Request`对象是可散列的，那么这个函数可以很容易地与[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")集成以将[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")与请求相关联。下面我们结合Web框架`on_request_end`提供的假设事件标记来说明这一点，该请求允许在请求结束时调用代码：
+假设一个 web 框架定义了一个库函数`get_current_request()`。使用此框架构建的应用程序可以随时调用此函数，并且结果将是表示当前正在处理的请求的某种`Request`对象。如果`Request`对象是可散列的，那么这个函数可以很容易地与[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")集成以将[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")与请求相关联。下面我们结合 Web 框架`on_request_end`提供的假设事件标记来说明这一点，该请求允许在请求结束时调用代码：
 
     from my_web_framework import get_current_request, on_request_endplain
     from sqlalchemy.orm import scoped_session, sessionmaker
@@ -184,7 +184,7 @@ current thread.
 *class* `sqlalchemy.orm.scoping。`{.descclassname} `scoped_session`{.descname} （ *session\_factory*，*scopefunc =无 T5\> ） T6\> [¶ T7\>](#sqlalchemy.orm.scoping.scoped_session "Permalink to this definition")*
 :   提供[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象的范围管理。
 
-    有关教程，请参阅[Contextual/Thread-local
+    有关教程，请参阅[Contextual/Thread-localplain
     Sessions](#unitofwork-contextual)。
 
     ` __呼叫__  T0> （ T1>  **千瓦 T2> ） T3> ¶ T4>`{.descname}
@@ -280,6 +280,6 @@ current thread.
 *class* `sqlalchemy.util。`{.descclassname} `ThreadLocalRegistry`{.descname} （ *createfunc* ） t5 \> [¶ T6\>](#sqlalchemy.util.ThreadLocalRegistry "Permalink to this definition")
 :   基础：`sqlalchemy.util._collections.ScopedRegistry`
 
-    一个使用`threading.local()`变量进行存储的[`ScopedRegistry`](#sqlalchemy.util.ScopedRegistry "sqlalchemy.util.ScopedRegistry")。
+    一个使用`threading.local()`变量进行存储的[`ScopedRegistry`](#sqlalchemy.util.ScopedRegistry "sqlalchemy.util.ScopedRegistry")。plainplainplain
 
 

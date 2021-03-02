@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy中文文档
   - core
 tags:
-  - 
 ---
 用MetaData描述数据库[¶](#module-sqlalchemy.schema "Permalink to this headline")
 ===============================================================================
@@ -167,7 +166,7 @@ tables in order of their dependency.
 
 可以通过[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的`create()`和`drop()`方法创建和删除单个表。这些方法默认发出CREATE或DROP，而不管表是否存在：
 
-    engine = create_engine('sqlite:///:memory:')
+    engine = create_engine('sqlite:///:memory:')plain
 
     meta = MetaData()
 
@@ -192,7 +191,7 @@ tables in order of their dependency.
 
 要启用“首先检查表存在”逻辑，请将`checkfirst=True`参数添加到`create()`或`drop()`：
 
-    employees.create(engine, checkfirst=True)
+    employees.create(engine, checkfirst=True)plain
     employees.drop(engine, checkfirst=False)
 
 通过迁移改变模式[¶](#altering-schemas-through-migrations "Permalink to this headline")
@@ -211,7 +210,7 @@ tables in order of their dependency.
 -   [SQLAlchemy-Migrate](https://github.com/openstack/sqlalchemy-migrate)
     - The original migration tool for SQLAlchemy, SQLAlchemy-Migrate is
     widely used and continues under active development.
-    SQLAlchemy-Migrate包含SQL脚本生成，ORM类生成，ORM模型比较以及对SQLite迁移的广泛支持等功能。
+    SQLAlchemy-Migrate 包含 SQL 脚本生成，ORM 类生成，ORM 模型比较以及对 SQLite 迁移的广泛支持等功能。
 
 指定模式名称[¶](#specifying-the-schema-name "Permalink to this headline")
 -------------------------------------------------------------------------

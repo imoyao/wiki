@@ -4,14 +4,14 @@ date: 2021-02-20 22:41:41
 permalink: /sqlalchemy/orm/extensions/declarative/api/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
   - extensions
   - declarative
 tags:
   - 
 ---
-声明式API [¶](#declarative-api "Permalink to this headline")
+声明式 API [¶](#declarative-api "Permalink to this headline")
 ============================================================
 
 API参考[¶](#api-reference "Permalink to this headline")
@@ -20,7 +20,7 @@ API参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.ext.declarative.`{.descclassname}`declarative_base`{.descname}(*bind=None*, *metadata=None*, *mapper=None*, *cls=\<type 'object'\>*, *name='Base'*, *constructor=\<function \_\_init\_\_\>*, *class\_registry=None*, *metaclass=\<class 'sqlalchemy.ext.declarative.api.DeclarativeMeta'\>*)[¶](#sqlalchemy.ext.declarative.declarative_base "Permalink to this definition")
 :   为声明性类定义构造一个基类。
 
-    新的基类将被赋予一个元类，该元类生成适当的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，并根据在类中声明提供的信息以及该类的任何子类进行相应的[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")调用类。
+    新的基类将被赋予一个元类，该元类生成适当的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，并根据在类中声明提供的信息以及该类的任何子类进行相应的[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")调用类。plainplain
 
     参数：
 
@@ -88,10 +88,10 @@ API参考[¶](#api-reference "Permalink to this headline")
 
     [`declarative_base()`](#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")
 
-*类 T0\> ` sqlalchemy.ext.declarative。 T1>  declared_attr  T2> （ T3>  fget  T4>，级联=假 T5> ） T6> ¶ T7>`{.descclassname}*
+*类 T0\> `sqlalchemy.ext.declarative。 T1>  declared_attr  T2> （ T3>  fget  T4>，级联=假 T5> ） T6> ¶ T7>`{.descclassname}*
 :   基础：`sqlalchemy.orm.base._MappedAttribute`，`__builtin__.property`
 
-    将类级方法标记为表示映射属性或特殊声明性成员名称的定义。
+    将类级方法标记为表示映射属性或特殊声明性成员名称的定义。plain
 
     @declared\_attr将属性转换为可以从未被实例化的类调用的类标量属性。声明式将特别标记为@declared\_attr的属性视为返回特定于映射或声明式表配置的构造。属性的名称是该属性的非动态版本的名称。
 
@@ -167,7 +167,7 @@ API参考[¶](#api-reference "Permalink to this headline")
         Scenarios](mixins.html#mixin-inheritance-columns)
 
 `sqlalchemy.ext.declarative.api。`{.descclassname} `_declarative_constructor`{.descname} （ *self*，*\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.ext.declarative.api._declarative_constructor "Permalink to this definition")
-:   一个简单的构造函数，允许从kwargs初始化。
+:   一个简单的构造函数，允许从 kwargs 初始化。
 
     使用`kwargs`中的名称和值在构造的实例上设置属性。plain
 
@@ -177,7 +177,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 :   给定一个类，如果它继承的任何类有一个映射表，则返回 True，否则返回 False。
 
  `sqlalchemy.ext.declarative.`{.descclassname}`synonym_for`{.descname}(*name*, *map\_column=False*)[¶](#sqlalchemy.ext.declarative.synonym_for "Permalink to this definition")
-:   装饰者，使Python @property成为列的查询同义词。
+:   装饰者，使 Python @property 成为列的查询同义词。
 
     [`synonym()`](mapped_attributes.html#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")的装饰版本。正在装饰的函数是'descriptor'，否则将它的参数传递给synonym()：plainplain
 
@@ -190,7 +190,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 
         prop = synonym('col', descriptor=property(_read_prop, _write_prop))
 
-` sqlalchemy.ext.declarative。 T0>  comparable_using  T1> （ T2>  comparator_factory  T3> ） T4> ¶< / T5>`{.descclassname}
+`sqlalchemy.ext.declarative。 T0>  comparable_using  T1> （ T2>  comparator_factory  T3> ） T4> ¶< / T5>`{.descclassname}
 :   装饰者，允许在查询标准中使用Python @property。
 
     这是通过comparator\_factory和正在装饰的函数的`comparable_property()`的装饰器前端：
@@ -330,7 +330,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.declarative。`{.descclassname} `DeferredReflection`{.descname} [¶](#sqlalchemy.ext.declarative.DeferredReflection "Permalink to this definition")
 :   基于延迟反射步骤构建映射的辅助类。
 
-    通常，通过在声明式类中使用autoload = True将[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象设置为`__table__`属性，可以在声明中使用声明式命令。The caveat is that the
+    通常，通过在声明式类中使用autoload = True将[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象设置为`__table__`属性，可以在声明中使用声明式命令。The caveat is that theplainplainplain
     [`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
     must be fully reflected, or at the very least have a primary key
     column, at the point at which a normal declarative mapping is
@@ -415,7 +415,7 @@ New in version 0.7.3.
 and Custom Base
 Classes](mixins.html#declarative-mixins)），允许子类仅从特殊类扩展：
 
-    class SomeAbstractBase(Base):
+    class SomeAbstractBase(Base):plainplain
         __abstract__ = True
 
         def some_helpful_method(self):

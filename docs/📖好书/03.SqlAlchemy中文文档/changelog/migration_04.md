@@ -9,7 +9,7 @@ categories:
 tags:
   - 
 ---
-SQLAlchemy 0.4有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-4 "Permalink to this headline")
+SQLAlchemy 0.4 有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-4 "Permalink to this headline")
 ===========================================================================================
 
 关于本文档
@@ -17,12 +17,12 @@ SQLAlchemy 0.4有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-4 "Permalink
 本文档介绍了 2008 年 10 月 14 日发布的 SQLAlchemy
 0.3 版和 2007 年 10 月 12 日发布的 SQLAlchemy 0.4 版之间的变化。
 
-文件日期：2008年3月21日
+文件日期：2008 年 3 月 21 日
 
 第一件事第一件[¶](#first-things-first "Permalink to this headline")
 -------------------------------------------------------------------
 
-如果您使用任何ORM功能，请确保从`sqlalchemy.orm`导入：
+如果您使用任何 ORM 功能，请确保从`sqlalchemy.orm`导入：
 
     from sqlalchemy import *plain
     from sqlalchemy.orm import *
@@ -53,7 +53,7 @@ of sqlachemy’s sub-modules into your namespace.
 
 在 0.3 中，此代码起作用：
 
-    from sqlalchemy import *plain
+    from sqlalchemy import *plainplain
 
     class UTCDateTime(types.TypeDecorator):
         pass
@@ -81,21 +81,21 @@ Query具有与外部生成匹配的内在胆量，并且有更多技巧。所有
 
 User.query.get\_by（\*\* kwargs）
 
-    User.query.filter_by(**kwargs).first()
+    User.query.filter_by(**kwargs).first()plainplain
 
 User.query.select\_by（\*\* kwargs）
 
-    User.query.filter_by(**kwargs).all()plain
+    User.query.filter_by(**kwargs).all()plainplain
 
 User.query.select()
 
-    User.query.filter(xxx).all()
+    User.query.filter(xxx).all()plain
 
 #### 新的基于属性的表达式构造[¶](#new-property-based-expression-constructs "Permalink to this headline")
 
-到目前为止，ORM中最明显的差异是，您现在可以直接使用基于类的属性构建查询条件。使用映射类时，不再需要“.c。”前缀：
+到目前为止，ORM 中最明显的差异是，您现在可以直接使用基于类的属性构建查询条件。使用映射类时，不再需要“.c。”前缀：
 
-    session.query(User).filter(and_(User.name == 'fred', User.id > 17))
+    session.query(User).filter(and_(User.name == 'fred', User.id > 17))plain
 
 尽管简单的基于列的比较没有什么大不了，但类属性有一些新的“更高级别”结构可用，包括以前仅在`filter_by()`中可用的结构：
 
@@ -127,9 +127,9 @@ User.query.select()
 
 #### 自动连接别名[¶](#automatic-join-aliasing "Permalink to this headline")
 
-我们现在有一段时间join()和outerjoin()：
+我们现在有一段时间 join()和 outerjoin()：
 
-    session.query(Order).join('items')...
+    session.query(Order).join('items')...plain
 
 现在你可以别名了：
 
@@ -159,7 +159,7 @@ User.query.select()
 
 要为别名中的每个表添加条件标准，可以使用`from_joinpoint`继续加入同一行别名：
 
-    # search for the treenode along the path "n1/n12/n122"
+    # search for the treenode along the path "n1/n12/n122"plain
 
     # first find a Node with name="n122"
     q = sess.query(Node).filter_by(name='n122')
@@ -192,7 +192,7 @@ User.query.select()
 
     order.hash = text("select hash from hashing_table")
 
-在操作之后，使用延迟加载器设置column-attribute，以便在下次访问时发出SQL以加载新值。
+在操作之后，使用延迟加载器设置 column-attribute，以便在下次访问时发出 SQL 以加载新值。
 
 #### 自引用和周期性快速加载[¶](#self-referential-and-cyclical-eager-loading "Permalink to this headline")
 
@@ -230,9 +230,9 @@ User.query.select()
 
 #### 复合类型[¶](#composite-types "Permalink to this headline")
 
-这是 Hibernate 阵营的一员。复合类型允许您定义一个由多个列（或者一列，如果需要）组成的自定义数据类型。让我们定义一个新的类型，`Point`。存储x / y坐标：
+这是 Hibernate 阵营的一员。复合类型允许您定义一个由多个列（或者一列，如果需要）组成的自定义数据类型。让我们定义一个新的类型，`Point`。存储 x / y 坐标：
 
-    class Point(object):plain
+    class Point(object):plainplain
         def __init__(self, x, y):
             self.x = x
             self.y = y
@@ -314,7 +314,7 @@ User.query.select()
 
 和`eagerload_all()`设置一个属性链，以便在一次传递中保持渴望：
 
-    mapper(Foo, foo_table, properties={
+    mapper(Foo, foo_table, properties={plain
        'bar':relation(Bar)
     })
     mapper(Bar, bar_table, properties={
@@ -325,15 +325,15 @@ User.query.select()
     # eager load bar and bat
     session.query(Foo).options(eagerload_all('bar.bat')).filter(...).all()
 
-#### 新集合API [¶](#new-collection-api "Permalink to this headline")
+#### 新集合 API [¶](#new-collection-api "Permalink to this headline")
 
 集合不再由InstrumentedList代理代理，并且对成员，方法和属性的访问是直接的。装饰者现在拦截进入和离开集合的对象，现在可以轻松地编写管理自己的成员资格的自定义集合类。灵活的装饰器也可以替换0.3中定制集合的命名方法接口，从而使任何类都可以很容易地作为集合容器使用。
 
 基于字典的集合现在更容易使用，并且完全像`dict`一样。Changing `__iter__` is no longer
-needed for ``` dict``s, and new built-in ``dict ```
+needed for `dict``s, and new built-in ``dict`
 types cover many needs:
 
-    # use a dictionary relation keyed by a column
+    # use a dictionary relation keyed by a columnplain
     relation(Item, collection_class=column_mapped_collection(items.c.keyword))
     # or named attribute
     relation(Item, collection_class=attribute_mapped_collection('keyword'))
@@ -346,7 +346,7 @@ types cover many needs:
 
 这个特性静静地出现在 0.3 中，但在 0.4 下得到了改进，这要归功于能够将子查询转换为表的子查询转换为针对该表的别名的子查询。这对于急切加载，查询中的别名加入等是关键的。当您只需要添加一些额外的列或子查询时，它可以减少对 select 语句创建映射器的需要：
 
-    mapper(User, users, properties={
+    mapper(User, users, properties={plain
            'fullname': column_property((users.c.firstname + users.c.lastname).label('fullname')),
            'numposts': column_property(
                 select([func.count(1)], users.c.id==posts.c.user_id).correlate(users).label('posts')
@@ -355,7 +355,7 @@ types cover many needs:
 
 一个典型的查询如下所示：
 
-    SELECT (SELECT count(1) FROM posts WHERE users.id = posts.user_id) AS count,plain
+    SELECT (SELECT count(1) FROM posts WHERE users.id = posts.user_id) AS count,plainplain
     users.firstname || users.lastname AS fullname,
     users.id AS users_id, users.firstname AS users_firstname, users.lastname AS users_lastname
     FROM users ORDER BY users.oid
@@ -395,7 +395,7 @@ of `assignmapper` are moved into the new
 with both `sessionmaker` as well as
 `create_session()`:
 
-    from sqlalchemy.orm import scoped_session, sessionmaker
+    from sqlalchemy.orm import scoped_session, sessionmakerplain
 
     Session = scoped_session(sessionmaker(autoflush=True, transactional=True))
     Session.configure(bind=engine)
@@ -422,7 +422,7 @@ with both `sessionmaker` as well as
 
 #### 会话再次默认为弱引用[¶](#sessions-are-again-weak-referencing-by-default "Permalink to this headline")
 
-默认情况下，Session 中的 weak\_identity\_map标志现在设置为`True`。自动从会话中删除外部推断和超出范围的实例。但是，存在“脏”变化的项目将保持强引用状态，直到这些变化被刷新为止，此时对象将恢复为弱引用（这对'可变'类型也适用，如可选属性）。将weak\_identity\_map 设置为`False`为使用会话的用户恢复旧的强引用行为，如缓存。
+默认情况下，Session 中的 weak\_identity\_map 标志现在设置为`True`。自动从会话中删除外部推断和超出范围的实例。但是，存在“脏”变化的项目将保持强引用状态，直到这些变化被刷新为止，此时对象将恢复为弱引用（这对'可变'类型也适用，如可选属性）。将weak\_identity\_map 设置为`False`为使用会话的用户恢复旧的强引用行为，如缓存。
 
 #### 自动事务会话[¶](#auto-transactional-sessions "Permalink to this headline")
 
@@ -433,7 +433,7 @@ with both `sessionmaker` as well as
 Also, `autoflush=True` means the `Session` will `flush()` before each
 `query` as well as when you call `flush()` or `commit()`. 所以现在这将工作：
 
-    Session = sessionmaker(bind=engine, autoflush=True, transactional=True)
+    Session = sessionmaker(bind=engine, autoflush=True, transactional=True)plain
 
     u = User(name='wendy')
 
@@ -456,7 +456,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
     sess.commit() # commit transaction
 
-与封闭的引擎级别（即非ORM）事务共享`Session`非常简单：
+与封闭的引擎级别（即非 ORM）事务共享`Session`非常简单：
 
     Session = sessionmaker(autoflush=True, transactional=False)plain
 
@@ -469,7 +469,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
     # commit the outermost transaction
     trans.commit()
 
-#### 使用SAVEPOINT [¶](#nested-session-transactions-with-savepoint "Permalink to this headline")嵌套会话事务
+#### 使用 SAVEPOINT [¶](#nested-session-transactions-with-savepoint "Permalink to this headline")嵌套会话事务
 
 在引擎和ORM级别可用。ORM文档到目前为止：
 
@@ -478,7 +478,7 @@ naging
 
 #### 两阶段提交会话[¶](#two-phase-commit-sessions "Permalink to this headline")
 
-在引擎和ORM级别可用。ORM文档到目前为止：
+在引擎和 ORM 级别可用。ORM 文档到目前为止：
 
 [http://www.sqlalchemy.org/docs/04/session.html\#unitofwork\_ma](http://www.sqlalchemy.org/docs/04/session.html#unitofwork_ma)
 naging
@@ -499,10 +499,10 @@ naging
 
 #### `sqlalchemy.types.TypeDecorator` [¶](#custom-subclasses-of-sqlalchemy-types-typedecorator "Permalink to this headline")
 
-有一个用于子类化TypeDecorator的[新 API](http://www.sqlalchemy.org/docs/04/types.html#types_custom)。在某些情况下使用0.3
-API会导致编译错误。
+有一个用于子类化 TypeDecorator 的[新 API](http://www.sqlalchemy.org/docs/04/types.html#types_custom)。在某些情况下使用 0.3
+API 会导致编译错误。
 
-SQL表达式[¶](#sql-expressions "Permalink to this headline")
+SQL 表达式[¶](#sql-expressions "Permalink to this headline")
 -----------------------------------------------------------
 
 ### 全新，确定性标签/别名生成[¶](#all-new-deterministic-label-alias-generation "Permalink to this headline")
@@ -514,7 +514,7 @@ T1\>](http://www.sqlalchemy.org/docs/04/sqlexpression.html)
 
 ### 生成 select()构造[¶](#generative-select-constructs "Permalink to this headline")
 
-这绝对是通过`select()`进行的。请参阅htt
+这绝对是通过`select()`进行的。请参阅 htt
 p：//www.sqlalchemy.org/docs/04/sqlexpression.html\#sql\_transf orm。
 
 ### 新的操作员系统[¶](#new-operator-system "Permalink to this headline")
@@ -526,7 +526,7 @@ lalchemy.org/docs/04/sqlexpression.html\#sql\_operators
 
 就像它说的那样：
 
-    b = bindparam('foo', type_=String)
+    b = bindparam('foo', type_=String)plain
 
 ### in\_函数更改为接受序列或可选[¶](#in-function-changed-to-accept-sequence-or-selectable "Permalink to this headline")
 
@@ -537,7 +537,7 @@ in\_函数现在将一系列值或可选值作为其唯一参数。以前传入�
 
 应改为
 
-    my_table.select(my_table.c.id.in_([1,2,3])
+    my_table.select(my_table.c.id.in_([1,2,3])plain
     my_table.select(my_table.c.id.in_(listOfIds)
 
 架构和反思[¶](#schema-and-reflection "Permalink to this headline")
@@ -591,7 +591,7 @@ SQL执行[¶](#sql-execution "Permalink to this headline")
 
 ### Oracle 的输出参数[¶](#out-parameters-for-oracle "Permalink to this headline")
 
-    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)
+    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)plain
     assert result.out_parameters == {'y':10, 'z':75}
 
 ### 连接绑定`MetaData`，`Sessions` [¶](#connection-bound-metadata-sessions "Permalink to this headline")
@@ -599,7 +599,7 @@ SQL执行[¶](#sql-execution "Permalink to this headline")
 `MetaData` and `Session` can be
 explicitly bound to a connection:
 
-    conn = engine.connect()
+    conn = engine.connect()plain
     sess = create_session(bind=conn)
 
 ### 更快，更安全`ResultProxy`对象[¶](#faster-more-foolproof-resultproxy-objects "Permalink to this headline")

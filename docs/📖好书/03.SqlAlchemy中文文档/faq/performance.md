@@ -46,7 +46,7 @@ depth is added (i.e. `r + r*r2 + r*r2*r3` ...)
 
 要进行更长期的查询分析或实现应用程序端“慢速查询”监视器，可以使用以下配方来使用事件来拦截游标执行：
 
-    from sqlalchemy import eventplain
+    from sqlalchemy import eventplainplainplainplain
     from sqlalchemy.engine import Engine
     import time
     import logging
@@ -74,9 +74,9 @@ depth is added (i.e. `r + r*r2 + r*r2*r3` ...)
 
 如果日志记录显示单个查询花费的时间太长，则需要详细分析处理查询的数据库花了多少时间，通过网络发送结果，由[DBAPI](glossary.html#term-dbapi)处理，以及最后被 SQLAlchemy 的结果集和/或 ORM 层接收。根据具体情况，这些阶段中的每一个都可能会出现各自的瓶颈。
 
-为此，您需要使用[Python分析模块](https://docs.python.org/2/library/profile.html)。下面是一个简单的配方，用于分析上下文管理器：
+为此，您需要使用[Python 分析模块](https://docs.python.org/2/library/profile.html)。下面是一个简单的配方，用于分析上下文管理器：
 
-    import cProfileplain
+    import cProfileplainplain
     import StringIO
     import pstats
     import contextlib
@@ -96,7 +96,7 @@ depth is added (i.e. `r + r*r2 + r*r2*r3` ...)
 
 要剖析一段代码：
 
-    with profiled():plainplain
+    with profiled():plainplainplain
         Session.query(FooClass).filter(FooClass.somevalue==8).all()
 
 分析的输出结果可用于了解花费时间的想法。剖析输出的一部分如下所示：
@@ -130,8 +130,8 @@ SQLAlchemy 函数被调用了 222 次（递归的，从外部的 21 次），总
 
     2    0.102    0.102    0.204    0.102 {method 'execute' of 'sqlite3.Cursor' objects}plainplainplainplain
 
-这将表明数据库需要很长时间才能开始返回结果，这意味着您的查询应该进行优化，可以通过添加索引或重新构建查询和/或基础模式来实现。对于该任务，使用诸如EXPLAIN，SHOW
-PLAN等的系统来分析查询计划是有保证的。如由数据库后端提供的那样。
+这将表明数据库需要很长时间才能开始返回结果，这意味着您的查询应该进行优化，可以通过添加索引或重新构建查询和/或基础模式来实现。对于该任务，使用诸如 EXPLAIN，SHOW
+PLAN 等的系统来分析查询计划是有保证的。如由数据库后端提供的那样。
 
 ### 结果获取缓慢 - 核心[¶](#result-fetching-slowness-core "Permalink to this headline")
 
@@ -140,17 +140,17 @@ ORM itself typically uses `fetchall()` to fetch rows
 (or `fetchmany()` if the [`Query.yield_per()`](orm_query.html#sqlalchemy.orm.query.Query.yield_per "sqlalchemy.orm.query.Query.yield_per")
 option is used).
 
-在DBAPI级别，通过对`fetchall()`进行非常缓慢的调用可以指示过多的行数：
+在 DBAPI 级别，通过对`fetchall()`进行非常缓慢的调用可以指示过多的行数：
 
-    2    0.300    0.600    0.300    0.600 {method 'fetchall' of 'sqlite3.Cursor' objects}plain
+    2    0.300    0.600    0.300    0.600 {method 'fetchall' of 'sqlite3.Cursor' objects}plainplain
 
 即使最终结果似乎没有多行，意外的大量行也可能是笛卡尔积的结果 -
 当多组行合并在一起而没有适当地将表连接在一起时。如果在复杂的查询中使用了错误的[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象，并引入其他意外的 FROM 子句，那么使用 SQLAlchemy
 Core 或 ORM 查询生成此行为通常很容易。
 
-另一方面，在DBAPI级别对`fetchall()`执行快速调用，但是当 SQLAlchemy 的[`ResultProxy`](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")被要求执行`fetchall()`
+另一方面，在 DBAPI 级别对`fetchall()`执行快速调用，但是当 SQLAlchemy 的[`ResultProxy`](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")被要求执行`fetchall()`
 
-    # the DBAPI cursor is fast...
+    # the DBAPI cursor is fast...plainplain
     2    0.020    0.040    0.020    0.040 {method 'fetchall' of 'sqlite3.Cursor' objects}
 
     ...
@@ -174,7 +174,7 @@ Core 或 ORM 查询生成此行为通常很容易。
 
 这种故意缓慢操作的分析输出可以看作是这样的：
 
-    200    0.001    0.000    0.237    0.001 lib/sqlalchemy/faq/sql/type_api.py:911(process)plain
+    200    0.001    0.000    0.237    0.001 lib/sqlalchemy/faq/sql/type_api.py:911(process)plainplain
     200    0.001    0.000    0.236    0.001 test.py:28(process_result_value)
     200    0.235    0.001    0.235    0.001 {time.sleep}
 
@@ -186,9 +186,9 @@ Core 或 ORM 查询生成此行为通常很容易。
 
 ### 结果获取缓慢 - ORM [¶](#result-fetching-slowness-orm "Permalink to this headline")
 
-为了检测行的ORM读取缓慢（这是性能关注的最常见区域），诸如`populate_state()`和`_instance()`的调用将说明单个 ORM 对象群体：
+为了检测行的 ORM 读取缓慢（这是性能关注的最常见区域），诸如`populate_state()`和`_instance()`的调用将说明单个 ORM 对象群体：
 
-    # the ORM calls _instance for each ORM-loaded row it sees, and
+    # the ORM calls _instance for each ORM-loaded row it sees, andplainplainplain
     # populate_state for each ORM-loaded row that results in the population
     # of an object's attributes
     220/20    0.001    0.000    0.010    0.000 lib/sqlalchemy/faq/orm_loading.py:327(_instance)
@@ -243,7 +243,7 @@ Operations](orm_persistence_techniques.html#bulk-operations)方法套件，这�
 下面的例子说明了插入行的几种不同方法的基于时间的测试，从最自动化到最小化。使用 cPython
 2.7，运行时观察到：
 
-    classics-MacBook-Pro:sqlalchemy classic$ python test.py
+    classics-MacBook-Pro:sqlalchemy classic$ python test.pyplain
     SQLAlchemy ORM: Total time for 100000 records 12.0471920967 secs
     SQLAlchemy ORM pk given: Total time for 100000 records 7.06283402443 secs
     SQLAlchemy ORM bulk_save_objects(): Total time for 100000 records 0.856323003769 secs
@@ -252,7 +252,7 @@ Operations](orm_persistence_techniques.html#bulk-operations)方法套件，这�
 
 我们可以使用[Pypy](http://pypy.org/)的最新版本将时间缩短三分之一：
 
-    classics-MacBook-Pro:sqlalchemy classic$ /usr/local/src/pypy-2.1-beta2-osx64/bin/pypy test.pyplain
+    classics-MacBook-Pro:sqlalchemy classic$ /usr/local/src/pypy-2.1-beta2-osx64/bin/pypy test.pyplainplain
     SQLAlchemy ORM: Total time for 100000 records 5.88369488716 secs
     SQLAlchemy ORM pk given: Total time for 100000 records 3.52294301987 secs
     SQLAlchemy Core: Total time for 100000 records 0.613556146622 secs
@@ -260,7 +260,7 @@ Operations](orm_persistence_techniques.html#bulk-operations)方法套件，这�
 
 脚本：
 
-    import timeplain
+    import timeplainplain
     import sqlite3
 
     from sqlalchemy.ext.declarative import declarative_base

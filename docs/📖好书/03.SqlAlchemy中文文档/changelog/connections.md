@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:33
 permalink: /sqlalchemy/ffcb37/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - changelog
 tags:
 ---
@@ -42,7 +42,7 @@ Pooling](core_pooling.html)。
 
 [`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")调用直接通过`connect_args`关键字参数接受附加参数：
 
-    e = create_engine("mysql://scott:tiger@localhost/test",plainplainplainplain
+    e = create_engine("mysql://scott:tiger@localhost/test",plainplainplainplainplain
                         connect_args={"encoding": "utf8"})
 
 或者对于基本的字符串和整数参数，通常可以在 URL 的查询字符串中指定它们：
@@ -64,7 +64,7 @@ Timeouts](dialects_mysql.html#mysql-connection-timeouts)中描述的[`create_eng
 
 ​2. MySQLdb
 [DBAPI](glossary.html#term-dbapi)或类似的 DBAPI 以非线程安全的方式使用，或以其他不适当的方式使用。MySQLdb 连接对象不是线程安全的
-- 这扩展到任何链接到包含ORM [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的单个连接的 SQLAlchemy 系统。有关如何在多线程环境中使用[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的背景信息，请参阅[Is
+- 这扩展到任何链接到包含 ORM [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的单个连接的 SQLAlchemy 系统。有关如何在多线程环境中使用[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的背景信息，请参阅[Is
 the session
 thread-safe?](orm_session_basics.html#session-faq-threadsafe)。
 
@@ -78,7 +78,7 @@ SQLAlchemy 目前假定 DBAPI 连接处于“非自动提交”模式 -
 
 连接池的连接返回行为的行为可以使用`reset_on_return`进行配置：
 
-    from sqlalchemy import create_engineplain
+    from sqlalchemy import create_engineplainplainplainplain
     from sqlalchemy.pool import QueuePool
 
     engine = create_engine('mysql://scott:tiger@localhost/myisam_database', pool=QueuePool(reset_on_return=False))
@@ -87,7 +87,7 @@ SQLAlchemy 目前假定 DBAPI 连接处于“非自动提交”模式 -
 
 除了`True`，`False`以外，`reset_on_return`还接受`commit`，`rollback` `None`设置为`commit`会导致 COMMIT，因为任何连接都会返回到池：
 
-    engine = create_engine('mssql://scott:tiger@mydsn', pool=QueuePool(reset_on_return='commit'))plainplainplainplain
+    engine = create_engine('mssql://scott:tiger@mydsn', pool=QueuePool(reset_on_return='commit'))plainplainplainplainplain
 
 I am using multiple connections with a SQLite database (typically to test transaction operation), and my test program is not working![¶](#i-am-using-multiple-connections-with-a-sqlite-database-typically-to-test-transaction-operation-and-my-test-program-is-not-working "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -106,7 +106,7 @@ PySQLite’s behavior.
 使用常规的 SA 引擎级连接，您可以通过[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")上的[`Connection.connection`](core_connections.html#sqlalchemy.engine.Connection.connection "sqlalchemy.engine.Connection.connection")属性获取 DBAPI 连接的池代理版本，真正的 DBAPI 连接可以调用`ConnectionFairy.connection`属性 -
 但不应该有任何需要访问非池代理的 DBAPI 连接，因为所有方法都通过以下方式代理：
 
-    engine = create_engine(...)
+    engine = create_engine(...)plainplain
     conn = engine.connect()
     conn.connection.<do DBAPI things>
     cursor = conn.connection.cursor(<DBAPI specific arguments..>)
@@ -115,7 +115,7 @@ PySQLite’s behavior.
 
 作为还原设置的替代方法，您可以在[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")或代理连接上调用[`Connection.detach()`](core_connections.html#sqlalchemy.engine.Connection.detach "sqlalchemy.engine.Connection.detach")方法，该方法将从池中断开连接当[`Connection.close()`](core_connections.html#sqlalchemy.engine.Connection.close "sqlalchemy.engine.Connection.close")被调用时它将被关闭并丢弃：
 
-    conn = engine.connect()
+    conn = engine.connect()plainplainplainplainplain
     conn.detach()  # detaches the DBAPI connection from the connection pool
     conn.connection.<go nuts>
     conn.close()  # connection is closed for real, the pool replaces it with a new connection
@@ -133,7 +133,7 @@ SQLAlchemy [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy
 
 3.  事件处理程序可以应用于连接池，用于测试跨进程边界共享的连接，并使其失效。这看起来像下面这样：
 
-        import osplainplain
+        import osplainplainplainplainplainplain
         import warnings
 
         from sqlalchemy import event
@@ -170,7 +170,7 @@ SQLAlchemy [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy
 
     这些事件一旦创建就会应用于[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")：
 
-        engine = create_engine("...")plainplain
+        engine = create_engine("...")plainplainplain
 
         add_engine_pidguard(engine)
 

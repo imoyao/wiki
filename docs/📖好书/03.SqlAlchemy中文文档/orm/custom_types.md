@@ -513,9 +513,9 @@ Server 的数据库连接器）会在小数位数过多的情况下传递 Decima
 
 ### 后端不可知的GUID类型[¶](#backend-agnostic-guid-type "Permalink to this headline")
 
-接收并返回Python
-uuid()对象。在其他后端使用Postgresql，CHAR（32）时使用PG
-UUID类型，并以字符串化的十六进制格式存储它们。如果需要，可以修改以在CHAR（16）中存储二进制文件：
+接收并返回 Python
+uuid()对象。在其他后端使用 Postgresql，CHAR（32）时使用 PG
+UUID 类型，并以字符串化的十六进制格式存储它们。如果需要，可以修改以在 CHAR（16）中存储二进制文件：
 
     from sqlalchemy.types import TypeDecorator, CHAR
     from sqlalchemy.dialects.postgresql import UUID
@@ -590,7 +590,7 @@ Tracking](orm_extensions_mutable.html)中的示例。
 替换现有类型的绑定/结果处理[¶](#replacing-the-bind-result-processing-of-existing-types "Permalink to this headline")
 --------------------------------------------------------------------------------------------------------------------
 
-使用[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")实现绑定/结果级别的大部分类型行为增强。对于需要替换由 SQLAlchemy 在 DBAPI 级别应用的特定处理的罕见场景，可以直接对 SQLAlchemy 类型进行子类化，并且`bind_processor()`或`result_processor()`这样做需要重写`adapt()`方法。此方法是 SQLAlchemy 在执行语句期间生成特定于 DBAPI 的类型行为的机制。覆盖它可以使用自定义类型的副本来代替 DBAPI 特定的类型。下面我们将[`types.TIME`](type_basics.html#sqlalchemy.types.TIME "sqlalchemy.types.TIME")类型进行子类化以具有自定义结果处理行为。`process()`函数将直接从DBAPI游标接收`value`：
+使用[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")实现绑定/结果级别的大部分类型行为增强。对于需要替换由 SQLAlchemy 在 DBAPI 级别应用的特定处理的罕见场景，可以直接对 SQLAlchemy 类型进行子类化，并且`bind_processor()`或`result_processor()`这样做需要重写`adapt()`方法。此方法是 SQLAlchemy 在执行语句期间生成特定于 DBAPI 的类型行为的机制。覆盖它可以使用自定义类型的副本来代替 DBAPI 特定的类型。下面我们将[`types.TIME`](type_basics.html#sqlalchemy.types.TIME "sqlalchemy.types.TIME")类型进行子类化以具有自定义结果处理行为。`process()`函数将直接从 DBAPI 游标接收`value`：
 
     class MySpecialTime(TIME):plain
         def __init__(self, special_argument):
@@ -624,7 +624,7 @@ Tracking](orm_extensions_mutable.html)中的示例。
 Bind/Result Processing of Existing
 Types](#replacing-processors)部分所见，SQLAlchemy 允许在将参数发送到语句时调用 Python 函数，如以及从数据库加载结果行时，以及在将数据发送到数据库或从数据库发送时对其应用转换。也可以定义 SQL 级别的转换。这里的基本原理是，只有关系数据库包含一系列必要的功能，才能在应用程序和持久性格式之间强制传入和传出数据。例子包括使用数据库定义的加密/解密函数，以及处理地理数据的存储过程。Postgis 对 Postgresql 的扩展包括一系列 SQL 函数，这些函数是将数据强制转换为特定格式所必需的。
 
-任何[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")，[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")或[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")子类都可以包含[`TypeEngine.bind_expression()`](type_api.html#sqlalchemy.types.TypeEngine.bind_expression "sqlalchemy.types.TypeEngine.bind_expression")和/或[`TypeEngine.column_expression()`](type_api.html#sqlalchemy.types.TypeEngine.column_expression "sqlalchemy.types.TypeEngine.column_expression")，当定义为返回非`None`值时，应返回要注入SQL语句的[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")表达式，参数或列表达式。例如，要构建将所有传入数据应用于 Postgis 函数`ST_GeomFromText`的所有传出值和函数`ST_AsText`的`Geometry`类型，我们可以创建我们自己的[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")的子类，它提供这些方法与[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结合使用：
+任何[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")，[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")或[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")子类都可以包含[`TypeEngine.bind_expression()`](type_api.html#sqlalchemy.types.TypeEngine.bind_expression "sqlalchemy.types.TypeEngine.bind_expression")和/或[`TypeEngine.column_expression()`](type_api.html#sqlalchemy.types.TypeEngine.column_expression "sqlalchemy.types.TypeEngine.column_expression")，当定义为返回非`None`值时，应返回要注入 SQL 语句的[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")表达式，参数或列表达式。例如，要构建将所有传入数据应用于 Postgis 函数`ST_GeomFromText`的所有传出值和函数`ST_AsText`的`Geometry`类型，我们可以创建我们自己的[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")的子类，它提供这些方法与[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结合使用：
 
     from sqlalchemy import func
     from sqlalchemy.types import UserDefinedType
@@ -649,7 +649,7 @@ Types](#replacing-processors)部分所见，SQLAlchemy 允许在将参数发送�
     print(select([geometry]).where(
       geometry.c.geom_data == 'LINESTRING(189412 252431,189631 259122)'))
 
-结果SQL根据需要嵌入两个函数。`ST_AsText` is applied
+结果 SQL 根据需要嵌入两个函数。`ST_AsText` is applied
 to the columns clause so that the return value is run through the
 function before passing into a result set, and
 `ST_GeomFromText` is run on the bound parameter so
@@ -664,14 +664,14 @@ method interacts with the mechanics of the compiler such that the SQL
 expression does not interfere with the labeling of the wrapped
 expression. 例如，如果我们针对表达式的[`label()`](sqlelement.html#sqlalchemy.sql.expression.label "sqlalchemy.sql.expression.label")呈现[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")，则将字符串标签移动到包装表达式的外部：
 
-    print(select([geometry.c.geom_data.label('my_data')]))
+    print(select([geometry.c.geom_data.label('my_data')]))plain
 
 输出：
 
-    SELECT ST_AsText(geometry.geom_data) AS my_data
+    SELECT ST_AsText(geometry.geom_data) AS my_dataplain
     FROM geometry
 
-对于直接对内置类型进行子类化的示例，我们继承[`postgresql.BYTEA`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.BYTEA "sqlalchemy.dialects.postgresql.BYTEA")以提供一个`PGPString`，它将利用Postgresql `pgcrypto`透明地扩展到encrpyt /解密值：
+对于直接对内置类型进行子类化的示例，我们继承[`postgresql.BYTEA`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.BYTEA "sqlalchemy.dialects.postgresql.BYTEA")以提供一个`PGPString`，它将利用 Postgresql `pgcrypto`透明地扩展到 encrpyt /解密值：
 
     from sqlalchemy import create_engine, String, select, func, \
             MetaData, Table, Column, type_coerce
@@ -790,9 +790,9 @@ onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.Colu
     >>> print(sometable.c.data.log(5))
     log(:log_1, :log_2)
 
-一元操作也是可能的。例如，要添加Postgresql阶乘运算符的实现，我们将[`UnaryExpression`](sqlelement.html#sqlalchemy.sql.expression.UnaryExpression "sqlalchemy.sql.expression.UnaryExpression")结构与[`custom_op`](sqlelement.html#sqlalchemy.sql.operators.custom_op "sqlalchemy.sql.operators.custom_op")结合起来以产生阶乘表达式：
+一元操作也是可能的。例如，要添加 Postgresql 阶乘运算符的实现，我们将[`UnaryExpression`](sqlelement.html#sqlalchemy.sql.expression.UnaryExpression "sqlalchemy.sql.expression.UnaryExpression")结构与[`custom_op`](sqlelement.html#sqlalchemy.sql.operators.custom_op "sqlalchemy.sql.operators.custom_op")结合起来以产生阶乘表达式：
 
-    from sqlalchemy import Integer
+    from sqlalchemy import Integerplain
     from sqlalchemy.sql.expression import UnaryExpression
     from sqlalchemy.sql import operators
 

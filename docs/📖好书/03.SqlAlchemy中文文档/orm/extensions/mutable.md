@@ -8,7 +8,6 @@ categories:
   - orm
   - extensions
 tags:
-  - 
 ---
 突变跟踪[¶](#module-sqlalchemy.ext.mutable "Permalink to this headline")
 ========================================================================
@@ -77,7 +76,7 @@ mixin 应用于普通的 Python 字典：
             dict.__delitem__(self, key)
             self.changed()
 
-上面的字典类采用子类化 Python 内置的`dict`的方法来生成一个dict子类，该子类通过`__setitem__`发送所有的突变事件。There are variants on this approach, such
+上面的字典类采用子类化 Python 内置的`dict`的方法来生成一个 dict 子类，该子类通过`__setitem__`发送所有的突变事件。There are variants on this approach, such
 as subclassing `UserDict.UserDict` or
 `collections.MutableMapping`; the part that’s
 important to this example is that the [`Mutable.changed()`](#sqlalchemy.ext.mutable.Mutable.changed "sqlalchemy.ext.mutable.Mutable.changed")
@@ -175,7 +174,7 @@ Column Types](composites.html#mapper-composite)中介绍。
 
 在版本 0.7 中更改： [`orm.composite()`](composites.html#sqlalchemy.orm.composite "sqlalchemy.orm.composite")的内部已大大简化，默认情况下不再启用就地突变检测；相反，用户定义的值必须自行检测更改并将其传播给所有拥有的父项。[`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")扩展提供了helper类[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")，它是[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")类中的轻微变体。
 
-与[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")一样，用户定义的组合类将[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")作为一个 mixin 的子类，并通过[`MutableComposite.changed()`](#sqlalchemy.ext.mutable.MutableComposite.changed "sqlalchemy.ext.mutable.MutableComposite.changed")方法。对于复合类，通常通过使用 Python 描述符（即`@property`）或者通过特殊的Python方法`__setattr__()`来进行检测。Below we expand upon the `Point` class introduced in [Composite Column
+与[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")一样，用户定义的组合类将[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")作为一个 mixin 的子类，并通过[`MutableComposite.changed()`](#sqlalchemy.ext.mutable.MutableComposite.changed "sqlalchemy.ext.mutable.MutableComposite.changed")方法。对于复合类，通常通过使用 Python 描述符（即`@property`）或者通过特殊的 Python 方法`__setattr__()`来进行检测。Below we expand upon the `Point` class introduced in [Composite Column
 Types](composites.html#mapper-composite) to subclass
 [`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")
 and to also route attribute set events via `__setattr__` to the [`MutableComposite.changed()`](#sqlalchemy.ext.mutable.MutableComposite.changed "sqlalchemy.ext.mutable.MutableComposite.changed")
@@ -235,7 +234,7 @@ that specifies our `Point` type.
 
 对`Vertex.start`或`Vertex.end`成员进行任何就地更改都会将该属性标记为父对象上的“脏”：
 
-    >>> from sqlalchemy.orm import Session
+    >>> from sqlalchemy.orm import Sessionplain
 
     >>> sess = Session()
     >>> v1 = Vertex(start=Point(3, 4), end=Point(12, 15))
@@ -473,7 +472,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableList`{.descname} [¶](#sqlalchemy.ext.mutable.MutableList "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")，`__builtin__.list`
 
-    实现[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")的列表类型。
+    实现[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")的列表类型。plain
 
     [`MutableList`](#sqlalchemy.ext.mutable.MutableList "sqlalchemy.ext.mutable.MutableList")对象实现了一个列表，当列表内容发生更改时（包括添加或删除值时），这些列表将发出更改事件到底层映射。
 

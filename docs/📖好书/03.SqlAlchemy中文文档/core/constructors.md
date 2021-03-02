@@ -17,7 +17,7 @@ tags:
 
 如果您需要在数据库加载的实例准备就绪之前对其进行设置，那么可以使用`@reconstructor`修饰器将方法标记为`__init__`每次加载或重建实例时，SQLAlchemy 都会在没有参数的情况下调用此方法。这对于重新创建通常在`__init__`中分配的瞬态属性非常有用：
 
-    from sqlalchemy import ormplainplainplainplainplainplainplain
+    from sqlalchemy import ormplainplainplainplainplainplainplainplainplainplainplain
 
     class MyMappedClass(object):
         def __init__(self, data):
@@ -40,7 +40,7 @@ normal 和`data`参数是必需的。当像`query(MyMappedClass).one()`那样在
 `sqlalchemy.orm。 T0> 重建 T1> （ T2>  FN  T3> ） T4> ¶ T5 >`{.descclassname}
 :   装饰方法作为'重建'钩子。
 
-    Designates a method as the “reconstructor”, an `__init__`-like method that will be called by the ORM after theplain
+    Designates a method as the “reconstructor”, an `__init__`-like method that will be called by the ORM after theplainplainplainplainplainplain
     instance has been loaded from the database or otherwise
     reconstituted.
 

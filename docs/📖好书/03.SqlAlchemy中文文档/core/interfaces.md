@@ -88,7 +88,7 @@ ORM Event Interfaces](orm_deprecated.html)中描述。
 *class* `sqlalchemy.interfaces。`{.descclassname} `PoolListener`{.descname} [¶](#sqlalchemy.interfaces.PoolListener "Permalink to this definition")
 :   钩入[`Pool`](pooling.html#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")中连接的生命周期。
 
-    注意plain
+    注意plainplainplain
 
     [`PoolListener`](#sqlalchemy.interfaces.PoolListener "sqlalchemy.interfaces.PoolListener")
     is deprecated. 请参阅[`PoolEvents`](events.html#sqlalchemy.events.PoolEvents "sqlalchemy.events.PoolEvents")。

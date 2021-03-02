@@ -14,7 +14,7 @@ tags:
 
 可以指示[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象从数据库中已有的相应数据库模式对象加载有关其自身的信息。这个过程被称为*反射*。在最简单的情况下，你只需要指定表名，一个[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象和`autoload=True`标志。如果[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")不是永久绑定的，还要添加`autoload_with`参数：
 
-    >>> messages = Table('messages', meta, autoload=True, autoload_with=engine)
+    >>> messages = Table('messages', meta, autoload=True, autoload_with=engine)plain
     >>> [c.name for c in messages.columns]
     ['message_id', 'message_name', 'date']
 
@@ -89,7 +89,7 @@ clear or delete all the rows in a database:
     for table in reversed(meta.sorted_tables):
         someengine.execute(table.delete())
 
-使用Inspector [¶](#fine-grained-reflection-with-inspector "Permalink to this headline")进行细粒度反射
+使用 Inspector [¶](#fine-grained-reflection-with-inspector "Permalink to this headline")进行细粒度反射
 -----------------------------------------------------------------------------------------------------
 
 还提供一个低级别接口，它提供了从给定数据库加载架构，表，列和约束描述列表的后端不可知系统。这被称为“检查员”：
@@ -433,6 +433,6 @@ clear or delete all the rows in a database:
 -   [`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")或[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的`.quote`设置的值
 -   特定[`Sequence`](defaults.html#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")与给定[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的关联
 
-关系数据库在很多情况下也以与 SQLAlchemy 中指定的格式不同的格式报告表格元数据。从反射返回的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象不能始终依赖于生成与原始 Python 定义的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象相同的DDL。None服务器端的默认值可以通过强制转换指令（通常Postgresql将包含一个`::<type>`强制转换）或不同于最初指定的引用模式返回。
+关系数据库在很多情况下也以与 SQLAlchemy 中指定的格式不同的格式报告表格元数据。从反射返回的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象不能始终依赖于生成与原始 Python 定义的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象相同的 DDL。None 服务器端的默认值可以通过强制转换指令（通常 Postgresql 将包含一个`::<type>`强制转换）或不同于最初指定的引用模式返回。
 
 另一类限制包括反射仅部分或尚未定义的模式结构。最近对反思的改进允许反映视图，索引和外键选项等内容。在撰写本文时，不会反映 CHECK 约束，表格注释和触发器等结构。

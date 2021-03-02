@@ -4,11 +4,10 @@ date: 2021-02-20 22:41:43
 permalink: /sqlalchemy/orm/extensions/instrumentation/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
   - extensions
 tags:
-  - 
 ---
 替代类仪器[¶](#module-sqlalchemy.ext.instrumentation "Permalink to this headline")
 ==================================================================================
@@ -27,13 +26,13 @@ Instrumentation](examples.html#examples-instrumentation)。
 在版本 0.8 中更改： [`sqlalchemy.orm.instrumentation`](events.html#module-sqlalchemy.orm.instrumentation "sqlalchemy.orm.instrumentation")被拆分出来，以便将与非标准检测相关的所有功能移出到[`sqlalchemy.ext.instrumentation`](#module-sqlalchemy.ext.instrumentation "sqlalchemy.ext.instrumentation")导入时，模块将自身安装在[`sqlalchemy.orm.instrumentation`](events.html#module-sqlalchemy.orm.instrumentation "sqlalchemy.orm.instrumentation")中，以便生效，包括识别映射类上的`__sa_instrumentation_manager__`以及[`instrumentation_finders`](#sqlalchemy.ext.instrumentation.instrumentation_finders "sqlalchemy.ext.instrumentation.instrumentation_finders")
 \>被用来确定类仪器的分辨率。
 
-API参考[¶](#api-reference "Permalink to this headline")
+API 参考[¶](#api-reference "Permalink to this headline")
 -------------------------------------------------------
 
 `sqlalchemy.ext.instrumentation。`{.descclassname} `INSTRUMENTATION_MANAGER`{.descname} *='\_\_sa\_instrumentation\_manager \_\_'* [¶](#sqlalchemy.ext.instrumentation.INSTRUMENTATION_MANAGER "Permalink to this definition")
 :   属性，在存在于映射类上时选择自定义检测。
 
-    允许类指定一个稍微或非常不同的技术来跟踪对映射的属性和集合所做的更改。
+    允许类指定一个稍微或非常不同的技术来跟踪对映射的属性和集合所做的更改。plain
 
     在给定的对象继承层次结构中只允许使用一个工具实现。
 

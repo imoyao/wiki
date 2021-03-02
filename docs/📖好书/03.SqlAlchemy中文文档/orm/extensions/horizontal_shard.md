@@ -25,7 +25,7 @@ API 文档[¶](#api-documentation "Permalink to this headline")
  *class*`sqlalchemy.ext.horizontal_shard.`{.descclassname}`ShardedSession`{.descname}(*shard\_chooser*, *id\_chooser*, *query\_chooser*, *shards=None*, *query\_cls=\<class 'sqlalchemy.ext.horizontal\_shard.ShardedQuery'\>*, *\*\*kwargs*)[¶](#sqlalchemy.ext.horizontal_shard.ShardedSession "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.session.Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 
-     `__init__`{.descname}(*shard\_chooser*, *id\_chooser*, *query\_chooser*, *shards=None*, *query\_cls=\<class 'sqlalchemy.ext.horizontal\_shard.ShardedQuery'\>*, *\*\*kwargs*)[¶](#sqlalchemy.ext.horizontal_shard.ShardedSession.__init__ "Permalink to this definition")plainplainplainplainplainplain
+     `__init__`{.descname}(*shard\_chooser*, *id\_chooser*, *query\_chooser*, *shards=None*, *query\_cls=\<class 'sqlalchemy.ext.horizontal\_shard.ShardedQuery'\>*, *\*\*kwargs*)[¶](#sqlalchemy.ext.horizontal_shard.ShardedSession.__init__ "Permalink to this definition")plainplainplainplainplainplainplainplainplainplain
     :   构建ShardedSession。
 
         参数：
@@ -49,7 +49,7 @@ API 文档[¶](#api-documentation "Permalink to this headline")
  *class*`sqlalchemy.ext.horizontal_shard.`{.descclassname}`ShardedQuery`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.ext.horizontal_shard.ShardedQuery "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.query.Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")
 
-    ` set_shard  T0> （ T1>  shard_id  T2> ） T3> ¶ T4>`{.descname}plainplainplainplain
+    ` set_shard  T0> （ T1>  shard_id  T2> ） T3> ¶ T4>`{.descname}plainplainplainplainplainplainplainplainplainplain
     :   返回一个新的查询，限于单个分片ID。
 
         无论其他状态如何，返回查询的所有后续操作都将针对单个分片。

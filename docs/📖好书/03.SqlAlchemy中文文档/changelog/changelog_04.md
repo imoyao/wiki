@@ -76,7 +76,7 @@ tags:
 
 -   **[orm]**在 scoped\_session 方法中添加了“add()”和“add\_all()”。0.4.7 的解决方法：
 
-        from sqlalchemy.orm.scoping import ScopedSession, instrumentplainplainplainplain
+        from sqlalchemy.orm.scoping import ScopedSession, instrumentplainplainplainplainplainplainplainplainplainplain
         setattr(ScopedSession, "add", instrument("add"))
         setattr(ScopedSession, "add_all", instrument("add_all"))
 
@@ -339,7 +339,7 @@ tags:
 
     新方法还会自动允许急切加载为子类（如果存在）工作，例如：
 
-        sess.query(Company).options(plainplainplainplainplain
+        sess.query(Company).options(plainplainplainplainplainplainplainplainplain
          eagerload_all(
         ))
 
@@ -1151,7 +1151,7 @@ tags:
     @converter method to translate objects used in “bulk” assignment
     into a stream of values, as in:
 
-        obj.col =plainplainplainplainplainplainplainplainplainplainplain
+        obj.col =plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
         # or
         obj.dictcol = {'foo': newval1, 'bar': newval2}
 
@@ -2248,7 +2248,7 @@ tags:
     proxyengine 暂时被移除，等待实际工作替换。[¶](#change-3b532a60bc0029ec354daf934d3a927a)
 
 -   **[extensions]** SelectResults 已被 Query 取代。SelectResults /
-    SelectResultsExt 仍然存在，但只是返回一个稍微修改的 Query 对象以实现向后兼容。来自 SelectResults 的 join\_to()方法不再存在，需要使用join()。[¶](#change-4365514b9b0ac1a9bf2782c1798256a6)
+    SelectResultsExt 仍然存在，但只是返回一个稍微修改的 Query 对象以实现向后兼容。来自 SelectResults 的 join\_to()方法不再存在，需要使用 join()。[¶](#change-4365514b9b0ac1a9bf2782c1798256a6)
 
 -   **[postgres]**添加了使用 postgres 数组数据类型的 PGArray 数据类型。[¶](#change-bf48335461a856fcc94af29e957c22d2)
 

@@ -14,7 +14,7 @@ tags:
 
 支持Oracle数据库。
 
-DBAPI支持[¶](#dialect-oracle "Permalink to this headline")
+DBAPI 支持[¶](#dialect-oracle "Permalink to this headline")
 ----------------------------------------------------------
 
 以下 dialect / DBAPI 选项可用。请参阅各个 DBAPI 部分的连接信息。
@@ -31,7 +31,7 @@ in use.
 
 -   `use_ansi` - 使用 ANSI JOIN 结构（请参阅 Oracle
     8 一节）。默认为`True`。如果`False`，则 Oracle-8 兼容构造用于连接。
--   `optimize_limits` - 默认为`False`。参见LIMIT / OFFSET部分。
+-   `optimize_limits` - 默认为`False`。参见 LIMIT / OFFSET 部分。
 -   `use_binds_for_limits` - 默认为`True`。参见 LIMIT / OFFSET 部分。
 
 自动增量行为[¶](#auto-increment-behavior "Permalink to this headline")
@@ -40,7 +40,7 @@ in use.
 包含整数主键的 SQLAlchemy 表对象通常被认为具有“自动增量”行为，这意味着它们可以在 INSERT 时生成它们自己的主键值。由于 Oracle 没有“自动增量”功能，SQLAlchemy 依赖序列来生成这些值。With
 the Oracle dialect, *a sequence must always be explicitly specified to
 enable autoincrement*.
-这与假定使用具有自动增量功能的数据库的大多数文档示例不同。要指定序列，请使用传递给Column构造的sqlalchemy.schema.Sequence对象：
+这与假定使用具有自动增量功能的数据库的大多数文档示例不同。要指定序列，请使用传递给 Column 构造的 sqlalchemy.schema.Sequence 对象：
 
     t = Table('mytable', metadata,plain
           Column('id', Integer, Sequence('id_seq'), primary_key=True),
@@ -74,13 +74,13 @@ exact methodology is taken from
 
 -   “FIRST
     ROWS()”优化关键字默认不使用。要启用此优化指令，请将`optimize_limits=True`指定为[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")。
--   为极限/偏移量传递的值将作为绑定参数发送。一些用户已经观察到，如果值作为绑定发送并且不是字面呈现，Oracle会产生一个糟糕的查询计划。要在SQL语句中逐字地显示限制/偏移值，请将`use_binds_for_limits=False`指定为[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")。
+-   为极限/偏移量传递的值将作为绑定参数发送。一些用户已经观察到，如果值作为绑定发送并且不是字面呈现，Oracle 会产生一个糟糕的查询计划。要在 SQL 语句中逐字地显示限制/偏移值，请将`use_binds_for_limits=False`指定为[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")。
 
 当使用完全不同的窗口查询方法（即ROW\_NUMBER()OVER（ORDER
-BY））来提供LIMIT /
-OFFSET（注意大多数用户不会观察到此情况）时，某些用户报告了更好的性能。为了适应这种情况，用于LIMIT
+BY））来提供 LIMIT /
+OFFSET（注意大多数用户不会观察到此情况）时，某些用户报告了更好的性能。为了适应这种情况，用于 LIMIT
 /
-OFFSET的方法可以完全替换。请参阅[http://www.sqlalchemy.org/trac/wiki/UsageRecipes/WindowFunctionsByDefault](http://www.sqlalchemy.org/trac/wiki/UsageRecipes/WindowFunctionsByDefault)中的配方，该配置安装了一个选择编译器，该选择编译器使用窗口函数替代极限/偏移量的生成。
+OFFSET 的方法可以完全替换。请参阅[http://www.sqlalchemy.org/trac/wiki/UsageRecipes/WindowFunctionsByDefault](http://www.sqlalchemy.org/trac/wiki/UsageRecipes/WindowFunctionsByDefault)中的配方，该配置安装了一个选择编译器，该选择编译器使用窗口函数替代极限/偏移量的生成。
 
 返回支持[¶](#returning-support "Permalink to this headline")
 ------------------------------------------------------------
@@ -90,12 +90,12 @@ Support](#cx-oracle-returning)）。
 
 SQLAlchemy 的“隐式返回”功能通常在 Oracle 后端启用，它在 INSERT 中使用 RETURNING，有时使用 UPDATE 语句来获取新生成的主键值和其他 SQL 默认值和表达式。默认情况下，“隐式返回”通常只会获取嵌入到 INSERT 中的单个`nextval(some_seq)`表达式的值，以便在 INSERT 语句中递增序列并同时返回值。要全面禁用此功能，请将`implicit_returning=False`指定为[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")：
 
-    engine = create_engine("oracle://scott:tiger@dsn",
+    engine = create_engine("oracle://scott:tiger@dsn",plainplain
                            implicit_returning=False)
 
 隐式返回也可作为表选项在逐个表的基础上禁用：
 
-    # Core Table
+    # Core Tableplainplain
     my_table = Table("my_table", metadata, ..., implicit_returning=False)
 
 
@@ -112,8 +112,8 @@ SQLAlchemy 的“隐式返回”功能通常在 Oracle 后端启用，它在 INS
 ON UPDATE CASCADE [¶](#on-update-cascade "Permalink to this headline")
 ----------------------------------------------------------------------
 
-Oracle没有本地ON UPDATE
-CASCADE功能。基于触发器的解决方案可在[http://asktom.oracle.com/tkyte/update\_cascade/index.html](http://asktom.oracle.com/tkyte/update_cascade/index.html)中找到。
+Oracle 没有本地 ON UPDATE
+CASCADE 功能。基于触发器的解决方案可在[http://asktom.oracle.com/tkyte/update\_cascade/index.html](http://asktom.oracle.com/tkyte/update_cascade/index.html)中找到。
 
 使用 SQLAlchemy ORM 时，ORM 手动发布级联更新的能力有限 - 使用“deferrable =
 True”，initial
@@ -127,7 +127,7 @@ Oracle 8兼容性[¶](#oracle-8-compatibility "Permalink to this headline")
 
 -   use\_ansi 标志被设置为 False。这具有将所有 JOIN 短语转换为 WHERE 子句的效果，并且在 LEFT
     OUTER JOIN 使用 Oracle 的（+）运算符的情况下。
--   当使用[`Unicode`](core_type_basics.html#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")时，NVARCHAR2和NCLOB数据类型不再生成为DDL
+-   当使用[`Unicode`](core_type_basics.html#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")时，NVARCHAR2 和 NCLOB 数据类型不再生成为 DDL
     - 而是发出 VARCHAR2 和 CLOB。这是因为这些类型在 Oracle
     8 上似乎不能正常工作，即使它们可用。[`NVARCHAR`](core_type_basics.html#sqlalchemy.types.NVARCHAR "sqlalchemy.types.NVARCHAR")和[`NCLOB`](#sqlalchemy.dialects.oracle.NCLOB "sqlalchemy.dialects.oracle.NCLOB")类型将始终生成 NVARCHAR2 和 NCLOB。
 -   在使用 cx\_oracle 时，“native
@@ -148,7 +148,7 @@ construct:
                                 autoload_with=some_engine,
                                 oracle_resolve_synonyms=True)
 
-设置此标志时，不仅在`ALL_TABLES`视图中搜索给定的名称（如`some_table`），还会在`ALL_SYNONYMS`如果同义词位于并指向DBLINK，则oracle方言知道如何使用DBLINK语法（例如`@dblink`）查找表的信息。
+设置此标志时，不仅在`ALL_TABLES`视图中搜索给定的名称（如`some_table`），还会在`ALL_SYNONYMS`如果同义词位于并指向 DBLINK，则 oracle 方言知道如何使用 DBLINK 语法（例如`@dblink`）查找表的信息。
 
 `oracle_resolve_synonyms` is accepted wherever
 reflection arguments are accepted, including methods such as
@@ -171,7 +171,7 @@ CREATE TABLE短语通过与[`Table`](core_metadata.html#sqlalchemy.schema.Table 
 
 -   `ON COMMIT`：
 
-        Table(
+        Table(plain
             "some_table", metadata, ...,
             prefixes=['GLOBAL TEMPORARY'], oracle_on_commit='PRESERVE ROWS')
 
@@ -188,7 +188,7 @@ CREATE TABLE短语通过与[`Table`](core_metadata.html#sqlalchemy.schema.Table 
         The ``oracle_compress`` parameter accepts either an integer compression
         level, or ``True`` to use the default compression level.
 
-版本1.0.0中的新功能
+版本 1.0.0 中的新功能
 
 Oracle特定索引选项[¶](#oracle-specific-index-options "Permalink to this headline")
 ----------------------------------------------------------------------------------
@@ -199,13 +199,13 @@ Oracle特定索引选项[¶](#oracle-specific-index-options "Permalink to this h
 
     Index('my_index', my_table.c.data, oracle_bitmap=True)
 
-位图索引不能是唯一的，也不能被压缩。SQLAlchemy不会检查这些限制，只有数据库会。
+位图索引不能是唯一的，也不能被压缩。SQLAlchemy 不会检查这些限制，只有数据库会。
 
-版本1.0.0中的新功能
+版本 1.0.0 中的新功能
 
 ### 索引压缩[¶](#index-compression "Permalink to this headline")
 
-对于包含大量重复值的索引，Oracle具有更高效的存储模式。使用`oracle_compress`参数打开密钥压缩：
+对于包含大量重复值的索引，Oracle 具有更高效的存储模式。使用`oracle_compress`参数打开密钥压缩：
 
     Index('my_index', my_table.c.data, oracle_compress=True)
 
@@ -248,7 +248,7 @@ Oracle数据类型[¶](#oracle-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.oracle。`{.descclassname} `DATE`{.descname} （ *timezone = False* ） T5\> [¶ T6\>](#sqlalchemy.dialects.oracle.DATE "Permalink to this definition")
 :   Bases: [`sqlalchemy.types.DateTime`](core_type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")
 
-    提供oracle DATE类型。
+    提供oracle DATE类型。plain
 
     这种类型没有特殊的Python行为，除了它的子类[`types.DateTime`](core_type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")；这是为了适应Oracle
     `DATE`类型支持时间值的事实。
@@ -274,7 +274,7 @@ Oracle数据类型[¶](#oracle-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.oracle。`{.descclassname} `INTERVAL`{.descname} （ *day\_precision =无*，*second\_precision =无 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.oracle.INTERVAL "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-     `__init__`{.descname}(*day\_precision=None*, *second\_precision=None*)[¶](#sqlalchemy.dialects.oracle.INTERVAL.__init__ "Permalink to this definition")
+     `__init__`{.descname}(*day\_precision=None*, *second\_precision=None*)[¶](#sqlalchemy.dialects.oracle.INTERVAL.__init__ "Permalink to this definition")plain
     :   构建一个INTERVAL。
 
         请注意，目前仅支持DAY TO
@@ -353,7 +353,7 @@ Oracle数据类型[¶](#oracle-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.oracle.`{.descclassname}`LONG`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.LONG "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")
 
-     `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.LONG.__init__ "Permalink to this definition")
+     `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.LONG.__init__ "Permalink to this definition")plain
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.String.__init__ "sqlalchemy.types.String.__init__")
         *method of* [`String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
 
@@ -450,15 +450,15 @@ cx\_Oracle [¶ T0\>](#module-sqlalchemy.dialects.oracle.cx_oracle "Permalink to 
     Numerics](#cx-oracle-numeric)。
 
 -   `exclude_setinputsizes` - 要从“auto
-    setinputsizes”功能中排除的字符串DBAPI类型名称的元组或列表。此处的类型名称必须与“cx\_Oracle”模块名称空间中找到的DBAPI类型匹配，例如cx\_Oracle.UNICODE，cx\_Oracle.NCLOB等。默认为`（STRING， UNICODE）`。
+    setinputsizes”功能中排除的字符串DBAPI类型名称的元组或列表。此处的类型名称必须与“cx\_Oracle”模块名称空间中找到的 DBAPI 类型匹配，例如 cx\_Oracle.UNICODE，cx\_Oracle.NCLOB 等。默认为`（STRING， UNICODE）`。
 
-    版本 0.8 中的新功能可以通过 exclude\_setinputsizes属性从auto\_setinputsizes 功能中排除特定的 DBAPI 类型。
+    版本 0.8 中的新功能可以通过 exclude\_setinputsizes 属性从 auto\_setinputsizes 功能中排除特定的 DBAPI 类型。
 
 -   `mode` -
     给出 SYSDBA 或 SYSOPER 的字符串值，或者一个整数值。该值仅作为 URL 查询字符串参数使用。
 
 -   `threaded` -
-    启用对cx\_oracle连接的多线程访问。默认为`True`。请注意，这是cx\_Oracle DBAPI 本身的相反默认值。
+    启用对 cx\_oracle 连接的多线程访问。默认为`True`。请注意，这是 cx\_Oracle DBAPI 本身的相反默认值。
 
 -   `service_name` -
     使用连接字符串（DSN）与`SERVICE_NAME`而不是`SID`的选项。当给出`database`部分时，不能传递它。例如。
@@ -499,7 +499,7 @@ cx\_Oracle SQLAlchemy 方言提供了两种不同的选项，用于在 Python
 要在Python
 2下重新启用cx\_Oracle的输出类型处理程序，可以将`coerce_to_unicode=True`标志（0.9.4中的新值）传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")：
 
-    engine = create_engine("oracle+cx_oracle://dsn", coerce_to_unicode=True)
+    engine = create_engine("oracle+cx_oracle://dsn", coerce_to_unicode=True)plain
 
 或者，如果不使用 cx\_Oracle的本地处理程序，则可以使用[`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")功能来运行纯字符串 SQL 语句并以 Python
 2 unicode 的形式获取`VARCHAR`
@@ -508,7 +508,7 @@ cx\_Oracle SQLAlchemy 方言提供了两种不同的选项，用于在 Python
     result = conn.execute(
         text("select username from user").columns(username=Unicode))
 
-版本0.9.2更改： cx\_Oracle 的 outputtypehandlers 不再用于 Python
+版本 0.9.2 更改： cx\_Oracle 的 outputtypehandlers 不再用于 Python
 2 中非 Unicode 数据类型的 unicode 结果，因为它们被确定为主要的性能瓶颈。而是使用 SQLAlchemy 自己的 unicode 工具。
 
 版本0.9.4新增：添加了`coerce_to_unicode`标志，以重新启用cx\_Oracle 的 outputtypehandler 并恢复到 0.9.2 之前的行为。
@@ -522,7 +522,7 @@ API 的支持，因此其他列表达式将以非确定的方式导致问题。
 因此，通过完全禁用 RETURNING 支持可以提高稳定性；否则 SQLAlchemy 将使用 RETURNING 来获取新序列生成的主键。如[RETURNING
 Support](#oracle-returning)所示：
 
-    engine = create_engine("oracle://scott:tiger@dsn",plainplain
+    engine = create_engine("oracle://scott:tiger@dsn",plainplainplain
                            implicit_returning=False)
 
 也可以看看
@@ -545,7 +545,7 @@ LOB。SQLAlchemy 将它们转换为字符串，以便 Binary 类型的接口与�
 两阶段事务是使用 XA 事务实现的，并且从 SQLAlchemy
 0.8.0b2,0.7.10 开始，已知以最新版本的 cx\_Oracle的基本工作方式工作。但是，该机制尚未被认为是有力的，应该仍然被视为实验性的。
 
-特别是最近5.1.2的cx\_Oracle
+特别是最近 5.1.2 的 cx\_Oracle
 DBAPI 有一个关于两个阶段的错误，这个阶段阻止了一个特定的 DBAPI 连接在准备好的事务中以及传统的 DBAPI 使用模式中始终可用；因此，一旦通过`Connection.begin_prepared()`使用了特定的连接，底层 DBAPI 连接的所有后续用法都必须位于准备事务的上下文内。
 
 [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的默认行为是维护一个DBAPI连接池。因此，由于上述故障，已在两阶段操作中使用并返回到池的DBAPI连接在非两阶段上下文中将不可用。为了避免这种情况，应用程序可以做出以下几种选择之一：
@@ -559,7 +559,7 @@ DBAPI 有一个关于两个阶段的错误，这个阶段阻止了一个特定�
 ### 精确数字[¶](#precision-numerics "Permalink to this headline")
 
 SQLAlchemy 方言经历了很多步骤以确保十进制数字的发送和接收完全准确。可调用的“outputtypehandler”与每个检测数字类型并将其作为字符串值接收的 cx\_oracle 连接对象相关联，而不是直接接收 Python
-`float`，然后将其传递给 Python `Decimal`在 cx\_oracle方言下的[`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")和[`Float`](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")类型意识到这种行为，并且强制`Decimal`到`float`如果`asdecimal`标志为`False`（默认在[`Float`](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")，[`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")上可选）。
+`float`，然后将其传递给 Python `Decimal`在 cx\_oracle 方言下的[`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")和[`Float`](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")类型意识到这种行为，并且强制`Decimal`到`float`如果`asdecimal`标志为`False`（默认在[`Float`](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")，[`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")上可选）。
 
 由于处理程序首先在所有情况下都强制`Decimal`，该功能会显着影响性能。如果不需要精度数字，则可以通过将标志`coerce_to_decimal=False`传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")来禁用十进制处理：
 
@@ -582,8 +582,8 @@ ints and not `Decimal` objects, and that any kind of
 floating point value is received as a string so that there is no
 floating point loss of precision.
 
-“存在小数点”逻辑本身对区域设置也很敏感。在[OCI](http://www.oracle.com/technetwork/database/features/oci/index.html)下，这由NLS\_LANG 环境变量控制。首次连接时，方言进行测试以确定当前的“十进制”字符，对于欧洲语言环境，该字符可以是逗号“，”。从这一点开始，outputtypehandler 使用该字符来表示小数点。请注意，在处理带有不使用句点“。”作为十进制字符的区域设置的数字时，需要 cx\_oracle
-5.0.3或更高版本。
+“存在小数点”逻辑本身对区域设置也很敏感。在[OCI](http://www.oracle.com/technetwork/database/features/oci/index.html)下，这由 NLS\_LANG 环境变量控制。首次连接时，方言进行测试以确定当前的“十进制”字符，对于欧洲语言环境，该字符可以是逗号“，”。从这一点开始，outputtypehandler 使用该字符来表示小数点。请注意，在处理带有不使用句点“。”作为十进制字符的区域设置的数字时，需要 cx\_oracle
+5.0.3 或更高版本。
 
 在版本 0.6.6 中更改：
 outputtypehandler 支持 locale 使用逗号“，”字符表示小数点的情况。

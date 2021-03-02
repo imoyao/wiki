@@ -8,14 +8,13 @@ categories:
   - orm
   - extensions
 tags:
-  - 
 ---
 自动地图[¶ T0\>](#module-sqlalchemy.ext.automap "Permalink to this headline")
 =============================================================================
 
 定义对[`sqlalchemy.ext.declarative`](declarative_api.html#module-sqlalchemy.ext.declarative "sqlalchemy.ext.declarative")系统的扩展，该系统自动从数据库模式生成映射类和关系，但通常不一定反映出来。
 
-版本0.9.1新增：添加了[`sqlalchemy.ext.automap`](#module-sqlalchemy.ext.automap "sqlalchemy.ext.automap")。
+版本 0.9.1 新增：添加了[`sqlalchemy.ext.automap`](#module-sqlalchemy.ext.automap "sqlalchemy.ext.automap")。
 
 It is hoped that the [`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")
 system provides a quick and modernized solution to the problem that the
@@ -226,7 +225,7 @@ case”方案和集合名称的“pluralizer”：
     flag is set to `True` in the set of relationship
     keyword arguments. 请注意，并非所有后端都支持 ON DELETE 的反射。
 
-    版本1.0.0中的新功能： -
+    版本 1.0.0 中的新功能： -
     当生成一对多关系并建立默认级联`all时，automap将检测不可为空的外键约束， t2 > delete-orphan`如果是的话；此外，如果约束指定`CASCADE`的[`ForeignKeyConstraint.ondelete`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint.params.ondelete "sqlalchemy.schema.ForeignKeyConstraint")为非空或`SET  tt> NULL / t9>表示可空列，还添加passive_deletes=True`选项。
 
 5.  关系的名称是使用[`AutomapBase.prepare.name_for_scalar_relationship`](#sqlalchemy.ext.automap.AutomapBase.prepare.params.name_for_scalar_relationship "sqlalchemy.ext.automap.AutomapBase.prepare")和[`AutomapBase.prepare.name_for_collection_relationship`](#sqlalchemy.ext.automap.AutomapBase.prepare.params.name_for_collection_relationship "sqlalchemy.ext.automap.AutomapBase.prepare")可调用函数确定的。需要注意的是，默认关系命名从**实际类名称**派生名称。如果您通过声明某个特定类的明确名称，或者指定了一个备用类命名方案，那么这就是从中派生关系名称的名称。
@@ -303,7 +302,7 @@ generate many-to-many relationships, e.g. those which contain a
 
 [`sqlalchemy.ext.automap`](#module-sqlalchemy.ext.automap "sqlalchemy.ext.automap")不会在两个处于继承关系的类之间生成任何关系。也就是说，有两个等级给出如下：
 
-    class Employee(Base):plain
+    class Employee(Base):plainplain
         __tablename__ = 'employee'
         id = Column(Integer, primary_key=True)
         type = Column(String(50))
@@ -381,7 +380,7 @@ generate many-to-many relationships, e.g. those which contain a
 Distinctly from Attribute
 Names](mapping_columns.html#mapper-column-distinct-names)区别命名列的方法修改，通过将列明确分配给新名称：
 
-    Base = automap_base()
+    Base = automap_base()plainplain
 
     class TableB(Base):
         __tablename__ = 'table_b'
@@ -555,7 +554,7 @@ API参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.ext.automap.`{.descclassname}`name_for_scalar_relationship`{.descname}(*base*, *local\_cls*, *referred\_cls*, *constraint*)[¶](#sqlalchemy.ext.automap.name_for_scalar_relationship "Permalink to this definition")
 :   对于标量对象引用，返回应该用于从一个类引用到另一个类的属性名称。
 
-    默认的实现是：plain
+    默认的实现是：plainplain
 
         return referred_cls.__name__.lower()
 
@@ -579,7 +578,7 @@ API参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.ext.automap.`{.descclassname}`name_for_collection_relationship`{.descname}(*base*, *local\_cls*, *referred\_cls*, *constraint*)[¶](#sqlalchemy.ext.automap.name_for_collection_relationship "Permalink to this definition")
 :   返回应该用于从一个类引用到另一个类的属性名称作为集合引用。
 
-    默认的实现是：plain
+    默认的实现是：plainplain
 
         return referred_cls.__name__.lower() + "_collection"
 

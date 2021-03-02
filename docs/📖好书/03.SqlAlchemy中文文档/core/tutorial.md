@@ -1,5 +1,5 @@
 ---
-title: SQL表达式语言教程
+title: SQL 表达式语言教程
 date: 2021-02-20 22:41:36
 permalink: /sqlalchemy/core/tutorial/
 categories:
@@ -17,7 +17,7 @@ SQLAlchemy 表达式语言提供了一个使用 Python 结构表示关系数据�
 Relational
 Tutorial](orm_tutorial.html)中引入的ORM呈现高层次和抽象的使用模式，这本身就是表达式语言的应用使用的一个例子，表达式语言提供了一个表示基元关系数据库的构造直接没有意见。
 
-虽然ORM和表达式语言的使用模式之间存在重叠，但它们的相似之处却比最初出现时更为肤浅。一个从用户定义的[域模型](http://en.wikipedia.org/wiki/Domain_model)的角度接近数据的结构和内容，该模型透明地从其底层存储模型中持久保留并刷新。另一种方法从文字模式和 SQL 表达式表达式的角度来看，它们被显式地组合成数据库单独消费的消息。
+虽然 ORM 和表达式语言的使用模式之间存在重叠，但它们的相似之处却比最初出现时更为肤浅。一个从用户定义的[域模型](http://en.wikipedia.org/wiki/Domain_model)的角度接近数据的结构和内容，该模型透明地从其底层存储模型中持久保留并刷新。另一种方法从文字模式和 SQL 表达式表达式的角度来看，它们被显式地组合成数据库单独消费的消息。
 
 虽然应用程序需要定义自己的系统，将应用程序概念转换为单独的数据库消息和单个数据库结果集，但是可以使用表达式语言专门构建成功的应用程序。或者，使用 ORM 构建的应用程序可以在高级方案中直接在需要特定数据库交互的特定区域中偶尔使用表达式语言。
 
@@ -31,7 +31,7 @@ return value.本教程没有先决条件。
 
 快速检查以确认我们至少处于SQLAlchemy的**版本 1.1**：
 
-    >>> import sqlalchemy
+    >>> import sqlalchemyplain
     >>> sqlalchemy.__version__  # doctest: +SKIP
     1.1.0
 
@@ -40,10 +40,10 @@ return value.本教程没有先决条件。
 
 对于本教程，我们将使用一个仅内存的SQLite数据库。这是一种简单的测试方法，无需在任何地方定义实际的数据库。要连接，我们使用[`create_engine()`](engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")：
 
-    >>> from sqlalchemy import create_engine
+    >>> from sqlalchemy import create_engineplain
     >>> engine = create_engine('sqlite:///:memory:', echo=True)
 
-`echo`标志是设置 SQLAlchemy 日志记录的快捷方式，它是通过 Python 的标准`日志`模块完成的。启用它，我们将看到生成的所有 SQL。如果您正在学习本教程并希望产生更少的输出，请将其设置为`False`。本教程将把SQL格式化为一个弹出窗口，所以它不会妨碍我们；只需点击“SQL”链接即可查看正在生成的内容。
+`echo`标志是设置 SQLAlchemy 日志记录的快捷方式，它是通过 Python 的标准`日志`模块完成的。启用它，我们将看到生成的所有 SQL。如果您正在学习本教程并希望产生更少的输出，请将其设置为`False`。本教程将把 SQL 格式化为一个弹出窗口，所以它不会妨碍我们；只需点击“SQL”链接即可查看正在生成的内容。
 
 [`create_engine()`](engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")的返回值是[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的一个实例，它表示数据库的核心接口，通过处理方言数据库和[DBAPI](glossary.html#term-dbapi)的使用细节。在这种情况下，SQLite 方言将向 Python 内置的`sqlite3`模块解释指令。
 
@@ -67,9 +67,9 @@ database, which is then used to emit the SQL.
 
 SQL表达式语言在大多数情况下针对表列构造表达式。在SQLAlchemy中，一个列通常由一个名为[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的对象表示，并且在所有情况下，一个[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")都与一个[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")关联。[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象及其关联的子对象的集合称为**数据库元数据**。在本教程中，我们将明确地列出几个[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，但是请注意，SA还可以从现有数据库中自动“导入”整个[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象集合（此过程称为**表反射**）。
 
-我们使用[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")结构将所有表定义在名为[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")的目录中，类似于常规的SQL
+我们使用[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")结构将所有表定义在名为[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")的目录中，类似于常规的 SQL
 CREATE
-TABLE语句。我们将创建两个表，其中一个表示应用程序中的“用户”，另一个表示“users”表中每行的零个或多个“电子邮件地址”：
+TABLE 语句。我们将创建两个表，其中一个表示应用程序中的“用户”，另一个表示“users”表中每行的零个或多个“电子邮件地址”：
 
     >>> from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey
     >>> metadata = MetaData()
@@ -174,7 +174,7 @@ automatically generates bind parameters for them.
     >>> conn
     <sqlalchemy.engine.base.Connection object at 0x...>
 
-[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象表示主动检出的DBAPI连接资源。让我们将[`Insert`](dml.html#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")对象并看看会发生什么：
+[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象表示主动检出的 DBAPI 连接资源。让我们将[`Insert`](dml.html#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")对象并看看会发生什么：
 
     >>> result = conn.execute(ins)
     INSERT INTO users (name, fullname) VALUES (?, ?)
@@ -189,7 +189,7 @@ automatically generates bind parameters for them.
     >>> str(ins)
     'INSERT INTO users (name, fullname) VALUES (?, ?)'
 
-当我们调用`execute()`时，我们得到的`result`变量​​怎么样？由于 SQLAlchemy [`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象引用了DBAPI连接，因此称为[`ResultProxy`](connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")对象的结果与DBAPI游标对象类似。在INSERT的情况下，我们可以从中获取重要信息，例如使用[`ResultProxy.inserted_primary_key`](connections.html#sqlalchemy.engine.ResultProxy.inserted_primary_key "sqlalchemy.engine.ResultProxy.inserted_primary_key")从我们的语句中生成的主键值：
+当我们调用`execute()`时，我们得到的`result`变量​​怎么样？由于 SQLAlchemy [`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象引用了 DBAPI 连接，因此称为[`ResultProxy`](connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")对象的结果与 DBAPI 游标对象类似。在 INSERT 的情况下，我们可以从中获取重要信息，例如使用[`ResultProxy.inserted_primary_key`](connections.html#sqlalchemy.engine.ResultProxy.inserted_primary_key "sqlalchemy.engine.ResultProxy.inserted_primary_key")从我们的语句中生成的主键值：
 
     >>> result.inserted_primary_key
     [1]
@@ -279,7 +279,7 @@ and [`fetchall()`](connections.html#sqlalchemy.engine.ResultProxy.fetchall "sqla
 
 但另一种方式，其用处稍后将变得明显，就是直接将[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象用作关键字：
 
-    sql>>> for row in conn.execute(s):plain
+    sql>>> for row in conn.execute(s):plainplain
     ...     print("name:", row[users.c.name], "; fullname:", row[users.c.fullname])
     SELECT users.id, users.name, users.fullname
     FROM users
@@ -287,7 +287,7 @@ and [`fetchall()`](connections.html#sqlalchemy.engine.ResultProxy.fetchall "sqla
     name: jack ; fullname: Jack Jones
     name: wendy ; fullname: Wendy Williams
 
-剩余待处理行的结果集应在丢弃前显式关闭。当对象被垃圾收集时，由[`ResultProxy`](connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")引用的游标和连接资源将分别关闭并返回到连接缓冲池，但最好将其明确化，因为某些数据库API对这些事情非常挑剔：
+剩余待处理行的结果集应在丢弃前显式关闭。当对象被垃圾收集时，由[`ResultProxy`](connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")引用的游标和连接资源将分别关闭并返回到连接缓冲池，但最好将其明确化，因为某些数据库 API 对这些事情非常挑剔：
 
     >>> result.close()
 
@@ -322,7 +322,7 @@ and [`fetchall()`](connections.html#sqlalchemy.engine.ResultProxy.fetchall "sqla
 
 它将**两个**表放入 FROM 子句中。但是，它也是一团糟。那些熟悉 SQL 连接的人知道这是一个**笛卡尔积**；来自`users`表的每行都是根据`addresses`表中的每行生成的。所以为了使这个陈述有一些理智，我们需要一个WHERE子句。我们使用[`Select.where()`](selectable.html#sqlalchemy.sql.expression.Select.where "sqlalchemy.sql.expression.Select.where")来做到这一点：
 
-    >>> s = select([users, addresses]).where(users.c.id == addresses.c.user_id)
+    >>> s = select([users, addresses]).where(users.c.id == addresses.c.user_id)plain
     sql>>> for row in conn.execute(s):
     ...     print(row)
     SELECT users.id, users.name, users.fullname, addresses.id,
@@ -364,7 +364,7 @@ WHERE clause. 因此，让我们看看到底表达的是什么：
     >>> print(users.c.id == addresses.c.user_id)
     users.id = addresses.user_id
 
-如果我们使用一个字面值（一个字面意思，而不是一个SQLAlchemy子句对象），我们得到一个绑定参数：
+如果我们使用一个字面值（一个字面意思，而不是一个 SQLAlchemy 子句对象），我们得到一个绑定参数：
 
     >>> print(users.c.id == 7)
     users.id = :id_1
@@ -405,7 +405,7 @@ equals 等。:
     concat(users.name, users.fullname)
 
 以上说明了为连接到MySQL数据库的[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")生成的SQL；
-`||`运算符现在编译为MySQL的`concat()`函数。
+`||`运算符现在编译为 MySQL 的`concat()`函数。
 
 如果遇到真正不可用的操作符，可以始终使用[`ColumnOperators.op()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.op "sqlalchemy.sql.operators.ColumnOperators.op")方法；这会产生你需要的任何操作符：
 
@@ -432,7 +432,7 @@ and Creating New Operators](custom_types.html#types-operators)部分。
 
 我们希望在[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构中展示一些我们的运算符。但是我们需要把它们再加一点，所以我们先来介绍一些连词。连词是 AND 和 OR 这些小词汇，它们把事物放在一起。我们也会碰到 NOT。[`and_()`](sqlelement.html#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")，[`or_()`](sqlelement.html#sqlalchemy.sql.expression.or_ "sqlalchemy.sql.expression.or_")和[`not_()`](sqlelement.html#sqlalchemy.sql.expression.not_ "sqlalchemy.sql.expression.not_")可以从 SQLAlchemy 提供的相应函数中工作（注意，我们也会在[`like()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")
 
-    >>> from sqlalchemy.sql import and_, or_, not_
+    >>> from sqlalchemy.sql import and_, or_, not_plain
     >>> print(and_(
     ...         users.c.name.like('j%'),
     ...         users.c.id == addresses.c.user_id,
@@ -520,7 +520,7 @@ BY 和 HAVING。
 我们可以通过连续的方法调用建立[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构的方式称为[method
 chaining](glossary.html#term-method-chaining)。
 
-使用文本SQL [¶](#using-textual-sql "Permalink to this headline")
+使用文本 SQL [¶](#using-textual-sql "Permalink to this headline")
 ----------------------------------------------------------------
 
 我们的最后一个例子确实成为了一小部分。从一个人所理解的文本 SQL 表达式变成一个 Python 构造，它将程序化风格中的组件组合在一起可能很难。这就是为什么 SQLAlchemy 只允许你使用字符串的原因，对于那些 SQL 已经知道并且没有强烈需要支持动态特性的语句的情况。[`text()`](sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")结构用于组成一个大部分不变的传递给数据库的文本语句。下面，我们创建一个[`text()`](sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")对象并执行它：
@@ -547,7 +547,7 @@ chaining](glossary.html#term-method-chaining)。
 
 [`text()`](sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")结构使用[`TextClause.bindparams()`](sqlelement.html#sqlalchemy.sql.expression.TextClause.bindparams "sqlalchemy.sql.expression.TextClause.bindparams")方法支持预先建立的绑定值：
 
-    stmt = text("SELECT * FROM users WHERE users.name BETWEEN :x AND :y")
+    stmt = text("SELECT * FROM users WHERE users.name BETWEEN :x AND :y")plain
     stmt = stmt.bindparams(x="m", y="z")
 
 参数也可以显式输入：
@@ -555,7 +555,7 @@ chaining](glossary.html#term-method-chaining)。
     stmt = stmt.bindparams(bindparam("x", String), bindparam("y", String))plain
     result = conn.execute(stmt, {"x": "m", "y": "z"})
 
-当类型需要数据类型提供的Python端或特殊的SQL端处理时，键入绑定参数是必要的。
+当类型需要数据类型提供的 Python 端或特殊的 SQL 端处理时，键入绑定参数是必要的。
 
 也可以看看
 
@@ -575,14 +575,14 @@ chaining](glossary.html#term-method-chaining)。
 
 当我们调用[`TextClause.columns()`](sqlelement.html#sqlalchemy.sql.expression.TextClause.columns "sqlalchemy.sql.expression.TextClause.columns")方法时，我们得到一个[`TextAsFrom`](selectable.html#sqlalchemy.sql.expression.TextAsFrom "sqlalchemy.sql.expression.TextAsFrom")对象，该对象支持完整的[`TextAsFrom.c`](selectable.html#sqlalchemy.sql.expression.TextAsFrom.c "sqlalchemy.sql.expression.TextAsFrom.c")和其他“可选“操作：
 
-    j = stmt.join(addresses, stmt.c.id == addresses.c.user_id)
+    j = stmt.join(addresses, stmt.c.id == addresses.c.user_id)plain
 
     new_stmt = select([stmt.c.id, addresses.c.id]).\
         select_from(j).where(stmt.c.name == 'x')
 
-当将文本SQL与现有的Core或ORM模型相关联时，[`TextClause.columns()`](sqlelement.html#sqlalchemy.sql.expression.TextClause.columns "sqlalchemy.sql.expression.TextClause.columns")的位置形式特别有用，因为我们可以直接使用列表达式，而不必担心名称冲突或其他结果列名称问题在文本SQL中：
+当将文本 SQL 与现有的 Core 或 ORM 模型相关联时，[`TextClause.columns()`](sqlelement.html#sqlalchemy.sql.expression.TextClause.columns "sqlalchemy.sql.expression.TextClause.columns")的位置形式特别有用，因为我们可以直接使用列表达式，而不必担心名称冲突或其他结果列名称问题在文本SQL中：
 
-    >>> stmt = text("SELECT users.id, addresses.id, users.id, "
+    >>> stmt = text("SELECT users.id, addresses.id, users.id, "plain
     ...     "users.name, addresses.email_address AS email "
     ...     "FROM users JOIN addresses ON users.id=addresses.user_id "
     ...     "WHERE users.id = 1").columns(
@@ -804,7 +804,7 @@ identical SQL string each time it is rendered for a particular dialect.
 使用连接[¶](#using-joins "Permalink to this headline")
 ------------------------------------------------------
 
-我们已经能够构建任何SELECT表达式了。SELECT的下一个基石是JOIN表达式。我们已经在我们的示例中进行了连接，只需将两个表放入[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造的columns子句或where子句中即可。但是，如果我们想要创建一个真正的“JOIN”或“OUTERJOIN”构造，我们使用[`join()`](selectable.html#sqlalchemy.sql.expression.FromClause.join "sqlalchemy.sql.expression.FromClause.join")和[`outerjoin()`](selectable.html#sqlalchemy.sql.expression.FromClause.outerjoin "sqlalchemy.sql.expression.FromClause.outerjoin")方法，这些方法通常从左表访问在加入：
+我们已经能够构建任何 SELECT 表达式了。SELECT 的下一个基石是 JOIN 表达式。我们已经在我们的示例中进行了连接，只需将两个表放入[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造的 columns 子句或 where 子句中即可。但是，如果我们想要创建一个真正的“JOIN”或“OUTERJOIN”构造，我们使用[`join()`](selectable.html#sqlalchemy.sql.expression.FromClause.join "sqlalchemy.sql.expression.FromClause.join")和[`outerjoin()`](selectable.html#sqlalchemy.sql.expression.FromClause.outerjoin "sqlalchemy.sql.expression.FromClause.outerjoin")方法，这些方法通常从左表访问在加入：
 
     >>> print(users.join(addresses))
     users JOIN addresses ON users.id = addresses.user_id
@@ -814,7 +814,7 @@ SQLAlchemy想出了如何加入两个表！这个连接的ON条件是根据我�
 
 当然，您可以加入任何您想要的表达方式，例如，如果我们想加入所有在其电子邮件地址中使用相同名称的用户名作为用户名：
 
-    >>> print(users.join(addresses,
+    >>> print(users.join(addresses,plain
     ...                 addresses.c.email_address.like(users.c.name + '%')
     ...             )
     ...  )
@@ -822,7 +822,7 @@ SQLAlchemy想出了如何加入两个表！这个连接的ON条件是根据我�
 
 当我们创建一个[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造时，SQLAlchemy 会查看我们提到的表，然后将它们放在语句的 FROM 子句中。但是，当我们使用 JOIN 时，我们知道我们需要什么 FROM 子句，所以我们在这里使用[`select_from()`](selectable.html#sqlalchemy.sql.expression.Select.select_from "sqlalchemy.sql.expression.Select.select_from")方法：
 
-    >>> s = select([users.c.fullname]).select_from(
+    >>> s = select([users.c.fullname]).select_from(plain
     ...    users.join(addresses,
     ...             addresses.c.email_address.like(users.c.name + '%'))
     ...    )
@@ -842,7 +842,7 @@ used in the same way as [`join()`](selectable.html#sqlalchemy.sql.expression.Fro
         FROM users
         LEFT OUTER JOIN addresses ON users.id = addresses.user_id
 
-这就是输出`outerjoin()`产生的结果，当然，除非你在第 9 版之前使用 Oracle 停留在一个 gig 中，并且你已经设置了引擎（可以使用`OracleDialect`）使用Oracle特定的SQL：
+这就是输出`outerjoin()`产生的结果，当然，除非你在第 9 版之前使用 Oracle 停留在一个 gig 中，并且你已经设置了引擎（可以使用`OracleDialect`）使用 Oracle 特定的 SQL：
 
     >>> from sqlalchemy.dialects.oracle import dialect as OracleDialect
     >>> print(s.compile(dialect=OracleDialect(use_ansi=False)))
@@ -868,7 +868,7 @@ DBA 的秘密部落不希望他们发现黑魔法；）。
 
 ### 绑定参数对象[¶](#bind-parameter-objects "Permalink to this headline")
 
-在所有这些例子中，无论文字表达式出现在哪里，SQLAlchemy 都忙于创建绑定参数。您也可以使用自己的名称指定自己的绑定参数，并重复使用相同的语句。[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")结构用于产生具有给定名称的绑定参数。尽管SQLAlchemy总是在API端通过名称引用绑定参数，但数据库方言在执行时会转换为适当的名称或位置样式，因为在这里它将转换为SQLite的位置：
+在所有这些例子中，无论文字表达式出现在哪里，SQLAlchemy 都忙于创建绑定参数。您也可以使用自己的名称指定自己的绑定参数，并重复使用相同的语句。[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")结构用于产生具有给定名称的绑定参数。尽管 SQLAlchemy 总是在 API 端通过名称引用绑定参数，但数据库方言在执行时会转换为适当的名称或位置样式，因为在这里它将转换为 SQLite 的位置：
 
     >>> from sqlalchemy.sql import bindparam
     >>> s = users.select(users.c.name == bindparam('username'))
@@ -881,7 +881,7 @@ DBA 的秘密部落不希望他们发现黑魔法；）。
 
 [`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")的另一个重要方面是它可以被分配一个类型。bind参数的类型将决定它在表达式中的行为，以及绑定到它的数据在被发送到数据库之前如何处理：
 
-    >>> s = users.select(users.c.name.like(bindparam('username', type_=String) + text("'%'")))plain
+    >>> s = users.select(users.c.name.like(bindparam('username', type_=String) + text("'%'")))plainplainplain
     sql>>> conn.execute(s, username='wendy').fetchall()
     SELECT users.id, users.name, users.fullname
     FROM users
@@ -950,14 +950,14 @@ the word you choose:
     ()
     u'www@www.org'
 
-支持返回整个结果集的函数的PostgreSQL和Oracle等数据库可以组合成可选单位，可用于语句中。Such
+支持返回整个结果集的函数的 PostgreSQL 和 Oracle 等数据库可以组合成可选单位，可用于语句中。Such
 as, a database function `calculate()` which takes
 the parameters `x` and `y`, and
 returns three columns which we’d like to name `q`,
 `z` and `r`, we can construct
 using “lexical” column objects as well as bind parameters:
 
-    >>> from sqlalchemy.sql import column
+    >>> from sqlalchemy.sql import columnplain
     >>> calculate = select([column('q'), column('z'), column('r')]).\
     ...        select_from(
     ...             func.calculate(
@@ -994,7 +994,7 @@ using “lexical” column objects as well as bind parameters:
 
 ### 窗口函数[¶](#window-functions "Permalink to this headline")
 
-任何[`FunctionElement`](functions.html#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")，包括由[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")生成的函数都可以转换成一个“窗口函数”，即OVER子句，使用[`FunctionElement.over()`](functions.html#sqlalchemy.sql.functions.FunctionElement.over "sqlalchemy.sql.functions.FunctionElement.over")
+任何[`FunctionElement`](functions.html#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")，包括由[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")生成的函数都可以转换成一个“窗口函数”，即 OVER 子句，使用[`FunctionElement.over()`](functions.html#sqlalchemy.sql.functions.FunctionElement.over "sqlalchemy.sql.functions.FunctionElement.over")
 
     >>> s = select([
     ...         users.c.id,
@@ -1033,7 +1033,7 @@ ROW”和`None`以指示“UNBOUNDED”。有关更多详细信息，请参阅[`
 联合体有两种风格，UNION 和 UNION
 ALL，它们可以通过模块级函数[`union()`](selectable.html#sqlalchemy.sql.expression.union "sqlalchemy.sql.expression.union")和[`union_all()`](selectable.html#sqlalchemy.sql.expression.union_all "sqlalchemy.sql.expression.union_all")使用：
 
-    >>> from sqlalchemy.sql import union
+    >>> from sqlalchemy.sql import unionplain
     >>> u = union(
     ...     addresses.select().
     ...             where(addresses.c.email_address == 'foo@bar.com'),
@@ -1077,7 +1077,7 @@ and [`except_all()`](selectable.html#sqlalchemy.sql.expression.except_all "sqlal
     ('%@%.com', '%@msn.com')
     [(1, 1, u'jack@yahoo.com'), (4, 2, u'wendy@aol.com')]
 
-所谓的“复合”可选项的一个常见问题是由于它们与括号嵌套的事实而产生的。特别是SQLite不喜欢以括号开头的语句。因此，在“化合物”中嵌套“化合物”时，如果该化合物也是化合物，通常需要将`.alias().select()`应用于最外层化合物的第一个元素。例如，要在“except\_”中嵌套“union”和“select”，SQLite会希望将“union”声明为子查询：
+所谓的“复合”可选项的一个常见问题是由于它们与括号嵌套的事实而产生的。特别是 SQLite 不喜欢以括号开头的语句。因此，在“化合物”中嵌套“化合物”时，如果该化合物也是化合物，通常需要将`.alias().select()`应用于最外层化合物的第一个元素。例如，要在“except\_”中嵌套“union”和“select”，SQLite 会希望将“union”声明为子查询：
 
     >>> u = except_(
     ...    union(
@@ -1131,7 +1131,7 @@ clauses.
 
 通过调用[`as_scalar()`](selectable.html#sqlalchemy.sql.expression.SelectBase.as_scalar "sqlalchemy.sql.expression.SelectBase.as_scalar")或[`label()`](selectable.html#sqlalchemy.sql.expression.SelectBase.label "sqlalchemy.sql.expression.SelectBase.label")方法，可以修改[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构以充当列表达式：
 
-    >>> stmt = select([func.count(addresses.c.id)]).\plain
+    >>> stmt = select([func.count(addresses.c.id)]).\plainplain
     ...             where(users.c.id == addresses.c.user_id).\
     ...             as_scalar()
 
@@ -1171,7 +1171,7 @@ family of expression constructs.
 ### 相关子查询[¶](#correlated-subqueries "Permalink to this headline")
 
 请注意，在[Scalar
-Selects](#scalar-selects)的示例中，每个嵌入式选择的 FROM 子句在其 FROM 子句中都不包含`users`表。这是因为SQLAlchemy自动将[correlates](glossary.html#term-correlates)例如：
+Selects](#scalar-selects)的示例中，每个嵌入式选择的 FROM 子句在其 FROM 子句中都不包含`users`表。这是因为 SQLAlchemy 自动将[correlates](glossary.html#term-correlates)例如：
 
     >>> stmt = select([addresses.c.user_id]).\
     ...             where(addresses.c.user_id == users.c.id).\
@@ -1189,7 +1189,7 @@ Selects](#scalar-selects)的示例中，每个嵌入式选择的 FROM 子句在�
 
 自动关联通常会做预期的事情，但它也可以被控制。例如，如果我们想要一条语句只关联`addresses`表而不关联`users`表，即使两者都出现在封闭的 SELECT 中，我们也使用[`correlate()`](selectable.html#sqlalchemy.sql.expression.Select.correlate "sqlalchemy.sql.expression.Select.correlate")方法来指定那些可能相关的FROM子句：
 
-    >>> stmt = select([users.c.id]).\
+    >>> stmt = select([users.c.id]).\plain
     ...             where(users.c.id == addresses.c.user_id).\
     ...             where(users.c.name == 'jack').\
     ...             correlate(addresses)
@@ -1243,7 +1243,7 @@ Selects](#scalar-selects)的示例中，每个嵌入式选择的 FROM 子句在�
 
 #### 横向关联[¶](#lateral-correlation "Permalink to this headline")
 
-LATERAL关联是SQL关联的一个特殊子类别，它允许可选单元在单个FROM子句中引用另一个可选单元。这是一个非常特殊的用例，虽然它是SQL标准的一部分，但只有最新版本的Postgresql才支持它。
+LATERAL 关联是 SQL 关联的一个特殊子类别，它允许可选单元在单个 FROM 子句中引用另一个可选单元。这是一个非常特殊的用例，虽然它是 SQL 标准的一部分，但只有最新版本的 Postgresql 才支持它。
 
 Normally, if a SELECT statement refers to
 `table1 JOIN (some SELECT) AS subquery` in its FROM
@@ -1287,7 +1287,7 @@ Core 支持使用[`Select.lateral()`](selectable.html#sqlalchemy.sql.expression.
 
 通过将列表达式传递给`order_by()`方法来完成排序：
 
-    >>> stmt = select([users.c.name]).order_by(users.c.name)
+    >>> stmt = select([users.c.name]).order_by(users.c.name)plain
     >>> conn.execute(stmt).fetchall()
     SELECT users.name
     FROM users ORDER BY users.name
@@ -1361,7 +1361,7 @@ BY 之后，可以使用 HAVING 过滤聚合值上的结果。它可以通过[`h
 插入，更新和删除[¶](#inserts-updates-and-deletes "Permalink to this headline")
 ------------------------------------------------------------------------------
 
-我们已经看到本教程前面介绍的[`insert()`](selectable.html#sqlalchemy.sql.expression.TableClause.insert "sqlalchemy.sql.expression.TableClause.insert")。其中[`insert()`](selectable.html#sqlalchemy.sql.expression.TableClause.insert "sqlalchemy.sql.expression.TableClause.insert")产生INSERT，[`update()`](selectable.html#sqlalchemy.sql.expression.TableClause.update "sqlalchemy.sql.expression.TableClause.update")方法产生UPDATE。这两种结构都有一个名为[`values()`](dml.html#sqlalchemy.sql.expression.ValuesBase.values "sqlalchemy.sql.expression.ValuesBase.values")的方法，它指定语句的VALUES或SET子句。
+我们已经看到本教程前面介绍的[`insert()`](selectable.html#sqlalchemy.sql.expression.TableClause.insert "sqlalchemy.sql.expression.TableClause.insert")。其中[`insert()`](selectable.html#sqlalchemy.sql.expression.TableClause.insert "sqlalchemy.sql.expression.TableClause.insert")产生INSERT，[`update()`](selectable.html#sqlalchemy.sql.expression.TableClause.update "sqlalchemy.sql.expression.TableClause.update")方法产生UPDATE。这两种结构都有一个名为[`values()`](dml.html#sqlalchemy.sql.expression.ValuesBase.values "sqlalchemy.sql.expression.ValuesBase.values")的方法，它指定语句的 VALUES 或 SET 子句。
 
 [`values()`](dml.html#sqlalchemy.sql.expression.ValuesBase.values "sqlalchemy.sql.expression.ValuesBase.values")方法容纳任何列表达式作为值：
 
@@ -1389,7 +1389,7 @@ BY 之后，可以使用 HAVING 过滤聚合值上的结果。它可以通过[`h
 
 使用[`update()`](selectable.html#sqlalchemy.sql.expression.TableClause.update "sqlalchemy.sql.expression.TableClause.update")结构发出 UPDATE 语句。这很像 INSERT，除了可以指定一个额外的 WHERE 子句：
 
-    >>> stmt = users.update().\
+    >>> stmt = users.update().\plainplain
     ...             where(users.c.name == 'jack').\
     ...             values(name='ed')
 
@@ -1401,7 +1401,7 @@ BY 之后，可以使用 HAVING 过滤聚合值上的结果。它可以通过[`h
 
 在“executemany”上下文中使用[`update()`](selectable.html#sqlalchemy.sql.expression.TableClause.update "sqlalchemy.sql.expression.TableClause.update")时，我们可能希望在 WHERE 子句中使用显式命名的绑定参数。同样，[`bindparam()`](sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")是用于实现此目的的构造：
 
-    >>> stmt = users.update().\plain
+    >>> stmt = users.update().\plainplain
     ...             where(users.c.name == bindparam('oldname')).\
     ...             values(name=bindparam('newname'))
     >>> conn.execute(stmt, [
@@ -1490,7 +1490,7 @@ FROM”语法，它一次更新一个表，但可以在额外的“FROM”子句
 
 除了它被排序之外，2 元组列表本质上与 Python 字典结构相同。使用上面的表格，我们确信，“y”列的 SET 子句将首先呈现，然后是“x”列的 SET 子句。
 
-版本1.0.10中的新增功能：使用[`preserve_parameter_order`(dml.html#sqlalchemy.sql.expression.update.params.preserve_parameter_order "sqlalchemy.sql.expression.update")标志增加了对显式排序UPDATE参数的支持。
+版本 1.0.10 中的新增功能：使用[`preserve_parameter_order`(dml.html#sqlalchemy.sql.expression.update.params.preserve_parameter_order "sqlalchemy.sql.expression.update")标志增加了对显式排序UPDATE参数的支持。
 
 ### 删除[¶ T0\>](#deletes "Permalink to this headline")
 
