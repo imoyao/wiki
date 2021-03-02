@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:47
 permalink: /sqlalchemy/orm/session_events/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
 tags:
 ---
@@ -45,14 +45,14 @@ Temporal Rows](examples.html#examples-versioned-rows)
 The [`SessionEvents.after_flush()`](events.html#sqlalchemy.orm.events.SessionEvents.after_flush "sqlalchemy.orm.events.SessionEvents.after_flush")
 hook is called after the SQL has been emitted for a flush process, but
 **before** the state of the objects that were flushed has been altered.
-也就是说，您仍然可以检查[`Session.new`](session_api.html#sqlalchemy.orm.session.Session.new "sqlalchemy.orm.session.Session.new")，[`Session.dirty`](session_api.html#sqlalchemy.orm.session.Session.dirty "sqlalchemy.orm.session.Session.dirty")和[`Session.deleted`](session_api.html#sqlalchemy.orm.session.Session.deleted "sqlalchemy.orm.session.Session.deleted")集合以查看刚刚刷新的内容，而您还可以使用像[`AttributeState`](internals.html#sqlalchemy.orm.state.AttributeState "sqlalchemy.orm.state.AttributeState")提供的历史跟踪功能来查看刚刚保存的更改。在[`SessionEvents.after_flush()`](events.html#sqlalchemy.orm.events.SessionEvents.after_flush "sqlalchemy.orm.events.SessionEvents.after_flush")事件中，可以根据观察到的变化将附加的SQL发送到数据库。
+也就是说，您仍然可以检查[`Session.new`](session_api.html#sqlalchemy.orm.session.Session.new "sqlalchemy.orm.session.Session.new")，[`Session.dirty`](session_api.html#sqlalchemy.orm.session.Session.dirty "sqlalchemy.orm.session.Session.dirty")和[`Session.deleted`](session_api.html#sqlalchemy.orm.session.Session.deleted "sqlalchemy.orm.session.Session.deleted")集合以查看刚刚刷新的内容，而您还可以使用像[`AttributeState`](internals.html#sqlalchemy.orm.state.AttributeState "sqlalchemy.orm.state.AttributeState")提供的历史跟踪功能来查看刚刚保存的更改。在[`SessionEvents.after_flush()`](events.html#sqlalchemy.orm.events.SessionEvents.after_flush "sqlalchemy.orm.events.SessionEvents.after_flush")事件中，可以根据观察到的变化将附加的 SQL 发送到数据库。
 
 ### `after_flush_postexec()`[¶](#after-flush-postexec "Permalink to this headline")
 
 [`SessionEvents.after_flush_postexec()`](events.html#sqlalchemy.orm.events.SessionEvents.after_flush_postexec "sqlalchemy.orm.events.SessionEvents.after_flush_postexec")
 is called soon after [`SessionEvents.after_flush()`](events.html#sqlalchemy.orm.events.SessionEvents.after_flush "sqlalchemy.orm.events.SessionEvents.after_flush"),
 but is invoked **after** the state of the objects has been modified to
-account for the flush that just took place. [`Session.new`](session_api.html#sqlalchemy.orm.session.Session.new "sqlalchemy.orm.session.Session.new")，[`Session.dirty`](session_api.html#sqlalchemy.orm.session.Session.dirty "sqlalchemy.orm.session.Session.dirty")和[`Session.deleted`](session_api.html#sqlalchemy.orm.session.Session.deleted "sqlalchemy.orm.session.Session.deleted")集合在这里通常是完全空的。使用[`SessionEvents.after_flush_postexec()`](events.html#sqlalchemy.orm.events.SessionEvents.after_flush_postexec "sqlalchemy.orm.events.SessionEvents.after_flush_postexec")检查最终对象的标识映射，并可能发出额外的SQL。In
+account for the flush that just took place. [`Session.new`](session_api.html#sqlalchemy.orm.session.Session.new "sqlalchemy.orm.session.Session.new")，[`Session.dirty`](session_api.html#sqlalchemy.orm.session.Session.dirty "sqlalchemy.orm.session.Session.dirty")和[`Session.deleted`](session_api.html#sqlalchemy.orm.session.Session.deleted "sqlalchemy.orm.session.Session.deleted")集合在这里通常是完全空的。使用[`SessionEvents.after_flush_postexec()`](events.html#sqlalchemy.orm.events.SessionEvents.after_flush_postexec "sqlalchemy.orm.events.SessionEvents.after_flush_postexec")检查最终对象的标识映射，并可能发出额外的 SQL。In
 this hook, there is the ability to make new changes on objects, which
 means the [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 will again go into a “dirty” state; the mechanics of the
@@ -102,7 +102,7 @@ States](session_state_management.html#session-object-states)中首次引入的�
 
 以上所有状态都可以通过事件完全跟踪。每个事件代表一个独特的状态转换，这意味着，起始状态和目标状态都是跟踪的部分。除了最初的瞬态事件之外，所有事件都是以[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象或类的形式出现的，这意味着它们可以与特定的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象关联：
 
-    from sqlalchemy import eventplainplainplain
+    from sqlalchemy import eventplainplainplainplain
     from sqlalchemy.orm import Session
 
     session = Session()
@@ -141,7 +141,7 @@ the [`InstanceEvents.init()`](events.html#sqlalchemy.orm.events.InstanceEvents.i
 method is probably the best event.
 此事件适用于特定的类或超类。例如，要拦截特定声明基的所有新对象：
 
-    from sqlalchemy.ext.declarative import declarative_baseplainplainplain
+    from sqlalchemy.ext.declarative import declarative_baseplainplainplainplain
     from sqlalchemy import event
 
     Base = declarative_base()
@@ -158,7 +158,7 @@ via the [`Session.add()`](session_api.html#sqlalchemy.orm.session.Session.add "s
 or [`Session.add_all()`](session_api.html#sqlalchemy.orm.session.Session.add_all "sqlalchemy.orm.session.Session.add_all")
 method. 一个对象也可能成为[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的一部分，作为[“cascade”](cascades.html#unitofwork-cascades)中显式添加的引用对象的结果。使用[`SessionEvents.transient_to_pending()`](events.html#sqlalchemy.orm.events.SessionEvents.transient_to_pending "sqlalchemy.orm.events.SessionEvents.transient_to_pending")事件可检测到暂挂转换的暂态：
 
-    @event.listens_for(sessionmaker, "transient_to_pending")plain
+    @event.listens_for(sessionmaker, "transient_to_pending")plainplainplainplainplainplain
     def intercept_transient_to_pending(session, object_):
         print("transient to pending: %s" % object_)
 
@@ -180,7 +180,7 @@ method is called before the pending object has been flushed, or if the
 method is called for the object before it is flushed.
 使用[`SessionEvents.pending_to_transient()`](events.html#sqlalchemy.orm.events.SessionEvents.pending_to_transient "sqlalchemy.orm.events.SessionEvents.pending_to_transient")事件跟踪挂起到瞬态：
 
-    @event.listens_for(sessionmaker, "pending_to_transient")plain
+    @event.listens_for(sessionmaker, "pending_to_transient")plainplainplainplain
     def intercept_pending_to_transient(session, object_):
         print("transient to pending: %s" % object_)
 
@@ -192,7 +192,7 @@ loaded, and is synonomous with using the [`InstanceEvents.load()`](events.html#s
 instance-level event.
 然而，[`SessionEvents.loaded_as_persistent()`](events.html#sqlalchemy.orm.events.SessionEvents.loaded_as_persistent "sqlalchemy.orm.events.SessionEvents.loaded_as_persistent")事件是以会话为中心的钩子提供的，以便在通过此特定途径进入持久状态时拦截对象：
 
-    @event.listens_for(sessionmaker, "loaded_as_persistent")plain
+    @event.listens_for(sessionmaker, "loaded_as_persistent")plainplain
     def intercept_loaded_as_persistent(session, object_):
         print("object loaded into persistent state: %s" % object_)
 
@@ -200,7 +200,7 @@ instance-level event.
 
 如果为对象首次添加为待处理的事务调用[`Session.rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")方法，持久对象可以恢复到瞬态状态。在 ROLLBACK 的情况下，使该对象持久化的 INSERT 语句被回滚，并且该对象从[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")被逐出以再次变为瞬态。使用[`SessionEvents.persistent_to_transient()`](events.html#sqlalchemy.orm.events.SessionEvents.persistent_to_transient "sqlalchemy.orm.events.SessionEvents.persistent_to_transient")事件挂钩跟踪从持久性恢复为瞬态的对象：
 
-    @event.listens_for(sessionmaker, "persistent_to_transient")plainplain
+    @event.listens_for(sessionmaker, "persistent_to_transient")plainplainplain
     def intercept_persistent_to_transient(session, object_):
         print("persistent to transient: %s" % object_)
 
@@ -214,7 +214,7 @@ instance-level event.
 
 使用[`SessionEvents.persistent_to_deleted()`](events.html#sqlalchemy.orm.events.SessionEvents.persistent_to_deleted "sqlalchemy.orm.events.SessionEvents.persistent_to_deleted")跟踪永久删除的转换：
 
-    @event.listens_for(sessionmaker, "persistent_to_deleted")plainplain
+    @event.listens_for(sessionmaker, "persistent_to_deleted")plainplainplainplain
     def intercept_persistent_to_deleted(session, object_):
         print("object was DELETEd, is now in deleted state: %s" % object_)
 
@@ -222,13 +222,13 @@ instance-level event.
 
 当会话的事务提交时，被删除的对象变为[detached](glossary.html#term-detached)。在[`Session.commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")方法被调用后，数据库事务是最终的，[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")现在完全丢弃已删除的对象并删除与它的所有关联。使用[`SessionEvents.deleted_to_detached()`](events.html#sqlalchemy.orm.events.SessionEvents.deleted_to_detached "sqlalchemy.orm.events.SessionEvents.deleted_to_detached")跟踪已删除到已分离的转换：
 
-    @event.listens_for(sessionmaker, "deleted_to_detached")
+    @event.listens_for(sessionmaker, "deleted_to_detached")plainplain
     def intercept_deleted_to_detached(session, object_):
         print("deleted to detached: %s" % object_)
 
 注意
 
-当对象处于已删除状态时，可以使用`inspect(object).deleted`访问的[`InstanceState.deleted`](internals.html#sqlalchemy.orm.state.InstanceState.deleted "sqlalchemy.orm.state.InstanceState.deleted")属性返回True。但是，当对象被分离时，[`InstanceState.deleted`](internals.html#sqlalchemy.orm.state.InstanceState.deleted "sqlalchemy.orm.state.InstanceState.deleted")将再次返回 False。要检测对象是否被删除，无论它是否被分离，请使用[`InstanceState.was_deleted`](internals.html#sqlalchemy.orm.state.InstanceState.was_deleted "sqlalchemy.orm.state.InstanceState.was_deleted")访问器。
+当对象处于已删除状态时，可以使用`inspect(object).deleted`访问的[`InstanceState.deleted`](internals.html#sqlalchemy.orm.state.InstanceState.deleted "sqlalchemy.orm.state.InstanceState.deleted")属性返回 True。但是，当对象被分离时，[`InstanceState.deleted`](internals.html#sqlalchemy.orm.state.InstanceState.deleted "sqlalchemy.orm.state.InstanceState.deleted")将再次返回 False。要检测对象是否被删除，无论它是否被分离，请使用[`InstanceState.was_deleted`](internals.html#sqlalchemy.orm.state.InstanceState.was_deleted "sqlalchemy.orm.state.InstanceState.was_deleted")访问器。
 
 ### 持久分离[¶](#persistent-to-detached "Permalink to this headline")
 
@@ -253,7 +253,7 @@ methods.
 
 使用[`Session.add()`](session_api.html#sqlalchemy.orm.session.Session.add "sqlalchemy.orm.session.Session.add")或等效方法将分离对象重新关联到会话时，分离的对象将变为持久对象。使用[`SessionEvents.detached_to_persistent()`](events.html#sqlalchemy.orm.events.SessionEvents.detached_to_persistent "sqlalchemy.orm.events.SessionEvents.detached_to_persistent")事件跟踪从分离状态回到持久性状态的对象：
 
-    @event.listens_for(sessionmaker, "detached_to_persistent")plainplain
+    @event.listens_for(sessionmaker, "detached_to_persistent")plainplainplain
     def intecept_detached_to_persistent(session, object_):
         print("object became persistent again: %s" % object_)
 
@@ -261,7 +261,7 @@ methods.
 
 当使用[`Session.rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")方法回退已删除 DELETEd 的事务时，[deleted](glossary.html#term-deleted)对象可以恢复为[persistent](glossary.html#term-persistent)状态。使用[`SessionEvents.deleted_to_persistent()`](events.html#sqlalchemy.orm.events.SessionEvents.deleted_to_persistent "sqlalchemy.orm.events.SessionEvents.deleted_to_persistent")事件跟踪已移回到持久状态的已删除对象：
 
-    @event.listens_for(sessionmaker, "transient_to_pending")plain
+    @event.listens_for(sessionmaker, "transient_to_pending")plainplainplainplain
     def intercept_transient_to_pending(session, object_):
         print("transient to pending: %s" % object_)
 

@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy中文文档
   - changelog
 tags:
-  - 
 ---
 SQLAlchemy 0.7 有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-7 "Permalink to this headline")
 ===========================================================================================
@@ -24,7 +23,7 @@ SQLAlchemy 0.7 有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-7 "Permalin
 本指南介绍了 SQLAlchemy
 0.7 版中的新增功能，并介绍了影响用户将其应用程序从 0.6 系列 SQLAlchemy 迁移到 0.7 的更改。
 
-在尽可能高的程度上，进行更改的方式不会中断与为0.6构建的应用程序的兼容性。这些必须不是向后兼容的更改很少，除了一个之外，对可变属性默认值的更改都会影响应用程序的极小部分
+在尽可能高的程度上，进行更改的方式不会中断与为 0.6 构建的应用程序的兼容性。这些必须不是向后兼容的更改很少，除了一个之外，对可变属性默认值的更改都会影响应用程序的极小部分
 - 许多更改都涉及非公共 API 和某些用户可能已无记录的黑客攻击试图使用。
 
 还记录了第二类甚至更小的非向后兼容更改。这类更改将至少从 0.5 版本开始被弃用的那些功能和行为视为已弃用，并且自从弃用以来一直提出警告。这些更改只会影响仍在使用 0.4 或早期 0.5 样式 API 的应用程序。随着项目的成熟，我们对 0.x 级别版本的这些变化越来越少，这是我们 API 的产品具有越来越少的特性，这些特性对于他们要解决的用例而言并不理想。
@@ -87,7 +86,7 @@ aren’t really aware of them otherwise.
 
 按照所有主要SQLA版本的习惯，通过内部广泛传递来减少开销和呼叫计数，这进一步减少了常见场景中所需的工作。此版本的亮点包括：
 
--   对于主键已经存在的行，刷新过程现在将INSERT语句捆绑到提供给`cursor.executemany()`的批处理中。特别是，这通常适用于连接表继承配置上的“子”表，这意味着对于连接表对象的大批量插入，对`cursor.execute`的调用次数可以减半，允许对传递给`cursor.executemany()`的语句进行本地DBAPI优化（例如重新使用预准备语句）。
+-   对于主键已经存在的行，刷新过程现在将 INSERT 语句捆绑到提供给`cursor.executemany()`的批处理中。特别是，这通常适用于连接表继承配置上的“子”表，这意味着对于连接表对象的大批量插入，对`cursor.execute`的调用次数可以减半，允许对传递给`cursor.executemany()`的语句进行本地 DBAPI 优化（例如重新使用预准备语句）。
 -   在访问已加载的相关对象的多对一引用时调用的代码路径已大大简化。直接检查身份映射而不需要首先生成新的`Query`对象，这在需要访问的数千个内存中的多对一的情况下是昂贵的。构造的每个调用“加载器”对象的用法也不再用于大多数惰性属性加载。
 -   当映射器内部访问 flush 中的映射属性时，组合的重写允许更短的代码路径。
 -   当“保存更新”和其他级联操作需要在与属性关联的数据成员的全部范围内级联时，新的内联属性访问功能取代了之前“历史”的用法。这可以降低为此速度关键操作生成新的`History`对象的开销。
@@ -95,7 +94,7 @@ aren’t really aware of them otherwise.
 -   现在缓存每个语句执行的类型生成的`bind_processor()`和`result_processor()`可调集（仔细地避免 ad-hoc 类型和方言的内存泄漏）为了这种类型的生命周期，进一步减少了每个语句的调用开销。
 -   语句的特定`Compiled`实例的“绑定处理器”集合也缓存在`Compiled`对象上，进一步利用了 flush 的“编译缓存”进程重新使用 INSERT，UPDATE，DELETE 语句的相同编译形式。
 
-包含样本基准测试脚本的callcount简化示例位于[http://techspot.zzzeek.org/2010/12/12/a-tale-of-three](http://techspot.zzzeek.org/2010/12/12/a-tale-of-three)
+包含样本基准测试脚本的 callcount 简化示例位于[http://techspot.zzzeek.org/2010/12/12/a-tale-of-three](http://techspot.zzzeek.org/2010/12/12/a-tale-of-three)
 - 配置文件/
 
 ### 复写重写[¶](#composites-rewritten "Permalink to this headline")
@@ -117,7 +116,7 @@ aren’t really aware of them otherwise.
 
 现在使用显式语句向目标发布`query.join()`的默认方法是：
 
-    query.join(SomeClass, SomeClass.id==ParentClass.some_id)plain
+    query.join(SomeClass, SomeClass.id==ParentClass.some_id)plainplainplainplainplain
 
 在 0.6 中，这个用法被认为是一个错误，因为`join()`接受多个对应于多个 JOIN 子句的参数 -
 两个参数形式需要在一个元组中以消除单参数和双参数连接目标。在 0.6 的中间，我们为这种特定的调用风格增加了检测和错误消息，因为它很常见。在 0.7 中，由于我们无论如何都在检测确切的模式，并且由于不必理由地键入元组是非常烦人的，所以非元组方法现在变成了“正常”的方式。与单连接情况相比，“多 JOIN”用例非常罕见，并且通过多次调用`join()`可以更清楚地表示多个连接。
@@ -126,7 +125,7 @@ aren’t really aware of them otherwise.
 
 请注意，`query.join()`的所有其他形式保持不变：
 
-    query.join(MyClass.somerelation)
+    query.join(MyClass.somerelation)plain
     query.join("somerelation")
     query.join(MyTarget)
     # ... etc
@@ -189,7 +188,7 @@ Index()构造可以与表定义一起内联创建，使用字符串作为列名�
 
 这里的主要基本原理是为了声明`__table_args__`的好处，特别是在与 mixin 一起使用时：
 
-    class HasNameMixin(object):
+    class HasNameMixin(object):plain
         name = Column('name', String(50), nullable=False)
         @declared_attr
         def __table_args__(cls):
@@ -211,7 +210,7 @@ Server 和 Oracle 支持，可能还有其他支持。
 [http://www.postgresql.org/docs/9.0/static/tutorial](http://www.postgresql.org/docs/9.0/static/tutorial)
 - window.html
 
-SQLAlchemy 使用`over()`方法提供一个通常通过现有函数子句调用的简单结构，该方法接受`order_by`和`partition_by`关键字参数。下面我们复制PG教程中的第一个例子：
+SQLAlchemy 使用`over()`方法提供一个通常通过现有函数子句调用的简单结构，该方法接受`order_by`和`partition_by`关键字参数。下面我们复制 PG 教程中的第一个例子：
 
     from sqlalchemy.sql import table, column, select, func
 
@@ -231,7 +230,7 @@ SQLAlchemy 使用`over()`方法提供一个通常通过现有函数子句调用�
 
 SQL：
 
-    SELECT empsalary.depname, empsalary.empno, empsalary.salary,plainplainplain
+    SELECT empsalary.depname, empsalary.empno, empsalary.salary,plainplainplainplain
     avg(empsalary.salary) OVER (PARTITION BY empsalary.depname) AS avg
     FROM empsalary
 
@@ -280,7 +279,7 @@ T0\>](http://www.sqlalchemy.org/docs/07/core_connections.html#sqlalchemy.engine.
 行为改变（向后兼容）[¶](#behavioral-changes-backwards-compatible "Permalink to this headline")
 ----------------------------------------------------------------------------------------------
 
-### C扩展默认生成[¶](#c-extensions-build-by-default "Permalink to this headline")
+### C 扩展默认生成[¶](#c-extensions-build-by-default "Permalink to this headline")
 
 这是 0.7b4。如果检测到 cPython
 2.xx，Exts 将生成。如果构建失败，例如在 Windows 安装中，则捕获该条件并继续进行非 C 安装。如果使用 Python
@@ -293,7 +292,7 @@ equivalent to:
 
     query.from_self(func.count(literal_column('1'))).scalar()plain
 
-以前，内部逻辑试图重写查询本身的列子句，并且在检测到“子查询”条件（例如可能包含聚合的列查询或具有DISTINCT的查询）时，会经历复杂重写列子句的过程。这种逻辑在复杂条件下失败了，特别是那些涉及到连接表继承的逻辑，并且由于更全面的`.from_self()`调用已经过时了。
+以前，内部逻辑试图重写查询本身的列子句，并且在检测到“子查询”条件（例如可能包含聚合的列查询或具有 DISTINCT 的查询）时，会经历复杂重写列子句的过程。这种逻辑在复杂条件下失败了，特别是那些涉及到连接表继承的逻辑，并且由于更全面的`.from_self()`调用已经过时了。
 
 由`query.count()`发出的 SQL 现在总是如下形式：
 
@@ -334,7 +333,7 @@ Sajip 为我们的日志记录系统提供了一个补丁，使得不再需要�
 
 ### 简化的 polymorphic\_on 分配[¶](#simplified-polymorphic-on-assignment "Permalink to this headline")
 
-当在继承场景中使用时，`polymorphic_on`列映射属性的总体现在在对象构造时发生，即使用init事件调用其`__init__`方法。该属性的行为与任何其他列映射属性相同。以前，特殊逻辑会在刷新期间触发以填充此列，从而阻止任何用户代码修改其行为。新方法通过三种方式改进了这一点：1.多态身份现在就在其构建的对象上出现；
+当在继承场景中使用时，`polymorphic_on`列映射属性的总体现在在对象构造时发生，即使用 init 事件调用其`__init__`方法。该属性的行为与任何其他列映射属性相同。以前，特殊逻辑会在刷新期间触发以填充此列，从而阻止任何用户代码修改其行为。新方法通过三种方式改进了这一点：1.多态身份现在就在其构建的对象上出现；
 2.多态身份可以通过用户代码进行更改，而不会与任何其他列映射属性有所不同；
 3.刷新过程中映射器的内部被简化，不再需要对此列进行特殊检查。
 
@@ -342,13 +341,13 @@ Sajip 为我们的日志记录系统提供了一个补丁，使得不再需要�
 
 ### contains\_eager()连接多个路径（即“all()”）[¶](#contains-eager-chains-across-multiple-paths-i-e-all "Permalink to this headline")
 
-现在，``` `contains_eager()`` ```修饰符将自行链接一段更长的路径，而不需要发出单独的`contains_eager()`调用。代替：
+现在，`contains_eager()`修饰符将自行链接一段更长的路径，而不需要发出单独的`contains_eager()`调用。代替：
 
-    session.query(A).options(contains_eager(A.b), contains_eager(A.b, B.c))
+    session.query(A).options(contains_eager(A.b), contains_eager(A.b, B.c))plainplain
 
 你可以说：
 
-    session.query(A).options(contains_eager(A.b, B.c))
+    session.query(A).options(contains_eager(A.b, B.c))plain
 
 [＃2032 T0\>](http://www.sqlalchemy.org/trac/ticket/2032)
 
@@ -384,7 +383,7 @@ environments. 0.7中的`sqla_nose.py`脚本现在是用鼻子运行测试的唯�
 
 完全不反对任何`Table`的构造，就像一个函数一样，可以被映射。
 
-    from sqlalchemy import select, func
+    from sqlalchemy import select, funcplainplainplainplain
     from sqlalchemy.orm import mapper
 
     class Subset(object):
@@ -436,9 +435,9 @@ Server 将这些类型的长度默认为'1'。
 
 ### `PickleType`和 ARRAY 可变性关闭[¶](#pickletype-and-array-mutability-turned-off-by-default "Permalink to this headline")
 
-当映射具有`PickleType`或`postgresql.ARRAY`数据类型的列时，此更改引用ORM的默认行为。`mutable`标志现在默认设置为`False`。如果现有的应用程序使用这些类型，并且依赖于检测到就地突变，则必须使用`mutable=True`构造类型对象以恢复 0.6 行为：
+当映射具有`PickleType`或`postgresql.ARRAY`数据类型的列时，此更改引用 ORM 的默认行为。`mutable`标志现在默认设置为`False`。如果现有的应用程序使用这些类型，并且依赖于检测到就地突变，则必须使用`mutable=True`构造类型对象以恢复 0.6 行为：
 
-    Table('mytable', metadata,plain
+    Table('mytable', metadata,plainplain
         # ....
 
         Column('pickled_data', PickleType(mutable=True))
@@ -457,12 +456,12 @@ migrate to the new mutation tracking system, as `mutable=True` is likely to be d
 
 ### `composite()`的可变性检测需要突变跟踪扩展[¶](#mutability-detection-of-composite-requires-the-mutation-tracking-extension "Permalink to this headline")
 
-所谓的“复合”映射属性，即那些使用[复合列类型](http://www.sqlalchemy.org/docs/07/orm_mapper_config.html#composite-column-types)中描述的技术配置的属性，已被重新实现，使得ORM内部不再意识到它们（导致更短，更高效关键部分的代码路径）。虽然复合类型通常被视为不可变的值对象，但从未强制执行。对于使用具有可变性的组合的应用程序，[Mutation
+所谓的“复合”映射属性，即那些使用[复合列类型](http://www.sqlalchemy.org/docs/07/orm_mapper_config.html#composite-column-types)中描述的技术配置的属性，已被重新实现，使得 ORM 内部不再意识到它们（导致更短，更高效关键部分的代码路径）。虽然复合类型通常被视为不可变的值对象，但从未强制执行。对于使用具有可变性的组合的应用程序，[Mutation
 Tracking](http://www.sqlalchemy.org/docs/07/orm_extensions_mutable.html)扩展提供了一个基类，它建立了用户定义的组合类型将更改事件消息发送回每个对象的所属父项或父项的机制。
 
 使用复合类型并依赖这些对象的原位变异检测的应用程序应该迁移到“突变追踪”扩展，或者更改复合类型的用法，以免不再需要就地更改（即对待它们作为不可变的值对象）。
 
-### SQLite - SQLite方言现在对基于文件的数据库使用`NullPool` [¶](#sqlite-the-sqlite-dialect-now-uses-nullpool-for-file-based-databases "Permalink to this headline")
+### SQLite - SQLite 方言现在对基于文件的数据库使用`NullPool` [¶](#sqlite-the-sqlite-dialect-now-uses-nullpool-for-file-based-databases "Permalink to this headline")
 
 This change is **99.999% backwards compatible**, unless you are using
 temporary tables across connection pool connections.
@@ -474,12 +473,12 @@ temporary tables across connection pool connections.
 `SingletonThreadPool` is still the default engine
 when a `:memory:` database is used.
 
-请注意，由于 SQLite 处理临时表的方式，此更改**会中断跨Session提交使用的临时表**。如果需要超出一个池连接范围的临时表，请参见[http://www.sqlalchemy.org/docs/dialects\_sqlite.html\#using](http://www.sqlalchemy.org/docs/dialects_sqlite.html#using)
+请注意，由于 SQLite 处理临时表的方式，此更改**会中断跨 Session 提交使用的临时表**。如果需要超出一个池连接范围的临时表，请参见[http://www.sqlalchemy.org/docs/dialects\_sqlite.html\#using](http://www.sqlalchemy.org/docs/dialects_sqlite.html#using)
 - temporary-tables-with-sqlite 中的注释。
 
 [＃1921 T0\>](http://www.sqlalchemy.org/trac/ticket/1921)
 
-### `Session.merge()`检查版本映射器的版本id [¶](#session-merge-checks-version-ids-for-versioned-mappers "Permalink to this headline")
+### `Session.merge()`检查版本映射器的版本 id [¶](#session-merge-checks-version-ids-for-versioned-mappers "Permalink to this headline")
 
 Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假设映射使用版本 ID 并且传入状态具有分配的版本 ID，并且如果它们不匹配则引发 StaleDataError。这是正确的行为，因为如果传入状态包含陈旧的版本 ID，则应该假定状态为陈旧。
 
@@ -495,7 +494,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 给定两个映射类`Foo`和`Bar`，每个类都有一个列`spam`：
 
-    qa = session.query(Foo.spam)plainplain
+    qa = session.query(Foo.spam)plainplainplain
     qb = session.query(Bar.spam)
 
     qu = qa.union(qb)
@@ -596,7 +595,7 @@ column is the primary representation of `FooBar.id`
 
 这是 0.6 的警告，现在 0.7 的错误。为`polymorphic_on`提供的列必须位于映射可选项中。这可以防止一些偶然的用户错误，例如：
 
-    mapper(SomeClass, sometable, polymorphic_on=some_lookup_table.c.id)
+    mapper(SomeClass, sometable, polymorphic_on=some_lookup_table.c.id)plain
 
 其中 polymorphic\_on 必须位于`sometable`列上，在这种情况下可能是`sometable.c.some_lookup_id`。还有一些“多态联合”情景，其中有时会出现类似的错误。
 
@@ -639,8 +638,8 @@ constructor as well as `Table.tometadata()`.
 在 Integer
 PK 列上存在 server\_default 时建立一致性。SQLA 不会预取这些，也不会返回到 cursor.lastrowid（DBAPI）中。确保所有后端始终在 result.inserted\_primary\_key 中返回 None，这些后端可能先前已返回一个值。在主键列上使用 server\_default 是非常不寻常的。如果使用特殊函数或 SQL 表达式来生成主键默认值，则应该将其设置为 Python 端“default”而不是 server\_default。
 
-关于这种情况的反思，除了在我们检测到序列默认值的PG SERIAL
-col的情况下，对server\_default 的 int PK
+关于这种情况的反思，除了在我们检测到序列默认值的 PG SERIAL
+col 的情况下，对 server\_default 的 int PK
 col 的反映将“autoincrement”标志设置为 False。
 
 [\#2020](http://www.sqlalchemy.org/trac/ticket/2020)
@@ -652,7 +651,7 @@ For a few years we’ve added the string `sqlalchemy.exceptions` to `sys.modules
 “`import sqlalchemy.exceptions`” would work.
 很久以来，核心例外模块的名称一直是`exc`，因此建议为此模块导入：
 
-    from sqlalchemy import exc
+    from sqlalchemy import excplain
 
 The `exceptions` name is still present in
 “`sqlalchemy`” for applications which might have
@@ -661,7 +660,7 @@ should also start using the `exc` name.
 
 ### 查询计时配方更改[¶](#query-timing-recipe-changes "Permalink to this headline")
 
-虽然不是SQLAlchemy本身的一部分，但值得一提的是，将`ConnectionProxy`重新加入到新事件系统中意味着它不再适合“Timing all
+虽然不是 SQLAlchemy 本身的一部分，但值得一提的是，将`ConnectionProxy`重新加入到新事件系统中意味着它不再适合“Timing all
 Queries”配方。请调整查询计时器以使用`before_cursor_execute()`和`after_cursor_execute()`事件，并在更新配方 UsageRecipes / Profiling 中进行演示。
 
 弃用的 API [¶](#deprecated-api "Permalink to this headline")
@@ -686,21 +685,21 @@ restored as of 0.7b4/0.7.0, but emits a deprecation warning.
 `PoolListener`, `ConnectionProxy`, `DDLElement.execute_at` are superseded by
 `event.listen()`, using the `PoolEvents`, `EngineEvents`, `DDLEvents` dispatch targets, respectively.
 
-### ORM扩展取代了事件监听器[¶](#orm-extensions-superseded-by-event-listeners "Permalink to this headline")
+### ORM 扩展取代了事件监听器[¶](#orm-extensions-superseded-by-event-listeners "Permalink to this headline")
 
 `MapperExtension`, `AttributeExtension`, `SessionExtension` are superseded by
 `event.listen()`, using the `MapperEvents`/`InstanceEvents`,
 `AttributeEvents`, `SessionEvents`, dispatch targets, respectively.
 
-### 在select()中为MySQL发送字符串'distinct'应该通过前缀来完成[¶](#sending-a-string-to-distinct-in-select-for-mysql-should-be-done-via-prefixes "Permalink to this headline")
+### 在 select()中为 MySQL 发送字符串'distinct'应该通过前缀来完成[¶](#sending-a-string-to-distinct-in-select-for-mysql-should-be-done-via-prefixes "Permalink to this headline")
 
 这个模糊的特性允许这种模式与 MySQL 后端：
 
-    select([mytable], distinct='ALL', prefixes=['HIGH_PRIORITY'])plainplain
+    select([mytable], distinct='ALL', prefixes=['HIGH_PRIORITY'])plainplainplain
 
 `prefixes`关键字或`prefix_with()`方法应该用于非标准或不常用的前缀：
 
-    select([mytable]).prefix_with('HIGH_PRIORITY', 'ALL')
+    select([mytable]).prefix_with('HIGH_PRIORITY', 'ALL')plain
 
 ### `useexisting`取代`extend_existing`和`keep_existing` [¶](#useexisting-superseded-by-extend-existing-and-keep-existing "Permalink to this headline")
 
@@ -711,11 +710,11 @@ restored as of 0.7b4/0.7.0, but emits a deprecation warning.
 向后不兼容的 API 更改[¶](#backwards-incompatible-api-changes "Permalink to this headline")
 ----------------------------------------------------------------------------------------
 
-### 传递给`bindparam()`的可加密标签不会被评估 - 影响Beaker示例[¶](#callables-passed-to-bindparam-don-t-get-evaluated-affects-the-beaker-example "Permalink to this headline")
+### 传递给`bindparam()`的可加密标签不会被评估 - 影响 Beaker 示例[¶](#callables-passed-to-bindparam-don-t-get-evaluated-affects-the-beaker-example "Permalink to this headline")
 
 [＃1950 T0\>](http://www.sqlalchemy.org/trac/ticket/1950)
 
-请注意，这会影响Beaker缓存示例，其中`_params_from_query()`函数的工作需要稍作调整。如果您使用 Beaker 示例中的代码，则应该应用此更改。
+请注意，这会影响 Beaker 缓存示例，其中`_params_from_query()`函数的工作需要稍作调整。如果您使用 Beaker 示例中的代码，则应该应用此更改。
 
 ### types.type\_map 现在是 private，types.\_type\_map [¶](#types-type-map-is-now-private-types-type-map "Permalink to this headline")
 
@@ -723,7 +722,7 @@ restored as of 0.7b4/0.7.0, but emits a deprecation warning.
 
 [＃1870 T0\>](http://www.sqlalchemy.org/trac/ticket/1870)
 
-### 将独立`alias()`函数的`alias`关键字arg重命名为`name` [¶](#renamed-the-alias-keyword-arg-of-standalone-alias-function-to-name "Permalink to this headline")
+### 将独立`alias()`函数的`alias`关键字 arg 重命名为`name` [¶](#renamed-the-alias-keyword-arg-of-standalone-alias-function-to-name "Permalink to this headline")
 
 This so that the keyword argument `name` matches
 that of the `alias()` methods on all
@@ -750,7 +749,7 @@ that of the `alias()` methods on all
 `Pool.return_conn()` - \>
 `Pool._return_conn()`
 
-`Pool.get()` - \> `Pool._get()`，公共API为`Pool.connect()`
+`Pool.get()` - \> `Pool._get()`，公共 API 为`Pool.connect()`
 
 `SingletonThreadPool.cleanup()` - \>
 `_cleanup()`

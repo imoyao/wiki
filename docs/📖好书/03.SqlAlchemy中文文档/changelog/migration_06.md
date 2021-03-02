@@ -34,13 +34,13 @@ SQLAlchemy 0.6 中有什么新东西？[¶](#what-s-new-in-sqlalchemy-0-6 "Perma
 
 现在，方言模块在单个数据库后端的范围内分解为不同的子组件。方言实现现在位于`sqlalchemy.dialects`包中。`sqlalchemy.databases`包依然以占位符的形式存在，为简单的导入提供一定程度的后向兼容性。
 
-对于每个受支持的数据库，在包含多个文件的`sqlalchemy.dialects`中存在一个子包。每个软件包都包含一个称为`base.py`的模块，该模块定义该数据库使用的特定SQL方言。它还包含一个或多个“驱动程序”模块，每个模块对应于特定的DBAPI
+对于每个受支持的数据库，在包含多个文件的`sqlalchemy.dialects`中存在一个子包。每个软件包都包含一个称为`base.py`的模块，该模块定义该数据库使用的特定 SQL 方言。它还包含一个或多个“驱动程序”模块，每个模块对应于特定的 DBAPI
 - 这些文件被命名为与 DBAPI 本身相对应，如`pysqlite`，`cx_oracle`或`pyodbc`SQLAlchemy方言使用的类首先在`base.py`模块中声明，定义数据库定义的所有行为特征。这些包括能力映射，如“支持序列”，“支持返回”等，类型定义和 SQL 编译规则。每个“驱动程序”模块依次提供这些类的子类，以覆盖默认行为以适应该 DBAPI 的附加功能，行为和怪癖。对于支持多个后端（pyodbc，zxJDBC，mxODBC）的 DBAPI，方言模块将使用来自`sqlalchemy.connectors`包的 mixins，它提供了所有后端通用的 DBAPI 功能，通常涉及 connect 参数。这意味着使用 pyodbc，zxJDBC 或 mxODBC 进行连接（实现时）在支持的后端之间非常一致。
 
 由`create_engine()`使用的 URL 格式已得到增强，可以使用受 JDBC 启发的方案来处理特定后端的任意数量的 DBAPI。以前的格式仍然有效，并且会选择一个“默认的”DBAPI 实现，比如下面的 Postgresql
 URL，它将使用 psycopg2：
 
-    create_engine('postgresql://scott:tiger@localhost/test')plain
+    create_engine('postgresql://scott:tiger@localhost/test')plainplain
 
 但是，要指定特定的 DBAPI 后端（例如 pg8000），请使用加号“+”将其添加到 URL 的“协议”部分中：
 
@@ -66,7 +66,7 @@ URL，它将使用 psycopg2：
 -   方言现在在初始连接上收到 initialize()事件以确定连接属性。
 -   编译器生成的函数和运算符现在使用形式为“visit\_ ”和“visit\_
     \_fn”的（几乎）常规调度函数来提供定制的处理。 T1\>
-    T0\>这代替了用直观的访问者方法复制编译器子类中的“函数”和“操作符”字典的需要，并且还允许编译器子类完全控制渲染，因为完整的\_Function 或\_BinaryExpression对象被传入。
+    T0\>这代替了用直观的访问者方法复制编译器子类中的“函数”和“操作符”字典的需要，并且还允许编译器子类完全控制渲染，因为完整的\_Function 或\_BinaryExpression 对象被传入。
 
 ### Dialect Imports [¶](#dialect-imports "Permalink to this headline")
 
@@ -75,7 +75,7 @@ URL，它将使用 psycopg2：
     from sqlalchemy.dialects.postgresql import INTEGER, BIGINT, SMALLINT,\plain
                                                 VARCHAR, MACADDR, DATE, BYTEA
 
-在上面，`INTEGER`实际上是`sqlalchemy.types`中普通的`INTEGER`类型，但是PG方言使它可以以与那些类型相同的方式是特定于PG的，如`BYTEA`和`MACADDR`。
+在上面，`INTEGER`实际上是`sqlalchemy.types`中普通的`INTEGER`类型，但是 PG 方言使它可以以与那些类型相同的方式是特定于 PG 的，如`BYTEA`和`MACADDR`。
 
 表达式语言变化[¶](#expression-language-changes "Permalink to this headline")
 ----------------------------------------------------------------------------
@@ -92,16 +92,16 @@ URL，它将使用 psycopg2：
 
 这样一来，Python 表达式在转换为字符串时就会生成 SQL 表达式：
 
-    >>> str(column('foo') == 5)plain
+    >>> str(column('foo') == 5)plainplain
     'foo = :foo_1'
 
 但是如果我们这样说会发生什么？
 
-    >>> if column('foo') == 5:plain
+    >>> if column('foo') == 5:plainplain
     ...     print("yes")
     ...
 
-在先前版本的SQLAlchemy中，返回的`_BinaryExpression`是一个普通的 Python 对象，其计算结果为`True`。现在，它计算实际的`ClauseElement`是否应该与正在比较的哈希值相同。含义：
+在先前版本的 SQLAlchemy 中，返回的`_BinaryExpression`是一个普通的 Python 对象，其计算结果为`True`。现在，它计算实际的`ClauseElement`是否应该与正在比较的哈希值相同。含义：
 
     >>> bool(column('foo') == 5)plain
     False
@@ -167,7 +167,7 @@ first compound element within another compound (such as, a
 `union()` inside of an `except_()`) wouldn’t be parenthesized.
 这是不一致的，并且在 Postgresql 上产生了错误的结果，PostgreSQL 具有关于 INTERSECTION 的优先规则，并且它通常是一个惊喜。当在 SQLite 中使用复杂的组合时，现在需要将第一个元素转换为子查询（它也与 PG 兼容）。一个新的例子是在[[http://www.sqlalchemy.org/docs/06/sqlexpression.html](http://www.sqlalchemy.org/docs/06/sqlexpression.html)＃union-and-other-set-operations]结尾处的 SQL 表达式教程中。有关更多背景信息，请参阅[＃1665](http://www.sqlalchemy.org/trac/ticket/1665)和r6690。
 
-C用于结果获取的扩展[¶](#c-extensions-for-result-fetching "Permalink to this headline")
+C 用于结果获取的扩展[¶](#c-extensions-for-result-fetching "Permalink to this headline")
 --------------------------------------------------------------------------------------
 
 The `ResultProxy` and related elements, including
@@ -180,14 +180,14 @@ The extensions have the most dramatic impact on result fetching using
 direct `ResultProxy` access, i.e. that which is
 returned by `engine.execute()`,
 `connection.execute()`, or
-`session.execute()`. 在由 ORM `Query`对象返回的结果中，结果提取的开销比例不高，因此 ORM 性能稍微提高了一些，主要是提取大型结果集。性能改进高度依赖于正在使用的 dbapi 以及用于访问每行的列的语法（例如，`row['name']`比`row.name`当前的扩展对插入/更新/删除的速度没有影响，也没有改善SQL执行的延迟，也就是说，花费大部分时间执行很多结果集很少的语句的应用程序看不到太多的改进。
+`session.execute()`. 在由 ORM `Query`对象返回的结果中，结果提取的开销比例不高，因此 ORM 性能稍微提高了一些，主要是提取大型结果集。性能改进高度依赖于正在使用的 dbapi 以及用于访问每行的列的语法（例如，`row['name']`比`row.name`当前的扩展对插入/更新/删除的速度没有影响，也没有改善 SQL 执行的延迟，也就是说，花费大部分时间执行很多结果集很少的语句的应用程序看不到太多的改进。
 
-无论延期如何，性能在0.6和0.5之间都有所提高。A quick overview of what
+无论延期如何，性能在 0.6 和 0.5 之间都有所提高。A quick overview of what
 connecting and fetching 50,000 rows looks like with SQLite, using mostly
 direct SQLite access, a `ResultProxy`, and a simple
 mapped ORM object:
 
-    sqlite select/native: 0.260splain
+    sqlite select/native: 0.260splainplainplain
 
     0.6 / C extension
 
@@ -218,16 +218,16 @@ extension versus not.
 
     DDL('CREATE TRIGGER users_trigger ...').execute_at('after-create', metadata)
 
-现在，全套的DDL结构在相同的系统下可用，包括CREATE TABLE，ADD
-CONSTRAINT等。:
+现在，全套的 DDL 结构在相同的系统下可用，包括 CREATE TABLE，ADD
+CONSTRAINT 等。:
 
-    from sqlalchemy.schema import Constraint, AddConstraintplain
+    from sqlalchemy.schema import Constraint, AddConstraintplainplainplain
 
     AddContraint(CheckConstraint("value > 5")).execute_at('after-create', mytable)
 
-此外，所有的 DDL 对象现在都是普通的`ClauseElement`对象，就像任何其他SQLAlchemy表达式对象一样：
+此外，所有的 DDL 对象现在都是普通的`ClauseElement`对象，就像任何其他 SQLAlchemy 表达式对象一样：
 
-    from sqlalchemy.schema import CreateTable
+    from sqlalchemy.schema import CreateTableplain
 
     create = CreateTable(mytable)
 
@@ -280,7 +280,7 @@ CONSTRAINT等。:
 
 -   其他删除的东西：
     -   `Table.key`（不知道这是什么）
-    -   `Column.bind`（通过column.table.bind获取）
+    -   `Column.bind`（通过 column.table.bind 获取）
     -   `Column.metadata`（通过 column.table.metadata 获取）
     -   `Column.sequence`（使用 column.default）
 
@@ -308,21 +308,21 @@ per-`Connection` and `isEnabledFor(DEBUG)` per-`ResultProxy` if already enabled 
 the parent connection. 池日志记录发送到`log.info()`和`log.debug()` - 没有检查 -
 请注意池检出/检入通常是每个事务一次。
 
-反射/督察API [¶](#reflection-inspector-api "Permalink to this headline")
+反射/督察 API [¶](#reflection-inspector-api "Permalink to this headline")
 ------------------------------------------------------------------------
 
 反射系统允许通过`Table（'sometable'， 元数据， autoload = True）反映表格列。  t0 >已经被开放到它自己的细粒度API中，它允许直接检查数据库元素，如表，列，约束，索引等。`此 API 将返回值表示为字符串，字典和`TypeEngine`对象的简单列表。现在，`autoload=True`的内部建立在这个系统上，原始数据库信息到`sqlalchemy.schema`结构的转换是集中的，大大简化了个别方言的契约减少不同后端之间的错误和不一致性。
 
 要使用检查员：
 
-    from sqlalchemy.engine.reflection import Inspector
+    from sqlalchemy.engine.reflection import Inspectorplainplain
     insp = Inspector.from_engine(my_engine)
 
     print(insp.get_schema_names())
 
 `from_engine()`方法在某些情况下会为后端特定的检查器提供额外的功能，例如提供`get_table_oid()`方法的 Postgresql：
 
-    my_engine = create_engine('postgresql://...')plain
+    my_engine = create_engine('postgresql://...')plainplain
     pg_insp = Inspector.from_engine(my_engine)
 
     print(pg_insp.get_table_oid('my_table'))
@@ -354,7 +354,7 @@ nextval()”系统带来更多的方法开销，该系统使用快速和肮脏�
 输入系统更改[¶](#type-system-changes "Permalink to this headline")
 ------------------------------------------------------------------
 
-### 新Archicture [¶](#new-archicture "Permalink to this headline")
+### 新 Archicture [¶](#new-archicture "Permalink to this headline")
 
 该类型系统已经在幕后完全重新编制，以提供两个目标：
 
@@ -384,11 +384,11 @@ unicode 对象，以用于基本选择 VARCHAR 值。如果是这样，`String`�
 其他类型可以根据需要选择禁用 unicode 处理，例如与 MS-SQL 一起使用时的`NVARCHAR`类型。
 
 特别是，如果基于先前返回非 Unicode 字符串的 DBAPI 移植应用程序，则“本地 unicode”模式具有明显不同的默认行为
-- 声明为`String`或`VARCHAR`现在默认返回unicode，而他们之前会返回字符串。这可能会破坏需要非Unicode字符串的代码。通过将`use_native_unicode=False`传递给`create_engine()`，可以禁用psycopg2“native unicode”模式。
+- 声明为`String`或`VARCHAR`现在默认返回 unicode，而他们之前会返回字符串。这可能会破坏需要非 Unicode 字符串的代码。通过将`use_native_unicode=False`传递给`create_engine()`，可以禁用 psycopg2“native unicode”模式。
 
 对于明确不需要 unicode 对象的字符串列更通用的解决方案是使用将 unicode 转换回 utf-8 或任何所需的`TypeDecorator`：
 
-    class UTF8Encoded(TypeDecorator):
+    class UTF8Encoded(TypeDecorator):plainplain
         """Unicode type which coerces to utf-8."""
 
         impl = sa.VARCHAR
@@ -413,7 +413,7 @@ CHECK 策略。请注意，Postgresql ENUM 类型目前不适用于 pg8000 或 z
 
 一些在表格元数据中大量使用的应用程序可能希望在反映的表格和/或未反映的表格中比较类型。在`TypeEngine`上有一个名为`_type_affinity`和相关联的比较帮助器`_compare_type_affinity`的半私人访问器。该访问器返回类型对应的“generic”`types`类：
 
-    >>> String(50)._compare_type_affinity(postgresql.VARCHAR(50))plain
+    >>> String(50)._compare_type_affinity(postgresql.VARCHAR(50))plainplainplain
     True
     >>> Integer()._compare_type_affinity(mysql.REAL)
     False
@@ -426,19 +426,19 @@ CHECK 策略。请注意，Postgresql ENUM 类型目前不适用于 pg8000 或 z
     NUMERIC, FLOAT, DECIMAL don’t generate any length or scale unless
     specified. 这也继续包括有争议的`String`和`VARCHAR`类型（尽管当 MySQL 被要求渲染 VARCHAR 的时候，方言会先发制人）。假定没有默认值，并且如果在 CREATE
     TABLE 语句中使用它们，则如果底层数据库不允许这些类型的非延长版本，则会引发错误。
--   对于BLOB / BYTEA /类似的类型，`Binary`类型已重命名为`LargeBinary`。对于`BINARY`和`VARBINARY`，它们直接存在于`types.BINARY`，`types.VARBINARY`中，以及MySQL和MS-SQL方言。
+-   对于BLOB / BYTEA /类似的类型，`Binary`类型已重命名为`LargeBinary`。对于`BINARY`和`VARBINARY`，它们直接存在于`types.BINARY`，`types.VARBINARY`中，以及 MySQL 和 MS-SQL 方言。
 -   `PickleType` now uses == for comparison of
     values when mutable=True, unless the “comparator” argument with a
     comparison function is specified to the type.
     如果您正在酸洗自定义对象，则应实施`__eq__()`方法，以便基于值的比较准确无误。
--   Numeric和Float的默认“precision”和“scale”参数已被删除，现在默认为None。除非提供这些值，否则默认情况下NUMERIC和FLOAT将不带数字参数呈现。
+-   Numeric 和 Float 的默认“precision”和“scale”参数已被删除，现在默认为 None。除非提供这些值，否则默认情况下 NUMERIC 和 FLOAT 将不带数字参数呈现。
 -   SQLite 上的 DATE，TIME 和 DATETIME 类型现在可以采用可选的“storage\_format”和“regexp”参数。“storage\_format”可用于使用自定义字符串格式存储这些类型。“regexp”允许使用自定义正则表达式来匹配数据库中的字符串值。
 -   不再支持 SQLite `Time`和`DateTime`类型的`__legacy_microseconds__`类型。您应该使用新的“storage\_format”参数。
 -   `DateTime` types on SQLite now use by a default
     a stricter regular expression to match strings from the database.
     如果您使用以旧格式存储的数据，请使用新的“regexp”参数。
 
-ORM更改[¶](#orm-changes "Permalink to this headline")
+ORM 更改[¶](#orm-changes "Permalink to this headline")
 -----------------------------------------------------
 
 将 ORM 应用程序从 0.5 升级到 0.6 应该几乎不需要更改，因为 ORM 的行为几乎完全相同。有一些默认参数和名称更改，并且一些加载行为已得到改进。
@@ -465,7 +465,7 @@ ORM更改[¶](#orm-changes "Permalink to this headline")
 一种新型的热切加载被称为“子查询”加载。这是一个负载，在首次加载第一个查询中所有父项的完整集合后，立即发出第二个 SQL 查询，并使用 INNER
 JOIN 向上连接到父项。Subquery loading is used simlarly to the current
 joined-eager loading, using the ``` `subqueryload()`` ``` and ``` ``subqueryload_all()`` ``` options
-as well as the ``` ``lazy='subquery'`` ``` setting
+as well as the `lazy='subquery'` setting
 on ``` ``relationship()` ```.
 子查询加载通常会更加高效地加载许多较大的集合，因为它无条件地使用 INNER
 JOIN，并且不会重新加载父行。
@@ -473,7 +473,7 @@ JOIN，并且不会重新加载父行。
 ### `eagerload()`, ``` ``eagerload_all()`` ``` is now `joinedload()`, ``` ``joinedload_all()` ```[¶](#eagerload-eagerload-all-is-now-joinedload-joinedload-all "Permalink to this headline")
 
 To make room for the new subquery load feature, the existing
-`eagerload()`/``` ``eagerload_all()`` ``` options are
+`eagerload()`/`eagerload_all()` options are
 now superseded by ``` ``joinedload()`` ``` and
 ``` ``joinedload_all()`` ```.
 就像`relation()`一样，旧名字在可预见的未来将继续存在。
@@ -482,13 +482,13 @@ now superseded by ``` ``joinedload()`` ``` and
 
 Continuing on the theme of loader strategies opened up, the standard
 keywords for the `lazy` option on
-``` ``relationship()`` ``` are now
-``` ``select`` ``` for lazy loading (via a SELECT
+`relationship()` are now
+`select` for lazy loading (via a SELECT
 issued on attribute access), ``` ``joined`` ``` for
-joined-eager loading, ``` ``subquery`` ``` for
+joined-eager loading, `subquery` for
 subquery-eager loading, ``` ``noload`` ``` for no
 loading should occur, and ``` ``dynamic`` ``` for a
-“dynamic” relationship. 旧的``` ``True`` ```，``` ``False`` ```，`None`参数仍被接受，其行为与以前一样。
+“dynamic” relationship. 旧的``` ``True`` ```，`False`，`None`参数仍被接受，其行为与以前一样。
 
 ### innerjoin =关于关系的 True，joinedload [¶](#innerjoin-true-on-relation-joinedload "Permalink to this headline")
 
@@ -497,7 +497,7 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
 在 mapper 级别：
 
-    mapper(Child, child)plainplain
+    mapper(Child, child)plainplainplainplain
     mapper(Parent, parent, properties={
         'child':relationship(Child, lazy='joined', innerjoin=True)
     })
@@ -528,13 +528,13 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
     会产生如下的 SQL：
 
-        SELECT * FROMplain
+        SELECT * FROMplainplainplainplain
           (SELECT * FROM addresses LIMIT 10) AS anon_1
           LEFT OUTER JOIN users AS users_1 ON users_1.id = anon_1.addresses_user_id
 
     这是因为任何渴望加载器的存在表明它们中的一些或全部可能涉及多行集合，这将需要在子查询内包装任何种类的行计数敏感修饰符，如LIMIT。
 
-    在0.6中，该逻辑更加敏感，并且可以检测所有渴望的加载器是否表示多对一，在这种情况下，渴望加入不会影响rowcount：
+    在 0.6 中，该逻辑更加敏感，并且可以检测所有渴望的加载器是否表示多对一，在这种情况下，渴望加入不会影响 rowcount：
 
         SELECT * FROM addresses LEFT OUTER JOIN users AS users_1 ON users_1.id = addresses.user_id LIMIT 10plain
 
@@ -546,7 +546,7 @@ MyISAM 这样的非级联数据库上，将该标志设置为`False`。未来的
 ### 烧杯缓存[¶](#beaker-caching "Permalink to this headline")
 
 Beaker集成的一个有希望的新例子是在`examples/beaker_caching`中。这是一个直接的方法，它在`Query`的结果生成引擎中应用 Beaker 缓存。缓存参数通过`query.options()`提供，并允许完全控制缓存的内容。SQLAlchemy
-0.6包含对`Session.merge()`方法的改进以支持此类和类似的配方，并在大多数情况下提供显着改进的性能。
+0.6 包含对`Session.merge()`方法的改进以支持此类和类似的配方，并在大多数情况下提供显着改进的性能。
 
 ### 其他更改[¶](#other-changes "Permalink to this headline")
 
@@ -557,7 +557,7 @@ Beaker集成的一个有希望的新例子是在`examples/beaker_caching`中。�
     从多宿主连接()子句中选择时很有用。
 -   `Session.merge()`上的“dont\_load =
     True”标志已弃用，现在为“load = False”。
--   添加了“make\_transient()”辅助函数，该函数将持久性/分离性实例转换为临时性实例（即，删除instance\_key 并从任何会话中删除）。[票：1052]
+-   添加了“make\_transient()”辅助函数，该函数将持久性/分离性实例转换为临时性实例（即，删除 instance\_key 并从任何会话中删除）。[票：1052]
 -   mapper()上的 allow\_null\_pks 标志已弃用，并已重命名为 allow\_partial\_pks。它默认打开。这意味着对于任何主键列都有一个非空值的行将被视为一个标识。通常只有在映射到外部联接时才需要此方案。当设置为 False 时，其中包含 NULL 的 PK 不会被视为主键
     -
     特别是这意味着结果行将返回为无（或未填充到集合中），0.6 中的新值也表示会话.merge()不会针对这样的 PK 值向数据库进行往返。[票：1680]
@@ -570,7 +570,7 @@ Beaker集成的一个有希望的新例子是在`examples/beaker_caching`中。�
 
 ### 已弃用/已删除 ORM 元素[¶](#deprecated-removed-orm-elements "Permalink to this headline")
 
-大多数在整个0.5版本中被弃用的元素和提出的弃用警告已被删除（有一些例外）。所有标记为“等待折旧”的元素现在都被弃用，并会在使用后引发警告。
+大多数在整个 0.5 版本中被弃用的元素和提出的弃用警告已被删除（有一些例外）。所有标记为“等待折旧”的元素现在都被弃用，并会在使用后引发警告。
 
 -   sessionmaker()上的'transactional'标志被删除。使用'autocommit =
     True'来表示'transactional = False'。
@@ -578,7 +578,7 @@ Beaker集成的一个有希望的新例子是在`examples/beaker_caching`中。�
 -   mapper()上的'select\_table'参数被删除。为此功能使用'with\_polymorphic
     =（“\*”，）'。
 -   同义词()的'代理'参数被删除。这个标志在整个 0.5 中没有做任何事情，因为“代理生成”行为现在是自动的。
--   不推荐将单个元素列表传递给joinedload()，joinedload\_all()，contains\_eager()，lazyload()，defer()和undefer()而不是多个位置\*参数。
+-   不推荐将单个元素列表传递给joinedload()，joinedload\_all()，contains\_eager()，lazyload()，defer()和 undefer()而不是多个位置\*参数。
 -   将单个元素列表传递给 query.order\_by()，query.group\_by()，query.join()或query.outerjoin()而不是多个位置\*参数已弃用。
 -   `query.iterate_instances()`被删除。使用`query.instances()`。
 -   `Query.query_from_parent()`被删除。Use the
@@ -596,7 +596,7 @@ Beaker集成的一个有希望的新例子是在`examples/beaker_caching`中。�
 -   session.merge()中的“dont\_load = True”标志不赞成使用“load = False”。
 -   `ScopedSession.mapper` remains deprecated.
     请参阅[http://www.sqlalchemy.org/trac/wiki/Usag](http://www.sqlalchemy.org/trac/wiki/Usag)
-    eRecipes / SessionAwareMapper中的使用配方
+    eRecipes / SessionAwareMapper 中的使用配方
 -   将`InstanceState`（内部 SQLAlchemy 状态对象）传递给`attributes.init_collection()`或`attributes.get_history()`已弃用。这些函数是公共 API，通常需要一个常规的映射对象实例。
 -   `declarative_base()`的'engine'参数被删除。使用'bind'关键字参数。
 

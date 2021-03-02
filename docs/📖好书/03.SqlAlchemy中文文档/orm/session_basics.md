@@ -44,7 +44,7 @@ is a regular Python class which can be directly instantiated.
 
 [`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")的用法如下所示：
 
-    from sqlalchemy import create_engineplainplainplain
+    from sqlalchemy import create_engineplainplainplainplainplainplain
     from sqlalchemy.orm import sessionmaker
 
     # an Engine, which the Session will use for connection
@@ -156,7 +156,7 @@ TL；博士；
 无论何时用于与数据库交谈，[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")在开始通信时都会立即开始数据库事务。假设`autocommit`标志保留为建议的`False`缺省值，则此事务将继续进行，直至[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")被回退，落实或关闭。[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")将在上一次交易结束后再次使用时开始新的交易；由此可见，[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")能够在多次交易中获得生命周期，但一次只能有一次。我们将这两个概念称为**事务范围**和**会话范围**。
 
 这里的含义是，SQLAlchemy
-ORM鼓励开发人员在他们的应用程序中建立这两个范围，不仅包括范围的开始和结束时间，还包括范围的范围，例如一个[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
+ORM 鼓励开发人员在他们的应用程序中建立这两个范围，不仅包括范围的开始和结束时间，还包括范围的范围，例如一个[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 
 开发人员决定这个范围的负担是 SQLAlchemy
 ORM 必须对如何使用数据库有强烈意见的一个领域。[unit of
@@ -199,7 +199,7 @@ session *externally* to functions that deal with specific data.
 
 例如。 **不要这样做**：
 
-    ### this is the **wrong way to do it** ###
+    ### this is the **wrong way to do it** ###plain
 
     class ThingOne(object):
         def go(self):
@@ -227,7 +227,7 @@ session *externally* to functions that deal with specific data.
 
 保持会话（通常是交易）的生命周期**独立和外部**：
 
-    ### this is a **better** (but not the only) way to do it ###
+    ### this is a **better** (but not the only) way to do it ###plain
 
     class ThingOne(object):
         def go(self, session):
@@ -252,7 +252,7 @@ session *externally* to functions that deal with specific data.
 
 高级开发人员将尽量保持会话，事务和异常管理的细节，尽可能避免程序工作的细节。例如，我们可以使用[上下文管理器](http://docs.python.org/3/library/contextlib.html#contextlib.contextmanager)进一步分离关注点：
 
-    ### another way (but again *not the only way*) to do it ###plain
+    ### another way (but again *not the only way*) to do it ###plainplainplain
 
     from contextlib import contextmanager
 
@@ -278,7 +278,7 @@ session *externally* to functions that deal with specific data.
 ### Session 是缓存吗？[¶](#is-the-session-a-cache "Permalink to this headline")
 
 Yeee ...没有。它有点用作缓存，因为它实现了[identity
-map](glossary.html#term-identity-map)模式，并存储了键入其主键的对象。但是，它不会执行任何类型的查询缓存。这意味着，如果你说`session.query(Foo).filter_by(name='bar')`，即使`Foo(name='bar')`在身份地图中，会议不知道这一点。它必须向数据库发出SQL，取回行，然后当它看到行中的主键时，*然后*它可以查看本地标识映射并查看该对象已经存在。只有当你说`query.get（{some primary key））` [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
+map](glossary.html#term-identity-map)模式，并存储了键入其主键的对象。但是，它不会执行任何类型的查询缓存。这意味着，如果你说`session.query(Foo).filter_by(name='bar')`，即使`Foo(name='bar')`在身份地图中，会议不知道这一点。它必须向数据库发出 SQL，取回行，然后当它看到行中的主键时，*然后*它可以查看本地标识映射并查看该对象已经存在。只有当你说`query.get（{some primary key））` [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 
 此外，Session 会默认使用弱引用存储对象实例。这也违背了将会话用作缓存的目的。
 
@@ -294,7 +294,7 @@ classmethod：
 
 更新的[Runtime Inspection API](core_inspection.html)系统也可以使用：
 
-    from sqlalchemy import inspectplainplain
+    from sqlalchemy import inspectplainplainplainplainplain
     session = inspect(someobject).session
 
 ### 会话是线程安全的吗？[¶](#is-the-session-thread-safe "Permalink to this headline")
@@ -306,7 +306,7 @@ Sessions](contextual.html#unitofwork-contextual)以了解有关背景信息）�
 
 更重要的一点是，你不应该*要*使用多个并发线程的会话。这就好比让一家餐厅的每个人都从同一个盘子吃东西。会话是一个本地“工作空间”，您可以使用它来完成一组特定的任务；您不希望或需要与其他正在执行其他任务的线程共享该会话。
 
-确保[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")一次只用于单个并发线程中称为“无共享”方法来实现并发。但实际上，不共享[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")意味着更重要的模式；它不仅意味着[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象本身，而且**与该Session**关联的所有对象都必须保持在单个并发线程的范围内。与[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")关联的一组映射对象本质上是对通过数据库连接访问的数据库行中的数据的代理，所以就像[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")本身一样，整个对象集实际上只是数据库连接（或连接）的大规模代理。最终，它主要是我们远离并发访问的 DBAPI 连接本身；但由于[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")及与其关联的所有对象都是该 DBAPI 连接的所有代理，因此整个图对于并发访问基本上不安全。
+确保[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")一次只用于单个并发线程中称为“无共享”方法来实现并发。但实际上，不共享[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")意味着更重要的模式；它不仅意味着[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象本身，而且**与该 Session**关联的所有对象都必须保持在单个并发线程的范围内。与[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")关联的一组映射对象本质上是对通过数据库连接访问的数据库行中的数据的代理，所以就像[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")本身一样，整个对象集实际上只是数据库连接（或连接）的大规模代理。最终，它主要是我们远离并发访问的 DBAPI 连接本身；但由于[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")及与其关联的所有对象都是该 DBAPI 连接的所有代理，因此整个图对于并发访问基本上不安全。
 
 If there are in fact multiple threads participating in the same task,
 then you may consider sharing the session and its objects between those
@@ -351,7 +351,7 @@ Tutorial](tutorial.html)中有详细介绍，并在 query\_api\_toplevel 中进�
 
 [`add()`](session_api.html#sqlalchemy.orm.session.Session.add "sqlalchemy.orm.session.Session.add")用于在实例中放置实例。对于*transient*（即全新的）实例，这将在下一次刷新时产生 INSERT 的效果。对于*持久*（即由此会话加载）的实例，它们已经存在并且不需要被添加。*已分离*的实例（即已从会话中删除）可以使用此方法重新与会话相关联：
 
-    user1 = User(name='user1')
+    user1 = User(name='user1')plain
     user2 = User(name='user2')
     session.add(user1)
     session.add(user2)
@@ -387,13 +387,13 @@ Tutorial](tutorial.html)中有详细介绍，并在 query\_api\_toplevel 中进�
 
 当上述会话提交时，所有属性都已过期。`user.addresses`的下一次访问将重新加载集合，从而显示所需的状态：
 
-    >>> session.commit()
+    >>> session.commit()plain
     >>> address in user.addresses
     False
 
 删除集合中项目的通常做法是直接使用[`delete()`](session_api.html#sqlalchemy.orm.session.Session.delete "sqlalchemy.orm.session.Session.delete")，而是使用级联行为自从从父集合中删除对象后自动调用删除。`delete-orphan`级联完成了这一点，如下例所示：
 
-    mapper(User, users_table, properties={plainplain
+    mapper(User, users_table, properties={plainplainplainplain
         'addresses':relationship(Address, cascade="all, delete, delete-orphan")
     })
     del user.addresses[1]
@@ -411,17 +411,17 @@ passing it to [`delete()`](session_api.html#sqlalchemy.orm.session.Session.delet
 
 对`Session.delete()`的警告是你需要有一个方便的对象来删除。查询包含一个[`delete()`](query.html#sqlalchemy.orm.query.Query.delete "sqlalchemy.orm.query.Query.delete")方法，该方法根据过滤标准删除：
 
-    session.query(User).filter(User.id==7).delete()plainplain
+    session.query(User).filter(User.id==7).delete()plainplainplainplainplainplainplain
 
 `Query.delete()`方法包含将会话中已存在的符合条件的对象“过期”的功能。然而，它确实有一些注意事项，包括“删除”和“删除孤立”级联不能充分表达已经加载的集合。有关更多详细信息，请参阅[`delete()`](query.html#sqlalchemy.orm.query.Query.delete "sqlalchemy.orm.query.Query.delete")的 API 文档。
 
 ### 潮红[¶ T0\>](#flushing "Permalink to this headline")
 
-当[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")与其默认配置一起使用时，冲洗步骤几乎总是透明地进行。具体来说，刷新发生在任何单个[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")发布之前，以及在事务提交之前的[`commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")调用中。当使用[`begin_nested()`](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")时，它也发生在发出SAVEPOINT之前。
+当[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")与其默认配置一起使用时，冲洗步骤几乎总是透明地进行。具体来说，刷新发生在任何单个[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")发布之前，以及在事务提交之前的[`commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")调用中。当使用[`begin_nested()`](session_api.html#sqlalchemy.orm.session.Session.begin_nested "sqlalchemy.orm.session.Session.begin_nested")时，它也发生在发出 SAVEPOINT 之前。
 
 无论自动刷新设置如何，都可以通过发出[`flush()`](session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")来强制刷新：
 
-    session.flush()
+    session.flush()plain
 
 通过使用标志`autoflush=False`构造[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")，可以禁用行为的“flush-on-Query”方面：
 

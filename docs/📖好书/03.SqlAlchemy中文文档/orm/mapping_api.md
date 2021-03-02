@@ -1,5 +1,5 @@
 ---
-title: 类映射API
+title: 类映射 API
 date: 2021-02-20 22:41:45
 permalink: /sqlalchemy/orm/mapping_api/
 categories:
@@ -15,7 +15,7 @@ tags:
  `sqlalchemy.orm.`{.descclassname}`mapper`{.descname}(*class\_*, *local\_table=None*, *properties=None*, *primary\_key=None*, *non\_primary=False*, *inherits=None*, *inherit\_condition=None*, *inherit\_foreign\_keys=None*, *extension=None*, *order\_by=False*, *always\_refresh=False*, *version\_id\_col=None*, *version\_id\_generator=None*, *polymorphic\_on=None*, *\_polymorphic\_map=None*, *polymorphic\_identity=None*, *concrete=False*, *with\_polymorphic=None*, *allow\_partial\_pks=True*, *batch=True*, *column\_prefix=None*, *include\_properties=None*, *exclude\_properties=None*, *passive\_updates=True*, *passive\_deletes=False*, *confirm\_deleted\_rows=True*, *eager\_defaults=False*, *legacy\_is\_orphan=False*, *\_compiled\_cache\_size=100*)[¶](#sqlalchemy.orm.mapper "Permalink to this definition")
 :   返回一个新的[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象。
 
-    该功能通常通过声明扩展在幕后使用。当使用Declarative时，许多通常的[`mapper()`](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")参数由Declarative扩展本身处理，包括`class_`，`local_table`，`properties`，`inherits`。其他选项使用`__mapper_args__`类变量传递给[`mapper()`](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")：
+    该功能通常通过声明扩展在幕后使用。当使用Declarative时，许多通常的[`mapper()`](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")参数由Declarative扩展本身处理，包括`class_`，`local_table`，`properties`，`inherits`。其他选项使用`__mapper_args__`类变量传递给[`mapper()`](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")：plain
 
         class MyClass(Base):
             __tablename__ = 'my_table'
@@ -499,7 +499,7 @@ tags:
  *class*`sqlalchemy.orm.mapper.`{.descclassname}`Mapper`{.descname}(*class\_*, *local\_table=None*, *properties=None*, *primary\_key=None*, *non\_primary=False*, *inherits=None*, *inherit\_condition=None*, *inherit\_foreign\_keys=None*, *extension=None*, *order\_by=False*, *always\_refresh=False*, *version\_id\_col=None*, *version\_id\_generator=None*, *polymorphic\_on=None*, *\_polymorphic\_map=None*, *polymorphic\_identity=None*, *concrete=False*, *with\_polymorphic=None*, *allow\_partial\_pks=True*, *batch=True*, *column\_prefix=None*, *include\_properties=None*, *exclude\_properties=None*, *passive\_updates=True*, *passive\_deletes=False*, *confirm\_deleted\_rows=True*, *eager\_defaults=False*, *legacy\_is\_orphan=False*, *\_compiled\_cache\_size=100*)[¶](#sqlalchemy.orm.mapper.Mapper "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.base.InspectionAttr`](internals.html#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")
 
-    定义类属性与数据库表列的关联。
+    定义类属性与数据库表列的关联。plain
 
     [`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象使用[`mapper()`](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")函数实例化。有关实例化新的[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象的信息，请参阅该函数的文档。
 

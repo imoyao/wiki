@@ -41,7 +41,7 @@ Events](session_events.html#session-lifecycle-events)部分，以及如何以编
 
 任何映射对象的实际状态都可以在任何时候使用[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")系统查看：
 
-    >>> from sqlalchemy import inspect
+    >>> from sqlalchemy import inspectplain
     >>> insp = inspect(my_object)
     >>> insp.persistent
     True
@@ -63,7 +63,7 @@ Events](session_events.html#session-lifecycle-events)部分，以及如何以编
 
 [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")本身的行为有点像集合式集合。所有存在的项目都可以使用迭代器接口访问：
 
-    for obj in session:
+    for obj in session:plain
         print(obj)
 
 可以使用常规的“包含”语义测试存在性：
@@ -101,7 +101,7 @@ Events](session_events.html#session-lifecycle-events)部分，以及如何以编
 
 基于事件的方法也是可行的。当所有对象保持在[persistent](glossary.html#term-persistent)状态时，为所有对象提供“强引用”行为的简单配方如下所示：
 
-    from sqlalchemy import eventplain
+    from sqlalchemy import eventplainplainplain
 
     def strong_reference_session(session):
         @event.listens_for(session, "pending_to_persistent")
@@ -189,7 +189,7 @@ state into a new session. 这里有一些例子：
     [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session").
     在操作结束时，父线程/进程维护它所启动的对象，并且线程/工作者可以继续处理这些对象的本地副本。
 
-    在“线程/进程之间的传输”用例中，应用程序可能也希望使用`load=False`标志以避免数据传输时出现开销和冗余SQL查询。
+    在“线程/进程之间的传输”用例中，应用程序可能也希望使用`load=False`标志以避免数据传输时出现开销和冗余 SQL 查询。
 
 ### 合并提示[¶](#merge-tips "Permalink to this headline")
 
@@ -197,9 +197,9 @@ state into a new session. 这里有一些例子：
 is an extremely useful method for many purposes.
 然而，它处理瞬态/分离对象与持久对象之间错综复杂的边界，以及状态的自动传输。可以在这里呈现的各种各样的场景通常需要对对象状态更谨慎的方法。合并的常见问题通常涉及有关传递给[`merge()`](session_api.html#sqlalchemy.orm.session.Session.merge "sqlalchemy.orm.session.Session.merge")的对象的一些意想不到的状态。
 
-让我们使用User和Address对象的规范例子：
+让我们使用 User 和 Address 对象的规范例子：
 
-    class User(Base):plain
+    class User(Base):plainplainplain
         __tablename__ = 'user'
 
         id = Column(Integer, primary_key=True)
@@ -215,7 +215,7 @@ is an extremely useful method for many purposes.
 
 假设`User`对象具有一个`Address`，它已经是持久的：
 
-    >>> u1 = User(name='ed', addresses=[Address(email_address='ed@ed.com')])
+    >>> u1 = User(name='ed', addresses=[Address(email_address='ed@ed.com')])plain
     >>> session.add(u1)
     >>> session.commit()
 
@@ -236,7 +236,7 @@ is an extremely useful method for many purposes.
 这是为什么 ？我们没有注意到我们的瀑布。将`a1.user`赋值给级联到`User.addresses`的 backref 的持久对象，并使我们的`a1`对象处于挂起状态，就好像我们已经添加它。现在我们在会话中有*两个*
 `Address`对象：
 
-    >>> a1 = Address()
+    >>> a1 = Address()plain
     >>> a1.user = u1
     >>> a1 in session
     True
@@ -258,7 +258,7 @@ solution here would usually be to not assign `a1.user` to an object already pers
 
 意外状态的另一个例子：
 
-    >>> a1 = Address(id=existing_a1.id, user_id=u1.id)
+    >>> a1 = Address(id=existing_a1.id, user_id=u1.id)plainplain
     >>> assert a1.user is None
     >>> True
     >>> a1 = session.merge(a1)
@@ -266,14 +266,14 @@ solution here would usually be to not assign `a1.user` to an object already pers
     sqlalchemy.exc.IntegrityError: (IntegrityError) address.user_id
     may not be NULL
 
-在这里，我们访问了a1.user，它返回了默认值`None`，它作为这个访问的结果放在我们对象的`__dict__`中`a1`通常，此操作不会创建更改事件，因此在刷新过程中`user_id`属性优先。但是当我们将`Address`对象合并到会话中时，操作等同于：
+在这里，我们访问了 a1.user，它返回了默认值`None`，它作为这个访问的结果放在我们对象的`__dict__`中`a1`通常，此操作不会创建更改事件，因此在刷新过程中`user_id`属性优先。但是当我们将`Address`对象合并到会话中时，操作等同于：
 
-    >>> existing_a1.id = existing_a1.id
+    >>> existing_a1.id = existing_a1.idplain
     >>> existing_a1.user_id = u1.id
     >>> existing_a1.user = None
 
 Where above, both `user_id` and `user` are assigned to, and change events are emitted for both.
-`user`关联优先，而None应用于`user_id`，导致失败。
+`user`关联优先，而 None 应用于`user_id`，导致失败。
 
 大多数[`merge()`](session_api.html#sqlalchemy.orm.session.Session.merge "sqlalchemy.orm.session.Session.merge")问题可以通过首先检查来检查
 - 会话中的对象是否过早？
@@ -302,18 +302,18 @@ Where above, both `user_id` and `user` are assigned to, and change events are em
 
 清除从会话中删除对象，将持久实例发送到分离状态，并将待处理实例发送到瞬态：
 
-    session.expunge(obj1)plainplain
+    session.expunge(obj1)plainplainplainplain
 
 要删除所有项目，请调用[`expunge_all()`](session_api.html#sqlalchemy.orm.session.Session.expunge_all "sqlalchemy.orm.session.Session.expunge_all")（此方法以前称为`clear()`）。
 
 刷新/过期[¶](#refreshing-expiring "Permalink to this headline")
 ---------------------------------------------------------------
 
-[Expiring](glossary.html#term-expiring)意味着保存在一系列对象属性中的数据库持久数据被删除，这样当下次访问这些属性时，就会发出一个SQL查询，它将刷新数据库中的数据。
+[Expiring](glossary.html#term-expiring)意味着保存在一系列对象属性中的数据库持久数据被删除，这样当下次访问这些属性时，就会发出一个 SQL 查询，它将刷新数据库中的数据。
 
 当我们谈论数据到期时，我们通常会谈论处于[persistent](glossary.html#term-persistent)状态的对象。例如，如果我们加载一个对象如下：
 
-    user = session.query(User).filter_by(name='user1').first()
+    user = session.query(User).filter_by(name='user1').first()plain
 
 上面的`User`对象是持久的，并且有一系列属性存在；如果我们要查看它的`__dict__`，我们会看到加载状态：
 
@@ -343,7 +343,7 @@ Where above, both `user_id` and `user` are assigned to, and change events are em
 以上，在访问过期属性`user.name`时，ORM 通过发出用户行的 SELECT 来启动[lazy
 load](glossary.html#term-lazy-load)以从数据库中检索最新状态这个用户提到的。之后，再次填充`__dict__`：
 
-    >>> user.__dict__plainplain
+    >>> user.__dict__plainplainplain
     {
       'id': 1, 'name': u'user1',
       '_sa_instance_state': <...>,
@@ -351,8 +351,8 @@ load](glossary.html#term-lazy-load)以从数据库中检索最新状态这个用
 
 注意
 
-当我们在`__dict__`里面查看时，为了看到 SQLAlchemy 用对象属性做些什么，我们**不应该修改`__dict__`的内容。直接，至少就SQLAlchemy
-ORM所维护的属性而言（SQLA领域之外的其他属性都可以）。**这是因为 SQLAlchemy 使用[descriptors](glossary.html#term-descriptors)来跟踪我们对对象所做的更改，并且当我们直接修改`__dict__`时，ORM 将无法跟踪我们改变了一些。
+当我们在`__dict__`里面查看时，为了看到 SQLAlchemy 用对象属性做些什么，我们**不应该修改`__dict__`的内容。直接，至少就 SQLAlchemy
+ORM 所维护的属性而言（SQLA 领域之外的其他属性都可以）。**这是因为 SQLAlchemy 使用[descriptors](glossary.html#term-descriptors)来跟踪我们对对象所做的更改，并且当我们直接修改`__dict__`时，ORM 将无法跟踪我们改变了一些。
 
 [`expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")和[`refresh()`](session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")的另一个关键行为是丢弃对象上所有未刷新的更改。也就是说，如果我们要修改`User`上的属性：
 
@@ -364,14 +364,14 @@ ORM所维护的属性而言（SQLA领域之外的其他属性都可以）。**�
     >>> user.name
     'user1'
 
-可以使用[`expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")方法将实例的所有ORM映射属性标记为“过期”：
+可以使用[`expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")方法将实例的所有 ORM 映射属性标记为“过期”：
 
-    # expire all ORM-mapped attributes on obj1
+    # expire all ORM-mapped attributes on obj1plainplainplain
     session.expire(obj1)
 
 它也可以传递一个字符串属性名称列表，引用特定的属性来标记为过期：
 
-    # expire only attributes obj1.attr1, obj1.attr2
+    # expire only attributes obj1.attr1, obj1.attr2plain
     session.expire(obj1, ['attr1', 'attr2'])
 
 [`refresh()`](session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")方法有一个类似的接口，但不是过期，而是立即为对象的行发出立即的 SELECT：
@@ -381,7 +381,7 @@ ORM所维护的属性而言（SQLA领域之外的其他属性都可以）。**�
 
 [`refresh()`](session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")也接受字符串属性名称列表，但与[`expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")不同，期望至少有一个名称是列映射属性的名称：
 
-    # reload obj1.attr1, obj1.attr2plain
+    # reload obj1.attr1, obj1.attr2plainplain
     session.refresh(obj1, ['attr1', 'attr2'])
 
 [`Session.expire_all()`](session_api.html#sqlalchemy.orm.session.Session.expire_all "sqlalchemy.orm.session.Session.expire_all")方法允许我们实时调用[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中包含的所有对象的[`Session.expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")
@@ -390,7 +390,7 @@ ORM所维护的属性而言（SQLA领域之外的其他属性都可以）。**�
 
 ### 什么实际上加载[¶](#what-actually-loads "Permalink to this headline")
 
-标有[`expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")或加载[`refresh()`](session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")的对象发出的SELECT语句根据以下几个因素而变化：
+标有[`expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")或加载[`refresh()`](session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")的对象发出的 SELECT 语句根据以下几个因素而变化：
 
 -   过期属性的负载仅由**列映射属性**触发。虽然任何类型的属性都可以标记为过期，包括[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")映​​射属性，但访问过期的[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")属性将仅为该属性发出加载，使用标准的面向关系的延迟加载。面向列的属性（即使过期）不会作为此操作的一部分加载，而是在访问任何面向列的属性时加载。
 -   [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")映​​射的属性不会加载，以响应正在访问的到期的基于列的属性。

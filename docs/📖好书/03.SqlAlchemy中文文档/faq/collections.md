@@ -88,7 +88,7 @@ False 关系的“动态”加载器是无效的。在这些情况下，较新�
 
 以上，`children`集合上的属性访问将会引发异常，如果它以前没有被预先加载。这包括读取权限，但对于集合也会影响写入权限，因为集合不能在没有先加载的情况下进行突变。其基本原理是确保应用程序在特定上下文中不发出任何意外的延迟加载。与其不必通过SQL日志来确定所有必要的属性已被加载，“提升”策略将导致卸载的属性在被访问时立即引发。通过使用[`orm.raiseload()`](loading_relationships.html#sqlalchemy.orm.raiseload "sqlalchemy.orm.raiseload")加载器选项，查询选项也可以使用提升策略。
 
-版本1.1中的新增功能：添加了“引导”加载器策略。
+版本 1.1 中的新增功能：添加了“引导”加载器策略。
 
 ### 使用被动删除[¶](#using-passive-deletes "Permalink to this headline")
 
@@ -201,7 +201,7 @@ we map an `Item` class containing a dictionary of
 
 [`attribute_mapped_collection()`](#sqlalchemy.orm.collections.attribute_mapped_collection "sqlalchemy.orm.collections.attribute_mapped_collection")将确保每个`Note`的`.keyword`属性符合字典中的键。例如，当分配给`Item.notes`时，我们提供的字典键必须与实际的`Note`对象匹配：
 
-    item = Item()
+    item = Item()plain
     item.notes = {
                 'a': Note('a', 'atext'),
                 'b': Note('b', 'btext')
@@ -212,7 +212,7 @@ a regular Python `@property` allows virtually any
 detail or combination of details about the object to be used as the key,
 as below when we establish it as a tuple of `Note.keyword` and the first ten letters of the `Note.text` field:
 
-    class Item(Base):
+    class Item(Base):plain
         __tablename__ = 'item'
         id = Column(Integer, primary_key=True)
         notes = relationship("Note",
@@ -246,7 +246,7 @@ backref。指定这种反向关系时，`Note`被添加到`Item.notes`字典中�
 
 其他内置的字典类型包括[`column_mapped_collection()`](#sqlalchemy.orm.collections.column_mapped_collection "sqlalchemy.orm.collections.column_mapped_collection")，它几乎像[`attribute_mapped_collection()`](#sqlalchemy.orm.collections.attribute_mapped_collection "sqlalchemy.orm.collections.attribute_mapped_collection")，直接给定[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
 
-    from sqlalchemy.orm.collections import column_mapped_collection
+    from sqlalchemy.orm.collections import column_mapped_collectionplain
 
     class Item(Base):
         __tablename__ = 'item'
@@ -272,7 +272,7 @@ Collections](extensions_associationproxy.html#proxying-dictionaries)和[Composit
 Association
 Proxies](extensions_associationproxy.html#composite-association-proxy)。
 
-` sqlalchemy.orm.collections。 T0>  attribute_mapped_collection  T1> （ T2>  attr_name  T3> ） T4> ¶< / T5>`{.descclassname}
+`sqlalchemy.orm.collections。 T0>  attribute_mapped_collection  T1> （ T2>  attr_name  T3> ） T4> ¶< / T5>`{.descclassname}
 :   基于属性的键控的基于字典的集合类型。
 
     使用基于集合中实体的'attr\_name'属性的键值返回[`MappedCollection`](#sqlalchemy.orm.collections.MappedCollection "sqlalchemy.orm.collections.MappedCollection")工厂，其中`attr_name`是属性的字符串名称。
@@ -286,7 +286,7 @@ Proxies](extensions_associationproxy.html#composite-association-proxy)。
 
     关键值在对象的生命周期中必须是不可变的。例如，如果这些键值在会话期间发生更改（例如，会话刷新后从无到数据库分配的整数），则无法映射外键值。
 
-` sqlalchemy.orm.collections。 T0>  mapped_collection  T1> （ T2>  keyfunc  T3> ） T4> ¶< / T5>`{.descclassname}
+`sqlalchemy.orm.collections。 T0>  mapped_collection  T1> （ T2>  keyfunc  T3> ） T4> ¶< / T5>`{.descclassname}
 :   基于字典的具有任意键控的集合类型。
 
     返回带有从keyfunc生成的键控函数的[`MappedCollection`](#sqlalchemy.orm.collections.MappedCollection "sqlalchemy.orm.collections.MappedCollection")工厂，这是一个可调用的实体，它返回一个实体并返回一个键值。
@@ -546,7 +546,7 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
 
 [`MappedCollection`](#sqlalchemy.orm.collections.MappedCollection "sqlalchemy.orm.collections.MappedCollection")类可以用作自定义类型的基类，也可以作为混合来快速将`dict`集合支持添加到其他类中。它使用键控功能委托给`__setitem__`和`__delitem__`：
 
-    from sqlalchemy.util import OrderedDict
+    from sqlalchemy.util import OrderedDictplain
     from sqlalchemy.orm.collections import MappedCollection
 
     class NodeMap(OrderedDict, MappedCollection):
@@ -565,7 +565,7 @@ user-defined versions of `__setitem__()` or
 -
 在一个已经检测到的调用中调用它们可能会导致重复触发事件或不恰当地触发事件，从而在极少数情况下导致内部状态损坏：
 
-    from sqlalchemy.orm.collections import MappedCollection,\
+    from sqlalchemy.orm.collections import MappedCollection,\plain
                                         collection
 
     class MyMappedCollection(MappedCollection):
@@ -590,7 +590,7 @@ ORM理解`dict`接口就像列表和集合一样，如果您选择继承`dict`�
 
 注意
 
-由于版本0.7.6之前的MappedCollection中存在一个错误，通常需要在使用[`collection.internally_instrumented()`](#sqlalchemy.orm.collections.collection.internally_instrumented "sqlalchemy.orm.collections.collection.internally_instrumented")的自定义[`MappedCollection`](#sqlalchemy.orm.collections.MappedCollection "sqlalchemy.orm.collections.MappedCollection")子类之前调用​​此解决方法：
+由于版本 0.7.6 之前的 MappedCollection 中存在一个错误，通常需要在使用[`collection.internally_instrumented()`](#sqlalchemy.orm.collections.collection.internally_instrumented "sqlalchemy.orm.collections.collection.internally_instrumented")的自定义[`MappedCollection`](#sqlalchemy.orm.collections.MappedCollection "sqlalchemy.orm.collections.MappedCollection")子类之前调用​​此解决方法：
 
     from sqlalchemy.orm.collections import _instrument_class, MappedCollection
     _instrument_class(MappedCollection)
@@ -656,7 +656,7 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
  `sqlalchemy.orm.collections.`{.descclassname}`bulk_replace`{.descname}(*values*, *existing\_adapter*, *new\_adapter*)[¶](#sqlalchemy.orm.collections.bulk_replace "Permalink to this definition")
 :   加载一个新的集合，根据之前的类似成员资格触发事件。
 
-    将`values`中的实例附加到`new_adapter`上。对于`existing_adapter`中不存在的任何实例，都会触发事件。`values`中不存在的`existing_adapter`中的任何实例都将移除在它们上面触发的事件。
+    将`values`中的实例附加到`new_adapter`上。对于`existing_adapter`中不存在的任何实例，都会触发事件。`values`中不存在的`existing_adapter`中的任何实例都将移除在它们上面触发的事件。plain
 
     参数：
 
@@ -672,7 +672,7 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
 *class* `sqlalchemy.orm.collections。`{.descclassname} `集合`{.descname}
 :   实体集合类的装饰器。
 
-    装饰者分为两组：注释和截取食谱。
+    装饰者分为两组：注释和截取食谱。plain
 
     注释装饰器（appender，remover，iterator，linker，converter，inward\_instrumented）表示方法的用途并且不带任何参数。他们不是与parens写的：
 
@@ -691,7 +691,7 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
 :   获取集合的[`CollectionAdapter`](#sqlalchemy.orm.collections.CollectionAdapter "sqlalchemy.orm.collections.CollectionAdapter")。
 
  *class*`sqlalchemy.orm.collections.`{.descclassname}`CollectionAdapter`{.descname}(*attr*, *owner\_state*, *data*)[¶](#sqlalchemy.orm.collections.CollectionAdapter "Permalink to this definition")
-:   ORM和任意Python集合之间的桥梁。
+:   ORM 和任意 Python 集合之间的桥梁。
 
     代理基本级集合操作（​​追加，删除，迭代）到基础Python集合，并为进入或离开集合的实体发出添加/删除事件。plain
 
@@ -705,7 +705,7 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
 *class* `sqlalchemy.orm.collections。`{.descclassname} `InstrumentedList`{.descname} [¶](#sqlalchemy.orm.collections.InstrumentedList "Permalink to this definition")
 :   基础：`__builtin__.list`
 
-    内置列表的检测版本。
+    内置列表的检测版本。plainplain
 
 *class* `sqlalchemy.orm.collections。`{.descclassname} `InstrumentedSet`{.descname} [¶](#sqlalchemy.orm.collections.InstrumentedSet "Permalink to this definition")
 :   基础：`__builtin__.set`
@@ -715,7 +715,7 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
 ` sqlalchemy.orm.collections。 T0>  prepare_instrumentation  T1> （ T2> 工厂 T3> ） T4> ¶< / T5>`{.descclassname}
 :   为将来使用作为集合类工厂准备一个可调用的函数。
 
-    给定一个集合类工厂（无论类型还是无参数），返回另一个工厂，在调用时将生成兼容的实例。plain
+    给定一个集合类工厂（无论类型还是无参数），返回另一个工厂，在调用时将生成兼容的实例。plainplain
 
     该函数负责将collection\_class = list转换为collection\_class =
     InstrumentedList的运行时行为。

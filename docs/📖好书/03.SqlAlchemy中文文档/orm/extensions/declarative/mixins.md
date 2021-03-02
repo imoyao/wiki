@@ -9,7 +9,6 @@ categories:
   - extensions
   - declarative
 tags:
-  - 
 ---
 混合、自定义实体公共类[¶](#mixin-and-custom-base-classes "Permalink to this headline")
 ======================================================================================
@@ -43,7 +42,7 @@ There’s no fixed convention over whether `MyMixin`
 precedes `Base` or not.
 正常的 Python 方法解决规则适用，上面的例子也适用于：
 
-    class MyModel(Base, MyMixin):plainplainplain
+    class MyModel(Base, MyMixin):plainplainplainplain
         name = Column(String(1000))
 
 这是有效的，因为`Base`在这里没有定义`MyMixin`定义的任何变量，即`__tablename__`，`__table_args__` `id`等如果`Base`确实定义了一个具有相同名称的属性，则首先放置在继承列表中的类将确定在新定义的类上使用哪个属性。
@@ -54,7 +53,7 @@ precedes `Base` or not.
 除了使用 MixIn 类这种方法外，上文提到的技术也是完全可以使用到 Base 基类本身的，实现方法就是通过给[`declarative_base()`](api.html#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")
 参数传一个 `cls` 参数
 
-    from sqlalchemy.ext.declarative import declared_attrplain
+    from sqlalchemy.ext.declarative import declared_attrplainplainplain
 
     class Base(object):
         @declared_attr
@@ -79,7 +78,7 @@ precedes `Base` or not.
 
 在 mixin 上指定列的最基本方法是通过简单的声明：
 
-    class TimestampMixin(object):
+    class TimestampMixin(object):plainplainplain
         created_at = Column(DateTime, default=func.now())
 
     class MyModel(TimestampMixin, Base):
@@ -100,7 +99,7 @@ identity)唯一标识了一个对象实例在一张表（schema）中的身份�
 
 此复制机制仅限于没有外键的简单列，因为[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")本身包含对在此级别无法正确重新创建的列的引用。对于具有外键的列以及需要目标显式上下文的各种映射级构造，提供了[`declared_attr`](api.html#sqlalchemy.ext.declarative.declared_attr "sqlalchemy.ext.declarative.declared_attr")修饰符，以便可以将许多类通用的模式定义为可调用对象：
 
-    from sqlalchemy.ext.declarative import declared_attrplain
+    from sqlalchemy.ext.declarative import declared_attrplainplain
 
     class ReferenceAddressMixin(object):
         @declared_attr
@@ -190,7 +189,7 @@ relationship and its possibly column-bound contents.
 
 上面的条件使用 lambda 来解决：
 
-    class RefTargetMixin(object):plain
+    class RefTargetMixin(object):plainplain
         @declared_attr
         def target_id(cls):
             return Column('target_id', ForeignKey('target.id'))
@@ -224,7 +223,7 @@ subclasses such as [`deferred()`](loading_columns.html#sqlalchemy.orm.deferred "
 etc.
 最终涉及对列的引用，因此在与声明性 mixin 一起使用时，必须具有[`declared_attr`](api.html#sqlalchemy.ext.declarative.declared_attr "sqlalchemy.ext.declarative.declared_attr")要求，以便不需要依赖复制：
 
-    class SomethingMixin(object):
+    class SomethingMixin(object):plainplain
 
         @declared_attr
         def dprop(cls):
@@ -252,7 +251,7 @@ etc.
 Mixins 可以指定用户定义的属性以及其他扩展单元，如[`association_proxy()`](associationproxy.html#sqlalchemy.ext.associationproxy.association_proxy "sqlalchemy.ext.associationproxy.association_proxy")。在属性必须专门针对目标子类定制的情况下，[`declared_attr`](api.html#sqlalchemy.ext.declarative.declared_attr "sqlalchemy.ext.declarative.declared_attr")的用法是必需的。一个示例是构建多个[`association_proxy()`](associationproxy.html#sqlalchemy.ext.associationproxy.association_proxy "sqlalchemy.ext.associationproxy.association_proxy")属性，每个属性都针对不同类型的子对象。下面是一个[`association_proxy()`](associationproxy.html#sqlalchemy.ext.associationproxy.association_proxy "sqlalchemy.ext.associationproxy.association_proxy")
 / mixin 示例，它为实现类提供了字符串值的标量列表：
 
-    from sqlalchemy import Column, Integer, ForeignKey, String
+    from sqlalchemy import Column, Integer, ForeignKey, Stringplain
     from sqlalchemy.orm import relationship
     from sqlalchemy.ext.associationproxy import association_proxy
     from sqlalchemy.ext.declarative import declarative_base, declared_attr
@@ -289,12 +288,12 @@ Mixins 可以指定用户定义的属性以及其他扩展单元，如[`associat
         id = Column(Integer(), primary_key=True)
 
 在上面，`HasStringCollection`
-mixin产生了一个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")，它引用了一个新生成的名为`StringAttribute`的类。`StringAttribute`类使用自己的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")定义生成，该定义对使用`HasStringCollection` mixin的父类是本地的。它还生成一个[`association_proxy()`](associationproxy.html#sqlalchemy.ext.associationproxy.association_proxy "sqlalchemy.ext.associationproxy.association_proxy")对象，该对象将对`strings`属性的引用代理到每个`StringAttribute`的`value`实例。
+mixin 产生了一个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")，它引用了一个新生成的名为`StringAttribute`的类。`StringAttribute`类使用自己的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")定义生成，该定义对使用`HasStringCollection` mixin 的父类是本地的。它还生成一个[`association_proxy()`](associationproxy.html#sqlalchemy.ext.associationproxy.association_proxy "sqlalchemy.ext.associationproxy.association_proxy")对象，该对象将对`strings`属性的引用代理到每个`StringAttribute`的`value`实例。
 
 `TypeA` or `TypeB` can be
 instantiated given the constructor argument `strings`, a list of strings:
 
-    ta = TypeA(strings=['foo', 'bar'])plain
+    ta = TypeA(strings=['foo', 'bar'])plainplain
     tb = TypeA(strings=['bat', 'bar'])
 
 该列表将生成`StringAttribute`对象的集合，该对象保存到`type_a_strings`或`type_b_strings`表的本地表中：
@@ -320,7 +319,7 @@ object is created for each of the `TypeA` and
 
 例如，要创建一个 mixin，为每个类提供一个基于类名的简单表名：
 
-    from sqlalchemy.ext.declarative import declared_attr
+    from sqlalchemy.ext.declarative import declared_attrplainplain
 
     class Tablename:
         @declared_attr
@@ -339,7 +338,7 @@ object is created for each of the `TypeA` and
 
 或者，我们可以使用[`has_inherited_table()`](api.html#sqlalchemy.ext.declarative.has_inherited_table "sqlalchemy.ext.declarative.has_inherited_table")修改我们的`__tablename__`函数为子类返回`None`。这具有将这些子类映射为父表单继承的效果：
 
-    from sqlalchemy.ext.declarative import declared_attr
+    from sqlalchemy.ext.declarative import declared_attrplainplain
     from sqlalchemy.ext.declarative import has_inherited_table
 
     class Tablename(object):
@@ -385,7 +384,7 @@ modifier, which indicates that the function should be invoked **for each
 class in the hierarchy**, just like it does for
 `__tablename__`:
 
-    class HasId(object):plain
+    class HasId(object):plainplain
         @declared_attr.cascading
         def id(cls):
             if has_inherited_table(cls):
@@ -412,7 +411,7 @@ class in the hierarchy**, just like it does for
 
 在声明性 mixin 指定的`__table_args__`或`__mapper_args__`的情况下，您可能希望将几个 mixin 的一些参数与您希望在类 iteself 上定义的参数结合起来。这里可以使用[`declared_attr`](api.html#sqlalchemy.ext.declarative.declared_attr "sqlalchemy.ext.declarative.declared_attr")装饰器来创建从多个集合中抽取的用户定义的整理例程：
 
-    from sqlalchemy.ext.declarative import declared_attrplain
+    from sqlalchemy.ext.declarative import declared_attrplainplainplain
 
     class MySQLSettings(object):
         __table_args__ = {'mysql_engine':'InnoDB'}
@@ -437,7 +436,7 @@ class in the hierarchy**, just like it does for
 
 要定义适用于从 mixin 派生的所有表的命名的可能多列[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")，请使用[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")的“inline”形式，并将它建立为`__table_args__`
 
-    class MyMixin(object):plainplainplainplainplain
+    class MyMixin(object):plainplainplainplainplainplain
         a =  Column(Integer)
         b =  Column(Integer)
 

@@ -4,10 +4,9 @@ date: 2021-02-20 22:41:31
 permalink: /sqlalchemy/1557ad/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - changelog
 tags:
-  - 
 ---
 SQLAlchemy 0.8 有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-8 "Permalink to this headline")
 ===========================================================================================
@@ -31,7 +30,7 @@ SQLAlchemy 版本将在 1.0 版中关闭，而 0.5 版以后的每个新版本�
 
 ### 针对Python 2.5及更高版本[¶](#targeting-python-2-5-and-up-now "Permalink to this headline")
 
-SQLAlchemy 0.8将针对Python 2.5并转发； Python 2.4的兼容性正在被丢弃。
+SQLAlchemy 0.8 将针对 Python 2.5 并转发； Python 2.4 的兼容性正在被丢弃。
 
 The internals will be able to make usage of Python ternaries (that is,
 `x if y else z`) which will improve things versus
@@ -57,7 +56,7 @@ SQLAlchemy 最终也会减少 2.5 的支持 -
     against a class that has multiple foreign key paths to the target.
     只需要`foreign_keys`参数来指定应包含的列：
 
-        class Parent(Base):plain
+        class Parent(Base):plainplainplain
             __tablename__ = 'parent'
             id = Column(Integer, primary_key=True)
             child_id_one = Column(Integer, ForeignKey('child.id'))
@@ -287,7 +286,7 @@ method allows the user to specify which tables should be present when
 querying against a joined-table entity.
 不幸的是，这个方法很笨拙，只适用于列表中的第一个实体，否则在内部使用和内部使用都会有尴尬的行为。已添加名为[`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")的对[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")结构的新增强，允许将任何实体“别名”为其自身的“多态”版本，可自由使用任何地方：
 
-    from sqlalchemy.orm import with_polymorphicplain
+    from sqlalchemy.orm import with_polymorphicplainplainplain
     palias = with_polymorphic(Person, [Engineer, Manager])
     session.query(Company).\
                 join(palias, Company.employees).\
@@ -325,7 +324,7 @@ attribute is accepted, including with loader functions like
 and comparison methods like [`PropComparator.any()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.any "sqlalchemy.orm.interfaces.PropComparator.any")
 and [`PropComparator.has()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.has "sqlalchemy.orm.interfaces.PropComparator.has"):
 
-    # use eager loading in conjunction with with_polymorphic targets
+    # use eager loading in conjunction with with_polymorphic targetsplain
     Job_P = with_polymorphic(Job, [SubJob, ExtraJob], aliased=True)
     q = s.query(DataContainer).\
                 join(DataContainer.jobs.of_type(Job_P)).\
@@ -377,7 +376,7 @@ Mapper 和实例事件现在可以与一个未映射的超类相关联，其中�
 
 ### 声明区分模块/包[¶](#declarative-distinguishes-between-modules-packages "Permalink to this headline")
 
-Declarative的一个关键特性是能够使用其字符串名称引用其他映射类。类名注册表现在对给定类的拥有模块和包是敏感的。类可以通过表达式中的虚线名称引用：
+Declarative 的一个关键特性是能够使用其字符串名称引用其他映射类。类名注册表现在对给定类的拥有模块和包是敏感的。类可以通过表达式中的虚线名称引用：
 
     class Snack(Base):plainplain
         # ...
@@ -393,7 +392,7 @@ Declarative的一个关键特性是能够使用其字符串名称引用其他映
 
 “延迟反射”示例已移至声明中的支持功能。这个特性允许只用占位符`Table`元数据构造声明式映射类，直到`prepare()`步骤被调用，给定一个`Engine`充分反映所有表格并建立实际映射。系统支持重写列，单个和联合继承，以及不同的每个引擎基数。现在可以根据在引擎创建时在一个步骤中汇编的现有表创建完整的声明性配置：
 
-    class ReflectedOne(DeferredReflection, Base):
+    class ReflectedOne(DeferredReflection, Base):plain
         __abstract__ = True
 
     class ReflectedTwo(DeferredReflection, Base):
@@ -447,7 +446,7 @@ or [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.
 
 特别是，对已加入继承实体的更新是受支持的，前提是 UPDATE 的目标对要过滤的表是本地的，或者如果父表和子表混合在一起，则它们将显式连接到查询中。下面，给出`Engineer`作为`Person`的联合子类：
 
-    query(Engineer).\
+    query(Engineer).\plain
             filter(Person.id==Engineer.id).\
             filter(Person.name=='dilbert').\
             update({"engineer_data":"java"})
@@ -473,7 +472,7 @@ or [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.
 请注意，Dogpile 示例以及之前的 Beaker 示例所使用的 SQLAlchemy
 API 已稍有变化，特别是如 Beaker 示例所示，需要进行此更改：
 
-    --- examples/beaker_caching/caching_query.pyplain
+    --- examples/beaker_caching/caching_query.pyplainplain
     +++ examples/beaker_caching/caching_query.py
     @@ -222,7 +222,8 @@
 
@@ -504,7 +503,7 @@ Core中的新操作系统添加了一直缺少的钩子，它将新的和重载�
 
 例如，要将对数支持添加到[`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")类型中：
 
-    from sqlalchemy.types import Numeric
+    from sqlalchemy.types import Numericplain
     from sqlalchemy.sql import func
 
     class CustomNumeric(Numeric):
@@ -540,7 +539,7 @@ The [`Insert.values()`](core_dml.html#sqlalchemy.sql.expression.Insert.values "s
 method now supports a list of dictionaries, which will render a
 multi-VALUES statement such as
 `VALUES (<row1>), (<row2>), ...`.
-这只与支持这种语法的后端相关，包括Postgresql，SQLite和MySQL。它与通常的`executemany()`风格的 INSERT 不同，它保持不变：
+这只与支持这种语法的后端相关，包括 Postgresql，SQLite 和 MySQL。它与通常的`executemany()`风格的 INSERT 不同，它保持不变：
 
     users.insert().values([plain
                         {"name": "some name"},
@@ -562,7 +561,7 @@ parameters as well as result row values, passing them through a Python
 side conversion function on the way to/back from the database.
 新功能允许类似的功能，除了在数据库方面：
 
-    from sqlalchemy.types import String
+    from sqlalchemy.types import Stringplain
     from sqlalchemy import func, Table, Column, MetaData
 
     class LowerString(String):
@@ -674,7 +673,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 [＃2606 T0\>](http://www.sqlalchemy.org/trac/ticket/2606)
 
-### 增强的Postgresql ARRAY类型[¶](#enhanced-postgresql-array-type "Permalink to this headline")
+### 增强的 Postgresql ARRAY 类型[¶](#enhanced-postgresql-array-type "Permalink to this headline")
 
 [`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型将接受可选的“维度”参数，将其固定为固定数量的维度，并在检索结果时大大提高效率：
 
@@ -694,13 +693,13 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 在 SELECT 中切片访问：
 
-    result = conn.execute(
+    result = conn.execute(plain
         select([mytable.c.arraycol[2:4]])
     )
 
 在更新中切片更新：
 
-    conn.execute(plain
+    conn.execute(plainplain
         mytable.update().values({mytable.c.arraycol[2:3]: [7, 8]})
     )
 
@@ -716,7 +715,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 数组串联，其中右侧`[4， 5， 6>`）被强制转换为数组文字：
 
-    select([mytable.c.arraycol + [4, 5, 6]])
+    select([mytable.c.arraycol + [4, 5, 6]])plain
 
 也可以看看
 
@@ -781,7 +780,7 @@ is used:
 
 面向MySQL，可以在任何这些结构中呈现“前缀”。例如。：
 
-    stmt = table.delete().prefix_with("LOW_PRIORITY", dialect="mysql")
+    stmt = table.delete().prefix_with("LOW_PRIORITY", dialect="mysql")plainplain
 
 
     stmt = table.update().prefix_with("LOW_PRIORITY", dialect="mysql")
@@ -893,7 +892,7 @@ NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基
 
 [＃2655 T0\>](http://www.sqlalchemy.org/trac/ticket/2655)
 
-### after\_attach事件在与会话相关联而不是之前触发后触发； before\_attach添加[¶](#the-after-attach-event-fires-after-the-item-is-associated-with-the-session-instead-of-before-before-attach-added "Permalink to this headline")
+### after\_attach 事件在与会话相关联而不是之前触发后触发； before\_attach添加[¶](#the-after-attach-event-fires-after-the-item-is-associated-with-the-session-instead-of-before-before-attach-added "Permalink to this headline")
 
 使用after\_attach的事件处理程序现在可以假定给定实例与给定会话关联：
 
@@ -915,7 +914,7 @@ NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基
 
 以前有必要调用[`Query.correlate()`](orm_query.html#sqlalchemy.orm.query.Query.correlate "sqlalchemy.orm.query.Query.correlate")以使列或 WHERE 子查询与父项相关联：
 
-    subq = session.query(Entity.value).\
+    subq = session.query(Entity.value).\plain
                     filter(Entity.id==Parent.entity_id).\
                     correlate(Parent).\
                     as_scalar()
@@ -944,7 +943,7 @@ actually used in that context.
 
 这种改变只会使渲染 SQL 变得更好，因为在相对于所选内容的 FROM 对象不足的情况下，不再可能渲染非法 SQL：
 
-    from sqlalchemy.sql import table, column, select
+    from sqlalchemy.sql import table, column, selectplain
 
     t1 = table('t1', column('x'))
     t2 = table('t2', column('y'))
@@ -956,13 +955,13 @@ actually used in that context.
 
     SELECT t1.x, t2.y FROM t2
 
-这是无效的SQL，因为“t1”在任何FROM子句中都没有引用。
+这是无效的 SQL，因为“t1”在任何 FROM 子句中都没有引用。
 
 现在，在没有包含 SELECT 的情况下，它会返回：
 
     SELECT t1.x, t2.y FROM t1, t2
 
-在SELECT中，相关按预期生效：
+在 SELECT 中，相关按预期生效：
 
     s2 = select([t1, t2]).where(t1.c.x == t2.c.y).where(t1.c.x == s)
 
@@ -989,7 +988,7 @@ actually used in that context.
 The [`InstrumentationEvents`](orm_events.html#sqlalchemy.orm.events.InstrumentationEvents "sqlalchemy.orm.events.InstrumentationEvents")
 series of event targets have documented that the events will only be
 fired off according to the actual class passed as a target.
-通过0.7，情况并非如此，任何适用于[`InstrumentationEvents`](orm_events.html#sqlalchemy.orm.events.InstrumentationEvents "sqlalchemy.orm.events.InstrumentationEvents")的事件侦听器都将被映射的所有类调用。在0.8中，增加了额外的逻辑，以便事件只会调用那些发送的类。默认情况下，`propagate`标志默认设置为`True`，因为类工具事件通常用于拦截尚未创建的类。
+通过 0.7，情况并非如此，任何适用于[`InstrumentationEvents`](orm_events.html#sqlalchemy.orm.events.InstrumentationEvents "sqlalchemy.orm.events.InstrumentationEvents")的事件侦听器都将被映射的所有类调用。在0.8中，增加了额外的逻辑，以便事件只会调用那些发送的类。默认情况下，`propagate`标志默认设置为`True`，因为类工具事件通常用于拦截尚未创建的类。
 
 [＃2590 T0\>](http://www.sqlalchemy.org/trac/ticket/2590)
 
@@ -1041,7 +1040,7 @@ x”这样的比较会发生同样的事情，总的来说，这种猜测级别�
 In 0.8, `Column.key` is honored
 in both cases:
 
-    # with 0.8
+    # with 0.8plain
     table1 = Table('t1', metadata,
         Column('col1', Integer, key='column_one')
     )
@@ -1068,7 +1067,7 @@ in both cases:
 
 0.7 添加了一个名为`column_reflect`的新事件，这样可以反映出列的反射，因为每个列都反映出来。我们得到这个事件有点不对，因为事件没有办法获取用于反射的当前`Inspector`和`Connection`，在来自数据库的附加信息的情况下是必要的。由于这是一个尚未广泛使用的新事件，因此我们将直接向其中添加`inspector`参数：
 
-    @event.listens_for(Table, "column_reflect")plain
+    @event.listens_for(Table, "column_reflect")plainplain
     def listen_for_col(inspector, table, column_info):
         # ...
 
@@ -1105,7 +1104,7 @@ MySQL 方言执行两个调用，一个是非常昂贵的，用于从数据库�
 
 一个非常古老的行为，`RowProxy`中的列名始终不区分大小写：
 
-    >>> row = result.fetchone()
+    >>> row = result.fetchone()plain
     >>> row['foo'] == row['FOO'] == row['Foo']
     True
 
@@ -1143,7 +1142,7 @@ SQLAlchemy ORM中旧的“可变”系统已被删除。这指的是`MutableType
 
 [＃2442 T0\>](http://www.sqlalchemy.org/trac/ticket/2442)
 
-### sqlalchemy.exceptions（多年来一直是sqlalchemy.exc）[¶](#sqlalchemy-exceptions-has-been-sqlalchemy-exc-for-years "Permalink to this headline")
+### sqlalchemy.exceptions（多年来一直是 sqlalchemy.exc）[¶](#sqlalchemy-exceptions-has-been-sqlalchemy-exc-for-years "Permalink to this headline")
 
 我们留下了一个别名`sqlalchemy.exceptions`，试图使一些尚未升级到使用`sqlalchemy.exc`的非常旧的库变得更容易一些。但有些用户仍然对它感到困惑，所以在 0.8 版本中，我们正在彻底消除这种混淆。
 

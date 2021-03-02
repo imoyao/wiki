@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:27
 permalink: /sqlalchemy/83b36d/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - changelog
 tags:
 ---
@@ -23,7 +23,7 @@ tags:
 
     参考文献：[＃274](http://www.sqlalchemy.org/trac/ticket/274)
 
--   用连接池改变了“无效”语义；将指示底层连接记录在下次调用时重新连接。如果在对connection.cursor()的底层调用中发生任何错误，“invalidate”也将自动被调用。这将有望允许连接池重新连接到已停止并启动而不重新启动连接应用程序的数据库[¶](#change-891655bb143a645ffda95f976413f7e4)
+-   用连接池改变了“无效”语义；将指示底层连接记录在下次调用时重新连接。如果在对 connection.cursor()的底层调用中发生任何错误，“invalidate”也将自动被调用。这将有望允许连接池重新连接到已停止并启动而不重新启动连接应用程序的数据库[¶](#change-891655bb143a645ffda95f976413f7e4)
 
     参考文献：[＃121](http://www.sqlalchemy.org/trac/ticket/121)
 
@@ -224,7 +224,7 @@ tags:
 
     参考文献：[＃76](http://www.sqlalchemy.org/trac/ticket/76)
 
--   对MapperExtension调用方案进行了大修，之前的工作并不完善[¶](#change-77fcf46249de1df2311dcc5841a81672)
+-   对 MapperExtension 调用方案进行了大修，之前的工作并不完善[¶](#change-77fcf46249de1df2311dcc5841a81672)
 
 -   调整为 ActiveMapper，支持自引用关系[¶](#change-3e7930f4e1f7db2df2614a03b648a0d4)
 
@@ -248,7 +248,7 @@ tags:
     assignmapper; this also adds them to
     activemapper[¶](#change-ee2c3e4930941f8e1b65654539428565)
 
--   封装在DBAPIError
+-   封装在 DBAPIError
     [¶](#change-4df52daf5a58fc301e4a1e627b125995)中的连接异常
 
 -   ActiveMapper now supports autoloading column definitions from the
@@ -343,11 +343,11 @@ tags:
 -   小的修复程序加上订购/限制/偏移[¶](#change-03a4cc85caf469f1dc0aff0590a1863a)
 
 -   utterly remarkable: added a single space between ‘CREATE TABLE’ and
-    ‘(’ since *that’s how MySQL indicates a non- reserved word………………
+    ‘(’ since *that’s how MySQL indicates a non- reserved word……
     tablename.....*[¶](#change-1afa0092b73a4311513258de8d1bfe61)
 
     参考文献：[＃206](http://www.sqlalchemy.org/trac/ticket/206)
-plain
+plainplainplain
 -   更多修复了继承问题，与多对多关系正确地保存[¶](#change-4aadd1394222f4244ef7c8cba4717753)
 
 -   fixed bug when specifying explicit module to mysql

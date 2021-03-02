@@ -78,7 +78,7 @@ Events](orm_session_events.html#session-lifecycle-events)中。
 
 为了解决给定新事件的灰色区域，引入了一个新的对象状态[deleted](glossary.html#term-deleted)。这种状态存在于“持久”和“分离”状态之间。通过[`Session.delete()`](orm_session_api.html#sqlalchemy.orm.session.Session.delete "sqlalchemy.orm.session.Session.delete")标记为删除的对象保持“持久”状态，直到刷新结束；此时，它将从身份映射中移除，移至“已删除”状态，并调用[`SessionEvents.persistent_to_deleted()`](orm_events.html#sqlalchemy.orm.events.SessionEvents.persistent_to_deleted "sqlalchemy.orm.events.SessionEvents.persistent_to_deleted")钩子。如果回滚[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象的事务，该对象将作为持久性恢复；调用[`SessionEvents.deleted_to_persistent()`](orm_events.html#sqlalchemy.orm.events.SessionEvents.deleted_to_persistent "sqlalchemy.orm.events.SessionEvents.deleted_to_persistent")转换。否则，如果[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象的事务被提交，则调用[`SessionEvents.deleted_to_detached()`](orm_events.html#sqlalchemy.orm.events.SessionEvents.deleted_to_detached "sqlalchemy.orm.events.SessionEvents.deleted_to_detached")转换。
 
-此外，对于处于新“已删除”状态的对象，[`InstanceState.persistent`](orm_internals.html#sqlalchemy.orm.state.InstanceState.persistent "sqlalchemy.orm.state.InstanceState.persistent")访问器**不再返回 True**；相反，[`InstanceState.deleted`](orm_internals.html#sqlalchemy.orm.state.InstanceState.deleted "sqlalchemy.orm.state.InstanceState.deleted")访问器已得到增强，可以可靠地报告此新状态。当对象被分离时，[`InstanceState.deleted`](orm_internals.html#sqlalchemy.orm.state.InstanceState.deleted "sqlalchemy.orm.state.InstanceState.deleted")将返回False，而[`InstanceState.detached`](orm_internals.html#sqlalchemy.orm.state.InstanceState.detached "sqlalchemy.orm.state.InstanceState.detached")存取器则为True。要确定某个对象是在当前事务中还是在之前的事务中被删除，请使用[`InstanceState.was_deleted`](orm_internals.html#sqlalchemy.orm.state.InstanceState.was_deleted "sqlalchemy.orm.state.InstanceState.was_deleted")访问器。
+此外，对于处于新“已删除”状态的对象，[`InstanceState.persistent`](orm_internals.html#sqlalchemy.orm.state.InstanceState.persistent "sqlalchemy.orm.state.InstanceState.persistent")访问器**不再返回 True**；相反，[`InstanceState.deleted`](orm_internals.html#sqlalchemy.orm.state.InstanceState.deleted "sqlalchemy.orm.state.InstanceState.deleted")访问器已得到增强，可以可靠地报告此新状态。当对象被分离时，[`InstanceState.deleted`](orm_internals.html#sqlalchemy.orm.state.InstanceState.deleted "sqlalchemy.orm.state.InstanceState.deleted")将返回 False，而[`InstanceState.detached`](orm_internals.html#sqlalchemy.orm.state.InstanceState.detached "sqlalchemy.orm.state.InstanceState.detached")存取器则为True。要确定某个对象是在当前事务中还是在之前的事务中被删除，请使用[`InstanceState.was_deleted`](orm_internals.html#sqlalchemy.orm.state.InstanceState.was_deleted "sqlalchemy.orm.state.InstanceState.was_deleted")访问器。
 
 #### 强身份地图已弃用[¶](#strong-identity-map-is-deprecated "Permalink to this headline")
 
@@ -96,7 +96,7 @@ Behavior](orm_session_state_management.html#session-referencing-behavior)。
     >>> obj.some_value
     None
 
-对于这个Python内部值来说，有一个用例与Core生成的默认值相对应，甚至在该对象被保存之前。为了适应这种用例，添加了一个新事件[`AttributeEvents.init_scalar()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.init_scalar "sqlalchemy.orm.events.AttributeEvents.init_scalar")。在[Attribute
+对于这个 Python 内部值来说，有一个用例与 Core 生成的默认值相对应，甚至在该对象被保存之前。为了适应这种用例，添加了一个新事件[`AttributeEvents.init_scalar()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.init_scalar "sqlalchemy.orm.events.AttributeEvents.init_scalar")。在[Attribute
 Instrumentation](orm_examples.html#examples-instrumentation)处的新示例`active_column_defaults.py`演示了一个示例用法，因此效果可以是：
 
     >>> obj = MyObj()
@@ -121,7 +121,7 @@ and JSON types now correctly specify
 
 [＃3499 T0\>](http://www.sqlalchemy.org/trac/ticket/3499)
 
-### 添加了特定的检查以传递映射类，实例为SQL文字[¶](#specific-checks-added-for-passing-mapped-classes-instances-as-sql-literals "Permalink to this headline")
+### 添加了特定的检查以传递映射类，实例为 SQL 文字[¶](#specific-checks-added-for-passing-mapped-classes-instances-as-sql-literals "Permalink to this headline")
 
 现在，键入系统对 SQLAlchemy“可检查”对象在上下文中的传递进行了特定的检查，否则这些对象将作为文字值处理。任何可合法作为 SQL 值传递的 SQLAlchemy 内置对象都包含一个为该对象提供有效 SQL 表达式的方法`__clause_element__()`。对于不提供此功能的 SQLAlchemy 对象（如映射类，映射器和映射实例），会发出更多信息性错误消息，而不是让 DBAPI 接收对象并稍后失败。下面举例说明一个例子，其中基于字符串的属性`User.name`与`User()`的完整实例进行比较，而不是针对字符串值：
 
@@ -236,9 +236,9 @@ MySQL的一个常见情况是当事务内发生死锁时，SAVEPOINT被取消。
     # so rollback() or commit() can succeed
     s.rollback()
 
-这个问题是[＃2696](http://www.sqlalchemy.org/trac/ticket/2696)的一个延续，我们发出警告，以便在Python
-2上运行时可以看到原始错误，即使SAVEPOINT异常优先。在Python
-3中，异常是链接的，因此两个失败都会单独报告。
+这个问题是[＃2696](http://www.sqlalchemy.org/trac/ticket/2696)的一个延续，我们发出警告，以便在 Python
+2 上运行时可以看到原始错误，即使 SAVEPOINT 异常优先。在 Python
+3 中，异常是链接的，因此两个失败都会单独报告。
 
 [＃3680 T0\>](http://www.sqlalchemy.org/trac/ticket/3680)
 
@@ -347,7 +347,7 @@ CASCADE 为配置的外键进行。这是使用[`orm.mapper.passive_deletes`(orm
             'polymorphic_identity': 'b'
         }
 
-通过上面的映射，在基本映射器上配置[`orm.mapper.passive_deletes`](orm_mapping_api.html#sqlalchemy.orm.mapper.params.passive_deletes "sqlalchemy.orm.mapper")选项；它对于具有选项集的映射器的后代的所有非基本映射器都有效。对于`B`类型的对象，DELETE不再需要检索`b_table_id`的主键值（如果未加载），也不需要为表本身发出DELETE语句：
+通过上面的映射，在基本映射器上配置[`orm.mapper.passive_deletes`](orm_mapping_api.html#sqlalchemy.orm.mapper.params.passive_deletes "sqlalchemy.orm.mapper")选项；它对于具有选项集的映射器的后代的所有非基本映射器都有效。对于`B`类型的对象，DELETE 不再需要检索`b_table_id`的主键值（如果未加载），也不需要为表本身发出DELETE语句：
 
     session.delete(some_b)plain
     session.commit()
@@ -417,7 +417,7 @@ CASCADE 为配置的外键进行。这是使用[`orm.mapper.passive_deletes`(orm
 
 混合方法或属性现在将反映原始文档字符串中存在的`__doc__`值：
 
-    class A(Base):
+    class A(Base):plain
         __tablename__ = 'a'
         id = Column(Integer, primary_key=True)
 
@@ -496,9 +496,9 @@ a mapping of the classes `Parent` and
     some_object.parent_id = some_parent.id
     some_object.parent = some_parent
 
-在上面，我们创建了一个挂起的对象`some_object`，将它的外键操作为`Parent`来引用它，*然后*我们实际建立了关系。在错误修复之前，backref不会被触发：
+在上面，我们创建了一个挂起的对象`some_object`，将它的外键操作为`Parent`来引用它，*然后*我们实际建立了关系。在错误修复之前，backref 不会被触发：
 
-    # before the fix
+    # before the fixplain
     assert some_object not in some_parent.items
 
 现在的修正是，当我们试图找到`some_object.parent`的前一个值时，我们忽略手动设置的父ID，然后查找数据库提交的值。在这种情况下，它是None，因为对象处于挂起状态，所以事件系统将`some_object.parent`记录为净更改：
@@ -522,7 +522,7 @@ a mapping of the classes `Parent` and
 
 上面的查询现在生成：
 
-    SELECT people.name AS people_name
+    SELECT people.name AS people_nameplain
     FROM people
     LEFT OUTER JOIN engineers ON people.person_id = engineers.person_id
     LEFT OUTER JOIN managers ON people.person_id = managers.person_id
@@ -535,7 +535,7 @@ would inadvertently attempt to correlate to the join of
 `Person`, `Engineer` and
 `Manager` as a single unit, so `Person` wouldn’t be correlated:
 
-    -- old, incorrect query
+    -- old, incorrect queryplain
     SELECT people.name AS people_name
     FROM people
     LEFT OUTER JOIN engineers ON people.person_id = engineers.person_id
@@ -616,7 +616,7 @@ dialect](#change-3631)
     q = q.join(c_alias_2, A.c)
     q = q.options(contains_eager(A.c, alias=c_alias_2))
 
-上面的查询发出SQL如下所示：
+上面的查询发出 SQL 如下所示：
 
     SELECTplain
         d.id AS d_id,
@@ -709,14 +709,14 @@ as when queries are combined into unions; these cases are not supported.
 新功能和改进 - 核心[¶](#new-features-and-improvements-core "Permalink to this headline")
 ----------------------------------------------------------------------------------------
 
-### CTE支持INSERT，UPDATE，DELETE [¶](#cte-support-for-insert-update-delete "Permalink to this headline")
+### CTE 支持 INSERT，UPDATE，DELETE [¶](#cte-support-for-insert-update-delete "Permalink to this headline")
 
 其中一个最广泛要求的功能是支持与 INSERT，UPDATE，DELETE 一起使用的公用表表达式（CTE），现在已经实现。INSERT
 / UPDATE /
 DELETE 既可以从 SQL 顶部的 WITH 子句中绘制，也可以在更大的语句的上下文中用作 CTE 本身。
 
-作为此更改的一部分，包含CTE的SELECT
-INSERT将现在将CTE呈现在整个语句的顶部，而不是像1.0中那样嵌套在SELECT语句中。
+作为此更改的一部分，包含 CTE 的 SELECT
+INSERT 将现在将 CTE 呈现在整个语句的顶部，而不是像 1.0 中那样嵌套在 SELECT 语句中。
 
 下面是一个在一个语句中呈现 UPDATE，INSERT 和 SELECT 全部的例子：
 
@@ -761,7 +761,7 @@ INSERT将现在将CTE呈现在整个语句的顶部，而不是像1.0中那样�
 
 [＃2551 T0\>](http://www.sqlalchemy.org/trac/ticket/2551)
 
-### 在窗口函数中支持RANGE和ROWS规范[¶](#support-for-range-and-rows-specification-within-window-functions "Permalink to this headline")
+### 在窗口函数中支持 RANGE 和 ROWS 规范[¶](#support-for-range-and-rows-specification-within-window-functions "Permalink to this headline")
 
 新的[`expression.over.range_`](core_sqlelement.html#sqlalchemy.sql.expression.over.params.range_ "sqlalchemy.sql.expression.over")和[`expression.over.rows`](core_sqlelement.html#sqlalchemy.sql.expression.over.params.rows "sqlalchemy.sql.expression.over")参数允许窗口函数的 RANGE 和 ROWS 表达式：
 
@@ -815,7 +815,7 @@ ROW”为 0，无对于 UNBOUNDED。
 
 可以使用[`FromClause.tablesample()`](core_selectable.html#sqlalchemy.sql.expression.FromClause.tablesample "sqlalchemy.sql.expression.FromClause.tablesample")方法呈现 SQL 标准 TABLESAMPLE，该方法返回类似于别名的[`TableSample`](core_selectable.html#sqlalchemy.sql.expression.TableSample "sqlalchemy.sql.expression.TableSample")结构：
 
-    from sqlalchemy import func
+    from sqlalchemy import funcplain
 
     selectable = people.tablesample(
                 func.bernoulli(1),
@@ -837,7 +837,7 @@ SQLAlchemy 一直具有为单列整数主键启用后端数据库的“自动增
 
 改变的是，该功能不再为*复合*主键自动开启；以前，一个表格定义如：
 
-    Table(
+    Table(plain
         'some_table', metadata,
         Column('x', Integer, primary_key=True),
         Column('y', Integer, primary_key=True)
@@ -867,7 +867,7 @@ construct will perform more thorough checks for missing primary key
 values on composite primary key columns that don’t have autoincrement
 set up; given a table such as:
 
-    Table(
+    Table(plainplain
         'b', metadata,
         Column('x', Integer, primary_key=True),
         Column('y', Integer, primary_key=True)
@@ -910,7 +910,7 @@ AUTO\_INCREMENT](#change-mysql-3216)的组合主键生成隐式KEY
 
 [＃3216 T0\>](http://www.sqlalchemy.org/trac/ticket/3216)
 
-### 支持IS DISTINCT FROM和IS NOT DISTINCT FROM [¶](#support-for-is-distinct-from-and-is-not-distinct-from "Permalink to this headline")
+### 支持 IS DISTINCT FROM 和 IS NOT DISTINCT FROM [¶](#support-for-is-distinct-from-and-is-not-distinct-from "Permalink to this headline")
 
 New operators [`ColumnOperators.is_distinct_from()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.is_distinct_from "sqlalchemy.sql.operators.ColumnOperators.is_distinct_from")
 and [`ColumnOperators.isnot_distinct_from()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.isnot_distinct_from "sqlalchemy.sql.operators.ColumnOperators.isnot_distinct_from")
@@ -942,15 +942,15 @@ available at the Core and ORM level, instructs the compiler to render
 
 该标志也适用于 ORM 级别：
 
-    q = session.query(MyClass).outerjoin(MyOtherClass, full=True)plain
+    q = session.query(MyClass).outerjoin(MyOtherClass, full=True)plainplain
 
 [＃1957 T0\>](http://www.sqlalchemy.org/trac/ticket/1957)
 
 ### ResultSet列匹配增强；文本SQL的位置列设置[¶](#resultset-column-matching-enhancements-positional-column-setup-for-textual-sql "Permalink to this headline")
 
 作为[＃918](http://www.sqlalchemy.org/trac/ticket/918)的一部分对1.0系列中的[`ResultProxy`](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")系统进行了一系列改进，它重新组织内部以将与游标绑定的结果列与表/
-ORM元数据在位置上，而不是通过匹配名称，对于包含有关要返回的结果行的完整信息的编译SQL结构。这可以显着节省Python开销，并且可以将ORM和Core
-SQL表达式链接到结果行的准确性更高。在1.1中，这种重组已经在内部得到了进一步研究，并且通过使用最近添加的[`TextClause.columns()`](core_sqlelement.html#sqlalchemy.sql.expression.TextClause.columns "sqlalchemy.sql.expression.TextClause.columns")方法，也可以用于纯文本SQL结构。
+ORM 元数据在位置上，而不是通过匹配名称，对于包含有关要返回的结果行的完整信息的编译 SQL 结构。这可以显着节省 Python 开销，并且可以将 ORM 和 Core
+SQL 表达式链接到结果行的准确性更高。在 1.1 中，这种重组已经在内部得到了进一步研究，并且通过使用最近添加的[`TextClause.columns()`](core_sqlelement.html#sqlalchemy.sql.expression.TextClause.columns "sqlalchemy.sql.expression.TextClause.columns")方法，也可以用于纯文本SQL结构。
 
 #### TextAsFrom.columns()现在在位置上工作[¶](#textasfrom-columns-now-works-positionally "Permalink to this headline")
 
@@ -1030,7 +1030,7 @@ name that is actually ambiguous, e.g. `row['user_id']` in the above example.
 
 现在可以使用任何符合PEP-435枚举类型来构造[`Enum`](core_type_basics.html#sqlalchemy.types.Enum "sqlalchemy.types.Enum")类型。使用此模式时，输入值和返回值是实际的枚举对象，而不是字符串值：
 
-    import enumplain
+    import enumplainplain
     from sqlalchemy import Table, MetaData, Column, Enum, create_engine
 
 
@@ -1101,9 +1101,9 @@ Python sequence, both in the pure Python and C-extension version.
 
 ### 大的参数和行值现在在日志和异常显示中被截断[¶](#large-parameter-and-row-values-are-now-truncated-in-logging-and-exception-displays "Permalink to this headline")
 
-现在，在记录，异常报告以及`repr()`期间的显示期间，将截断作为SQL语句的绑定参数以及结果行中存在的大值的大值。该行本身：
+现在，在记录，异常报告以及`repr()`期间的显示期间，将截断作为 SQL 语句的绑定参数以及结果行中存在的大值的大值。该行本身：
 
-    >>> from sqlalchemy import create_engineplain
+    >>> from sqlalchemy import create_engineplainplain
     >>> import random
     >>> e = create_engine("sqlite://", echo='debug')
     >>> some_value = ''.join(chr(random.randint(52, 85)) for i in range(5000))
@@ -1207,7 +1207,7 @@ value. This flag defaults to False, which means that the column should
 constant were used.
 但是，在两种情况下，ORM可能会失败；一种是当列中还包含default或server\_default值时，映射属性上的正值`None`仍然会导致列级别的默认值被触发，替换`None`
 
-    obj = MyObject(json_value=None)plain
+    obj = MyObject(json_value=None)plainplain
     session.add(obj)
     session.commit()   # would fire off default / server_default, not encode "'none'"
 
@@ -1236,7 +1236,7 @@ NULL按预期插入，就像以前的行为一样。下面说明两个变体：
 
 [＃3514 T0\>](http://www.sqlalchemy.org/trac/ticket/3514)
 
-#### 新的JSON.NULL常量已添加[¶](#new-json-null-constant-added "Permalink to this headline")
+#### 新的 JSON.NULL 常量已添加[¶](#new-json-null-constant-added "Permalink to this headline")
 
 为了确保应用程序始终能够完全控制[`types.JSON`](core_type_basics.html#sqlalchemy.types.JSON "sqlalchemy.types.JSON")，[`postgresql.JSON`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")，[`mysql.JSON`](dialects_mysql.html#sqlalchemy.dialects.mysql.JSON "sqlalchemy.dialects.mysql.JSON")的值级别，或[`postgresql.JSONB`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSONB "sqlalchemy.dialects.postgresql.JSONB")列应该接收到SQL
 NULL或JSON `"null"`值时，常量[`types.JSON.NULL`](core_type_basics.html#sqlalchemy.types.JSON.NULL "sqlalchemy.types.JSON.NULL")已被添加，与[`null()`](core_sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")结合使用可以完全确定 SQL
@@ -1255,7 +1255,7 @@ NULL 和 JSON `"null"`之间的关系，无论[`types.JSON.none_as_null`(core_ty
 
 [＃3514 T0\>](http://www.sqlalchemy.org/trac/ticket/3514)
 
-### 阵列支持添加到核心；新的ANY和所有运算符[¶](#array-support-added-to-core-new-any-and-all-operators "Permalink to this headline")
+### 阵列支持添加到核心；新的 ANY 和所有运算符[¶](#array-support-added-to-core-new-any-and-all-operators "Permalink to this headline")
 
 Along with the enhancements made to the Postgresql
 [`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")
@@ -1264,7 +1264,7 @@ of ARRAY, JSON, HSTORE](#change-3503), the base class of
 [`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")
 itself has been moved to Core in a new class [`types.ARRAY`](core_type_basics.html#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY").
 
-数组是 SQL 标准的一部分，也有几个面向数组的函数，如`array_agg()`和`unnest()`。为了支持这些结构不仅适用于PostgreSQL，而且还适用于未来其他具有阵列能力的后端，例如DB2，SQL表达式的大部分数组逻辑现在位于Core中。[`types.ARRAY`](core_type_basics.html#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")类型still
+数组是 SQL 标准的一部分，也有几个面向数组的函数，如`array_agg()`和`unnest()`。为了支持这些结构不仅适用于 PostgreSQL，而且还适用于未来其他具有阵列能力的后端，例如 DB2，SQL 表达式的大部分数组逻辑现在位于 Core 中。[`types.ARRAY`](core_type_basics.html#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")类型still
 **仅适用于 Postgresql**，但它可以直接使用，支持特殊的数组用例，例如索引访问，以及支持ANY和所有：
 
     mytable = Table("mytable", metadata,
@@ -1287,9 +1287,9 @@ and [`sql.expression.all_()`](core_sqlelement.html#sqlalchemy.sql.expression.all
 
     select([mytable]).where(12 == any_(mytable.c.data[5]))
 
-对于特定于PostgreSQL的运算符“contains”，“contained\_by”和“overlapps”，应该继续直接使用[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型，它提供了[`types.ARRAY`](core_type_basics.html#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")类型。
+对于特定于 PostgreSQL 的运算符“contains”，“contained\_by”和“overlapps”，应该继续直接使用[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型，它提供了[`types.ARRAY`](core_type_basics.html#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")类型。
 
-[`sql.expression.any_()`](core_sqlelement.html#sqlalchemy.sql.expression.any_ "sqlalchemy.sql.expression.any_")和[`sql.expression.all_()`](core_sqlelement.html#sqlalchemy.sql.expression.all_ "sqlalchemy.sql.expression.all_")运算符在Core级别是开放式的，但是它们对后端数据库的解释是有限的。在Postgresql后端，两个运算符**只接受数组值**。而在MySQL后端，它们**只接受子查询值**。在MySQL上，可以使用如下表达式：
+[`sql.expression.any_()`](core_sqlelement.html#sqlalchemy.sql.expression.any_ "sqlalchemy.sql.expression.any_")和[`sql.expression.all_()`](core_sqlelement.html#sqlalchemy.sql.expression.all_ "sqlalchemy.sql.expression.all_")运算符在Core级别是开放式的，但是它们对后端数据库的解释是有限的。在Postgresql后端，两个运算符**只接受数组值**。而在MySQL后端，它们**只接受子查询值**。在 MySQL 上，可以使用如下表达式：
 
     from sqlalchemy import any_, all_
 
@@ -1309,13 +1309,13 @@ SQL函数实现预先键入的函数，该函数现在可以使用[`array_agg`](
 用于聚合ORDER
 BY的Postgresql元素也通过[`postgresql.aggregate_order_by`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.aggregate_order_by "sqlalchemy.dialects.postgresql.aggregate_order_by")添加：
 
-    from sqlalchemy.dialects.postgresql import aggregate_order_by
+    from sqlalchemy.dialects.postgresql import aggregate_order_byplain
     expr = func.array_agg(aggregate_order_by(table.c.a, table.c.b.desc()))
     stmt = select([expr])
 
 生产：
 
-    SELECT array_agg(table1.a ORDER BY table1.b DESC) AS array_agg_1 FROM table1
+    SELECT array_agg(table1.a ORDER BY table1.b DESC) AS array_agg_1 FROM table1plain
 
 PG方言本身也提供一个[`postgresql.array_agg()`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.array_agg "sqlalchemy.dialects.postgresql.array_agg")包装来确保[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型：
 
@@ -1337,7 +1337,7 @@ modifier:
         )
     ])
 
-上面的语句会产生SQL类似于：
+上面的语句会产生 SQL 类似于：
 
     SELECT department.id, percentile_cont(0.5)
     WITHIN GROUP (ORDER BY department.salary DESC)
@@ -1450,7 +1450,7 @@ dialect](#change-3081)
         id = Column('id', Integer, primary_key=True)
         person_id = Column('person_id', Integer)
 
-在[`relationship.primaryjoin`](orm_relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")表达式中，我们使用[`type_coerce()`](core_sqlelement.html#sqlalchemy.sql.expression.type_coerce "sqlalchemy.sql.expression.type_coerce")来处理通过 lazyloading 传递的绑定参数作为整数，因为我们已经知道这些参数将来自`StringAsInt`类型，它在Python中将值保持为整数。然后我们使用[`cast()`](core_sqlelement.html#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")，因此作为SQL表达式，VARCHAR“id”列将被CAST为常规未转换连接的整数，如同[`Query.join()`](orm_query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")或[`orm.joinedload()`](orm_loading_relationships.html#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")。也就是说，`.pets`的连接加载看起来像：
+在[`relationship.primaryjoin`](orm_relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")表达式中，我们使用[`type_coerce()`](core_sqlelement.html#sqlalchemy.sql.expression.type_coerce "sqlalchemy.sql.expression.type_coerce")来处理通过 lazyloading 传递的绑定参数作为整数，因为我们已经知道这些参数将来自`StringAsInt`类型，它在Python中将值保持为整数。然后我们使用[`cast()`](core_sqlelement.html#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")，因此作为 SQL 表达式，VARCHAR“id”列将被 CAST 为常规未转换连接的整数，如同[`Query.join()`](orm_query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")或[`orm.joinedload()`](orm_loading_relationships.html#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")。也就是说，`.pets`的连接加载看起来像：
 
     SELECT person.id AS person_id, pets_1.id AS pets_1_id,
            pets_1.person_id AS pets_1_person_id
@@ -1494,7 +1494,7 @@ dialect](#change-3081)
 
 例如，代码如下：
 
-    stmt = text("SELECT id, name, description FROM table")
+    stmt = text("SELECT id, name, description FROM table")plain
 
     # no longer matches by name
     stmt = stmt.columns(my_table.c.name, my_table.c.description, my_table.c.id)
@@ -1506,7 +1506,7 @@ dialect](#change-3081)
 
 可能更有可能的是，这样的陈述：
 
-    stmt = text("SELECT * FROM table")
+    stmt = text("SELECT * FROM table")plain
     stmt = stmt.columns(my_table.c.id, my_table.c.name, my_table.c.description)
 
 现在有点冒险，因为“\*”规范通常会按照它们出现在表中的顺序传递列。如果表的结构因模式更改而发生更改，则此排序可能不再相同。因此，在使用[`TextClause.columns()`](core_sqlelement.html#sqlalchemy.sql.expression.TextClause.columns "sqlalchemy.sql.expression.TextClause.columns")时，建议在文本 SQL 中明确列出所需的列，但不必再担心文本 SQL 中的名称本身。
@@ -1557,7 +1557,7 @@ which implement the full syntax supported by Posgresql 9.5 in this area:
 ### ARRAY和JSON类型现在可以正确指定“不可用”[¶](#array-and-json-types-now-correctly-specify-unhashable "Permalink to this headline")
 
 如[Changes regarding “unhashable”
-types](#change-3499)中所述，当查询的选定实体将完整的ORM实体与列表达式混合时，ORM依赖于能够为列值生成散列函数。`hashable=False`标志现在可以在所有PG的“数据结构”类型中正确设置，包括[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")和[`postgresql.JSON`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")。[`JSONB`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSONB "sqlalchemy.dialects.postgresql.JSONB")和[`HSTORE`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")类型已包含此标志。对于[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")，这是基于[`postgresql.ARRAY.as_tuple`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY.params.as_tuple "sqlalchemy.dialects.postgresql.ARRAY")标志的条件，但是不应该再设置该标志来获得数组值存在于组成的ORM行中。
+types](#change-3499)中所述，当查询的选定实体将完整的 ORM 实体与列表达式混合时，ORM 依赖于能够为列值生成散列函数。`hashable=False`标志现在可以在所有 PG 的“数据结构”类型中正确设置，包括[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")和[`postgresql.JSON`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")。[`JSONB`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSONB "sqlalchemy.dialects.postgresql.JSONB")和[`HSTORE`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")类型已包含此标志。对于[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")，这是基于[`postgresql.ARRAY.as_tuple`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY.params.as_tuple "sqlalchemy.dialects.postgresql.ARRAY")标志的条件，但是不应该再设置该标志来获得数组值存在于组成的ORM行中。
 
 也可以看看
 
@@ -1591,7 +1591,7 @@ the SQL type assigned to the expression returned by indexed access, e.g.
     or [`JSONB`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSONB "sqlalchemy.dialects.postgresql.JSONB")
     itself, unless the [`astext`{](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON.Comparator.astext "sqlalchemy.dialects.postgresql.JSON.Comparator.astext")
     modifier is used.
-    这意味着无论JSON结构的索引访问最终是指字符串，列表，数字还是其他JSON结构，Postgresql始终认为它本身是JSON，除非它明确地被转换为不同的形式。像[`ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型一样，这意味着现在可以直接生成具有多级索引访问的JSON表达式：
+    这意味着无论JSON结构的索引访问最终是指字符串，列表，数字还是其他JSON结构，Postgresql始终认为它本身是JSON，除非它明确地被转换为不同的形式。像[`ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型一样，这意味着现在可以直接生成具有多级索引访问的 JSON 表达式：
 
         json_expr = json_col['key1']['attr1'][5]
 
@@ -1655,7 +1655,7 @@ other without the “astext” aspect.
 
 发出：
 
-    CREATE TYPE work_place_roles AS ENUM (plain
+    CREATE TYPE work_place_roles AS ENUM (plainplain
         'manager', 'place_admin', 'carwash_admin', 'parking_admin',
         'service_admin', 'tire_admin', 'mechanic', 'carwasher',
         'tire_mechanic')
@@ -1670,13 +1670,13 @@ other without the “astext” aspect.
 
 ### 检查约束现在反映[¶](#check-constraints-now-reflect "Permalink to this headline")
 
-Postgresql 方言现在支持在方法[`Inspector.get_check_constraints()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_check_constraints "sqlalchemy.engine.reflection.Inspector.get_check_constraints")以及`Table.constraints`内的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")反射内反映CHECK约束。采集。
+Postgresql 方言现在支持在方法[`Inspector.get_check_constraints()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_check_constraints "sqlalchemy.engine.reflection.Inspector.get_check_constraints")以及`Table.constraints`内的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")反射内反映 CHECK 约束。采集。
 
 ### “Plain”和“Materialized”视图可以单独检查[¶](#plain-and-materialized-views-can-be-inspected-separately "Permalink to this headline")
 
 新参数[`PGInspector.get_view_names.include`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.base.PGInspector.get_view_names.params.include "sqlalchemy.dialects.postgresql.base.PGInspector.get_view_names")允许指定应返回哪些视图的子类型：
 
-    from sqlalchemy import inspect
+    from sqlalchemy import inspectplain
     insp = inspect(engine)
 
     plain_views = insp.get_view_names(include='plain')
@@ -1729,8 +1729,8 @@ Core 和 ORM 中的新参数[`GenerativeSelect.with_for_update.skip_locked`](cor
 
 ### MySQL JSON支持[¶](#mysql-json-support "Permalink to this headline")
 
-一个新类型的[`mysql.JSON`](dialects_mysql.html#sqlalchemy.dialects.mysql.JSON "sqlalchemy.dialects.mysql.JSON")被添加到支持新添加到MySQL
-5.7的JSON类型的MySQL方言中。该类型在内部使用`JSON_EXTRACT`函数提供 JSON 的持久性以及基本的索引访问。通过使用 MySQL 和 Postgresql 共同的[`types.JSON`](core_type_basics.html#sqlalchemy.types.JSON "sqlalchemy.types.JSON")数据类型，可以实现跨 MySQL 和 Postgresql 的可索引 JSON 列。
+一个新类型的[`mysql.JSON`](dialects_mysql.html#sqlalchemy.dialects.mysql.JSON "sqlalchemy.dialects.mysql.JSON")被添加到支持新添加到 MySQL
+5.7 的 JSON 类型的 MySQL 方言中。该类型在内部使用`JSON_EXTRACT`函数提供 JSON 的持久性以及基本的索引访问。通过使用 MySQL 和 Postgresql 共同的[`types.JSON`](core_type_basics.html#sqlalchemy.types.JSON "sqlalchemy.types.JSON")数据类型，可以实现跨 MySQL 和 Postgresql 的可索引 JSON 列。
 
 也可以看看
 
@@ -1810,7 +1810,7 @@ column](#change-3216)不再为组合主键列隐式启用.autoincrement 指令�
 方言的改进和改变 - SQLite [¶](#dialect-improvements-and-changes-sqlite "Permalink to this headline")
 ----------------------------------------------------------------------------------------------------
 
-### 为SQLite 3.7.16版本提供了右嵌套连接解决方​​法[¶](#right-nested-join-workaround-lifted-for-sqlite-version-3-7-16 "Permalink to this headline")
+### 为 SQLite 3.7.16 版本提供了右嵌套连接解决方​​法[¶](#right-nested-join-workaround-lifted-for-sqlite-version-3-7-16 "Permalink to this headline")
 
 在0.9版本中，由[Many JOIN and LEFT OUTER JOIN expressions will no longer
 be wrapped in (SELECT \* FROM ..) AS
@@ -1821,9 +1821,9 @@ SQLite to actually have this limitation!
 
 [＃3634 T0\>](http://www.sqlalchemy.org/trac/ticket/3634)
 
-### 为SQLite版本3.10.0解决了虚线列名解决方法[¶](#dotted-column-names-workaround-lifted-for-sqlite-version-3-10-0 "Permalink to this headline")
+### 为 SQLite 版本 3.10.0 解决了虚线列名解决方法[¶](#dotted-column-names-workaround-lifted-for-sqlite-version-3-10-0 "Permalink to this headline")
 
-对于数据库驱动程序不报告某些SQL结果集的正确列名的问题，特别是在使用UNION时，SQLite方言早就有了一个解决方法。解决方法详见[Dotted
+对于数据库驱动程序不报告某些 SQL 结果集的正确列名的问题，特别是在使用 UNION 时，SQLite 方言早就有了一个解决方法。解决方法详见[Dotted
 Column
 Names](dialects_sqlite.html#sqlite-dotted-column-names)，并要求SQLAlchemy假定任何带有点的列名实际上都是通过此错误行为提供的`tablename.columnname`组合，可以通过`sqlite_raw_colnames`执行选项将其关闭。
 
@@ -1831,7 +1831,7 @@ Names](dialects_sqlite.html#sqlite-dotted-column-names)，并要求SQLAlchemy假
 join workaround lifted for SQLite version
 3.7.16](#change-3634)中描述的更改一样，SQLite 的更改日志仅将其隐含地标识为“添加了 sqlite3\_index\_info 的 colUsed 字段以供 sqlite3\_module.xBestIndex 方法使用”，但是此版本不再需要 SQLAlchemy 对这些虚线列名的翻译，因此在检测到 3.10.0 或更高版本时关闭。
 
-总体而言，从1.0系列开始，SQLAlchemy [`ResultProxy`](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")在为 Core 和 ORM
+总体而言，从 1.0 系列开始，SQLAlchemy [`ResultProxy`](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")在为 Core 和 ORM
 SQL 结构提供结果时，对结果集中的列名的依赖要少得多，因此在任何情况下，此问题的重要性都已减轻。
 
 [＃3633 T0\>](http://www.sqlalchemy.org/trac/ticket/3633)
@@ -1872,7 +1872,7 @@ will also indicate these phrases.
 
 所有SQL Server方言都通过[`create_engine.isolation_level`(core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")和[`Connection.execution_options.isolation_level`](core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")参数支持事务隔离级别设置。支持四种标准级别以及`SNAPSHOT`：
 
-    engine = create_engine(
+    engine = create_engine(plain
         "mssql+pyodbc://scott:tiger@ms_2008",
         isolation_level="REPEATABLE READ"
     )
@@ -1898,9 +1898,9 @@ Server下的“un-extended”类型会将“length”参数复制为值`"max"`�
     <class 'sqlalchemy.sql.sqltypes.VARCHAR'> max
     <class 'sqlalchemy.dialects.mssql.base.VARBINARY'> max
 
-预计基本类型中的“length”参数只是一个整数值或None； None表示SQL
-Server方言解释为“max”的无限长度。然后修正是这样的，这些长度是None，所以这些类型对象在非SQL
-Server上下文中工作：
+预计基本类型中的“length”参数只是一个整数值或 None； None 表示 SQL
+Server 方言解释为“max”的无限长度。然后修正是这样的，这些长度是 None，所以这些类型对象在非 SQL
+Server 上下文中工作：
 
     >>> for col in insp.get_columns("s"):
     ...     print(col['type'].__class__, col['type'].length)
@@ -1920,7 +1920,7 @@ Server上下文中工作：
 
 [Clustered Index Support](dialects_mssql.html#mssql-indexes)
 
-### legacy\_schema\_aliasing标志现在设置为False [¶](#the-legacy-schema-aliasing-flag-is-now-set-to-false "Permalink to this headline")
+### legacy\_schema\_aliasing 标志现在设置为 False [¶](#the-legacy-schema-aliasing-flag-is-now-set-to-false "Permalink to this headline")
 
 SQLAlchemy 1.0.5 introduced the `legacy_schema_aliasing` flag to the MSSQL dialect, allowing so-called “legacy mode”
 aliasing to be turned off.
@@ -1935,7 +1935,7 @@ aliasing to be turned off.
 
 传统的行为模式将尝试将符合模式的表名称变为别名：
 
-    >>> eng = create_engine("mssql+pymssql://mydsn", legacy_schema_aliasing=True)
+    >>> eng = create_engine("mssql+pymssql://mydsn", legacy_schema_aliasing=True)plain
     >>> print(account_table.select().compile(eng))
     SELECT account_1.id, account_1.info
     FROM customer_schema.account AS account_1
