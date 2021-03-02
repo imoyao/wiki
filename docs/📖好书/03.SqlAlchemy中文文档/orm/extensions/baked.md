@@ -4,11 +4,10 @@ date: 2021-02-20 22:41:41
 permalink: /sqlalchemy/orm/extensions/baked/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
   - extensions
 tags:
-  - 
 ---
 烘焙查询[¶](#module-sqlalchemy.ext.baked "Permalink to this headline")
 ======================================================================
@@ -18,7 +17,7 @@ tags:
 The rationale for this system is to greatly reduce Python interpreter
 overhead for everything that occurs **before the SQL is emitted**.
 “烘焙”系统的缓存以任何方式减少 SQL 调用或缓存来自数据库的**返回结果**。**不是**。在[Dogpile
-Caching](examples.html#examples-caching)中提供了一种演示SQL调用和结果集本身缓存的技术。
+Caching](examples.html#examples-caching)中提供了一种演示 SQL 调用和结果集本身缓存的技术。
 
 版本 1.0.0 中的新功能
 
@@ -75,20 +74,20 @@ Caching](examples.html#examples-caching)中提供了一种演示SQL调用和结�
     `lambda q: q.filter(User.email == bindparam('email'))` will be part of the cache key that’s retrieved; when
     `email` is `None`, this
     callable is not part of the cache key.
-6.  因为 lambda 只被调用一次，所以必须保证在 lambda 表达式中**内没有引用可能会改变的变量；相反，假设这些值是绑定到SQL字符串中的，我们使用[`bindparam()`](core_sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")来构造命名参数，其中我们稍后使用[`Result.params()`](#sqlalchemy.ext.baked.Result.params "sqlalchemy.ext.baked.Result.params")**
+6.  因为 lambda 只被调用一次，所以必须保证在 lambda 表达式中**内没有引用可能会改变的变量；相反，假设这些值是绑定到 SQL 字符串中的，我们使用[`bindparam()`](core_sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")来构造命名参数，其中我们稍后使用[`Result.params()`](#sqlalchemy.ext.baked.Result.params "sqlalchemy.ext.baked.Result.params")**
 
 性能[¶ T0\>](#performance "Permalink to this headline")
 -------------------------------------------------------
 
 烘焙的查询可能看起来有点奇怪，有点尴尬，有点冗长。但是，在应用程序中多次调用的查询所节省的 Python 性能非常显着。在[Performance](examples.html#examples-performance)中演示的示例套件`short_selects`演示了每个只返回一行的查询的比较，例如以下常规查询：
 
-    session = Session(bind=engine)
+    session = Session(bind=engine)plainplain
     for id_ in random.sample(ids, n):
         session.query(Customer).filter(Customer.id == id_).one()
 
 与同等的“烘焙”查询相比：
 
-    bakery = baked.bakery()
+    bakery = baked.bakery()plain
     s = Session(bind=engine)
     for id_ in random.sample(ids, n):
         q = bakery(lambda s: s.query(Customer))
@@ -97,7 +96,7 @@ Caching](examples.html#examples-caching)中提供了一种演示SQL调用和结�
 
 对每个块调用 10000 次迭代的 Python 函数调用计数的区别如下：
 
-    test_baked_query : test a baked query of the full entity.
+    test_baked_query : test a baked query of the full entity.plain
                        (10000 iterations); total fn calls 1951294
 
     test_orm_query :   test a straight ORM query of the full entity.
@@ -115,7 +114,7 @@ Caching](examples.html#examples-caching)中提供了一种演示SQL调用和结�
 
 测量两次，切一次
 
-有关如何配置SQLAlchemy应用程序的背景信息，请参阅[Performance](faq_performance.html#faq-performance)部分。在尝试提高应用程序的性能时，使用性能测量技术是非常重要的。
+有关如何配置 SQLAlchemy 应用程序的背景信息，请参阅[Performance](faq_performance.html#faq-performance)部分。在尝试提高应用程序的性能时，使用性能测量技术是非常重要的。
 
 理[¶ T0\>](#rationale "Permalink to this headline")
 ---------------------------------------------------
@@ -133,9 +132,9 @@ Caching](examples.html#examples-caching)中提供了一种演示SQL调用和结�
 
         return query.params(id=id_argument).all()
 
-上述方法使我们获得了非常小的性能优势。通过重新使用[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")，我们保存了`session.query(Model)`构造函数中的Python工作，并调用`过滤器（Model .id == bindparam（'id'））`，它会跳过我们构建Core表达式以及发送它到[`Query.filter()`](query.html#sqlalchemy.orm.query.Query.filter "sqlalchemy.orm.query.Query.filter")。但是，每次调用[`Query.all()`](query.html#sqlalchemy.orm.query.Query.all "sqlalchemy.orm.query.Query.all")时，该方法仍然会重新生成完整的[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象，并且还会发送此全新的[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")到每次的字符串编译步骤，对于像上面这样的简单情况，这可能是大约70％的开销。
+上述方法使我们获得了非常小的性能优势。通过重新使用[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")，我们保存了`session.query(Model)`构造函数中的 Python 工作，并调用`过滤器（Model .id == bindparam（'id'））`，它会跳过我们构建 Core 表达式以及发送它到[`Query.filter()`](query.html#sqlalchemy.orm.query.Query.filter "sqlalchemy.orm.query.Query.filter")。但是，每次调用[`Query.all()`](query.html#sqlalchemy.orm.query.Query.all "sqlalchemy.orm.query.Query.all")时，该方法仍然会重新生成完整的[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象，并且还会发送此全新的[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")到每次的字符串编译步骤，对于像上面这样的简单情况，这可能是大约 70％的开销。
 
-为了减少额外的开销，我们需要一些更专门的逻辑，一些方法来记忆选择对象的构造和 SQL 的构造。Wiki 中有一个例子是[BakedQuery](https://bitbucket.org/zzzeek/sqlalchemy/orm/extensions/wiki/UsageRecipes/BakedQuery)，它是该功能的先驱，但是在该系统中，我们没有缓存查询的*构造*。为了消除所有的开销，我们需要缓存查询的构造以及SQL编译。Let’s
+为了减少额外的开销，我们需要一些更专门的逻辑，一些方法来记忆选择对象的构造和 SQL 的构造。Wiki 中有一个例子是[BakedQuery](https://bitbucket.org/zzzeek/sqlalchemy/orm/extensions/wiki/UsageRecipes/BakedQuery)，它是该功能的先驱，但是在该系统中，我们没有缓存查询的*构造*。为了消除所有的开销，我们需要缓存查询的构造以及 SQL 编译。Let’s
 assume we adapted the recipe in this way and made ourselves a method
 `.bake()` that pre-compiles the SQL for the query,
 producing a new object that can be invoked with minimal overhead.
@@ -157,7 +156,7 @@ producing a new object that can be invoked with minimal overhead.
 
 我们可以使用“面包店”的方法来重新构建上述方法，这种方式看起来比“构建lambda”方法更不寻常，更像是对简单的“重用查询”方法的简单改进：
 
-    bakery = baked.bakery()plainplain
+    bakery = baked.bakery()plainplainplainplainplain
 
     def lookup(session, id_argument):
         def create_model_query(session):
@@ -166,7 +165,7 @@ producing a new object that can be invoked with minimal overhead.
         parameterized_query = bakery.bake(create_model_query)
         return parameterized_query(session).params(id=id_argument).all()
 
-在上面，我们使用“烘焙”系统，其方式与简单化的“缓存查询”系统非常相似。然而，它使用了少两行代码，不需要制作“my\_key”的缓存键，而且还包含了与我们自定义的“烘焙”功能相同的功能，可以从构建器缓存100％的Python调用工作查询过滤器调用，以生成[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象到字符串编译步骤。
+在上面，我们使用“烘焙”系统，其方式与简单化的“缓存查询”系统非常相似。然而，它使用了少两行代码，不需要制作“my\_key”的缓存键，而且还包含了与我们自定义的“烘焙”功能相同的功能，可以从构建器缓存 100％的 Python 调用工作查询过滤器调用，以生成[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象到字符串编译步骤。
 
 从以上所述，如果我们问自己，“如果查询需要对查询结构做出条件性决定会怎样？”，这就是希望变得明显，为什么“烘焙”就是这样。我们可以从*中的任意数量的*函数构建它，而不是从一个函数构建参数化查询（这是我们认为烘焙最初可能工作的方式）。考虑我们的天真示例，如果我们需要在条件基础上在查询中添加附加子句：
 
@@ -208,11 +207,11 @@ producing a new object that can be invoked with minimal overhead.
 
         return parameterized_query(session).params(id=id_argument).all()
 
-在上面，我们不仅缓存查询对象，还缓存为了生成SQL而需要执行的所有工作。我们也不再需要处理确保我们生成一个缓存键，该缓存键准确地考虑了我们所做的所有结构修改；这现在可以自动处理，并且不会出错。
+在上面，我们不仅缓存查询对象，还缓存为了生成 SQL 而需要执行的所有工作。我们也不再需要处理确保我们生成一个缓存键，该缓存键准确地考虑了我们所做的所有结构修改；这现在可以自动处理，并且不会出错。
 
 此代码示例比简单示例短几行，无需处理缓存键，并且具有完整的所谓“烘焙”功能的巨大性能优势。但仍然有点冗长！因此，我们采用像[`BakedQuery.add_criteria()`](#sqlalchemy.ext.baked.BakedQuery.add_criteria "sqlalchemy.ext.baked.BakedQuery.add_criteria")和[`BakedQuery.with_criteria()`](#sqlalchemy.ext.baked.BakedQuery.with_criteria "sqlalchemy.ext.baked.BakedQuery.with_criteria")这样的方法并将它们缩短为运算符，并鼓励（尽管肯定不需要！）使用简单的lambda表达式，只是为了减少冗长：
 
-    bakery = baked.bakery()
+    bakery = baked.bakery()plainplain
 
     def lookup(session, id_argument, include_frobnizzle=False):
         parameterized_query = bakery.bake(
@@ -248,7 +247,7 @@ producing a new object that can be invoked with minimal overhead.
 
 [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构包含一个标志[`relationship.bake_queries`](relationship_api.html#sqlalchemy.orm.relationship.params.bake_queries "sqlalchemy.orm.relationship")，当设置为 False 时，会导致该关系退出烘焙查询系统，当应用程序范围[`bake_lazy_loaders()`](#sqlalchemy.ext.baked.bake_lazy_loaders "sqlalchemy.ext.baked.bake_lazy_loaders")函数来启用烘焙查询加载器。
 
-API文档[¶](#api-documentation "Permalink to this headline")
+API 文档[¶](#api-documentation "Permalink to this headline")
 -----------------------------------------------------------
 
  `sqlalchemy.ext.baked.`{.descclassname}`bakery`{.descname}(*cls*, *size=200*)[¶](#sqlalchemy.ext.baked.bakery "Permalink to this definition")
@@ -295,7 +294,7 @@ API文档[¶](#api-documentation "Permalink to this headline")
  *class*`sqlalchemy.ext.baked.`{.descclassname}`Result`{.descname}(*bq*, *session*)[¶](#sqlalchemy.ext.baked.Result "Permalink to this definition")
 :   针对[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")调用[`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")。
 
-    [`Result`](#sqlalchemy.ext.baked.Result "sqlalchemy.ext.baked.Result")对象是实际的[`query.Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象被创建或从缓存中检索，针对目标[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，然后被调用为结果。
+    [`Result`](#sqlalchemy.ext.baked.Result "sqlalchemy.ext.baked.Result")对象是实际的[`query.Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象被创建或从缓存中检索，针对目标[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，然后被调用为结果。plainplain
 
     `所有 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   返回所有行。
@@ -327,15 +326,15 @@ API文档[¶](#api-documentation "Permalink to this headline")
     `params`{.descname} （ *\* args*，*\*\* kw* ） [T5\>](#sqlalchemy.ext.baked.Result.params "Permalink to this definition")
     :   指定要替换到字符串SQL语句中的参数。
 
-` sqlalchemy.ext.baked。 T0>  bake_lazy_loaders  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
-:   为全系统的所有lazyloaders启用烘焙查询。
+`sqlalchemy.ext.baked。 T0>  bake_lazy_loaders  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
+:   为全系统的所有 lazyloaders 启用烘焙查询。
 
     这个操作对于所有懒惰的加载器应该是安全的，并且会减少这些操作的Python开销。plain
 
 `sqlalchemy.ext.baked。 T0>  unbake_lazy_loaders  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
 :   禁止在系统范围内为所有 lazyloaders 使用烘焙查询。
 
-    该操作将恢复[`bake_lazy_loaders()`](#sqlalchemy.ext.baked.bake_lazy_loaders "sqlalchemy.ext.baked.bake_lazy_loaders")产生的更改。plainplain
+    该操作将恢复[`bake_lazy_loaders()`](#sqlalchemy.ext.baked.bake_lazy_loaders "sqlalchemy.ext.baked.bake_lazy_loaders")产生的更改。plainplainplain
 
 `sqlalchemy.ext.baked。 T0>  baked_lazyload  T1> （ T2>  *键 T3> ） T4> ¶  T5>`{.descclassname}
 :   指示应该使用加载中使用的“烘焙”查询使用“延迟”加载来加载给定属性。

@@ -90,7 +90,7 @@ Many](basic_relationships.html#relationships-many-to-many)中描述） ：
     >>> user.kw
     [<__main__.Keyword object at 0x12cdd30>, <__main__.Keyword object at 0x12cde30>]
 
-由[`association_proxy()`](#sqlalchemy.ext.associationproxy.association_proxy "sqlalchemy.ext.associationproxy.association_proxy")函数产生的[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")对象是[Python描述符](http://docs.python.org/howto/descriptor.html)的实例。无论使用通过[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")函数的声明映射还是经典映射，都始终声明用户定义类正在映射。
+由[`association_proxy()`](#sqlalchemy.ext.associationproxy.association_proxy "sqlalchemy.ext.associationproxy.association_proxy")函数产生的[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")对象是[Python 描述符](http://docs.python.org/howto/descriptor.html)的实例。无论使用通过[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")函数的声明映射还是经典映射，都始终声明用户定义类正在映射。
 
 代理通过对底层映射属性或集合进行操作来响应操作，并且通过代理进行的更改在映射属性中立即显现，反之亦然。底层属性保持完全可访问。
 
@@ -102,7 +102,7 @@ Many](basic_relationships.html#relationships-many-to-many)中描述） ：
 当列表 append()事件（或 set add()，dictionary \_\_setitem
 \_\_()或标量赋值事件）被关联代理拦截时，它使用其构造函数实例化“中间”对象的新实例，作为单个论证给定的价值。在我们上面的例子中，一个操作如下：
 
-    user.keywords.append('cheese inspector')plain
+    user.keywords.append('cheese inspector')plainplain
 
 由协会代理翻译成操作：
 
@@ -129,7 +129,7 @@ Object](basic_relationships.html#association-pattern)中进行了描述。关联
 假设我们上面的`userkeywords`表有额外的列，我们希望明确映射，但是在大多数情况下我们不需要直接访问这些属性。下面我们举例说明一个新的映射，它引入了映射到前面说明的`userkeywords`表的`UserKeyword`类。这个类增加了一个额外的列`special_key`，这是我们偶尔想要访问的值，但通常情况下不会。我们在`User`类中创建了一个名为`keywords`的关联代理，它将与`User`的`user_keywords`
 \>到每个`UserKeyword`中存在的`.keyword`属性：
 
-    from sqlalchemy import Column, Integer, String, ForeignKey
+    from sqlalchemy import Column, Integer, String, ForeignKeyplain
     from sqlalchemy.orm import relationship, backref
 
     from sqlalchemy.ext.associationproxy import association_proxy
@@ -197,11 +197,11 @@ Object](basic_relationships.html#association-pattern)中进行了描述。关联
 
 对于那些我们希望`special_key`具有值的情况，我们显式创建`UserKeyword`对象。下面我们分配所有三个属性，其中`.user`的赋值将`UserKeyword`的作用附加到`User.user_keywords`集合中：
 
-    >>> UserKeyword(Keyword('its_wood'), user, special_key='my special key')
+    >>> UserKeyword(Keyword('its_wood'), user, special_key='my special key')plain
 
 关联代理向我们返回由所有这些操作表示的`Keyword`对象的集合：
 
-    >>> user.keywords
+    >>> user.keywordsplain
     [Keyword('new_from_blammo'), Keyword('its_big'), Keyword('its_heavy'), Keyword('its_wood')]
 
 代理基于字典的集合[¶](#proxying-to-dictionary-based-collections "Permalink to this headline")
@@ -340,7 +340,7 @@ string, where `UserKeyword` and `Keyword` objects are created and removed for us
 association proxy.
 在下面的例子中，我们举例说明了赋值运算符的用法，也可以由关联代理进行适当处理，以便将字典值同时应用于集合：
 
-    >>> user = User('log')
+    >>> user = User('log')plain
     >>> user.keywords = {
     ...     'sk1':'kw1',
     ...     'sk2':'kw2'

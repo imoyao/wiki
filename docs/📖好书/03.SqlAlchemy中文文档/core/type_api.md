@@ -1,5 +1,5 @@
 ---
-title: 基本类型API
+title: 基本类型 API
 date: 2021-02-20 22:41:37
 permalink: /sqlalchemy/core/type_api/
 categories:

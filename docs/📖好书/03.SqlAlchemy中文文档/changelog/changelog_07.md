@@ -771,12 +771,12 @@ tags:
 
 -   **[engine] [feature]**为引擎，连接添加了一些体面的上下文管理器：
 
-        with engine.begin() as conn:plainplainplainplainplainplainplainplainplainplainplainplain
+        with engine.begin() as conn:plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
             <work with conn in a transaction>
 
     和：
 
-        with engine.connect() as conn:plainplainplainplainplainplainplainplain
+        with engine.connect() as conn:plainplainplainplainplainplainplainplainplainplainplainplainplainplain
             <work with conn>
 
     在 engine.begin()完成，提交或回滚事务时出错都关闭连接。

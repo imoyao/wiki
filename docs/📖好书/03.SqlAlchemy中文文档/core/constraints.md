@@ -218,7 +218,7 @@ NULL”之类的短语来指定，这与外键约束对应。“ON UPDATE”或�
 DELETE”之后的短语也可能允许其他特定于正在使用的数据库的短语。[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")和[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象支持通过`onupdate`和`ondelete`关键字参数生成此子句。该值是在适当的“ON UPDATE”或“ON
 DELETE”短语后输出的任何字符串：
 
-    child = Table('child', meta,
+    child = Table('child', meta,plain
         Column('id', Integer,
                 ForeignKey('parent.id', onupdate="CASCADE", ondelete="CASCADE"),
                 primary_key=True
@@ -362,7 +362,7 @@ The above convention will establish names for all constraints within the
 target [`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
 collection. 例如，我们可以观察创建未命名的[`UniqueConstraint`](#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")时产生的名称：
 
-    >>> user_table = Table('user', metadata,
+    >>> user_table = Table('user', metadata,plain
     ...                 Column('id', Integer, primary_key=True),
     ...                 Column('name', String(30), nullable=False),
     ...                 UniqueConstraint('name')
@@ -405,7 +405,7 @@ The tokens available include `%(table_name)s`,
 describes each individually.
 通过在naming\_convention 字典中指定一个额外的标记和一个可调用标记，还可以添加新的标记。例如，如果我们想使用 GUID 方案来命名我们的外键约束，我们可以这样做：
 
-    import uuid
+    import uuidplain
 
     def fk_guid(constraint, table):
         str_tokens = [
@@ -1751,7 +1751,7 @@ INDEX”的DDL在表的create语句之后立即发布：
 
 或者使用支持Postgresql等函数索引的后端，可以使用`lower()`函数创建“不区分大小写”的索引：
 
-    from sqlalchemy import func, Index
+    from sqlalchemy import func, Indexplain
 
     Index('someindex', func.lower(mytable.c.somecol))
 

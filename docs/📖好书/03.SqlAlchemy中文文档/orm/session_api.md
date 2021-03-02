@@ -1164,7 +1164,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
 属性和状态管理实用程序[¶](#attribute-and-state-management-utilities "Permalink to this headline")
 -------------------------------------------------------------------------------------------------
 
-这些函数由SQLAlchemy属性检测API提供，以提供处理实例，属性值和历史记录的详细界面。它们中的一些在构建事件监听器函数时很有用，比如[*ORM
+这些函数由 SQLAlchemy 属性检测 API 提供，以提供处理实例，属性值和历史记录的详细界面。它们中的一些在构建事件监听器函数时很有用，比如[*ORM
 Events*](events.html)中描述的那些函数。
 
 `sqlalchemy.orm.util。 T0>  object_state  T1> （ T2> 实例 T3> ） T4> ¶< / T5>`{.descclassname}

@@ -28,20 +28,20 @@ t4\>语句，并在从数据库读回行`SELECTed`时再次使用它。接受类
 泛型类型[¶](#generic-types "Permalink to this headline")
 --------------------------------------------------------
 
-泛型类型指定一个可以读取，写入和存储特定类型的Python数据的列。发布`CREATE TABLE`语句时，SQLAlchemy将选择目标数据库上可用的最佳数据库列类型。为了完全控制哪些列类型在`CREATE TABLE`中发出，例如`VARCHAR`，请参阅[\`SQL
+泛型类型指定一个可以读取，写入和存储特定类型的 Python 数据的列。发布`CREATE TABLE`语句时，SQLAlchemy将选择目标数据库上可用的最佳数据库列类型。为了完全控制哪些列类型在`CREATE TABLE`中发出，例如`VARCHAR`，请参阅[\`SQL
 Standard Types\`\_](#id1)和本章的其他部分。
 
 *class* `sqlalchemy.types。`{.descclassname} `BigInteger`{.descname} [¶](#sqlalchemy.types.BigInteger "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Integer`](#sqlalchemy.types.Integer "sqlalchemy.types.Integer")
 
-    更大的`int`整数的类型。
+    更大的`int`整数的类型。plain
 
     通常在DDL中生成一个`BIGINT`，否则就像Python端的普通[`Integer`](#sqlalchemy.types.Integer "sqlalchemy.types.Integer")一样。
 
 *class* `sqlalchemy.types。`{.descclassname} `布尔`{.descname} （ *create\_constraint = True*，*名称=无*，*\_create\_events = True ） [¶](#sqlalchemy.types.Boolean "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")，[`sqlalchemy.types.SchemaType`](#sqlalchemy.types.SchemaType "sqlalchemy.types.SchemaType")
 
-    一个bool数据类型。
+    一个bool数据类型。plain
 
     布尔值通常在DDL端使用BOOLEAN或SMALLINT，而在Python端则使用`True`或`False`。
 
@@ -730,7 +730,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `BINARY`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.BINARY "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
 
-    SQL BINARY类型。
+    SQL BINARY类型。plain
 
 *class* `sqlalchemy.types。`{.descclassname} `BLOB`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.BLOB "Permalink to this definition")
 :   基础：[`sqlalchemy.types.LargeBinary`](#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
@@ -772,7 +772,7 @@ backends that explicitly support them by name.
  *class*`sqlalchemy.types.`{.descclassname}`FLOAT`{.descname}(*precision=None*, *asdecimal=False*, *decimal\_return\_scale=None*, *\*\*kwargs*)[¶](#sqlalchemy.types.FLOAT "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Float`](#sqlalchemy.types.Float "sqlalchemy.types.Float")
 
-    SQL FLOAT类型。
+    SQL FLOAT类型。plain
 
 ` sqlalchemy.types。 T0>  INT  T1> ¶ T2>`{.descclassname}
 :   [`INTEGER`](#sqlalchemy.types.INTEGER "sqlalchemy.types.INTEGER")的别名
@@ -916,7 +916,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `NVARCHAR`{.descname} （ *length = None*，*\* \* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.types.NVARCHAR "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.Unicode`](#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")
 
-    SQL NVARCHAR类型。
+    SQL NVARCHAR类型。plain
 
  *class*`sqlalchemy.types.`{.descclassname}`NUMERIC`{.descname}(*precision=None*, *scale=None*, *decimal\_return\_scale=None*, *asdecimal=True*)[¶](#sqlalchemy.types.NUMERIC "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Numeric`](#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")
@@ -926,7 +926,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `REAL`{.descname} （ *precision = None*，*asdecimal = False*，*decimal\_return\_scale = None*，*\*\* kwargs* ） [¶](#sqlalchemy.types.REAL "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Float`](#sqlalchemy.types.Float "sqlalchemy.types.Float")
 
-    SQL REAL类型。plain
+    SQL REAL类型。plainplain
 
 *class* `sqlalchemy.types。`{.descclassname} `SMALLINT`{.descname} [¶](#sqlalchemy.types.SMALLINT "Permalink to this definition")
 :   基础：[`sqlalchemy.types.SmallInteger`](#sqlalchemy.types.SmallInteger "sqlalchemy.types.SmallInteger")
@@ -936,7 +936,7 @@ backends that explicitly support them by name.
  *class*`sqlalchemy.types.`{.descclassname}`TEXT`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.types.TEXT "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Text`](#sqlalchemy.types.Text "sqlalchemy.types.Text")
 
-    SQL TEXT类型。plain
+    SQL TEXT类型。plainplain
 
  *class*`sqlalchemy.types.`{.descclassname}`TIME`{.descname}(*timezone=False*)[¶](#sqlalchemy.types.TIME "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Time`](#sqlalchemy.types.Time "sqlalchemy.types.Time")
@@ -946,7 +946,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `TIMESTAMP`{.descname} （ *timezone = False* / T5\> [¶ T6\>](#sqlalchemy.types.TIMESTAMP "Permalink to this definition")
 :   基础：[`sqlalchemy.types.DateTime`](#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")
 
-    SQL TIMESTAMP类型。
+    SQL TIMESTAMP类型。plain
 
 *class* `sqlalchemy.types。`{.descclassname} `VARBINARY`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.VARBINARY "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
@@ -963,9 +963,9 @@ backends that explicitly support them by name.
 
 数据库特定类型也可用于从每个数据库的方言模块导入。请参阅您感兴趣的数据库的[Dialects](dialects_index.html)参考。
 
-例如，MySQL 有一个`BIGINT`类型，而PostgreSQL有一个`INET`类型。要使用这些，请明确从模块中导入它们：
+例如，MySQL 有一个`BIGINT`类型，而 PostgreSQL 有一个`INET`类型。要使用这些，请明确从模块中导入它们：
 
-    from sqlalchemy.dialects import mysql
+    from sqlalchemy.dialects import mysqlplain
 
     table = Table('foo', metadata,
         Column('id', mysql.BIGINT),

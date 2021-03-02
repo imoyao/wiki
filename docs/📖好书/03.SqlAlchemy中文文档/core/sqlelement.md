@@ -34,7 +34,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 ` sqlalchemy.sql.expression。 T0> 和_  T1> （ T2>  *条款 T3> ） T4> ¶  T5>`{.descclassname}
 :   Produce a conjunction of expressions joined by `AND`.
 
-    例如。：
+    例如。：plain
 
         from sqlalchemy import and_
 
@@ -1070,7 +1070,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     [Using Textual SQL](orm_tutorial.html#orm-tutorial-literal-sql) - in
     the ORM tutorial
 
-` sqlalchemy.sql.expression。 T0> 真 T1> （ T2> ） T3> ¶ T4>`{.descclassname}
+`sqlalchemy.sql.expression。 T0> 真 T1> （ T2> ） T3> ¶ T4>`{.descclassname}
 :   返回一个常量[`True_`](#sqlalchemy.sql.elements.True_ "sqlalchemy.sql.elements.True_")结构。
 
     例如。：

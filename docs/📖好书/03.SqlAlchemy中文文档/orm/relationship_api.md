@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy中文文档
   - orm
 tags:
-  - 
 ---
 关系API [¶](#relationships-api "Permalink to this headline")
 ============================================================
@@ -558,7 +557,7 @@ tags:
  `sqlalchemy.orm.`{.descclassname}`backref`{.descname}(*name*, *\*\*kwargs*)[¶](#sqlalchemy.orm.backref "Permalink to this definition")
 :   使用显式关键字参数创建一个后端引用，这些参数是可以发送到[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的相同参数。
 
-    与[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的`backref`关键字参数一起使用以代替字符串参数，例如：plain
+    与[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的`backref`关键字参数一起使用以代替字符串参数，例如：plainplain
 
         'items':relationship(
             SomeItem, backref=backref('parent', lazy='subquery'))
@@ -588,7 +587,7 @@ tags:
 `sqlalchemy.orm。 T0> 外国 T1> （ T2>  EXPR  T3> ） T4> ¶ T5 >`{.descclassname}
 :   使用“外部”注释标注一个 primaryjoin 表达式的一部分。
 
-    有关使用说明，请参阅[Creating Custom Foreign
+    有关使用说明，请参阅[Creating Custom Foreignplain
     Conditions](join_conditions.html#relationship-custom-foreign)部分。
 
     0.8版本中的新功能
@@ -600,7 +599,7 @@ tags:
 
     [`remote()`](#sqlalchemy.orm.remote "sqlalchemy.orm.remote")
 
-` sqlalchemy.orm。 T0> 远程 T1> （ T2>  EXPR  T3> ） T4> ¶ T5 >`{.descclassname}
+`sqlalchemy.orm。 T0> 远程 T1> （ T2>  EXPR  T3> ） T4> ¶ T5 >`{.descclassname}
 :   使用'远程'注释标注一个primaryjoin表达式的一部分。
 
     有关使用说明，请参阅[Creating Custom Foreign

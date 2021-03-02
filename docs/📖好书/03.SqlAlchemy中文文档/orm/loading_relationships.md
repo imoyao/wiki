@@ -32,7 +32,7 @@ SQLAlchemy 的很大一部分是对查询中相关对象加载的方式提供了
 名称“select”，因为通常在首次访问属性时会发出“SELECT”语句。
 
 在[Object Relational Tutorial](tutorial.html)中，我们引入了**Eager
-Loading**的概念。我们将`option`与[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象结合使用，以表示在单个 SQL 查询中应该与父对象同时加载关系。这个被称为[`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")的选项将一个JOIN（缺省为LEFT
+Loading**的概念。我们将`option`与[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象结合使用，以表示在单个 SQL 查询中应该与父对象同时加载关系。这个被称为[`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")的选项将一个 JOIN（缺省为 LEFT
 OUTER join）连接到该语句，并从与父类相同的结果集中填充标量/集合：
 
     sql>>> jack = session.query(User).\
@@ -47,7 +47,7 @@ OUTER join）连接到该语句，并从与父类相同的结果集中填充标�
 
 除了“加入急切加载”之外，还有第二种急切加载选项，称为“子查询加载”。这种热切的加载为请求的每个集合都发出额外的 SQL 语句，并聚合到所有父对象中：
 
-    sql>>> jack = session.query(User).\plain
+    sql>>> jack = session.query(User).\plainplain
     ... options(subqueryload('addresses')).\
     ... filter_by(name='jack').all()
     SELECT users.id AS users_id, users.name AS users_name, users.fullname AS users_fullname,
@@ -138,7 +138,7 @@ subqueryload())?](faq_ormconfiguration.html#faq-subqueryload-limit-sort)
                         defaultload("atob").joinedload("btoc")
                     ).all()
 
-在版本0.9.0中进行了更改：之前在加载器选项中指定点分隔路径的方法已被[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")对象和相关方法的模糊方法所取代。使用这个系统，用户明确指定链中每个链接的加载样式，而不是在诸如`joinedload()`和`joinedload_all()`之类的选项之间进行猜测。提供[`orm.defaultload()`](#sqlalchemy.orm.defaultload "sqlalchemy.orm.defaultload")以允许在不修改现有加载程序选项的情况下进行路径导航。点分离路径系统以及`_all()`函数将无限期地保持向后兼容。
+在版本 0.9.0 中进行了更改：之前在加载器选项中指定点分隔路径的方法已被[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")对象和相关方法的模糊方法所取代。使用这个系统，用户明确指定链中每个链接的加载样式，而不是在诸如`joinedload()`和`joinedload_all()`之类的选项之间进行猜测。提供[`orm.defaultload()`](#sqlalchemy.orm.defaultload "sqlalchemy.orm.defaultload")以允许在不修改现有加载程序选项的情况下进行路径导航。点分离路径系统以及`_all()`函数将无限期地保持向后兼容。
 
 默认加载策略[¶](#default-loading-strategies "Permalink to this headline")
 -------------------------------------------------------------------------
@@ -161,7 +161,7 @@ loading for a particular query, affecting all [`relationship()`](relationship_ap
 
 该选项不会取代查询中声明的加载器选项，如[`eagerload()`](#sqlalchemy.orm.eagerload "sqlalchemy.orm.eagerload")，[`subqueryload()`](#sqlalchemy.orm.subqueryload "sqlalchemy.orm.subqueryload")等。下面的查询仍将使用`widget`关系的连接加载：
 
-    session.query(MyClass).options(
+    session.query(MyClass).options(plainplain
                                 lazyload('*'),
                                 joinedload(MyClass.widget)
                             )
@@ -175,7 +175,7 @@ loading for a particular query, affecting all [`relationship()`](relationship_ap
 
 默认加载器策略的一个变体是能够以每个实体为基础设置策略。例如，如果查询`User`和`Address`，我们可以指示`Address`上的所有关系仅使用延迟加载，方法是首先应用[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")对象，然后将`*`指定为链接选项：
 
-    session.query(User, Address).options(Load(Address).lazyload('*'))
+    session.query(User, Address).options(Load(Address).lazyload('*'))plain
 
 以上，`Address`上的所有关系都将设置为延迟加载。
 
@@ -210,7 +210,7 @@ Above, `ORDER BY addresses.email_address` is not
 valid since `addresses` is not in the FROM list.
 加载`User`通过电子邮件地址记录和订购的正确方法是使用[`Query.join()`](query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")：
 
-    >>> jack = session.query(User).\plain
+    >>> jack = session.query(User).\plainplain
     ... join(User.addresses).\
     ... filter(User.name=='jack').\
     ... order_by(Address.email_address).all()
@@ -285,17 +285,17 @@ are returned.
     # ... subqueryload() emits a SELECT in order
     # to load all address records ...
 
-当使用连接的预先加载时，如果查询包含影响外部返回到连接的行的修饰符，例如在使用DISTINCT，LIMIT，OFFSET或等效项时，完成的语句首先被包装在子查询中，并且专用于连接加入的急切加载应用于子查询。无论查询的格式是什么，SQLAlchemy的加入的加载都会花费更多的时间，然后再增加10英里，以确保它不会影响查询的最终结果，只会加载集合和相关对象的方式。
+当使用连接的预先加载时，如果查询包含影响外部返回到连接的行的修饰符，例如在使用 DISTINCT，LIMIT，OFFSET 或等效项时，完成的语句首先被包装在子查询中，并且专用于连接加入的急切加载应用于子查询。无论查询的格式是什么，SQLAlchemy 的加入的加载都会花费更多的时间，然后再增加 10 英里，以确保它不会影响查询的最终结果，只会加载集合和相关对象的方式。
 
 使用什么样的装载？[¶](#what-kind-of-loading-to-use "Permalink to this headline")
 --------------------------------------------------------------------------------
 
-通常使用哪种类型的加载通常归结为优化SQL执行次数，发出的SQL的复杂性以及获取的数据量之间的折衷。让我们举两个例子：引用集合的[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")和引用标量多对一引用的[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")。
+通常使用哪种类型的加载通常归结为优化 SQL 执行次数，发出的 SQL 的复杂性以及获取的数据量之间的折衷。让我们举两个例子：引用集合的[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")和引用标量多对一引用的[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")。
 
 -   一对多收藏
 
 > -   当使用默认的延迟加载时，如果加载 100 个对象，然后访问每个对象的集合，则会发出总共 101 条 SQL 语句，尽管每条语句通常都是一个没有任何连接的简单 SELECT。
-> -   在使用连接的加载时，100个对象及其集合的加载只会发出一条SQL语句。但是，获取的行的总数将等于所有集合的大小之和，再加上一个具有空集合的每个父对象的额外行。每行还将包含由父项表示的全部列，对每个集合项重复
+> -   在使用连接的加载时，100 个对象及其集合的加载只会发出一条 SQL 语句。但是，获取的行的总数将等于所有集合的大小之和，再加上一个具有空集合的每个父对象的额外行。每行还将包含由父项表示的全部列，对每个集合项重复
 >     -
 >     SQLAlchemy 不会重新获取除主键以外的这些列，但大多数 DBAPI（有一些例外）将传输完整数据在任何情况下，每个父母通过电线连接到客户端连接。因此，只有当收集的大小相对较小时，加入的急切加载才有意义。与 INNER 加入相比，LEFT
 >     OUTER JOIN 也可以是性能密集型的。
@@ -324,7 +324,7 @@ are returned.
 
 为此 SQLAlchemy 提供[`contains_eager()`](#sqlalchemy.orm.contains_eager "sqlalchemy.orm.contains_eager")选项。该选项的使用方式与[`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")选项相同，只是假定[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")将显式指定适当的连接。下面，我们指定`User`和`Address`之间的连接，并将其作为加载`User.addresses`的基础：
 
-    class User(Base):
+    class User(Base):plain
         __tablename__ = 'user'
         id = Column(Integer, primary_key=True)
         addresses = relationship("Address")
@@ -395,7 +395,7 @@ methods are used.
 
 由于这些原因，当需要一个对象加上一组自定义的相关对象时，更愿意在元组中返回单独的字段而不是人为改变集合：
 
-    q = session.query(User, Address).join(User.addresses).\
+    q = session.query(User, Address).join(User.addresses).\plain
                 filter(Address.email.like('%ed%'))
 
 ### 任意语句的高级用法[¶](#advanced-usage-with-arbitrary-statements "Permalink to this headline")
@@ -423,7 +423,7 @@ methods are used.
 
 这是一项先进的技术！应该使用非常小心和测试。
 
-ORM具有各种边界情况，其中属性的值在本地可用，但是ORM本身并不知晓这一点。还有一些情况是需要用户定义的加载属性系统。为了支持用户定义的加载系统的用例，提供了一个关键函数[`attributes.set_committed_value()`](session_api.html#sqlalchemy.orm.attributes.set_committed_value "sqlalchemy.orm.attributes.set_committed_value")。这个函数基本上等同于Python自己的`setattr()`函数，除了应用于目标对象时，用于确定刷新时间更改的SQLAlchemy的“属性历史记录”系统被绕过；该属性的分配方式与ORM从数据库中加载该属性的方式相同。
+ORM具有各种边界情况，其中属性的值在本地可用，但是ORM本身并不知晓这一点。还有一些情况是需要用户定义的加载属性系统。为了支持用户定义的加载系统的用例，提供了一个关键函数[`attributes.set_committed_value()`](session_api.html#sqlalchemy.orm.attributes.set_committed_value "sqlalchemy.orm.attributes.set_committed_value")。这个函数基本上等同于 Python 自己的`setattr()`函数，除了应用于目标对象时，用于确定刷新时间更改的SQLAlchemy的“属性历史记录”系统被绕过；该属性的分配方式与ORM从数据库中加载该属性的方式相同。
 
 使用[`attributes.set_committed_value()`](session_api.html#sqlalchemy.orm.attributes.set_committed_value "sqlalchemy.orm.attributes.set_committed_value")可以与另一个称为[`InstanceEvents.load()`](events.html#sqlalchemy.orm.events.InstanceEvents.load "sqlalchemy.orm.events.InstanceEvents.load")的关键事件组合，以在加载对象时生成属性填充行为。一个这样的例子是双向的“一对一”情况，其中加载一对一的“多对一”一方也应该暗示“一对多”方的价值。SQLAlchemy
 ORM 在加载相关对象时不会考虑 backrefs，它将“一对一”视为另一个“一对多”，而这恰好是一行。
@@ -457,7 +457,7 @@ ORM 在加载相关对象时不会考虑 backrefs，它将“一对一”视为�
 
 由于`b.a`与`a1`的值相同，因此该 SELECT 是多余的。我们可以创建一个有效规则来为我们填充这个：
 
-    from sqlalchemy import eventplain
+    from sqlalchemy import eventplainplain
     from sqlalchemy.orm import attributes
 
     @event.listens_for(A, "load")
@@ -532,10 +532,10 @@ Relationship Loader API [¶](#relationship-loader-api "Permalink to this headlin
     [Routing Explicit Joins/Statements into Eagerly Loaded
     Collections](#contains-eager)
 
-` sqlalchemy.orm。 T0>  defaultload  T1> （ T2>  *键 T3> ） T4> ¶ T5>`{.descclassname}
+`sqlalchemy.orm。 T0>  defaultload  T1> （ T2>  *键 T3> ） T4> ¶ T5>`{.descclassname}
 :   指示应使用其默认加载程序样式加载的属性。
 
-    此方法用于链接到其他加载器选项，例如在链接到正在加载的父类的关系的类上设置[`orm.defer()`](loading_columns.html#sqlalchemy.orm.defer "sqlalchemy.orm.defer")选项。[`orm.defaultload()`](#sqlalchemy.orm.defaultload "sqlalchemy.orm.defaultload")来导航此路径而不更改关系的加载样式：
+    此方法用于链接到其他加载器选项，例如在链接到正在加载的父类的关系的类上设置[`orm.defer()`](loading_columns.html#sqlalchemy.orm.defer "sqlalchemy.orm.defer")选项。[`orm.defaultload()`](#sqlalchemy.orm.defaultload "sqlalchemy.orm.defaultload")来导航此路径而不更改关系的加载样式：plain
 
         session.query(MyClass).options(defaultload("someattr").defer("some_column"))
 
@@ -569,7 +569,7 @@ Relationship Loader API [¶](#relationship-loader-api "Permalink to this headlin
  `sqlalchemy.orm.`{.descclassname}`joinedload`{.descname}(*\*keys*, *\*\*kw*)[¶](#sqlalchemy.orm.joinedload "Permalink to this definition")
 :   表明给定的属性应该使用连接的预加载加载。
 
-    该函数是[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")接口的一部分，并支持方法链接和独立操作。
+    该函数是[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")接口的一部分，并支持方法链接和独立操作。plain
 
     例子：
 
@@ -693,7 +693,7 @@ Relationship Loader API [¶](#relationship-loader-api "Permalink to this headlin
 ` sqlalchemy.orm。 T0>  subqueryload  T1> （ T2>  *键 T3> ） T4> ¶ T5>`{.descclassname}
 :   指示应该使用子查询预加载来加载给定的属性。
 
-    该函数是[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")接口的一部分，并支持方法链接和独立操作。
+    该函数是[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")接口的一部分，并支持方法链接和独立操作。plain
 
     例子：
 

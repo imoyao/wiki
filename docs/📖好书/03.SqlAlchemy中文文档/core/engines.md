@@ -7,13 +7,12 @@ categories:
   - SqlAlchemy中文文档
   - core
 tags:
-  - 
 ---
 引擎配置[¶](#engine-configuration "Permalink to this headline")
 ===============================================================
 
-[`引擎`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")是任何 SQLAlchemy 应用程序的基础。它是实际数据库及其[DBAPI](glossary.html#term-dbapi)的“主基”，通过连接池和[`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")传递给SQLAlchemy应用程序，该应用程序描述了如何与特定类型的数据库/
-DBAPI组合。
+[`引擎`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")是任何 SQLAlchemy 应用程序的基础。它是实际数据库及其[DBAPI](glossary.html#term-dbapi)的“主基”，通过连接池和[`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")传递给 SQLAlchemy 应用程序，该应用程序描述了如何与特定类型的数据库/
+DBAPI 组合。
 
 一般结构如下：
 
@@ -66,7 +65,7 @@ implementations for various backends.
 
 ### 的PostgreSQL [¶ T0\>](#postgresql "Permalink to this headline")
 
-Postgresql方言使用psycopg2作为默认的DBAPI。pg8000也可用作纯Python替代品：
+Postgresql 方言使用 psycopg2 作为默认的 DBAPI。pg8000 也可用作纯 Python 替代品：
 
     # default
     engine = create_engine('postgresql://scott:tiger@localhost/mydatabase')
@@ -77,12 +76,12 @@ Postgresql方言使用psycopg2作为默认的DBAPI。pg8000也可用作纯Python
     # pg8000
     engine = create_engine('postgresql+pg8000://scott:tiger@localhost/mydatabase')
 
-有关在[PostgreSQL](dialects_postgresql.html)连接到Postgresql的更多注意事项。
+有关在[PostgreSQL](dialects_postgresql.html)连接到 Postgresql 的更多注意事项。
 
 ### MySQL的[¶ T0\>](#mysql "Permalink to this headline")
 
-MySQL方言使用mysql-python作为默认的DBAPI。有许多MySQL
-DBAPI可用，包括MySQL连接器-python和OurSQL：
+MySQL 方言使用 mysql-python 作为默认的 DBAPI。有许多 MySQL
+DBAPI 可用，包括 MySQL 连接器-python 和 OurSQL：
 
     # default
     engine = create_engine('mysql://scott:tiger@localhost/foo')
@@ -100,7 +99,7 @@ DBAPI可用，包括MySQL连接器-python和OurSQL：
 
 ### 甲骨文[¶ T0\>](#oracle "Permalink to this headline")
 
-Oracle方言使用cx\_oracle作为默认的DBAPI：
+Oracle方言使用cx\_oracle 作为默认的 DBAPI：
 
     engine = create_engine('oracle://scott:tiger@127.0.0.1:1521/sidname')plain
 
@@ -110,9 +109,9 @@ Oracle方言使用cx\_oracle作为默认的DBAPI：
 
 ### Microsoft SQL Server [¶](#microsoft-sql-server "Permalink to this headline")
 
-SQL Server方言使用pyodbc作为默认DBAPI。pymssql也可用：
+SQL Server 方言使用 pyodbc 作为默认 DBAPI。pymssql 也可用：
 
-    # pyodbc
+    # pyodbcplain
     engine = create_engine('mssql+pyodbc://scott:tiger@mydsn')
 
     # pymssql
@@ -156,7 +155,7 @@ SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据�
 `sqlalchemy。`{.descclassname} `create_engine`{.descname} （ *\* args*，*\*\* kwargs* / T5\> [¶ T6\>](#sqlalchemy.create_engine "Permalink to this definition")
 :   创建一个新的[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")实例。
 
-    标准调用形式是将URL作为第一个位置参数发送，通常是指示数据库方言和连接参数的字符串：
+    标准调用形式是将URL作为第一个位置参数发送，通常是指示数据库方言和连接参数的字符串：plain
 
         engine = create_engine("postgresql://scott:tiger@localhost/test")
 
@@ -394,16 +393,16 @@ SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据�
         Each keyword argument to `engine_from_config()` itself overrides the corresponding item taken from the
         ‘configuration’ dictionary. 关键字参数应该以*不是*为前缀。
 
-` sqlalchemy.engine.url。 T0>  make_url  T1> （ T2>  name_or_url  T3> ） T4> ¶< / T5>`{.descclassname}
+`sqlalchemy.engine.url。 T0>  make_url  T1> （ T2>  name_or_url  T3> ） T4> ¶< / T5>`{.descclassname}
 :   给定一个字符串或 unicode 实例，产生一个新的 URL 实例。
 
-    给定的字符串根据RFC
+    给定的字符串根据RFCplainplain
     1738规范进行分析。如果传递一个现有的URL对象，只返回该对象。
 
 *class* `sqlalchemy.engine.url。`{.descclassname} `URL`{.descname} （ *drivername*，*=无*，*密码=无*，*主机=无*，*端口=无*，*数据库=无* ，*query = None t\>\> ） [¶](#sqlalchemy.engine.url.URL "Permalink to this definition")*
 :   表示用于连接到数据库的 URL 的组件。
 
-    该对象适合直接传递给[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")调用。URL的字段由[`make_url()`](#sqlalchemy.engine.url.make_url "sqlalchemy.engine.url.make_url")函数从字符串中解析。该URL的字符串格式是RFC-1738样式的字符串。
+    该对象适合直接传递给[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")调用。URL的字段由[`make_url()`](#sqlalchemy.engine.url.make_url "sqlalchemy.engine.url.make_url")函数从字符串中解析。该URL的字符串格式是RFC-1738样式的字符串。plainplain
 
     所有初始化参数都可用作公共属性。
 
@@ -457,11 +456,11 @@ allow a default “overflow” of ten. 由于[`Engine`](connections.html#sqlalch
 
 [`QueuePool`](pooling.html#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")
 is not used by default for SQLite engines.
-有关SQLite连接池用法的详细信息，请参阅[SQLite](dialects_sqlite.html)。
+有关 SQLite 连接池用法的详细信息，请参阅[SQLite](dialects_sqlite.html)。
 
 有关连接池的更多信息，请参阅[Connection Pooling](pooling.html)。
 
-自定义DBAPI连接()参数[¶](#custom-dbapi-connect-arguments "Permalink to this headline")
+自定义 DBAPI 连接()参数[¶](#custom-dbapi-connect-arguments "Permalink to this headline")
 --------------------------------------------------------------------------------------
 
 在发布`connect()`调用到底层 DBAPI 时使用的自定义参数可能以三种不同的方式发布。可以直接从 URL 字符串中传递基于字符串的参数作为查询参数：
@@ -484,13 +483,13 @@ is not used by default for SQLite engines.
 配置日志记录[¶](#configuring-logging "Permalink to this headline")
 ------------------------------------------------------------------
 
-Python的标准[logging](http://docs.python.org/library/logging.html)模块用于通过 SQLAlchemy 实现信息和调试日志输出。这允许 SQLAlchemy 的日志记录与其他应用程序和库以标准方式集成。The
+Python 的标准[logging](http://docs.python.org/library/logging.html)模块用于通过 SQLAlchemy 实现信息和调试日志输出。这允许 SQLAlchemy 的日志记录与其他应用程序和库以标准方式集成。The
 `echo` and `echo_pool` flags
 that are present on [`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine"), as
 well as the `echo_uow` flag used on [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session"),
 all interact with regular loggers.
 
-本节假定您熟悉上述链接的日志记录模块。所有由SQLAlchemy执行的日志都存在于`sqlalchemy`命名空间下面，正如`logging.getLogger('sqlalchemy')`所使用的。当配置日志记录（即通过`logging.basicConfig()`）时，可以打开的SA记录器的通用名称空间如下所示：
+本节假定您熟悉上述链接的日志记录模块。所有由 SQLAlchemy 执行的日志都存在于`sqlalchemy`命名空间下面，正如`logging.getLogger('sqlalchemy')`所使用的。当配置日志记录（即通过`logging.basicConfig()`）时，可以打开的 SA 记录器的通用名称空间如下所示：
 
 -   `sqlalchemy.engine` -
     控制SQL回显。对于SQL查询输出设置为`logging.INFO`，对于查询+结果集输出设置为`logging.DEBUG`。
@@ -499,11 +498,11 @@ all interact with regular loggers.
 -   `sqlalchemy.pool` -
     控制连接池日志记录。设置为`logging.INFO`或更低以记录连接池检出/检入。
 -   `sqlalchemy.orm` -
-    控制各种ORM功能的记录。设置为`logging.INFO`以获取有关映射器配置的信息。
+    控制各种 ORM 功能的记录。设置为`logging.INFO`以获取有关映射器配置的信息。
 
-例如，要使用Python日志记录来记录SQL查询，而不是`echo=True`标志：
+例如，要使用 Python 日志记录来记录 SQL 查询，而不是`echo=True`标志：
 
-    import logging
+    import loggingplain
 
     logging.basicConfig()
     logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)

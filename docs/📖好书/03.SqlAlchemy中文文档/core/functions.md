@@ -54,7 +54,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`FunctionElement`{.descname}(*\*clauses*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.FunctionElement "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.Executable`](selectable.html#sqlalchemy.sql.expression.Executable "sqlalchemy.sql.expression.Executable")，[`sqlalchemy.sql.expression.ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")，[`sqlalchemy.sql.expression.FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
 
-    基于SQL函数的构造。
+    基于SQL函数的构造。plain
 
     也可以看看
 
@@ -612,7 +612,7 @@ SQL 函数 API，工厂和内置函数。
  `sqlalchemy.sql.functions.`{.descclassname}`register_function`{.descname}(*identifier*, *fn*, *package='\_default'*)[¶](#sqlalchemy.sql.functions.register_function "Permalink to this definition")
 :   将可调用函数与特定的函数关联。名称。
 
-    这通常由\_GenericMeta调用，但也可以自行使用，以便非函数结构可以与[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")访问器关联（即，CAST，EXTRACT）。
+    这通常由\_GenericMeta调用，但也可以自行使用，以便非函数结构可以与[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")访问器关联（即，CAST，EXTRACT）。plain
 
 *class* `sqlalchemy.sql.functions。`{.descclassname} `session_user`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.sql.functions.session_user "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.AnsiFunction`](#sqlalchemy.sql.functions.AnsiFunction "sqlalchemy.sql.functions.AnsiFunction")
