@@ -39,7 +39,7 @@ ORM；一个构建在 Core 上的应用程序，它仅处理[`Table`](core_metad
 几乎在所有情况下，表都有一个所谓的[candidate
 key](glossary.html#term-candidate-key)，它是一列或一系列唯一标识一行的列。如果一个表真的没有这个，并且实际上有完全重复的行，那么这个表就不对应于[第一范式](http://en.wikipedia.org/wiki/First_normal_form)，并且不能被映射。否则，可以直接将任何包含最佳候选键的列应用于映射器：
 
-    class SomeClass(Base):plainplainplainplainplainplain
+    class SomeClass(Base):
         __table__ = some_table_with_no_pk
         __mapper_args__ = {
             'primary_key':[some_table_with_no_pk.c.uid, some_table_with_no_pk.c.bar]
@@ -47,7 +47,7 @@ key](glossary.html#term-candidate-key)，它是一列或一系列唯一标识一
 
 更好的是，当使用完全声明的表元数据时，在这些列上使用`primary_key=True`标志：
 
-    class SomeClass(Base):plainplainplainplainplainplain
+    class SomeClass(Base):plain
         __tablename__ = "some_table_with_no_pk"
 
         uid = Column(Integer, primary_key=True)
@@ -56,7 +56,7 @@ key](glossary.html#term-candidate-key)，它是一列或一系列唯一标识一
 关系数据库中的所有表都应该有主键。即使是多对多关联表 -
 主键也是两个关联列的组合：
 
-    CREATE TABLE my_association (plainplainplain
+    CREATE TABLE my_association (plain
       user_id INTEGER REFERENCES user(id),
       account_id INTEGER REFERENCES account(id),
       PRIMARY KEY (user_id, account_id)
@@ -110,7 +110,7 @@ Names](orm_mapping_columns.html#mapper-column-distinct-names)。
 
 给出如下的例子：
 
-    from sqlalchemy import Integer, Column, ForeignKeyplainplain
+    from sqlalchemy import Integer, Column, ForeignKeyplain
     from sqlalchemy.ext.declarative import declarative_base
 
     Base = declarative_base()
@@ -130,7 +130,7 @@ Names](orm_mapping_columns.html#mapper-column-distinct-names)。
 
 解决此问题的映射如下所示：
 
-    class A(Base):plainplainplain
+    class A(Base):
         __tablename__ = 'a'
 
         id = Column(Integer, primary_key=True)
@@ -145,7 +145,7 @@ Suppose we did want `A.id` and `B.id` to be mirrors of each other, despite the f
 `B.a_id` is where `A.id` is
 related. 我们可以使用[`column_property()`](orm_mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")将它们结合在一起：
 
-    class A(Base):plainplainplain
+    class A(Base):
         __tablename__ = 'a'
 
         id = Column(Integer, primary_key=True)
@@ -157,12 +157,12 @@ related. 我们可以使用[`column_property()`](orm_mapping_columns.html#sqlalc
         id = column_property(Column(Integer, primary_key=True), A.id)
         a_id = Column(Integer, ForeignKey('a.id'))
 
-我正在使用 Declarative 并使用`and_()`或`or_()`设置primaryjoin / secondaryjoin，并且收到有关外键的错误消息。[/ T4\>](#i-m-using-declarative-and-setting-primaryjoin-secondaryjoin-using-an-and-or-or-and-i-am-getting-an-error-message-about-foreign-keys "Permalink to this headline")
+我正在使用 Declarative 并使用`and_()`或`or_()`设置 primaryjoin / secondaryjoin，并且收到有关外键的错误消息。[/ T4\>](#i-m-using-declarative-and-setting-primaryjoin-secondaryjoin-using-an-and-or-or-and-i-am-getting-an-error-message-about-foreign-keys "Permalink to this headline")
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 你在做这个吗？:
 
-    class MyClass(Base):plainplainplain
+    class MyClass(Base):plain
         # ....
 
         foo = relationship("Dest", primaryjoin=and_("MyClass.id==Dest.foo_id", "MyClass.foo==Dest.bar"))
@@ -170,21 +170,21 @@ related. 我们可以使用[`column_property()`](orm_mapping_columns.html#sqlalc
 这是两个字符串表达式的`and_()`，SQLAlchemy 不能应用任何映射。Declarative 允许[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")参数指定为字符串，并使用`eval()`转换为表达式对象。但是这不会发生在`and_()`表达式内部 -
 这是一种特殊的操作，声明式只适用于传递给 primaryjoin 或其他参数的字符串的*整体*
 
-    class MyClass(Base):
+    class MyClass(Base):plain
         # ....
 
         foo = relationship("Dest", primaryjoin="and_(MyClass.id==Dest.foo_id, MyClass.foo==Dest.bar)")
 
 或者，如果您需要的对象已经可用，请跳过字符串：
 
-    class MyClass(Base):plain
+    class MyClass(Base):
         # ....
 
         foo = relationship(Dest, primaryjoin=and_(MyClass.id==Dest.foo_id, MyClass.foo==Dest.bar))
 
 同样的想法适用于所有其他参数，如`foreign_keys`：
 
-    # wrong !plainplainplainplainplain
+    # wrong !plain
     foo = relationship(Dest, foreign_keys=["Dest.foo_id", "Dest.bar_id"])
 
     # correct !
@@ -208,9 +208,9 @@ related. 我们可以使用[`column_property()`](orm_mapping_columns.html#sqlalc
 
 当我们使用 SQLAlchemy 方法（如[`Query.first()`](orm_query.html#sqlalchemy.orm.query.Query.first "sqlalchemy.orm.query.Query.first")）时，实际上我们在查询中应用了一个`LIMIT`，所以没有明确的排序，它不是确定性的我们真的回来了。虽然我们可能没有注意到对通常以自然顺序返回行的数据库的简单查询，但如果我们还使用[`orm.subqueryload()`](orm_loading_relationships.html#sqlalchemy.orm.subqueryload "sqlalchemy.orm.subqueryload")加载相关集合，则会变得更加棘手，而我们可能无法按预期加载收藏。
 
-SQLAlchemy通过发出一个单独的查询来实现[`orm.subqueryload()`](orm_loading_relationships.html#sqlalchemy.orm.subqueryload "sqlalchemy.orm.subqueryload")，其结果与第一个查询的结果相匹配。我们看到这样发出两个查询：
+SQLAlchemy 通过发出一个单独的查询来实现[`orm.subqueryload()`](orm_loading_relationships.html#sqlalchemy.orm.subqueryload "sqlalchemy.orm.subqueryload")，其结果与第一个查询的结果相匹配。我们看到这样发出两个查询：
 
-    >>> session.query(User).options(subqueryload(User.addresses)).all()plainplain
+    >>> session.query(User).options(subqueryload(User.addresses)).all()
     -- the "main" query
     SELECT users.id AS users_id
     FROM users
@@ -224,7 +224,7 @@ SQLAlchemy通过发出一个单独的查询来实现[`orm.subqueryload()`](orm_l
 
 第二个查询嵌入第一个查询作为行的来源。当内部查询使用`OFFSET`和/或`LIMIT`时没有排序，这两个查询可能看不到相同的结果：
 
-    >>> user = session.query(User).options(subqueryload(User.addresses)).first()plainplain
+    >>> user = session.query(User).options(subqueryload(User.addresses)).first()
     -- the "main" query
     SELECT users.id AS users_id
     FROM users
@@ -239,7 +239,7 @@ SQLAlchemy通过发出一个单独的查询来实现[`orm.subqueryload()`](orm_l
 
 根据数据库的具体情况，我们可能会得到如下两个查询的结果：
 
-    -- query #1
+    -- query #1plain
     +--------+
     |users_id|
     +--------+
@@ -259,7 +259,7 @@ SQLAlchemy通过发出一个单独的查询来实现[`orm.subqueryload()`](orm_l
 
 此问题的解决方案是始终指定确定性的排序顺序，以便主查询始终返回相同的一组行。这通常意味着您应该在表上的唯一列上使用[`Query.order_by()`](orm_query.html#sqlalchemy.orm.query.Query.order_by "sqlalchemy.orm.query.Query.order_by")。主键是一个很好的选择：
 
-    session.query(User).options(subqueryload(User.addresses)).order_by(User.id).first()plainplainplain
+    session.query(User).options(subqueryload(User.addresses)).order_by(User.id).first()plain
 
 请注意，[`joinedload()`](orm_loading_relationships.html#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")不会遇到同样的问题，因为只发出一个查询，所以加载查询不能与主查询不同。
 

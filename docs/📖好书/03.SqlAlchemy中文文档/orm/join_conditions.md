@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy 中文文档
   - orm
 tags:
-  - 
 ---
 配置关系如何连接[¶](#configuring-how-relationship-joins "Permalink to this headline")
 =====================================================================================
@@ -51,7 +50,7 @@ should be compared. 有多种情况需要定制此行为。
 
 上面的映射，当我们尝试使用它时，会产生错误：
 
-    sqlalchemy.exc.AmbiguousForeignKeysError: Could not determine joinplainplain
+    sqlalchemy.exc.AmbiguousForeignKeysError: Could not determine joinplain
     condition between parent/child tables on relationship
     Customer.billing_address - there are multiple foreign key
     paths linking the tables.  Specify the 'foreign_keys' argument,
@@ -62,7 +61,7 @@ should be compared. 有多种情况需要定制此行为。
 
 在这种情况下，消息希望我们通过指示每个关键字列应该被考虑，来限定每个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")，并且适当的格式如下：
 
-    class Customer(Base):plainplainplain
+    class Customer(Base):plain
         __tablename__ = 'customer'
         id = Column(Integer, primary_key=True)
         name = Column(String)
@@ -82,7 +81,7 @@ the `Customer.billing_address` relationship from a
 `shipping_address` relationship.
 两列的联系在持续期间也起着作用；刚刚插入的`Address`对象的新生成的主键将在刷新期间被复制到关联`Customer`对象的相应外键列中。
 
-使用Declarative指定`foreign_keys`时，我们也可以使用字符串名称来指定，但是如果使用列表，则**列表是字符串**的一部分，这一点很重要：
+使用 Declarative 指定`foreign_keys`时，我们也可以使用字符串名称来指定，但是如果使用列表，则**列表是字符串**的一部分，这一点很重要：
 
     billing_address = relationship("Address", foreign_keys="[Customer.billing_address_id]")plain
 
@@ -159,7 +158,7 @@ the `Customer.billing_address` relationship from a
 
 上面的关系会产生一个连接，如：
 
-    SELECT host_entry.id, host_entry.ip_address, host_entry.contentplainplainplain
+    SELECT host_entry.id, host_entry.ip_address, host_entry.content
     FROM host_entry JOIN host_entry AS host_entry_1
     ON host_entry_1.ip_address = CAST(host_entry.content AS INET)
 
@@ -169,7 +168,7 @@ and [`remote()`](relationship_api.html#sqlalchemy.orm.remote "sqlalchemy.orm.rem
 [`primaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")
 expression. 此语法表示[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")通常自身应用于给定[`foreign_keys`](relationship_api.html#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")和[`remote_side`](relationship_api.html#sqlalchemy.orm.relationship.params.remote_side "sqlalchemy.orm.relationship")参数的连接条件的注释。当显式连接条件存在时，这些函数可能更简洁，并且还用于无论该列是多次声明还是在复杂的 SQL 表达式中，都精确地标记“外来”或“远程”列：
 
-    from sqlalchemy.orm import foreign, remoteplainplain
+    from sqlalchemy.orm import foreign, remoteplain
 
     class HostEntry(Base):
         __tablename__ = 'host_entry'
@@ -194,7 +193,7 @@ when joining with types such as [`postgresql.INET`](dialects_postgresql.html#sql
 and [`postgresql.CIDR`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.CIDR "sqlalchemy.dialects.postgresql.CIDR").
 对于自定义运算符，我们使用[`Operators.op()`](core_sqlelement.html#sqlalchemy.sql.operators.Operators.op "sqlalchemy.sql.operators.Operators.op")函数：
 
-    inet_column.op("<<")(cidr_column)plainplain
+    inet_column.op("<<")(cidr_column)
 
 然而，如果我们使用这个运算符来构造[`primaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")，那么[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")仍然需要更多的信息。This
 is because when it examines our primaryjoin condition, it specifically
@@ -202,11 +201,11 @@ looks for operators used for **comparisons**, and this is typically a
 fixed list containing known comparison operators such as `==`, `<`, etc.
 因此，对于我们的自定义操作员参与此系统，我们需要使用[`is_comparison`](core_sqlelement.html#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")参数将其注册为比较运算符：
 
-    inet_column.op("<<", is_comparison=True)(cidr_column)plainplain
+    inet_column.op("<<", is_comparison=True)(cidr_column)plain
 
 一个完整的例子：
 
-    class IPA(Base):plain
+    class IPA(Base):
         __tablename__ = 'ip_address'
 
         id = Column(Integer, primary_key=True)
@@ -225,7 +224,7 @@ fixed list containing known comparison operators such as `==`, `<`, etc.
 
 以上，一个查询如：
 
-    session.query(IPA).join(IPA.network)plainplain
+    session.query(IPA).join(IPA.network)plain
 
 将呈现为：
 
@@ -248,7 +247,7 @@ well, `Article.magazine_id` is involved in two
 separate relationships; `Article.magazine` and
 `Article.writer`:
 
-    class Magazine(Base):plainplainplain
+    class Magazine(Base):plain
         __tablename__ = 'magazine'
 
         id = Column(Integer, primary_key=True)
@@ -323,14 +322,14 @@ To get just \#1 and \#2, we could specify only
 `Article.writer_id` as the “foreign keys” for
 `Article.writer`:
 
-    class Article(Base):plain
+    class Article(Base):
         # ...
 
         writer = relationship("Writer", foreign_keys='Article.writer_id')
 
 但是，当查询`Writer`时，这会影响`Article.writer`不考虑`Article.magazine_id`：
 
-    SELECT article.article_id AS article_article_id,plainplainplain
+    SELECT article.article_id AS article_article_id,plain
         article.magazine_id AS article_magazine_id,
         article.writer_id AS article_writer_id
     FROM article
@@ -338,7 +337,7 @@ To get just \#1 and \#2, we could specify only
 
 因此，为了充分利用＃1，＃2 和＃3，我们通过将[`primaryjoin`(relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")完整地与[`foreign_keys`](relationship_api.html#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")参数，或者通过使用[`foreign()`](relationship_api.html#sqlalchemy.orm.foreign "sqlalchemy.orm.foreign")进行注释更简洁：
 
-    class Article(Base):plainplain
+    class Article(Base):plain
         # ...
 
         writer = relationship(
@@ -361,7 +360,7 @@ ORM 将尝试警告何时将列同时用作来自多个关系的同步目标。
 通过仔细使用[`foreign()`](relationship_api.html#sqlalchemy.orm.foreign "sqlalchemy.orm.foreign")和[`remote()`](relationship_api.html#sqlalchemy.orm.remote "sqlalchemy.orm.remote")，我们可以建立一种有效生成基本物化路径系统的关系。基本上，当[`foreign()`](relationship_api.html#sqlalchemy.orm.foreign "sqlalchemy.orm.foreign")和[`remote()`](relationship_api.html#sqlalchemy.orm.remote "sqlalchemy.orm.remote")位于比较表达式的*相同*一侧时，该关系被认为是“one
 to 许多”；当他们在*不同*方面时，这种关系被认为是“多对一”。为了比较我们将在这里使用，我们将处理集合，以便将事物配置为“一对多”：
 
-    class Element(Base):plainplainplain
+    class Element(Base):plain
         __tablename__ = 'element'
 
         path = Column(String, primary_key=True)
@@ -419,7 +418,7 @@ column object available yet or the `node_to_node`
 table perhaps isn’t yet available.
 当在一个声明性字符串中引用一个普通的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象时，我们使用该表的字符串名称，因为它存在于[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")中：
 
-    class Node(Base):plainplain
+    class Node(Base):
         __tablename__ = 'node'
         id = Column(Integer, primary_key=True)
         label = Column(String)
@@ -466,11 +465,11 @@ table perhaps isn’t yet available.
 
 本节介绍 SQLAlchemy 的一些新增功能和实验功能。
 
-有时，当人们试图在两个表之间建立一个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")时，为了加入它们，需要多于两个或三个表参与。这是[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的一个区域，它试图推动可能的边界，并且通常需要在SQLAlchemy邮件列表上敲定这些特殊用例的最终解决方案。
+有时，当人们试图在两个表之间建立一个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")时，为了加入它们，需要多于两个或三个表参与。这是[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的一个区域，它试图推动可能的边界，并且通常需要在 SQLAlchemy 邮件列表上敲定这些特殊用例的最终解决方案。
 
 在更新版本的SQLAlchemy中，为了提供由多个表组成的复合目标，可以在一些情况下使用[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数。以下是这种连接条件的示例（要求版本 0.9.2 至少按照原样运行）：
 
-    class A(Base):plain
+    class A(Base):
         __tablename__ = 'a'
 
         id = Column(Integer, primary_key=True)
@@ -508,7 +507,7 @@ and [`secondaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.s
 in the declarative style referring to the named tables `a`, `b`, `c`,
 `d` directly. 从`A`到`D`的查询如下所示：
 
-    sess.query(A).join(A.d).all()
+    sess.query(A).join(A.d).all()plain
 
     SELECT a.id AS a_id, a.b_id AS a_b_id
     FROM a JOIN (
@@ -518,7 +517,7 @@ in the declarative style referring to the named tables `a`, `b`, `c`,
 
 在上面的例子中，我们利用能够将多个表填充到“辅助”容器中，以便我们可以跨多个表加入，同时仍然保持[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的“简单”在“左”和“右”方面都有“一张”表；复杂性保持在中间。
 
-版本0.9.2中的新功能：支持将[`join()`](core_selectable.html#sqlalchemy.sql.expression.join "sqlalchemy.sql.expression.join")结构直接用作[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数的目标，包括对连接，急切连接和延迟加载的支持，以及在声明式中支持指定复杂条件（如包含类名称作为目标的连接）的支持。
+版本 0.9.2 中的新功能：支持将[`join()`](core_selectable.html#sqlalchemy.sql.expression.join "sqlalchemy.sql.expression.join")结构直接用作[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数的目标，包括对连接，急切连接和延迟加载的支持，以及在声明式中支持指定复杂条件（如包含类名称作为目标的连接）的支持。
 
 与非主映射器的关系[¶](#relationship-to-non-primary-mapper "Permalink to this headline")
 ---------------------------------------------------------------------------------------
@@ -574,7 +573,7 @@ support any references between `A` and `B` directly.
 
 在上面的例子中，当我们查询时，我们的`B`的非主映射器会发出额外的列；这些可以被忽略：
 
-    sess.query(A).join(A.b).all()
+    sess.query(A).join(A.b).all()plain
 
     SELECT a.id AS a_id, a.b_id AS a_b_id
     FROM a JOIN (b JOIN d ON d.b_id = b.id JOIN c ON c.id = d.c_id) ON a.b_id = b.id
@@ -584,7 +583,7 @@ support any references between `A` and `B` directly.
 
 非常雄心勃勃的自定义连接条件可能无法直接持久化，并且在某些情况下甚至可能无法正确加载。要移除等式的持久性部分，请在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上使用标记[`viewonly`](relationship_api.html#sqlalchemy.orm.relationship.params.viewonly "sqlalchemy.orm.relationship")，将其建立为只读属性（写入集合的数据将为在 flush()上被忽略）。但是，在极端情况下，请考虑将常规 Python 属性与[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")结合使用，如下所示：
 
-    class User(Base):plainplainplainplain
+    class User(Base):plain
         __tablename__ = 'user'
         id = Column(Integer, primary_key=True)
 

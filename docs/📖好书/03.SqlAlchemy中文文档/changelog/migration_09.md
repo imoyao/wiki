@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy中文文档
   - changelog
 tags:
-  - 
 ---
 SQLAlchemy 0.9有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-9 "Permalink to this headline")
 ===========================================================================================
@@ -54,7 +53,7 @@ C 扩展已经移植到支持 Python 3，现在可以在 Python 2 和 Python 3 �
 将[`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")与复合属性结合使用现在返回由该复合物维护的对象类型，而不是分解为单独的列。在[Composite
 Column Types](orm_composites.html#mapper-composite)中使用映射设置：
 
-    >>> session.query(Vertex.start, Vertex.end).\
+    >>> session.query(Vertex.start, Vertex.end).\plain
     ...     filter(Vertex.start == Point(3, 4)).all()
     [(Point(x=3, y=4), Point(x=5, y=6))]
 
@@ -92,7 +91,7 @@ Column Types](orm_composites.html#mapper-composite)中使用映射设置：
 
 如果我们想要颠倒 JOIN 的左侧和右侧元素的顺序，文档将导致我们相信我们可以使用[`Query.select_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")来执行此操作：
 
-    q = session.query(User).\plainplainplain
+    q = session.query(User).\plain
             select_from(select_stmt).\
             join(User, User.id == select_stmt.c.id).\
             filter(User.name == 'ed')
@@ -124,7 +123,7 @@ replaced with `anon_1` as well.
 
 因此，对于SQLAlchemy 0.9，我们从`select_stmt`中选择的查询产生了我们期望的SQL：
 
-    -- SQLAlchemy 0.9plainplain
+    -- SQLAlchemy 0.9
     SELECT "user".id AS user_id, "user".name AS user_name
     FROM (SELECT "user".id AS id, "user".name AS name
     FROM "user"
@@ -344,7 +343,7 @@ at its default of `PASSIVE_OFF`.
 
 ### 类型对象不再接受被忽略的关键字参数[¶](#type-objects-no-longer-accept-ignored-keyword-arguments "Permalink to this headline")
 
-通过0.8系列，大多数类型的对象接受了被默默忽略的任意关键字参数：
+通过 0.8 系列，大多数类型的对象接受了被默默忽略的任意关键字参数：
 
     from sqlalchemy import Date, Integer
 
@@ -395,7 +394,7 @@ at its default of `PASSIVE_OFF`.
 
 [`TypeEngine.with_variant()`](core_type_api.html#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")
 isn’t new, it was added in SQLAlchemy 0.7.2.
-因此，在0.8系列上运行的代码可以更正为在升级到0.9之前使用此方法并进行测试。
+因此，在 0.8 系列上运行的代码可以更正为在升级到 0.9 之前使用此方法并进行测试。
 
 ### `None`不能再用作“部分 AND”构造函数[¶](#none-can-no-longer-be-used-as-a-partial-and-constructor "Permalink to this headline")
 
@@ -415,7 +414,7 @@ form an AND condition piecemeal.
 
 对于 0.8 和 0.9，正确的代码应为：
 
-    from sqlalchemy.sql import and_plainplainplain
+    from sqlalchemy.sql import and_
 
     if conditions:
         stmt = stmt.where(and_(*conditions))
@@ -441,7 +440,7 @@ conjunctions](#migration-2804)的渲染
 ### `create_engine()`的“密码”部分不再将`+`标记视为编码空间[¶](#the-password-portion-of-a-create-engine-no-longer-considers-the-sign-as-an-encoded-space "Permalink to this headline")
 
 无论出于何种原因，Python 函数`unquote_plus()`都应用于 URL 的“password”字段，这是[RFC
-1738](http://www.ietf.org/rfc/rfc1738.txt)中描述的编码规则的错误应用。它作为加号逃脱了空间。现在URL的字符串只对“：​​”，“@”或“/”进行编码，并且现在也应用于`username`和`password`字段以前它只适用于密码）。在解析时，编码字符被转换，但加号和空格按原样传递：
+1738](http://www.ietf.org/rfc/rfc1738.txt)中描述的编码规则的错误应用。它作为加号逃脱了空间。现在 URL 的字符串只对“：​​”，“@”或“/”进行编码，并且现在也应用于`username`和`password`字段以前它只适用于密码）。在解析时，编码字符被转换，但加号和空格按原样传递：
 
     # password: "pass word + other:words"
     dbtype://user:pass word + other%3Awords@host/dbname
@@ -461,7 +460,7 @@ conjunctions](#migration-2804)的渲染
 
 以前，像下面这样的表达式：
 
-    print((column('x') == 'somevalue').collate("en_EN"))plainplain
+    print((column('x') == 'somevalue').collate("en_EN"))
 
 会产生这样的表达式：
 
@@ -475,11 +474,11 @@ conjunctions](#migration-2804)的渲染
 
 如果将[`collate()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.collate "sqlalchemy.sql.operators.ColumnOperators.collate")运算符应用于右列，则可能出现向后不兼容的更改，如下所示：
 
-    print(column('x') == literal('somevalue').collate("en_EN"))
+    print(column('x') == literal('somevalue').collate("en_EN"))plain
 
 在 0.8 中，这产生：
 
-    x = :param_1 COLLATE en_ENplainplain
+    x = :param_1 COLLATE en_EN
 
 然而在 0.9 中，现在会产生更准确但可能不是你想要的形式：
 
@@ -680,7 +679,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
                       addresses.join(stmt), addresses.c.user_id == stmt.c.id)
 
 
-        # or into a cte():plainplainplain
+        # or into a cte():
         stmt = text("SELECT id, name FROM user").columns(id=Integer, name=String)
         stmt = stmt.cte("x")
 
@@ -691,7 +690,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 ### 从SELECT [¶](#insert-from-select "Permalink to this headline")插入
 
-经过几年毫无意义的拖延之后，这个相对较小的语法特征已被添加，并且也被支持到0.8.3，所以在技术上0.9不是“新”。A
+经过几年毫无意义的拖延之后，这个相对较小的语法特征已被添加，并且也被支持到 0.8.3，所以在技术上 0.9 不是“新”。A
 [`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")
 construct or other compatible construct can be passed to the new method
 [`Insert.from_select()`](core_dml.html#sqlalchemy.sql.expression.Insert.from_select "sqlalchemy.sql.expression.Insert.from_select")
@@ -707,7 +706,7 @@ where it will be used to render an `INSERT .. SELECT` construct:
 
 该构造足够智能，可以容纳诸如类和[`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象的 ORM 对象：
 
-    s = Session()
+    s = Session()plain
     q = s.query(User.id, User.name).filter_by(name='ed')
     ins = insert(Address).from_select((Address.id, Address.email_address), q)
 
@@ -744,9 +743,9 @@ as is the case with [`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "
 and some float types such as [`mysql.DOUBLE`](dialects_mysql.html#sqlalchemy.dialects.mysql.DOUBLE "sqlalchemy.dialects.mysql.DOUBLE"),
 the value of `.scale` is used as the default for
 `.decimal_return_scale` if it is not otherwise
-specified. 如果`.scale`和`.decimal_return_scale`都不存在，则默认值为10。例如。：
+specified. 如果`.scale`和`.decimal_return_scale`都不存在，则默认值为 10。例如。：
 
-    from sqlalchemy.dialects.mysql import DOUBLE
+    from sqlalchemy.dialects.mysql import DOUBLEplain
     import decimal
 
     data = Table('data', metadata,
@@ -802,7 +801,7 @@ Counters](orm_versioning.html#server-side-version-counter)
 
 ### `include_backrefs=False`选项用于`@validates` [¶](#include-backrefs-false-option-for-validates "Permalink to this headline")
 
-[`validates()`](orm_mapped_attributes.html#sqlalchemy.orm.validates "sqlalchemy.orm.validates")函数现在接受一个选项`include_backrefs=True`，该选项将绕过针对事件从backref：
+[`validates()`](orm_mapped_attributes.html#sqlalchemy.orm.validates "sqlalchemy.orm.validates")函数现在接受一个选项`include_backrefs=True`，该选项将绕过针对事件从 backref：
 
     from sqlalchemy import Column, Integer, ForeignKey
     from sqlalchemy.orm import relationship, validates
@@ -911,7 +910,7 @@ auto-generating ad-hoc mappings.
 多年以来，SQLAlchemy ORM 一直被阻止在现有 JOIN 的右侧（通常是 LEFT OUTER
 JOIN，因为 INNER JOIN 总是被压平）嵌套 JOIN。
 
-    SELECT a.*, b.*, c.* FROM a LEFT OUTER JOIN (b JOIN c ON b.id = c.id) ON a.id
+    SELECT a.*, b.*, c.* FROM a LEFT OUTER JOIN (b JOIN c ON b.id = c.id) ON a.idplain
 
 这是因为直到版本**3.7.16**的 SQLite 无法解析上述格式的语句：
 
@@ -939,7 +938,7 @@ OUTER JOIN :)：
                     FROM b JOIN c ON b.id = c.id
                 ) AS anon_1 ON a.id=anon_1.b_id
 
-使用连接表继承结构时，像以上形式的JOIN常见；任何时候[`Query.join()`](orm_query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")用于从某个父节点连接到一个连接表子类，或者当类似地使用[`joinedload()`](orm_loading_relationships.html#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")时，SQLAlchemy 的 ORM 将始终确保为避免查询无法在 SQLite 上运行，嵌套的 JOIN 永远不会呈现。尽管 Core 一直支持更加紧凑的形式，但 ORM 必须避免它。
+使用连接表继承结构时，像以上形式的 JOIN 常见；任何时候[`Query.join()`](orm_query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")用于从某个父节点连接到一个连接表子类，或者当类似地使用[`joinedload()`](orm_loading_relationships.html#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")时，SQLAlchemy 的 ORM 将始终确保为避免查询无法在 SQLite 上运行，嵌套的 JOIN 永远不会呈现。尽管 Core 一直支持更加紧凑的形式，但 ORM 必须避免它。
 
 在ON子句中存在特殊标准的多对多关系中产生连接时，会出现另外一个问题。考虑像下面这样的热切加载连接：
 
@@ -973,7 +972,7 @@ OUTER JOIN :)：
             ON base_table_1.id = subclass_table_1.id)
             ON parent.id = base_table_1.parent_id
 
-多对多连接和eagerloads将嵌套“次”和“右”表：
+多对多连接和 eagerloads 将嵌套“次”和“右”表：
 
     SELECT order.id, order.name
     FROM order LEFT OUTER JOIN
@@ -1033,7 +1032,7 @@ OUTER JOIN :)：
                         )
                     )
 
-生成（除了SQLite以外）：
+生成（除了 SQLite 以外）：
 
     SELECT companies.company_id AS companies_company_id, companies.name AS companies_name
     FROM companies JOIN (
@@ -1087,11 +1086,11 @@ supports “implicit returning”.
 
 也就是说，当从 A-\> B进行多对一的子查询加载时：
 
-    SELECT b.id AS b_id, b.name AS b_name, anon_1.b_id AS a_b_idplain
+    SELECT b.id AS b_id, b.name AS b_name, anon_1.b_id AS a_b_id
     FROM (SELECT DISTINCT a_b_id FROM a) AS anon_1
     JOIN b ON b.id = anon_1.a_b_id
 
-由于`a.b_id`是非不同的外键，所以应用DISTINCT以消除多余的`a.b_id`。可以使用 flag `distinct_target_key`为特定的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")无条件地打开或关闭行为，将值设置为`True`以无条件开启， `False`表示无条件关闭，而`None`表示当目标 SELECT 针对不包含完整主键的列时，此功能才会生效。在 0.9 中，`None`是默认值。
+由于`a.b_id`是非不同的外键，所以应用 DISTINCT 以消除多余的`a.b_id`。可以使用 flag `distinct_target_key`为特定的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")无条件地打开或关闭行为，将值设置为`True`以无条件开启， `False`表示无条件关闭，而`None`表示当目标 SELECT 针对不包含完整主键的列时，此功能才会生效。在 0.9 中，`None`是默认值。
 
 该选项也被反向移植到0.8，其中`distinct_target_key`选项默认为`False`。
 
@@ -1146,7 +1145,7 @@ removing `c1` from `p1.children`
 while maintaining a check against the propagation from going into an
 endless recursive loop.
 
-最终用户代码是哪一个。使用[`AttributeEvents.set()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.set "sqlalchemy.orm.events.AttributeEvents.set")，[`AttributeEvents.append()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.append "sqlalchemy.orm.events.AttributeEvents.append")或[`AttributeEvents.remove()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.remove "sqlalchemy.orm.events.AttributeEvents.remove")事件，以及b。由于这些事件可能需要修改以防止递归循环，所以启动进一步的属性修改操作，因为属性系统不再阻止事件链在没有backref事件处理程序的情况下无限传播。此外，取决于`initiator`值的代码需要根据新的API进行调整，并且必须准备好`initiator`的值以从其原始值因为 backref 处理程序现在可以为某些操作交换新的`initiator`值。
+最终用户代码是哪一个。使用[`AttributeEvents.set()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.set "sqlalchemy.orm.events.AttributeEvents.set")，[`AttributeEvents.append()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.append "sqlalchemy.orm.events.AttributeEvents.append")或[`AttributeEvents.remove()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.remove "sqlalchemy.orm.events.AttributeEvents.remove")事件，以及b。由于这些事件可能需要修改以防止递归循环，所以启动进一步的属性修改操作，因为属性系统不再阻止事件链在没有backref事件处理程序的情况下无限传播。此外，取决于`initiator`值的代码需要根据新的 API 进行调整，并且必须准备好`initiator`的值以从其原始值因为 backref 处理程序现在可以为某些操作交换新的`initiator`值。
 
 [＃2789 T0\>](http://www.sqlalchemy.org/trac/ticket/2789)
 
@@ -1225,7 +1224,7 @@ The boolean constants [`true()`](core_sqlelement.html#sqlalchemy.sql.expression.
 and [`false()`](core_sqlelement.html#sqlalchemy.sql.expression.false "sqlalchemy.sql.expression.false")
 themselves render as `0 = 1` and `1 = 1` for a backend with no boolean constants:
 
-    >>> print(select([t1]).where(and_(t1.c.y > 5, false())).compile(
+    >>> print(select([t1]).where(and_(t1.c.y > 5, false())).compile(plain
     ...     dialect=mysql.dialect()))
     SELECT t.x, t.y FROM t WHERE 0 = 1
 
@@ -1249,7 +1248,7 @@ BY子句中呈现为它的名称，假设底层方言报告支持此功能。
 
 例如。例如：
 
-    from sqlalchemy.sql import table, column, select, funcplain
+    from sqlalchemy.sql import table, column, select, func
 
     t = table('t', column('c1'), column('c2'))
     expr = (func.foo(t.c.c1) + t.c.c2).label("expr")
@@ -1260,7 +1259,7 @@ BY子句中呈现为它的名称，假设底层方言报告支持此功能。
 
 0.9 之前会呈现为：
 
-    SELECT foo(t.c1) + t.c2 AS exprplain
+    SELECT foo(t.c1) + t.c2 AS expr
     FROM t ORDER BY foo(t.c1) + t.c2
 
 现在呈现为：
@@ -1294,7 +1293,7 @@ BY 只呈现标签，而不是简单的`ASC`或`DESC`。
 
 [＃2848 T0\>](http://www.sqlalchemy.org/trac/ticket/2848)
 
-### 当类型可用时，不带类型的bindparam()构造会通过复制进行升级[¶](#a-bindparam-construct-with-no-type-gets-upgraded-via-copy-when-a-type-is-available "Permalink to this headline")
+### 当类型可用时，不带类型的 bindparam()构造会通过复制进行升级[¶](#a-bindparam-construct-with-no-type-gets-upgraded-via-copy-when-a-type-is-available "Permalink to this headline")
 
 “升级”一个[`bindparam()`](core_sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")结构以承担封闭表达式的类型的逻辑已经通过两种方式得到了改进。First,
 the [`bindparam()`](core_sqlelement.html#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")
@@ -1308,7 +1307,7 @@ is not mutated in place. 其次，在编译[`Insert`](core_dml.html#sqlalchemy.s
 
 如果我们使用这个参数如下：
 
-    expr = mytable.c.col == bp
+    expr = mytable.c.col == bpplain
 
 The type for `bp` remains as `NullType`, however if `mytable.c.col` is of type
 `String`, then `expr.right`,
@@ -1317,11 +1316,11 @@ that is the right side of the binary expression, will take on the
 
 同样，此操作发生在[`Insert`](core_dml.html#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")或[`Update`](core_dml.html#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")中：
 
-    stmt = mytable.update().values(col=bp)
+    stmt = mytable.update().values(col=bp)plain
 
 上面，`bp`保持不变，但执行语句时将使用`String`类型，我们可以通过检查`binds`字典来看到：
 
-    >>> compiled = stmt.compile()
+    >>> compiled = stmt.compile()plain
     >>> compiled.binds['some_col'].type
     String
 
@@ -1376,7 +1375,7 @@ initialize their parent column.
 
 2.  系统现在也可以使用[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")：
 
-        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKeyConstraintplain
+        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKeyConstraint
         >>> metadata = MetaData()
         >>> t2 = Table('t2', metadata,
         ...     Column('t1a'), Column('t1b'),
@@ -1395,7 +1394,7 @@ initialize their parent column.
 
 3.  它甚至适用于“多跳” - 也就是说，引用另一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的引用[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")：
 
-        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKeyplain
+        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKey
         >>> metadata = MetaData()
         >>> t2 = Table('t2', metadata, Column('t1id', ForeignKey('t1.id')))
         >>> t3 = Table('t3', metadata, Column('t2t1id', ForeignKey('t2.t1id')))

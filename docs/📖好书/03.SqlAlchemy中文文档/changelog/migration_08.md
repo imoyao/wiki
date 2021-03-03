@@ -56,7 +56,7 @@ SQLAlchemy 最终也会减少 2.5 的支持 -
     against a class that has multiple foreign key paths to the target.
     只需要`foreign_keys`参数来指定应包含的列：
 
-        class Parent(Base):plainplainplain
+        class Parent(Base):
             __tablename__ = 'parent'
             id = Column(Integer, primary_key=True)
             child_id_one = Column(Integer, ForeignKey('child.id'))
@@ -167,7 +167,7 @@ ORM 模型也完全可以反映内容，但这从来就不是一个完全稳定�
 
 一些关键功能的演练如下：
 
-    >>> class User(Base):plainplain
+    >>> class User(Base):
     ...     __tablename__ = 'user'
     ...     id = Column(Integer, primary_key=True)
     ...     name = Column(String)
@@ -286,7 +286,7 @@ method allows the user to specify which tables should be present when
 querying against a joined-table entity.
 不幸的是，这个方法很笨拙，只适用于列表中的第一个实体，否则在内部使用和内部使用都会有尴尬的行为。已添加名为[`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")的对[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")结构的新增强，允许将任何实体“别名”为其自身的“多态”版本，可自由使用任何地方：
 
-    from sqlalchemy.orm import with_polymorphicplainplainplain
+    from sqlalchemy.orm import with_polymorphic
     palias = with_polymorphic(Person, [Engineer, Manager])
     session.query(Company).\
                 join(palias, Company.employees).\
@@ -310,7 +310,7 @@ target. This method can now be used to target *any number* of target
 subtypes, by combining it with the new [`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")
 function:
 
-    # use eager loading in conjunction with with_polymorphic targetsplain
+    # use eager loading in conjunction with with_polymorphic targets
     Job_P = with_polymorphic(Job, [SubJob, ExtraJob], aliased=True)
     q = s.query(DataContainer).\
                 join(DataContainer.jobs.of_type(Job_P)).\
@@ -324,7 +324,7 @@ attribute is accepted, including with loader functions like
 and comparison methods like [`PropComparator.any()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.any "sqlalchemy.orm.interfaces.PropComparator.any")
 and [`PropComparator.has()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.has "sqlalchemy.orm.interfaces.PropComparator.has"):
 
-    # use eager loading in conjunction with with_polymorphic targetsplain
+    # use eager loading in conjunction with with_polymorphic targets
     Job_P = with_polymorphic(Job, [SubJob, ExtraJob], aliased=True)
     q = s.query(DataContainer).\
                 join(DataContainer.jobs.of_type(Job_P)).\
@@ -378,7 +378,7 @@ Mapper 和实例事件现在可以与一个未映射的超类相关联，其中�
 
 Declarative 的一个关键特性是能够使用其字符串名称引用其他映射类。类名注册表现在对给定类的拥有模块和包是敏感的。类可以通过表达式中的虚线名称引用：
 
-    class Snack(Base):plainplain
+    class Snack(Base):
         # ...
 
         peanuts = relationship("nuts.Peanut",
@@ -392,7 +392,7 @@ Declarative 的一个关键特性是能够使用其字符串名称引用其他�
 
 “延迟反射”示例已移至声明中的支持功能。这个特性允许只用占位符`Table`元数据构造声明式映射类，直到`prepare()`步骤被调用，给定一个`Engine`充分反映所有表格并建立实际映射。系统支持重写列，单个和联合继承，以及不同的每个引擎基数。现在可以根据在引擎创建时在一个步骤中汇编的现有表创建完整的声明性配置：
 
-    class ReflectedOne(DeferredReflection, Base):plain
+    class ReflectedOne(DeferredReflection, Base):
         __abstract__ = True
 
     class ReflectedTwo(DeferredReflection, Base):
@@ -437,7 +437,7 @@ or [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.
 
 ### Query.update()支持 UPDATE..FROM [¶](#query-update-supports-update-from "Permalink to this headline")
 
-新的 UPDATE..FROM 机制在 query.update()中工作。下面，我们针对`SomeEntity`发出UPDATE，并针对`SomeOtherEntity`添加了一个 FROM 子句（或等价物，具体取决于后端）：
+新的 UPDATE..FROM 机制在 query.update()中工作。下面，我们针对`SomeEntity`发出 UPDATE，并针对`SomeOtherEntity`添加了一个 FROM 子句（或等价物，具体取决于后端）：
 
     query(SomeEntity).\
         filter(SomeEntity.id==SomeOtherEntity.id).\
@@ -472,7 +472,7 @@ or [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.
 请注意，Dogpile 示例以及之前的 Beaker 示例所使用的 SQLAlchemy
 API 已稍有变化，特别是如 Beaker 示例所示，需要进行此更改：
 
-    --- examples/beaker_caching/caching_query.pyplainplain
+    --- examples/beaker_caching/caching_query.py
     +++ examples/beaker_caching/caching_query.py
     @@ -222,7 +222,8 @@
 
@@ -503,7 +503,7 @@ Core中的新操作系统添加了一直缺少的钩子，它将新的和重载�
 
 例如，要将对数支持添加到[`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")类型中：
 
-    from sqlalchemy.types import Numericplain
+    from sqlalchemy.types import Numeric
     from sqlalchemy.sql import func
 
     class CustomNumeric(Numeric):
@@ -513,7 +513,7 @@ Core中的新操作系统添加了一直缺少的钩子，它将新的和重载�
 
 新的类型可以像任何其他类型一样使用：
 
-    data = Table('data', metadata,
+    data = Table('data', metadata,plain
               Column('id', Integer, primary_key=True),
               Column('x', CustomNumeric(10, 5)),
               Column('y', CustomNumeric(10, 5))
@@ -561,7 +561,7 @@ parameters as well as result row values, passing them through a Python
 side conversion function on the way to/back from the database.
 新功能允许类似的功能，除了在数据库方面：
 
-    from sqlalchemy.types import Stringplain
+    from sqlalchemy.types import String
     from sqlalchemy import func, Table, Column, MetaData
 
     class LowerString(String):
@@ -580,7 +580,7 @@ side conversion function on the way to/back from the database.
 
 上面，`LowerString`类型定义了一个 SQL 表达式，只要在 SELECT 语句的 columns 子句中呈现`test_table.c.data`列时就会发出该表达式：
 
-    >>> print(select([test_table]).where(test_table.c.data == 'HI'))plainplain
+    >>> print(select([test_table]).where(test_table.c.data == 'HI'))
     SELECT lower(test_table.data) AS data
     FROM test_table
     WHERE test_table.data = lower(:data_1)
@@ -677,7 +677,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 [`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型将接受可选的“维度”参数，将其固定为固定数量的维度，并在检索结果时大大提高效率：
 
-    # old way, still works since PG supports N-dimensions per row:
+    # old way, still works since PG supports N-dimensions per row:plain
     Column("my_array", postgresql.ARRAY(Integer))
 
     # new way, will render ARRAY with correct number of [] in DDL,
@@ -687,25 +687,25 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 该类型还引入了新的运算符，使用新的类型特定的运算符框架。新的操作包括索引访问：
 
-    result = conn.execute(
+    result = conn.execute(plain
         select([mytable.c.arraycol[2]])
     )
 
 在 SELECT 中切片访问：
 
-    result = conn.execute(plain
+    result = conn.execute(
         select([mytable.c.arraycol[2:4]])
     )
 
 在更新中切片更新：
 
-    conn.execute(plainplain
+    conn.execute(
         mytable.update().values({mytable.c.arraycol[2:3]: [7, 8]})
     )
 
 独立阵列文字：
 
-    >>> from sqlalchemy.dialects import postgresql
+    >>> from sqlalchemy.dialects import postgresqlplain
     >>> conn.scalar(
     ...    select([
     ...        postgresql.array([1, 2]) + postgresql.array([3, 4, 5])
@@ -715,7 +715,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 数组串联，其中右侧`[4， 5， 6>`）被强制转换为数组文字：
 
-    select([mytable.c.arraycol + [4, 5, 6]])plain
+    select([mytable.c.arraycol + [4, 5, 6]])
 
 也可以看看
 
@@ -778,9 +778,9 @@ is used:
 
 ### “前缀”现在支持[`update()`](core_dml.html#sqlalchemy.sql.expression.update "sqlalchemy.sql.expression.update")，[`delete()`](core_dml.html#sqlalchemy.sql.expression.delete "sqlalchemy.sql.expression.delete") [¶](#prefixes-now-supported-for-update-delete "Permalink to this headline")
 
-面向MySQL，可以在任何这些结构中呈现“前缀”。例如。：
+面向 MySQL，可以在任何这些结构中呈现“前缀”。例如。：
 
-    stmt = table.delete().prefix_with("LOW_PRIORITY", dialect="mysql")plainplain
+    stmt = table.delete().prefix_with("LOW_PRIORITY", dialect="mysql")
 
 
     stmt = table.update().prefix_with("LOW_PRIORITY", dialect="mysql")
@@ -806,7 +806,7 @@ is used:
 
 ### “待决”对象作为“孤儿”的考虑已经变得更加激进[¶](#the-consideration-of-a-pending-object-as-an-orphan-has-been-made-more-aggressive "Permalink to this headline")
 
-这是0.8系列的后期增加，但希望新的行为在更广泛的各种情况下通常更加一致和直观。The
+这是 0.8 系列的后期增加，但希望新的行为在更广泛的各种情况下通常更加一致和直观。The
 ORM has since at least version 0.4 included behavior such that an object
 that’s “pending”, meaning that it’s associated with a [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 but hasn’t been inserted into the database yet, is automatically
@@ -894,7 +894,7 @@ NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基
 
 ### after\_attach 事件在与会话相关联而不是之前触发后触发； before\_attach添加[¶](#the-after-attach-event-fires-after-the-item-is-associated-with-the-session-instead-of-before-before-attach-added "Permalink to this headline")
 
-使用after\_attach的事件处理程序现在可以假定给定实例与给定会话关联：
+使用 after\_attach的事件处理程序现在可以假定给定实例与给定会话关联：
 
     @event.listens_for(Session, "after_attach")plain
     def after_attach(session, instance):
@@ -902,7 +902,7 @@ NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基
 
 一些用例要求它以这种方式工作。但是，其他用例要求该项目*不是*，而不是会话的一部分，例如，用于加载实例所需状态的查询首先发出自动刷新，否则会过早刷新目标目的。这些用例应该使用新的“before\_attach”事件：
 
-    @event.listens_for(Session, "before_attach")plainplain
+    @event.listens_for(Session, "before_attach")
     def before_attach(session, instance):
         instance.some_necessary_attribute = session.query(Widget).\
                                                 filter_by(instance.widget_name).\
@@ -994,7 +994,7 @@ fired off according to the actual class passed as a target.
 
 ### 与 MS-SQL 中的子查询进行比较时，不再需要对 IN 进行“=”的魔术强化[¶](#no-more-magic-coercion-of-to-in-when-comparing-to-subquery-in-ms-sql "Permalink to this headline")
 
-我们在MSSQL方言中发现了一个非常古老的行为，它会在尝试像这样做时尝试从用户身上抢救用户：
+我们在 MSSQL 方言中发现了一个非常古老的行为，它会在尝试像这样做时尝试从用户身上抢救用户：
 
     scalar_subq = select([someothertable.c.id]).where(someothertable.c.data=='foo')
     select([sometable]).where(sometable.c.id==scalar_subq)
@@ -1025,7 +1025,7 @@ x”这样的比较会发生同样的事情，总的来说，这种猜测级别�
 
 在 0.8 之前，如果[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")具有不同的`Column.key`，则此键将被忽略，与[`Select.apply_labels()`](core_selectable.html#sqlalchemy.sql.expression.Select.apply_labels "sqlalchemy.sql.expression.Select.apply_labels")不一致用过的：
 
-    # before 0.8plain
+    # before 0.8
     table1 = Table('t1', metadata,
         Column('col1', Integer, key='column_one')
     )
@@ -1067,7 +1067,7 @@ in both cases:
 
 0.7 添加了一个名为`column_reflect`的新事件，这样可以反映出列的反射，因为每个列都反映出来。我们得到这个事件有点不对，因为事件没有办法获取用于反射的当前`Inspector`和`Connection`，在来自数据库的附加信息的情况下是必要的。由于这是一个尚未广泛使用的新事件，因此我们将直接向其中添加`inspector`参数：
 
-    @event.listens_for(Table, "column_reflect")plainplain
+    @event.listens_for(Table, "column_reflect")
     def listen_for_col(inspector, table, column_info):
         # ...
 
@@ -1136,7 +1136,7 @@ SQLSoup 是一个非常简单的工具，可以从对其使用风格感兴趣的
 
 ### MutableType [¶ T0\>](#mutabletype "Permalink to this headline")
 
-SQLAlchemy ORM中旧的“可变”系统已被删除。这指的是`MutableType`接口，该接口已应用于`PickleType`等类型并有条件地应用于`TypeDecorator`，并且由于很早的 SQLAlchemy 版本提供了一种方式为 ORM 检测所谓的“可变”数据结构（如 JSON 结构和腌渍对象）的变化。然而，实施从来都不合理，并且迫使工作单元使用效率非常低的模式，这导致在冲洗期间对所有对象进行昂贵的扫描。在 0.7 中引入了[sqlalchemy.ext.mutable](http://docs.sqlalchemy.org/en/latest/orm_extensions_mutable.html)扩展，以便在发生更改时用户定义的数据类型可以将事件适当地发送到工作单元。
+SQLAlchemy ORM 中旧的“可变”系统已被删除。这指的是`MutableType`接口，该接口已应用于`PickleType`等类型并有条件地应用于`TypeDecorator`，并且由于很早的 SQLAlchemy 版本提供了一种方式为 ORM 检测所谓的“可变”数据结构（如 JSON 结构和腌渍对象）的变化。然而，实施从来都不合理，并且迫使工作单元使用效率非常低的模式，这导致在冲洗期间对所有对象进行昂贵的扫描。在 0.7 中引入了[sqlalchemy.ext.mutable](http://docs.sqlalchemy.org/en/latest/orm_extensions_mutable.html)扩展，以便在发生更改时用户定义的数据类型可以将事件适当地发送到工作单元。
 
 今天，`MutableType`的使用量预计会很低，因为其效率低下已经有几年了。
 

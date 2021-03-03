@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy中文文档
   - core
 tags:
-  - 
 ---
 ORM内部[¶](#orm-internals "Permalink to this headline")
 =======================================================
@@ -69,7 +68,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 *类 T0\> ` sqlalchemy.orm.instrumentation。 T1>  ClassManager  T2> （ T3> 类_  T4> ）< / T5> ¶ T6>`{.descclassname}*
 :   基础：`__builtin__.dict`
 
-    跟踪课堂级别的状态信息。
+    跟踪课堂级别的状态信息。plain
 
     ` __文件__  T0> ¶ T1>`{.descname}
     :   *inherited from the* `__le__` *attribute of* `dict`

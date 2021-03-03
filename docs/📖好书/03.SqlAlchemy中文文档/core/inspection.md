@@ -28,7 +28,7 @@ and others. 另一个原因是，[`inspect()`](#sqlalchemy.inspection.inspect "s
  `sqlalchemy.inspection.`{.descclassname}`inspect`{.descname}(*subject*, *raiseerr=True*)[¶](#sqlalchemy.inspection.inspect "Permalink to this definition")
 :   为给定的目标生成检查对象。
 
-    在某些情况下，返回的值可能与给定的对象相同，例如传递[`Mapper`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象。在其他情况下，它将是给定对象的注册检查类型的实例，例如，如果传递[`engine.Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")，则返回一个[`Inspector`](reflection.html#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")对象。plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    在某些情况下，返回的值可能与给定的对象相同，例如传递[`Mapper`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象。在其他情况下，它将是给定对象的注册检查类型的实例，例如，如果传递[`engine.Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")，则返回一个[`Inspector`](reflection.html#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")对象。plain
 
     参数：
 

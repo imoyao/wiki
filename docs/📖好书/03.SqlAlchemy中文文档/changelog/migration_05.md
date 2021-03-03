@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:31
 permalink: /sqlalchemy/8a8597/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - changelog
 tags:
 ---
@@ -47,11 +47,11 @@ test / orm\_test\_deprecations.py]中查看。
 -   **查询中的列级表达式** -
     详见[教程](http://www.sqlalchemy.org/docs/05/ormtutorial.html)，`Query`有能力创建特定的SELECT语句，而不仅仅是针对整行的那些语句：
 
-        session.query(User.name, func.count(Address.id).label("numaddresses")).join(Address).group_by(User.name)plain
+        session.query(User.name, func.count(Address.id).label("numaddresses")).join(Address).group_by(User.name)
 
     任何多列/实体查询返回的元组都是*命名的*元组：
 
-        for row in session.query(User.name, func.count(Address.id).label('numaddresses')).join(Address).group_by(User.name):plainplain
+        for row in session.query(User.name, func.count(Address.id).label('numaddresses')).join(Address).group_by(User.name):
            print("name", row.name, "number", row.numaddresses)
 
     `Query` has a `statement`
@@ -70,7 +70,7 @@ test / orm\_test\_deprecations.py]中查看。
     class, which allows fine-grained control of aliases in conjunction
     with ORM queries. 尽管表级别别名（即`table.alias()`）仍然可用，但 ORM 级别别名保留了 ORM 映射对象的语义，这对于继承映射，选项和其他场景很重要。例如。：
 
-        Friend = aliased(Person)plainplain
+        Friend = aliased(Person)plain
         session.query(Person, Friend).join((Friend, Person.friends)).all()
 
 -   **query.join()大大增强。** -
@@ -87,12 +87,12 @@ test / orm\_test\_deprecations.py]中查看。
 
     遍历列：
 
-        for col in table.c:plainplain
+        for col in table.c:plain
             print(col)
 
     使用特定列：
 
-        table.c.somecolumnplainplainplain
+        table.c.somecolumnplain
 
     类绑定描述符支持完整的 Column 运算符以及文档化的面向关系的运算符，如`has()`，`any()`，`contains()`等
 
@@ -145,7 +145,7 @@ test / orm\_test\_deprecations.py]中查看。
     set using strings which are evaluated in Python later on (this works
     **only** with declarative, not plain mappers):
 
-        class MyClass(MyDeclarativeBase):plainplainplainplain
+        class MyClass(MyDeclarativeBase):plain
             ...
             'addresses':relation("Address", order_by="Address.id")
 
@@ -187,7 +187,7 @@ test / orm\_test\_deprecations.py]中查看。
 
 -   `session.Query().iterate_instances()`已被重命名为`instances()`。返回列表而不是迭代器的旧`instances()`方法不再存在。如果你依赖这种行为，你应该使用`list(your_query.instances())`。
 
-扩展ORM [¶](#extending-the-orm "Permalink to this headline")
+扩展 ORM [¶](#extending-the-orm "Permalink to this headline")
 ------------------------------------------------------------
 
 在 0.5 中，我们正在采取更多方法来修改和扩展 ORM。下面是一个总结：
@@ -221,7 +221,7 @@ test / orm\_test\_deprecations.py]中查看。
     TypeEngine/TypeDecorator are removed.** -
     不幸的是，O'Reilly 的书中记录了这些方法，即使它们在 0.3 后被弃用。对于类型为`TypeEngine`的用户定义类型，应该使用`bind_processor()`和`result_processor()`方法进行绑定/结果处理。任何用户定义的类型，无论是扩展`TypeEngine`还是`TypeDecorator`，都可以使用以下适配器轻松适应新样式：
 
-        class AdaptOldConvertMethods(object):plain
+        class AdaptOldConvertMethods(object):
             """A mixin which adapts 0.3-style convert_bind_param and
             convert_result_value methods
 
@@ -249,14 +249,14 @@ test / orm\_test\_deprecations.py]中查看。
 
 -   `Column`和`Table`以及`Table`中的`quote_schema`标志上的`quote`默认值是`None`，这意味着让常规引用规则生效。当`True`时，强制引用引用。当`False`时，引用被强制关闭。
 
--   列`DEFAULT`值 DDL 现在可以通过`Column（...， server_default ='val'）  t2 >，弃用列（...， PassiveDefault（'val'））`。`default=`现在专用于 Python 启动的默认值，并且可以与 server\_default共存。新的`server_default=FetchedValue()`取代了用于标记列的`PassiveDefault('')`成语受外部触发影响并且没有 DDL 副作用。
+-   列`DEFAULT`值 DDL 现在可以通过`Column（...， server_default ='val'）  t2 >，弃用列（...， PassiveDefault（'val'））`。`default=`现在专用于 Python 启动的默认值，并且可以与 server\_default 共存。新的`server_default=FetchedValue()`取代了用于标记列的`PassiveDefault('')`成语受外部触发影响并且没有 DDL 副作用。
 
 -   SQLite 的`DateTime`，`Time`和`Date`类型现在**只接受日期时间对象，而不接受字符串**作为绑定参数输入。如果你想创建自己的“hybrid”类型，它接受字符串并将结果作为日期对象返回（从任何你想要的格式），创建一个`TypeDecorator`，它建立在`String`如果您只需要基于字符串的日期，只需使用`String`即可。
 
 -   此外，当与 SQLite 一起使用时，`DateTime`和`Time`类型现在表示 Python
     `datetime.datetime`对象的“microseconds”字段与`str(datetime)`相同的方式 - 分数秒，而不是微秒数。那是：
 
-        dt = datetime.datetime(2008, 6, 27, 12, 0, 0, 125)  # 125 usecplainplainplain
+        dt = datetime.datetime(2008, 6, 27, 12, 0, 0, 125)  # 125 usec
 
         # old way
         '2008-06-27 12:00:00.125'
@@ -266,12 +266,12 @@ test / orm\_test\_deprecations.py]中查看。
 
     因此，如果现有的基于 SQLite 文件的数据库打算在 0.4 和 0.5 之间使用，则必须升级日期时间列以存储新格式（请注意：请测试一下，我非常肯定它的正确性）：
 
-        UPDATE mytable SET somedatecol =plain
+        UPDATE mytable SET somedatecol =
           substr(somedatecol, 0, 19) || '.' || substr((substr(somedatecol, 21, -1) / 1000000), 3, -1);
 
     或者，启用“传统”模式，如下所示：
 
-        from sqlalchemy.databases.sqlite import DateTimeMixin
+        from sqlalchemy.databases.sqlite import DateTimeMixinplain
         DateTimeMixin.__legacy_microseconds__ = True
 
 默认情况下，连接池不再是 threadlocal [¶](#connection-pool-no-longer-threadlocal-by-default "Permalink to this headline")
@@ -282,7 +282,7 @@ True”，例如，当在单个线程中使用多个会话时会导致意外行�
 re-enable 0.4’s behavior, specify `pool_threadlocal=True` to `create_engine()`, or alternatively use
 the “threadlocal” strategy via `strategy="threadlocal"`.
 
-\* args Accepted，\* args不再被接受[¶](#args-accepted-args-no-longer-accepted "Permalink to this headline")
+\* args Accepted，\* args 不再被接受[¶](#args-accepted-args-no-longer-accepted "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------
 
 使用`method(\*args)`与`method([args])`的策略是，如果方法接受表示固定结构的可变长度项集，它需要`\*args`。如果该方法接受数据驱动的可变长度项目集合，则需要`[args]`。
@@ -292,7 +292,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     their argument now, which allows a path to be formulated using
     descriptors, ie. :
 
-        query.options(eagerload_all(User.orders, Order.items, Item.keywords))plainplainplain
+        query.options(eagerload_all(User.orders, Order.items, Item.keywords))plain
 
     为了向后兼容，仍然接受单个数组参数。
 
@@ -301,7 +301,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     length \*args, with a single array accepted for backwards
     compatibility:
 
-        query.join('orders', 'items')plain
+        query.join('orders', 'items')
         query.join(User.orders, Order.items)
 
 -   列和类似的\_()方法中的`in_()`它不再接受`\*args`。
@@ -321,7 +321,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
     要获得同等功能：
 
-        x = session.query(SomeClass).populate_existing().get(7)plainplain
+        x = session.query(SomeClass).populate_existing().get(7)
 
     `Session.get(cls, id)` and
     `Session.load(cls, id)` have been removed.
@@ -330,7 +330,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
     `MapperExtension.get()`也被删除（就像`MapperExtension.load()`）。要覆盖`Query.get()`的功能，请使用以下子类：
 
-        class MyQuery(Query):plainplainplainplain
+        class MyQuery(Query):plain
             def get(self, ident):
                 # ...
 
@@ -357,7 +357,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     `join()`, `outerjoin()`,
     `add_entity()` and `add_column()` has been removed. 要将`Query`中的表别名作为结果列，请使用`aliased`结构：
 
-        from sqlalchemy.orm import aliasedplainplain
+        from sqlalchemy.orm import aliased
         address_alias = aliased(Address)
         print(session.query(User, address_alias).join((address_alias, User.addresses)).all())
 

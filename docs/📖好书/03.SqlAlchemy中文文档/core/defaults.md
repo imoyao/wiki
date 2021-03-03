@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:33
 permalink: /sqlalchemy/core/defaults/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - core
 tags:
 ---
@@ -35,7 +35,7 @@ SQLAlchemy 针对在 INSERT 和 UPDATE 语句期间发生的列级事件提供�
 
 标量值也可能与 UPDATE 语句相关联，尽管这不是很常见（因为 UPDATE 语句通常在寻找动态默认值）：
 
-    Table("mytable", meta,plain
+    Table("mytable", meta,
         Column("somecolumn", Integer, onupdate=25)
     )
 
@@ -44,7 +44,7 @@ Python 执行的函数[¶](#python-executed-functions "Permalink to this headlin
 
 [`Column.default`](metadata.html#sqlalchemy.schema.Column.params.default "sqlalchemy.schema.Column")和[`Column.onupdate`](metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")关键字参数也接受 Python 函数。如果没有提供该列的其他值，则在插入或更新时调用这些函数，并将返回的值用于该列的值。下面举例说明了一个粗略的“序列”，它将一个递增计数器分配给主键列：
 
-    # a function which counts upwardsplainplain
+    # a function which counts upwards
     i = 0
     def mydefault():
         global i
@@ -61,7 +61,7 @@ To illustrate onupdate, we assign the Python `datetime` function `now` to the
 [`Column.onupdate`](metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")
 attribute:
 
-    import datetime
+    import datetimeplain
 
     t = Table("mytable", meta,
         Column('id', Integer, primary_key=True),
@@ -78,7 +78,7 @@ SQLAlchemy 将在语句执行时执行该函数。
 
 由[`Column.default`](metadata.html#sqlalchemy.schema.Column.params.default "sqlalchemy.schema.Column")和[`Column.onupdate`](metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")使用的 Python 函数也可以使用当前语句的上下文来确定一个值。语句的 context 是一个内部 SQLAlchemy 对象，它包含有关正在执行的语句的所有信息，包括其源表达式，与其关联的参数以及游标。与默认生成有关的上下文的典型用例是访问在该行上插入或更新的其他值。要访问上下文，请提供一个接受单个`context`参数的函数：
 
-    def mydefault(context):plainplainplainplainplain
+    def mydefault(context):plain
         return context.current_parameters['counter'] + 12
 
     t = Table('mytable', meta,
@@ -99,7 +99,7 @@ SQL 表达式[¶](#sql-expressions "Permalink to this headline")
 
 “default”和“onupdate”关键字也可以通过 SQL 表达式，包括 select 语句或直接函数调用：
 
-    t = Table("mytable", meta,
+    t = Table("mytable", meta,plain
         Column('id', Integer, primary_key=True),
 
         # define 'create_date' to default to now()
@@ -155,7 +155,7 @@ TABLE 语句中：
 
 创建上述表格的调用将产生：
 
-    CREATE TABLE test (plainplainplain
+    CREATE TABLE test (plain
         abc varchar(20) default 'abc',
         created_at datetime default sysdate
     )
@@ -167,7 +167,7 @@ TABLE 语句中：
 
 可以使用[`FetchedValue`](#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")作为标记来调出具有由数据库触发器或其他外部过程设置的值的列：
 
-    t = Table('test', meta,plainplain
+    t = Table('test', meta,plain
         Column('abc', String(20), server_default=FetchedValue()),
         Column('def', String(20), server_onupdate=FetchedValue())
     )
@@ -181,7 +181,7 @@ TABLE 语句中：
 
 将[`FetchedValue`](#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")与主键列结合使用通常是不恰当的，特别是在使用 ORM 或需要[`ResultProxy.inserted_primary_key`](connections.html#sqlalchemy.engine.ResultProxy.inserted_primary_key "sqlalchemy.engine.ResultProxy.inserted_primary_key")属性的任何其他场景时。这是因为“post-fetch”操作要求主键值已经可用，以便可以在主键上选择该行。
 
-对于服务器生成的主键值，所有数据库都提供特殊的访问器或其他技术来获取表的“最后插入的主键”列。这些机制不受[`FetchedValue`](#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")的影响。对于使用触发器生成主键值的特殊情况，并且正在使用的数据库不支持`RETURNING`子句，可能需要放弃使用触发器，而是应用SQL表达式或用作“预执行”表达式：
+对于服务器生成的主键值，所有数据库都提供特殊的访问器或其他技术来获取表的“最后插入的主键”列。这些机制不受[`FetchedValue`](#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")的影响。对于使用触发器生成主键值的特殊情况，并且正在使用的数据库不支持`RETURNING`子句，可能需要放弃使用触发器，而是应用 SQL 表达式或用作“预执行”表达式：
 
     t = Table('test', meta,
             Column('abc', MyType, default=func.generate_new_value(), primary_key=True)
@@ -201,7 +201,7 @@ SQLAlchemy 使用[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Seq
 
 [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")可以作为 INSERT 操作期间使用的“默认”生成器放置在任何列上，也可以配置为在 UPDATE 操作期间根据需要触发。它通常与单个整数主键列结合使用：
 
-    table = Table("cartitems", meta,plainplain
+    table = Table("cartitems", meta,plain
         Column("cart_id", Integer, Sequence('cart_id_seq'), primary_key=True),
         Column("description", String(40)),
         Column("createdate", DateTime())
@@ -215,9 +215,9 @@ SQLAlchemy 使用[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Seq
 [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")对象还实现了特殊的功能以适应 Postgresql 的 SERIAL 数据类型。PG 中的 SERIAL 类型自动生成一个在插入过程中隐式使用的序列。这意味着如果一个[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象在其主键列上定义了一个[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")，以便它可以与 Oracle 和 Firebird 一起使用，那么[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")将进入 PG 通常使用的“隐式”序列的方式。对于这个用例，将标志`optional=True`添加到[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")对象
 - 这表明仅当数据库提供时才应使用[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")没有其他选项可用于生成主键标识符。
 
-[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")对象也可以像SQL表达式那样独立执行，具有调用其“下一个值”功能的效果：
+[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")对象也可以像 SQL 表达式那样独立执行，具有调用其“下一个值”功能的效果：
 
-    seq = Sequence('some_sequence')plainplain
+    seq = Sequence('some_sequence')plain
     nextid = connection.execute(seq)
 
 ### 将序列关联到服务器端默认[¶](#associating-a-sequence-as-the-server-side-default "Permalink to this headline")
@@ -298,7 +298,7 @@ it’s probably a good idea to specify it in this way as well.
 *class* `sqlalchemy.schema。`{.descclassname} `DefaultGenerator`{.descname} （ *for\_update = False* / T5\> [¶ T6\>](#sqlalchemy.schema.DefaultGenerator "Permalink to this definition")
 :   基础：`sqlalchemy.schema._NotAColumnExpr`，[`sqlalchemy.schema.SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-    列*默认*值的基类。
+    列*默认*值的基类。plain
 
 *类 T0\> `sqlalchemy.schema。 T1>  FetchedValue  T2> （ T3>  FOR_UPDATE =假 T4> ）< / T5> ¶ T6>`{.descclassname}*
 :   基础：`sqlalchemy.schema._NotAColumnExpr`，`sqlalchemy.sql.expression.SchemaEventTarget`

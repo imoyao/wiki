@@ -121,7 +121,7 @@ for each new connection.
 
 要设置使用每个连接执行选项：
 
-    connection = engine.connect()plain
+    connection = engine.connect()
     connection = connection.execution_options(
         isolation_level="READ COMMITTED"
     )
@@ -139,12 +139,12 @@ Python 和 PyMySQL。使用它，MySQL 连接将对`SELECT @@ autocommit；`的�
 
 1.1 版新增功能： - 增加了对 AUTOCOMMIT 隔离级别的支持。
 
-AUTO\_INCREMENT行为[¶](#auto-increment-behavior "Permalink to this headline")
+AUTO\_INCREMENT 行为[¶](#auto-increment-behavior "Permalink to this headline")
 -----------------------------------------------------------------------------
 
 创建表时，SQLAlchemy 将在未标记为外键的第一个[`Integer`](core_type_basics.html#sqlalchemy.types.Integer "sqlalchemy.types.Integer")主键列上自动设置`AUTO_INCREMENT`：
 
-    >>> t = Table('mytable', metadata,plain
+    >>> t = Table('mytable', metadata,
     ...   Column('mytable_id', Integer, primary_key=True)
     ... )
     >>> t.create()
@@ -160,7 +160,7 @@ AUTO\_INCREMENT行为[¶](#auto-increment-behavior "Permalink to this headline")
           Column('id', Integer, primary_key=True)
          )
 
-Unicode的[¶ T0\>](#unicode "Permalink to this headline")
+Unicode 的[¶ T0\>](#unicode "Permalink to this headline")
 --------------------------------------------------------
 
 ### 字符集选择[¶](#charset-selection "Permalink to this headline")
@@ -187,7 +187,7 @@ of the `default-character-set` setting in the
 
 也可以看看
 
-[utf8mb4字符集](http://dev.mysql.com/doc/refman/5.5/en/charset-unicode-utf8mb4.html)
+[utf8mb4 字符集](http://dev.mysql.com/doc/refman/5.5/en/charset-unicode-utf8mb4.html)
 - 在MySQL文档中
 
 ### Unicode 编码/解码[¶](#unicode-encoding-decoding "Permalink to this headline")
@@ -195,7 +195,7 @@ of the `default-character-set` setting in the
 所有现代的 MySQL
 DBAPI 都提供了在 Python 应用程序空间和数据库之间处理 unicode 数据编码和解码的服务。由于情况并非总是如此，SQLAlchemy 还包含一个执行编码/解码任务的综合系统。由于这些系统中只有一个应该在使用，SQLAlchemy 长期以来包含了在第一次连接时自动检测 DBAPI 是否自动处理 unicode 的功能。
 
-MySQL DBAPI是否处理编码通常可以使用DBAPI标志`use_unicode`进行配置，该标志至少已被 MySQLdb，PyMySQL 和 MySQL-Connector 支持。在“connect
+MySQL DBAPI 是否处理编码通常可以使用 DBAPI 标志`use_unicode`进行配置，该标志至少已被 MySQLdb，PyMySQL 和 MySQL-Connector 支持。在“connect
 args”或查询字符串中将此值设置为`0`将导致禁用 DBAPI 处理 unicode 的效果，例如，它将返回`str`类型或`bytes`类型，数据在配置的字符集中：
 
     # connect while disabling the DBAPI's unicode encoding/decoding
@@ -207,7 +207,7 @@ args”或查询字符串中将此值设置为`0`将导致禁用 DBAPI 处理 un
 -   在 Python 3 下，`use_unicode=0`标志应该**永远不会被使用**。Python
     3 下的 SQLAlchemy 通常假定 DBAPI 接收并返回字符串值，如 Python
     3 字符串，它本质上是 unicode 对象。
--   在使用MySQLdb的Python 2下，`use_unicode=0`标志将**提供卓越的性能**，因为与 SQLAlchemy 的快速性相比，MySQLdb 的 Python
+-   在使用 MySQLdb 的 Python 2 下，`use_unicode=0`标志将**提供卓越的性能**，因为与 SQLAlchemy 的快速性相比，MySQLdb 的 Python
     2 下的 unicode 转换器仅被观察到异常缓慢的性能基于 C 的编码器/解码器。
 
 简而言之：不要在所有的中指定`use_unicode`
@@ -219,7 +219,7 @@ Ansi Quoting Style [¶](#ansi-quoting-style "Permalink to this headline")
 
 MySQL features two varieties of identifier “quoting style”, one using
 backticks and the other using quotes, e.g.
-`` `some_identifier` `` vs.
+`some_identifier` vs.
 `"some_identifier"`. 当首次建立与特定[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的连接时，所有 MySQL 方言通过检查`sql_mode`的值来检测正在使用哪个版本。这种引用风格在呈现表名和列名以及反映现有数据库结构时起作用。检测是完全自动的，不需要使用任何引用样式的特殊配置。
 
 在版本 0.6 中更改：检测 ANSI 引用样式是完全自动的，在这方面不再有任何最终用户`create_engine()`选项。
@@ -234,7 +234,7 @@ MySQL SQL扩展[¶](#mysql-sql-extensions "Permalink to this headline")
 
 当然，任何有效的 MySQL 语句也可以作为字符串执行。
 
-目前有一些对SQL扩展的有限直接支持。
+目前有一些对 SQL 扩展的有限直接支持。
 
 -   SELECT杂注：
 
@@ -242,7 +242,7 @@ MySQL SQL扩展[¶](#mysql-sql-extensions "Permalink to this headline")
 
 -   更新与限制：
 
-        update(..., mysql_limit=10)plain
+        update(..., mysql_limit=10)
 
 Rowcount支持[¶](#rowcount-support "Permalink to this headline")
 ---------------------------------------------------------------
@@ -264,7 +264,7 @@ MySQL 将文档 CAST 操作符记录在版本 4.0.2 中。当使用 SQLAlchemy [
 SQL Constructs and Compilation
 Extension](core_compiler.html)系统按照以下配方来控制CAST的行为：
 
-    from sqlalchemy.sql.expression import Castplain
+    from sqlalchemy.sql.expression import Cast
     from sqlalchemy.ext.compiler import compiles
 
     @compiles(Cast, 'mysql')
@@ -302,7 +302,7 @@ MySQL 提供了创建具有一定长度的索引条目的选项，其中“lengt
 
 以及[`PrimaryKeyConstraint`](core_constraints.html#sqlalchemy.schema.PrimaryKeyConstraint "sqlalchemy.schema.PrimaryKeyConstraint")上的`mysql_using`参数：
 
-    PrimaryKeyConstraint("data", mysql_using='hash')plain
+    PrimaryKeyConstraint("data", mysql_using='hash')
 
 The value passed to the keyword argument will be simply passed through
 to the underlying CREATE INDEX or PRIMARY KEY clause, so it *must* be a
@@ -319,13 +319,13 @@ T0\>](http://dev.mysql.com/doc/refman/5.0/en/create-table.html)
 MySQL外键[¶](#mysql-foreign-keys "Permalink to this headline")
 --------------------------------------------------------------
 
-MySQL关于外键的行为有一些重要的注意事项。
+MySQL 关于外键的行为有一些重要的注意事项。
 
 ### 避免使用外键参数[¶](#foreign-key-arguments-to-avoid "Permalink to this headline")
 
-MySQL不支持外键参数“DEFERRABLE”，“INITIALLY”或“MATCH”。对[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")或[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")使用`deferrable`或`initially`关键字参数将会产生这些关键字在 DDL 表达式，这会在 MySQL 上引发错误。为了在外键上使用这些关键字，同时让它们在 MySQL 后端上被忽略，请使用自定义编译规则：
+MySQL 不支持外键参数“DEFERRABLE”，“INITIALLY”或“MATCH”。对[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")或[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")使用`deferrable`或`initially`关键字参数将会产生这些关键字在 DDL 表达式，这会在 MySQL 上引发错误。为了在外键上使用这些关键字，同时让它们在 MySQL 后端上被忽略，请使用自定义编译规则：
 
-    from sqlalchemy.ext.compiler import compilesplainplain
+    from sqlalchemy.ext.compiler import compiles
     from sqlalchemy.schema import ForeignKeyConstraint
 
     @compiles(ForeignKeyConstraint, "mysql")
@@ -385,7 +385,7 @@ with the `unique=True` setting present in the
 TIMESTAMP列和NULL [¶](#timestamp-columns-and-null "Permalink to this headline")
 -------------------------------------------------------------------------------
 
-MySQL在历史上强制指定TIMESTAMP数据类型的列隐式地包含缺省值CURRENT\_TIMESTAMP，尽管没有说明，并且另外将列设置为NOT
+MySQL 在历史上强制指定 TIMESTAMP 数据类型的列隐式地包含缺省值 CURRENT\_TIMESTAMP，尽管没有说明，并且另外将列设置为NOT
 NULL，与所有其他数据类型相反：
 
     mysql> CREATE TABLE ts_test (
@@ -409,7 +409,7 @@ NULL，与所有其他数据类型相反：
     ) ENGINE=MyISAM DEFAULT CHARSET=latin1
 
 在上面，我们看到 INTEGER 列默认为 NULL，除非它用 NOT
-NULL 指定。但是，当列的类型为 TIMESTAMP 时，会生成 CURRENT\_TIMESTAMP的隐式缺省值，这也会强制该列成为NOT
+NULL 指定。但是，当列的类型为 TIMESTAMP 时，会生成 CURRENT\_TIMESTAMP 的隐式缺省值，这也会强制该列成为 NOT
 NULL，即使我们没有这样指定它。
 
 MySQL 的这种行为可以使用 MySQL
@@ -647,7 +647,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `ENUM`{.descname} （ *\* enums*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.ENUM "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.Enum`](core_type_basics.html#sqlalchemy.types.Enum "sqlalchemy.types.Enum")，`sqlalchemy.dialects.mysql.enumerated._EnumeratedValues`
 
-    MySQL ENUM类型。
+    MySQL ENUM类型。plain
 
     `__ init __`{.descname} （ *\* enums*，*\*\* kw* ） [T5\>](#sqlalchemy.dialects.mysql.ENUM.__init__ "Permalink to this definition")
     :   构造一个枚举。
@@ -753,7 +753,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `LONGBLOB`{.descname} （ *length = None* ） T5\> [¶ T6\>](#sqlalchemy.dialects.mysql.LONGBLOB "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
 
-    MySQL LONGBLOB类型，用于最多2 \^ 32字节的二进制数据。
+    MySQL LONGBLOB类型，用于最多2 \^ 32字节的二进制数据。plain
 
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `LONGTEXT`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.dialects.mysql.LONGTEXT "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.mysql.types._StringType`
@@ -861,7 +861,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `NUMERIC`{.descname} （ *precision = None*，*scale = None*，*asdecimal = True*，*\*\* kw* ） [](#sqlalchemy.dialects.mysql.NUMERIC "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.mysql.types._NumericType`，[`sqlalchemy.types.NUMERIC`](core_type_basics.html#sqlalchemy.types.NUMERIC "sqlalchemy.types.NUMERIC")
 
-    MySQL NUMERIC类型。
+    MySQL NUMERIC类型。plain
 
      `__init__`{.descname}(*precision=None*, *scale=None*, *asdecimal=True*, *\*\*kw*)[¶](#sqlalchemy.dialects.mysql.NUMERIC.__init__ "Permalink to this definition")
     :   构建一个数字。
@@ -1010,7 +1010,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `TEXT`{.descname} （ *length = None*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.TEXT "Permalink to this definition")*
 :   基础：`sqlalchemy.dialects.mysql.types._StringType`，[`sqlalchemy.types.TEXT`](core_type_basics.html#sqlalchemy.types.TEXT "sqlalchemy.types.TEXT")
 
-    MySQL文本类型，文本最多2 \^ 16个字符。
+    MySQL文本类型，文本最多2 \^ 16个字符。plain
 
     ` __初始化__  T0> （ T1> 长度=无 T2>， **千瓦 T3> ） T4> ¶< / T5>`{.descname}
     :   构建一个TEXT。
@@ -1093,12 +1093,12 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `TINYBLOB`{.descname} （ *length = None* ） T5\> [¶ T6\>](#sqlalchemy.dialects.mysql.TINYBLOB "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
 
-    MySQL TINYBLOB类型，用于2 \^ 8字节的二进制数据。
+    MySQL TINYBLOB类型，用于2 \^ 8字节的二进制数据。plain
 
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `TINYINT`{.descname} （ *display\_width = None*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.TINYINT "Permalink to this definition")*
 :   基础：`sqlalchemy.dialects.mysql.types._IntegerType`
 
-    MySQL TINYINT类型。
+    MySQL TINYINT类型。plain
 
     `__ init __`{.descname} （ *display\_width = None*，*\*\* kw* ） [/ T5\>](#sqlalchemy.dialects.mysql.TINYINT.__init__ "Permalink to this definition")
     :   构建一个TINYINT。
@@ -1118,7 +1118,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `TINYTEXT`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.dialects.mysql.TINYTEXT "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.mysql.types._StringType`
 
-    MySQL TINYTEXT类型，文本最多2 \^ 8个字符。
+    MySQL TINYTEXT类型，文本最多2 \^ 8个字符。plain
 
     ` __初始化__  T0> （ T1>  ** kwargs  T2> ） T3> ¶ T4>`{.descname}
     :   构建一个TINYTEXT。
@@ -1184,7 +1184,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 的MySQL的Python [¶ T0\>](#module-sqlalchemy.dialects.mysql.mysqldb "Permalink to this headline")
 ------------------------------------------------------------------------------------------------
 
-通过MySQL-Python驱动程序支持MySQL数据库。
+通过 MySQL-Python 驱动程序支持 MySQL 数据库。
 
 ### DBAPI [¶ T0\>](#dialect-mysql-mysqldb-url "Permalink to this headline")
 
@@ -1220,13 +1220,13 @@ pymysql [¶ T0\>](#module-sqlalchemy.dialects.mysql.pymysql "Permalink to this h
 
 ### DBAPI [¶ T0\>](#dialect-mysql-pymysql-url "Permalink to this headline")
 
-PyMySQL的文档和下载信息（如果适用）可在以下网址获得：[http://www.pymysql.org/](http://www.pymysql.org/)
+PyMySQL 的文档和下载信息（如果适用）可在以下网址获得：[http://www.pymysql.org/](http://www.pymysql.org/)
 
 ### 连接[¶ T0\>](#dialect-mysql-pymysql-connect "Permalink to this headline")
 
 连接字符串：
 
-    mysql+pymysql://<username>:<password>@<host>/<dbname>[?<options>]
+    mysql+pymysql://<username>:<password>@<host>/<dbname>[?<options>]plain
 
 ### Unicode 的[¶ T0\>](#id3 "Permalink to this headline")
 
@@ -1251,9 +1251,9 @@ Python的文档和下载信息（如果适用）可在以下网址获得：[http
 
 连接字符串：
 
-    mysql+mysqlconnector://<user>:<password>@<host>[:<port>]/<dbname>plain
+    mysql+mysqlconnector://<user>:<password>@<host>[:<port>]/<dbname>
 
-### Unicode的[¶ T0\>](#id4 "Permalink to this headline")
+### Unicode 的[¶ T0\>](#id4 "Permalink to this headline")
 
 有关 unicode 处理的当前建议，请参阅[Unicode](#mysql-unicode)。
 
@@ -1302,7 +1302,7 @@ New in version 0.7.8.
 
 Deprecated since version 1.0: This dialect is **no longer necessary**
 for Google Cloud SQL; the MySQLdb dialect can be used directly. Cloud
-SQL现在推荐使用URL格式通过mysql方言创建连接
+SQL 现在推荐使用 URL 格式通过 mysql 方言创建连接
 
 `mysql+mysqldb://root@/<dbname>?unix_socket=/cloudsql/<projectid>:<instancename>`
 
@@ -1320,7 +1320,7 @@ SQL 的文档和下载信息（如果适用），请访问：[https://developers
 ### 汇集[¶ T0\>](#pooling "Permalink to this headline")
 
 Google App
-Engine连接似乎是随机回收的，因此方言不会集中连接。默认情况下，[`NullPool`](core_pooling.html#sqlalchemy.pool.NullPool "sqlalchemy.pool.NullPool")实现安装在[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")中。
+Engine 连接似乎是随机回收的，因此方言不会集中连接。默认情况下，[`NullPool`](core_pooling.html#sqlalchemy.pool.NullPool "sqlalchemy.pool.NullPool")实现安装在[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")中。
 
 pyodbc [¶ T0\>](#module-sqlalchemy.dialects.mysql.pyodbc "Permalink to this headline")
 --------------------------------------------------------------------------------------
@@ -1358,7 +1358,7 @@ zxjdbc [¶ T0\>](#module-sqlalchemy.dialects.mysql.zxjdbc "Permalink to this hea
 
 连接字符串：
 
-    mysql+zxjdbc://<user>:<password>@<hostname>[:<port>]/<database>
+    mysql+zxjdbc://<user>:<password>@<hostname>[:<port>]/<database>plain
 
 ### 字符集[¶](#character-sets "Permalink to this headline")
 

@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:31
 permalink: /sqlalchemy/aec63a/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - changelog
 tags:
 ---
@@ -43,7 +43,7 @@ of rewriting statements and parameters; `AttributeExtension` provided a system o
 `DDL` objects had events that could be switched off
 of dialect-sensitive callables.
 
-0.7使用全新的统一方法重新实现了所有这些插件点，该方法保留了不同系统的所有功能，提供了更大的灵活性和更少的样板，性能更好，并且无需为每个事件子系统学习截然不同的API
+0.7 使用全新的统一方法重新实现了所有这些插件点，该方法保留了不同系统的所有功能，提供了更大的灵活性和更少的样板，性能更好，并且无需为每个事件子系统学习截然不同的 API
 。The pre-existing classes `MapperExtension`,
 `SessionExtension`, `AttributeExtension`, `ConnectionProxy`,
 `PoolListener` as well as the
@@ -84,7 +84,7 @@ aren’t really aware of them otherwise.
 
 ### 速度增强[¶](#speed-enhancements "Permalink to this headline")
 
-按照所有主要SQLA版本的习惯，通过内部广泛传递来减少开销和呼叫计数，这进一步减少了常见场景中所需的工作。此版本的亮点包括：
+按照所有主要 SQLA 版本的习惯，通过内部广泛传递来减少开销和呼叫计数，这进一步减少了常见场景中所需的工作。此版本的亮点包括：
 
 -   对于主键已经存在的行，刷新过程现在将 INSERT 语句捆绑到提供给`cursor.executemany()`的批处理中。特别是，这通常适用于连接表继承配置上的“子”表，这意味着对于连接表对象的大批量插入，对`cursor.execute`的调用次数可以减半，允许对传递给`cursor.executemany()`的语句进行本地 DBAPI 优化（例如重新使用预准备语句）。
 -   在访问已加载的相关对象的多对一引用时调用的代码路径已大大简化。直接检查身份映射而不需要首先生成新的`Query`对象，这在需要访问的数千个内存中的多对一的情况下是昂贵的。构造的每个调用“加载器”对象的用法也不再用于大多数惰性属性加载。
@@ -116,7 +116,7 @@ aren’t really aware of them otherwise.
 
 现在使用显式语句向目标发布`query.join()`的默认方法是：
 
-    query.join(SomeClass, SomeClass.id==ParentClass.some_id)plainplainplainplainplain
+    query.join(SomeClass, SomeClass.id==ParentClass.some_id)plain
 
 在 0.6 中，这个用法被认为是一个错误，因为`join()`接受多个对应于多个 JOIN 子句的参数 -
 两个参数形式需要在一个元组中以消除单参数和双参数连接目标。在 0.6 的中间，我们为这种特定的调用风格增加了检测和错误消息，因为它很常见。在 0.7 中，由于我们无论如何都在检测确切的模式，并且由于不必理由地键入元组是非常烦人的，所以非元组方法现在变成了“正常”的方式。与单连接情况相比，“多 JOIN”用例非常罕见，并且通过多次调用`join()`可以更清楚地表示多个连接。
@@ -230,7 +230,7 @@ SQLAlchemy 使用`over()`方法提供一个通常通过现有函数子句调用�
 
 SQL：
 
-    SELECT empsalary.depname, empsalary.empno, empsalary.salary,plainplainplainplain
+    SELECT empsalary.depname, empsalary.empno, empsalary.salary,
     avg(empsalary.salary) OVER (PARTITION BY empsalary.depname) AS avg
     FROM empsalary
 
@@ -296,7 +296,7 @@ equivalent to:
 
 由`query.count()`发出的 SQL 现在总是如下形式：
 
-    SELECT count(1) AS count_1 FROM (plainplainplain
+    SELECT count(1) AS count_1 FROM (plain
         SELECT user.id AS user_id, user.name AS user_name from user
     ) AS anon_1
 
@@ -304,11 +304,11 @@ equivalent to:
 
 [＃2093 T0\>](http://www.sqlalchemy.org/trac/ticket/2093)
 
-#### 发出一个非子查询形式的count()[¶](#to-emit-a-non-subquery-form-of-count "Permalink to this headline")
+#### 发出一个非子查询形式的 count()[¶](#to-emit-a-non-subquery-form-of-count "Permalink to this headline")
 
 MySQL 用户已经报道过，MyISAM 引擎不会因为这个简单的改变而完全落空。请注意，对于针对无法处理简单子查询的 DB 进行优化的简单`count()`，应该使用`func.count()`：
 
-    from sqlalchemy import func
+    from sqlalchemy import funcplain
     session.query(func.count(MyClass.id)).scalar()
 
 或者用于`count(*)`：
@@ -343,17 +343,17 @@ Sajip 为我们的日志记录系统提供了一个补丁，使得不再需要�
 
 现在，`contains_eager()`修饰符将自行链接一段更长的路径，而不需要发出单独的`contains_eager()`调用。代替：
 
-    session.query(A).options(contains_eager(A.b), contains_eager(A.b, B.c))plainplain
+    session.query(A).options(contains_eager(A.b), contains_eager(A.b, B.c))
 
 你可以说：
 
-    session.query(A).options(contains_eager(A.b, B.c))plain
+    session.query(A).options(contains_eager(A.b, B.c))
 
 [＃2032 T0\>](http://www.sqlalchemy.org/trac/ticket/2032)
 
 ### 禁止没有父母的孤儿被允许[¶](#flushing-of-orphans-that-have-no-parent-is-allowed "Permalink to this headline")
 
-我们有一个长期存在的行为，在flush期间检查所谓的“孤立”，即与`relationship()`关联的一个对象，该对象指定了“delete-orphan”级联，已被新增加到 INSERT 的会话中，并且没有建立父母关系。这项检查是在几年前添加的，以适应测试孤儿行为的一致性的一些测试案例。在现代 SQLA 中，这一检查在 Python 方面不再需要。通过使对象的父行的外键引用 NOT
+我们有一个长期存在的行为，在 flush 期间检查所谓的“孤立”，即与`relationship()`关联的一个对象，该对象指定了“delete-orphan”级联，已被新增加到 INSERT 的会话中，并且没有建立父母关系。这项检查是在几年前添加的，以适应测试孤儿行为的一致性的一些测试案例。在现代 SQLA 中，这一检查在 Python 方面不再需要。通过使对象的父行的外键引用 NOT
 NULL 来完成“孤立检查”的等效行为，其中数据库以与 SQLA 允许大多数其他操作一样的方式建立数据一致性的工作。如果对象的父外键可为空，则可以插入该行。当对象与特定的父对象持久化时，将会运行“孤儿”行为，然后与该父对象关联，导致为其发出 DELETE 语句。
 
 [＃1912 T0\>](http://www.sqlalchemy.org/trac/ticket/1912)
@@ -383,7 +383,7 @@ environments. 0.7中的`sqla_nose.py`脚本现在是用鼻子运行测试的唯�
 
 完全不反对任何`Table`的构造，就像一个函数一样，可以被映射。
 
-    from sqlalchemy import select, funcplainplainplainplain
+    from sqlalchemy import select, func
     from sqlalchemy.orm import mapper
 
     class Subset(object):
@@ -418,7 +418,7 @@ construct rather than constructing an ORM level `AliasedClass`.
 
 ### SQLite - relative file paths are normalized through os.path.abspath()[¶](#sqlite-relative-file-paths-are-normalized-through-os-path-abspath "Permalink to this headline")
 
-这样，一个改变当前目录的脚本将继续定位到相同的位置，因为后续的SQLite连接已经建立。
+这样，一个改变当前目录的脚本将继续定位到相同的位置，因为后续的 SQLite 连接已经建立。
 
 [＃2036 T0\>](http://www.sqlalchemy.org/trac/ticket/2036)
 
@@ -437,7 +437,7 @@ Server 将这些类型的长度默认为'1'。
 
 当映射具有`PickleType`或`postgresql.ARRAY`数据类型的列时，此更改引用 ORM 的默认行为。`mutable`标志现在默认设置为`False`。如果现有的应用程序使用这些类型，并且依赖于检测到就地突变，则必须使用`mutable=True`构造类型对象以恢复 0.6 行为：
 
-    Table('mytable', metadata,plainplain
+    Table('mytable', metadata,
         # ....
 
         Column('pickled_data', PickleType(mutable=True))
@@ -494,7 +494,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 给定两个映射类`Foo`和`Bar`，每个类都有一个列`spam`：
 
-    qa = session.query(Foo.spam)plainplainplain
+    qa = session.query(Foo.spam)
     qb = session.query(Bar.spam)
 
     qu = qa.union(qb)
@@ -509,7 +509,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 使用声明式，场景是这样的：
 
-    class Parent(Base):plainplain
+    class Parent(Base):
         __tablename__ = 'parent'
         id = Column(Integer, primary_key=True)
 
@@ -520,7 +520,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 以上，属性`Child.id`指向`child.id`列和`parent.id` -
 这是由于属性。如果它在类上命名不同，如`Child.child_id`，则它将明确地映射到`child.id`，并且`Child.id`为与`Parent.id`具有相同的属性。
 
-当`id`属性用于引用`parent.id`和`child.id`时，它将它们存储在有序列表中。像`Child.id`这样的表达式在渲染时仅引用这些列的*一个*。直到0.6，这个列将是`parent.id`。In 0.7, it is the less surprising `child.id`.
+当`id`属性用于引用`parent.id`和`child.id`时，它将它们存储在有序列表中。像`Child.id`这样的表达式在渲染时仅引用这些列的*一个*。直到 0.6，这个列将是`parent.id`。In 0.7, it is the less surprising `child.id`.
 
 这种行为的遗留问题涉及到不再适用的 ORM 的行为和限制；所需要的只是扭转秩序。
 
@@ -537,7 +537,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
         id = Column(Integer, primary_key=True)
         child_id = Column(Integer, ForeignKey('child.id'))
 
-在0.7之前，`Child.id`表达式将引用`Parent.id`，并且有必要将`child.id`映射到不同的属性。
+在 0.7 之前，`Child.id`表达式将引用`Parent.id`，并且有必要将`child.id`映射到不同的属性。
 
 这也意味着像这样的查询会改变它的行为：
 
@@ -595,7 +595,7 @@ column is the primary representation of `FooBar.id`
 
 这是 0.6 的警告，现在 0.7 的错误。为`polymorphic_on`提供的列必须位于映射可选项中。这可以防止一些偶然的用户错误，例如：
 
-    mapper(SomeClass, sometable, polymorphic_on=some_lookup_table.c.id)plain
+    mapper(SomeClass, sometable, polymorphic_on=some_lookup_table.c.id)
 
 其中 polymorphic\_on 必须位于`sometable`列上，在这种情况下可能是`sometable.c.some_lookup_id`。还有一些“多态联合”情景，其中有时会出现类似的错误。
 
@@ -606,7 +606,7 @@ column is the primary representation of `FooBar.id`
 
 ### `DDL()`构造现在转义百分号[¶](#ddl-constructs-now-escape-percent-signs "Permalink to this headline")
 
-以前，对于那些接受`pyformat`的 DBAPI，根据 DBAPI，`DDL()`字符串中的百分号必须转义，即`%%`或`format`绑定（即psycopg2，mysql-python），这与`text()`构造不一致。对于`text()`，现在对`DDL()`发生同样的转义。
+以前，对于那些接受`pyformat`的 DBAPI，根据 DBAPI，`DDL()`字符串中的百分号必须转义，即`%%`或`format`绑定（即 psycopg2，mysql-python），这与`text()`构造不一致。对于`text()`，现在对`DDL()`发生同样的转义。
 
 [＃1897 T0\>](http://www.sqlalchemy.org/trac/ticket/1897)
 
@@ -651,7 +651,7 @@ For a few years we’ve added the string `sqlalchemy.exceptions` to `sys.modules
 “`import sqlalchemy.exceptions`” would work.
 很久以来，核心例外模块的名称一直是`exc`，因此建议为此模块导入：
 
-    from sqlalchemy import excplain
+    from sqlalchemy import exc
 
 The `exceptions` name is still present in
 “`sqlalchemy`” for applications which might have
@@ -695,7 +695,7 @@ restored as of 0.7b4/0.7.0, but emits a deprecation warning.
 
 这个模糊的特性允许这种模式与 MySQL 后端：
 
-    select([mytable], distinct='ALL', prefixes=['HIGH_PRIORITY'])plainplainplain
+    select([mytable], distinct='ALL', prefixes=['HIGH_PRIORITY'])plain
 
 `prefixes`关键字或`prefix_with()`方法应该用于非标准或不常用的前缀：
 
@@ -772,7 +772,7 @@ that of the `alias()` methods on all
 
 这些方法都可以接受 0.5 系列的\*参数：
 
-    # current way, in place since 0.5
+    # current way, in place since 0.5plain
     session.query(Houses).join(Houses.rooms, Room.closets)
     session.query(Houses).options(eagerload_all(Houses.rooms, Room.closets))
 

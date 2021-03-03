@@ -8,7 +8,7 @@ categories:
   - orm
 tags:
 ---
-关系API [¶](#relationships-api "Permalink to this headline")
+关系 API [¶](#relationships-api "Permalink to this headline")
 ============================================================
 
  `sqlalchemy.orm.`{.descclassname}`relationship`{.descname}(*argument*, *secondary=None*, *primaryjoin=None*, *secondaryjoin=None*, *foreign\_keys=None*, *uselist=None*, *order\_by=False*, *backref=None*, *back\_populates=None*, *post\_update=False*, *cascade=False*, *extension=None*, *viewonly=False*, *lazy=True*, *collection\_class=None*, *passive\_deletes=False*, *passive\_updates=True*, *remote\_side=None*, *enable\_typechecks=True*, *join\_depth=None*, *comparator\_factory=None*, *single\_parent=False*, *innerjoin=False*, *distinct\_target\_key=None*, *doc=None*, *active\_history=False*, *cascade\_backrefs=True*, *load\_on\_pending=False*, *bake\_queries=True*, *strategy\_class=None*, *\_local\_remote\_pairs=None*, *query\_class=None*, *info=None*)[¶](#sqlalchemy.orm.relationship "Permalink to this definition")
@@ -557,7 +557,7 @@ tags:
  `sqlalchemy.orm.`{.descclassname}`backref`{.descname}(*name*, *\*\*kwargs*)[¶](#sqlalchemy.orm.backref "Permalink to this definition")
 :   使用显式关键字参数创建一个后端引用，这些参数是可以发送到[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的相同参数。
 
-    与[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的`backref`关键字参数一起使用以代替字符串参数，例如：plainplain
+    与[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的`backref`关键字参数一起使用以代替字符串参数，例如：plain
 
         'items':relationship(
             SomeItem, backref=backref('parent', lazy='subquery'))

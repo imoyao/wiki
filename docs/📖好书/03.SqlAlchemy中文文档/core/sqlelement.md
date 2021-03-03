@@ -12,7 +12,7 @@ tags:
 列元素和表达式[¶](#module-sqlalchemy.sql.expression "Permalink to this headline")
 =================================================================================
 
-SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表达式支持。所有SQL表达式结构的核心是[`ClauseElement`](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")，它是几个子分支的基础。[`ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")类是用于构造任何类型的SQL表达式的基本单位。
+SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 表达式支持。所有 SQL 表达式结构的核心是[`ClauseElement`](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")，它是几个子分支的基础。[`ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")类是用于构造任何类型的SQL表达式的基本单位。
 
 ` sqlalchemy.sql.expression。 T0> 所有_  T1> （ T2>  EXPR  T3> ） T4> ¶< / T5>`{.descclassname}
 :   产生一个 ALL 表达式。
@@ -773,7 +773,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
     [Using More Specific Text with table(), literal\_column(), and
     column()](tutorial.html#sqlexpression-literal-column)中使用更多特定文本
 
-` sqlalchemy.sql.expression。 T0> 不_  T1> （ T2> 子句 T3> ） T4> ¶< / T5>`{.descclassname}
+`sqlalchemy.sql.expression。 T0> 不_  T1> （ T2> 子句 T3> ） T4> ¶< / T5>`{.descclassname}
 :   返回给定子句的否定，即`NOT(clause)`。
 
     所有[`ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")子类中的`~`运算符也被重载，以产生相同的结果。
@@ -891,7 +891,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
  `sqlalchemy.sql.expression.`{.descclassname}`over`{.descname}(*element*, *partition\_by=None*, *order\_by=None*, *range\_=None*, *rows=None*)[¶](#sqlalchemy.sql.expression.over "Permalink to this definition")
 :   针对函数生成[`Over`](#sqlalchemy.sql.expression.Over "sqlalchemy.sql.expression.Over")对象。
 
-    针对聚合或所谓的“窗口”函数，用于支持窗口函数的数据库后端。plain
+    针对聚合或所谓的“窗口”函数，用于支持窗口函数的数据库后端。
 
     [`over()`](#sqlalchemy.sql.expression.over "sqlalchemy.sql.expression.over")
     is usually called using the [`FunctionElement.over()`](functions.html#sqlalchemy.sql.functions.FunctionElement.over "sqlalchemy.sql.functions.FunctionElement.over")
@@ -2709,7 +2709,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
  *class*`sqlalchemy.sql.expression.`{.descclassname}`Extract`{.descname}(*field*, *expr*, *\*\*kwargs*)[¶](#sqlalchemy.sql.expression.Extract "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
-    表示一个SQL EXTRACT子句，`提取（field FROM expr）`。
+    表示一个SQL EXTRACT子句，`提取（field FROM expr）`。plain
 
      `__init__`{.descname}(*field*, *expr*, *\*\*kwargs*)[¶](#sqlalchemy.sql.expression.Extract.__init__ "Permalink to this definition")
     :   构建一个新的[`Extract`](#sqlalchemy.sql.expression.Extract "sqlalchemy.sql.expression.Extract")对象。
@@ -3014,7 +3014,7 @@ SQL表达式API最基本的部分是“列元素”，它允许基本的SQL表�
 *class* `sqlalchemy.sql.operators。`{.descclassname} `custom_op`{.descname} （ *opstring*，*precedence = 0*，*is\_comparison = False*，*natural\_self\_precedent = False* ） [¶](#sqlalchemy.sql.operators.custom_op "Permalink to this definition")
 :   代表一个'自定义'操作符。
 
-    当使用[`ColumnOperators.op()`](#sqlalchemy.sql.operators.ColumnOperators.op "sqlalchemy.sql.operators.ColumnOperators.op")方法创建自定义操作符可调用时，[`custom_op`](#sqlalchemy.sql.operators.custom_op "sqlalchemy.sql.operators.custom_op")通常是即时创建的。当以编程方式构造表达式时，该类也可以直接使用。例如。代表“阶乘”操作：
+    当使用[`ColumnOperators.op()`](#sqlalchemy.sql.operators.ColumnOperators.op "sqlalchemy.sql.operators.ColumnOperators.op")方法创建自定义操作符可调用时，[`custom_op`](#sqlalchemy.sql.operators.custom_op "sqlalchemy.sql.operators.custom_op")通常是即时创建的。当以编程方式构造表达式时，该类也可以直接使用。例如。代表“阶乘”操作：plain
 
         from sqlalchemy.sql import UnaryExpression
         from sqlalchemy.sql import operators
