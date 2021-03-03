@@ -74,14 +74,14 @@ setup.py 文件现在需要 setuptools；不再支持简单的 distutils 安装�
 
 当`pip`可用时，可以从 Pypi 下载并在一个步骤中安装该分发：
 
-    pip install SQLAlchemyplainplainplainplainplainplainplain
+    pip install SQLAlchemy
 
 该命令将从[Python Cheese
 Shop](http://pypi.python.org/pypi/SQLAlchemy)下载最新的**发布的**版 SQLAlchemy 并将其安装到您的系统中。
 
 为了安装最新的**prerelease**版本，比如`1.1.0b1`，pip 要求使用`--pre`标志：
 
-    pip install --pre SQLAlchemyplainplainplainplainplainplainplain
+    pip install --pre SQLAlchemy
 
 如上所述，如果最新版本是预发行版本，则将安装它而不是最新发布的版本。
 
@@ -89,7 +89,7 @@ Shop](http://pypi.python.org/pypi/SQLAlchemy)下载最新的**发布的**版 SQL
 
 否则，您可以使用`setup.py`脚本从分发安装：
 
-    python setup.py installplainplainplainplainplainplainplain
+    python setup.py installplain
 
 ### 安装 C 扩展[¶](#installing-the-c-extensions "Permalink to this headline")
 
@@ -101,7 +101,7 @@ if an appropriate platform is detected.
 
 要运行构建/安装而不尝试编译 C 扩展，可以指定`DISABLE_SQLALCHEMY_CEXT`环境变量。对于这种情况的用例要么是针对特殊的测试环境，要么是通常的“重建”机制无法解决的罕见情况下的兼容性/构建问题：
 
-    export DISABLE_SQLALCHEMY_CEXT=1; python setup.py installplainplainplainplainplainplainplainplainplainplainplain
+    export DISABLE_SQLALCHEMY_CEXT=1; python setup.py install
 
 在版本 1.1 中更改：遗留的--without-cextensions 标志已从安装程序中删除，因为它依赖于 setuptools 的不推荐使用的功能。
 
@@ -121,7 +121,7 @@ links.
 
 本文档涵盖了 SQLAlchemy 版本 1.1。如果您正在使用已安装 SQLAlchemy 的系统，请从您的 Python 提示符中检查版本，如下所示：
 
-    >>> import sqlalchemyplainplainplainplainplainplain
+    >>> import sqlalchemy
     >>> sqlalchemy.__version__ # doctest: +SKIP
     1.1.0
 

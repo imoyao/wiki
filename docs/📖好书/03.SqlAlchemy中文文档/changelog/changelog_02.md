@@ -307,7 +307,7 @@ tags:
 -   升级了所有的 unittests 以将'./lib/'插入 sys.path，解决了新的 setuptools
     PYTHONPATH - 查杀行为[¶](#change-59e2b6515f9cf90eab511b44b21c6c21)
 
--   进一步修复属性/依赖关系/ etc ....
+-   进一步修复属性/依赖关系/ etc ……
     [¶](#change-a635a07bb0755421e364596ccc416ed3)
 
 -   改进了 DynamicMetaData 未连接时的错误处理[¶](#change-0f308612c0441691991056a9ab1577b2)
@@ -317,7 +317,7 @@ tags:
 -   组中的 UPDATE 和 DELETE 语句的排序现在按照主键值的顺序排列，用于更多的确定性排序[¶](#change-10cb588f38e3ba8028e1fa3d9eda66aa)
 
 -   after\_insert / delete /
-    update现在称为每个对象的映射器扩展，而不是每个对象每个表[¶](#change-736e4b3a6aa7ac48bbd1ed840f55abde)
+    update 现在称为每个对象的映射器扩展，而不是每个对象每个表[¶](#change-736e4b3a6aa7ac48bbd1ed840f55abde)
 
 -   进一步修复/重构映射器编译[¶](#change-efafc61951a6e94fc868a8288241c457)
 
@@ -343,11 +343,12 @@ tags:
 -   小的修复程序加上订购/限制/偏移[¶](#change-03a4cc85caf469f1dc0aff0590a1863a)
 
 -   utterly remarkable: added a single space between ‘CREATE TABLE’ and
-    ‘(’ since *that’s how MySQL indicates a non- reserved word……
+    ‘(’ since *that’s how MySQL indicates a non- reserved word
+…………
     tablename.....*[¶](#change-1afa0092b73a4311513258de8d1bfe61)
 
-    参考文献：[＃206](http://www.sqlalchemy.org/trac/ticket/206)
-plainplainplain
+://www.sqlalchemy.org/trac/ticket/206)
+plainplainplainplainplain
 -   更多修复了继承问题，与多对多关系正确地保存[¶](#change-4aadd1394222f4244ef7c8cba4717753)
 
 -   fixed bug when specifying explicit module to mysql

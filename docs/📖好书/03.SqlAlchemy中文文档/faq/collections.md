@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:39
 permalink: /sqlalchemy/faq/collections/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - faq
 tags:
 ---
@@ -70,7 +70,7 @@ False 关系的“动态”加载器是无效的。在这些情况下，较新�
 
 即使访问，“noload”关系也不会从数据库加载。它使用`lazy='noload'`配置：
 
-    class MyClass(Base):plain
+    class MyClass(Base):
         __tablename__ = 'some_table'
 
         children = relationship(MyOtherClass, lazy='noload')
@@ -86,13 +86,13 @@ False 关系的“动态”加载器是无效的。在这些情况下，较新�
 
         children = relationship(MyOtherClass, lazy='raise')
 
-以上，`children`集合上的属性访问将会引发异常，如果它以前没有被预先加载。这包括读取权限，但对于集合也会影响写入权限，因为集合不能在没有先加载的情况下进行突变。其基本原理是确保应用程序在特定上下文中不发出任何意外的延迟加载。与其不必通过SQL日志来确定所有必要的属性已被加载，“提升”策略将导致卸载的属性在被访问时立即引发。通过使用[`orm.raiseload()`](loading_relationships.html#sqlalchemy.orm.raiseload "sqlalchemy.orm.raiseload")加载器选项，查询选项也可以使用提升策略。
+以上，`children`集合上的属性访问将会引发异常，如果它以前没有被预先加载。这包括读取权限，但对于集合也会影响写入权限，因为集合不能在没有先加载的情况下进行突变。其基本原理是确保应用程序在特定上下文中不发出任何意外的延迟加载。与其不必通过 SQL 日志来确定所有必要的属性已被加载，“提升”策略将导致卸载的属性在被访问时立即引发。通过使用[`orm.raiseload()`](loading_relationships.html#sqlalchemy.orm.raiseload "sqlalchemy.orm.raiseload")加载器选项，查询选项也可以使用提升策略。
 
 版本 1.1 中的新增功能：添加了“引导”加载器策略。
 
 ### 使用被动删除[¶](#using-passive-deletes "Permalink to this headline")
 
-使用[`passive_deletes`](relationship_api.html#sqlalchemy.orm.relationship.params.passive_deletes "sqlalchemy.orm.relationship")禁用DELETE操作上的子对象加载，并结合数据库上的“ON
+使用[`passive_deletes`](relationship_api.html#sqlalchemy.orm.relationship.params.passive_deletes "sqlalchemy.orm.relationship")禁用 DELETE 操作上的子对象加载，并结合数据库上的“ON
 DELETE（CASCADE | SET NULL）”来自动级联删除子对象：
 
     class MyClass(Base):plain
@@ -137,7 +137,7 @@ deleted by the database.
 
 映射一对多或多对多关系会导致通过父实例上的属性访问值的集合。默认情况下，这个集合是一个`list`：
 
-    class Parent(Base):plain
+    class Parent(Base):
         __tablename__ = 'parent'
         parent_id = Column(Integer, primary_key=True)
 
@@ -167,7 +167,7 @@ deleted by the database.
 we map an `Item` class containing a dictionary of
 `Note` items keyed to the `Note.keyword` attribute:
 
-    from sqlalchemy import Column, Integer, String, ForeignKey
+    from sqlalchemy import Column, Integer, String, ForeignKeyplain
     from sqlalchemy.orm import relationship
     from sqlalchemy.orm.collections import attribute_mapped_collection
     from sqlalchemy.ext.declarative import declarative_base
@@ -194,7 +194,7 @@ we map an `Item` class containing a dictionary of
 
 `Item.notes` is then a dictionary:
 
-    >>> item = Item()
+    >>> item = Item()plain
     >>> item.notes['a'] = Note('a', 'atext')
     >>> item.notes.items()
     {'a': <__main__.Note object at 0x2eaaf0>}
@@ -212,7 +212,7 @@ a regular Python `@property` allows virtually any
 detail or combination of details about the object to be used as the key,
 as below when we establish it as a tuple of `Note.keyword` and the first ten letters of the `Note.text` field:
 
-    class Item(Base):plain
+    class Item(Base):
         __tablename__ = 'item'
         id = Column(Integer, primary_key=True)
         notes = relationship("Note",
@@ -279,7 +279,7 @@ Proxies](extensions_associationproxy.html#composite-association-proxy)。
 
     关键值在对象的生命周期中必须是不可变的。例如，如果这些键值在会话期间发生更改（例如，会话刷新后从无到数据库分配的整数），则无法映射外键值。
 
-` sqlalchemy.orm.collections。 T0>  column_mapped_collection  T1> （ T2>  mapping_spec  T3> ） T4> ¶< / T5>`{.descclassname}
+`sqlalchemy.orm.collections。 T0>  column_mapped_collection  T1> （ T2>  mapping_spec  T3> ） T4> ¶< / T5>`{.descclassname}
 :   基于列的键控的基于字典的集合类型。
 
     使用从mapping\_spec生成的键控函数返回一个[`MappedCollection`](#sqlalchemy.orm.collections.MappedCollection "sqlalchemy.orm.collections.MappedCollection")工厂，该工具可能是一列或一列列。
@@ -317,7 +317,7 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
 
 集合包理解列表，集合和字典的基本接口，并将自动将检测应用于这些内置类型及其子类。实现基本集合接口的对象派生类型通过鸭式输入进行检测和检测：
 
-    class ListLike(object):
+    class ListLike(object):plain
         def __init__(self):
             self.data = []
         def append(self, item):
@@ -349,13 +349,13 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
 
 由于`append`，这个类看起来像列表一样，但是`__emulates__`强制它设置为类似的。`remove`已知是设置界面的一部分，并将进行检测。
 
-但是这个类还不行：需要一点点粘合剂才能适应SQLAlchemy的使用。ORM需要知道使用哪些方法来追加，删除和迭代集合的成员。当使用像`list`或`set`这样的类型时，适当的方法是众所周知的，并在出现时自动使用。这个集合类没有提供预期的`add`方法，因此我们必须通过装饰器为 ORM 提供显式映射。
+但是这个类还不行：需要一点点粘合剂才能适应 SQLAlchemy 的使用。ORM 需要知道使用哪些方法来追加，删除和迭代集合的成员。当使用像`list`或`set`这样的类型时，适当的方法是众所周知的，并在出现时自动使用。这个集合类没有提供预期的`add`方法，因此我们必须通过装饰器为 ORM 提供显式映射。
 
 ### 通过装饰器注释自定义集合[¶](#annotating-custom-collections-via-decorators "Permalink to this headline")
 
 装饰器可用于标记ORM管理集合所需的各种方法。当你的课堂并不完全满足其容器类型的常规界面，或者你想用另一种方法完成工作时使用它们。
 
-    from sqlalchemy.orm.collections import collectionplainplain
+    from sqlalchemy.orm.collections import collection
 
     class SetLike(object):
         __emulates__ = set
@@ -373,7 +373,7 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
         def __iter__(self):
             return iter(self.data)
 
-这就是完成这个例子所需要的一切。SQLAlchemy将通过`append`方法添加实例。`remove`和`__iter__`是集合的默认方法，将用于删除和迭代。缺省方法也可以更改：
+这就是完成这个例子所需要的一切。SQLAlchemy 将通过`append`方法添加实例。`remove`和`__iter__`是集合的默认方法，将用于删除和迭代。缺省方法也可以更改：
 
     from sqlalchemy.orm.collections import collectionplain
 
@@ -391,7 +391,7 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
 *class* `sqlalchemy.orm.collections。`{.descclassname} `集合`{.descname} [¶](#sqlalchemy.orm.collections.collection "Permalink to this definition")
 :   实体集合类的装饰器。
 
-    装饰者分为两组：注释和截取食谱。plain
+    装饰者分为两组：注释和截取食谱。
 
     注释装饰器（appender，remover，iterator，linker，converter，inward\_instrumented）表示方法的用途并且不带任何参数。他们不是与parens写的：
 
@@ -546,7 +546,7 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
 
 [`MappedCollection`](#sqlalchemy.orm.collections.MappedCollection "sqlalchemy.orm.collections.MappedCollection")类可以用作自定义类型的基类，也可以作为混合来快速将`dict`集合支持添加到其他类中。它使用键控功能委托给`__setitem__`和`__delitem__`：
 
-    from sqlalchemy.util import OrderedDictplain
+    from sqlalchemy.util import OrderedDict
     from sqlalchemy.orm.collections import MappedCollection
 
     class NodeMap(OrderedDict, MappedCollection):
@@ -565,7 +565,7 @@ user-defined versions of `__setitem__()` or
 -
 在一个已经检测到的调用中调用它们可能会导致重复触发事件或不恰当地触发事件，从而在极少数情况下导致内部状态损坏：
 
-    from sqlalchemy.orm.collections import MappedCollection,\plain
+    from sqlalchemy.orm.collections import MappedCollection,\
                                         collection
 
     class MyMappedCollection(MappedCollection):
@@ -641,7 +641,7 @@ ORM理解`dict`接口就像列表和集合一样，如果您选择继承`dict`�
 
 这些装饰在关系之外是轻量级且无操作的，但是在其他地方触发时它们确实增加了不必要的开销。当使用库类作为集合时，最好使用“平凡的子类”技巧来限制装饰，使其仅用于关系中的使用。例如：
 
-    class MyAwesomeList(some.great.library.AwesomeList):
+    class MyAwesomeList(some.great.library.AwesomeList):plain
         pass
 
     # ... relationship(..., collection_class=MyAwesomeList)
@@ -656,7 +656,7 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
  `sqlalchemy.orm.collections.`{.descclassname}`bulk_replace`{.descname}(*values*, *existing\_adapter*, *new\_adapter*)[¶](#sqlalchemy.orm.collections.bulk_replace "Permalink to this definition")
 :   加载一个新的集合，根据之前的类似成员资格触发事件。
 
-    将`values`中的实例附加到`new_adapter`上。对于`existing_adapter`中不存在的任何实例，都会触发事件。`values`中不存在的`existing_adapter`中的任何实例都将移除在它们上面触发的事件。plain
+    将`values`中的实例附加到`new_adapter`上。对于`existing_adapter`中不存在的任何实例，都会触发事件。`values`中不存在的`existing_adapter`中的任何实例都将移除在它们上面触发的事件。
 
     参数：
 
@@ -672,7 +672,7 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
 *class* `sqlalchemy.orm.collections。`{.descclassname} `集合`{.descname}
 :   实体集合类的装饰器。
 
-    装饰者分为两组：注释和截取食谱。plain
+    装饰者分为两组：注释和截取食谱。
 
     注释装饰器（appender，remover，iterator，linker，converter，inward\_instrumented）表示方法的用途并且不带任何参数。他们不是与parens写的：
 
@@ -700,12 +700,12 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
 *class* `sqlalchemy.orm.collections。`{.descclassname} `InstrumentedDict`{.descname} [¶](#sqlalchemy.orm.collections.InstrumentedDict "Permalink to this definition")
 :   基础：`__builtin__.dict`
 
-    内置字典的工具版本。
+    内置字典的工具版本。plain
 
 *class* `sqlalchemy.orm.collections。`{.descclassname} `InstrumentedList`{.descname} [¶](#sqlalchemy.orm.collections.InstrumentedList "Permalink to this definition")
 :   基础：`__builtin__.list`
 
-    内置列表的检测版本。plainplain
+    内置列表的检测版本。
 
 *class* `sqlalchemy.orm.collections。`{.descclassname} `InstrumentedSet`{.descname} [¶](#sqlalchemy.orm.collections.InstrumentedSet "Permalink to this definition")
 :   基础：`__builtin__.set`
@@ -715,7 +715,7 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
 ` sqlalchemy.orm.collections。 T0>  prepare_instrumentation  T1> （ T2> 工厂 T3> ） T4> ¶< / T5>`{.descclassname}
 :   为将来使用作为集合类工厂准备一个可调用的函数。
 
-    给定一个集合类工厂（无论类型还是无参数），返回另一个工厂，在调用时将生成兼容的实例。plainplain
+    给定一个集合类工厂（无论类型还是无参数），返回另一个工厂，在调用时将生成兼容的实例。
 
     该函数负责将collection\_class = list转换为collection\_class =
     InstrumentedList的运行时行为。

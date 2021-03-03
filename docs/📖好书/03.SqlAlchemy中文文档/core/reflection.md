@@ -76,7 +76,7 @@ The [`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.Met
 object can also get a listing of tables and reflect the full set.
 这是通过使用[`reflect()`](metadata.html#sqlalchemy.schema.MetaData.reflect "sqlalchemy.schema.MetaData.reflect")方法实现的。调用它之后，所有定位的表格都存在于[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象的表格字典中：
 
-    meta = MetaData()
+    meta = MetaData()plain
     meta.reflect(bind=someengine)
     users_table = meta.tables['users']
     addresses_table = meta.tables['addresses']
@@ -94,7 +94,7 @@ clear or delete all the rows in a database:
 
 还提供一个低级别接口，它提供了从给定数据库加载架构，表，列和约束描述列表的后端不可知系统。这被称为“检查员”：
 
-    from sqlalchemy import create_engine
+    from sqlalchemy import create_engineplain
     from sqlalchemy.engine import reflection
     engine = create_engine('...')
     insp = reflection.Inspector.from_engine(engine)

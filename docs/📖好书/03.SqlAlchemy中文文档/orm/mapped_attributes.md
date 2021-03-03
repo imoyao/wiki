@@ -16,7 +16,7 @@ tags:
 
 向属性添加“验证”例程的一种快速方法是使用[`validates()`](#sqlalchemy.orm.validates "sqlalchemy.orm.validates")装饰器。属性验证器可以引发异常，停止变更属性值的过程，或者可以将给定值更改为不同的值。与所有属性扩展一样，验证器只能由普通的用户级代码调用；当 ORM 填充对象时它们不会被发出：
 
-    from sqlalchemy.orm import validatesplainplain
+    from sqlalchemy.orm import validates
 
     class EmailAddress(Base):
         __tablename__ = 'address'
@@ -52,7 +52,7 @@ supports reception of these events by specifying
 `include_removes=True` to the decorator.
 当设置此标志时，验证函数必须接收一个额外的布尔参数，如果`True`表明该操作是删除：
 
-    from sqlalchemy.orm import validatesplainplainplainplain
+    from sqlalchemy.orm import validates
 
     class User(Base):
         # ...
@@ -70,7 +70,7 @@ supports reception of these events by specifying
 
 使用`include_backrefs=False`选项也可以定制相互依赖的验证器通过 backref 链接的情况；当设置为`False`时，此选项可防止发生验证功能，如果事件是由于 backref 引起的：
 
-    from sqlalchemy.orm import validatesplainplainplain
+    from sqlalchemy.orm import validatesplain
 
     class User(Base):
         # ...
@@ -92,7 +92,7 @@ emitted, even though an append occurs to `some_user.addresses` - the event is ca
  `sqlalchemy.orm.`{.descclassname}`validates`{.descname}(*\*names*, *\*\*kw*)[¶](#sqlalchemy.orm.validates "Permalink to this definition")
 :   装饰一个方法作为一个或多个命名属性的“验证器”。
 
-    将方法指定为验证程序，该方法接收属性的名称以及要分配的值，或者在集合的情况下，将要添加到集合的值。然后该函数可以引发验证异常，以阻止进程继续进行（Python内置的`ValueError`和`AssertionError`异常是合理的选择），或者可以修改或替换之前的值诉讼。函数应返回给定的值。plain
+    将方法指定为验证程序，该方法接收属性的名称以及要分配的值，或者在集合的情况下，将要添加到集合的值。然后该函数可以引发验证异常，以阻止进程继续进行（Python内置的`ValueError`和`AssertionError`异常是合理的选择），或者可以修改或替换之前的值诉讼。函数应返回给定的值。
 
     请注意，集合**的验证程序不能**在验证例程中发出该集合的加载 -
     此用法引发一个断言以避免递归溢出。这是一个不支持的重入条件。
@@ -126,7 +126,7 @@ emitted, even though an append occurs to `some_user.addresses` - the event is ca
 为属性生成修改后行为的更全面的方法是使用[descriptors](glossary.html#term-descriptors)。这些通常在 Python 中使用`property()`函数使用。描述符的标准 SQLAlchemy 技术是创建一个简单的描述符，并使其从具有不同名称的映射属性读取/写入。下面我们使用 Python
 2.6 样式的属性来说明这一点：
 
-    class EmailAddress(Base):plainplainplainplainplain
+    class EmailAddress(Base):
         __tablename__ = 'email_address'
 
         id = Column(Integer, primary_key=True)
@@ -151,7 +151,7 @@ attribute does not have the usual expression semantics usable with
 [`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query").
 为了提供这些，我们改用如下的[`hybrid`](extensions_hybrid.html#module-sqlalchemy.ext.hybrid "sqlalchemy.ext.hybrid")扩展名：
 
-    from sqlalchemy.ext.hybrid import hybrid_propertyplainplain
+    from sqlalchemy.ext.hybrid import hybrid_property
 
     class EmailAddress(Base):
         __tablename__ = 'email_address'
@@ -171,7 +171,7 @@ attribute does not have the usual expression semantics usable with
 `.email`属性除了在我们拥有`EmailAddress`实例时提供 getter /
 setter 行为外，还在类级别使用时提供了 SQL 表达式，也就是说，直接从`EmailAddress`类：
 
-    from sqlalchemy.orm import Sessionplainplain
+    from sqlalchemy.orm import Sessionplain
     session = Session()
 
     sqladdress = session.query(EmailAddress).\
@@ -220,7 +220,7 @@ setter 行为外，还在类级别使用时提供了 SQL 表达式，也就是�
 
 以上，访问`EmailAddress`实例的`email`属性将返回`_email`属性的值，删除或添加主机名`@example.com`中的值。当我们查询`email`属性时，会呈现一个 SQL 函数，它会产生相同的效果：
 
-    sqladdress = session.query(EmailAddress).filter(EmailAddress.email == 'address').one()
+    sqladdress = session.query(EmailAddress).filter(EmailAddress.email == 'address').one()plain
     SELECT address.email AS address_email, address.id AS address_id
     FROM address
     WHERE substr(address.email, ?, length(address.email) - ?) = ?
@@ -236,7 +236,7 @@ Attributes](extensions_hybrid.html)中了解更多关于混合动力的信息。
 
 从最基本的意义上说，同义词是通过附加名称提供某个特定属性的简单方法：
 
-    class MyClass(Base):
+    class MyClass(Base):plain
         __tablename__ = 'my_table'
 
         id = Column(Integer, primary_key=True)
@@ -246,7 +246,7 @@ Attributes](extensions_hybrid.html)中了解更多关于混合动力的信息。
 
 上面的类`MyClass`具有两个属性，即`.job_status`和`.status`，它们在表达式级别上表现为一个属性：
 
-    >>> print(MyClass.job_status == 'some_status')plain
+    >>> print(MyClass.job_status == 'some_status')
     my_table.job_status = :job_status_1
 
     >>> print(MyClass.status == 'some_status')
@@ -254,7 +254,7 @@ Attributes](extensions_hybrid.html)中了解更多关于混合动力的信息。
 
 并在实例级别：
 
-    >>> m1 = MyClass(status='x')plainplainplainplain
+    >>> m1 = MyClass(status='x')plain
     >>> m1.status, m1.job_status
     ('x', 'x')
 
@@ -266,7 +266,7 @@ Attributes](extensions_hybrid.html)中了解更多关于混合动力的信息。
 
 除了简单的镜像之外，也可以使用[`synonym()`](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")来引用用户定义的[descriptor](glossary.html#term-descriptor)。我们可以用`@property`提供我们的`status`同义词：
 
-    class MyClass(Base):plainplain
+    class MyClass(Base):
         __tablename__ = 'my_table'
 
         id = Column(Integer, primary_key=True)

@@ -1998,7 +1998,7 @@ Mapper事件[¶](#mapper-events "Permalink to this headline")
 
 该模块通常对用户应用程序不直接可见，但定义了ORM交互性的很大一部分。
 
-instrumentation.py处理最终用户类的状态跟踪注册。它与分别建立per-instance和per-class-attribute工具的state.py和attributes.py紧密交互。
+instrumentation.py 处理最终用户类的状态跟踪注册。它与分别建立 per-instance 和 per-class-attribute 工具的 state.py 和 attributes.py 紧密交互。
 
 类工具系统可以使用[`sqlalchemy.ext.instrumentation`](extensions_instrumentation.html#module-sqlalchemy.ext.instrumentation "sqlalchemy.ext.instrumentation")模块在每个类或全局基础上定制，该模块提供了构建和指定替代工具形式的方法。
 

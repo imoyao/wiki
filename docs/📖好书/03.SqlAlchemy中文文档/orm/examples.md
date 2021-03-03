@@ -24,7 +24,7 @@ SQLAlchemy 发行版包含各种代码示例，说明一组选择的模式，一
 
 例如。：
 
-    node = TreeNode('rootnode')plain
+    node = TreeNode('rootnode')
     node.append('node1')
     node.append('node3')
     session.add(node)
@@ -45,7 +45,7 @@ SQLAlchemy 发行版包含各种代码示例，说明一组选择的模式，一
 
 -   [proxied\_association.py](_modules/examples/association/proxied_association.html)
     -
-    与 basic\_association相同的示例，在使用[`sqlalchemy.ext.associationproxy`](extensions_associationproxy.html#module-sqlalchemy.ext.associationproxy "sqlalchemy.ext.associationproxy")时添加以明确引用`OrderItem`可选。
+    与 basic\_association 相同的示例，在使用[`sqlalchemy.ext.associationproxy`](extensions_associationproxy.html#module-sqlalchemy.ext.associationproxy "sqlalchemy.ext.associationproxy")时添加以明确引用`OrderItem`可选。
 -   [basic\_association.py](_modules/examples/association/basic_association.html)
     -
     说明“订单”和“商品”对象集合之间的多对多关系，通过名为“OrderItem”的关联对象将购买价格与每个对象关联起来
@@ -57,7 +57,7 @@ SQLAlchemy 发行版包含各种代码示例，说明一组选择的模式，一
 
 有向图结构的持久性示例。该图存储为一组边，每个节都引用一个“下”节点和一个“上”节点。对低层和高层邻居的基本持久性和查询进行了说明：
 
-    n2 = Node(2)plainplainplainplain
+    n2 = Node(2)
     n5 = Node(5)
     n2.add_neighbor(n5)
     print n2.higher_neighbors()
@@ -156,7 +156,7 @@ T2\>提交食谱版本。](http://techspot.zzzeek.org/2007/05/29/polymorphic-ass
 
 在包级别提供了一个命令行工具，可以运行各个套件：
 
-    $ python -m examples.performance --helpplain
+    $ python -m examples.performance --help
     usage: python -m examples.performance [-h] [--test TEST] [--dburl DBURL]
                                           [--num NUM] [--profile] [--dump]
                                           [--runsnake] [--echo]
@@ -180,7 +180,7 @@ T2\>提交食谱版本。](http://techspot.zzzeek.org/2007/05/29/polymorphic-ass
 
 示例运行如下所示：
 
-    $ python -m examples.performance bulk_insertsplainplainplainplainplain
+    $ python -m examples.performance bulk_inserts
 
 或者选择：
 
@@ -215,7 +215,7 @@ application?](faq_performance.html#faq-how-to-profile)
 
 这是运行的默认形式：
 
-    $ python -m examples.performance single_insertsplainplainplain
+    $ python -m examples.performance single_inserts
     Tests to run: test_orm_commit, test_bulk_save,
                   test_bulk_insert_dictionaries, test_core,
                   test_core_query_caching, test_dbapi_raw_w_connect,
@@ -241,7 +241,7 @@ application?](faq_performance.html#faq-how-to-profile)
 
 Python 配置文件输出可以转储所有测试，或更常见的单个测试：
 
-    $ python -m examples.performance single_inserts --test test_core --num 1000 --dumpplain
+    $ python -m examples.performance single_inserts --test test_core --num 1000 --dump
     Tests to run: test_core
     test_core : Individual INSERT/COMMIT pairs using Core. (1000 iterations); total fn calls 186109
              186109 function calls (186102 primitive calls) in 1.089 seconds
@@ -261,7 +261,7 @@ Python 配置文件输出可以转储所有测试，或更常见的单个测试�
 
 该选项需要安装[RunSnake](https://pypi.python.org/pypi/RunSnakeRun)命令行工具：
 
-    $ python -m examples.performance single_inserts --test test_core --num 1000 --runsnakeplain
+    $ python -m examples.performance single_inserts --test test_core --num 1000 --runsnake
 
 将显示图形 RunSnake 输出。
 
@@ -269,7 +269,7 @@ Python 配置文件输出可以转储所有测试，或更常见的单个测试�
 
 profiler 套件系统是可扩展的，可以应用于您自己的一套测试。这是一个有价值的技术，用于决定一些性能关键的例程的正确方法。例如，如果我们想分析几种加载之间的差异，我们可以创建一个文件`test_loads.py`，其中包含以下内容：
 
-    from examples.performance import Profilerplain
+    from examples.performance import Profiler
     from sqlalchemy import Integer, Column, create_engine, ForeignKey
     from sqlalchemy.orm import relationship, joinedload, subqueryload, Session
     from sqlalchemy.ext.declarative import declarative_base
@@ -347,7 +347,7 @@ profiler 套件系统是可扩展的，可以应用于您自己的一套测试�
 
 我们可以直接运行我们的新脚本：
 
-    $ python test_loads.py  --dburl postgresql+psycopg2://scott:tiger@localhost/testplainplainplain
+    $ python test_loads.py  --dburl postgresql+psycopg2://scott:tiger@localhost/test
     Running setup once...
     Tests to run: test_lazyload, test_joinedload, test_subqueryload
     test_lazyload : load everything, no eager loading. (1000 iterations); total time 11.971159 sec
@@ -356,7 +356,7 @@ profiler 套件系统是可扩展的，可以应用于您自己的一套测试�
 
 以及 RunSnake 输出的个人测试：
 
-    $ python test_loads.py  --num 100 --runsnake --test test_joinedload
+    $ python test_loads.py  --num 100 --runsnake --test test_joinedloadplain
 
 ### 关系连接条件[¶](#module-examples.join_conditions "Permalink to this headline")
 
@@ -377,7 +377,7 @@ profiler 套件系统是可扩展的，可以应用于您自己的一套测试�
 
 例如。：
 
-    # parse an XML file and persist in the databaseplainplainplainplain
+    # parse an XML file and persist in the databaseplain
     doc = ElementTree.parse("test.xml")
     session.add(Document(file, doc))
     session.commit()
@@ -406,7 +406,7 @@ profiler 套件系统是可扩展的，可以应用于您自己的一套测试�
 
 用法可以通过单元测试模块`test_versioning.py`来说明，它可以通过鼻子运行：
 
-    cd examples/versioningplainplain
+    cd examples/versioning
     nosetests -v
 
 示例用法的片段，使用声明式：
@@ -447,7 +447,7 @@ profiler 套件系统是可扩展的，可以应用于您自己的一套测试�
 `Versioned`
 mixin 设计用于声明式。要使用经典映射器的扩展，可以应用`_history_mapper`函数：
 
-    from history_meta import _history_mapper
+    from history_meta import _history_mapperplain
 
     m = mapper(SomeClass, sometable)
     _history_mapper(m)
@@ -486,7 +486,7 @@ mixin 设计用于声明式。要使用经典映射器的扩展，可以应用`_
 
 例：
 
-    shrew = Animal(u'shrew')
+    shrew = Animal(u'shrew')plain
     shrew[u'cuteness'] = 5
     shrew[u'weasel-like'] = False
     shrew[u'poisonous'] = True
@@ -580,7 +580,7 @@ API 的基本示例。分片是指跨多个数据库水平缩放数据。
 
 例如。：
 
-    # query for Person objects, specifying cacheplain
+    # query for Person objects, specifying cache
     q = Session.query(Person).options(FromCache("default"))
 
     # specify that each Person's "addresses" collection comes from
@@ -595,7 +595,7 @@ API 的基本示例。分片是指跨多个数据库水平缩放数据。
 
 演示脚本自身，按照复杂性顺序，以 Python 模块的形式运行，以便相对导入工作：
 
-    python -m examples.dogpile_caching.helloworldplainplainplain
+    python -m examples.dogpile_caching.helloworldplain
 
     python -m examples.dogpile_caching.relationship_caching
 
@@ -645,7 +645,7 @@ API 的基本示例。分片是指跨多个数据库水平缩放数据。
 
 例如。：
 
-    print session.query(Road).filter(Road.road_geom.intersects(r1.road_geom)).all()plainplainplainplain
+    print session.query(Road).filter(Road.road_geom.intersects(r1.road_geom)).all()plain
 
 文件清单：
 

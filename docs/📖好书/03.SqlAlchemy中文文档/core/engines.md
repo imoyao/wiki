@@ -39,7 +39,7 @@ is invoked. In this way, [`Engine`](connections.html#sqlalchemy.engine.Engine "s
 and [`Pool`](pooling.html#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool") can
 be said to have a *lazy initialization* behavior.
 
-[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")一旦创建，可以直接用于与数据库进行交互，也可以将其传递给[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象以使用ORM。本节将介绍配置[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的详细信息。下一节[Working
+[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")一旦创建，可以直接用于与数据库进行交互，也可以将其传递给[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象以使用 ORM。本节将介绍配置[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的详细信息。下一节[Working
 with Engines and Connections](connections.html)将详细介绍[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的类似 API，通常用于非 ORM 应用程序。
 
 支持的数据库[¶](#supported-databases "Permalink to this headline")
@@ -58,7 +58,7 @@ implementations for various backends.
 
     dialect+driver://username:password@host:port/database
 
-方言名称包括SQLAlchemy方言的名称，名称如`sqlite`，`mysql`，`postgresql`，`oracle` ，或`mssql`。drivername 是用于使用全部小写字母连接到数据库的 DBAPI 的名称。如果未指定，则将导入“默认”DBAPI（如果可用）
+方言名称包括 SQLAlchemy 方言的名称，名称如`sqlite`，`mysql`，`postgresql`，`oracle` ，或`mssql`。drivername 是用于使用全部小写字母连接到数据库的 DBAPI 的名称。如果未指定，则将导入“默认”DBAPI（如果可用）
 - 此默认值通常是该后端可用的最广泛的驱动程序。
 
 以下是常用连接样式的示例。有关所有包含方言的详细信息的完整索引以及第三方方言的链接，请参见[Dialects](dialects_index.html)。
@@ -83,7 +83,7 @@ Postgresql 方言使用 psycopg2 作为默认的 DBAPI。pg8000 也可用作纯 
 MySQL 方言使用 mysql-python 作为默认的 DBAPI。有许多 MySQL
 DBAPI 可用，包括 MySQL 连接器-python 和 OurSQL：
 
-    # default
+    # defaultplain
     engine = create_engine('mysql://scott:tiger@localhost/foo')
 
     # mysql-python
@@ -111,14 +111,14 @@ Oracle方言使用cx\_oracle 作为默认的 DBAPI：
 
 SQL Server 方言使用 pyodbc 作为默认 DBAPI。pymssql 也可用：
 
-    # pyodbcplain
+    # pyodbc
     engine = create_engine('mssql+pyodbc://scott:tiger@mydsn')
 
     # pymssql
     engine = create_engine('mssql+pymssql://scott:tiger@hostname:port/dbname')
 
-有关在[Microsoft SQL Server](dialects_mssql.html)连接到SQL
-Server的更多注意事项。
+有关在[Microsoft SQL Server](dialects_mssql.html)连接到 SQL
+Server 的更多注意事项。
 
 ### SQLite的[¶ T0\>](#sqlite "Permalink to this headline")
 
@@ -132,14 +132,14 @@ SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据�
 
 对于绝对文件路径，三个斜杠后面是绝对路径：
 
-    #Unix/Mac - 4 initial slashes in totalplainplain
+    #Unix/Mac - 4 initial slashes in totalplain
     engine = create_engine('sqlite:////absolute/path/to/foo.db')
     #Windows
     engine = create_engine('sqlite:///C:\\path\\to\\foo.db')
     #Windows alternative using raw string
     engine = create_engine(r'sqlite:///C:\path\to\foo.db')
 
-要使用SQLite `:memory:`数据库，请指定一个空的URL：
+要使用 SQLite `:memory:`数据库，请指定一个空的 URL：
 
     engine = create_engine('sqlite://')
 
@@ -155,7 +155,7 @@ SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据�
 `sqlalchemy。`{.descclassname} `create_engine`{.descname} （ *\* args*，*\*\* kwargs* / T5\> [¶ T6\>](#sqlalchemy.create_engine "Permalink to this definition")
 :   创建一个新的[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")实例。
 
-    标准调用形式是将URL作为第一个位置参数发送，通常是指示数据库方言和连接参数的字符串：plain
+    标准调用形式是将URL作为第一个位置参数发送，通常是指示数据库方言和连接参数的字符串：
 
         engine = create_engine("postgresql://scott:tiger@localhost/test")
 
@@ -396,13 +396,13 @@ SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据�
 `sqlalchemy.engine.url。 T0>  make_url  T1> （ T2>  name_or_url  T3> ） T4> ¶< / T5>`{.descclassname}
 :   给定一个字符串或 unicode 实例，产生一个新的 URL 实例。
 
-    给定的字符串根据RFCplainplain
+    给定的字符串根据RFCplain
     1738规范进行分析。如果传递一个现有的URL对象，只返回该对象。
 
 *class* `sqlalchemy.engine.url。`{.descclassname} `URL`{.descname} （ *drivername*，*=无*，*密码=无*，*主机=无*，*端口=无*，*数据库=无* ，*query = None t\>\> ） [¶](#sqlalchemy.engine.url.URL "Permalink to this definition")*
 :   表示用于连接到数据库的 URL 的组件。
 
-    该对象适合直接传递给[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")调用。URL的字段由[`make_url()`](#sqlalchemy.engine.url.make_url "sqlalchemy.engine.url.make_url")函数从字符串中解析。该URL的字符串格式是RFC-1738样式的字符串。plainplain
+    该对象适合直接传递给[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")调用。URL的字段由[`make_url()`](#sqlalchemy.engine.url.make_url "sqlalchemy.engine.url.make_url")函数从字符串中解析。该URL的字符串格式是RFC-1738样式的字符串。
 
     所有初始化参数都可用作公共属性。
 
@@ -465,7 +465,7 @@ is not used by default for SQLite engines.
 
 在发布`connect()`调用到底层 DBAPI 时使用的自定义参数可能以三种不同的方式发布。可以直接从 URL 字符串中传递基于字符串的参数作为查询参数：
 
-    db = create_engine('postgresql://scott:tiger@localhost/test?argument1=foo&argument2=bar')plain
+    db = create_engine('postgresql://scott:tiger@localhost/test?argument1=foo&argument2=bar')
 
 如果 SQLAlchemy 的数据库连接器知道特定的查询参数，它可能会将其类型从字符串转换为适当的类型。
 
@@ -473,7 +473,7 @@ is not used by default for SQLite engines.
 
     db = create_engine('postgresql://scott:tiger@localhost/test', connect_args = {'argument1':17, 'argument2':'bar'})
 
-全部最可定制的连接方法是传递一个`creator`参数，该参数指定一个返回DBAPI连接的可调用对象：
+全部最可定制的连接方法是传递一个`creator`参数，该参数指定一个返回 DBAPI 连接的可调用对象：
 
     def connect():
         return psycopg.connect(user='scott', host='localhost')
@@ -492,7 +492,7 @@ all interact with regular loggers.
 本节假定您熟悉上述链接的日志记录模块。所有由 SQLAlchemy 执行的日志都存在于`sqlalchemy`命名空间下面，正如`logging.getLogger('sqlalchemy')`所使用的。当配置日志记录（即通过`logging.basicConfig()`）时，可以打开的 SA 记录器的通用名称空间如下所示：
 
 -   `sqlalchemy.engine` -
-    控制SQL回显。对于SQL查询输出设置为`logging.INFO`，对于查询+结果集输出设置为`logging.DEBUG`。
+    控制 SQL 回显。对于 SQL 查询输出设置为`logging.INFO`，对于查询+结果集输出设置为`logging.DEBUG`。
 -   `sqlalchemy.dialects` -
     控制 SQL 方言的自定义日志记录。有关详细信息，请参阅单个方言的文档。
 -   `sqlalchemy.pool` -

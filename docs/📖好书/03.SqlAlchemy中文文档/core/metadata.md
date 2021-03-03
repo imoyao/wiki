@@ -185,7 +185,7 @@ tables in order of their dependency.
 
 `drop()`方法：
 
-    sqlemployees.drop(engine)
+    sqlemployees.drop(engine)plain
     DROP TABLE employees
     {}
 

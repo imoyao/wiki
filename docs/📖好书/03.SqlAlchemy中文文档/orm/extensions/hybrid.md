@@ -20,7 +20,7 @@ tags:
 
 考虑映射`Interval`，表示整数`start`和`end`值。我们可以在映射类上定义更高级别的函数，这些类可以在类级别生成 SQL 表达式，也可以在实例级别上进行 Python 表达式评估。下面，用[`hybrid_method`](#sqlalchemy.ext.hybrid.hybrid_method "sqlalchemy.ext.hybrid.hybrid_method")或[`hybrid_property`](#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")装饰的每个函数都可以接收`self`作为类的实例，或者作为类本身：
 
-    from sqlalchemy import Column, Integerplainplain
+    from sqlalchemy import Column, Integer
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.orm import Session, aliased
     from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method
@@ -52,13 +52,13 @@ tags:
 
 以上，`length`属性返回`end`和`start`属性之间的差异。使用`Interval`的实例，使用正常的 Python 描述符机制，在 Python 中进行相减：
 
-    >>> i1 = Interval(5, 10)
+    >>> i1 = Interval(5, 10)plain
     >>> i1.length
     5
 
 当处理`Interval`类本身时，[`hybrid_property`](#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")描述符将给定`Interval`类的函数体评估为参数，当使用 SQLAlchemy 表达式机制返回一个新的 SQL 表达式：
 
-    >>> print Interval.lengthplainplainplainplain
+    >>> print Interval.length
     interval."end" - interval.start
 
     >>> print Session().query(Interval).filter(Interval.length > 10)
@@ -71,7 +71,7 @@ ORM methods such as [`filter_by()`](query.html#sqlalchemy.orm.query.Query.filter
 generally use `getattr()` to locate attributes, so
 can also be used with hybrid attributes:
 
-    >>> print Session().query(Interval).filter_by(length=5)plainplainplain
+    >>> print Session().query(Interval).filter_by(length=5)plain
     SELECT interval.id AS interval_id, interval.start AS interval_start,
     interval."end" AS interval_end
     FROM interval
@@ -125,9 +125,9 @@ SQL 表达式的构造有足够的区别，应该定义两个单独的 Python �
         def radius(cls):
             return func.abs(cls.length) / 2
 
-Python 函数`abs()`用于实例级操作，SQL函数`ABS()`通过[`func`](core_sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")对象用于类级表达式：
+Python 函数`abs()`用于实例级操作，SQL 函数`ABS()`通过[`func`](core_sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")对象用于类级表达式：
 
-    >>> i1.radiusplainplain
+    >>> i1.radius
     2
 
     >>> print Session().query(Interval).filter(Interval.radius > 5)
@@ -141,7 +141,7 @@ Python 函数`abs()`用于实例级操作，SQL函数`ABS()`通过[`func`](core_
 
 混合属性也可以定义 setter 方法。如果我们想在上面设置`length`，那么在修改端点值时：
 
-    class Interval(object):plainplainplainplain
+    class Interval(object):
         # ...
 
         @hybrid_property
@@ -154,7 +154,7 @@ Python 函数`abs()`用于实例级操作，SQL函数`ABS()`通过[`func`](core_
 
 现在在 set 中调用`长度（self， value）`方法：
 
-    >>> i1 = Interval(5, 10)plain
+    >>> i1 = Interval(5, 10)
     >>> i1.length
     5
     >>> i1.length = 12
@@ -170,7 +170,7 @@ Python 函数`abs()`用于实例级操作，SQL函数`ABS()`通过[`func`](core_
 
 考虑以下将`User`与`SavingsAccount`关联的声明性映射：
 
-    from sqlalchemy import Column, Integer, ForeignKey, Numeric, String
+    from sqlalchemy import Column, Integer, ForeignKey, Numeric, Stringplain
     from sqlalchemy.orm import relationship
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.ext.hybrid import hybrid_property
@@ -214,7 +214,7 @@ setter 方法可以将`accounts`视为`self`上可用的 Python 列表。
 
 但是，在表达级别上，预计`User`类将在适当的上下文中使用，以便存在对`SavingsAccount`的适当连接：
 
-    >>> print Session().query(User, User.balance).\
+    >>> print Session().query(User, User.balance).\plain
     ...     join(User.accounts).filter(User.balance > 5000)
     SELECT "user".id AS user_id, "user".name AS user_name,
     account.balance AS account_balance
@@ -223,7 +223,7 @@ setter 方法可以将`accounts`视为`self`上可用的 Python 列表。
 
 但是请注意，虽然实例级访问器需要担心是否存在`self.accounts`，但这个问题在 SQL 表达式级别表达不同，我们基本上会使用外连接：
 
-    >>> from sqlalchemy import or_plainplain
+    >>> from sqlalchemy import or_
     >>> print (Session().query(User, User.balance).outerjoin(User.accounts).
     ...         filter(or_(User.balance < 5000, User.balance == None)))
     SELECT "user".id AS user_id, "user".name AS user_name,
@@ -236,7 +236,7 @@ setter 方法可以将`accounts`视为`self`上可用的 Python 列表。
 当然，我们可以放弃依赖封闭查询的连接用法，而支持相关的子查询，它可以被移植到单个列表达式中。相关的子查询更具可移植性，但通常在 SQL 级别执行得更差。使用在[Using
 column\_property](mapped_sql_expr.html#mapper-column-property-sql-expressions)中说明的相同技术，我们可以调整我们的`SavingsAccount`示例以汇总*所有*个帐户的余额，并使用相关子查询列表达式：
 
-    from sqlalchemy import Column, Integer, ForeignKey, Numeric, Stringplainplain
+    from sqlalchemy import Column, Integer, ForeignKey, Numeric, String
     from sqlalchemy.orm import relationship
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.ext.hybrid import hybrid_property
@@ -269,7 +269,7 @@ column\_property](mapped_sql_expr.html#mapper-column-property-sql-expressions)�
 
 上面的配方会给我们提供一个相关的 SELECT 的`balance`列：
 
-    >>> print s.query(User).filter(User.balance > 400)plain
+    >>> print s.query(User).filter(User.balance > 400)
     SELECT "user".id AS user_id, "user".name AS user_name
     FROM "user"
     WHERE (SELECT sum(account.balance) AS sum_1
@@ -310,7 +310,7 @@ column\_property](mapped_sql_expr.html#mapper-column-property-sql-expressions)�
 以上，针对`word_insensitive`的 SQL 表达式会将`LOWER()`
 SQL 函数应用于双方：
 
-    >>> print Session().query(SearchWord).filter_by(word_insensitive="Trucks")plain
+    >>> print Session().query(SearchWord).filter_by(word_insensitive="Trucks")
     SELECT searchword.id AS searchword_id, searchword.word AS searchword_word
     FROM searchword
     WHERE lower(searchword.word) = lower(:lower_1)
@@ -358,7 +358,7 @@ Above, the `CaseInsensitiveWord` object represents
 `self.word`, which may be a SQL function, or may be
 a Python native. 通过重写`operate()`和`__clause_element__()`以根据`self.word`工作，所有比较操作都将针对“转换后” `word`，无论是 SQL 端还是 Python 端。我们的`SearchWord`类现在可以无条件地从单个混合调用中提供`CaseInsensitiveWord`对象：
 
-    class SearchWord(Base):plainplain
+    class SearchWord(Base):
         __tablename__ = 'searchword'
         id = Column(Integer, primary_key=True)
         word = Column(String(255), nullable=False)
@@ -391,7 +391,7 @@ SQL 表达式与 SQL 表达式：
 
 仅 Python 表达式：
 
-    >>> ws1 = SearchWord(word="SomeWord")plainplain
+    >>> ws1 = SearchWord(word="SomeWord")
     >>> ws1.word_insensitive == "sOmEwOrD"
     True
     >>> ws1.word_insensitive == "XOmEwOrX"
@@ -497,7 +497,7 @@ tricky part here is ensuring that successive instances of
 object against `Node`.
 下面我们使用一个简单的记忆方法，将一个`GrandparentTransformer`与每个类关联起来：
 
-    class Node(Base):plain
+    class Node(Base):
 
         # ...
 
@@ -597,7 +597,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  *class*`sqlalchemy.ext.hybrid.`{.descclassname}`Comparator`{.descname}(*expression*)[¶](#sqlalchemy.ext.hybrid.Comparator "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.interfaces.PropComparator`](internals.html#sqlalchemy.orm.interfaces.PropComparator "sqlalchemy.orm.interfaces.PropComparator")
 
-    一个辅助类，允许轻松构建用于混合使用的自定义[`PropComparator`](internals.html#sqlalchemy.orm.interfaces.PropComparator "sqlalchemy.orm.interfaces.PropComparator")类。plainplain
+    一个辅助类，允许轻松构建用于混合使用的自定义[`PropComparator`](internals.html#sqlalchemy.orm.interfaces.PropComparator "sqlalchemy.orm.interfaces.PropComparator")类。
 
 `sqlalchemy.ext.hybrid。`{.descclassname} `HYBRID_METHOD`{.descname} *=符号（'HYBRID\_METHOD'）* [¶](#sqlalchemy.ext.hybrid.HYBRID_METHOD "Permalink to this definition")
 :   
