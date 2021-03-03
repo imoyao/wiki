@@ -22,7 +22,7 @@ basis](changelog_migration_09.html#migration-2824)查询时，复合属性现在
 
 一个简单的例子表示成对的列作为`Point`对象。`Point`表示如`.x`和`.y`这样的一对：
 
-    class Point(object):plainplain
+    class Point(object):
         def __init__(self, x, y):
             self.x = x
             self.y = y
@@ -45,7 +45,7 @@ basis](changelog_migration_09.html#migration-2824)查询时，复合属性现在
 
 我们将创建一个映射到一个表`vertices`，它将两个点表示为`x1/y1`和`x2/y2`。这些通常被创建为[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象。然后，[`composite()`](#sqlalchemy.orm.composite "sqlalchemy.orm.composite")函数用于分配新属性，这些新属性将通过`Point`类表示一组列。
 
-    from sqlalchemy import Column, Integerplainplain
+    from sqlalchemy import Column, Integerplain
     from sqlalchemy.orm import composite
     from sqlalchemy.ext.declarative import declarative_base
 
@@ -65,7 +65,7 @@ basis](changelog_migration_09.html#migration-2824)查询时，复合属性现在
 
 上面的经典映射会根据现有表定义每个[`composite()`](#sqlalchemy.orm.composite "sqlalchemy.orm.composite")：
 
-    mapper(Vertex, vertices_table, properties={plainplainplain
+    mapper(Vertex, vertices_table, properties={
         'start':composite(Point, vertices_table.c.x1, vertices_table.c.y1),
         'end':composite(Point, vertices_table.c.x2, vertices_table.c.y2),
     })
@@ -74,7 +74,7 @@ We can now persist and use `Vertex` instances, as
 well as query for them, using the `.start` and
 `.end` attributes against ad-hoc `Point` instances:
 
-    >>> v = Vertex(start=Point(3, 4), end=Point(5, 6))plainplainplainplain
+    >>> v = Vertex(start=Point(3, 4), end=Point(5, 6))plain
     >>> session.add(v)
     >>> q = session.query(Vertex).filter(Vertex.start == Point(3, 4))
     sql>>> print(q.first().start)
@@ -95,7 +95,7 @@ well as query for them, using the `.start` and
  `sqlalchemy.orm.`{.descclassname}`composite`{.descname}(*class\_*, *\*attrs*, *\*\*kwargs*)[¶](#sqlalchemy.orm.composite "Permalink to this definition")
 :   返回一个组合的基于列的属性以用于 Mapper。
 
-    完整的使用示例请参见映射文档部分[Composite Columnplainplainplainplainplainplain
+    完整的使用示例请参见映射文档部分[Composite Column
     Types](#mapper-composite)。
 
     [`composite()`](#sqlalchemy.orm.composite "sqlalchemy.orm.composite")返回的[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")是[`CompositeProperty`](internals.html#sqlalchemy.orm.descriptor_props.CompositeProperty "sqlalchemy.orm.descriptor_props.CompositeProperty")。
@@ -159,7 +159,7 @@ we specify a custom [`CompositeProperty.Comparator`](internals.html#sqlalchemy.o
 class to define existing or new operations.
 下面我们说明“大于”运算符，实现与“大于”基数相同的表达式：
 
-    from sqlalchemy.orm.properties import CompositePropertyplainplainplainplain
+    from sqlalchemy.orm.properties import CompositeProperty
     from sqlalchemy import sql
 
     class PointComparator(CompositeProperty.Comparator):

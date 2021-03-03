@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy 中文文档
   - dialects
 tags:
-  - 
 ---
 甲骨文[¶ T0\>](#module-sqlalchemy.dialects.oracle.base "Permalink to this headline")
 ====================================================================================
@@ -42,7 +41,7 @@ the Oracle dialect, *a sequence must always be explicitly specified to
 enable autoincrement*.
 这与假定使用具有自动增量功能的数据库的大多数文档示例不同。要指定序列，请使用传递给 Column 构造的 sqlalchemy.schema.Sequence 对象：
 
-    t = Table('mytable', metadata,plain
+    t = Table('mytable', metadata,
           Column('id', Integer, Sequence('id_seq'), primary_key=True),
           Column(...), ...
     )
@@ -62,7 +61,7 @@ enable autoincrement*.
 这将导致与从 Oracle 接收的数据字典数据不匹配，因此除非标识名称已真正创建为区分大小写（即使用带引号的名称）
 ，所有小写字母名称都应该用在 SQLAlchemy 方面。
 
-LIMIT / OFFSET支持[¶](#limit-offset-support "Permalink to this headline")
+LIMIT / OFFSET 支持[¶](#limit-offset-support "Permalink to this headline")
 -------------------------------------------------------------------------
 
 Oracle 不支持 LIMIT 或 OFFSET 关键字。SQLAlchemy 与 ROWNUM 一起使用了一个包装子查询方法。The
@@ -90,12 +89,12 @@ Support](#cx-oracle-returning)）。
 
 SQLAlchemy 的“隐式返回”功能通常在 Oracle 后端启用，它在 INSERT 中使用 RETURNING，有时使用 UPDATE 语句来获取新生成的主键值和其他 SQL 默认值和表达式。默认情况下，“隐式返回”通常只会获取嵌入到 INSERT 中的单个`nextval(some_seq)`表达式的值，以便在 INSERT 语句中递增序列并同时返回值。要全面禁用此功能，请将`implicit_returning=False`指定为[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")：
 
-    engine = create_engine("oracle://scott:tiger@dsn",plainplain
+    engine = create_engine("oracle://scott:tiger@dsn",plain
                            implicit_returning=False)
 
 隐式返回也可作为表选项在逐个表的基础上禁用：
 
-    # Core Tableplainplain
+    # Core Tableplain
     my_table = Table("my_table", metadata, ..., implicit_returning=False)
 
 
@@ -120,7 +119,7 @@ True”，initial
 ='deferred'“关键字参数指定 ForeignKey 对象，并在每个关系()上指定”passive\_updates
 = False“。
 
-Oracle 8兼容性[¶](#oracle-8-compatibility "Permalink to this headline")
+Oracle 8 兼容性[¶](#oracle-8-compatibility "Permalink to this headline")
 -----------------------------------------------------------------------
 
 当检测到 Oracle 8 时，方言内部将其自身配置为以下行为：
@@ -162,7 +161,7 @@ and [`Inspector.get_columns()`](core_reflection.html#sqlalchemy.engine.reflectio
 
 Oracle 没有称为`DATETIME`的数据类型，它只有`DATE`，它实际上可以存储日期和时间值。出于这个原因，Oracle 方言提供了一个类型[`oracle.DATE`](#sqlalchemy.dialects.oracle.DATE "sqlalchemy.dialects.oracle.DATE")，它是[`DateTime`](core_type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")的子类。这种类型没有特殊的行为，仅作为这种类型的“标记”出现；此外，当数据库列被反映并且类型被报告为`DATE`时，将使用支持时间的[`oracle.DATE`](#sqlalchemy.dialects.oracle.DATE "sqlalchemy.dialects.oracle.DATE")类型。
 
-版本0.9.4中已更改：将[`oracle.DATE`](#sqlalchemy.dialects.oracle.DATE "sqlalchemy.dialects.oracle.DATE")添加到[`DateTime`](core_type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")子类中。这是一个变化，因为以前的版本会将`DATE`列反映为[`types.DATE`](core_type_basics.html#sqlalchemy.types.DATE "sqlalchemy.types.DATE")，它是[`Date`](core_type_basics.html#sqlalchemy.types.Date "sqlalchemy.types.Date")的子类。这里唯一的意义是检查在特殊 Python 翻译中使用的列类型或将模式迁移到其他数据库后端的方案。
+版本 0.9.4 中已更改：将[`oracle.DATE`](#sqlalchemy.dialects.oracle.DATE "sqlalchemy.dialects.oracle.DATE")添加到[`DateTime`](core_type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")子类中。这是一个变化，因为以前的版本会将`DATE`列反映为[`types.DATE`](core_type_basics.html#sqlalchemy.types.DATE "sqlalchemy.types.DATE")，它是[`Date`](core_type_basics.html#sqlalchemy.types.Date "sqlalchemy.types.Date")的子类。这里唯一的意义是检查在特殊 Python 翻译中使用的列类型或将模式迁移到其他数据库后端的方案。
 
 Oracle 表选项[¶](#oracle-table-options "Permalink to this headline")
 -------------------------------------------------------------------
@@ -175,11 +174,11 @@ CREATE TABLE短语通过与[`Table`](core_metadata.html#sqlalchemy.schema.Table 
             "some_table", metadata, ...,
             prefixes=['GLOBAL TEMPORARY'], oracle_on_commit='PRESERVE ROWS')
 
-版本1.0.0中的新功能
+版本 1.0.0 中的新功能
 
 -   `COMPRESS`
 
-         Table('mytable', metadata, Column('data', String(32)),plainplainplain
+         Table('mytable', metadata, Column('data', String(32)),plain
              oracle_compress=True)
 
          Table('mytable', metadata, Column('data', String(32)),
@@ -195,9 +194,9 @@ Oracle特定索引选项[¶](#oracle-specific-index-options "Permalink to this h
 
 ### 位图索引[¶](#bitmap-indexes "Permalink to this headline")
 
-您可以指定`oracle_bitmap`参数来创建位图索引而不是B树索引：
+您可以指定`oracle_bitmap`参数来创建位图索引而不是 B 树索引：
 
-    Index('my_index', my_table.c.data, oracle_bitmap=True)
+    Index('my_index', my_table.c.data, oracle_bitmap=True)plain
 
 位图索引不能是唯一的，也不能被压缩。SQLAlchemy 不会检查这些限制，只有数据库会。
 
@@ -207,7 +206,7 @@ Oracle特定索引选项[¶](#oracle-specific-index-options "Permalink to this h
 
 对于包含大量重复值的索引，Oracle 具有更高效的存储模式。使用`oracle_compress`参数打开密钥压缩：
 
-    Index('my_index', my_table.c.data, oracle_compress=True)
+    Index('my_index', my_table.c.data, oracle_compress=True)plain
 
     Index('my_index', my_table.c.data1, my_table.c.data2, unique=True,
            oracle_compress=1)
@@ -232,7 +231,7 @@ Oracle数据类型[¶](#oracle-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.oracle.`{.descclassname}`BFILE`{.descname}(*length=None*)[¶](#sqlalchemy.dialects.oracle.BFILE "Permalink to this definition")
 :   基础：[`sqlalchemy.types.LargeBinary`](core_type_basics.html#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
 
-    ` __初始化__  T0> （ T1> 长度=无 T2> ） T3> ¶ T4>`{.descname}plain
+    ` __初始化__  T0> （ T1> 长度=无 T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.LargeBinary.__init__ "sqlalchemy.types.LargeBinary.__init__")
         *method of* [`LargeBinary`](core_type_basics.html#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
 
@@ -248,7 +247,7 @@ Oracle数据类型[¶](#oracle-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.oracle。`{.descclassname} `DATE`{.descname} （ *timezone = False* ） T5\> [¶ T6\>](#sqlalchemy.dialects.oracle.DATE "Permalink to this definition")
 :   Bases: [`sqlalchemy.types.DateTime`](core_type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")
 
-    提供oracle DATE类型。plain
+    提供oracle DATE类型。
 
     这种类型没有特殊的Python行为，除了它的子类[`types.DateTime`](core_type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")；这是为了适应Oracle
     `DATE`类型支持时间值的事实。
@@ -274,7 +273,7 @@ Oracle数据类型[¶](#oracle-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.oracle。`{.descclassname} `INTERVAL`{.descname} （ *day\_precision =无*，*second\_precision =无 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.oracle.INTERVAL "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-     `__init__`{.descname}(*day\_precision=None*, *second\_precision=None*)[¶](#sqlalchemy.dialects.oracle.INTERVAL.__init__ "Permalink to this definition")plain
+     `__init__`{.descname}(*day\_precision=None*, *second\_precision=None*)[¶](#sqlalchemy.dialects.oracle.INTERVAL.__init__ "Permalink to this definition")
     :   构建一个INTERVAL。
 
         请注意，目前仅支持DAY TO
@@ -293,7 +292,7 @@ Oracle数据类型[¶](#oracle-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.oracle.`{.descclassname}`NCLOB`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.NCLOB "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")
 
-     `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.NCLOB.__init__ "Permalink to this definition")plain
+     `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.NCLOB.__init__ "Permalink to this definition")
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.String.__init__ "sqlalchemy.types.String.__init__")
         *method of* [`String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
 
@@ -353,7 +352,7 @@ Oracle数据类型[¶](#oracle-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.oracle.`{.descclassname}`LONG`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.LONG "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")
 
-     `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.LONG.__init__ "Permalink to this definition")plain
+     `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.LONG.__init__ "Permalink to this definition")
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.String.__init__ "sqlalchemy.types.String.__init__")
         *method of* [`String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
 
@@ -422,11 +421,11 @@ cx\_Oracle [¶ T0\>](#module-sqlalchemy.dialects.oracle.cx_oracle "Permalink to 
 
 连接字符串：
 
-    oracle+cx_oracle://user:pass@host:port/dbname[?key=value&key=value...]plainplainplain
+    oracle+cx_oracle://user:pass@host:port/dbname[?key=value&key=value...]plain
 
 ### 其他连接参数[¶](#additional-connect-arguments "Permalink to this headline")
 
-与`dbname`连接时，使用cx\_oracle
+与`dbname`连接时，使用 cx\_oracle
 `makedsn()`函数将主机，端口和 dbname 标记转换为 TNS 名称。否则，主机令牌将直接作为 TNS 名称。
 
 其他参数可以指定为 URL 上的查询字符串参数，也可以指定为[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")的关键字参数：
@@ -501,7 +500,7 @@ cx\_Oracle SQLAlchemy 方言提供了两种不同的选项，用于在 Python
 
     engine = create_engine("oracle+cx_oracle://dsn", coerce_to_unicode=True)plain
 
-或者，如果不使用 cx\_Oracle的本地处理程序，则可以使用[`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")功能来运行纯字符串 SQL 语句并以 Python
+或者，如果不使用 cx\_Oracle 的本地处理程序，则可以使用[`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")功能来运行纯字符串 SQL 语句并以 Python
 2 unicode 的形式获取`VARCHAR`
 
     from sqlalchemy import text, Unicode
@@ -522,7 +521,7 @@ API 的支持，因此其他列表达式将以非确定的方式导致问题。
 因此，通过完全禁用 RETURNING 支持可以提高稳定性；否则 SQLAlchemy 将使用 RETURNING 来获取新序列生成的主键。如[RETURNING
 Support](#oracle-returning)所示：
 
-    engine = create_engine("oracle://scott:tiger@dsn",plainplainplain
+    engine = create_engine("oracle://scott:tiger@dsn",plain
                            implicit_returning=False)
 
 也可以看看
@@ -535,7 +534,7 @@ Support](#oracle-returning)所示：
 
 ### LOB对象[¶](#lob-objects "Permalink to this headline")
 
-cx\_oracle使用cx\_oracle.LOB 对象返回 Oracle
+cx\_oracle 使用 cx\_oracle.LOB 对象返回 Oracle
 LOB。SQLAlchemy 将它们转换为字符串，以便 Binary 类型的接口与其他后端的接口一致，并且在 result.fetchmany()和 result.fetchall()等场景中不需要与活动游标的链接。这意味着默认情况下，LOB 对象无条件地被 SQLAlchemy 完全取出，并且与活动光标的链接被中断。
 
 要禁用此处理，请将`auto_convert_lobs=False`传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")。
@@ -543,18 +542,18 @@ LOB。SQLAlchemy 将它们转换为字符串，以便 Binary 类型的接口与�
 ### 两阶段事务支持[¶](#two-phase-transaction-support "Permalink to this headline")
 
 两阶段事务是使用 XA 事务实现的，并且从 SQLAlchemy
-0.8.0b2,0.7.10 开始，已知以最新版本的 cx\_Oracle的基本工作方式工作。但是，该机制尚未被认为是有力的，应该仍然被视为实验性的。
+0.8.0b2,0.7.10 开始，已知以最新版本的 cx\_Oracle 的基本工作方式工作。但是，该机制尚未被认为是有力的，应该仍然被视为实验性的。
 
 特别是最近 5.1.2 的 cx\_Oracle
 DBAPI 有一个关于两个阶段的错误，这个阶段阻止了一个特定的 DBAPI 连接在准备好的事务中以及传统的 DBAPI 使用模式中始终可用；因此，一旦通过`Connection.begin_prepared()`使用了特定的连接，底层 DBAPI 连接的所有后续用法都必须位于准备事务的上下文内。
 
-[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的默认行为是维护一个DBAPI连接池。因此，由于上述故障，已在两阶段操作中使用并返回到池的DBAPI连接在非两阶段上下文中将不可用。为了避免这种情况，应用程序可以做出以下几种选择之一：
+[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的默认行为是维护一个 DBAPI 连接池。因此，由于上述故障，已在两阶段操作中使用并返回到池的 DBAPI 连接在非两阶段上下文中将不可用。为了避免这种情况，应用程序可以做出以下几种选择之一：
 
 -   使用[`NullPool`](core_pooling.html#sqlalchemy.pool.NullPool "sqlalchemy.pool.NullPool")禁用连接池
 -   确保正在使用的特定[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")仅用于两阶段操作。绑定到包含`twophase=True`的ORM [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")将一致使用两阶段事务样式。
 -   对于没有禁用池的临时两阶段操作，可以使用[`Connection.detach()`](core_connections.html#sqlalchemy.engine.Connection.detach "sqlalchemy.engine.Connection.detach")方法从连接池中清除正在使用的DBAPI连接。
 
-在 0.8.0b2,0.7.10 版本中更改：已执行并测试了对 cx\_oracle准备事务的支持。
+在 0.8.0b2,0.7.10 版本中更改：已执行并测试了对 cx\_oracle 准备事务的支持。
 
 ### 精确数字[¶](#precision-numerics "Permalink to this headline")
 
@@ -570,7 +569,7 @@ flag.
 
 性能的另一种替代方法是使用[cdecimal](http://pypi.python.org/pypi/cdecimal/)库；有关其他注意事项，请参阅[`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")。
 
-该处理程序试图使用结果集列的“精度”和“比例”属性来最好地确定后续输入值是否应该被接收为`Decimal`而不是int（在这种情况下，不会添加处理）。There are several
+该处理程序试图使用结果集列的“精度”和“比例”属性来最好地确定后续输入值是否应该被接收为`Decimal`而不是 int（在这种情况下，不会添加处理）。There are several
 scenarios where
 [OCI](http://www.oracle.com/technetwork/database/features/oci/index.html)
 does not provide unambiguous data as to the numeric type, including some
@@ -605,4 +604,4 @@ zxjdbc [¶ T0\>](#module-sqlalchemy.dialects.oracle.zxjdbc "Permalink to this he
 
 连接字符串：
 
-    oracle+zxjdbc://user:pass@host/dbnameplainplain
+    oracle+zxjdbc://user:pass@host/dbnameplain

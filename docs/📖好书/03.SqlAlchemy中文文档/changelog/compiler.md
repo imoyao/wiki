@@ -18,7 +18,7 @@ tags:
 
 用法涉及创建一个或多个[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")子类和一个或多个定义其编译的可调参数：
 
-    from sqlalchemy.ext.compiler import compilesplainplain
+    from sqlalchemy.ext.compiler import compiles
     from sqlalchemy.sql.expression import ColumnClause
 
     class MyColumn(ColumnClause):
@@ -32,21 +32,21 @@ Above, `MyColumn` extends [`ColumnClause`](sqlelement.html#sqlalchemy.sql.expres
 the base expression element for named column objects.
 `compiles`修饰符向`MyColumn`类注册自己，以便在对象编译为字符串时调用它：
 
-    from sqlalchemy import selectplainplainplainplain
+    from sqlalchemy import select
 
     s = select([MyColumn('x'), MyColumn('y')])
     print str(s)
 
 生产：
 
-    SELECT [x], [y]plainplainplainplain
+    SELECT [x], [y]
 
 特定于方言的编译规则[¶](#dialect-specific-compilation-rules "Permalink to this headline")
 -----------------------------------------------------------------------------------------
 
 编译器也可以制作方言特定的。正在使用的方言将调用适当的编译器：
 
-    from sqlalchemy.schema import DDLElementplainplainplain
+    from sqlalchemy.schema import DDLElement
 
     class AlterColumn(DDLElement):
 
@@ -70,7 +70,7 @@ the base expression element for named column objects.
 
 `compiler`参数是正在使用的[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。可以检查此对象是否有任何关于正在进行的编译的信息，包括`compiler.dialect`，`compiler.statement`等。[`SQLCompiler`](internals.html#sqlalchemy.sql.compiler.SQLCompiler "sqlalchemy.sql.compiler.SQLCompiler")和[`DDLCompiler`](internals.html#sqlalchemy.sql.compiler.DDLCompiler "sqlalchemy.sql.compiler.DDLCompiler")都包含一个`process()`方法，可用于编译嵌入属性：
 
-    from sqlalchemy.sql.expression import Executable, ClauseElementplain
+    from sqlalchemy.sql.expression import Executable, ClauseElement
 
     class InsertFromSelect(Executable, ClauseElement):
         def __init__(self, table, select):
@@ -105,7 +105,7 @@ Autocommit on a Construct](#enabling-compiled-autocommit)。
 
 SQL 和 DDL 结构分别使用不同的基本编译器 - `SQLCompiler`和`DDLCompiler`进行编译。常见的需求是从 DDL 表达式中访问 SQL 表达式的编译规则。由于这个原因，`DDLCompiler`包含一个访问器`sql_compiler`，比如下面我们生成一个嵌入 SQL 表达式的 CHECK 约束：
 
-    @compiles(MyConstraint)plain
+    @compiles(MyConstraint)
     def compile_my_constraint(constraint, ddlcompiler, **kw):
         return "CONSTRAINT %s CHECK (%s)" % (
             constraint.name,
@@ -129,7 +129,7 @@ Execution, Implicit Execution](connections.html#dbengine-implicit)）。
 
 目前，一个快速的方法是将[`Executable`](selectable.html#sqlalchemy.sql.expression.Executable "sqlalchemy.sql.expression.Executable")子类化，然后将“autocommit”标志添加到`_execution_options`字典中（注意这是一个“冻结” `union()`方法）：
 
-    from sqlalchemy.sql.expression import Executable, ClauseElementplainplainplainplain
+    from sqlalchemy.sql.expression import Executable, ClauseElement
 
     class MyInsertThing(Executable, ClauseElement):
         _execution_options = \
@@ -141,7 +141,7 @@ can be used, which already is a subclass of [`Executable`](selectable.html#sqlal
 [`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")
 and includes the `autocommit` flag:
 
-    from sqlalchemy.sql.expression import UpdateBaseplainplain
+    from sqlalchemy.sql.expression import UpdateBase
 
     class MyInsertThing(UpdateBase):
         def __init__(self, ...):
@@ -157,7 +157,7 @@ and includes the `autocommit` flag:
 在新的编译函数中，为了获得“原始”编译例程，使用适当的 visit\_XXX 方法 -
 这是因为 compiler.process()将调用重写例程并导致无限循环。比如，为所有插入语句添加“前缀”：
 
-    from sqlalchemy.sql.expression import Insertplainplain
+    from sqlalchemy.sql.expression import Insert
 
     @compiles(Insert)
     def prefix_inserts(insert, compiler, **kw):
@@ -171,7 +171,7 @@ and includes the `autocommit` flag:
 `compiler`也适用于类型，例如下面我们为`String` /
 `VARCHAR`实现特定于 MS-SQL 的'max'关键字：
 
-    @compiles(String, 'mssql')plainplain
+    @compiles(String, 'mssql')
     @compiles(VARCHAR, 'mssql')
     def compile_varchar(element, compiler, **kw):
         if element.length == 'max':
@@ -202,7 +202,7 @@ and includes the `autocommit` flag:
     expression’s return type.
     这可以在构造函数的实例级别建立，也可以在类级别建立，如果它通常是常量：
 
-        class timestamp(ColumnElement):plain
+        class timestamp(ColumnElement):
             type = TIMESTAMP()
 
 -   [`FunctionElement`](functions.html#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")
@@ -211,7 +211,7 @@ and includes the `autocommit` flag:
     `FunctionElement` adds in the ability to be used
     in the FROM clause of a `select()` construct:
 
-        from sqlalchemy.sql.expression import FunctionElementplainplainplain
+        from sqlalchemy.sql.expression import FunctionElement
 
         class coalesce(FunctionElement):
             name = 'coalesce'
@@ -251,7 +251,7 @@ and includes the `autocommit` flag:
 
 对于 Postgresql 和 Microsoft SQL Server：
 
-    from sqlalchemy.sql import expressionplain
+    from sqlalchemy.sql import expression
     from sqlalchemy.ext.compiler import compiles
     from sqlalchemy.types import DateTime
 
@@ -268,7 +268,7 @@ and includes the `autocommit` flag:
 
 用法示例：
 
-    from sqlalchemy import (plainplainplainplainplainplain
+    from sqlalchemy import (
                 Table, Column, Integer, String, DateTime, MetaData
             )
     metadata = MetaData()
@@ -309,7 +309,7 @@ and includes the `autocommit` flag:
 
 用法示例：
 
-    Session.query(Account).\plain
+    Session.query(Account).\
             filter(
                 greatest(
                     Account.checking_balance,
@@ -320,7 +320,7 @@ and includes the `autocommit` flag:
 
 呈现“false”常量表达式，在没有“false”常量的平台上呈现为“0”：
 
-    from sqlalchemy.sql import expressionplain
+    from sqlalchemy.sql import expression
     from sqlalchemy.ext.compiler import compiles
 
     class sql_false(expression.ColumnElement):
@@ -338,7 +338,7 @@ and includes the `autocommit` flag:
 
 用法示例：
 
-    from sqlalchemy import select, union_allplainplain
+    from sqlalchemy import select, union_all
 
     exp = union_all(
         select([users.c.name, sql_false().label("enrolled")]),
@@ -348,7 +348,7 @@ and includes the `autocommit` flag:
  `sqlalchemy.ext.compiler.`{.descclassname}`compiles`{.descname}(*class\_*, *\*specs*)[¶](#sqlalchemy.ext.compiler.compiles "Permalink to this definition")
 :   为给定的[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")类型注册一个函数作为编译器。
 
-` sqlalchemy.ext.compiler。 T0> 注销 T1> （ T2> 类_  T3> ） T4> ¶< / T5>`{.descclassname}
+`sqlalchemy.ext.compiler。 T0> 注销 T1> （ T2> 类_  T3> ） T4> ¶< / T5>`{.descclassname}
 :   删除与给定[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")类型关联的所有自定义编译器。
 
 

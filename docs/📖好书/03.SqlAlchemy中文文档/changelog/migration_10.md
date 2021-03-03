@@ -4,10 +4,9 @@ date: 2021-02-20 22:41:31
 permalink: /sqlalchemy/63d953/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - changelog
 tags:
-  - 
 ---
 SQLAlchemy 1.0有哪些新特性？[¶](#what-s-new-in-sqlalchemy-1-0 "Permalink to this headline")
 ===========================================================================================
@@ -54,7 +53,7 @@ application?](faq_performance.html#faq-how-to-profile)常见问题解答部分�
 
 ### “烘焙”查询[¶](#baked-queries "Permalink to this headline")
 
-“烘焙”查询功能是一种不寻常的新方法，它允许直接构建使用缓存来调用[`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象，后续调用功能大大减少了Python函数调用开销（超过75％）。通过将一个[`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象指定为一系列仅调用一次的lambda表达式，作为预编译单元的查询开始变得可行：
+“烘焙”查询功能是一种不寻常的新方法，它允许直接构建使用缓存来调用[`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象，后续调用功能大大减少了 Python 函数调用开销（超过 75％）。通过将一个[`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象指定为一系列仅调用一次的 lambda 表达式，作为预编译单元的查询开始变得可行：
 
     from sqlalchemy.ext import baked
     from sqlalchemy import bindparam
@@ -111,7 +110,7 @@ function now **memoizes** the value that’s returned on a per-class
 basis, so that repeated calls to the same attribute will return the same
 value. 我们可以改变这个例子来说明这一点：
 
-    class HasFooBar(object):plain
+    class HasFooBar(object):
         @declared_attr
         def foobar(cls):
             return Column(Integer)
@@ -194,7 +193,7 @@ relationship `something`.
 [＃2952](http://www.sqlalchemy.org/trac/ticket/2952)
 [＃3050](http://www.sqlalchemy.org/trac/ticket/3050)
 
-### ORM全部对象的读取速度提高了25％[¶](#orm-full-object-fetches-25-faster "Permalink to this headline")
+### ORM 全部对象的读取速度提高了 25％[¶](#orm-full-object-fetches-25-faster "Permalink to this headline")
 
 `loading.py`模块的机制以及标识映射经过了内联，重构和修剪的几个过程，因此现在的行加载大约比基于OR​​M的对象快大约25％
 。假设有一个1M行表，类似下面的脚本说明了最受改善的负载类型：
@@ -229,15 +228,15 @@ relationship `something`.
 
     print("Total time: %d" % (time.time() - now))
 
-本地 MacBookPro 的结果从 0.9 秒的 19 秒降至 1.0 的 14 秒。在批量处理大量行时，[`Query.yield_per()`](orm_query.html#sqlalchemy.orm.query.Query.yield_per "sqlalchemy.orm.query.Query.yield_per")调用总是一个好主意，因为它可以防止Python解释器不得不一次为所有对象及其工具分配大量内存。如果没有[`Query.yield_per()`](orm_query.html#sqlalchemy.orm.query.Query.yield_per "sqlalchemy.orm.query.Query.yield_per")，MacBookPro 上面的脚本在 0.9 上是 31 秒，在 1.0 上是 26 秒，因此需要花费额外的时间来设置非常大的内存缓冲区。
+本地 MacBookPro 的结果从 0.9 秒的 19 秒降至 1.0 的 14 秒。在批量处理大量行时，[`Query.yield_per()`](orm_query.html#sqlalchemy.orm.query.Query.yield_per "sqlalchemy.orm.query.Query.yield_per")调用总是一个好主意，因为它可以防止 Python 解释器不得不一次为所有对象及其工具分配大量内存。如果没有[`Query.yield_per()`](orm_query.html#sqlalchemy.orm.query.Query.yield_per "sqlalchemy.orm.query.Query.yield_per")，MacBookPro 上面的脚本在 0.9 上是 31 秒，在 1.0 上是 26 秒，因此需要花费额外的时间来设置非常大的内存缓冲区。
 
-### New KeyedTuple实现显着加快[¶](#new-keyedtuple-implementation-dramatically-faster "Permalink to this headline")
+### New KeyedTuple 实现显着加快[¶](#new-keyedtuple-implementation-dramatically-faster "Permalink to this headline")
 
 我们看了一下[`KeyedTuple`](orm_query.html#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")实现，希望改进像这样的查询：
 
-    rows = sess.query(Foo.a, Foo.b, Foo.c).all()plain
+    rows = sess.query(Foo.a, Foo.b, Foo.c).all()
 
-使用[`KeyedTuple`](orm_query.html#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")类而不是Python的`collections.namedtuple()`，因为后者有一个非常复杂的类型创建例程，其基准测试比[`KeyedTuple`](orm_query.html#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")但是，当获取成千上万行时，`collections.namedtuple()`快速超过[`KeyedTuple`](orm_query.html#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")，随着实例调用的增加，它变得非常慢。该怎么办？两种方法之间进行对冲的新类型。基于哪种情况，新的“轻量级键控元组”要么针对“大小”（返回的行数）和“num”（针对不同查询的数量），要么优于两者，要么滞后于较快的对象。在“甜蜜点”中，我们既创建了大量新类型，又获取了很多行，轻量级对象完全吸引了名为 tuple 和 KeyedTuple：
+使用[`KeyedTuple`](orm_query.html#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")类而不是 Python 的`collections.namedtuple()`，因为后者有一个非常复杂的类型创建例程，其基准测试比[`KeyedTuple`](orm_query.html#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")但是，当获取成千上万行时，`collections.namedtuple()`快速超过[`KeyedTuple`](orm_query.html#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")，随着实例调用的增加，它变得非常慢。该怎么办？两种方法之间进行对冲的新类型。基于哪种情况，新的“轻量级键控元组”要么针对“大小”（返回的行数）和“num”（针对不同查询的数量），要么优于两者，要么滞后于较快的对象。在“甜蜜点”中，我们既创建了大量新类型，又获取了很多行，轻量级对象完全吸引了名为 tuple 和 KeyedTuple：
 
     -----------------
     size=10 num=10000                 # few rows, lots of queries
@@ -269,7 +268,7 @@ relationship `something`.
 利用 heapy 测量 Nova 的启动大小的一个工作台说明了在基本导入“nova.db.”的过程中，SQLAlchemy 的对象，相关字典以及弱引用占用了大约 3.7 个 megs 或 46％的差异，即 46％。
 sqlalchemy.models”：
 
-    # reported by heapy, summation of SQLAlchemy objects +plain
+    # reported by heapy, summation of SQLAlchemy objects +
     # associated dicts + weakref-related objects with core of Nova imported:
 
         Before: total count 26477 total bytes 7975712
@@ -288,7 +287,7 @@ flush 内批处理为更高性能的 executemany()调用，类似于 INSERT 语�
 
 -   按顺序的两个或多个 UPDATE 语句涉及要修改的相同的一组列。
 -   该语句在SET子句中没有嵌入式SQL表达式。
--   映射不使用[`version_id_col`](orm_mapping_api.html#sqlalchemy.orm.mapper.params.version_id_col "sqlalchemy.orm.mapper")，或者后端dialect支持executemany()操作的“理智”行计数；大多数DBAPI现在都能正确支持这一点。
+-   映射不使用[`version_id_col`](orm_mapping_api.html#sqlalchemy.orm.mapper.params.version_id_col "sqlalchemy.orm.mapper")，或者后端 dialect 支持 executemany()操作的“理智”行计数；大多数 DBAPI 现在都能正确支持这一点。
 
 ### Session.get\_bind()处理更广泛的继承场景[¶](#session-get-bind-handles-a-wider-variety-of-inheritance-scenarios "Permalink to this headline")
 
@@ -317,7 +316,7 @@ flush 内批处理为更高性能的 executemany()调用，类似于 INSERT 语�
             __mapper_args__ = {'concrete': True}
 
 
-        session = Session(binds={plain
+        session = Session(binds={
             base_table: some_engine,
             concrete_table: some_other_engine
         })
@@ -365,9 +364,9 @@ queries to different backends.
 
         session.query(User.id, User.name).all()
 
--   SQL函数和其他针对间接映射的表达式，如[`column_property`](orm_mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")：
+-   SQL 函数和其他针对间接映射的表达式，如[`column_property`](orm_mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")：
 
-        class User(Base):plain
+        class User(Base):
             # ...
 
             score = column_property(func.coalesce(self.tables.users.c.name, None)))
@@ -480,7 +479,7 @@ order\_by将无法使用标签，因为它会因多态加载而被匿名化：
 
     sel = select([table]).limit(bindparam('mylimit')).offset(bindparam('myoffset'))
 
-不支持非整数LIMIT或OFFSET表达式的方言可能会继续不支持此行为；第三方方言也可能需要修改才能利用新的行为。当前使用`._limit`或`._offset`属性的方言将继续适用于极限/偏移被指定为简单整数值的情况。但是，当指定SQL表达式时，这两个属性将在访问时引发[`CompileError`](core_exceptions.html#sqlalchemy.exc.CompileError "sqlalchemy.exc.CompileError")。希望支持新功能的第三方方言现在应该调用`._limit_clause`和`._offset_clause`属性来接收完整的 SQL 表达式，而不是整数值。
+不支持非整数 LIMIT 或 OFFSET 表达式的方言可能会继续不支持此行为；第三方方言也可能需要修改才能利用新的行为。当前使用`._limit`或`._offset`属性的方言将继续适用于极限/偏移被指定为简单整数值的情况。但是，当指定SQL表达式时，这两个属性将在访问时引发[`CompileError`](core_exceptions.html#sqlalchemy.exc.CompileError "sqlalchemy.exc.CompileError")。希望支持新功能的第三方方言现在应该调用`._limit_clause`和`._offset_clause`属性来接收完整的 SQL 表达式，而不是整数值。
 
 ### `ForeignKeyConstraint`上的`use_alter`标志（通常）不再需要[¶](#the-use-alter-flag-on-foreignkeyconstraint-is-usually-no-longer-needed "Permalink to this headline")
 
@@ -558,7 +557,7 @@ well as establishing the fetch methods as “closed”.
 
 将呈现：
 
-    CREATE TABLE foo (plainplain
+    CREATE TABLE foo (
         value INTEGER,
         CONSTRAINT ck_foo_value CHECK (value > 5)
     )
@@ -628,7 +627,7 @@ types](core_constraints.html#naming-schematypes)配置命名
 
 当[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")已经包含构造[`Constraint`](core_constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")时的所有目标[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象时，原始自动附加逻辑当然会保持原位：
 
-    from sqlalchemy import Table, Column, MetaData, Integer, UniqueConstraintplain
+    from sqlalchemy import Table, Column, MetaData, Integer, UniqueConstraint
 
     m = MetaData()
 
@@ -678,7 +677,7 @@ are rendered as constants into the SELECT statement:
 当由[`Column.server_default`](core_metadata.html#sqlalchemy.schema.Column.params.server_default "sqlalchemy.schema.Column")设置的[`DefaultClause`](core_defaults.html#sqlalchemy.schema.DefaultClause "sqlalchemy.schema.DefaultClause")作为要编译的 SQL 表达式存在时，“literal
 bindings”编译器标志将打开。这允许嵌入在 SQL 中的文字正确呈现，例如：
 
-    from sqlalchemy import Table, Column, MetaData, Textplain
+    from sqlalchemy import Table, Column, MetaData, Text
     from sqlalchemy.schema import CreateTable
     from sqlalchemy.dialects.postgresql import ARRAY, array
     from sqlalchemy.dialects import postgresql
@@ -698,7 +697,7 @@ bindings”编译器标志将打开。这允许嵌入在 SQL 中的文字正确�
         arr TEXT[] DEFAULT ARRAY['foo', 'bar', 'baz']
     )
 
-在此之前，文字值`“foo”， “bar”， “baz”`这在DDL中是无用的。
+在此之前，文字值`“foo”， “bar”， “baz”`这在 DDL 中是无用的。
 
 [＃3087 T0\>](http://www.sqlalchemy.org/trac/ticket/3087)
 
@@ -790,7 +789,7 @@ duplicates.
 
 ### query.update()现在将字符串名称解析为映射的属性名称[¶](#query-update-now-resolves-string-names-into-mapped-attribute-names "Permalink to this headline")
 
-[`Query.update()`](orm_query.html#sqlalchemy.orm.query.Query.update "sqlalchemy.orm.query.Query.update")的文档声明给定的`values`字典是“属性名称为键的字典”，暗示这些是映射的属性名称。不幸的是，该函数设计得更加注重接收属性和SQL表达式，而不是太多的字符串；当字符串被传递时，这些字符串将直接传递到核心更新语句而没有任何解决方案，就这些名称在映射类中的表示方式而言，这意味着名称必须完全与表列匹配，而不是如何该名称的属性被映射到类上。
+[`Query.update()`](orm_query.html#sqlalchemy.orm.query.Query.update "sqlalchemy.orm.query.Query.update")的文档声明给定的`values`字典是“属性名称为键的字典”，暗示这些是映射的属性名称。不幸的是，该函数设计得更加注重接收属性和 SQL 表达式，而不是太多的字符串；当字符串被传递时，这些字符串将直接传递到核心更新语句而没有任何解决方案，就这些名称在映射类中的表示方式而言，这意味着名称必须完全与表列匹配，而不是如何该名称的属性被映射到类上。
 
 字符串名称现在被认真解析为属性名称：
 
@@ -806,7 +805,7 @@ duplicates.
 
 给定的字符串现在是针对实体解析的：
 
-    session.query(User).update({'name': 'moonbeam'})plain
+    session.query(User).update({'name': 'moonbeam'})
 
 通常最好直接使用该属性，以避免任何含糊之处：
 
@@ -830,18 +829,18 @@ duplicates.
 
 ### 将对象与无值与[¶](#warnings-emitted-when-comparing-objects-with-none-values-to-relationships "Permalink to this headline")关系进行比较时发出警告
 
-这个变化在1.0.1中是新的。一些用户正在执行基本上是这种形式的查询：
+这个变化在 1.0.1 中是新的。一些用户正在执行基本上是这种形式的查询：
 
-    session.query(Address).filter(Address.user == User(id=None))plain
+    session.query(Address).filter(Address.user == User(id=None))
 
-SQLAlchemy目前不支持此模式。对于所有版本，它发出的SQL类似于：
+SQLAlchemy 目前不支持此模式。对于所有版本，它发出的 SQL 类似于：
 
     SELECT address.id AS address_id, address.user_id AS address_user_id,
     address.email_address AS address_email_address
     FROM address WHERE ? = address.user_id
     (None,)
 
-请注意，有一个比较`WHERE ？ = address.user_id`绑定值`?`在SQL中接收`None`或`NULL`。**这总是会在SQL中返回False**。这里的比较理论上会生成SQL，如下所示：
+请注意，有一个比较`WHERE ？ = address.user_id`绑定值`?`在SQL中接收`None`或`NULL`。**这总是会在 SQL 中返回 False**。这里的比较理论上会生成SQL，如下所示：
 
     SELECT address.id AS address_id, address.user_id AS address_user_id,
     address.email_address AS address_email_address
@@ -865,7 +864,7 @@ NULL”，然后查询会产生不同的结果。因此，通过这种操作，�
 
 给定映射：
 
-    class A(Base):plain
+    class A(Base):
         __tablename__ = 'a'
         id = Column(Integer, primary_key=True)
 
@@ -877,7 +876,7 @@ NULL”，然后查询会产生不同的结果。因此，通过这种操作，�
 
 给定`A`，主键为 7，但我们更改为 10 而无需刷新：
 
-    s = Session(autoflush=False)plain
+    s = Session(autoflush=False)
     a1 = A(id=7)
     s.add(a1)
     s.commit()
@@ -890,7 +889,7 @@ NULL”，然后查询会产生不同的结果。因此，通过这种操作，�
 
 生产：
 
-    SELECT b.id AS b_id, b.a_id AS b_a_idplainplain
+    SELECT b.id AS b_id, b.a_id AS b_a_id
     FROM b
     WHERE ? = b.a_id
     (10,)
@@ -939,7 +938,7 @@ and related functions.
 `obj.someattr = 无`。然而，这里的“set on
 get”在历史和事件方面会有不同的表现。它不会发射任何属性事件，而且如果我们查看历史记录，我们可以看到：
 
-    >>> inspect(obj).attrs.someattr.historyplain
+    >>> inspect(obj).attrs.someattr.history
     History(added=(), unchanged=[None], deleted=())   # 0.9 and below
 
 也就是说，就好像该属性始终是`None`，并且从未更改过。这与我们先设置属性的情况明显不同：
@@ -975,7 +974,7 @@ change](#migration-3060)）说明了一些很少的边缘情况实际上我们�
 
 作为[＃3060](http://www.sqlalchemy.org/trac/ticket/3060)的一个副作用，将关系绑定属性设置为`None`现在是一个跟踪的历史事件，它涉及持续存在的意图`None`因为设置关系绑定属性的情况总是会直接分配给外键属性，所以在分配 None 时可以看到行为更改。给定映射：
 
-    class A(Base):plain
+    class A(Base):
         __tablename__ = 'table_a'
 
         id = Column(Integer, primary_key=True)
@@ -989,7 +988,7 @@ change](#migration-3060)）说明了一些很少的边缘情况实际上我们�
 
 在 1.0 中，在所有情况下，关系绑定属性优先于 FK 绑定属性，无论我们分配的值是对`A`对象的引用还是`None`在 0.9 中，行为是不一致的，只有赋值时才会生效；不考虑：
 
-    a1 = A(id=1)plain
+    a1 = A(id=1)
     a2 = A(id=2)
     session.add_all([a1, a2])
     session.flush()
@@ -1042,7 +1041,7 @@ transaction is committed.
 
 为了使[`Query.yield_per()`](orm_query.html#sqlalchemy.orm.query.Query.yield_per "sqlalchemy.orm.query.Query.yield_per")方法更易于使用，当使用 yield\_per 时，如果任何子查询渴望加载器或加入的将使用集合的渴望加载器都要生效，因为它们目前与 yield-per 不兼容（然而，理论上子查询加载可能）。发生此错误时，可以使用星号发送[`lazyload()`](orm_loading_relationships.html#sqlalchemy.orm.lazyload "sqlalchemy.orm.lazyload")选项：
 
-    q = sess.query(Object).options(lazyload('*')).yield_per(100)plain
+    q = sess.query(Object).options(lazyload('*')).yield_per(100)
 
 或使用[`Query.enable_eagerloads()`](orm_query.html#sqlalchemy.orm.query.Query.enable_eagerloads "sqlalchemy.orm.query.Query.enable_eagerloads")：
 
@@ -1101,21 +1100,21 @@ That is, the `A.bs` is part of a “path”.
 
 在0.9中，这将呈现如下：
 
-    SELECT a.id AS a_idplain
+    SELECT a.id AS a_id
     FROM a JOIN b ON b.a_id = a.id JOIN b AS b_1 ON b_1.a_id = a.id
 
 这是有问题的，因为别名是隐含的，并且在不同的ON子句的情况下会导致不可预知的结果。
 
 在1.0中，没有应用自动别名，我们得到：
 
-    SELECT a.id AS a_idplainplain
+    SELECT a.id AS a_id
     FROM a JOIN b ON b.a_id = a.id JOIN b ON b.a_id = a.id
 
 这会引发数据库错误。虽然如果我们加入冗余关系和基于冗余非关系的目标，如果“重复连接目标”的行为相同，那么现在我们只是在更严重的情况下改变行为，在这种情况下，先前会出现隐式锯齿，并且只会在关系案例中发出警告。最终，两次加入相同的事物而没有任何混淆消除歧义的行为会在所有情况下产生错误。
 
 此更改还会影响单表继承目标。使用如下映射：
 
-    from sqlalchemy import Integer, Column, String, ForeignKeyplain
+    from sqlalchemy import Integer, Column, String, ForeignKey
     from sqlalchemy.orm import Session, relationship
     from sqlalchemy.ext.declarative import declarative_base
 
@@ -1179,14 +1178,14 @@ That is, the `A.bs` is part of a “path”.
 
 ### 延迟列不再隐式不延迟[¶](#deferred-columns-no-longer-implicitly-undefer "Permalink to this headline")
 
-标记为延迟但没有显式未延迟的映射属性现在将保持“延迟”状态，即使它们的列以某种方式存在于结果集中。这是一种性能增强，因为当获得结果集时，ORM加载不再花费时间搜索每个延迟列。但是，对于依赖于此的应用程序，现在应该使用明确的[`undefer()`](orm_loading_columns.html#sqlalchemy.orm.undefer "sqlalchemy.orm.undefer")或类似选项，以防止在访问属性时发出SELECT。
+标记为延迟但没有显式未延迟的映射属性现在将保持“延迟”状态，即使它们的列以某种方式存在于结果集中。这是一种性能增强，因为当获得结果集时，ORM 加载不再花费时间搜索每个延迟列。但是，对于依赖于此的应用程序，现在应该使用明确的[`undefer()`](orm_loading_columns.html#sqlalchemy.orm.undefer "sqlalchemy.orm.undefer")或类似选项，以防止在访问属性时发出SELECT。
 
 ### 已弃用的 ORM 事件挂钩已删除[¶](#deprecated-orm-event-hooks-removed "Permalink to this headline")
 
 以下 ORM 事件挂钩（其中一些已从 0.5 开始已弃用）已被删除：`translate_row`，`populate_instance`，`append_result`，`create_instance`这些钩子的用例起源于早期的 0.1 /
 0.2 系列 SQLAlchemy，并且早已不必要了。特别是钩子在很大程度上无法使用，因为这些事件中的行为契约与周围的内部组件紧密相关，例如需要如何创建和初始化实例以及如何在 ORM 生成的行内定位列。删除这些钩子大大简化了 ORM 对象加载的机制。
 
-### 使用自定义行加载程序时对新Bundle功能的API更改[¶](#api-change-for-new-bundle-feature-when-custom-row-loaders-are-used "Permalink to this headline")
+### 使用自定义行加载程序时对新 Bundle 功能的 API 更改[¶](#api-change-for-new-bundle-feature-when-custom-row-loaders-are-used "Permalink to this headline")
 
 当`create_row_processor()`方法在自定义类上被覆盖时，0.9的新[`Bundle`](orm_query.html#sqlalchemy.orm.query.Bundle "sqlalchemy.orm.query.Bundle")对象在 API 中有一个小的改变。以前，示例代码如下所示：
 
@@ -1203,7 +1202,7 @@ That is, the `A.bs` is part of a “path”.
 
 未使用的`result`成员现在被删除：
 
-    from sqlalchemy.orm import Bundleplain
+    from sqlalchemy.orm import Bundle
 
     class DictBundle(Bundle):
         def create_row_processor(self, query, procs, labels):
@@ -1229,7 +1228,7 @@ load chained to an outer join eager load will use a right-nested join.
 `"nested"` is now implied when using
 `innerjoin=True`:
 
-    query(User).options(plain
+    query(User).options(
         joinedload("orders", innerjoin=False).joinedload("items", innerjoin=True))
 
 使用新的默认值，这将以下面的形式呈现 FROM 子句：
@@ -1256,11 +1255,11 @@ loads](migration_09.html#feature-2976) - 0.9.4 中介绍的特征描述。
 
 [＃3008 T0\>](http://www.sqlalchemy.org/trac/ticket/3008)
 
-### 子查询不再应用于使用list = False加入的预载[¶](#subqueries-no-longer-applied-to-uselist-false-joined-eager-loads "Permalink to this headline")
+### 子查询不再应用于使用 list = False 加入的预载[¶](#subqueries-no-longer-applied-to-uselist-false-joined-eager-loads "Permalink to this headline")
 
 给定如下所示的加入的热切加载：
 
-    class A(Base):plain
+    class A(Base):
         __tablename__ = 'a'
         id = Column(Integer, primary_key=True)
         b = relationship("B", uselist=False)
@@ -1286,7 +1285,7 @@ one” relationship.
 
 然而，由于内部查询的到外层一个上的关系是至多只有一排在`uselist=False`
 
-    SELECT a.id AS a_id, b_1.id AS b_1_id, b_1.a_id AS b_1_a_idplain
+    SELECT a.id AS a_id, b_1.id AS b_1_id, b_1.a_id AS b_1_a_id
     FROM a LEFT OUTER JOIN b AS b_1 ON a.id = b_1.a_id
     LIMIT :param_1
 
@@ -1295,7 +1294,7 @@ JOIN 返回多于一行的情况下，ORM 总是在这里发出警告并忽略`u
 
 [＃3249 T0\>](http://www.sqlalchemy.org/trac/ticket/3249)
 
-### 如果与join()，select\_from()，from\_self()一起使用，query.update()/ query.delete()会引发[¶](#query-update-query-delete-raises-if-used-with-join-select-from-from-self "Permalink to this headline")
+### 如果与 join()，select\_from()，from\_self()一起使用，query.update()/ query.delete()会引发[¶](#query-update-query-delete-raises-if-used-with-join-select-from-from-self "Permalink to this headline")
 
 A warning is emitted in SQLAlchemy 0.9.10 (not yet released as of June
 9, 2015) when the [`Query.update()`](orm_query.html#sqlalchemy.orm.query.Query.update "sqlalchemy.orm.query.Query.update")
@@ -1319,7 +1318,7 @@ or [`Query.from_self()`](orm_query.html#sqlalchemy.orm.query.Query.from_self "sq
 
 “复活”ORM 事件已被完全删除。从 0.8 版本开始，该事件不再具有任何功能，从工作单元中删除旧的“可变”系统。
 
-### 使用from\_self()，count()[时，更改为单表继承条件](#change-to-single-table-inheritance-criteria-when-using-from-self-count "Permalink to this headline")
+### 使用 from\_self()，count()[时，更改为单表继承条件](#change-to-single-table-inheritance-criteria-when-using-from-self-count "Permalink to this headline")
 
 给定一个单表继承映射，如：
 
@@ -1366,7 +1365,7 @@ or [`Query.from_self()`](orm_query.html#sqlalchemy.orm.query.Query.from_self "sq
 
 ### 单表继承条件无条件地添加到所有 ON 子句[¶](#single-table-inheritance-criteria-added-to-all-on-clauses-unconditionally "Permalink to this headline")
 
-当连接到单表继承子类目标时，ORM在加入关系时总是添加“单表标准”。给定映射为：
+当连接到单表继承子类目标时，ORM 在加入关系时总是添加“单表标准”。给定映射为：
 
     class Widget(Base):
         __tablename__ = 'widget'
@@ -1406,7 +1405,7 @@ ON子句，不只是从关系中产生的那些，包括一个明确说明的关
     # related.id = widget.related_id AND widget.type IN (:type_1)
     s.query(Related).join(FooWidget, FooWidget.related_id == Related.id).all()
 
-当没有任何类型的ON子句被声明时，以及“隐式”连接：
+当没有任何类型的 ON 子句被声明时，以及“隐式”连接：
 
     # ON clause will now render as
     # related.id = widget.related_id AND widget.type IN (:type_1)
@@ -1480,7 +1479,7 @@ Warnings Filter](https://docs.python.org/2/library/warnings.html)：
 
 鉴于上述警告，我们的声明工作得很好，但为了摆脱警告，我们将重写我们的声明如下：
 
-    from sqlalchemy import select, textplain
+    from sqlalchemy import select, text
     stmt = select([
             text("a"),
             text("b")
@@ -1488,7 +1487,7 @@ Warnings Filter](https://docs.python.org/2/library/warnings.html)：
 
 正如警告所暗示的，如果我们使用[`column()`](core_sqlelement.html#sqlalchemy.sql.expression.column "sqlalchemy.sql.expression.column")和[`table()`](core_selectable.html#sqlalchemy.sql.expression.table "sqlalchemy.sql.expression.table")，我们可以更具体地说明文本。
 
-    from sqlalchemy import select, text, column, tableplain
+    from sqlalchemy import select, text, column, table
 
     stmt = select([column("a"), column("b")]).\
         where(text("a = b")).select_from(table("sometable"))
@@ -1506,7 +1505,7 @@ and [`Query.having()`](orm_query.html#sqlalchemy.orm.query.Query.having "sqlalch
 有一种情况使用字符串具有特殊含义，并且作为此更改的一部分，我们已增强其功能。当我们有一个引用某个列名或命名标签的[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")或[`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")时，我们可能想要 GROUP
 BY 和/或 ORDER BY 已知列或标签：
 
-    stmt = select([plain
+    stmt = select([
         user.c.name,
         func.count(user.c.id).label("id_count")
     ]).group_by("name").order_by("id_count")
@@ -1530,7 +1529,7 @@ to `users.name`! ）：
 
 输出符合我们的说法，但它又一次警告我们：
 
-    SAWarning: Can't resolve label reference 'some_label'; converting toplain
+    SAWarning: Can't resolve label reference 'some_label'; converting to
     text() (this warning may be suppressed after 10 occurrences)
 
     SELECT users.name, count(users.id) AS id_count
@@ -1545,8 +1544,8 @@ BY 或其他表达式指定任意表达式：
 
     stmt = select([users]).order_by(text("some special expression"))
 
-整个变化的结果是SQLAlchemy现在希望我们在发送字符串时告诉它该字符串显式为[`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")构造，或者列，表等，并且if我们使用它作为标签名称，按照group
-by或其他表达式进行排序，SQLAlchemy预期字符串会解析为已知的内容，否则应该再次使用[`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")或类似方法进行限定。
+整个变化的结果是SQLAlchemy现在希望我们在发送字符串时告诉它该字符串显式为[`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")构造，或者列，表等，并且 if 我们使用它作为标签名称，按照 group
+by 或其他表达式进行排序，SQLAlchemy 预期字符串会解析为已知的内容，否则应该再次使用[`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")或类似方法进行限定。
 
 [＃2992 T0\>](http://www.sqlalchemy.org/trac/ticket/2992)
 
@@ -1556,7 +1555,7 @@ by或其他表达式进行排序，SQLAlchemy预期字符串会解析为已知�
 
 该功能已经过大修，因此其功能与“executemany”风格的调用类似：
 
-    import itertoolsplainplain
+    import itertools
 
     counter = itertools.count(1)
     t = Table(
@@ -1573,12 +1572,12 @@ by或其他表达式进行排序，SQLAlchemy预期字符串会解析为已知�
 
 上面的例子将会像预期的那样分别为每一行调用`next(counter)`：
 
-    INSERT INTO my_table (id, data) VALUES (?, ?), (?, ?), (?, ?)plain
+    INSERT INTO my_table (id, data) VALUES (?, ?), (?, ?), (?, ?)
     (1, 'd1', 2, 'd2', 3, 'd3')
 
 以前，位置方言会失败，因为不会为其他位置生成绑定：
 
-    Incorrect number of bindings supplied. The current statement uses 6,plain
+    Incorrect number of bindings supplied. The current statement uses 6,
     and there are 4 supplied.
     [SQL: u'INSERT INTO my_table (id, data) VALUES (?, ?), (?, ?), (?, ?)']
     [parameters: (1, 'd1', 'd2', 'd3')]
@@ -1604,7 +1603,7 @@ by或其他表达式进行排序，SQLAlchemy预期字符串会解析为已知�
 
 会提高：
 
-    sqlalchemy.exc.CompileError: INSERT value for column my_table.data isplain
+    sqlalchemy.exc.CompileError: INSERT value for column my_table.data is
     explicitly rendered as a boundparameter in the VALUES clause; a
     Python-side value or SQL expression is required
 
@@ -1621,7 +1620,7 @@ by或其他表达式进行排序，SQLAlchemy预期字符串会解析为已知�
 
 [＃3163 T0\>](http://www.sqlalchemy.org/trac/ticket/3163)
 
-### INSERT ... FROM SELECT结构现在意味着`inline=True` [¶](#the-insert-from-select-construct-now-implies-inline-true "Permalink to this headline")
+### INSERT ... FROM SELECT 结构现在意味着`inline=True` [¶](#the-insert-from-select-construct-now-implies-inline-true "Permalink to this headline")
 
 现在使用[`Insert.from_select()`](core_dml.html#sqlalchemy.sql.expression.Insert.from_select "sqlalchemy.sql.expression.Insert.from_select")意味着`inline=True`在[`insert()`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.dml.insert "sqlalchemy.dialects.postgresql.dml.insert")上。这有助于修复 INSERT
 ... FROM
@@ -1637,7 +1636,7 @@ SELECT需要在任何情况下隐式返回。如果需要插入数据，则应�
 
 通过单独传递[`Table.autoload_with`](core_metadata.html#sqlalchemy.schema.Table.params.autoload_with "sqlalchemy.schema.Table")，可以设置[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")进行反射：
 
-    my_table = Table('my_table', metadata, autoload_with=some_engine)plain
+    my_table = Table('my_table', metadata, autoload_with=some_engine)
 
 [＃3027 T0\>](http://www.sqlalchemy.org/trac/ticket/3027)
 
@@ -1667,7 +1666,7 @@ is added to unconditionally return string keys for the local set of
 columns regardless of how the object was constructed or its current
 state.
 
-### MetaData.sorted\_tables访问器是“确定性的”[¶](#metadata-sorted-tables-accessor-is-deterministic "Permalink to this headline")
+### MetaData.sorted\_tables 访问器是“确定性的”[¶](#metadata-sorted-tables-accessor-is-deterministic "Permalink to this headline")
 
 The sorting of tables resulting from the [`MetaData.sorted_tables`](core_metadata.html#sqlalchemy.schema.MetaData.sorted_tables "sqlalchemy.schema.MetaData.sorted_tables")
 accessor is “deterministic”; the ordering should be the same in all
@@ -1695,7 +1694,7 @@ determine lexical significance.
 
 [＃3170 T0\>](http://www.sqlalchemy.org/trac/ticket/3170)
 
-### SQLite / Oracle具有不同的临时表/视图名称报告方法[¶](#sqlite-oracle-have-distinct-methods-for-temporary-table-view-name-reporting "Permalink to this headline")
+### SQLite / Oracle 具有不同的临时表/视图名称报告方法[¶](#sqlite-oracle-have-distinct-methods-for-temporary-table-view-name-reporting "Permalink to this headline")
 
 在 SQLite / Oracle 的情况下，[`Inspector.get_table_names()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_table_names "sqlalchemy.engine.reflection.Inspector.get_table_names")和[`Inspector.get_view_names()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_view_names "sqlalchemy.engine.reflection.Inspector.get_view_names")方法也会返回临时表和视图的名称，任何其他方言（在 MySQL 的情况下，至少它是不可能的）。This
 logic has been moved out to two new methods
@@ -1762,7 +1761,7 @@ called with the `checkfirst=True` flag:
 
 [＃3319 T0\>](http://www.sqlalchemy.org/trac/ticket/3319)
 
-### 新的Postgresql表选项[¶](#new-postgresql-table-options "Permalink to this headline")
+### 新的 Postgresql 表选项[¶](#new-postgresql-table-options "Permalink to this headline")
 
 当通过[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")构造渲染 DDL 时，增加了对 PG 表格选项 TABLESPACE，ON
 COMMIT，WITH（OUT）OIDS 和 INHERITS 的支持。
@@ -1798,9 +1797,9 @@ Options](dialects_postgresql.html#postgresql-table-options)
 -   [`Inspector.get_table_names()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_table_names "sqlalchemy.engine.reflection.Inspector.get_table_names")
     does **not** change for Postgresql, it continues to return only the
     names of plain tables.
--   添加了一个新方法[`PGInspector.get_foreign_table_names()`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.base.PGInspector.get_foreign_table_names "sqlalchemy.dialects.postgresql.base.PGInspector.get_foreign_table_names")，它将返回Postgresql模式表中明确标记为“外部”的表的名称。
+-   添加了一个新方法[`PGInspector.get_foreign_table_names()`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.base.PGInspector.get_foreign_table_names "sqlalchemy.dialects.postgresql.base.PGInspector.get_foreign_table_names")，它将返回 Postgresql 模式表中明确标记为“外部”的表的名称。
 
-对反射的改变包括将`'m'`和`'f'`添加到我们在查询`pg_class.relkind`时使用的限定符列表中，但是此更改在1.0.0中是新的，以避免那些在生产中运行0.9的人出现任何向后不兼容的意外。
+对反射的改变包括将`'m'`和`'f'`添加到我们在查询`pg_class.relkind`时使用的限定符列表中，但是此更改在 1.0.0 中是新的，以避免那些在生产中运行 0.9 的人出现任何向后不兼容的意外。
 
 [＃2891 T0\>](http://www.sqlalchemy.org/trac/ticket/2891)
 
@@ -1827,7 +1826,7 @@ Options](dialects_postgresql.html#postgresql-table-options)
 
 这种行为会导致非失败应用程序的行为不同，这是非常不可能的，因为 Postgresql 允许非临时表以静默方式覆盖临时表。因此，像下面这样的代码现在将完全不同，不再在临时表之后创建真实表：
 
-    from sqlalchemy import *plain
+    from sqlalchemy import *
 
     metadata = MetaData()
     user_tmp = Table(
@@ -1885,7 +1884,7 @@ Postgresql 现在支持 9.4 的集合函数的 SQL 标准 FILTER 关键字。SQL
 方言的改进和改变 - MySQL [¶](#dialect-improvements-and-changes-mysql "Permalink to this headline")
 --------------------------------------------------------------------------------------------------
 
-### 在所有情况下，MySQL TIMESTAMP类型现在都会呈现NULL / NOT NULL [¶](#mysql-timestamp-type-now-renders-null-not-null-in-all-cases "Permalink to this headline")
+### 在所有情况下，MySQL TIMESTAMP 类型现在都会呈现 NULL / NOT NULL [¶](#mysql-timestamp-type-now-renders-null-not-null-in-all-cases "Permalink to this headline")
 
 如果使用`nullable=True`设置列，则 MySQL 方言一直通过为这种类型发送 NULL 来解决 MySQL 的与 TIMESTAMP 列相关的隐式 NOT
 NULL 默认值。但是，MySQL
@@ -1900,12 +1899,12 @@ NULL 默认值。但是，MySQL
 
 ### MySQL SET Type大写，支持空集，unicode，空值处理[¶](#mysql-set-type-overhauled-to-support-empty-sets-unicode-blank-value-handling "Permalink to this headline")
 
-[`mysql.SET`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET "sqlalchemy.dialects.mysql.SET")类型历史上不包括分别处理空白集和空值的系统；因为不同的驱动程序在处理空字符串和空字符集表示方面有不同的行为，所以SET类型只试图在这些行为之间进行对冲，选择将空集作为`set([''])`这里的部分原因是，否则实际上不可能在MySQL
-SET中存储一个空字符串，因为驱动程序给我们返回的字符串无法区分`set([''])`和`set()`用户确定是否`set([''])`实际上表示“空集”。
+[`mysql.SET`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET "sqlalchemy.dialects.mysql.SET")类型历史上不包括分别处理空白集和空值的系统；因为不同的驱动程序在处理空字符串和空字符集表示方面有不同的行为，所以SET类型只试图在这些行为之间进行对冲，选择将空集作为`set([''])`这里的部分原因是，否则实际上不可能在 MySQL
+SET 中存储一个空字符串，因为驱动程序给我们返回的字符串无法区分`set([''])`和`set()`用户确定是否`set([''])`实际上表示“空集”。
 
 新行为将空字符串的用例（这是一个甚至在MySQL文档中没有记录的异常情况）移动到一个特殊情况，现在[`mysql.SET`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET "sqlalchemy.dialects.mysql.SET")的默认行为是：
 
--   将 MySQL-python 返回的空字符串`''`处理为空set
+-   将 MySQL-python 返回的空字符串`''`处理为空 set
     `set()`；
 -   将MySQL-Connector-Python返回的单空值集合`set([''])`转换为空set `set()`；
 -   为了处理实际希望在其可能值列表中包含空值`''`的集合类型的情况，实现了一个新特性（在这个用例中是必需的），从而设置值被持久化并且作为一个按位整数值加载；添加标志[`mysql.SET.retrieve_as_bitwise`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET.params.retrieve_as_bitwise "sqlalchemy.dialects.mysql.SET")以启用此功能。
@@ -1913,16 +1912,16 @@ SET中存储一个空字符串，因为驱动程序给我们返回的字符串�
 通过使用[`mysql.SET.retrieve_as_bitwise`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET.params.retrieve_as_bitwise "sqlalchemy.dialects.mysql.SET")标志，可以保持集合的持久性，并且检索时不会出现任何含糊不清的值。理论上这个标志可以在任何情况下被打开，只要该类型的给定值列表与数据库中声明的顺序完全匹配即可。它只会使 SQL
 echo 输出更加不寻常。
 
-[`mysql.SET`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET "sqlalchemy.dialects.mysql.SET")的默认行为保持不变，使用字符串往返传值。基于字符串的行为现在支持unicode完全包含use\_unicode
+[`mysql.SET`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET "sqlalchemy.dialects.mysql.SET")的默认行为保持不变，使用字符串往返传值。基于字符串的行为现在支持 unicode 完全包含 use\_unicode
 = 0的MySQL-python。
 
 [＃3283 T0\>](http://www.sqlalchemy.org/trac/ticket/3283)
 
 ### MySQL内部“没有这样的表”异常不会传递给事件处理程序[¶](#mysql-internal-no-such-table-exceptions-not-passed-to-event-handlers "Permalink to this headline")
 
-现在，MySQL方言将禁止[`ConnectionEvents.handle_error()`](core_events.html#sqlalchemy.events.ConnectionEvents.handle_error "sqlalchemy.events.ConnectionEvents.handle_error")事件触发它在内部使用的用于检测表是否存在的语句。这是通过使用执行选项`skip_user_error_events`来实现的，该选项为该执行的范围禁用句柄错误事件。通过这种方式，重写异常的用户代码不需要担心偶尔需要捕获 SQLAlchemy 特定异常的 MySQL 方言或其他方言。
+现在，MySQL 方言将禁止[`ConnectionEvents.handle_error()`](core_events.html#sqlalchemy.events.ConnectionEvents.handle_error "sqlalchemy.events.ConnectionEvents.handle_error")事件触发它在内部使用的用于检测表是否存在的语句。这是通过使用执行选项`skip_user_error_events`来实现的，该选项为该执行的范围禁用句柄错误事件。通过这种方式，重写异常的用户代码不需要担心偶尔需要捕获 SQLAlchemy 特定异常的 MySQL 方言或其他方言。
 
-### 为MySQL连接器更改了`raise_on_warnings`的默认值[¶](#changed-the-default-value-of-raise-on-warnings-for-mysql-connector "Permalink to this headline")
+### 为 MySQL 连接器更改了`raise_on_warnings`的默认值[¶](#changed-the-default-value-of-raise-on-warnings-for-mysql-connector "Permalink to this headline")
 
 MySQL-Connector将“raise\_on\_warnings”的默认值更改为 False。由于某种原因，这被设置为 True。不幸的是，“缓冲”标志必须保持为 True，因为 MySQL 连接器不允许游标关闭，除非所有结果都被完全获取。
 
@@ -1936,11 +1935,11 @@ NOT 运算符进行 0.9 版本的修改以及[＃2682](http://www.sqlalchemy.org
 / IS）是同义的，它仍然支持 IS / IS NOT。不是不适用于数字）。
 
 因此，这里的变化是 MySQL 方言仍然是“非本地布尔”，但是[`true()`](core_sqlelement.html#sqlalchemy.sql.expression.true "sqlalchemy.sql.expression.true")和[`false()`](core_sqlelement.html#sqlalchemy.sql.expression.false "sqlalchemy.sql.expression.false")符号再次产生关键字“true”和“false
-“，这样像`column.is_(true())`这样的表达式再次适用于MySQL。
+“，这样像`column.is_(true())`这样的表达式再次适用于 MySQL。
 
 [＃3186 T0\>](http://www.sqlalchemy.org/trac/ticket/3186)
 
-### match()运算符现在返回与MySQL的浮点返回值兼容的不可知的MatchType [¶](#the-match-operator-now-returns-an-agnostic-matchtype-compatible-with-mysql-s-floating-point-return-value "Permalink to this headline")
+### match()运算符现在返回与 MySQL 的浮点返回值兼容的不可知的 MatchType [¶](#the-match-operator-now-returns-an-agnostic-matchtype-compatible-with-mysql-s-floating-point-return-value "Permalink to this headline")
 
 一个[`ColumnOperators.match()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.match "sqlalchemy.sql.operators.ColumnOperators.match")表达式的返回类型现在是一个名为[`MatchType`](core_type_basics.html#sqlalchemy.types.MatchType "sqlalchemy.types.MatchType")的新类型。这是[`Boolean`](core_type_basics.html#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")的一个子类，可以通过方言拦截，以便在 SQL 执行时产生不同的结果类型。
 
@@ -1997,7 +1996,7 @@ TABLE 语句的正则表达式解析相结合，以形成约束名称的完整�
 Server，例如使用明确的主机名，现在需要一个驱动程序名 -
 SQLAlchemy 将不再尝试猜测默认值：
 
-    engine = create_engine("mssql+pyodbc://scott:tiger@myhost:port/databasename?driver=SQL+Server+Native+Client+10.0")plain
+    engine = create_engine("mssql+pyodbc://scott:tiger@myhost:port/databasename?driver=SQL+Server+Native+Client+10.0")
 
 SQLAlchemy 以前硬编码的默认“SQL
 Server”在 Windows 上已过时，并且 SQLAlchemy 不能根据操作系统/驱动程序检测猜测最佳驱动程序。使用 ODBC 完全避免此问题时，始终首选使用 DSN。
@@ -2017,7 +2016,7 @@ Deprecation](dialects_mssql.html#mssql-large-type-deprecation)。
 
 CTE 对 Oracle 的支持已经得到了修复，并且还有一个新特性`CTE.with_suffixes()`可以帮助 Oracle 的特殊指令：
 
-    included_parts = select([plain
+    included_parts = select([
         part.c.sub_part, part.c.part, part.c.quantity
     ]).where(part.c.part == "p1").\
         cte(name="included_parts", recursive=True).\

@@ -13,7 +13,7 @@ tags:
 =================================================================================
 
 本节将讨论SQL
-[constraints](glossary.html#term-constraints)和索引。在SQLAlchemy中，关键类包括[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")和[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")。
+[constraints](glossary.html#term-constraints)和索引。在 SQLAlchemy 中，关键类包括[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")和[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")。
 
 定义外键[¶](#defining-foreign-keys "Permalink to this headline")
 ----------------------------------------------------------------
@@ -37,9 +37,9 @@ t3＆gt；的形式的字符串，或者对于远程模式中的表或“所有�
 schemaname＆gt；。＆lt； tablename＆gt；。＆lt；
 columnname＆gt；*。*它也可能是一个实际的[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象，我们稍后会看到它是通过它的`c`集合从现有的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象进行访问的：
 
-    ForeignKey(user.c.user_id)
+    ForeignKey(user.c.user_id)plain
 
-使用字符串的好处在于，仅当第一次需要时才解析`user`和`user_preference`之间的in-python链接，以便可以将表对象轻松地分布到多个模块中，按任何顺序定义。
+使用字符串的好处在于，仅当第一次需要时才解析`user`和`user_preference`之间的 in-python 链接，以便可以将表对象轻松地分布到多个模块中，按任何顺序定义。
 
 外键也可以使用[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象在表级定义。该对象可以描述单列或多列外键。多列外键称为*复合*外键，并且几乎总是引用具有复合主键的表。下面我们定义一个表`invoice`，它有一个复合主键：
 
@@ -128,7 +128,7 @@ MyISAM 数据）。因此，这些方法将在这种循环中将约束分解为�
     ALTER TABLE node ADD FOREIGN KEY(primary_element)
         REFERENCES element (element_id)
 
-为了为这些表发出DROP，应用相同的逻辑，但请注意，在SQL中，要发出DROP
+为了为这些表发出 DROP，应用相同的逻辑，但请注意，在 SQL 中，要发出 DROP
 CONSTRAINT，需要该约束具有名称。在上面的`'node'`表中，我们没有命名这个约束；系统将因此尝试仅为那些被命名的约束发出DROP：
 
     >>> with engine.connect() as conn:
@@ -207,7 +207,7 @@ Conventions](#constraint-naming-conventions)
 
 [`sort_tables_and_constraints()`](ddl.html#sqlalchemy.schema.sort_tables_and_constraints "sqlalchemy.schema.sort_tables_and_constraints")
 
-### ON UPDATE和ON DELETE [¶](#on-update-and-on-delete "Permalink to this headline")
+### ON UPDATE 和 ON DELETE [¶](#on-update-and-on-delete "Permalink to this headline")
 
 Most databases support *cascading* of foreign key values, that is the
 when a parent row is updated the new value is placed in child rows, or
@@ -310,8 +310,8 @@ PRIMARY KEY约束[¶](#primary-key-constraint "Permalink to this headline")
 使用声明式ORM扩展时设置约束[¶](#setting-up-constraints-when-using-the-declarative-orm-extension "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------
 
-[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")是SQLAlchemy核心结构，允许用户定义表格元数据，其中SQLAlchemy
-ORM可以使用该元数据作为映射类别的目标。The
+[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")是 SQLAlchemy 核心结构，允许用户定义表格元数据，其中 SQLAlchemy
+ORM 可以使用该元数据作为映射类别的目标。The
 [Declarative](orm_extensions_declarative_index.html) extension allows
 the [`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
 object to be created automatically, given the contents of the table
@@ -329,7 +329,7 @@ KEY 约束等约束与表定义时，数据库通常会有一个系统，在这�
 
 可以使用[`Constraint.name`](#sqlalchemy.schema.Constraint.params.name "sqlalchemy.schema.Constraint")参数明确命名约束，并为索引[`Index.name`](#sqlalchemy.schema.Index.params.name "sqlalchemy.schema.Index")参数指定约束。但是，在约束条件下，该参数是可选的。还有一些使用[`Column.unique`](metadata.html#sqlalchemy.schema.Column.params.unique "sqlalchemy.schema.Column")和[`Column.index`](metadata.html#sqlalchemy.schema.Column.params.index "sqlalchemy.schema.Column")参数来创建[`UniqueConstraint`](#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")和[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")未指定明确名称的对象。
 
-更改现有表和约束的用例可以通过模式迁移工具（如[Alembic](http://alembic.zzzcomputing.com/)）来处理。然而，Alembic和SQLAlchemy目前都没有为其中未指定名称的约束对象创建名称，导致能够更改现有约束的情况意味着必须对关系数据库使用的命名系统进行反向工程以自动分配名称或者必须小心确保所有约束都被命名。
+更改现有表和约束的用例可以通过模式迁移工具（如[Alembic](http://alembic.zzzcomputing.com/)）来处理。然而，Alembic 和 SQLAlchemy 目前都没有为其中未指定名称的约束对象创建名称，导致能够更改现有约束的情况意味着必须对关系数据库使用的命名系统进行反向工程以自动分配名称或者必须小心确保所有约束都被命名。
 
 与必须为所有[`Constraint`](#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")和[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")对象指定显式名称相反，可以使用事件构建自动命名方案。This
 approach has the advantage that constraints will get a consistent naming
@@ -458,7 +458,7 @@ Constraints](http://alembic.zzzcomputing.com/en/latest/naming.html#tutorial-cons
 
 ### 命名CHECK约束[¶](#naming-check-constraints "Permalink to this headline")
 
-[`CheckConstraint`](#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")对象是针对任意SQL表达式配置的，该表达式可以包含任意数量的列，另外通常使用原始SQL字符串进行配置。因此，与[`CheckConstraint`](#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")一起使用的通用约定是我们期望该对象已经拥有一个名称的公约，然后我们使用其他约定元素对其进行了增强。A
+[`CheckConstraint`](#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")对象是针对任意 SQL 表达式配置的，该表达式可以包含任意数量的列，另外通常使用原始 SQL 字符串进行配置。因此，与[`CheckConstraint`](#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")一起使用的通用约定是我们期望该对象已经拥有一个名称的公约，然后我们使用其他约定元素对其进行了增强。A
 typical convention is
 `"ck_%(table_name)s_%(constraint_name)s"`:
 
@@ -1717,7 +1717,7 @@ INDEX”的DDL在表的create语句之后立即发布：
 
 注意在上面的例子中，[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")构造是直接使用[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象在它所对应的表的外部创建的。[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")还支持[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中的“内联”定义，使用字符串名称来标识列：
 
-    meta = MetaData()
+    meta = MetaData()plain
     mytable = Table('mytable', meta,
         Column('col1', Integer),
 
@@ -1733,7 +1733,7 @@ INDEX”的DDL在表的create语句之后立即发布：
         Index('idx_col34', 'col3', 'col4', unique=True)
     )
 
-0.7版中的新功能支持[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")中[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")内的“内联”定义。
+0.7 版中的新功能支持[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")中[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")内的“内联”定义。
 
 [`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")对象也支持它自己的`create()`方法：
 
@@ -1749,7 +1749,7 @@ INDEX”的DDL在表的create语句之后立即发布：
 
     Index('someindex', mytable.c.somecol.desc())
 
-或者使用支持Postgresql等函数索引的后端，可以使用`lower()`函数创建“不区分大小写”的索引：
+或者使用支持 Postgresql 等函数索引的后端，可以使用`lower()`函数创建“不区分大小写”的索引：
 
     from sqlalchemy import func, Indexplain
 
@@ -1763,7 +1763,7 @@ INDEX”的DDL在表的create语句之后立即发布：
  *class*`sqlalchemy.schema.`{.descclassname}`Index`{.descname}(*name*, *\*expressions*, *\*\*kw*)[¶](#sqlalchemy.schema.Index "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.base.DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")，[`sqlalchemy.schema.ColumnCollectionMixin`](#sqlalchemy.schema.ColumnCollectionMixin "sqlalchemy.schema.ColumnCollectionMixin")，[`sqlalchemy.schema.SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-    表级索引。
+    表级索引。plain
 
     定义一个复合（一个或多个列）INDEX。
 

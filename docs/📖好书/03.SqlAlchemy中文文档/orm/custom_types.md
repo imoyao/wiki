@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:33
 permalink: /sqlalchemy/orm/custom_types/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
 tags:
 ---
@@ -26,7 +26,7 @@ TABLE 语句或其他 SQL 函数（如 CAST）中呈现的类型。例如，应�
     def compile_binary_sqlite(type_, compiler, **kw):
         return "BLOB"
 
-上面的代码允许使用[`types.BINARY`](type_basics.html#sqlalchemy.types.BINARY "sqlalchemy.types.BINARY")，它将针对除SQLite以外的所有后端生成字符串`BINARY`，在这种情况下，它将生成`BLOB`
+上面的代码允许使用[`types.BINARY`](type_basics.html#sqlalchemy.types.BINARY "sqlalchemy.types.BINARY")，它将针对除 SQLite 以外的所有后端生成字符串`BINARY`，在这种情况下，它将生成`BLOB`
 
 有关其他示例，请参阅[Changing Compilation of
 Types](compiler.html#type-compilation-extension)一节（[Custom SQL
@@ -511,7 +511,7 @@ Server 的数据库连接器）会在小数位数过多的情况下传递 Decima
                 value = value.quantize(self.quantize)
             return value
 
-### 后端不可知的GUID类型[¶](#backend-agnostic-guid-type "Permalink to this headline")
+### 后端不可知的 GUID 类型[¶](#backend-agnostic-guid-type "Permalink to this headline")
 
 接收并返回 Python
 uuid()对象。在其他后端使用 Postgresql，CHAR（32）时使用 PG
@@ -583,7 +583,7 @@ UUID 类型，并以字符串化的十六进制格式存储它们。如果需要
                 value = json.loads(value)
             return value
 
-请注意，默认情况下，ORM不会检测到这种类型的“可变性” -
+请注意，默认情况下，ORM 不会检测到这种类型的“可变性” -
 这意味着，就地更改值不会被检测到，也不会被刷新。如果没有进一步的步骤，您需要用每个父对象上的新值替换现有值以检测更改。请注意，这没有什么问题，因为许多应用程序可能不需要一旦创建值就会发生变化。对于那些确实有此要求的用户，最好使用`sqlalchemy.ext.mutable`扩展名应用对可变性的支持 - 请参阅[Mutation
 Tracking](orm_extensions_mutable.html)中的示例。
 
@@ -733,7 +733,7 @@ expression. 例如，如果我们针对表达式的[`label()`](sqlelement.html#s
 重新定义和创建新操作符[¶](#redefining-and-creating-new-operators "Permalink to this headline")
 ----------------------------------------------------------------------------------------------
 
-SQLAlchemy Core定义了一组可用于所有列表达式的表达式运算符。Some of these
+SQLAlchemy Core 定义了一组可用于所有列表达式的表达式运算符。Some of these
 operations have the effect of overloading Python’s built in operators;
 examples of such operators include [`ColumnOperators.__eq__()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.__eq__ "sqlalchemy.sql.operators.ColumnOperators.__eq__")
 (`table.c.somecolumn == 'foo'`),
@@ -821,7 +821,7 @@ onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.Colu
 The [`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")
 class is provided as a simple base class for defining entirely new
 database types.
-用它来表示SQLAlchemy不知道的本地数据库类型。如果只需要Python翻译行为，请改用[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")。
+用它来表示 SQLAlchemy 不知道的本地数据库类型。如果只需要 Python 翻译行为，请改用[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")。
 
 *class* `sqlalchemy.types。`{.descclassname} `UserDefinedType`{.descname} [¶](#sqlalchemy.types.UserDefinedType "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")

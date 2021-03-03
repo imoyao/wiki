@@ -13,10 +13,10 @@ tags:
 
 SQLAlchemy 的很大一部分是对查询中相关对象加载的方式提供了广泛的控制。这个行为可以在映射器构造时使用[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")函数的`lazy`参数进行配置，也可以使用[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")目的。
 
-使用Loader策略：延迟加载，预先加载[¶](#using-loader-strategies-lazy-loading-eager-loading "Permalink to this headline")
+使用 Loader 策略：延迟加载，预先加载[¶](#using-loader-strategies-lazy-loading-eager-loading "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------
 
-默认情况下，所有的对象间关系都是**延迟加载**。与[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")关联的标量或集合属性包含一个触发器，该属性首次被访问时触发。除了一种情况外，该触发器在访问点发出SQL调用以加载相关对象或对象：
+默认情况下，所有的对象间关系都是**延迟加载**。与[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")关联的标量或集合属性包含一个触发器，该属性首次被访问时触发。除了一种情况外，该触发器在访问点发出 SQL 调用以加载相关对象或对象：
 
     sql>>> jack.addressesplain
     SELECT addresses.id AS addresses_id, addresses.email_address AS addresses_email_address,
@@ -35,7 +35,7 @@ SQLAlchemy 的很大一部分是对查询中相关对象加载的方式提供了
 Loading**的概念。我们将`option`与[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象结合使用，以表示在单个 SQL 查询中应该与父对象同时加载关系。这个被称为[`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")的选项将一个 JOIN（缺省为 LEFT
 OUTER join）连接到该语句，并从与父类相同的结果集中填充标量/集合：
 
-    sql>>> jack = session.query(User).\
+    sql>>> jack = session.query(User).\plain
     ... options(joinedload('addresses')).\
     ... filter_by(name='jack').all() #doctest: +NORMALIZE_WHITESPACE
     SELECT addresses_1.id AS addresses_1_id, addresses_1.email_address AS addresses_1_email_address,
@@ -47,7 +47,7 @@ OUTER join）连接到该语句，并从与父类相同的结果集中填充标�
 
 除了“加入急切加载”之外，还有第二种急切加载选项，称为“子查询加载”。这种热切的加载为请求的每个集合都发出额外的 SQL 语句，并聚合到所有父对象中：
 
-    sql>>> jack = session.query(User).\plainplain
+    sql>>> jack = session.query(User).\
     ... options(subqueryload('addresses')).\
     ... filter_by(name='jack').all()
     SELECT users.id AS users_id, users.name AS users_name, users.fullname AS users_fullname,
@@ -65,7 +65,7 @@ OUTER join）连接到该语句，并从与父类相同的结果集中填充标�
 
 任何[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的默认**加载器策略**由`lazy`关键字参数配置，该参数默认为`select`这表示一个“选择”语句。下面我们将它设置为`joined`，以便使用JOIN加载`children`关系：
 
-    # load the 'children' collection using LEFT OUTER JOINplainplain
+    # load the 'children' collection using LEFT OUTER JOIN
     class Parent(Base):
         __tablename__ = 'parent'
 
@@ -84,7 +84,7 @@ OUTER join）连接到该语句，并从与父类相同的结果集中填充标�
 
 查询时，使用[`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")，[`subqueryload()`](#sqlalchemy.orm.subqueryload "sqlalchemy.orm.subqueryload")和[`lazyload()`](#sqlalchemy.orm.lazyload "sqlalchemy.orm.lazyload")
 
-    # set children to load lazily
+    # set children to load lazilyplain
     session.query(Parent).options(lazyload('children')).all()
 
     # set children to load eagerly with a join
@@ -134,7 +134,7 @@ subqueryload())?](faq_ormconfiguration.html#faq-subqueryload-limit-sort)
 
 使用方法链接，明确声明路径中每个链接的装入程序样式。要沿路径导航而不改变特定属性的现有装入程序样式，可以使用[`defaultload()`](#sqlalchemy.orm.defaultload "sqlalchemy.orm.defaultload")方法/函数：
 
-    session.query(A).options(
+    session.query(A).options(plain
                         defaultload("atob").joinedload("btoc")
                     ).all()
 
@@ -155,13 +155,13 @@ loading for a particular query, affecting all [`relationship()`](relationship_ap
 -mapped attributes not otherwise specified in the [`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query").
 通过将字符串`'*'`作为参数传递给以下任何选项，可以使用此功能：
 
-    session.query(MyClass).options(lazyload('*'))
+    session.query(MyClass).options(lazyload('*'))plain
 
 在上面，`lazyload('*')`选项将取代用于该查询的所有[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构的`lazy`设置，那些使用`'dynamic'`风格的加载。例如，如果某些关系指定了`lazy='joined'`或`lazy='subquery'`，则使用`lazyload('*')`所有这些关系使用`'select'`加载，例如在访问每个属性时发出一条 SELECT 语句。
 
 该选项不会取代查询中声明的加载器选项，如[`eagerload()`](#sqlalchemy.orm.eagerload "sqlalchemy.orm.eagerload")，[`subqueryload()`](#sqlalchemy.orm.subqueryload "sqlalchemy.orm.subqueryload")等。下面的查询仍将使用`widget`关系的连接加载：
 
-    session.query(MyClass).options(plainplain
+    session.query(MyClass).options(plain
                                 lazyload('*'),
                                 joinedload(MyClass.widget)
                             )
@@ -210,7 +210,7 @@ Above, `ORDER BY addresses.email_address` is not
 valid since `addresses` is not in the FROM list.
 加载`User`通过电子邮件地址记录和订购的正确方法是使用[`Query.join()`](query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")：
 
-    >>> jack = session.query(User).\plainplain
+    >>> jack = session.query(User).\
     ... join(User.addresses).\
     ... filter(User.name=='jack').\
     ... order_by(Address.email_address).all()
@@ -270,7 +270,7 @@ are returned.
 
 通过将[`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")的使用更改为另一种加载类型，我们可以更改集合的加载方式，完全独立于用于检索我们想要的实际`User`行的SQL。下面我们将[`joinedload()`](#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")改成[`subqueryload()`](#sqlalchemy.orm.subqueryload "sqlalchemy.orm.subqueryload")：
 
-    >>> jack = session.query(User).\plainplain
+    >>> jack = session.query(User).\
     ... join(User.addresses).\
     ... options(subqueryload(User.addresses)).\
     ... filter(User.name=='jack').\
@@ -361,7 +361,7 @@ needs to be a full path from the starting entity.
 
 或者使用类绑定描述符：
 
-    query(User).options(contains_eager(User.orders).contains_eager(Order.items))
+    query(User).options(contains_eager(User.orders).contains_eager(Order.items))plain
 
 ### 使用contains\_eager()加载自定义过滤的收集结果[¶](#using-contains-eager-to-load-a-custom-filtered-collection-result "Permalink to this headline")
 
@@ -395,7 +395,7 @@ methods are used.
 
 由于这些原因，当需要一个对象加上一组自定义的相关对象时，更愿意在元组中返回单独的字段而不是人为改变集合：
 
-    q = session.query(User, Address).join(User.addresses).\plain
+    q = session.query(User, Address).join(User.addresses).\
                 filter(Address.email.like('%ed%'))
 
 ### 任意语句的高级用法[¶](#advanced-usage-with-arbitrary-statements "Permalink to this headline")
@@ -457,7 +457,7 @@ ORM 在加载相关对象时不会考虑 backrefs，它将“一对一”视为�
 
 由于`b.a`与`a1`的值相同，因此该 SELECT 是多余的。我们可以创建一个有效规则来为我们填充这个：
 
-    from sqlalchemy import eventplainplain
+    from sqlalchemy import event
     from sqlalchemy.orm import attributes
 
     @event.listens_for(A, "load")
@@ -477,10 +477,10 @@ ORM 在加载相关对象时不会考虑 backrefs，它将“一对一”视为�
 Relationship Loader API [¶](#relationship-loader-api "Permalink to this headline")
 ----------------------------------------------------------------------------------
 
-` sqlalchemy.orm。 T0>  contains_alias  T1> （ T2> 别名 T3> ） T4> ¶ T5 >`{.descclassname}
+`sqlalchemy.orm。 T0>  contains_alias  T1> （ T2> 别名 T3> ） T4> ¶ T5 >`{.descclassname}
 :   返回将向[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")指示主表已被别名的`MapperOption`。
 
-    这是一个很少用的选项，以适应[`contains_eager()`](#sqlalchemy.orm.contains_eager "sqlalchemy.orm.contains_eager")与使用别名父表的用户定义SELECT语句结合使用的情况。例如。：
+    这是一个很少用的选项，以适应[`contains_eager()`](#sqlalchemy.orm.contains_eager "sqlalchemy.orm.contains_eager")与使用别名父表的用户定义SELECT语句结合使用的情况。例如。：plain
 
         # define an aliased UNION called 'ulist'
         ulist = users.select(users.c.user_id==7).\
@@ -569,7 +569,7 @@ Relationship Loader API [¶](#relationship-loader-api "Permalink to this headlin
  `sqlalchemy.orm.`{.descclassname}`joinedload`{.descname}(*\*keys*, *\*\*kw*)[¶](#sqlalchemy.orm.joinedload "Permalink to this definition")
 :   表明给定的属性应该使用连接的预加载加载。
 
-    该函数是[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")接口的一部分，并支持方法链接和独立操作。plain
+    该函数是[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")接口的一部分，并支持方法链接和独立操作。
 
     例子：
 
@@ -717,10 +717,10 @@ Relationship Loader API [¶](#relationship-loader-api "Permalink to this headlin
 
     [`relationship.lazy`](relationship_api.html#sqlalchemy.orm.relationship.params.lazy "sqlalchemy.orm.relationship")
 
-` sqlalchemy.orm。 T0>  subqueryload_all  T1> （ T2>  *键 T3> ） T4> ¶ T5>`{.descclassname}
+`sqlalchemy.orm。 T0>  subqueryload_all  T1> （ T2>  *键 T3> ） T4> ¶ T5>`{.descclassname}
 :   为[`orm.subqueryload()`](#sqlalchemy.orm.subqueryload "sqlalchemy.orm.subqueryload")生成一个独立的“全部”选项。
 
-    从版本0.9.0开始弃用：“\_all()”样式被方法链接取代，例如：
+    从版本0.9.0开始弃用：“\_all()”样式被方法链接取代，例如：plain
 
         session.query(MyClass).options(
             subqueryload("someattribute").subqueryload("anotherattribute")

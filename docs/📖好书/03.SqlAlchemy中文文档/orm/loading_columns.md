@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy 中文文档
   - orm
 tags:
-  - 
 ---
 加载列[¶](#loading-columns "Permalink to this headline")
 ========================================================
@@ -19,7 +18,7 @@ tags:
 
 此功能允许仅在直接访问时加载表的特定列，而不是使用[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")查询实体的时间。这个功能在有人想避免把无用但又很大的 text 字段或者二进制字段加载到内存时十分有效可以使用[`orm.deferred()`](#sqlalchemy.orm.deferred "sqlalchemy.orm.deferred")函数将各个列标记为“延迟”，从而可以单独延迟加载各个列，也可以将它们放入到一起加载的组中。在下面的例子中，我们定义了一个映射，当个人首次引用每个属性时，将在单独的单行 SELECT 语句中加载`.excerpt`和`.photo`对象实例：
 
-    from sqlalchemy.orm import deferredplain
+    from sqlalchemy.orm import deferred
     from sqlalchemy import Integer, String, Text, Binary, Column
 
     class Book(Base):
@@ -64,7 +63,7 @@ attributes which are marked with a “group” can be undeferred using
 [`orm.undefer_group()`](#sqlalchemy.orm.undefer_group "sqlalchemy.orm.undefer_group"),
 sending in the group name:
 
-    from sqlalchemy.orm import undefer_groupplainplain
+    from sqlalchemy.orm import undefer_groupplain
 
     query = session.query(Book)
     query.options(undefer_group('photos')).all()
@@ -73,7 +72,7 @@ sending in the group name:
 
 使用[`orm.load_only()`](#sqlalchemy.orm.load_only "sqlalchemy.orm.load_only")可以选择任意一组列作为“仅加载”列，这些列将在推迟给定实体上的所有其他列时加载。
 
-    from sqlalchemy.orm import load_onlyplainplain
+    from sqlalchemy.orm import load_onlyplain
 
     session.query(Book).options(load_only("summary", "excerpt"))
 
@@ -83,7 +82,7 @@ sending in the group name:
 
 要在加载多种类型实体的[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")中指定列延迟选项，[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")对象可以指定启动哪个父实体：
 
-    from sqlalchemy.orm import Loadplain
+    from sqlalchemy.orm import Load
 
     query = session.query(Book, Author).join(Book.author)
     query = query.options(
@@ -93,7 +92,7 @@ sending in the group name:
 
 为了沿着各种关系的路径指定列延期选项，选项支持链接，每个关系的加载样式首先被指定，然后链接到延期选项。例如，要加载`Book`实例，然后加入-eager-加载`Author`，然后将延迟选项应用于`Author`实体：
 
-    from sqlalchemy.orm import joinedloadplainplain
+    from sqlalchemy.orm import joinedload
 
     query = session.query(Book)
     query = query.options(
@@ -102,7 +101,7 @@ sending in the group name:
 
 在父关系的加载样式应该保持不变的情况下，使用[`orm.defaultload()`](loading_relationships.html#sqlalchemy.orm.defaultload "sqlalchemy.orm.defaultload")：
 
-    from sqlalchemy.orm import defaultloadplainplain
+    from sqlalchemy.orm import defaultload
 
     query = session.query(Book)
     query = query.options(
@@ -116,7 +115,7 @@ sending in the group name:
  `sqlalchemy.orm.`{.descclassname}`deferred`{.descname}(*\*columns*, *\*\*kw*)[¶](#sqlalchemy.orm.deferred "Permalink to this definition")
 :   指示一个基于列的映射属性，默认情况下将不会加载，除非被访问。
 
-    参数：plainplainplain
+    参数：
 
     -   **\*列** [¶](#sqlalchemy.orm.deferred.params.*columns) -
         要映射的列。这通常是一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象，但是为了支持在同一个属性下映射多个列，支持一个集合。
@@ -130,7 +129,7 @@ sending in the group name:
  `sqlalchemy.orm.`{.descclassname}`defer`{.descname}(*key*, *\*addl\_attrs*)[¶](#sqlalchemy.orm.defer "Permalink to this definition")
 :   表明给定的面向列的属性应该被推迟，例如，直到访问才加载。
 
-    该函数是[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")接口的一部分，并支持方法链接和独立操作。plainplainplainplain
+    该函数是[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")接口的一部分，并支持方法链接和独立操作。
 
     例如。：
 
@@ -173,7 +172,7 @@ sending in the group name:
 `sqlalchemy.orm。 T0>  LOAD_ONLY  T1> （ T2>  * ATTRS  T3> ） T4> ¶ T5>`{.descclassname}
 :   表明对于一个特定的实体，只应该加载给定的基于列的属性名称列表；所有其他人将被推迟。
 
-    该函数是[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")接口的一部分，并支持方法链接和独立操作。plainplain
+    该函数是[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")接口的一部分，并支持方法链接和独立操作。
 
     示例 - 给定类`User`，仅加载`name`和`fullname`属性：
 
@@ -197,7 +196,7 @@ sending in the group name:
  `sqlalchemy.orm.`{.descclassname}`undefer`{.descname}(*key*, *\*addl\_attrs*)[¶](#sqlalchemy.orm.undefer "Permalink to this definition")
 :   表明给定的面向列的属性应该是未定的，例如，在整个实体的 SELECT 语句内指定。
 
-    未定位的列通常在映射上设置为[`deferred()`](#sqlalchemy.orm.deferred "sqlalchemy.orm.deferred")属性。plainplainplain
+    未定位的列通常在映射上设置为[`deferred()`](#sqlalchemy.orm.deferred "sqlalchemy.orm.deferred")属性。plain
 
     该函数是[`Load`](query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")接口的一部分，并支持方法链接和独立操作。
 
@@ -229,7 +228,7 @@ sending in the group name:
 `sqlalchemy.orm。 T0>  undefer_group  T1> （ T2> 名称 T3> ） T4> ¶ T5 >`{.descclassname}
 :   指出给定的延期组名称中的列应该是未定的。
 
-    未定位的列在映射上设置为[`deferred()`](#sqlalchemy.orm.deferred "sqlalchemy.orm.deferred")属性并包含“组”名称。plainplain
+    未定位的列在映射上设置为[`deferred()`](#sqlalchemy.orm.deferred "sqlalchemy.orm.deferred")属性并包含“组”名称。
 
     例如：
 
@@ -255,11 +254,11 @@ sending in the group name:
 
 [`Bundle`](query.html#sqlalchemy.orm.query.Bundle "sqlalchemy.orm.query.Bundle")可用于在一个名称空间下查询列组。
 
-版本0.9.0中的新功能
+版本 0.9.0 中的新功能
 
 该捆绑允许列组合在一起：
 
-    from sqlalchemy.orm import Bundle
+    from sqlalchemy.orm import Bundleplain
 
     bn = Bundle('mybundle', MyClass.data1, MyClass.data2)
     for row in session.query(bn).filter(bn.c.data1 == 'd1'):
@@ -278,11 +277,11 @@ sending in the group name:
                         )
             return proc
 
-在版本1.0中改变： `proc()`可调用现在传递给自定义[`Bundle`](query.html#sqlalchemy.orm.query.Bundle "sqlalchemy.orm.query.Bundle")类的`create_row_processor()`只接受一个“行”参数。
+在版本 1.0 中改变： `proc()`可调用现在传递给自定义[`Bundle`](query.html#sqlalchemy.orm.query.Bundle "sqlalchemy.orm.query.Bundle")类的`create_row_processor()`只接受一个“行”参数。
 
 上述包的结果将返回字典值：
 
-    bn = DictBundle('mybundle', MyClass.data1, MyClass.data2)plain
+    bn = DictBundle('mybundle', MyClass.data1, MyClass.data2)
     for row in session.query(bn).filter(bn.c.data1 == 'd1'):
         print(row.mybundle['data1'], row.mybundle['data2'])
 

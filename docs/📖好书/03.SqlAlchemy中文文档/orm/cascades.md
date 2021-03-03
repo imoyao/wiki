@@ -17,7 +17,7 @@ tags:
 
 在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中使用[`cascade`](relationship_api.html#sqlalchemy.orm.relationship.params.cascade "sqlalchemy.orm.relationship")选项配置级联行为：
 
-    class Order(Base):plainplainplainplain
+    class Order(Base):plain
         __tablename__ = 'order'
 
         items = relationship("Item", cascade="all, delete-orphan")
@@ -25,7 +25,7 @@ tags:
 
 要设置 backref 上的级联，同一个标志可以与[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")函数一起使用，该函数最终将其参数返回给[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")：
 
-    class Item(Base):plain
+    class Item(Base):
         __tablename__ = 'item'
 
         order = relationship("Order",
@@ -56,14 +56,14 @@ all the objects associated with it via this [`relationship()`](relationship_api.
 should also be added to that same [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session").
 假设我们有一个包含两个相关对象`address1`，`address2`的对象`user1`：
 
-    >>> user1 = User()plainplainplain
+    >>> user1 = User()
     >>> address1, address2 = Address(), Address()
     >>> user1.addresses = [address1, address2]
 
 If we add `user1` to a [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session"),
 it will also add `address1`, `address2` implicitly:
 
-    >>> sess = Session()plainplain
+    >>> sess = Session()
     >>> sess.add(user1)
     >>> address1 in sess
     True
@@ -73,7 +73,7 @@ we add a third object, `address3` to the
 `user1.addresses` collection, it becomes part of the
 state of that [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session"):
 
-    >>> address3 = Address()plainplainplainplain
+    >>> address3 = Address()plain
     >>> user1.append(address3)
     >>> address3 in sess
     >>> True
@@ -85,7 +85,7 @@ or in some cases a scalar attribute may also be pulled into the
 of a parent object; this is so that the flush process may handle that
 related object appropriately. 这种情况通常只能在从一个[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中删除一个对象并添加到另一个时才会出现：
 
-    >>> user1 = sess1.query(User).filter_by(id=1).first()plainplainplain
+    >>> user1 = sess1.query(User).filter_by(id=1).first()plain
     >>> address1 = user1.addresses[0]
     >>> sess1.close()   # user1, address1 no longer associated with sess1
     >>> user1.addresses.remove(address1)  # address1 no longer associated with user1
@@ -112,19 +112,19 @@ Backrefs](#backref-cascade).
 
 `delete`级联指示当“父”对象被标记为删除时，其相关的“子”对象也应被标记为删除。例如，如果我们有`User.addresses`与`delete`级联关系的配置关系：
 
-    class User(Base):plainplain
+    class User(Base):plain
         # ...
 
         addresses = relationship("Address", cascade="save-update, merge, delete")
 
 如果使用上述映射，我们有一个`User`对象和两个相关的`Address`对象：
 
-    >>> user1 = sess.query(User).filter_by(id=1).first()plainplainplainplainplain
+    >>> user1 = sess.query(User).filter_by(id=1).first()plain
     >>> address1, address2 = user1.addresses
 
 如果我们将`user1`标记为删除，在刷新操作继续之后，`address1`和`address2`也将被删除：
 
-    >>> sess.delete(user1)plainplainplain
+    >>> sess.delete(user1)plain
     >>> sess.commit()
     DELETE FROM address WHERE address.id = ?
     ((1,), (2,))
@@ -136,14 +136,14 @@ Alternatively, if our `User.addresses` relationship
 does *not* have `delete` cascade, SQLAlchemy’s
 default behavior is to instead de-associate `address1` and `address2` from `user1` by setting their foreign key reference to `NULL`. 使用如下映射：
 
-    class User(Base):plainplainplainplainplain
+    class User(Base):
         # ...
 
         addresses = relationship("Address")
 
 在删除父`User`对象时，`address`中的行不会被删除，而是取消关联：
 
-    >>> sess.delete(user1)plainplainplainplainplain
+    >>> sess.delete(user1)plain
     >>> sess.commit()
     UPDATE address SET user_id=? WHERE address.id = ?
     (None, 1)
@@ -241,7 +241,7 @@ the operation should be propagated down to referred objects.
 
 缺省情况下，[save-update](#cascade-save-update)级联发生在从 backrefs 发出的属性更改事件上。这可能是一个令人困惑的陈述，通过示范更容易描述；这意味着，给定一个这样的映射：
 
-    mapper(Order, order_table, properties={plain
+    mapper(Order, order_table, properties={
         'items' : relationship(Item, backref='order')
     })
 
@@ -250,7 +250,7 @@ assigned to the `order` attribute of an
 `Item`, the backref appends the `Item` to the `items` collection of that
 `Order`, resulting in the `save-update` cascade taking place:
 
-    >>> o1 = Order()plainplain
+    >>> o1 = Order()plain
     >>> session.add(o1)
     >>> o1 in session
     True

@@ -119,7 +119,7 @@ place.
 
 对`MyDataClass.data`成员进行任何就地更改都会将该属性标记为父对象上的“脏”：
 
-    >>> from sqlalchemy.orm import Sessionplainplain
+    >>> from sqlalchemy.orm import Session
 
     >>> sess = Session()
     >>> m1 = MyDataClass(data={'value1':'foo'})
@@ -172,7 +172,7 @@ mixin 将重新建立[`Mutable._parents`](#sqlalchemy.ext.mutable.Mutable._paren
 组合是一种特殊的 ORM 特性，它允许为单个标量属性分配一个对象值，该值表示来自底层映射表中一个或多个列的“合成”信息。通常的例子是几何“点”，并在[Composite
 Column Types](composites.html#mapper-composite)中介绍。
 
-在版本 0.7 中更改： [`orm.composite()`](composites.html#sqlalchemy.orm.composite "sqlalchemy.orm.composite")的内部已大大简化，默认情况下不再启用就地突变检测；相反，用户定义的值必须自行检测更改并将其传播给所有拥有的父项。[`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")扩展提供了helper类[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")，它是[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")类中的轻微变体。
+在版本 0.7 中更改： [`orm.composite()`](composites.html#sqlalchemy.orm.composite "sqlalchemy.orm.composite")的内部已大大简化，默认情况下不再启用就地突变检测；相反，用户定义的值必须自行检测更改并将其传播给所有拥有的父项。[`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")扩展提供了 helper 类[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")，它是[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")类中的轻微变体。
 
 与[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")一样，用户定义的组合类将[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")作为一个 mixin 的子类，并通过[`MutableComposite.changed()`](#sqlalchemy.ext.mutable.MutableComposite.changed "sqlalchemy.ext.mutable.MutableComposite.changed")方法。对于复合类，通常通过使用 Python 描述符（即`@property`）或者通过特殊的 Python 方法`__setattr__()`来进行检测。Below we expand upon the `Point` class introduced in [Composite Column
 Types](composites.html#mapper-composite) to subclass
@@ -180,7 +180,7 @@ Types](composites.html#mapper-composite) to subclass
 and to also route attribute set events via `__setattr__` to the [`MutableComposite.changed()`](#sqlalchemy.ext.mutable.MutableComposite.changed "sqlalchemy.ext.mutable.MutableComposite.changed")
 method:
 
-    from sqlalchemy.ext.mutable import MutableComposite
+    from sqlalchemy.ext.mutable import MutableCompositeplain
 
     class Point(MutableComposite):
         def __init__(self, x, y):
@@ -253,7 +253,7 @@ method is essentially equivalent to using a [`validates()`](mapped_attributes.ht
 validation routine for all attributes which make use of the custom
 composite type:
 
-    class Point(MutableComposite):
+    class Point(MutableComposite):plain
         # other Point methods
         # ...
 
@@ -289,13 +289,13 @@ dictionary. 下面我们定义一个`__getstate__`和一个`__setstate__`，它�
 
 与[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")一样，[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")增加了父对象关系状态的酸洗过程，以使[`MutableBase._parents()`](#sqlalchemy.ext.mutable.MutableBase._parents "sqlalchemy.ext.mutable.MutableBase._parents")集合恢复为所有`Point`对象。
 
-API参考[¶](#api-reference "Permalink to this headline")
+API 参考[¶](#api-reference "Permalink to this headline")
 -------------------------------------------------------
 
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableBase`{.descname} [¶](#sqlalchemy.ext.mutable.MutableBase "Permalink to this definition")
 :   通用基类为[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")和[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")。
 
-    ` _parents  T0> ¶ T1>`{.descname}
+    ` _parents  T0> ¶ T1>`{.descname}plain
     :   父对象上的字典 - \>属性名称。
 
         这个属性是一个所谓的“memoized”属性。它在第一次访问时使用新的`weakref.WeakKeyDictionary`进行初始化，并在后续访问时返回相同的对象。
@@ -325,7 +325,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `Mutable`{.descname} [¶](#sqlalchemy.ext.mutable.Mutable "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
-    Mixin定义变化事件向父对象的透明传播。plainplain
+    Mixin定义变化事件向父对象的透明传播。plain
 
     有关使用信息，请参阅[Establishing Mutability on Scalar Column
     Values](#mutable-scalars)中的示例。
@@ -423,7 +423,7 @@ API参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableComposite`{.descname} [¶](#sqlalchemy.ext.mutable.MutableComposite "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
-    Mixin，定义SQLAlchemy“复合”对象上的变化事件的透明传播给其拥有的父对象或父对象。plain
+    Mixin，定义SQLAlchemy“复合”对象上的变化事件的透明传播给其拥有的父对象或父对象。
 
     有关使用信息，请参阅[Establishing Mutability on
     Composites](#mutable-composites)中的示例。

@@ -113,7 +113,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 `sqlalchemy.ext.instrumentation。`{.descclassname} `instrumentation_finders`{.descname} *= [＆lt；函数find\_native\_user\_instrumentation\_hook at 0x7f43​​0c541230＆gt；]* [¶](#sqlalchemy.ext.instrumentation.instrumentation_finders "Permalink to this definition")
 :   可扩展的可调用序列，返回仪器实现
 
-    当一个类被注册时，每个可调用对象将被传递一个类对象。如果返回None，则会查询序列中的下一个查找器。否则，返回必须是符合sqlalchemy.ext.instrumentation.INSTRUMENTATION\_MANAGER相同准则的检测工厂。plainplain
+    当一个类被注册时，每个可调用对象将被传递一个类对象。如果返回None，则会查询序列中的下一个查找器。否则，返回必须是符合sqlalchemy.ext.instrumentation.INSTRUMENTATION\_MANAGER相同准则的检测工厂。plain
 
     默认情况下，唯一的查找程序是find\_native\_user\_instrumentation\_hook，它搜索INSTRUMENTATION\_MANAGER。如果所有查找器都返回None，则使用标准的ClassManager工具。
 

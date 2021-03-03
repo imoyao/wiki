@@ -44,7 +44,7 @@ is a regular Python class which can be directly instantiated.
 
 [`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")的用法如下所示：
 
-    from sqlalchemy import create_engineplainplainplainplainplainplain
+    from sqlalchemy import create_engineplain
     from sqlalchemy.orm import sessionmaker
 
     # an Engine, which the Session will use for connection
@@ -80,7 +80,7 @@ it?](#session-faq-whentocreate)。
 
 一个常见的场景是在模块导入时调用[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")，但是要生成一个或多个与[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")关联的[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")尚未进行。对于这个用例，[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")结构提供了[`sessionmaker.configure()`](session_api.html#sqlalchemy.orm.session.sessionmaker.configure "sqlalchemy.orm.session.sessionmaker.configure")方法，该方法将其他配置指令放入现有的[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")当构造被调用时发生：
 
-    from sqlalchemy.orm import sessionmakerplainplainplain
+    from sqlalchemy.orm import sessionmaker
     from sqlalchemy import create_engine
 
     # configure Session class with desired options
@@ -170,7 +170,7 @@ work](glossary.html#term-unit-of-work)模式具体是随着时间的推移积累
 
 Web 应用程序是最简单的情况，因为这样的应用程序已经围绕一个一致的范围构建
 -
-这是**请求**，它表示来自浏览器的传入请求，处理该请求以制定一个响应，最后将该响应交付给客户。然后，将 Web 应用程序与[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")集成是将[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")范围与请求范围关联的简单任务。[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")可以在请求开始时建立，也可以使用延迟初始化模式，该模式在需要时立即建立。然后，请求继续进行，其中一些系统已经到位，应用程序逻辑可以以与访问实际请求对象的方式相关的方式访问当前的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。当请求结束时，通常通过使用由Web框架提供的事件挂钩，[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")也被拆除。The
+这是**请求**，它表示来自浏览器的传入请求，处理该请求以制定一个响应，最后将该响应交付给客户。然后，将 Web 应用程序与[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")集成是将[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")范围与请求范围关联的简单任务。[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")可以在请求开始时建立，也可以使用延迟初始化模式，该模式在需要时立即建立。然后，请求继续进行，其中一些系统已经到位，应用程序逻辑可以以与访问实际请求对象的方式相关的方式访问当前的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。当请求结束时，通常通过使用由 Web 框架提供的事件挂钩，[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")也被拆除。The
 transaction used by the [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 may also be committed at this point, or alternatively the application
 may opt for an explicit commit pattern, only committing for those
@@ -227,7 +227,7 @@ session *externally* to functions that deal with specific data.
 
 保持会话（通常是交易）的生命周期**独立和外部**：
 
-    ### this is a **better** (but not the only) way to do it ###plain
+    ### this is a **better** (but not the only) way to do it ###
 
     class ThingOne(object):
         def go(self, session):
@@ -252,7 +252,7 @@ session *externally* to functions that deal with specific data.
 
 高级开发人员将尽量保持会话，事务和异常管理的细节，尽可能避免程序工作的细节。例如，我们可以使用[上下文管理器](http://docs.python.org/3/library/contextlib.html#contextlib.contextmanager)进一步分离关注点：
 
-    ### another way (but again *not the only way*) to do it ###plainplainplain
+    ### another way (but again *not the only way*) to do it ###plain
 
     from contextlib import contextmanager
 
@@ -290,11 +290,11 @@ Caching](examples.html#examples-caching)示例提供了实现二级缓存的模�
 使用[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")上的[`object_session()`](session_api.html#sqlalchemy.orm.session.Session.object_session "sqlalchemy.orm.session.Session.object_session")
 classmethod：
 
-    session = Session.object_session(someobject)plain
+    session = Session.object_session(someobject)
 
 更新的[Runtime Inspection API](core_inspection.html)系统也可以使用：
 
-    from sqlalchemy import inspectplainplainplainplainplain
+    from sqlalchemy import inspectplain
     session = inspect(someobject).session
 
 ### 会话是线程安全的吗？[¶](#is-the-session-thread-safe "Permalink to this headline")
@@ -351,7 +351,7 @@ Tutorial](tutorial.html)中有详细介绍，并在 query\_api\_toplevel 中进�
 
 [`add()`](session_api.html#sqlalchemy.orm.session.Session.add "sqlalchemy.orm.session.Session.add")用于在实例中放置实例。对于*transient*（即全新的）实例，这将在下一次刷新时产生 INSERT 的效果。对于*持久*（即由此会话加载）的实例，它们已经存在并且不需要被添加。*已分离*的实例（即已从会话中删除）可以使用此方法重新与会话相关联：
 
-    user1 = User(name='user1')plain
+    user1 = User(name='user1')
     user2 = User(name='user2')
     session.add(user1)
     session.add(user2)
@@ -368,7 +368,7 @@ Tutorial](tutorial.html)中有详细介绍，并在 query\_api\_toplevel 中进�
 
 [`delete()`](session_api.html#sqlalchemy.orm.session.Session.delete "sqlalchemy.orm.session.Session.delete")方法将一个实例放入要标记为已删除的 Session 对象列表中：
 
-    # mark two objects to be deletedplain
+    # mark two objects to be deleted
     session.delete(obj1)
     session.delete(obj2)
 
@@ -393,7 +393,7 @@ Tutorial](tutorial.html)中有详细介绍，并在 query\_api\_toplevel 中进�
 
 删除集合中项目的通常做法是直接使用[`delete()`](session_api.html#sqlalchemy.orm.session.Session.delete "sqlalchemy.orm.session.Session.delete")，而是使用级联行为自从从父集合中删除对象后自动调用删除。`delete-orphan`级联完成了这一点，如下例所示：
 
-    mapper(User, users_table, properties={plainplainplainplain
+    mapper(User, users_table, properties={plain
         'addresses':relationship(Address, cascade="all, delete, delete-orphan")
     })
     del user.addresses[1]
@@ -411,7 +411,7 @@ passing it to [`delete()`](session_api.html#sqlalchemy.orm.session.Session.delet
 
 对`Session.delete()`的警告是你需要有一个方便的对象来删除。查询包含一个[`delete()`](query.html#sqlalchemy.orm.query.Query.delete "sqlalchemy.orm.query.Query.delete")方法，该方法根据过滤标准删除：
 
-    session.query(User).filter(User.id==7).delete()plainplainplainplainplainplainplain
+    session.query(User).filter(User.id==7).delete()plain
 
 `Query.delete()`方法包含将会话中已存在的符合条件的对象“过期”的功能。然而，它确实有一些注意事项，包括“删除”和“删除孤立”级联不能充分表达已经加载的集合。有关更多详细信息，请参阅[`delete()`](query.html#sqlalchemy.orm.query.Query.delete "sqlalchemy.orm.query.Query.delete")的 API 文档。
 
@@ -421,11 +421,11 @@ passing it to [`delete()`](session_api.html#sqlalchemy.orm.session.Session.delet
 
 无论自动刷新设置如何，都可以通过发出[`flush()`](session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")来强制刷新：
 
-    session.flush()plain
+    session.flush()
 
 通过使用标志`autoflush=False`构造[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")，可以禁用行为的“flush-on-Query”方面：
 
-    Session = sessionmaker(autoflush=False)plainplain
+    Session = sessionmaker(autoflush=False)
 
 另外，可以随时通过设置`autoflush`标志暂时禁用自动刷新：
 

@@ -246,7 +246,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`OrderedSetAgg`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.OrderedSetAgg "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    定义一个返回类型基于传递给[`FunctionElement.within_group()`](#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")方法的表达式定义的排序表达式类型的函数。plain
+    定义一个返回类型基于传递给[`FunctionElement.within_group()`](#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")方法的表达式定义的排序表达式类型的函数。
 
     `array_for_multi_clause`{.descname} *= False* [¶](#sqlalchemy.sql.functions.OrderedSetAgg.array_for_multi_clause "Permalink to this definition")
     :   
@@ -543,7 +543,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`percentile_cont`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.percentile_cont "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.OrderedSetAgg`](#sqlalchemy.sql.functions.OrderedSetAgg "sqlalchemy.sql.functions.OrderedSetAgg")
 
-    实现`percentile_cont`有序集合函数。
+    实现`percentile_cont`有序集合函数。plain
 
     该函数必须与[`FunctionElement.within_group()`](#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")修饰符一起使用，以提供一个排序表达式来进行操作。
 
@@ -629,7 +629,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`sum`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.sum "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.ReturnTypeFromArgs`](#sqlalchemy.sql.functions.ReturnTypeFromArgs "sqlalchemy.sql.functions.ReturnTypeFromArgs")
 
-    `标识符`{.descname} *='sum'* [¶](#sqlalchemy.sql.functions.sum.identifier "Permalink to this definition")
+    `标识符`{.descname} *='sum'* [¶](#sqlalchemy.sql.functions.sum.identifier "Permalink to this definition")plain
     :   
 
     `name`{.descname} *='sum'* [¶](#sqlalchemy.sql.functions.sum.name "Permalink to this definition")

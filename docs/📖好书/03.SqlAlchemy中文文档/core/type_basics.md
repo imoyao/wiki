@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy中文文档
   - core
 tags:
-  - 
 ---
 列和数据类型[¶](#module-sqlalchemy.types "Permalink to this headline")
 ======================================================================
@@ -34,7 +33,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
 *class* `sqlalchemy.types。`{.descclassname} `BigInteger`{.descname} [¶](#sqlalchemy.types.BigInteger "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Integer`](#sqlalchemy.types.Integer "sqlalchemy.types.Integer")
 
-    更大的`int`整数的类型。plain
+    更大的`int`整数的类型。
 
     通常在DDL中生成一个`BIGINT`，否则就像Python端的普通[`Integer`](#sqlalchemy.types.Integer "sqlalchemy.types.Integer")一样。
 
@@ -549,7 +548,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
 
         参数与[`Text`](#sqlalchemy.types.Text "sqlalchemy.types.Text")相同，但`convert_unicode`默认为`True`。
 
-SQL标准和多个供应商类型[¶](#sql-standard-and-multiple-vendor-types "Permalink to this headline")
+SQL 标准和多个供应商类型[¶](#sql-standard-and-multiple-vendor-types "Permalink to this headline")
 ------------------------------------------------------------------------------------------------
 
 此类型的类型是指属于SQL标准一部分的类型，或可能在数据库后端子集中找到的类型。Unlike
@@ -735,7 +734,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `BLOB`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.BLOB "Permalink to this definition")
 :   基础：[`sqlalchemy.types.LargeBinary`](#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
 
-    SQL BLOB类型。
+    SQL BLOB类型。plain
 
  *class*`sqlalchemy.types.`{.descclassname}`BOOLEAN`{.descname}(*create\_constraint=True*, *name=None*, *\_create\_events=True*)[¶](#sqlalchemy.types.BOOLEAN "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Boolean`](#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")
@@ -745,7 +744,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `CHAR`{.descname} （ *length = None*，*= None*，*convert\_unicode = False*，*unicode\_error = None*，*\_warn\_on\_bytestring = False ） [¶ T10\>](#sqlalchemy.types.CHAR "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.String`](#sqlalchemy.types.String "sqlalchemy.types.String")
 
-    SQL CHAR类型。
+    SQL CHAR类型。plain
 
 *class* `sqlalchemy.types。`{.descclassname} `CLOB`{.descname} （ *length =无*，*= None*，*convert\_unicode = False*，*unicode\_error = None*，*\_warn\_on\_bytestring = False ） [¶ T10\>](#sqlalchemy.types.CLOB "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.Text`](#sqlalchemy.types.Text "sqlalchemy.types.Text")
@@ -921,12 +920,12 @@ backends that explicitly support them by name.
  *class*`sqlalchemy.types.`{.descclassname}`NUMERIC`{.descname}(*precision=None*, *scale=None*, *decimal\_return\_scale=None*, *asdecimal=True*)[¶](#sqlalchemy.types.NUMERIC "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Numeric`](#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")
 
-    SQL NUMERIC类型。
+    SQL NUMERIC类型。plain
 
 *class* `sqlalchemy.types。`{.descclassname} `REAL`{.descname} （ *precision = None*，*asdecimal = False*，*decimal\_return\_scale = None*，*\*\* kwargs* ） [¶](#sqlalchemy.types.REAL "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Float`](#sqlalchemy.types.Float "sqlalchemy.types.Float")
 
-    SQL REAL类型。plainplain
+    SQL REAL类型。
 
 *class* `sqlalchemy.types。`{.descclassname} `SMALLINT`{.descname} [¶](#sqlalchemy.types.SMALLINT "Permalink to this definition")
 :   基础：[`sqlalchemy.types.SmallInteger`](#sqlalchemy.types.SmallInteger "sqlalchemy.types.SmallInteger")
@@ -936,7 +935,7 @@ backends that explicitly support them by name.
  *class*`sqlalchemy.types.`{.descclassname}`TEXT`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.types.TEXT "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Text`](#sqlalchemy.types.Text "sqlalchemy.types.Text")
 
-    SQL TEXT类型。plainplain
+    SQL TEXT类型。
 
  *class*`sqlalchemy.types.`{.descclassname}`TIME`{.descname}(*timezone=False*)[¶](#sqlalchemy.types.TIME "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Time`](#sqlalchemy.types.Time "sqlalchemy.types.Time")
