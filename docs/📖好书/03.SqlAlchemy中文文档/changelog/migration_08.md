@@ -28,7 +28,7 @@ SQLAlchemy 版本将在 1.0 版中关闭，而 0.5 版以后的每个新版本�
 平台支持[¶](#platform-support "Permalink to this headline")
 -----------------------------------------------------------
 
-### 针对Python 2.5及更高版本[¶](#targeting-python-2-5-and-up-now "Permalink to this headline")
+### 针对 Python 2.5 及更高版本[¶](#targeting-python-2-5-and-up-now "Permalink to this headline")
 
 SQLAlchemy 0.8 将针对 Python 2.5 并转发； Python 2.4 的兼容性正在被丢弃。
 
@@ -114,7 +114,7 @@ SQLAlchemy 最终也会减少 2.5 的支持 -
 
 -   以前很难的自定义连接条件，如涉及函数和/或 CASTing 类型的连接条件，现在在大多数情况下会按预期运行：
 
-        class HostEntry(Base):plain
+        class HostEntry(Base):plainplain
             __tablename__ = 'host_entry'
 
             id = Column(Integer, primary_key=True)
@@ -130,7 +130,7 @@ SQLAlchemy 最终也会减少 2.5 的支持 -
 
     新的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")机制利用了被称为[annotations](glossary.html#term-annotations)的 SQLAlchemy 概念。这些注释也可以通过[`foreign()`](orm_relationship_api.html#sqlalchemy.orm.foreign "sqlalchemy.orm.foreign")和[`remote()`](orm_relationship_api.html#sqlalchemy.orm.remote "sqlalchemy.orm.remote")函数显式地提供给应用程序代码，作为提高高级配置可读性或直接注入精确度配置，绕过通常的加入检查试探法：
 
-        from sqlalchemy.orm import foreign, remote
+        from sqlalchemy.orm import foreign, remoteplainplain
 
         class HostEntry(Base):
             __tablename__ = 'host_entry'
@@ -167,7 +167,7 @@ ORM 模型也完全可以反映内容，但这从来就不是一个完全稳定�
 
 一些关键功能的演练如下：
 
-    >>> class User(Base):
+    >>> class User(Base):plain
     ...     __tablename__ = 'user'
     ...     id = Column(Integer, primary_key=True)
     ...     name = Column(String)
@@ -310,7 +310,7 @@ target. This method can now be used to target *any number* of target
 subtypes, by combining it with the new [`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")
 function:
 
-    # use eager loading in conjunction with with_polymorphic targets
+    # use eager loading in conjunction with with_polymorphic targetsplain
     Job_P = with_polymorphic(Job, [SubJob, ExtraJob], aliased=True)
     q = s.query(DataContainer).\
                 join(DataContainer.jobs.of_type(Job_P)).\
@@ -358,7 +358,7 @@ and [`PropComparator.has()`](orm_internals.html#sqlalchemy.orm.interfaces.PropCo
 
 Mapper 和实例事件现在可以与一个未映射的超类相关联，其中这些事件将被映射到这些子类时传播到子类。应该使用`propagate=True`标志。此功能允许将事件与声明性基类关联：
 
-    from sqlalchemy.ext.declarative import declarative_base
+    from sqlalchemy.ext.declarative import declarative_baseplain
 
     Base = declarative_base()
 
@@ -378,7 +378,7 @@ Mapper 和实例事件现在可以与一个未映射的超类相关联，其中�
 
 Declarative 的一个关键特性是能够使用其字符串名称引用其他映射类。类名注册表现在对给定类的拥有模块和包是敏感的。类可以通过表达式中的虚线名称引用：
 
-    class Snack(Base):
+    class Snack(Base):plain
         # ...
 
         peanuts = relationship("nuts.Peanut",
@@ -416,7 +416,7 @@ Declarative 的一个关键特性是能够使用其字符串名称引用其他�
 
 [＃2485 T0\>](http://www.sqlalchemy.org/trac/ticket/2485)
 
-### ORM类现在被核心构造接受[¶](#orm-classes-now-accepted-by-core-constructs "Permalink to this headline")
+### ORM 类现在被核心构造接受[¶](#orm-classes-now-accepted-by-core-constructs "Permalink to this headline")
 
 While the SQL expressions used with [`Query.filter()`](orm_query.html#sqlalchemy.orm.query.Query.filter "sqlalchemy.orm.query.Query.filter"),
 such as `User.id == 5`, have always been compatible
@@ -503,7 +503,7 @@ Core中的新操作系统添加了一直缺少的钩子，它将新的和重载�
 
 例如，要将对数支持添加到[`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")类型中：
 
-    from sqlalchemy.types import Numeric
+    from sqlalchemy.types import Numericplainplain
     from sqlalchemy.sql import func
 
     class CustomNumeric(Numeric):
@@ -599,7 +599,7 @@ Processing](core_custom_types.html#types-sql-value-processing)
 [New Class/Object Inspection
 System](#feature-orminspection-08)中引入的[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数也适用于核心。应用于[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")时，它会生成一个[`Inspector`](core_reflection.html#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")对象：
 
-    from sqlalchemy import inspect
+    from sqlalchemy import inspectplain
     from sqlalchemy import create_engine
 
     engine = create_engine("postgresql://scott:tiger@localhost/test")
@@ -677,7 +677,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 [`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型将接受可选的“维度”参数，将其固定为固定数量的维度，并在检索结果时大大提高效率：
 
-    # old way, still works since PG supports N-dimensions per row:plain
+    # old way, still works since PG supports N-dimensions per row:plainplain
     Column("my_array", postgresql.ARRAY(Integer))
 
     # new way, will render ARRAY with correct number of [] in DDL,
@@ -693,7 +693,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 在 SELECT 中切片访问：
 
-    result = conn.execute(
+    result = conn.execute(plain
         select([mytable.c.arraycol[2:4]])
     )
 
@@ -729,7 +729,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 SQLite 没有内置的 DATE，TIME 或 DATETIME 类型，而是提供了一些支持将日期和时间值存储为字符串或整数。SQLite 的日期和时间类型在 0.8 中得到了增强，可以针对特定格式进行更多的配置，包括“微秒”部分是可选的，以及其他几乎所有的部分。
 
-    Column('sometimestamp', sqlite.DATETIME(truncate_microseconds=True))
+    Column('sometimestamp', sqlite.DATETIME(truncate_microseconds=True))plain
     Column('sometimestamp', sqlite.DATETIME(
                         storage_format=(
                                     "%(year)04d%(month)02d%(day)02d"
@@ -914,7 +914,7 @@ NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基
 
 以前有必要调用[`Query.correlate()`](orm_query.html#sqlalchemy.orm.query.Query.correlate "sqlalchemy.orm.query.Query.correlate")以使列或 WHERE 子查询与父项相关联：
 
-    subq = session.query(Entity.value).\plain
+    subq = session.query(Entity.value).\plainplain
                     filter(Entity.id==Parent.entity_id).\
                     correlate(Parent).\
                     as_scalar()
@@ -922,7 +922,7 @@ NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基
 
 这是一个普通的`select()`构造的相反行为，默认情况下会采用自动关联。0.8 中的上述语句将自动关联：
 
-    subq = session.query(Entity.value).\
+    subq = session.query(Entity.value).\plain
                     filter(Entity.id==Parent.entity_id).\
                     as_scalar()
     session.query(Parent).filter(subq=="some value")
@@ -953,7 +953,7 @@ actually used in that context.
 
 在此更改之前，上述内容将返回：
 
-    SELECT t1.x, t2.y FROM t2
+    SELECT t1.x, t2.y FROM t2plain
 
 这是无效的 SQL，因为“t1”在任何 FROM 子句中都没有引用。
 
@@ -975,7 +975,7 @@ actually used in that context.
 
 [＃2668 T0\>](http://www.sqlalchemy.org/trac/ticket/2668)
 
-### 现在，create\_all()和drop\_all()将授予一个空列表[¶](#create-all-and-drop-all-will-now-honor-an-empty-list-as-such "Permalink to this headline")
+### 现在，create\_all()和 drop\_all()将授予一个空列表[¶](#create-all-and-drop-all-will-now-honor-an-empty-list-as-such "Permalink to this headline")
 
 现在，方法[`MetaData.create_all()`](core_metadata.html#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")和[`MetaData.drop_all()`](core_metadata.html#sqlalchemy.schema.MetaData.drop_all "sqlalchemy.schema.MetaData.drop_all")将接受[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的列表，这些对象是空的，并且不会发出任何 CREATE 或 DROP 语句。以前，一个空的列表与为集合传递`None`相同，并且无条件地为所有项目发出 CREATE / DROP。
 
@@ -1019,7 +1019,7 @@ x”这样的比较会发生同样的事情，总的来说，这种猜测级别�
 
 表达式系统的用户知道[`Select.apply_labels()`](core_selectable.html#sqlalchemy.sql.expression.Select.apply_labels "sqlalchemy.sql.expression.Select.apply_labels")为每个列名添加表名，影响[`Select.c`](core_selectable.html#sqlalchemy.sql.expression.Select.c "sqlalchemy.sql.expression.Select.c")中可用的名称：
 
-    s = select([table1]).apply_labels()
+    s = select([table1]).apply_labels()plain
     s.c.table1_col1
     s.c.table1_col2
 
@@ -1067,7 +1067,7 @@ in both cases:
 
 0.7 添加了一个名为`column_reflect`的新事件，这样可以反映出列的反射，因为每个列都反映出来。我们得到这个事件有点不对，因为事件没有办法获取用于反射的当前`Inspector`和`Connection`，在来自数据库的附加信息的情况下是必要的。由于这是一个尚未广泛使用的新事件，因此我们将直接向其中添加`inspector`参数：
 
-    @event.listens_for(Table, "column_reflect")
+    @event.listens_for(Table, "column_reflect")plain
     def listen_for_col(inspector, table, column_info):
         # ...
 
@@ -1083,7 +1083,7 @@ MySQL 方言执行两个调用，一个是非常昂贵的，用于从数据库�
 
 引用`insert()`或`update()`构造中不存在的列会引发错误而不是警告：
 
-    t1 = table('t1', column('x'))plain
+    t1 = table('t1', column('x'))plainplainplain
     t1.insert().values(x=5, z=5) # raises "Unconsumed column names: z"
 
 [＃2415 T0\>](http://www.sqlalchemy.org/trac/ticket/2415)

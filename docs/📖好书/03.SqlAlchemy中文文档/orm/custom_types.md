@@ -673,7 +673,7 @@ expression. 例如，如果我们针对表达式的[`label()`](sqlelement.html#s
 
 对于直接对内置类型进行子类化的示例，我们继承[`postgresql.BYTEA`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.BYTEA "sqlalchemy.dialects.postgresql.BYTEA")以提供一个`PGPString`，它将利用 Postgresql `pgcrypto`透明地扩展到 encrpyt /解密值：
 
-    from sqlalchemy import create_engine, String, select, func, \
+    from sqlalchemy import create_engine, String, select, func, \plain
             MetaData, Table, Column, type_coerce
 
     from sqlalchemy.dialects.postgresql import BYTEA
@@ -754,7 +754,7 @@ base class defines a root “comparison” implementation
 and many specific types provide their own sub-implementations of this
 class. 用户定义的[`TypeEngine.Comparator`](type_api.html#sqlalchemy.types.TypeEngine.Comparator "sqlalchemy.types.TypeEngine.Comparator")实现可以直接构建到特定类型的简单子类中，以覆盖或定义新的操作。下面，我们创建一个覆盖[`ColumnOperators.__add__()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.__add__ "sqlalchemy.sql.operators.ColumnOperators.__add__")运算符的[`Integer`](type_basics.html#sqlalchemy.types.Integer "sqlalchemy.types.Integer")子类。
 
-    from sqlalchemy import Integer
+    from sqlalchemy import Integerplain
 
     class MyInt(Integer):
         class comparator_factory(Integer.Comparator):
@@ -778,7 +778,7 @@ are exposed on an owning SQL expression using a `__getattr__` scheme, which expo
 onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement").
 例如，要将`log()`函数添加到整数：
 
-    from sqlalchemy import Integer, func
+    from sqlalchemy import Integer, funcplain
 
     class MyInt(Integer):
         class comparator_factory(Integer.Comparator):
@@ -792,7 +792,7 @@ onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.Colu
 
 一元操作也是可能的。例如，要添加 Postgresql 阶乘运算符的实现，我们将[`UnaryExpression`](sqlelement.html#sqlalchemy.sql.expression.UnaryExpression "sqlalchemy.sql.expression.UnaryExpression")结构与[`custom_op`](sqlelement.html#sqlalchemy.sql.operators.custom_op "sqlalchemy.sql.operators.custom_op")结合起来以产生阶乘表达式：
 
-    from sqlalchemy import Integerplain
+    from sqlalchemy import Integerplainplain
     from sqlalchemy.sql.expression import UnaryExpression
     from sqlalchemy.sql import operators
 

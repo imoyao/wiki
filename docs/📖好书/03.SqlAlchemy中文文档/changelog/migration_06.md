@@ -44,7 +44,7 @@ URL，它将使用 psycopg2：
 
 但是，要指定特定的 DBAPI 后端（例如 pg8000），请使用加号“+”将其添加到 URL 的“协议”部分中：
 
-    create_engine('postgresql+pg8000://scott:tiger@localhost/test')plain
+    create_engine('postgresql+pg8000://scott:tiger@localhost/test')plainplain
 
 重要的方言链接：
 
@@ -82,17 +82,17 @@ URL，它将使用 psycopg2：
 
 ### 重要的表达语言Gotcha [¶](#an-important-expression-language-gotcha "Permalink to this headline")
 
-对于可能影响某些应用程序的表达式语言，有一个非常重要的行为变化。Python布尔表达式的布尔值，即`==`，`!=`以及类似的，现在可以精确地评估正在比较的两个子对象。
+对于可能影响某些应用程序的表达式语言，有一个非常重要的行为变化。Python 布尔表达式的布尔值，即`==`，`!=`以及类似的，现在可以精确地评估正在比较的两个子对象。
 
 我们知道，将一个`ClauseElement`与任何其他对象进行比较都会返回另一个`ClauseElement`：
 
-    >>> from sqlalchemy.sql import column
+    >>> from sqlalchemy.sql import columnplain
     >>> column('foo') == 5
     <sqlalchemy.sql.expression._BinaryExpression object at 0x1252490>
 
 这样一来，Python 表达式在转换为字符串时就会生成 SQL 表达式：
 
-    >>> str(column('foo') == 5)plain
+    >>> str(column('foo') == 5)plainplain
     'foo = :foo_1'
 
 但是如果我们这样说会发生什么？
@@ -119,7 +119,7 @@ URL，它将使用 psycopg2：
 
 如果`expression`是二进制子句，则不会评估。由于不应该使用上述模式，因此如果在布尔上下文中调用，基`ClauseElement`现在会引发异常：
 
-    >>> bool(c)
+    >>> bool(c)plainplain
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
       ...
@@ -142,7 +142,7 @@ URL，它将使用 psycopg2：
 
 SQLAlchemy 中的“executemany”对应于对`execute()`的调用，传递一组绑定参数集：
 
-    connection.execute(table.insert(), {'data':'row1'}, {'data':'row2'}, {'data':'row3'})
+    connection.execute(table.insert(), {'data':'row1'}, {'data':'row2'}, {'data':'row3'})plain
 
 当`Connection`对象发送给定的用于编译的`insert()`结构时，它将传递给第一组绑定的键名传递给编译器，以确定该语句的 VALUES 子句。熟悉这个构造的用户会知道其余字典中存在的其他键没有任何影响。What’s
 different now is that all subsequent dictionaries need to include at
@@ -214,20 +214,20 @@ extension versus not.
 
 `sqlalchemy.schema`包得到了一些长期需要的关注。最明显的变化是新扩展的 DDL 系统。在 SQLAlchemy 中，从版本 0.5 开始可以创建自定义的 DDL 字符串，并将它们与表或元数据对象关联：
 
-    from sqlalchemy.schema import DDLplain
+    from sqlalchemy.schema import DDLplainplainplainplain
 
     DDL('CREATE TRIGGER users_trigger ...').execute_at('after-create', metadata)
 
 现在，全套的 DDL 结构在相同的系统下可用，包括 CREATE TABLE，ADD
 CONSTRAINT 等。:
 
-    from sqlalchemy.schema import Constraint, AddConstraint
+    from sqlalchemy.schema import Constraint, AddConstraintplainplain
 
     AddContraint(CheckConstraint("value > 5")).execute_at('after-create', mytable)
 
 此外，所有的 DDL 对象现在都是普通的`ClauseElement`对象，就像任何其他 SQLAlchemy 表达式对象一样：
 
-    from sqlalchemy.schema import CreateTableplain
+    from sqlalchemy.schema import CreateTableplainplain
 
     create = CreateTable(mytable)
 
@@ -322,7 +322,7 @@ the parent connection. 池日志记录发送到`log.info()`和`log.debug()` - �
 
 `from_engine()`方法在某些情况下会为后端特定的检查器提供额外的功能，例如提供`get_table_oid()`方法的 Postgresql：
 
-    my_engine = create_engine('postgresql://...')plain
+    my_engine = create_engine('postgresql://...')plainplain
     pg_insp = Inspector.from_engine(my_engine)
 
     print(pg_insp.get_table_oid('my_table'))
@@ -335,7 +335,7 @@ RETURNING 子句。目前不支持任何其他后端。
 
 以与`select()`结构相同的方式给出列表达式的列表，这些列的值将作为常规结果集返回：
 
-    result = connection.execute(plain
+    result = connection.execute(plainplain
                 table.insert().values(data='some data').returning(table.c.id, table.c.timestamp)
             )
     row = result.first()
@@ -475,7 +475,7 @@ JOIN，并且不会重新加载父行。
 To make room for the new subquery load feature, the existing
 `eagerload()`/`eagerload_all()` options are
 now superseded by ``` ``joinedload()`` ``` and
-``` ``joinedload_all()`` ```.
+`joinedload_all()`.
 就像`relation()`一样，旧名字在可预见的未来将继续存在。
 
 ### `lazy=False|None|True|'dynamic'` now accepts `lazy='noload'|'joined'|'subquery'|'select'|'dynamic'`[¶](#lazy-false-none-true-dynamic-now-accepts-lazy-noload-joined-subquery-select-dynamic "Permalink to this headline")
@@ -486,9 +486,9 @@ keywords for the `lazy` option on
 `select` for lazy loading (via a SELECT
 issued on attribute access), `joined` for
 joined-eager loading, `subquery` for
-subquery-eager loading, ``` ``noload`` ``` for no
+subquery-eager loading, `noload` for no
 loading should occur, and `dynamic` for a
-“dynamic” relationship. 旧的``` ``True`` ```，`False`，`None`参数仍被接受，其行为与以前一样。
+“dynamic” relationship. 旧的`True`，`False`，`None`参数仍被接受，其行为与以前一样。
 
 ### innerjoin =关于关系的 True，joinedload [¶](#innerjoin-true-on-relation-joinedload "Permalink to this headline")
 
@@ -497,7 +497,7 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
 在 mapper 级别：
 
-    mapper(Child, child)plain
+    mapper(Child, child)plainplain
     mapper(Parent, parent, properties={
         'child':relationship(Child, lazy='joined', innerjoin=True)
     })
@@ -512,7 +512,7 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
 -   多对一的关系现在会在更少的情况下触发延迟加载，包括在大多数情况下不会在更换新代码时获取“旧”值。
 
--   与连接表子类的多对一关系现在使用get()作为简单加载（称为“use\_get”条件），即`Related` - \>“Sub（Base）
+-   与连接表子类的多对一关系现在使用 get()作为简单加载（称为“use\_get”条件），即`Related` - \>“Sub（Base）
     ，而不需要根据基表重新定义主连接条件。[票：1186]
 
 -   指定具有声明列的外键，即`ForeignKey(MyRelatedClass.id)`不会破坏发生的“use\_get”条件[ticket：1492]
@@ -524,7 +524,7 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
     例如，在 0.5 这个查询中：
 
-        session.query(Address).options(eagerload(Address.user)).limit(10)plain
+        session.query(Address).options(eagerload(Address.user)).limit(10)plainplainplain
 
     会产生如下的 SQL：
 
@@ -536,7 +536,7 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
     在 0.6 中，该逻辑更加敏感，并且可以检测所有渴望的加载器是否表示多对一，在这种情况下，渴望加入不会影响 rowcount：
 
-        SELECT * FROM addresses LEFT OUTER JOIN users AS users_1 ON users_1.id = addresses.user_id LIMIT 10plain
+        SELECT * FROM addresses LEFT OUTER JOIN users AS users_1 ON users_1.id = addresses.user_id LIMIT 10plainplain
 
 ### 加入表继承的可变主键[¶](#mutable-primary-keys-with-joined-table-inheritance "Permalink to this headline")
 

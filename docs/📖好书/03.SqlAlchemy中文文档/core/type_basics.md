@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:37
 permalink: /sqlalchemy/core/type_basics/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - core
 tags:
 ---
@@ -233,7 +233,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
  *class*`sqlalchemy.types.`{.descclassname}`Interval`{.descname}(*native=True*, *second\_precision=None*, *day\_precision=None*)[¶](#sqlalchemy.types.Interval "Permalink to this definition")
 :   基础：`sqlalchemy.types._DateAffinity`，[`sqlalchemy.types.TypeDecorator`](custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
 
-    `datetime.timedelta()`对象的类型。
+    `datetime.timedelta()`对象的类型。plain
 
     Interval类型处理`datetime.timedelta`对象。在PostgreSQL中，使用本地`INTERVAL`类型；对于其他人而言，价值被存储为相对于“时代”（1970年1月1日）的日期。
 
@@ -264,7 +264,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
 *class* `sqlalchemy.types。`{.descclassname} `LargeBinary`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.LargeBinary "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
 
-    一种大型二进制字节数据的类型。
+    一种大型二进制字节数据的类型。plainplain
 
     The [`LargeBinary`](#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
     type corresponds to a large and/or unlengthed binary type for the
@@ -493,7 +493,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
 *class* `sqlalchemy.types。`{.descclassname} `Unicode`{.descname} （ *length = None*，*\* \* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.types.Unicode "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.String`](#sqlalchemy.types.String "sqlalchemy.types.String")
 
-    一个可变长度的Unicode字符串类型。
+    一个可变长度的Unicode字符串类型。plain
 
     The [`Unicode`](#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")
     type is a [`String`](#sqlalchemy.types.String "sqlalchemy.types.String")
@@ -537,7 +537,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
 *class* `sqlalchemy.types。`{.descclassname} `UnicodeText`{.descname} （ *length = None*，*\* \* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.types.UnicodeText "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.Text`](#sqlalchemy.types.Text "sqlalchemy.types.Text")
 
-    无限长的Unicode字符串类型。
+    无限长的Unicode字符串类型。plain
 
     有关此对象的Unicode特性的详细信息，请参阅[`Unicode`](#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")。
 
@@ -551,7 +551,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
 SQL 标准和多个供应商类型[¶](#sql-standard-and-multiple-vendor-types "Permalink to this headline")
 ------------------------------------------------------------------------------------------------
 
-此类型的类型是指属于SQL标准一部分的类型，或可能在数据库后端子集中找到的类型。Unlike
+此类型的类型是指属于 SQL 标准一部分的类型，或可能在数据库后端子集中找到的类型。Unlike
 the “generic” types, the SQL standard/multi-vendor types have **no**
 guarantee of working on all backends, and will only work on those
 backends that explicitly support them by name.
@@ -560,7 +560,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `ARRAY`{.descname} （ *item\_type*，*as\_tuple = False dimensions = None，*zero\_indexes = False* ） [¶](#sqlalchemy.types.ARRAY "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.Indexable`](type_api.html#sqlalchemy.types.Indexable "sqlalchemy.types.Indexable")，[`sqlalchemy.types.Concatenable`](type_api.html#sqlalchemy.types.Concatenable "sqlalchemy.types.Concatenable")，[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    表示一个SQL数组类型。
+    表示一个SQL数组类型。plain
 
     注意
 
@@ -729,7 +729,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `BINARY`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.BINARY "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
 
-    SQL BINARY类型。plain
+    SQL BINARY类型。plainplain
 
 *class* `sqlalchemy.types。`{.descclassname} `BLOB`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.BLOB "Permalink to this definition")
 :   基础：[`sqlalchemy.types.LargeBinary`](#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
@@ -945,7 +945,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `TIMESTAMP`{.descname} （ *timezone = False* / T5\> [¶ T6\>](#sqlalchemy.types.TIMESTAMP "Permalink to this definition")
 :   基础：[`sqlalchemy.types.DateTime`](#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")
 
-    SQL TIMESTAMP类型。plain
+    SQL TIMESTAMP类型。plainplain
 
 *class* `sqlalchemy.types。`{.descclassname} `VARBINARY`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.VARBINARY "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
@@ -973,7 +973,7 @@ backends that explicitly support them by name.
 
 或者一些PostgreSQL类型：
 
-    from sqlalchemy.dialects import postgresqlplain
+    from sqlalchemy.dialects import postgresqlplainplain
 
     table = Table('foo', metadata,
         Column('ipaddress', postgresql.INET),
@@ -984,7 +984,7 @@ backends that explicitly support them by name.
 \_\_集合中提供了该后端支持的完整类型名称集合，因此简单的import
 \*或类似方式将导入为该后端实现的所有受支持类型：
 
-    from sqlalchemy.dialects.postgresql import *
+    from sqlalchemy.dialects.postgresql import *plain
 
     t = Table('mytable', metadata,
                Column('id', INTEGER, primary_key=True),

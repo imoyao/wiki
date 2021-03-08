@@ -20,9 +20,9 @@ tags:
 
 SQL中的*外键*是表级结构，限制该表中的一个或多个列，使得值能存在不同列中，通常但不总是位于不同的表。我们调用了约束*外键*列的列和它们被约束到*引用的*列的列。被引用的列几乎总是为他们拥有的表定义主键，但也有例外。外键是将具有相互关系的行对连接在一起的“联合”，SQLAlchemy几乎在其操作的每个区域都非常重视这个概念。
 
-在SQLAlchemy以及DDL中，可以将外键约束定义为table子句中的附加属性，或者对于单列外键，可以在单列的定义内指定外键约束。单列外键更常见，并且在列级别通过构建[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")对象作为[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的参数来指定：
+在 SQLAlchemy 以及 DDL 中，可以将外键约束定义为 table 子句中的附加属性，或者对于单列外键，可以在单列的定义内指定外键约束。单列外键更常见，并且在列级别通过构建[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")对象作为[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的参数来指定：
 
-    user_preference = Table('user_preference', metadata,
+    user_preference = Table('user_preference', metadata,plain
         Column('pref_id', Integer, primary_key=True),
         Column('user_id', Integer, ForeignKey("user.user_id"), nullable=False),
         Column('pref_name', String(40), nullable=False),
@@ -62,10 +62,10 @@ columnname＆gt；*。*它也可能是一个实际的[`Column`](metadata.html#sq
 值得注意的是，[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")是定义组合外键的唯一方法。虽然我们也可以在`invoice_item.invoice_id`和`invoice_item.ref_num`列上放置单个[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")对象，但 SQLAlchemy 不会意识到这两个值应该配对在一起
 - 这将是两个单独的外键约束，而不是引用两列的单个组合外键。
 
-### 通过ALTER创建/删除外键约束[](#creating-dropping-foreign-key-constraints-via-alter "Permalink to this headline")
+### 通过 ALTER 创建/删除外键约束[](#creating-dropping-foreign-key-constraints-via-alter "Permalink to this headline")
 
-我们在教程和其他地方看到的涉及DDL外键的行为表明，约束通常在CREATE
-TABLE语句内呈现为“内联”，如：
+我们在教程和其他地方看到的涉及 DDL 外键的行为表明，约束通常在 CREATE
+TABLE 语句内呈现为“内联”，如：
 
     CREATE TABLE addresses (
         id INTEGER NOT NULL,
@@ -109,7 +109,7 @@ MyISAM 数据）。因此，这些方法将在这种循环中将约束分解为�
 
 当我们在后端（如 Postgresql 后端）上调用[`MetaData.create_all()`](metadata.html#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")时，解析这两个表之间的循环并分别创建约束：
 
-    >>> with engine.connect() as conn:
+    >>> with engine.connect() as conn:plain
     ...    metadata.create_all(conn, checkfirst=False)
     CREATE TABLE element (
         element_id SERIAL NOT NULL,
@@ -160,7 +160,7 @@ CONSTRAINT”；数据库通常自动分配一个。
         )
     )
 
-在我们的CREATE DDL中，我们将只看到这个约束的ALTER语句，而不是另一个：
+在我们的 CREATE DDL 中，我们将只看到这个约束的 ALTER 语句，而不是另一个：
 
     >>> with engine.connect() as conn:
     ...    metadata.create_all(conn, checkfirst=False)
@@ -462,7 +462,7 @@ Constraints](http://alembic.zzzcomputing.com/en/latest/naming.html#tutorial-cons
 typical convention is
 `"ck_%(table_name)s_%(constraint_name)s"`:
 
-    metadata = MetaData(
+    metadata = MetaData(plain
         naming_convention={"ck": "ck_%(table_name)s_%(constraint_name)s"}
     )
 
@@ -542,7 +542,7 @@ typical convention is
 
 [`SchemaType`](type_basics.html#sqlalchemy.types.SchemaType "sqlalchemy.types.SchemaType")类使用特殊的内部符号，因此只能在 DDL 编译时确定命名约定。在 Postgresql 上，有一个本地的 BOOLEAN 类型，所以不需要[`Boolean`](type_basics.html#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")的CHECK约束；我们可以安全地设置一个没有名字的[`Boolean`](type_basics.html#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")类型，即使检查约束有一个命名约定。如果我们针对没有像 SQLite 或 MySQL 这样的本机 BOOLEAN 类型的数据库运行，只会为 CHECK 约束查阅此约定。
 
-CHECK约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](type_basics.html#sqlalchemy.types.SchemaType "sqlalchemy.types.SchemaType")很好地配合使用，因为这些约束只有一列：
+CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](type_basics.html#sqlalchemy.types.SchemaType "sqlalchemy.types.SchemaType")很好地配合使用，因为这些约束只有一列：
 
     metadata = MetaData(plain
         naming_convention={"ck": "ck_%(table_name)s_%(column_0_name)s"}

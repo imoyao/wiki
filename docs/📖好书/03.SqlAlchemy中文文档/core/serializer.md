@@ -18,7 +18,7 @@ Deserializer 对象与 SQLAlchemy 查询结构一起使用，允许“上下文�
 
 用法与标准 Python pickle 模块的用法几乎相同：
 
-    from sqlalchemy.ext.serializer import loads, dumps
+    from sqlalchemy.ext.serializer import loads, dumpsplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
     metadata = MetaData(bind=some_engine)
     Session = scoped_session(sessionmaker())
 

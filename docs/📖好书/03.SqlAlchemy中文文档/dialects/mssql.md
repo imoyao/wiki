@@ -17,7 +17,7 @@ Microsoft SQL Server [¶](#module-sqlalchemy.dialects.mssql.base "Permalink to t
 DBAPI支持[¶](#dialect-mssql "Permalink to this headline")
 ---------------------------------------------------------
 
-以下dialect / DBAPI选项可用。请参阅各个DBAPI部分的连接信息。
+以下 dialect / DBAPI 选项可用。请参阅各个 DBAPI 部分的连接信息。
 
 -   [PyODBC T0\>](#module-sqlalchemy.dialects.mssql.pyodbc)
 -   [mxODBC T0\>](#module-sqlalchemy.dialects.mssql.mxodbc)
@@ -40,7 +40,7 @@ SQL Server使用`IDENTITY`结构提供所谓的“自动递增”行为，该结
 
 上面的例子将生成DDL：
 
-    CREATE TABLE t (plain
+    CREATE TABLE t (plainplain
         id INTEGER NOT NULL IDENTITY(1,1),
         x INTEGER NULL,
         PRIMARY KEY (id)
@@ -82,7 +82,7 @@ Server 上，它重新用于指定有关标识列的行为，包括对“开始�
 
 请注意，序列的`start`和`increment`值是可选的，默认值为1,1。
 
-### INSERT行为[¶](#insert-behavior "Permalink to this headline")
+### INSERT 行为[¶](#insert-behavior "Permalink to this headline")
 
 在 INSERT 时间处理`IDENTITY`列涉及两个关键技术。最常见的是能够为给定的`IDENTITY`列获取“最后插入的值”，这是 SQLAlchemy 在很多情况下隐式执行的过程，最重要的是在 ORM 中执行。
 
@@ -91,7 +91,7 @@ Server 上，它重新用于指定有关标识列的行为，包括对“开始�
 -   在绝大多数情况下，RETURNING 与 SQL
     Server 上的 INSERT 语句一起使用以获取新生成的主键值：
 
-        INSERT INTO t (x) OUTPUT inserted.id VALUES (?)
+        INSERT INTO t (x) OUTPUT inserted.id VALUES (?)plain
 
 -   当 RETURNING 不可用或已通过`implicit_returning=False`禁用时，使用`scope_identity()`函数或`@@identity`变量；行为因后端而异：
 
@@ -115,7 +115,7 @@ Server 上，它重新用于指定有关标识列的行为，包括对“开始�
         [`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine"),
         the statement `SELECT @@identity AS lastrowid` is used instead.
 
-包含`IDENTITY`列的表将禁止显式引用标识列的INSERT语句。The SQLAlchemy dialect
+包含`IDENTITY`列的表将禁止显式引用标识列的 INSERT 语句。The SQLAlchemy dialect
 will detect when an INSERT construct, created using a core
 [`insert()`](postgresql.html#sqlalchemy.dialects.postgresql.dml.insert "sqlalchemy.dialects.postgresql.dml.insert")
 construct (not a plain string SQL), refers to the identity column, and
@@ -190,7 +190,7 @@ argument as passed to [`Connection.execution_options()`](core_connections.html#s
 
 使用[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")设置隔离级别：
 
-    engine = create_engine(
+    engine = create_engine(plain
         "mssql+pyodbc://scott:tiger@ms_2008",
         isolation_level="REPEATABLE READ"
     )
@@ -208,7 +208,7 @@ argument as passed to [`Connection.execution_options()`](core_connections.html#s
 -   `READ UNCOMMITTED`
 -   `REPEATABLE READ`
 -   `SERIALIZABLE`
--   `SNAPSHOT` - 特定于SQL Server
+-   `SNAPSHOT` - 特定于 SQL Server
 
 版本 1.1 中的新功能：支持 Microsoft SQL Server 上的隔离级别设置。
 
@@ -246,7 +246,7 @@ Server 在未来的版本中。SQLAlchemy 通常将这些类型与[`UnicodeText`
 
 -   当此标志为`False`时，[`UnicodeText`](core_type_basics.html#sqlalchemy.types.UnicodeText "sqlalchemy.types.UnicodeText")，[`Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")和[`LargeBinary`](core_type_basics.html#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")数据类型在渲染 DDL 时将渲染类型分别为`NTEXT`，`TEXT`和`IMAGE`。这是这些类型的长期行为。
 
--   在数据库连接建立之前，该标志以`None`值开始。如果方言用于在未设置标志的情况下呈现DDL，则它被解释为与`False`相同。
+-   在数据库连接建立之前，该标志以`None`值开始。如果方言用于在未设置标志的情况下呈现 DDL，则它被解释为与`False`相同。
 
 -   在第一次连接时，方言检测 SQL
     Server 版本 2012 或更高版本是否正在使用；如果标志仍然在`None`，则根据是否检测到 2012 或更高，将其设置为`True`或`False`。
@@ -256,9 +256,9 @@ Server 在未来的版本中。SQLAlchemy 通常将这些类型与[`UnicodeText`
         eng = create_engine("mssql+pymssql://user:pass@host/db",plain
                         deprecate_large_types=True)
 
--   通过使用大写类型对象来完全控制所有SQLAlchemy版本是否呈现“旧”或“新”类型：[`NVARCHAR`](core_type_basics.html#sqlalchemy.types.NVARCHAR "sqlalchemy.types.NVARCHAR")，[`VARCHAR`](mysql.html#sqlalchemy.dialects.mysql.VARCHAR "sqlalchemy.dialects.mysql.VARCHAR")，[`types.VARBINARY`](core_type_basics.html#sqlalchemy.types.VARBINARY "sqlalchemy.types.VARBINARY")，[`TEXT`](core_type_basics.html#sqlalchemy.types.TEXT "sqlalchemy.types.TEXT")，[`mssql.NTEXT`](#sqlalchemy.dialects.mssql.NTEXT "sqlalchemy.dialects.mssql.NTEXT")，[`mssql.IMAGE`](#sqlalchemy.dialects.mssql.IMAGE "sqlalchemy.dialects.mssql.IMAGE")将始终保持固定并始终输出该类型。
+-   通过使用大写类型对象来完全控制所有 SQLAlchemy 版本是否呈现“旧”或“新”类型：[`NVARCHAR`](core_type_basics.html#sqlalchemy.types.NVARCHAR "sqlalchemy.types.NVARCHAR")，[`VARCHAR`](mysql.html#sqlalchemy.dialects.mysql.VARCHAR "sqlalchemy.dialects.mysql.VARCHAR")，[`types.VARBINARY`](core_type_basics.html#sqlalchemy.types.VARBINARY "sqlalchemy.types.VARBINARY")，[`TEXT`](core_type_basics.html#sqlalchemy.types.TEXT "sqlalchemy.types.TEXT")，[`mssql.NTEXT`](#sqlalchemy.dialects.mssql.NTEXT "sqlalchemy.dialects.mssql.NTEXT")，[`mssql.IMAGE`](#sqlalchemy.dialects.mssql.IMAGE "sqlalchemy.dialects.mssql.IMAGE")将始终保持固定并始终输出该类型。
 
-版本1.0.0中的新功能
+版本 1.0.0 中的新功能
 
 传统架构模式[¶](#legacy-schema-mode "Permalink to this headline")
 -----------------------------------------------------------------
@@ -296,7 +296,7 @@ MSSQL 方言通过`mssql_clustered`选项支持聚簇索引（和主键）。此
 
 要生成群集主键，请使用：
 
-    Table('my_table', metadata,
+    Table('my_table', metadata,plain
           Column('x', ...),
           Column('y', ...),
           PrimaryKeyConstraint("x", "y", mssql_clustered=True))
@@ -317,20 +317,20 @@ MSSQL 方言通过`mssql_clustered`选项支持聚簇索引（和主键）。此
 
 要显式请求非集群主键（例如，当需要单独的集群索引时），请使用：
 
-    Table('my_table', metadata,
+    Table('my_table', metadata,plain
           Column('x', ...),
           Column('y', ...),
           PrimaryKeyConstraint("x", "y", mssql_clustered=False))
 
 例如，它将呈现该表格，如下所示：
 
-    CREATE TABLE my_table (x INTEGER NOT NULL, y INTEGER NOT NULL,
+    CREATE TABLE my_table (x INTEGER NOT NULL, y INTEGER NOT NULL,plain
                            PRIMARY KEY NONCLUSTERED (x, y))
 
-在版本1.1中更改： `mssql_clustered`选项现在默认为None，而不是False。`mssql_clustered=False`现在显式呈现 NONCLUSTERED 子句，而 None 完全忽略 CLUSTERED 子句，从而允许 SQL
+在版本1.1中更改： `mssql_clustered`选项现在默认为 None，而不是 False。`mssql_clustered=False`现在显式呈现 NONCLUSTERED 子句，而 None 完全忽略 CLUSTERED 子句，从而允许 SQL
 Server 默认设置生效。
 
-MSSQL特定的索引选项[¶](#mssql-specific-index-options "Permalink to this headline")
+MSSQL 特定的索引选项[¶](#mssql-specific-index-options "Permalink to this headline")
 ----------------------------------------------------------------------------------
 
 除集群之外，MSSQL 方言支持[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")的其他特殊选项。
@@ -374,7 +374,7 @@ SQLAlchemy 默认使用 OUTPUT
 INSERTED 通过 IDENTITY 列或其他服务器端默认值获取新生成的主键值。MS-SQL 不允许在具有触发器的表上使用 OUTPUT
 INSERTED。要禁用每个表的 OUTPUT INSERTED 用法，请为每个[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")指定`implicit_returning=False`
 
-    Table('mytable', metadata,
+    Table('mytable', metadata,plain
         Column('id', Integer, primary_key=True),
         # ...,
         implicit_returning=False
@@ -396,7 +396,7 @@ Server 驱动程序具有非常有限的能力来返回从 UPDATE 或 DELETE 语
 
 特别是，当使用 OUTPUT
 INSERTED 时，更新的 rowcount 不可用。这会在使用服务器端版本控制方案时影响 SQLAlchemy
-ORM 的版本控制功能。在使用 pyodbc 时，对于使用 version\_id列与服务器端版本生成器结合使用的任何ORM映射类，需要将“implicit\_returning”标志设置为 false：
+ORM 的版本控制功能。在使用 pyodbc 时，对于使用 version\_id 列与服务器端版本生成器结合使用的任何 ORM 映射类，需要将“implicit\_returning”标志设置为 false：
 
     class MyTable(Base):
         __tablename__ = 'mytable'
@@ -411,7 +411,7 @@ ORM 的版本控制功能。在使用 pyodbc 时，对于使用 version\_id列�
             'implicit_returning': False
         }
 
-如果没有上面的implicit\_returning标志，那么UPDATE语句将使用`OUTPUT inserted.timestamp`，并且 rowcount 将返回-1，导致版本控制逻辑失败。
+如果没有上面的 implicit\_returning标志，那么UPDATE语句将使用`OUTPUT inserted.timestamp`，并且 rowcount 将返回-1，导致版本控制逻辑失败。
 
 启用快照隔离[¶](#enabling-snapshot-isolation "Permalink to this headline")
 --------------------------------------------------------------------------
@@ -608,7 +608,7 @@ Server 的 UPPERCASE 类型都可以从顶级方言导入，无论它们来源�
 *class* `sqlalchemy.dialects.mssql。`{.descclassname} `SMALLMONEY`{.descname} [¶](#sqlalchemy.dialects.mssql.SMALLMONEY "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    ` __初始化__  T0> ¶ T1>`{.descname}
+    ` __初始化__  T0> ¶ T1>`{.descname}plain
     :   *继承自* `__init__`
         *属性* `object`
 
@@ -705,7 +705,7 @@ Server 的 UPPERCASE 类型都可以从顶级方言导入，无论它们来源�
  *class*`sqlalchemy.dialects.mssql.`{.descclassname}`VARCHAR`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.mssql.VARCHAR "Permalink to this definition")
 :   基础：[`sqlalchemy.types.String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
 
-    SQL VARCHAR类型。
+    SQL VARCHAR类型。plain
 
      `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.mssql.VARCHAR.__init__ "Permalink to this definition")
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.String.__init__ "sqlalchemy.types.String.__init__")
@@ -804,7 +804,7 @@ Server 驱动程序名称。由于 SQLAlchemy 根据平台和安装的驱动程�
 
 由 Pyodbc 方言解释的其他关键字在 DSN 和主机名情况下都被传递给`pyodbc.connect()`包括：`odbc_autotranslate`，`ansi`， `unicode_results`，`autocommit`。
 
-#### 通过精确的Pyodbc字符串[¶](#pass-through-exact-pyodbc-string "Permalink to this headline")
+#### 通过精确的 Pyodbc 字符串[¶](#pass-through-exact-pyodbc-string "Permalink to this headline")
 
 PyODBC 连接字符串也可以使用参数`odbc_connect`完全按照[ConnectionStrings](https://code.google.com/p/pyodbc/wiki/ConnectionStrings)中的规定发送到驱动程序中。但是，使用`urllib.quote_plus`时，定界符必须是URL转义的：
 
@@ -822,7 +822,7 @@ unicode 文字直接传递给 PyODBC 驱动程序；虽然 SQLAlchemy 可以首�
 unicode 对象，而作者观察到 python
 unicode 完全被 PyODBC 误解的普遍情况，特别是在处理表反射中使用的信息模式表，并且必须首先将该值编码为字符串。
 
-正是由于这个原因，可以使用`supports_unicode_binds`参数控制`create_engine()`来控制是否将绑定参数的 unicode 文字发送到 PyODBC。当默认值为`None`时，PyODBC方言将使用最佳猜测来判断驱动程序是否处理unicode字面值。当`False`时，unicode文字将首先被编码，并且`True`
+正是由于这个原因，可以使用`supports_unicode_binds`参数控制`create_engine()`来控制是否将绑定参数的 unicode 文字发送到 PyODBC。当默认值为`None`时，PyODBC 方言将使用最佳猜测来判断驱动程序是否处理 unicode 字面值。当`False`时，unicode文字将首先被编码，并且`True`
 unicode 文字将被直接传递。这是一个临时标志，当 unix +
 PyODBC 的 unicode 情况稳定时，希望不需要该标志。
 
@@ -847,7 +847,7 @@ mxODBC的文档和下载信息（如果适用）可在以下网址获得：[http
 
 连接字符串：
 
-    mssql+mxodbc://<username>:<password>@<dsnname>
+    mssql+mxodbc://<username>:<password>@<dsnname>plainplain
 
 ### 执行模式[¶](#execution-modes "Permalink to this headline")
 

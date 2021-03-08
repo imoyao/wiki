@@ -126,7 +126,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
  *class*`sqlalchemy.orm.session.`{.descclassname}`Session`{.descname}(*bind=None*, *autoflush=True*, *expire\_on\_commit=True*, *\_enable\_transaction\_accounting=True*, *autocommit=False*, *twophase=False*, *weak\_identity\_map=True*, *binds=None*, *extension=None*, *info=None*, *query\_cls=\<class 'sqlalchemy.orm.query.Query'\>*)[¶](#sqlalchemy.orm.session.Session "Permalink to this definition")
 :   基础：`sqlalchemy.orm.session._SessionClassMethods`
 
-    管理ORM映射对象的持久性操作。plain
+    管理ORM映射对象的持久性操作。plainplain
 
     会话的使用范例在[*Using the Session*](session.html)中描述。
 
@@ -1180,7 +1180,7 @@ Events*](events.html)中描述的那些函数。
  `sqlalchemy.orm.attributes.`{.descclassname}`del_attribute`{.descname}(*instance*, *key*)[¶](#sqlalchemy.orm.attributes.del_attribute "Permalink to this definition")
 :   删除属性的值，激发历史事件。
 
-    无论直接应用于该类的仪器如何，都可以使用该函数，即不需要描述符。自定义属性管理方案需要使用此方法来建立SQLAlchemy所理解的属性状态。
+    无论直接应用于该类的仪器如何，都可以使用该函数，即不需要描述符。自定义属性管理方案需要使用此方法来建立SQLAlchemy所理解的属性状态。plain
 
 `sqlalchemy.orm.attributes。`{.descclassname} `get_attribute`{.descname} （ *实例*，*键* ） T5\> [¶ T6\>](#sqlalchemy.orm.attributes.get_attribute "Permalink to this definition")
 :   获取属性的值，触发所需的可调用对象。

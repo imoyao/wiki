@@ -583,7 +583,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
 ` sqlalchemy.sql.expression。 T0> 不同 T1> （ T2>  EXPR  T3> ） T4> ¶< / T5>`{.descclassname}
 :   生成列表达式级别的一元`DISTINCT`子句。
 
-    这将`DISTINCT`关键字应用于单个列表达式，并且通常包含在聚合函数中，如下所示：
+    这将`DISTINCT`关键字应用于单个列表达式，并且通常包含在聚合函数中，如下所示：plain
 
         from sqlalchemy import distinct, func
         stmt = select([func.count(distinct(users_table.c.name))])
@@ -731,7 +731,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  `sqlalchemy.sql.expression.`{.descclassname}`literal`{.descname}(*value*, *type\_=None*)[¶](#sqlalchemy.sql.expression.literal "Permalink to this definition")
 :   返回绑定到绑定参数的文字子句。
 
-    当非[`ClauseElement`](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")对象（例如字符串，整数，日期等）时，将自动创建文本子句。用于与[`ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")子类的比较操作，例如[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象。使用此函数强制生成一个文字子句，该子句将被创建为具有绑定值的[`BindParameter`](#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")。
+    当非[`ClauseElement`](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")对象（例如字符串，整数，日期等）时，将自动创建文本子句。用于与[`ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")子类的比较操作，例如[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象。使用此函数强制生成一个文字子句，该子句将被创建为具有绑定值的[`BindParameter`](#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")。plain
 
     参数：
 
@@ -1253,7 +1253,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  *class*`sqlalchemy.sql.expression.`{.descclassname}`Case`{.descname}(*whens*, *value=None*, *else\_=None*)[¶](#sqlalchemy.sql.expression.Case "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
-    代表一个`CASE`表达式。
+    代表一个`CASE`表达式。plainplain
 
     [`Case`](#sqlalchemy.sql.expression.Case "sqlalchemy.sql.expression.Case")是使用[`case()`](#sqlalchemy.sql.expression.case "sqlalchemy.sql.expression.case")工厂函数生成的，如下所示：
 
@@ -2726,7 +2726,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
 *class* `sqlalchemy.sql.expression。`{.descclassname} `FunctionFilter`{.descname} （ *func*，*\*标准 T5\> ） T6\> [¶ T7\>](#sqlalchemy.sql.expression.FunctionFilter "Permalink to this definition")*
 :   基础：[`sqlalchemy.sql.expression.ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
-    表示一个函数FILTER子句。
+    表示一个函数FILTER子句。plain
 
     这是一个针对聚集和窗口函数的特殊操作符，它控制将哪些行传递给它。它仅受特定数据库后端支持。
 

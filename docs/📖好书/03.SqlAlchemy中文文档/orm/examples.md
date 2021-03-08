@@ -180,11 +180,11 @@ T2\>提交食谱版本。](http://techspot.zzzeek.org/2007/05/29/polymorphic-ass
 
 示例运行如下所示：
 
-    $ python -m examples.performance bulk_inserts
+    $ python -m examples.performance bulk_insertsplainplain
 
 或者选择：
 
-    $ python -m examples.performance bulk_inserts \
+    $ python -m examples.performance bulk_inserts \plainplain
         --dburl mysql+mysqldb://scott:tiger@localhost/test \
         --profile --num 1000
 
@@ -215,7 +215,7 @@ application?](faq_performance.html#faq-how-to-profile)
 
 这是运行的默认形式：
 
-    $ python -m examples.performance single_inserts
+    $ python -m examples.performance single_insertsplainplainplain
     Tests to run: test_orm_commit, test_bulk_save,
                   test_bulk_insert_dictionaries, test_core,
                   test_core_query_caching, test_dbapi_raw_w_connect,
@@ -241,7 +241,7 @@ application?](faq_performance.html#faq-how-to-profile)
 
 Python 配置文件输出可以转储所有测试，或更常见的单个测试：
 
-    $ python -m examples.performance single_inserts --test test_core --num 1000 --dump
+    $ python -m examples.performance single_inserts --test test_core --num 1000 --dumpplain
     Tests to run: test_core
     test_core : Individual INSERT/COMMIT pairs using Core. (1000 iterations); total fn calls 186109
              186109 function calls (186102 primitive calls) in 1.089 seconds
@@ -261,7 +261,7 @@ Python 配置文件输出可以转储所有测试，或更常见的单个测试�
 
 该选项需要安装[RunSnake](https://pypi.python.org/pypi/RunSnakeRun)命令行工具：
 
-    $ python -m examples.performance single_inserts --test test_core --num 1000 --runsnake
+    $ python -m examples.performance single_inserts --test test_core --num 1000 --runsnakeplain
 
 将显示图形 RunSnake 输出。
 
@@ -269,7 +269,7 @@ Python 配置文件输出可以转储所有测试，或更常见的单个测试�
 
 profiler 套件系统是可扩展的，可以应用于您自己的一套测试。这是一个有价值的技术，用于决定一些性能关键的例程的正确方法。例如，如果我们想分析几种加载之间的差异，我们可以创建一个文件`test_loads.py`，其中包含以下内容：
 
-    from examples.performance import Profiler
+    from examples.performance import Profilerplainplainplain
     from sqlalchemy import Integer, Column, create_engine, ForeignKey
     from sqlalchemy.orm import relationship, joinedload, subqueryload, Session
     from sqlalchemy.ext.declarative import declarative_base
@@ -347,7 +347,7 @@ profiler 套件系统是可扩展的，可以应用于您自己的一套测试�
 
 我们可以直接运行我们的新脚本：
 
-    $ python test_loads.py  --dburl postgresql+psycopg2://scott:tiger@localhost/test
+    $ python test_loads.py  --dburl postgresql+psycopg2://scott:tiger@localhost/testplainplain
     Running setup once...
     Tests to run: test_lazyload, test_joinedload, test_subqueryload
     test_lazyload : load everything, no eager loading. (1000 iterations); total time 11.971159 sec
@@ -356,7 +356,7 @@ profiler 套件系统是可扩展的，可以应用于您自己的一套测试�
 
 以及 RunSnake 输出的个人测试：
 
-    $ python test_loads.py  --num 100 --runsnake --test test_joinedloadplain
+    $ python test_loads.py  --num 100 --runsnake --test test_joinedloadplainplain
 
 ### 关系连接条件[¶](#module-examples.join_conditions "Permalink to this headline")
 
@@ -447,7 +447,7 @@ profiler 套件系统是可扩展的，可以应用于您自己的一套测试�
 `Versioned`
 mixin 设计用于声明式。要使用经典映射器的扩展，可以应用`_history_mapper`函数：
 
-    from history_meta import _history_mapperplain
+    from history_meta import _history_mapperplainplainplain
 
     m = mapper(SomeClass, sometable)
     _history_mapper(m)
@@ -512,7 +512,7 @@ mixin 设计用于声明式。要使用经典映射器的扩展，可以应用`_
 
 ### 基本继承映射[¶](#module-examples.inheritance "Permalink to this headline")
 
-如datamapping\_inheritance 中所述的单表，连接表和混凝土表继承的工作示例。
+如 datamapping\_inheritance 中所述的单表，连接表和混凝土表继承的工作示例。
 
 文件清单：
 
@@ -546,7 +546,7 @@ API 的基本示例。分片是指跨多个数据库水平缩放数据。
 
 “分片”映射的基本组件是：
 
--   多个数据库，每个数据库分配一个'分片ID'
+-   多个数据库，每个数据库分配一个'分片 ID'
 -   给定要保存的实例的函数，它可以返回单个分片 ID；这被称为“shard\_chooser”
 -   一个可以返回适用于特定实例标识符的分片 ID 列表的函数；这被称为“id\_chooser”。如果它返回所有分片 ID，则将搜索所有分片。
 -   给定一个特定的查询（“query\_chooser”），该函数可以返回一个分片 ID 列表来尝试。如果它返回所有分片 ID，则将查询所有分片并将结果连接在一起。
@@ -595,7 +595,7 @@ API 的基本示例。分片是指跨多个数据库水平缩放数据。
 
 演示脚本自身，按照复杂性顺序，以 Python 模块的形式运行，以便相对导入工作：
 
-    python -m examples.dogpile_caching.helloworldplain
+    python -m examples.dogpile_caching.helloworldplainplainplain
 
     python -m examples.dogpile_caching.relationship_caching
 
@@ -645,7 +645,7 @@ API 的基本示例。分片是指跨多个数据库水平缩放数据。
 
 例如。：
 
-    print session.query(Road).filter(Road.road_geom.intersects(r1.road_geom)).all()plain
+    print session.query(Road).filter(Road.road_geom.intersects(r1.road_geom)).all()plainplain
 
 文件清单：
 

@@ -187,7 +187,7 @@ tests continue to function, then upgrade to 0.9 without issue.
 
 ### 关联代理 SQL 表达式改进和修复[¶](#association-proxy-sql-expression-improvements-and-fixes "Permalink to this headline")
 
-由引用标量关系上的标量值的关联代理实现的`==`和`!=`运算符现在生成更完整的SQL表达式，旨在考虑当比较是针对`None`时，“关联”行是否存在。
+由引用标量关系上的标量值的关联代理实现的`==`和`!=`运算符现在生成更完整的 SQL 表达式，旨在考虑当比较是针对`None`时，“关联”行是否存在。
 
 考虑这个映射：
 
@@ -217,9 +217,9 @@ tests continue to function, then upgrade to 0.9 without issue.
     FROM b
     WHERE b.id = a.b_id AND b.value IS NULL)
 
-在0.9中，它现在产生：
+在 0.9 中，它现在产生：
 
-    SELECT a.id AS a_id, a.b_id AS a_b_id
+    SELECT a.id AS a_id, a.b_id AS a_b_idplainplain
     FROM a
     WHERE (EXISTS (SELECT 1
     FROM b
@@ -235,7 +235,7 @@ tests continue to function, then upgrade to 0.9 without issue.
     FROM b
     WHERE b.id = a.b_id AND b.value IS NULL))
 
-现在在0.9中，检查已被重新编译，以确保A.b\_id 行存在，除了`B.value`为非NULL：
+现在在 0.9 中，检查已被重新编译，以确保 A.b\_id 行存在，除了`B.value`为非NULL：
 
     SELECT a.id AS a_id, a.b_id AS a_b_id
     FROM a
@@ -245,7 +245,7 @@ tests continue to function, then upgrade to 0.9 without issue.
 
 此外，还增强了`has()`运算符，以便您可以在不使用标准的情况下将其称为标量列值，并且它会生成检查存在或不存在的关联行的条件：
 
-    s.query(A).filter(A.b_value.has()).all()
+    s.query(A).filter(A.b_value.has()).all()plain
 
 输出：
 
@@ -357,7 +357,7 @@ at its default of `PASSIVE_OFF`.
 
 这是一个非常古老的bug，为0.8系列添加了弃用警告，但因为没有人用“-W”标志运行Python，所以大部分都没有看到：
 
-    $ python -W always::DeprecationWarning ~/dev/sqlalchemy/test.py
+    $ python -W always::DeprecationWarning ~/dev/sqlalchemy/test.pyplain
     /Users/classic/dev/sqlalchemy/test.py:5: SADeprecationWarning: Passing arguments to
     type object constructor <class 'sqlalchemy.types.Date'> is deprecated
       d = Date(storage_format="%(day)02d.%(month)02d.%(year)04d")
@@ -365,7 +365,7 @@ at its default of `PASSIVE_OFF`.
     type object constructor <class 'sqlalchemy.types.Integer'> is deprecated
       i = Integer(display_width=5)
 
-从0.9系列开始，“catch all”构造函数从[`TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")中移除，并且这些无意义的参数不再被接受。
+从 0.9 系列开始，“catch all”构造函数从[`TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")中移除，并且这些无意义的参数不再被接受。
 
 使用特定于方言的参数（如`storage_format`和`display_width`）的正确方法是使用适当的方言特定类型：
 
@@ -419,7 +419,7 @@ form an AND condition piecemeal.
     if conditions:
         stmt = stmt.where(and_(*conditions))
 
-另一个适用于所有后端的变种0.9，但在0.8上只适用于支持布尔常量的后端：
+另一个适用于所有后端的变种 0.9，但在 0.8 上只适用于支持布尔常量的后端：
 
     from sqlalchemy.sql import trueplain
 
@@ -469,7 +469,7 @@ conjunctions](#migration-2804)的渲染
 
 上述内容被 MSSQL 误解，通常不是针对任何数据库建议的语法。该表达式现在将生成大多数数据库文档所说明的语法：
 
-    -- 0.9 behavior
+    -- 0.9 behaviorplain
     x = :x_1 COLLATE en_EN
 
 如果将[`collate()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.collate "sqlalchemy.sql.operators.ColumnOperators.collate")运算符应用于右列，则可能出现向后不兼容的更改，如下所示：
@@ -503,7 +503,7 @@ which will again ensure no parentheses are generated:
 
 现在，[`postgresql.ENUM`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ENUM "sqlalchemy.dialects.postgresql.ENUM")类型将对枚举值中的单引号进行转义：
 
-    >>> from sqlalchemy.dialects import postgresql
+    >>> from sqlalchemy.dialects import postgresqlplain
     >>> type = postgresql.ENUM('one', 'two', "three's", name="myenum")
     >>> from sqlalchemy.dialects.postgresql import base
     >>> print(base.CreateEnumType(type).compile(dialect=postgresql.dialect()))
@@ -556,13 +556,13 @@ etc. 全部基于称为[`Load`](orm_query.html#sqlalchemy.orm.strategy_options.L
 
 Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样适用于每个链接，无需在[`joinedload()`](orm_loading_relationships.html#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")和[`joinedload_all()`](orm_loading_relationships.html#sqlalchemy.orm.joinedload_all "sqlalchemy.orm.joinedload_all")
 
-    query(User).options(joinedload("orders").joinedload("items").joinedload("keywords"))plain
+    query(User).options(joinedload("orders").joinedload("items").joinedload("keywords"))plainplain
 
 **旧方式**
 
 在基于子类的路径上设置选项要求将路径中的所有链接拼写为类绑定属性，因为需要调用[`PropComparator.of_type()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.of_type "sqlalchemy.orm.interfaces.PropComparator.of_type")方法：
 
-    session.query(Company).\
+    session.query(Company).\plain
         options(
             subqueryload_all(
                 Company.employees.of_type(Engineer),
@@ -656,7 +656,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 -   [`TextClause.bindparams()`](core_sqlelement.html#sqlalchemy.sql.expression.TextClause.bindparams "sqlalchemy.sql.expression.TextClause.bindparams")
     allows bound parameter types and values to be set flexibly:
 
-        # setup valuesplain
+        # setup valuesplainplain
         stmt = text("SELECT id, name FROM user "
               "WHERE name=:name AND timestamp=:timestamp").\
               bindparams(name="ed", timestamp=datetime(2012, 11, 10, 15, 12, 35))
@@ -696,7 +696,7 @@ construct or other compatible construct can be passed to the new method
 [`Insert.from_select()`](core_dml.html#sqlalchemy.sql.expression.Insert.from_select "sqlalchemy.sql.expression.Insert.from_select")
 where it will be used to render an `INSERT .. SELECT` construct:
 
-    >>> from sqlalchemy.sql import table, column
+    >>> from sqlalchemy.sql import table, columnplainplain
     >>> t1 = table('t1', column('a'), column('b'))
     >>> t2 = table('t2', column('x'), column('y'))
     >>> print(t1.insert().from_select(['a', 'b'], t2.select().where(t2.c.y == 5)))
@@ -718,7 +718,7 @@ where it will be used to render an `INSERT .. SELECT` construct:
 
 [＃722 T0\>](http://www.sqlalchemy.org/trac/ticket/722)
 
-### 新的FOR UPDATE支持在`select()`，`Query()` [¶](#new-for-update-support-on-select-query "Permalink to this headline")
+### 新的 FOR UPDATE 支持在`select()`，`Query()` [¶](#new-for-update-support-on-select-query "Permalink to this headline")
 
 An attempt is made to simplify the specification of the
 `FOR UPDATE` clause on `SELECT`
@@ -738,7 +738,7 @@ Oracle.
 
 ### 浮点数字符串转换精度可配置为本地浮点类型[¶](#floating-point-string-conversion-precision-configurable-for-native-floating-point-types "Permalink to this headline")
 
-无论何时DBAPI返回要转换为Python `Decimal()`的Python浮点类型，SQLAlchemy都会执行的转换必然涉及将浮点值转换为字符串的中间步骤。用于此字符串转换的比例先前已硬编码为10，现在可配置。该设置可以在[`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")以及[`Float`](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")类型以及所有 SQL 和特定于方言的后代类型上使用参数`decimal_return_scale`If the type supports a `.scale` parameter,
+无论何时DBAPI返回要转换为Python `Decimal()`的 Python 浮点类型，SQLAlchemy 都会执行的转换必然涉及将浮点值转换为字符串的中间步骤。用于此字符串转换的比例先前已硬编码为 10，现在可配置。该设置可以在[`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")以及[`Float`](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")类型以及所有 SQL 和特定于方言的后代类型上使用参数`decimal_return_scale`If the type supports a `.scale` parameter,
 as is the case with [`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")
 and some float types such as [`mysql.DOUBLE`](dialects_mysql.html#sqlalchemy.dialects.mysql.DOUBLE "sqlalchemy.dialects.mysql.DOUBLE"),
 the value of `.scale` is used as the default for
@@ -926,21 +926,21 @@ JOIN，因为 INNER JOIN 总是被压平）嵌套 JOIN。
 右外连接当然是解决右括号的另一种方法；这将会非常复杂并且在视觉上很难实现，但幸运的是 SQLite 不支持 RIGHT
 OUTER JOIN :)：
 
-    sqlite> select a.id, b.id, c.id from b join c on b.id=c.id
+    sqlite> select a.id, b.id, c.id from b join c on b.id=c.idplainplain
        ...> right outer join a on b.id=a.id;
     Error: RIGHT and FULL OUTER JOINs are not currently supported
 
 早在 2005 年，目前还不清楚其他数据库是否存在这种形式的问题，但今天似乎很清楚，除了 SQLite 之外，每一个测试数据库都能够支持它（Oracle
 8 是一个非常古老的数据库，根本不支持 JOIN 关键字，但对于 Oracle 的语法，SQLAlchemy 总是有一个简单的重写方案）。更糟糕的是，应用 SELECT 的 SQLAlchemy 通常的解决方法通常会降低 Postgresql 和 MySQL 等平台的性能：
 
-    SELECT a.*, anon_1.* FROM a LEFT OUTER JOIN (
+    SELECT a.*, anon_1.* FROM a LEFT OUTER JOIN (plain
                     SELECT b.id AS b_id, c.id AS c_id
                     FROM b JOIN c ON b.id = c.id
                 ) AS anon_1 ON a.id=anon_1.b_id
 
 使用连接表继承结构时，像以上形式的 JOIN 常见；任何时候[`Query.join()`](orm_query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")用于从某个父节点连接到一个连接表子类，或者当类似地使用[`joinedload()`](orm_loading_relationships.html#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")时，SQLAlchemy 的 ORM 将始终确保为避免查询无法在 SQLite 上运行，嵌套的 JOIN 永远不会呈现。尽管 Core 一直支持更加紧凑的形式，但 ORM 必须避免它。
 
-在ON子句中存在特殊标准的多对多关系中产生连接时，会出现另外一个问题。考虑像下面这样的热切加载连接：
+在 ON 子句中存在特殊标准的多对多关系中产生连接时，会出现另外一个问题。考虑像下面这样的热切加载连接：
 
     session.query(Order).outerjoin(Order.items)
 
@@ -1062,7 +1062,7 @@ items 的 INNER 连接，而无需更改返回的用户行，而是忽略“链�
 
 新的“右嵌套连接是好的”逻辑会启动，我们会得到：
 
-    FROM users LEFT OUTER JOIN (orders JOIN items ON <onclause>) ON <onclause>plain
+    FROM users LEFT OUTER JOIN (orders JOIN items ON <onclause>) ON <onclause>plainplain
 
 由于我们错过了这一点，为了避免进一步的回归，我们通过指定字符串`"nested"`到[`joinedload.innerjoin`](orm_loading_relationships.html#sqlalchemy.orm.joinedload.params.innerjoin "sqlalchemy.orm.joinedload")添加了上述功能：
 
@@ -1209,7 +1209,7 @@ truncating a rendered expression, when a [`true()`](core_sqlelement.html#sqlalch
 or [`false()`](core_sqlelement.html#sqlalchemy.sql.expression.false "sqlalchemy.sql.expression.false")
 constant is present:
 
-    >>> print(select([t1]).where(and_(t1.c.y > 5, false())).compile(
+    >>> print(select([t1]).where(and_(t1.c.y > 5, false())).compile(plainplain
     ...     dialect=postgresql.dialect()))
     SELECT t.x, t.y FROM t WHERE false
 
@@ -1243,12 +1243,12 @@ themselves render as `0 = 1` and `1 = 1` for a backend with no boolean constants
 
 ### 现在，标签构造可以在ORDER BY [¶](#label-constructs-can-now-render-as-their-name-alone-in-an-order-by "Permalink to this headline")中作为其名称单独渲染
 
-对于在 column 子句和 SELECT 的 ORDER BY 子句中都使用[`Label`](core_sqlelement.html#sqlalchemy.sql.expression.Label "sqlalchemy.sql.expression.Label")的情况，标签将在ORDER
-BY子句中呈现为它的名称，假设底层方言报告支持此功能。
+对于在 column 子句和 SELECT 的 ORDER BY 子句中都使用[`Label`](core_sqlelement.html#sqlalchemy.sql.expression.Label "sqlalchemy.sql.expression.Label")的情况，标签将在 ORDER
+BY 子句中呈现为它的名称，假设底层方言报告支持此功能。
 
 例如。例如：
 
-    from sqlalchemy.sql import table, column, select, func
+    from sqlalchemy.sql import table, column, select, funcplain
 
     t = table('t', column('c1'), column('c2'))
     expr = (func.foo(t.c.c1) + t.c.c2).label("expr")
@@ -1320,7 +1320,7 @@ that is the right side of the binary expression, will take on the
 
 上面，`bp`保持不变，但执行语句时将使用`String`类型，我们可以通过检查`binds`字典来看到：
 
-    >>> compiled = stmt.compile()plain
+    >>> compiled = stmt.compile()plainplain
     >>> compiled.binds['some_col'].type
     String
 
@@ -1364,7 +1364,7 @@ initialize their parent column.
 
 1.  只要目标[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")与相同的[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")关联，[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")中的类型立即出现。无论首先配置哪一侧，这都可以工作：
 
-        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKey
+        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKeyplain
         >>> metadata = MetaData()
         >>> t2 = Table('t2', metadata, Column('t1id', ForeignKey('t1.id')))
         >>> t2.c.t1id.type
@@ -1413,7 +1413,7 @@ initialize their parent column.
 方言改变[¶](#dialect-changes "Permalink to this headline")
 ----------------------------------------------------------
 
-### Firebird `fdb`现在是默认的Firebird方言。[¶](#firebird-fdb-is-now-the-default-firebird-dialect "Permalink to this headline")
+### Firebird `fdb`现在是默认的 Firebird 方言。[¶](#firebird-fdb-is-now-the-default-firebird-dialect "Permalink to this headline")
 
 如果创建的引擎没有方言说明符，即`firebird://`，则现在使用`fdb`方言。`fdb` is a `kinterbasdb` compatible DBAPI which
 per the Firebird project is now their official Python driver.

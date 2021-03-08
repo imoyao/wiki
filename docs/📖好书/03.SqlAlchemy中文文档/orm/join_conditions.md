@@ -23,7 +23,7 @@ should be compared. 有多种情况需要定制此行为。
 
 考虑一个包含`Address`类的两个外键的`Customer`类：
 
-    from sqlalchemy import Integer, ForeignKey, String, Column
+    from sqlalchemy import Integer, ForeignKey, String, Columnplainplain
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.orm import relationship
 
@@ -83,7 +83,7 @@ the `Customer.billing_address` relationship from a
 
 使用 Declarative 指定`foreign_keys`时，我们也可以使用字符串名称来指定，但是如果使用列表，则**列表是字符串**的一部分，这一点很重要：
 
-    billing_address = relationship("Address", foreign_keys="[Customer.billing_address_id]")plain
+    billing_address = relationship("Address", foreign_keys="[Customer.billing_address_id]")plainplain
 
 在这个特定的例子中，因为只有一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")我们需要：
 
@@ -134,7 +134,7 @@ the `Customer.billing_address` relationship from a
 
 下面，一个类`HostEntry`连接到它自己，将字符串`content`列等同于`ip_address`列，这是一个名为`INET`我们需要使用[`cast()`](core_sqlelement.html#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")来将连接的一边转换为另一边的类型：
 
-    from sqlalchemy import cast, String, Column, Integer
+    from sqlalchemy import cast, String, Column, Integerplain
     from sqlalchemy.orm import relationship
     from sqlalchemy.dialects.postgresql import INET
 
@@ -158,7 +158,7 @@ the `Customer.billing_address` relationship from a
 
 上面的关系会产生一个连接，如：
 
-    SELECT host_entry.id, host_entry.ip_address, host_entry.content
+    SELECT host_entry.id, host_entry.ip_address, host_entry.contentplainplain
     FROM host_entry JOIN host_entry AS host_entry_1
     ON host_entry_1.ip_address = CAST(host_entry.content AS INET)
 
@@ -193,7 +193,7 @@ when joining with types such as [`postgresql.INET`](dialects_postgresql.html#sql
 and [`postgresql.CIDR`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.CIDR "sqlalchemy.dialects.postgresql.CIDR").
 对于自定义运算符，我们使用[`Operators.op()`](core_sqlelement.html#sqlalchemy.sql.operators.Operators.op "sqlalchemy.sql.operators.Operators.op")函数：
 
-    inet_column.op("<<")(cidr_column)
+    inet_column.op("<<")(cidr_column)plain
 
 然而，如果我们使用这个运算符来构造[`primaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")，那么[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")仍然需要更多的信息。This
 is because when it examines our primaryjoin condition, it specifically
@@ -201,7 +201,7 @@ looks for operators used for **comparisons**, and this is typically a
 fixed list containing known comparison operators such as `==`, `<`, etc.
 因此，对于我们的自定义操作员参与此系统，我们需要使用[`is_comparison`](core_sqlelement.html#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")参数将其注册为比较运算符：
 
-    inet_column.op("<<", is_comparison=True)(cidr_column)plain
+    inet_column.op("<<", is_comparison=True)(cidr_column)plainplainplain
 
 一个完整的例子：
 
@@ -228,7 +228,7 @@ fixed list containing known comparison operators such as `==`, `<`, etc.
 
 将呈现为：
 
-    SELECT ip_address.id AS ip_address_id, ip_address.v4address AS ip_address_v4addressplain
+    SELECT ip_address.id AS ip_address_id, ip_address.v4address AS ip_address_v4addressplainplain
     FROM ip_address JOIN network ON ip_address.v4address << network.v4representation
 
 版本 0.9.2 中的新功能： - 添加了[`Operators.op.is_comparison`(core_sqlelement.html#sqlalchemy.sql.operators.Operators.op.params.is_comparison "sqlalchemy.sql.operators.Operators.op")标志来帮助使用自定义运算符创建[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构。
@@ -247,7 +247,7 @@ well, `Article.magazine_id` is involved in two
 separate relationships; `Article.magazine` and
 `Article.writer`:
 
-    class Magazine(Base):plain
+    class Magazine(Base):plainplainplain
         __tablename__ = 'magazine'
 
         id = Column(Integer, primary_key=True)
@@ -329,7 +329,7 @@ To get just \#1 and \#2, we could specify only
 
 但是，当查询`Writer`时，这会影响`Article.writer`不考虑`Article.magazine_id`：
 
-    SELECT article.article_id AS article_article_id,plain
+    SELECT article.article_id AS article_article_id,plainplainplain
         article.magazine_id AS article_magazine_id,
         article.writer_id AS article_writer_id
     FROM article
@@ -374,7 +374,7 @@ to 许多”；当他们在*不同*方面时，这种关系被认为是“多对
 
 上面，如果给定一个`Element`对象，其路径属性为`"/foo/bar2"`，我们寻找一个`Element.descendants`看起来像：
 
-    SELECT element.path AS element_pathplain
+    SELECT element.path AS element_pathplainplain
     FROM element
     WHERE element.path LIKE ('/foo/bar2' || '/%') ORDER BY element.path
 
@@ -418,7 +418,7 @@ column object available yet or the `node_to_node`
 table perhaps isn’t yet available.
 当在一个声明性字符串中引用一个普通的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象时，我们使用该表的字符串名称，因为它存在于[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")中：
 
-    class Node(Base):
+    class Node(Base):plain
         __tablename__ = 'node'
         id = Column(Integer, primary_key=True)
         label = Column(String)
@@ -467,7 +467,7 @@ table perhaps isn’t yet available.
 
 有时，当人们试图在两个表之间建立一个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")时，为了加入它们，需要多于两个或三个表参与。这是[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的一个区域，它试图推动可能的边界，并且通常需要在 SQLAlchemy 邮件列表上敲定这些特殊用例的最终解决方案。
 
-在更新版本的SQLAlchemy中，为了提供由多个表组成的复合目标，可以在一些情况下使用[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数。以下是这种连接条件的示例（要求版本 0.9.2 至少按照原样运行）：
+在更新版本的 SQLAlchemy 中，为了提供由多个表组成的复合目标，可以在一些情况下使用[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数。以下是这种连接条件的示例（要求版本 0.9.2 至少按照原样运行）：
 
     class A(Base):
         __tablename__ = 'a'
@@ -507,7 +507,7 @@ and [`secondaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.s
 in the declarative style referring to the named tables `a`, `b`, `c`,
 `d` directly. 从`A`到`D`的查询如下所示：
 
-    sess.query(A).join(A.d).all()plain
+    sess.query(A).join(A.d).all()plainplain
 
     SELECT a.id AS a_id, a.b_id AS a_b_id
     FROM a JOIN (
@@ -573,7 +573,7 @@ support any references between `A` and `B` directly.
 
 在上面的例子中，当我们查询时，我们的`B`的非主映射器会发出额外的列；这些可以被忽略：
 
-    sess.query(A).join(A.b).all()plain
+    sess.query(A).join(A.b).all()plainplainplainplain
 
     SELECT a.id AS a_id, a.b_id AS a_b_id
     FROM a JOIN (b JOIN d ON d.b_id = b.id JOIN c ON c.id = d.c_id) ON a.b_id = b.id

@@ -1867,7 +1867,7 @@ method:
  `sqlalchemy.orm.`{.descclassname}`outerjoin`{.descname}(*left*, *right*, *onclause=None*, *full=False*, *join\_to\_left=None*)[¶](#sqlalchemy.orm.outerjoin "Permalink to this definition")
 :   在左边和右边的子句之间产生一个左外连接。
 
-    这是[`orm.join()`](#sqlalchemy.orm.join "sqlalchemy.orm.join")函数的“外部连接”版本，除了生成一个OUTER
+    这是[`orm.join()`](#sqlalchemy.orm.join "sqlalchemy.orm.join")函数的“外部连接”版本，除了生成一个OUTERplain
     JOIN外，其特征与其他行为相同。有关其他使用细节，请参阅该函数的文档。
 
  `sqlalchemy.orm.`{.descclassname}`with_parent`{.descname}(*instance*, *prop*)[¶](#sqlalchemy.orm.with_parent "Permalink to this definition")

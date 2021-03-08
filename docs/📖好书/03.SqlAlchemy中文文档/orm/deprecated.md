@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:40
 permalink: /sqlalchemy/orm/deprecated/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
 tags:
 ---
@@ -210,7 +210,7 @@ Mapper 事件[¶](#mapper-events "Permalink to this headline")
 *class* `sqlalchemy.orm.interfaces。`{.descclassname} `AttributeExtension`{.descname} [¶](#sqlalchemy.orm.interfaces.AttributeExtension "Permalink to this definition")
 :   `AttributeImpl`事件挂钩的基本实现，这是在用户代码中引发属性突变时触发的事件。
 
-    注意plain
+    注意plainplain
 
     [`AttributeExtension`](#sqlalchemy.orm.interfaces.AttributeExtension "sqlalchemy.orm.interfaces.AttributeExtension")已弃用。请参阅[`event.listen()`](core_event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")以及[`AttributeEvents`](events.html#sqlalchemy.orm.events.AttributeEvents "sqlalchemy.orm.events.AttributeEvents")。
 

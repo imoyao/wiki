@@ -43,7 +43,7 @@ SQLite 自动增量的背景是：[http://sqlite.org/autoinc.html](http://sqlite
 
 关键概念：
 
--   SQLite有一个隐含的“自动增量”功能，对于任何使用“INTEGER PRIMARY
+-   SQLite 有一个隐含的“自动增量”功能，对于任何使用“INTEGER PRIMARY
     KEY”专门为+主键创建的非复合主键列进行。
 -   SQLite 也有一个明确的“AUTOINCREMENT”关键字，即**not**等价于隐式自动增量特性；此关键字不推荐用于一般用途。除非使用特殊的 SQLite 特定指令，否则 SQLAlchemy 不会呈现此关键字（请参见下文）。但是，它仍然要求列的类型被命名为“INTEGER”。
 
@@ -133,7 +133,7 @@ default mode of `SERIALIZABLE` isolation, and a
 “dirty read” isolation mode normally referred to as
 `READ UNCOMMITTED`.
 
-SQLAlchemy使用[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")的[`create_engine.isolation_level`](core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")参数连接到此 PRAGMA 语句中。与 SQLite 一起使用时，此参数的有效值分别为`"SERIALIZABLE"`和`“READ UNCOMMITTED”`分别为 0 和 1。SQLite 默认为`SERIALIZABLE`，但其行为受到 pysqlite 驱动程序默认行为的影响。
+SQLAlchemy 使用[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")的[`create_engine.isolation_level`](core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")参数连接到此 PRAGMA 语句中。与 SQLite 一起使用时，此参数的有效值分别为`"SERIALIZABLE"`和`“READ UNCOMMITTED”`分别为 0 和 1。SQLite 默认为`SERIALIZABLE`，但其行为受到 pysqlite 驱动程序默认行为的影响。
 
 SQLite 的事务锁定所受影响的另一个轴是通过使用的`BEGIN`语句的性质。如[BEGIN
 TRANSACTION](http://sqlite.org/lang_transaction.html)所述，这三个品种是“延期”，“即时”和“排他”。A
@@ -179,7 +179,7 @@ KEY 语法，但默认情况下，这些约束对表的操作没有影响。
 
 SQLite 上的约束检查有三个先决条件：
 
--   至少必须使用SQLite版本3.6.19
+-   至少必须使用 SQLite 版本 3.6.19
 -   SQLite 库必须在没有启用 SQLITE\_OMIT\_FOREIGN\_KEY 或 SQLITE\_OMIT\_TRIGGER 符号的情况下编译*。*
 -   在使用前必须在所有连接上发送`PRAGMA foreign_keys = ON`
 
@@ -304,7 +304,7 @@ SQLite 有一个错误，它要求 SQLAlchemy 过滤掉这些结果集中的点�
 
 第二个断言失败：
 
-    Traceback (most recent call last):
+    Traceback (most recent call last):plain
       File "test.py", line 19, in <module>
         [c[0] for c in cursor.description]
     AssertionError: ['x.a', 'x.b']
@@ -313,7 +313,7 @@ SQLite 有一个错误，它要求 SQLAlchemy 过滤掉这些结果集中的点�
 
 SQLAlchemy 依赖于列名与原始语句匹配的可预测性，因此 SQLAlchemy 方言别无选择，只能将其过滤掉：
 
-    from sqlalchemy import create_engineplain
+    from sqlalchemy import create_engineplainplain
 
     eng = create_engine("sqlite://")
     conn = eng.connect()
@@ -334,7 +334,7 @@ SQLAlchemy 依赖于列名与原始语句匹配的可预测性，因此 SQLAlche
 
 注意上面，即使 SQLAlchemy 过滤掉了这些点，*这两个名字仍然是可寻址的*：
 
-    >>> row = result.first()
+    >>> row = result.first()plain
     >>> row["a"]
     1
     >>> row["x.a"]
@@ -382,7 +382,7 @@ SQLite 数据类型[¶](#sqlite-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.sqlite.`{.descclassname}`DATETIME`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.dialects.sqlite.DATETIME "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.sqlite.base._DateTimeMixin`，[`sqlalchemy.types.DateTime`](core_type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")
 
-    使用字符串在SQLite中表示Python日期时间对象。plain
+    使用字符串在SQLite中表示Python日期时间对象。plainplain
 
     默认的字符串存储格式是：
 
@@ -416,7 +416,7 @@ SQLite 数据类型[¶](#sqlite-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.sqlite。`{.descclassname} `DATE`{.descname} （ *storage\_format =无*，*regexp = None*，*\*\* kw* ） [¶](#sqlalchemy.dialects.sqlite.DATE "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.sqlite.base._DateTimeMixin`，[`sqlalchemy.types.Date`](core_type_basics.html#sqlalchemy.types.Date "sqlalchemy.types.Date")
 
-    使用字符串在SQLite中表示Python日期对象。plain
+    使用字符串在SQLite中表示Python日期对象。plainplainplain
 
     默认的字符串存储格式是：
 
@@ -450,7 +450,7 @@ SQLite 数据类型[¶](#sqlite-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.sqlite.`{.descclassname}`TIME`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.dialects.sqlite.TIME "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.sqlite.base._DateTimeMixin`，[`sqlalchemy.types.Time`](core_type_basics.html#sqlalchemy.types.Time "sqlalchemy.types.Time")
 
-    使用字符串在SQLite中表示一个Python时间对象。plain
+    使用字符串在SQLite中表示一个Python时间对象。plainplain
 
     默认的字符串存储格式是：
 
@@ -495,7 +495,7 @@ pysqlite 的文档和下载信息（如果适用）可在以下网址获得：[h
 
 连接字符串：
 
-    sqlite+pysqlite:///file_path
+    sqlite+pysqlite:///file_pathplain
 
 ### 驱动程序[¶ T0\>](#driver "Permalink to this headline")
 
@@ -513,7 +513,7 @@ to control this explicitly:
 
 SQLite 数据库的文件规范被认为是 URL 的“数据库”部分。请注意，SQLAlchemy 网址的格式是：
 
-    driver://user:pass@host/databaseplain
+    driver://user:pass@host/databaseplainplain
 
 这意味着要使用的实际文件名以第三个斜杠的**右侧**中的字符开头。因此连接到相对的文件路径如下所示：
 
@@ -522,7 +522,7 @@ SQLite 数据库的文件规范被认为是 URL 的“数据库”部分。请�
 
 绝对路径，以斜杠开始，表示您需要**四个**斜线：
 
-    # absolute path
+    # absolute pathplainplain
     e = create_engine('sqlite:////path/to/database.db')
 
 要使用 Windows 路径，可以使用常规的驱动器规格和反斜杠。可能需要双反斜杠：
@@ -537,7 +537,7 @@ SQLite 数据库的文件规范被认为是 URL 的“数据库”部分。请�
 
 ### 与 sqlite3“native”日期和日期时间类型兼容[¶](#compatibility-with-sqlite3-native-date-and-datetime-types "Permalink to this headline")
 
-pysqlite驱动程序包括sqlite3.PARSE\_DECLTYPES 和 sqlite3.PARSE\_COLNAMES 选项，这些选项会将显式转换为“date”或“timestamp”的任何列或表达式转换为 Python 日期或日期时间对象。pysqlite 方言提供的日期和日期时间类型目前与这些选项不兼容，因为它们呈现 ISO 日期/日期时间（包括微秒），而 pysqlite 的驱动程序却没有。此外，SQLAlchemy 目前不会自动呈现独立函数“current\_timestamp”和“current\_date”所需的“强制转换”语法，以便本机返回 datetime
+pysqlite 驱动程序包括 sqlite3.PARSE\_DECLTYPES 和 sqlite3.PARSE\_COLNAMES 选项，这些选项会将显式转换为“date”或“timestamp”的任何列或表达式转换为 Python 日期或日期时间对象。pysqlite 方言提供的日期和日期时间类型目前与这些选项不兼容，因为它们呈现 ISO 日期/日期时间（包括微秒），而 pysqlite 的驱动程序却没有。此外，SQLAlchemy 目前不会自动呈现独立函数“current\_timestamp”和“current\_date”所需的“强制转换”语法，以便本机返回 datetime
 / date 类型。不幸的是，pysqlite 没有在`cursor.description`中提供标准 DBAPI 类型，使得 SQLAlchemy 无法在没有昂贵的每行类型检查的情况下即时检测这些类型。
 
 请记住，建议不要使用 pysqlite 的解析选项，也不需要使用 SQLAlchemy，如果在 create\_engine()上配置了“native\_datetime
@@ -549,7 +549,7 @@ pysqlite驱动程序包括sqlite3.PARSE\_DECLTYPES 和 sqlite3.PARSE\_COLNAMES �
         native_datetime=True
     )
 
-启用此标志时，DATE 和 TIMESTAMP 类型（但注意 -
+启用此标志时，DATE 和 TIMESTAMP 类型（但注意 -…………
 不是 DATETIME 或 TIME 类型......困惑了吗？）将不执行任何绑定参数或结果处理。执行“func.current\_date()”将返回一个字符串。“func.current\_timestamp()”被注册为在 SQLAlchemy 中返回 DATETIME 类型，所以该函数仍然接收 SQLAlchemy 级别的结果处理。
 
 ### 线程/池化行为[¶](#threading-pooling-behavior "Permalink to this headline")
@@ -584,7 +584,7 @@ SQLAlchemy 设置池以使用 Pysqlite 的默认行为：
 [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")时临时表表应该在[`Session.commit()`](orm_session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")或[`Session.rollback()`](orm_session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")之后继续保持，必须使用维护单个连接的池。如果仅在当前线程中需要作用域，则使用[`SingletonThreadPool`](core_pooling.html#sqlalchemy.pool.SingletonThreadPool "sqlalchemy.pool.SingletonThreadPool")，或者在这种情况下多个线程内需要[`StaticPool`](core_pooling.html#sqlalchemy.pool.StaticPool "sqlalchemy.pool.StaticPool")作用域：
 
     # maintain the same connection per threadplain
-    from sqlalchemy.pool import SingletonThreadPool
+    from sqlalchemy.pool import SingletonThreadPoolplain
     engine = create_engine('sqlite:///mydb.db',
                         poolclass=SingletonThreadPool)
 
@@ -613,8 +613,8 @@ SQLAlchemy 默认选择不改变这种行为，因为它是 pysqlite 驱动程�
 
 好消息是，通过一些事件，我们可以完全实现事务性支持，完全禁用 pysqlite 的功能并自行发布 BEGIN。这是通过使用两个事件监听器来实现的：
 
-    from sqlalchemy import create_engine, event
-
+    from sqlalchemy import create_engine, eventplain
+plainplain
     engine = create_engine("sqlite:///myfile.db")
 
     @event.listens_for(engine, "connect")
@@ -636,7 +636,7 @@ at which SQLAlchemy knows that transaction scope is to begin, we emit
 TRANSACTION](http://sqlite.org/lang_transaction.html)中引入的 SQLite 锁定模式，方法是将所需的锁定模式添加到我们的`"BEGIN"`
 
     @event.listens_for(engine, "begin")plain
-    def do_begin(conn):
+    def do_begin(conn):plain
         conn.execute("BEGIN EXCLUSIVE")
 
 也可以看看
@@ -669,7 +669,7 @@ pysqlcipher 的文档和下载信息（如果适用）可在以下网址获得�
 连接字符串：
 
     sqlite+pysqlcipher://:passphrase/file_path[?kdf_iter=<iter>]
-
+plain
 ### 驱动程序[¶ T0\>](#id3 "Permalink to this headline")
 
 这里的驱动程序是使用 SQLCipher 引擎的[pysqlcipher](https://pypi.python.org/pypi/pysqlcipher)驱动程序。该系统基本上向 SQLite 引入了新的 PRAGMA 命令，允许设置密码和其他加密参数，从而允许对数据库文件进行加密。
@@ -687,7 +687,7 @@ pysqlcipher 的文档和下载信息（如果适用）可在以下网址获得�
 在[https://www.zetetic.net/sqlcipher/sqlcipher-api/](https://www.zetetic.net/sqlcipher/sqlcipher-api/)中记录的 SQLCipher 支持的其他与加密相关的编译指示的选择可以在查询字符串中传递，并且会导致 PRAGMA 被称为每个新的连接。目前，支持`cipher`，`kdf_iter` `cipher_page_size`和`cipher_use_hmac`
 
     e = create_engine('sqlite+pysqlcipher://:testing@/foo.db?cipher=aes-256-cfb&kdf_iter=64000')plain
-
+plain
 ### 合并行为[¶](#pooling-behavior "Permalink to this headline")
 
 驱动程序根据[Threading/Pooling
