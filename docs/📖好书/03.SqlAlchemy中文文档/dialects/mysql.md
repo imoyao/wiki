@@ -41,7 +41,7 @@ SQLAlchemy 通过现代版本支持从 4.1 版本开始的 MySQL。但是，如�
 
 MySQL 具有自动连接关闭行为，适用于闲置八小时或更长时间的连接。为了避免发生此问题，请使用控制任何连接的最大使用期限的`pool_recycle`选项：
 
-    engine = create_engine('mysql+mysqldb://...', pool_recycle=3600)
+    engine = create_engine('mysql+mysqldb://...', pool_recycle=3600)plain
 
 也可以看看
 
@@ -59,14 +59,14 @@ including `ENGINE`, `CHARSET`,
 of `utf8`, and `KEY_BLOCK_SIZE`
 of `1024`:
 
-    Table('mytable', metadata,
+    Table('mytable', metadata,plain
           Column('data', String(32)),
           mysql_engine='InnoDB',
           mysql_charset='utf8',
           mysql_key_block_size="1024"
          )
 
-MySQL方言通常会将指定为`mysql_keyword_name`的任何关键字转换成`CREATE TABLE中的KEYWORD_NAME` \>语句。A handful of these names will render with a space
+MySQL 方言通常会将指定为`mysql_keyword_name`的任何关键字转换成`CREATE TABLE中的KEYWORD_NAME` \>语句。A handful of these names will render with a space
 instead of an underscore; to support this, the MySQL dialect has
 awareness of these particular names, which include
 `DATA DIRECTORY` (e.g.
@@ -89,7 +89,7 @@ majority of cases is `InnoDB`.
 
 也可以看看
 
-[InnoDB存储引擎](http://dev.mysql.com/doc/refman/5.0/en/innodb-storage-engine.html)
+[InnoDB 存储引擎](http://dev.mysql.com/doc/refman/5.0/en/innodb-storage-engine.html)
 - 在 MySQL 网站上。
 
 区分大小写和表反射[¶](#case-sensitivity-and-table-reflection "Permalink to this headline")
@@ -121,7 +121,7 @@ for each new connection.
 
 要设置使用每个连接执行选项：
 
-    connection = engine.connect()
+    connection = engine.connect()plain
     connection = connection.execution_options(
         isolation_level="READ COMMITTED"
     )
@@ -135,7 +135,7 @@ for each new connection.
 -   `AUTOCOMMIT`
 
 特殊的`AUTOCOMMIT`值使用特定 DBAPI 提供的各种“autocommit”属性，目前支持 MySQLdb，MySQL-Client，MySQL-Connector
-Python 和 PyMySQL。使用它，MySQL 连接将对`SELECT @@ autocommit；`的值返回true。
+Python 和 PyMySQL。使用它，MySQL 连接将对`SELECT @@ autocommit；`的值返回 true。
 
 1.1 版新增功能： - 增加了对 AUTOCOMMIT 隔离级别的支持。
 
@@ -155,7 +155,7 @@ AUTO\_INCREMENT 行为[¶](#auto-increment-behavior "Permalink to this headline"
 
 您可以通过将`False`传递给[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的[`autoincrement`](core_metadata.html#sqlalchemy.schema.Column.params.autoincrement "sqlalchemy.schema.Column")参数来禁用此行为。此标志还可用于启用某些存储引擎的多列键中辅助列的自动递增：
 
-    Table('mytable', metadata,
+    Table('mytable', metadata,plain
           Column('gid', Integer, primary_key=True, autoincrement=False),
           Column('id', Integer, primary_key=True)
          )
@@ -242,12 +242,12 @@ MySQL SQL扩展[¶](#mysql-sql-extensions "Permalink to this headline")
 
 -   更新与限制：
 
-        update(..., mysql_limit=10)
+        update(..., mysql_limit=10)plain
 
 Rowcount支持[¶](#rowcount-support "Permalink to this headline")
 ---------------------------------------------------------------
 
-SQLAlchemy将DBAPI `cursor.rowcount`属性标准化为“UPDATE 或 DELETE 匹配的行数”的通常定义。这与大多数 MySQL
+SQLAlchemy 将 DBAPI `cursor.rowcount`属性标准化为“UPDATE 或 DELETE 匹配的行数”的通常定义。这与大多数 MySQL
 DBAPI 驱动程序的默认设置相矛盾，即“实际修改/删除的行数”。因此，SQLAlchemy
 MySQL 方言总是在连接时添加`constants.CLIENT.FOUND_ROWS`标志或任何等同于目标方言的标志。此设置目前是硬编码的。
 
@@ -255,7 +255,7 @@ MySQL 方言总是在连接时添加`constants.CLIENT.FOUND_ROWS`标志或任何
 
 [`ResultProxy.rowcount`](core_connections.html#sqlalchemy.engine.ResultProxy.rowcount "sqlalchemy.engine.ResultProxy.rowcount")
 
-CAST支持[¶](#cast-support "Permalink to this headline")
+CAST 支持[¶](#cast-support "Permalink to this headline")
 -------------------------------------------------------
 
 MySQL 将文档 CAST 操作符记录在版本 4.0.2 中。当使用 SQLAlchemy [`cast()`](core_sqlelement.html#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")函数时，基于服务器版本检测，SQLAlchemy 将不会在此版本之前在 MySQL 上呈现 CAST 标记，而是直接渲染内部表达式。
@@ -325,7 +325,7 @@ MySQL 关于外键的行为有一些重要的注意事项。
 
 MySQL 不支持外键参数“DEFERRABLE”，“INITIALLY”或“MATCH”。对[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")或[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")使用`deferrable`或`initially`关键字参数将会产生这些关键字在 DDL 表达式，这会在 MySQL 上引发错误。为了在外键上使用这些关键字，同时让它们在 MySQL 后端上被忽略，请使用自定义编译规则：
 
-    from sqlalchemy.ext.compiler import compiles
+    from sqlalchemy.ext.compiler import compilesplain
     from sqlalchemy.schema import ForeignKeyConstraint
 
     @compiles(ForeignKeyConstraint, "mysql")
@@ -435,7 +435,7 @@ MySQL 的这种行为可以使用 MySQL
 
 输出：
 
-    CREATE TABLE ts_test (plain
+    CREATE TABLE ts_test (plainplain
         a INTEGER,
         b INTEGER NOT NULL,
         c TIMESTAMP NULL,
@@ -487,7 +487,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.mysql.`{.descclassname}`BIT`{.descname}(*length=None*)[¶](#sqlalchemy.dialects.mysql.BIT "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    MySQL BIT类型。plain
+    MySQL BIT类型。plainplain
 
     这种类型适用于MyISAM的MySQL
     5.0.3或更高版本，以及MyISAM，MEMORY，InnoDB和BDB的5.0.5或更高版本。对于旧版本，请使用MSTinyInteger()类型。
@@ -599,7 +599,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `DECIMAL`{.descname} （ *precision = None*，*scale = None*，*asdecimal = True*，*\*\* kw* ） [](#sqlalchemy.dialects.mysql.DECIMAL "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.mysql.types._NumericType`，[`sqlalchemy.types.DECIMAL`](core_type_basics.html#sqlalchemy.types.DECIMAL "sqlalchemy.types.DECIMAL")
 
-    MySQL DECIMAL类型。
+    MySQL DECIMAL类型。plain
 
      `__init__`{.descname}(*precision=None*, *scale=None*, *asdecimal=True*, *\*\*kw*)[¶](#sqlalchemy.dialects.mysql.DECIMAL.__init__ "Permalink to this definition")
     :   构建一个DECIMAL。
@@ -758,7 +758,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `LONGTEXT`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.dialects.mysql.LONGTEXT "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.mysql.types._StringType`
 
-    MySQL LONGTEXT类型，文本最多2 \^ 32个字符。
+    MySQL LONGTEXT类型，文本最多2 \^ 32个字符。plain
 
     ` __初始化__  T0> （ T1>  ** kwargs  T2> ） T3> ¶ T4>`{.descname}
     :   构建一个LONGTEXT。
@@ -1010,7 +1010,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `TEXT`{.descname} （ *length = None*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.TEXT "Permalink to this definition")*
 :   基础：`sqlalchemy.dialects.mysql.types._StringType`，[`sqlalchemy.types.TEXT`](core_type_basics.html#sqlalchemy.types.TEXT "sqlalchemy.types.TEXT")
 
-    MySQL文本类型，文本最多2 \^ 16个字符。plain
+    MySQL文本类型，文本最多2 \^ 16个字符。plainplain
 
     ` __初始化__  T0> （ T1> 长度=无 T2>， **千瓦 T3> ） T4> ¶< / T5>`{.descname}
     :   构建一个TEXT。
@@ -1151,7 +1151,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `VARCHAR`{.descname} （ *length = None*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.VARCHAR "Permalink to this definition")*
 :   基础：`sqlalchemy.dialects.mysql.types._StringType`，[`sqlalchemy.types.VARCHAR`](core_type_basics.html#sqlalchemy.types.VARCHAR "sqlalchemy.types.VARCHAR")
 
-    MySQL VARCHAR类型，用于可变长度字符数据。
+    MySQL VARCHAR类型，用于可变长度字符数据。plain
 
     `__ init __`{.descname} （ *length = None*，*\*\* kwargs* ） [/ T5\>](#sqlalchemy.dialects.mysql.VARCHAR.__init__ "Permalink to this definition")
     :   构建一个VARCHAR。
@@ -1211,7 +1211,7 @@ bugfixes.
 
 Google Cloud SQL 现在推荐使用 MySQLdb 方言。使用以下 URL 连接：
 
-    mysql+mysqldb://root@/<dbname>?unix_socket=/cloudsql/<projectid>:<instancename>
+    mysql+mysqldb://root@/<dbname>?unix_socket=/cloudsql/<projectid>:<instancename>plain
 
 pymysql [¶ T0\>](#module-sqlalchemy.dialects.mysql.pymysql "Permalink to this headline")
 ----------------------------------------------------------------------------------------

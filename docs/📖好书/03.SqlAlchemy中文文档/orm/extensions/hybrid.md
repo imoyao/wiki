@@ -20,7 +20,7 @@ tags:
 
 考虑映射`Interval`，表示整数`start`和`end`值。我们可以在映射类上定义更高级别的函数，这些类可以在类级别生成 SQL 表达式，也可以在实例级别上进行 Python 表达式评估。下面，用[`hybrid_method`](#sqlalchemy.ext.hybrid.hybrid_method "sqlalchemy.ext.hybrid.hybrid_method")或[`hybrid_property`](#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")装饰的每个函数都可以接收`self`作为类的实例，或者作为类本身：
 
-    from sqlalchemy import Column, Integer
+    from sqlalchemy import Column, Integerplain
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.orm import Session, aliased
     from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method
@@ -80,7 +80,7 @@ can also be used with hybrid attributes:
 `Interval`类示例还演示了`contains()`和`intersects()`两种方法，用[`hybrid_method`](#sqlalchemy.ext.hybrid.hybrid_method "sqlalchemy.ext.hybrid.hybrid_method")修饰。该装饰器将相同的想法应用于[`hybrid_property`](#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")应用于属性的方法。这些方法返回布尔值，并利用 Python
 `|`和`&`位运算符来产生等效的实例级和 SQL 表达式级布尔行为：
 
-    >>> i1.contains(6)
+    >>> i1.contains(6)plain
     True
     >>> i1.contains(15)
     False
@@ -112,7 +112,7 @@ can also be used with hybrid attributes:
 我们使用上面的`&`和`|`位运算符是幸运的，考虑到我们的函数对两个布尔值进行操作以返回新函数。在许多情况下，Python 内函数和 SQLAlchemy
 SQL 表达式的构造有足够的区别，应该定义两个单独的 Python 表达式。[`hybrid`](#module-sqlalchemy.ext.hybrid "sqlalchemy.ext.hybrid")装饰器为此定义了[`hybrid_property.expression()`](#sqlalchemy.ext.hybrid.hybrid_property.expression "sqlalchemy.ext.hybrid.hybrid_property.expression")修饰符。作为一个例子，我们将定义间隔的半径，这需要使用绝对值函数：
 
-    from sqlalchemy import funcplain
+    from sqlalchemy import funcplainplain
 
     class Interval(object):
         # ...
@@ -154,7 +154,7 @@ Python 函数`abs()`用于实例级操作，SQL 函数`ABS()`通过[`func`](core
 
 现在在 set 中调用`长度（self， value）`方法：
 
-    >>> i1 = Interval(5, 10)
+    >>> i1 = Interval(5, 10)plainplain
     >>> i1.length
     5
     >>> i1.length = 12
@@ -170,7 +170,7 @@ Python 函数`abs()`用于实例级操作，SQL 函数`ABS()`通过[`func`](core
 
 考虑以下将`User`与`SavingsAccount`关联的声明性映射：
 
-    from sqlalchemy import Column, Integer, ForeignKey, Numeric, Stringplain
+    from sqlalchemy import Column, Integer, ForeignKey, Numeric, Stringplainplain
     from sqlalchemy.orm import relationship
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.ext.hybrid import hybrid_property
@@ -223,7 +223,7 @@ setter 方法可以将`accounts`视为`self`上可用的 Python 列表。
 
 但是请注意，虽然实例级访问器需要担心是否存在`self.accounts`，但这个问题在 SQL 表达式级别表达不同，我们基本上会使用外连接：
 
-    >>> from sqlalchemy import or_
+    >>> from sqlalchemy import or_plain
     >>> print (Session().query(User, User.balance).outerjoin(User.accounts).
     ...         filter(or_(User.balance < 5000, User.balance == None)))
     SELECT "user".id AS user_id, "user".name AS user_name,
@@ -269,7 +269,7 @@ column\_property](mapped_sql_expr.html#mapper-column-property-sql-expressions)�
 
 上面的配方会给我们提供一个相关的 SELECT 的`balance`列：
 
-    >>> print s.query(User).filter(User.balance > 400)
+    >>> print s.query(User).filter(User.balance > 400)plain
     SELECT "user".id AS user_id, "user".name AS user_name
     FROM "user"
     WHERE (SELECT sum(account.balance) AS sum_1
@@ -317,7 +317,7 @@ SQL 函数应用于双方：
 
 上面的`CaseInsensitiveComparator`实现了[`ColumnOperators`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")接口的一部分。可以对所有比较操作（即，`eq`，`lt`，`gt`等）应用“强制”使用[`Operators.operate()`](core_sqlelement.html#sqlalchemy.sql.operators.Operators.operate "sqlalchemy.sql.operators.Operators.operate")：
 
-    class CaseInsensitiveComparator(Comparator):plain
+    class CaseInsensitiveComparator(Comparator):plainplain
         def operate(self, op, other):
             return op(func.lower(self.__clause_element__()), func.lower(other))
 
@@ -369,7 +369,7 @@ a Python native. 通过重写`operate()`和`__clause_element__()`以根据`self.
 
 `word_insensitive`属性现在普遍具有不区分大小写的比较行为，包括 SQL 表达式与 Python 表达式（请注意，Python 值在此处转换为小写）：
 
-    >>> print Session().query(SearchWord).filter_by(word_insensitive="Trucks")
+    >>> print Session().query(SearchWord).filter_by(word_insensitive="Trucks")plain
     SELECT searchword.id AS searchword_id, searchword.word AS searchword_word
     FROM searchword
     WHERE lower(searchword.word) = :lower_1
@@ -391,7 +391,7 @@ SQL 表达式与 SQL 表达式：
 
 仅 Python 表达式：
 
-    >>> ws1 = SearchWord(word="SomeWord")
+    >>> ws1 = SearchWord(word="SomeWord")plain
     >>> ws1.word_insensitive == "sOmEwOrD"
     True
     >>> ws1.word_insensitive == "XOmEwOrX"
@@ -418,7 +418,7 @@ SQL 表达式与 SQL 表达式：
 
 考虑一个映射的类`Node`，它将使用邻接表进行汇编成一个分层树形模式：
 
-    from sqlalchemy import Column, Integer, ForeignKeyplain
+    from sqlalchemy import Column, Integer, ForeignKeyplainplain
     from sqlalchemy.orm import relationship
     from sqlalchemy.ext.declarative import declarative_base
     Base = declarative_base()
@@ -481,7 +481,7 @@ callable as well as the right side of the comparison
 `Node(id=5)`. 然后返回一个函数`transform`，它将首先转换[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")以加入到`Node.parent`，然后比较`parent_alias`
 \>在左侧和右侧使用`Operators.eq`，传入`Query.filter`：
 
-    >>> from sqlalchemy.orm import Sessionplain
+    >>> from sqlalchemy.orm import Sessionplainplain
     >>> session = Session()
     sql>>> session.query(Node).\
     ...        with_transformation(Node.grandparent==Node(id=5)).\
@@ -597,7 +597,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  *class*`sqlalchemy.ext.hybrid.`{.descclassname}`Comparator`{.descname}(*expression*)[¶](#sqlalchemy.ext.hybrid.Comparator "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.interfaces.PropComparator`](internals.html#sqlalchemy.orm.interfaces.PropComparator "sqlalchemy.orm.interfaces.PropComparator")
 
-    一个辅助类，允许轻松构建用于混合使用的自定义[`PropComparator`](internals.html#sqlalchemy.orm.interfaces.PropComparator "sqlalchemy.orm.interfaces.PropComparator")类。
+    一个辅助类，允许轻松构建用于混合使用的自定义[`PropComparator`](internals.html#sqlalchemy.orm.interfaces.PropComparator "sqlalchemy.orm.interfaces.PropComparator")类。plainplain
 
 `sqlalchemy.ext.hybrid。`{.descclassname} `HYBRID_METHOD`{.descname} *=符号（'HYBRID\_METHOD'）* [¶](#sqlalchemy.ext.hybrid.HYBRID_METHOD "Permalink to this definition")
 :   

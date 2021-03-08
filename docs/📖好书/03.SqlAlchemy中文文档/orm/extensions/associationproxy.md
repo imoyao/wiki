@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:41
 permalink: /sqlalchemy/orm/extensions/associationproxy/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
   - extensions
 tags:
@@ -66,7 +66,7 @@ Many](basic_relationships.html#relationships-many-to-many)中描述） ：
 
 对`User`类应用`association_proxy`以产生`kw`关系的“视图”，该关系仅显示字符串值`.keyword`与每个`Keyword`对象关联：
 
-    from sqlalchemy.ext.associationproxy import association_proxyplain
+    from sqlalchemy.ext.associationproxy import association_proxyplainplain
 
     class User(Base):
         __tablename__ = 'user'
@@ -110,7 +110,7 @@ Many](basic_relationships.html#relationships-many-to-many)中描述） ：
 
 这个例子在这里工作，因为我们设计了`Keyword`的构造函数来接受一个位置参数`keyword`。对于单参数构造函数不可行的情况，可以使用`creator`参数来定制关联代理的创建行为，该参数引用可调用的函数（即 Python 函数），该函数将产生一个新的对象实例给出单数论证。下面我们用典型的 lambda 来说明这一点：
 
-    class User(Base):plain
+    class User(Base):plainplain
         # ...
 
         # use Keyword(keyword=kw) on append() events
@@ -280,7 +280,7 @@ Dictionary-Based Collections](collections.html#id1)中描述的扩展技术。
 
 考虑到我们之前从关系到标量属性，代理跨越关联对象以及代理字典的代理示例，我们可以将所有三种技术组合在一起以给出`User` a `keywords`字典严格处理映射到字符串`keyword`的`special_key`的字符串值。`UserKeyword`和`Keyword`类都完全隐藏。这是通过在`User`上建立一个关联代理实现的，该代理引用`UserKeyword`上存在的关联代理：
 
-    from sqlalchemy import Column, Integer, String, ForeignKeyplain
+    from sqlalchemy import Column, Integer, String, ForeignKeyplainplain
     from sqlalchemy.orm import relationship, backref
 
     from sqlalchemy.ext.associationproxy import association_proxy
@@ -375,7 +375,7 @@ association proxy.
 
 对于标量属性的代理，支持`__eq__()`：
 
-    >>> print(session.query(UserKeyword).filter(UserKeyword.keyword == 'jek'))plain
+    >>> print(session.query(UserKeyword).filter(UserKeyword.keyword == 'jek'))plainplainplain
     SELECT user_keyword.*
     FROM user_keyword
     WHERE EXISTS (SELECT 1
@@ -418,9 +418,9 @@ API 文档[¶](#api-documentation "Permalink to this headline")
 -----------------------------------------------------------
 
  `sqlalchemy.ext.associationproxy.`{.descclassname}`association_proxy`{.descname}(*target\_collection*, *attr*, *\*\*kw*)[¶](#sqlalchemy.ext.associationproxy.association_proxy "Permalink to this definition")
-:   返回实现目标属性视图的Python属性，该属性引用目标成员上的属性。
+:   返回实现目标属性视图的 Python 属性，该属性引用目标成员上的属性。
 
-    返回的值是[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")的一个实例。plain
+    返回的值是[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")的一个实例。plainplain
 
     将一个表示关系的Python属性实现为一组简单值或一个标量值。被代理的属性将模仿目标（列表，字典或集合）的集合类型，或者在一对一关系的情况下，它是一个简单的标量值。
 

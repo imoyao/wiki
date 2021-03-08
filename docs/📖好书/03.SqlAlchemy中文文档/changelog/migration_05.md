@@ -45,13 +45,13 @@ test / orm\_test\_deprecations.py]中查看。
 ------------------------------------------------------------------------
 
 -   **查询中的列级表达式** -
-    详见[教程](http://www.sqlalchemy.org/docs/05/ormtutorial.html)，`Query`有能力创建特定的SELECT语句，而不仅仅是针对整行的那些语句：
+    详见[教程](http://www.sqlalchemy.org/docs/05/ormtutorial.html)，`Query`有能力创建特定的 SELECT 语句，而不仅仅是针对整行的那些语句：
 
-        session.query(User.name, func.count(Address.id).label("numaddresses")).join(Address).group_by(User.name)
+        session.query(User.name, func.count(Address.id).label("numaddresses")).join(Address).group_by(User.name)plain
 
     任何多列/实体查询返回的元组都是*命名的*元组：
 
-        for row in session.query(User.name, func.count(Address.id).label('numaddresses')).join(Address).group_by(User.name):
+        for row in session.query(User.name, func.count(Address.id).label('numaddresses')).join(Address).group_by(User.name):plain
            print("name", row.name, "number", row.numaddresses)
 
     `Query` has a `statement`
@@ -59,7 +59,7 @@ test / orm\_test\_deprecations.py]中查看。
     allow `Query` to be used to create more complex
     combinations:
 
-        subq = session.query(Keyword.id.label('keyword_id')).filter(Keyword.name.in_(['beans', 'carrots'])).subquery()plain
+        subq = session.query(Keyword.id.label('keyword_id')).filter(Keyword.name.in_(['beans', 'carrots'])).subquery()plainplain
         recipes = session.query(Recipe).filter(exists().
            where(Recipe.id==recipe_keywords.c.recipe_id).
            where(recipe_keywords.c.keyword_id==subq.c.keyword_id)
@@ -70,7 +70,7 @@ test / orm\_test\_deprecations.py]中查看。
     class, which allows fine-grained control of aliases in conjunction
     with ORM queries. 尽管表级别别名（即`table.alias()`）仍然可用，但 ORM 级别别名保留了 ORM 映射对象的语义，这对于继承映射，选项和其他场景很重要。例如。：
 
-        Friend = aliased(Person)plain
+        Friend = aliased(Person)plainplain
         session.query(Person, Friend).join((Friend, Person.friends)).all()
 
 -   **query.join()大大增强。** -
@@ -83,11 +83,11 @@ test / orm\_test\_deprecations.py]中查看。
 
     为了得到映射类的表（如果你没有保留它）：
 
-        table = class_mapper(someclass).mapped_tableplain
+        table = class_mapper(someclass).mapped_tableplainplain
 
     遍历列：
 
-        for col in table.c:plain
+        for col in table.c:plainplainplainplainplain
             print(col)
 
     使用特定列：
@@ -122,7 +122,7 @@ test / orm\_test\_deprecations.py]中查看。
     setups, as well as portable subqueries, etc.
 
 -   **Session Now Synchronizes Automatically with
-    Transactions.**会话现在默认会自动与事务同步，包括 autoflush 和 autoexpire。除非禁止使用`autocommit`选项，否则交易始终存在。当所有三个标志都设置为默认值时，会话在回滚之后会优雅地恢复，并且很难将陈旧的数据导入会话。有关详细信息，请参阅新的Session文档。
+    Transactions.**会话现在默认会自动与事务同步，包括 autoflush 和 autoexpire。除非禁止使用`autocommit`选项，否则交易始终存在。当所有三个标志都设置为默认值时，会话在回滚之后会优雅地恢复，并且很难将陈旧的数据导入会话。有关详细信息，请参阅新的 Session 文档。
 
 -   **隐式订单被移除**。这将影响依赖于 SA 的“隐式排序”行为的 ORM 用户，这些用户声明所有没有`order_by()`的 Query 对象将 ORDER
     BY 的“id”或“oid”列主映射表和所有懒惰/急切加载的集合都会应用类似的排序。在 0.5 中，必须在`mapper()`和`relation()`对象（如果需要）上显式配置自动排序，否则在使用`Query`时自动排序。
@@ -131,7 +131,7 @@ test / orm\_test\_deprecations.py]中查看。
     will be extremely similar to 0.4 or previous, use the
     `order_by` setting on `mapper()` and `relation()`:
 
-        mapper(User, users, properties={plain
+        mapper(User, users, properties={plainplain
             'addresses':relation(Address, order_by=addresses.c.id)
         }, order_by=users.c.id)
 
@@ -221,7 +221,7 @@ test / orm\_test\_deprecations.py]中查看。
     TypeEngine/TypeDecorator are removed.** -
     不幸的是，O'Reilly 的书中记录了这些方法，即使它们在 0.3 后被弃用。对于类型为`TypeEngine`的用户定义类型，应该使用`bind_processor()`和`result_processor()`方法进行绑定/结果处理。任何用户定义的类型，无论是扩展`TypeEngine`还是`TypeDecorator`，都可以使用以下适配器轻松适应新样式：
 
-        class AdaptOldConvertMethods(object):
+        class AdaptOldConvertMethods(object):plainplainplain
             """A mixin which adapts 0.3-style convert_bind_param and
             convert_result_value methods
 
@@ -244,7 +244,7 @@ test / orm\_test\_deprecations.py]中查看。
 
     要使用上面的 mixin：
 
-        class MyType(AdaptOldConvertMethods, TypeEngine):
+        class MyType(AdaptOldConvertMethods, TypeEngine):plainplain
            # ...
 
 -   `Column`和`Table`以及`Table`中的`quote_schema`标志上的`quote`默认值是`None`，这意味着让常规引用规则生效。当`True`时，强制引用引用。当`False`时，引用被强制关闭。
@@ -256,7 +256,7 @@ test / orm\_test\_deprecations.py]中查看。
 -   此外，当与 SQLite 一起使用时，`DateTime`和`Time`类型现在表示 Python
     `datetime.datetime`对象的“microseconds”字段与`str(datetime)`相同的方式 - 分数秒，而不是微秒数。那是：
 
-        dt = datetime.datetime(2008, 6, 27, 12, 0, 0, 125)  # 125 usec
+        dt = datetime.datetime(2008, 6, 27, 12, 0, 0, 125)  # 125 usecplain
 
         # old way
         '2008-06-27 12:00:00.125'
@@ -266,12 +266,12 @@ test / orm\_test\_deprecations.py]中查看。
 
     因此，如果现有的基于 SQLite 文件的数据库打算在 0.4 和 0.5 之间使用，则必须升级日期时间列以存储新格式（请注意：请测试一下，我非常肯定它的正确性）：
 
-        UPDATE mytable SET somedatecol =
+        UPDATE mytable SET somedatecol =plain
           substr(somedatecol, 0, 19) || '.' || substr((substr(somedatecol, 21, -1) / 1000000), 3, -1);
 
     或者，启用“传统”模式，如下所示：
 
-        from sqlalchemy.databases.sqlite import DateTimeMixinplain
+        from sqlalchemy.databases.sqlite import DateTimeMixinplainplain
         DateTimeMixin.__legacy_microseconds__ = True
 
 默认情况下，连接池不再是 threadlocal [¶](#connection-pool-no-longer-threadlocal-by-default "Permalink to this headline")
@@ -301,7 +301,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     length \*args, with a single array accepted for backwards
     compatibility:
 
-        query.join('orders', 'items')
+        query.join('orders', 'items')plain
         query.join(User.orders, Order.items)
 
 -   列和类似的\_()方法中的`in_()`它不再接受`\*args`。
@@ -311,7 +311,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
 -   **entity\_name** -
     此功能始终存在问题并且很少使用。0.5 的更深入充实的用例揭示了导致其被删除的`entity_name`的进一步问题。如果单个类需要不同的映射，请将该类拆分为单独的子类并分别映射它们。一个例子是[wiki：UsageRecipes
-    / EntityName]。有关基本原理的更多信息，请参见http：//groups.google.c
+    / EntityName]。有关基本原理的更多信息，请参见 http：//groups.google.c
     om / group / sqlalchemy / browse\_thread / thread /
     9e23a0641a88b96d？hl = en。
 
@@ -357,7 +357,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     `join()`, `outerjoin()`,
     `add_entity()` and `add_column()` has been removed. 要将`Query`中的表别名作为结果列，请使用`aliased`结构：
 
-        from sqlalchemy.orm import aliased
+        from sqlalchemy.orm import aliasedplain
         address_alias = aliased(Address)
         print(session.query(User, address_alias).join((address_alias, User.addresses)).all())
 
@@ -382,7 +382,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
     从`DefaultDialect.preexecute_sequences`到`.preexecute_pk_sequences`的别名已被删除。
 
-    已弃用的engine\_descriptors()函数已被删除。
+    已弃用的 engine\_descriptors()函数已被删除。
 
 -   `sqlalchemy.ext.activemapper`
 

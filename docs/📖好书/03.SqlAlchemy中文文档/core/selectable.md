@@ -5433,7 +5433,7 @@ subclasses).
 *class* `sqlalchemy.sql.expression。`{.descclassname} `TextAsFrom`{.descname} （ *text*，*columns*，*positions = False* ） [¶](#sqlalchemy.sql.expression.TextAsFrom "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.SelectBase`](#sqlalchemy.sql.expression.SelectBase "sqlalchemy.sql.expression.SelectBase")
 
-    在[`SelectBase`](#sqlalchemy.sql.expression.SelectBase "sqlalchemy.sql.expression.SelectBase")界面中包装[`TextClause`](sqlelement.html#sqlalchemy.sql.expression.TextClause "sqlalchemy.sql.expression.TextClause")结构。
+    在[`SelectBase`](#sqlalchemy.sql.expression.SelectBase "sqlalchemy.sql.expression.SelectBase")界面中包装[`TextClause`](sqlelement.html#sqlalchemy.sql.expression.TextClause "sqlalchemy.sql.expression.TextClause")结构。plain
 
     This allows the [`TextClause`](sqlelement.html#sqlalchemy.sql.expression.TextClause "sqlalchemy.sql.expression.TextClause")
     object to gain a `.c` collection and other

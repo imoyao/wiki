@@ -27,7 +27,7 @@ SQLAlchemy 针对在 INSERT 和 UPDATE 语句期间发生的列级事件提供�
 
 最简单的默认值是一个用作列默认值的标量值：
 
-    Table("mytable", meta,
+    Table("mytable", meta,plain
         Column("somecolumn", Integer, default=12)
     )
 
@@ -78,7 +78,7 @@ SQLAlchemy 将在语句执行时执行该函数。
 
 由[`Column.default`](metadata.html#sqlalchemy.schema.Column.params.default "sqlalchemy.schema.Column")和[`Column.onupdate`](metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")使用的 Python 函数也可以使用当前语句的上下文来确定一个值。语句的 context 是一个内部 SQLAlchemy 对象，它包含有关正在执行的语句的所有信息，包括其源表达式，与其关联的参数以及游标。与默认生成有关的上下文的典型用例是访问在该行上插入或更新的其他值。要访问上下文，请提供一个接受单个`context`参数的函数：
 
-    def mydefault(context):plain
+    def mydefault(context):plainplainplainplain
         return context.current_parameters['counter'] + 12
 
     t = Table('mytable', meta,
@@ -183,7 +183,7 @@ TABLE 语句中：
 
 对于服务器生成的主键值，所有数据库都提供特殊的访问器或其他技术来获取表的“最后插入的主键”列。这些机制不受[`FetchedValue`](#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")的影响。对于使用触发器生成主键值的特殊情况，并且正在使用的数据库不支持`RETURNING`子句，可能需要放弃使用触发器，而是应用 SQL 表达式或用作“预执行”表达式：
 
-    t = Table('test', meta,
+    t = Table('test', meta,plain
             Column('abc', MyType, default=func.generate_new_value(), primary_key=True)
     )
 
@@ -201,7 +201,7 @@ SQLAlchemy 使用[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Seq
 
 [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")可以作为 INSERT 操作期间使用的“默认”生成器放置在任何列上，也可以配置为在 UPDATE 操作期间根据需要触发。它通常与单个整数主键列结合使用：
 
-    table = Table("cartitems", meta,plain
+    table = Table("cartitems", meta,plainplainplainplain
         Column("cart_id", Integer, Sequence('cart_id_seq'), primary_key=True),
         Column("description", String(40)),
         Column("createdate", DateTime())
@@ -217,7 +217,7 @@ SQLAlchemy 使用[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Seq
 
 [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")对象也可以像 SQL 表达式那样独立执行，具有调用其“下一个值”功能的效果：
 
-    seq = Sequence('some_sequence')plain
+    seq = Sequence('some_sequence')plainplain
     nextid = connection.execute(seq)
 
 ### 将序列关联到服务器端默认[¶](#associating-a-sequence-as-the-server-side-default "Permalink to this headline")
@@ -237,25 +237,25 @@ TABLE 不会引用此序列。如果我们希望将序列用作服务器端缺�
 
 上面的元数据将在 Postgresql 上生成一个 CREATE TABLE 语句，如下所示：
 
-    CREATE TABLE cartitems (
+    CREATE TABLE cartitems (plain
         cart_id INTEGER DEFAULT nextval('cart_id_seq') NOT NULL,
         description VARCHAR(40),
         createdate TIMESTAMP WITHOUT TIME ZONE,
         PRIMARY KEY (cart_id)
     )
 
-我们把[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")也作为Python的默认值放在上面，也就是说，它在[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")定义中提到了两次。根据所使用的后端，这可能不是严格必要的，例如在 Postgresql 后端，Core 将使用`RETURNING`访问新生成的主键值。However, for the best compatibility,
+我们把[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")也作为 Python 的默认值放在上面，也就是说，它在[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")定义中提到了两次。根据所使用的后端，这可能不是严格必要的，例如在 Postgresql 后端，Core 将使用`RETURNING`访问新生成的主键值。However, for the best compatibility,
 [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence") was
 originally intended to be a Python-side directive first and foremost so
 it’s probably a good idea to specify it in this way as well.
 
-默认对象API [¶](#default-objects-api "Permalink to this headline")
+默认对象 API [¶](#default-objects-api "Permalink to this headline")
 ------------------------------------------------------------------
 
 *class* `sqlalchemy.schema。`{.descclassname} `ColumnDefault`{.descname} （ *arg*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.schema.ColumnDefault "Permalink to this definition")*
 :   基础：[`sqlalchemy.schema.DefaultGenerator`](#sqlalchemy.schema.DefaultGenerator "sqlalchemy.schema.DefaultGenerator")
 
-    列上的普通默认值。plain
+    列上的普通默认值。plainplain
 
     这可以对应于常量，可调用函数或SQL子句。
 
@@ -298,12 +298,12 @@ it’s probably a good idea to specify it in this way as well.
 *class* `sqlalchemy.schema。`{.descclassname} `DefaultGenerator`{.descname} （ *for\_update = False* / T5\> [¶ T6\>](#sqlalchemy.schema.DefaultGenerator "Permalink to this definition")
 :   基础：`sqlalchemy.schema._NotAColumnExpr`，[`sqlalchemy.schema.SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-    列*默认*值的基类。plain
+    列*默认*值的基类。plainplain
 
 *类 T0\> `sqlalchemy.schema。 T1>  FetchedValue  T2> （ T3>  FOR_UPDATE =假 T4> ）< / T5> ¶ T6>`{.descclassname}*
 :   基础：`sqlalchemy.schema._NotAColumnExpr`，`sqlalchemy.sql.expression.SchemaEventTarget`
 
-    透明数据库默认的标记。plain
+    透明数据库默认的标记。plainplain
 
     当数据库配置为为列提供一些自动默认值时，使用[`FetchedValue`](#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")。
 
@@ -327,7 +327,7 @@ it’s probably a good idea to specify it in this way as well.
  *class*`sqlalchemy.schema.`{.descclassname}`Sequence`{.descname}(*name*, *start=None*, *increment=None*, *minvalue=None*, *maxvalue=None*, *nominvalue=None*, *nomaxvalue=None*, *cycle=None*, *schema=None*, *optional=False*, *quote=None*, *metadata=None*, *quote\_schema=None*, *for\_update=False*)[¶](#sqlalchemy.schema.Sequence "Permalink to this definition")
 :   基础：[`sqlalchemy.schema.DefaultGenerator`](#sqlalchemy.schema.DefaultGenerator "sqlalchemy.schema.DefaultGenerator")
 
-    表示一个命名的数据库序列。
+    表示一个命名的数据库序列。plain
 
     [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")对象表示数据库序列的名称和配置参数。它还表示一个可以由SQLAlchemy
     [`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")执行的构造，为目标数据库呈现适当的“下一个值”函数并返回结果。

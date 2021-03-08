@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:41
 permalink: /sqlalchemy/orm/extensions/automap/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
   - extensions
 tags:
@@ -196,7 +196,7 @@ case”方案和集合名称的“pluralizer”：
 
 从上面的映射中，我们现在将有`User`和`Address`的类，其中`User`到`Address`的集合是称为`User.addresses`：
 
-    User, Address = Base.classes.User, Base.classes.Addressplain
+    User, Address = Base.classes.User, Base.classes.Addressplainplain
 
     u1 = User(addresses=[Address(email="foo@bar.com")])
 
@@ -347,7 +347,7 @@ generate many-to-many relationships, e.g. those which contain a
 
 在映射过程中命名冲突的情况下，根据需要覆盖[`classname_for_table()`](#sqlalchemy.ext.automap.classname_for_table "sqlalchemy.ext.automap.classname_for_table")，[`name_for_scalar_relationship()`](#sqlalchemy.ext.automap.name_for_scalar_relationship "sqlalchemy.ext.automap.name_for_scalar_relationship")和[`name_for_collection_relationship()`](#sqlalchemy.ext.automap.name_for_collection_relationship "sqlalchemy.ext.automap.name_for_collection_relationship")中的任何一个。例如，如果 automap 试图命名与现有列相同的多对一关系，则可以有条件地选择替代约定。给定一个模式：
 
-    CREATE TABLE table_a (
+    CREATE TABLE table_a (plain
         id INTEGER PRIMARY KEY
     );
 
@@ -361,7 +361,7 @@ generate many-to-many relationships, e.g. those which contain a
 
 我们可以通过使用下划线来解决这个冲突，如下所示：
 
-    def name_for_scalar_relationship(base, local_cls, referred_cls, constraint):
+    def name_for_scalar_relationship(base, local_cls, referred_cls, constraint):plain
         name = referred_cls.__name__.lower()
         local_table = local_cls.__table__
         if name in local_table.columns:
@@ -380,7 +380,7 @@ generate many-to-many relationships, e.g. those which contain a
 Distinctly from Attribute
 Names](mapping_columns.html#mapper-column-distinct-names)区别命名列的方法修改，通过将列明确分配给新名称：
 
-    Base = automap_base()
+    Base = automap_base()plain
 
     class TableB(Base):
         __tablename__ = 'table_b'
@@ -453,7 +453,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.automap。`{.descclassname} `AutomapBase`{.descname} [¶](#sqlalchemy.ext.automap.AutomapBase "Permalink to this definition")
 :   “自动映射”模式的基类。
 
-    可以将[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类与由[`declarative.declarative_base()`](declarative_api.html#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")函数生成的“声明性基本”类进行比较。在实践中，[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类总是作为一个mixin与一个实际的声明基础一起使用。plain
+    可以将[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类与由[`declarative.declarative_base()`](declarative_api.html#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")函数生成的“声明性基本”类进行比较。在实践中，[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类总是作为一个mixin与一个实际的声明基础一起使用。plainplain
 
     通常使用[`automap_base()`](#sqlalchemy.ext.automap.automap_base "sqlalchemy.ext.automap.automap_base")函数即时创建一个新的子类化的[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")。
 

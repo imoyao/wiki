@@ -87,7 +87,7 @@ place.
 
 我们新的`MutableDict`类型提供了一个类方法[`as_mutable()`](#sqlalchemy.ext.mutable.Mutable.as_mutable "sqlalchemy.ext.mutable.Mutable.as_mutable")，我们可以在列元数据中使用它来与类型关联。此方法捕获给定类型的对象或类，并关联侦听器，该侦听器将检测此类型的所有未来映射，并将事件侦听工具应用于映射的属性。比如，用经典的表格元数据：
 
-    from sqlalchemy import Table, Column, Integer
+    from sqlalchemy import Table, Column, Integerplain
 
     my_data = Table('my_data', metadata,
         Column('id', Integer, primary_key=True),
@@ -163,7 +163,7 @@ setstate\_\_上恢复它们​​）：
         def __setstate__(self, state):
             self.update(state)
 
-如果可变值对象被粘贴到一个或多个也是pickle一部分的父对象上，那么[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")
+如果可变值对象被粘贴到一个或多个也是 pickle 一部分的父对象上，那么[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")
 mixin 将重新建立[`Mutable._parents`](#sqlalchemy.ext.mutable.Mutable._parents "sqlalchemy.ext.mutable.Mutable._parents")
 
 在复合材料上建立可变性[¶](#establishing-mutability-on-composites "Permalink to this headline")
@@ -180,7 +180,7 @@ Types](composites.html#mapper-composite) to subclass
 and to also route attribute set events via `__setattr__` to the [`MutableComposite.changed()`](#sqlalchemy.ext.mutable.MutableComposite.changed "sqlalchemy.ext.mutable.MutableComposite.changed")
 method:
 
-    from sqlalchemy.ext.mutable import MutableCompositeplain
+    from sqlalchemy.ext.mutable import MutableCompositeplainplainplain
 
     class Point(MutableComposite):
         def __init__(self, x, y):
@@ -278,7 +278,7 @@ attribute which isn’t picklable. If we need to pickle instances of
 `Point` or its owning class `Vertex`, we at least need to define a `__getstate__` that doesn’t include the `_parents`
 dictionary. 下面我们定义一个`__getstate__`和一个`__setstate__`，它们包装了我们的`Point`类的最小形式：
 
-    class Point(MutableComposite):
+    class Point(MutableComposite):plain
         # ...
 
         def __getstate__(self):
@@ -295,7 +295,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableBase`{.descname} [¶](#sqlalchemy.ext.mutable.MutableBase "Permalink to this definition")
 :   通用基类为[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")和[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")。
 
-    ` _parents  T0> ¶ T1>`{.descname}plain
+    ` _parents  T0> ¶ T1>`{.descname}plainplainplain
     :   父对象上的字典 - \>属性名称。
 
         这个属性是一个所谓的“memoized”属性。它在第一次访问时使用新的`weakref.WeakKeyDictionary`进行初始化，并在后续访问时返回相同的对象。
@@ -423,7 +423,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableComposite`{.descname} [¶](#sqlalchemy.ext.mutable.MutableComposite "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
-    Mixin，定义SQLAlchemy“复合”对象上的变化事件的透明传播给其拥有的父对象或父对象。
+    Mixin，定义SQLAlchemy“复合”对象上的变化事件的透明传播给其拥有的父对象或父对象。plain
 
     有关使用信息，请参阅[Establishing Mutability on
     Composites](#mutable-composites)中的示例。
@@ -472,7 +472,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableList`{.descname} [¶](#sqlalchemy.ext.mutable.MutableList "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")，`__builtin__.list`
 
-    实现[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")的列表类型。plain
+    实现[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")的列表类型。plainplain
 
     [`MutableList`](#sqlalchemy.ext.mutable.MutableList "sqlalchemy.ext.mutable.MutableList")对象实现了一个列表，当列表内容发生更改时（包括添加或删除值时），这些列表将发出更改事件到底层映射。
 

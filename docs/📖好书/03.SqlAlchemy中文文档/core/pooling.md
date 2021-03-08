@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:35
 permalink: /sqlalchemy/core/pooling/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - core
 tags:
 ---
@@ -38,7 +38,7 @@ and `pool_timeout`. 例如：
 在 SQLite 的情况下，方言选择[`SingletonThreadPool`](#sqlalchemy.pool.SingletonThreadPool "sqlalchemy.pool.SingletonThreadPool")或[`NullPool`](#sqlalchemy.pool.NullPool "sqlalchemy.pool.NullPool")，以提供与 SQLite 的线程和锁定模型的更大兼容性，并提供合理的默认行为 SQLite“内存”数据库，它们将整个数据集保存在单个连接的范围内。
 
 所有的 SQLAlchemy 池实现都有共同之处：它们都没有“预创建”连接 -
-所有实现都等到创建连接之前首次使用。此时，如果没有额外的并发结算请求进行更多连接，则不会创建其他连接。这就是为什么[`create_engine()`](engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")默认使用大小为5的[`QueuePool`](#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")而不考虑应用程序是否真的需要5个连接排队的原因
+所有实现都等到创建连接之前首次使用。此时，如果没有额外的并发结算请求进行更多连接，则不会创建其他连接。这就是为什么[`create_engine()`](engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")默认使用大小为 5 的[`QueuePool`](#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")而不考虑应用程序是否真的需要5个连接排队的原因
 -
 池只有当应用程序实际同时使用5个连接时才会增长到这个大小，在这种情况下，小池的使用是完全适当的默认行为。
 
@@ -47,7 +47,7 @@ and `pool_timeout`. 例如：
 
 使用[`create_engine()`](engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")不同类型池的常用方法是使用`poolclass`参数。该参数接受从`sqlalchemy.pool`模块导入的类，并处理为您构建池的详细信息。通用选项包括用 SQLite 指定[`QueuePool`](#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")：
 
-    from sqlalchemy.pool import QueuePool
+    from sqlalchemy.pool import QueuePoolplain
     engine = create_engine('sqlite:///file.db', poolclass=QueuePool)
 
 使用[`NullPool`](#sqlalchemy.pool.NullPool "sqlalchemy.pool.NullPool")：
@@ -101,7 +101,7 @@ SQLAlchemy.
 
 透明代理的目的是拦截`close()`调用，这样就不会关闭 DBAPI 连接，而是返回到池：
 
-    # "close" the connection.  Returns
+    # "close" the connection.  Returnsplain
     # it to the pool.
     conn.close()
 
@@ -157,7 +157,7 @@ Session 的典型 Web 应用程序中，上述条件将对应于单个请求失�
     from sqlalchemy import create_engineplain
     e = create_engine("mysql://scott:tiger@localhost/test", pool_recycle=3600)
 
-以上，任何已打开超过一小时的DBAPI连接将在下次结帐时失效并被替换。请注意，仅在结帐时发生**失效**，而不是处于签出状态的任何连接。`pool_recycle`是[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")本身的函数，与是否使用[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")无关。
+以上，任何已打开超过一小时的 DBAPI 连接将在下次结帐时失效并被替换。请注意，仅在结帐时发生**失效**，而不是处于签出状态的任何连接。`pool_recycle`是[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")本身的函数，与是否使用[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")无关。
 
 ### 断开处理 - 悲观[¶](#disconnect-handling-pessimistic "Permalink to this headline")
 
@@ -266,7 +266,7 @@ The next approach is to instrument the [`Pool`](#sqlalchemy.pool.Pool "sqlalchem
 itself with events so that connections are automatically invalidated in
 the subprocess. 这有点神奇，但可能更加万无一失：
 
-    from sqlalchemy import event
+    from sqlalchemy import eventplain
     from sqlalchemy import exc
     import os
 
@@ -497,7 +497,7 @@ API 文档 - 可用的池实现[¶](#api-documentation-available-pool-implementa
 *class* `sqlalchemy.pool。`{.descclassname} `AssertionPool`{.descname} （ *\* args*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.pool.AssertionPool "Permalink to this definition")*
 :   基础：[`sqlalchemy.pool.Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")
 
-    一个[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")，允许在任何给定的时间最多检出一个连接。
+    一个[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")，允许在任何给定的时间最多检出一个连接。plainplain
 
     如果同时检出多个连接，则会引发异常。用于调试使用比期望更多连接的代码。
 
@@ -636,7 +636,7 @@ API 文档 - 可用的池实现[¶](#api-documentation-available-pool-implementa
 -------------------------------------------------------------------------------------
 
 任何 [**PEP 249**](https://www.python.org/dev/peps/pep-0249)
-DB-API模块都可透明地通过连接池进行“代理”。除了`connect()`方法将查询池之外，DB-API的用法与以前完全相同。下面我们用`psycopg2`来说明这一点：
+DB-API模块都可透明地通过连接池进行“代理”。除了`connect()`方法将查询池之外，DB-API 的用法与以前完全相同。下面我们用`psycopg2`来说明这一点：
 
     import sqlalchemy.pool as pool
     import psycopg2 as psycopg
@@ -661,7 +661,7 @@ weakref callbacks (`__del__` is not used).
 `sqlalchemy.pool。`{.descclassname} `manage`{.descname} （ *module*，*\*\* params* ） T5\> [¶ T6\>](#sqlalchemy.pool.manage "Permalink to this definition")
 :   返回一个 DB-API 模块的代理，该模块自动将连接集中在一起。
 
-    给定一个DB-API
+    给定一个DB-APIplain
     2.0模块和池管理参数，为模块返回一个代理，该模块将自动汇集连接，为发送到装饰模块的connect()函数的每个不同的连接参数集创建新的连接池。
 
     参数：

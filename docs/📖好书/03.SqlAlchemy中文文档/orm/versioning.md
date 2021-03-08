@@ -35,7 +35,7 @@ tags:
 
 跟踪版本最直接的方法是在映射表中添加一个整数列，然后在映射器选项中将其建立为`version_id_col`：
 
-    class User(Base):plain
+    class User(Base):plainplainplain
         __tablename__ = 'user'
 
         id = Column(Integer, primary_key=True)
@@ -48,7 +48,7 @@ tags:
 
 以上，`User`映​​射使用列`version_id`跟踪整数版本。当首先刷新`User`类型的对象时，`version_id`列将被赋予值“1”。然后，表中的 UPDATE 将始终以类似于以下的方式发出：
 
-    UPDATE user SET version_id=:version_id, name=:name
+    UPDATE user SET version_id=:version_id, name=:nameplainplain
     WHERE user.id = :user_id AND user.version_id = :user_version_id
     {"name": "new name", "version_id": 2, "user_id": 1, "user_version_id": 1}
 
@@ -65,7 +65,7 @@ identifier we’ve been known to use on this object.
 
 例如，如果我们想使用随机生成的 GUID 跟踪我们的`User`类的版本控制，我们可以做到这一点（请注意，一些后端支持本地 GUID 类型，但我们在这里用一个简单的字符串）：
 
-    import uuid
+    import uuidplainplain
 
     class User(Base):
         __tablename__ = 'user'
@@ -91,7 +91,7 @@ identifier we’ve been known to use on this object.
 `version_id_generator`也可以配置为依赖数据库生成的值。在这种情况下，当一行受 INSERT 和 UPDATE 处理时，数据库将需要一些生成新标识符的方法。对于 UPDATE 情况，通常需要更新触发器，除非有问题的数据库支持其他本地版本标识符。Postgresql 数据库特别支持一个称为[xmin](http://www.postgresql.org/docs/9.1/static/ddl-system-columns.html)的系统列，它提供 UPDATE 版本控制。我们可以使用 Postgresql
 `xmin`列对我们的`User`类进行版本化，如下所示：
 
-    class User(Base):
+    class User(Base):plainplainplain
         __tablename__ = 'user'
 
         id = Column(Integer, primary_key=True)
@@ -116,13 +116,13 @@ ORM 通常不会在发出 INSERT 或 UPDATE 时主动获取数据库生成的值
 
 当目标数据库支持 RETURNING 时，我们的`User`类的 INSERT 语句如下所示：
 
-    INSERT INTO "user" (name) VALUES (%(name)s) RETURNING "user".id, "user".xmin
+    INSERT INTO "user" (name) VALUES (%(name)s) RETURNING "user".id, "user".xminplainplain
     {'name': 'ed'}
 
 如上所述，ORM 可以在一个语句中获取任何新生成的主键值以及服务器生成的版本标识符。当后端不支持 RETURNING 时，必须为**每个**
 INSERT 和 UPDATE 发出一个额外的 SELECT，效率低得多，并且还引入了错过版本计数器的可能性：
 
-    INSERT INTO "user" (name) VALUES (%(name)s)plain
+    INSERT INTO "user" (name) VALUES (%(name)s)plainplainplain
     {'name': 'ed'}
 
     SELECT "user".version_id AS user_version_id FROM "user" where
@@ -143,7 +143,7 @@ when triggers are used), Firebird.
 
 当`version_id_generator`设置为 False 时，我们也可以通过编程方式（和有条件地）在我们的对象上设置版本标识符，这与我们分配任何其他映射属性的方式相同。例如，如果我们使用我们的 UUID 示例，但将`version_id_generator`设置为`False`，则可以根据我们的选择设置版本标识符：
 
-    import uuid
+    import uuidplainplain
 
     class User(Base):
         __tablename__ = 'user'
@@ -170,7 +170,7 @@ when triggers are used), Firebird.
 
 我们可以在不增加版本计数器的情况下更新我们的`User`对象；计数器的值将保持不变，并且 UPDATE 语句仍然会检查以前的值。这对于只有某些类别的 UPDATE 对并发性问题敏感的方案可能很有用：
 
-    # will leave version_uuid unchangedplain
+    # will leave version_uuid unchangedplainplainplainplainplainplain
     u1.name = 'u3'
     session.commit()
 

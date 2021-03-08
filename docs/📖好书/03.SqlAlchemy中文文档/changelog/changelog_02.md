@@ -240,7 +240,7 @@ tags:
 -   修复 Session expunge / update / etc
     ...需要更多的清理[¶](#change-b249794857f4ffef83824b29eb577243)
 
--   select\_table映射器*静态*并不总是编译[¶](#change-1e0443db2dd1ddadf93ed4e1637c9100)
+-   select\_table 映射器*静态*并不总是编译[¶](#change-1e0443db2dd1ddadf93ed4e1637c9100)
 
 -   修正了布尔数据类型[¶](#change-6110d6d0c21f6d8574611b4a3931fedb)
 
@@ -343,7 +343,7 @@ tags:
 -   小的修复程序加上订购/限制/偏移[¶](#change-03a4cc85caf469f1dc0aff0590a1863a)
 
 -   utterly remarkable: added a single space between ‘CREATE TABLE’ and
-    ‘(’ since *that’s how MySQL indicates a non- reserved word
+    ‘(’ since *that’s how MySQL indicates a non- reserved word………………………………
 …………
     tablename.....*[¶](#change-1afa0092b73a4311513258de8d1bfe61)
 
@@ -378,7 +378,7 @@ plainplainplainplainplain
 
     参考文献：[＃225](http://www.sqlalchemy.org/trac/ticket/225)
 
--   新的MySQL类型：MSEnum，MSTinyText，MSMediumText，MSLongText等更多支持MS特定长度/精度参数的数值类型补丁Mike
+-   新的 MySQL 类型：MSEnum，MSTinyText，MSMediumText，MSLongText 等更多支持 MS 特定长度/精度参数的数值类型补丁 Mike
     Bernson [¶](#change-22f10061c7f8be06b4bdcb04c8b9df8d)
 
 -   修正连接池invalidate()[¶](#change-352e899ebdf1244cadff3555b1420e2b)
@@ -393,7 +393,7 @@ plainplainplainplainplain
 -   overhaul to mapper compilation to be deferred.
     这允许映射器以任何顺序构造，并且当映射器第一次使用时编译它们之间的关系。[¶](#change-8291e03c8c5f2701838ae5d2f8be31c3)
 
--   修复了级联行为中的一个非常大的速度瓶颈，特别是当backrefs正在使用时[¶](#change-9b32bca1789e60d5e16e1edc3a21a32e)
+-   修复了级联行为中的一个非常大的速度瓶颈，特别是当 backrefs 正在使用时[¶](#change-9b32bca1789e60d5e16e1edc3a21a32e)
 
 -   属性检测模块已被完全重写；现在它的程度更简单，更清晰，速度更快。属性的“历史”不再是每次更改的微观管理，而是第一次加载实例时创建的“CommittedState”对象的一部分。HistoryArraySet 消失后，列表属性的行为现在更加开放式（即它们不再是集合）。[¶](#change-1c0e73f78920f1f97d78a0e02b7db01f)
 
@@ -417,7 +417,7 @@ plainplainplainplainplain
 
 -   URL 的固定'port'属性是一个整数（如果存在）[¶](#change-ecc83114559345f0a9a3eaa6df5bb4b9)
 
--   修复了旧bug，如果多对多映射为“次要”的表有额外的列，删除操作无效[¶](#change-7b441f457cf77d508db40bebef05589b)
+-   修复了旧 bug，如果多对多映射为“次要”的表有额外的列，删除操作无效[¶](#change-7b441f457cf77d508db40bebef05589b)
 
 -   针对 UNION 查询映射的错误修正[¶](#change-de389a34b53d442e9d0b3b965217ab28)
 
@@ -489,7 +489,7 @@ plainplainplainplainplain
 
 -   获得了基本的“映射到多个表”功能清理，更正确地记录[¶](#change-3e0af16f5eb71a64848fe32af5739cc7)
 
--   恢复了global\_connect()函数，并附加到名为“default\_metadata”的 DynamicMetaData 实例。将 MetaData
+-   恢复了 global\_connect()函数，并附加到名为“default\_metadata”的 DynamicMetaData 实例。将 MetaData
     arg 保留为 Table
     out 将使用默认元数据。[¶](#change-1258190627b876b0ffe8295ecdd5ffb8)
 
@@ -512,7 +512,7 @@ plainplainplainplainplain
     @ /
     db 在 postgres 上破解）[T1\>](#change-bfd7ab5d5c9af9f46885a6f856400645)
 
--   当Mapper插入并尝试获取新的主键值时对其进行小修改[¶](#change-05ae6d2f0e41b25c9aefe7a65ffb0b98)
+-   当 Mapper 插入并尝试获取新的主键值时对其进行小修改[¶](#change-05ae6d2f0e41b25c9aefe7a65ffb0b98)
 
 -   重写了 TLEngine 的一半，与'strategy
     =“threadlocal”'一起使用了 ComposedSQLEngine。它现在正确地实现了 engine.begin()/

@@ -14,7 +14,7 @@ tags:
  `sqlalchemy.orm.`{.descclassname}`relationship`{.descname}(*argument*, *secondary=None*, *primaryjoin=None*, *secondaryjoin=None*, *foreign\_keys=None*, *uselist=None*, *order\_by=False*, *backref=None*, *back\_populates=None*, *post\_update=False*, *cascade=False*, *extension=None*, *viewonly=False*, *lazy=True*, *collection\_class=None*, *passive\_deletes=False*, *passive\_updates=True*, *remote\_side=None*, *enable\_typechecks=True*, *join\_depth=None*, *comparator\_factory=None*, *single\_parent=False*, *innerjoin=False*, *distinct\_target\_key=None*, *doc=None*, *active\_history=False*, *cascade\_backrefs=True*, *load\_on\_pending=False*, *bake\_queries=True*, *strategy\_class=None*, *\_local\_remote\_pairs=None*, *query\_class=None*, *info=None*)[¶](#sqlalchemy.orm.relationship "Permalink to this definition")
 :   提供两个映射类之间的关系。
 
-    这对应于父子关系或关联表关系。构造的类是[`RelationshipProperty`](internals.html#sqlalchemy.orm.properties.RelationshipProperty "sqlalchemy.orm.properties.RelationshipProperty")的一个实例。
+    这对应于父子关系或关联表关系。构造的类是[`RelationshipProperty`](internals.html#sqlalchemy.orm.properties.RelationshipProperty "sqlalchemy.orm.properties.RelationshipProperty")的一个实例。plain
 
     典型的[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")，用于经典映射中：
 
@@ -600,7 +600,7 @@ tags:
     [`remote()`](#sqlalchemy.orm.remote "sqlalchemy.orm.remote")
 
 `sqlalchemy.orm。 T0> 远程 T1> （ T2>  EXPR  T3> ） T4> ¶ T5 >`{.descclassname}
-:   使用'远程'注释标注一个primaryjoin表达式的一部分。
+:   使用'远程'注释标注一个 primaryjoin 表达式的一部分。
 
     有关使用说明，请参阅[Creating Custom Foreign
     Conditions](join_conditions.html#relationship-custom-foreign)部分。

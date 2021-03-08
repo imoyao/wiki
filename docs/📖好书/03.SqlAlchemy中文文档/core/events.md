@@ -9,14 +9,14 @@ categories:
 tags:
   - 
 ---
-ORM事件[¶](#orm-events "Permalink to this headline")
+ORM 事件[¶](#orm-events "Permalink to this headline")
 ====================================================
 
 ORM包含各种可用于订阅的挂钩。
 
 有关最常用的ORM事件的介绍，请参见[Tracking Object and Session Changes
 with
-Events](session_events.html)部分。一般的事件系统在[Events](core_event.html)讨论。非ORM事件（如关于连接和低级语句执行的事件）在[Core
+Events](session_events.html)部分。一般的事件系统在[Events](core_event.html)讨论。非 ORM 事件（如关于连接和低级语句执行的事件）在[Core
 Events](core_events.html)中描述。
 
 属性事件[¶](#attribute-events "Permalink to this headline")
@@ -327,7 +327,7 @@ Events](core_events.html)中描述。
 
         如果事件使用`retval=True`注册，则应返回给定值或新的有效值。
 
-Mapper事件[¶](#mapper-events "Permalink to this headline")
+Mapper 事件[¶](#mapper-events "Permalink to this headline")
 ----------------------------------------------------------
 
 *class* `sqlalchemy.orm.events。`{.descclassname} `MapperEvents`{.descname} [¶](#sqlalchemy.orm.events.MapperEvents "Permalink to this definition")

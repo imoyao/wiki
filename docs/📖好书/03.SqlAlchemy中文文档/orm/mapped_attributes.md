@@ -126,7 +126,7 @@ emitted, even though an append occurs to `some_user.addresses` - the event is ca
 为属性生成修改后行为的更全面的方法是使用[descriptors](glossary.html#term-descriptors)。这些通常在 Python 中使用`property()`函数使用。描述符的标准 SQLAlchemy 技术是创建一个简单的描述符，并使其从具有不同名称的映射属性读取/写入。下面我们使用 Python
 2.6 样式的属性来说明这一点：
 
-    class EmailAddress(Base):
+    class EmailAddress(Base):plainplainplain
         __tablename__ = 'email_address'
 
         id = Column(Integer, primary_key=True)
@@ -151,7 +151,7 @@ attribute does not have the usual expression semantics usable with
 [`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query").
 为了提供这些，我们改用如下的[`hybrid`](extensions_hybrid.html#module-sqlalchemy.ext.hybrid "sqlalchemy.ext.hybrid")扩展名：
 
-    from sqlalchemy.ext.hybrid import hybrid_property
+    from sqlalchemy.ext.hybrid import hybrid_propertyplain
 
     class EmailAddress(Base):
         __tablename__ = 'email_address'
@@ -220,7 +220,7 @@ setter 行为外，还在类级别使用时提供了 SQL 表达式，也就是�
 
 以上，访问`EmailAddress`实例的`email`属性将返回`_email`属性的值，删除或添加主机名`@example.com`中的值。当我们查询`email`属性时，会呈现一个 SQL 函数，它会产生相同的效果：
 
-    sqladdress = session.query(EmailAddress).filter(EmailAddress.email == 'address').one()plain
+    sqladdress = session.query(EmailAddress).filter(EmailAddress.email == 'address').one()plainplain
     SELECT address.email AS address_email, address.id AS address_id
     FROM address
     WHERE substr(address.email, ?, length(address.email) - ?) = ?
@@ -236,7 +236,7 @@ Attributes](extensions_hybrid.html)中了解更多关于混合动力的信息。
 
 从最基本的意义上说，同义词是通过附加名称提供某个特定属性的简单方法：
 
-    class MyClass(Base):plain
+    class MyClass(Base):plainplainplain
         __tablename__ = 'my_table'
 
         id = Column(Integer, primary_key=True)
@@ -254,7 +254,7 @@ Attributes](extensions_hybrid.html)中了解更多关于混合动力的信息。
 
 并在实例级别：
 
-    >>> m1 = MyClass(status='x')plain
+    >>> m1 = MyClass(status='x')plainplain
     >>> m1.status, m1.job_status
     ('x', 'x')
 
@@ -266,7 +266,7 @@ Attributes](extensions_hybrid.html)中了解更多关于混合动力的信息。
 
 除了简单的镜像之外，也可以使用[`synonym()`](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")来引用用户定义的[descriptor](glossary.html#term-descriptor)。我们可以用`@property`提供我们的`status`同义词：
 
-    class MyClass(Base):
+    class MyClass(Base):plainplain
         __tablename__ = 'my_table'
 
         id = Column(Integer, primary_key=True)
@@ -299,7 +299,7 @@ attribute](#mapper-hybrids)特性更好地处理了在描述符中增强属性�
  `sqlalchemy.orm.`{.descclassname}`synonym`{.descname}(*name*, *map\_column=None*, *descriptor=None*, *comparator\_factory=None*, *doc=None*, *info=None*)[¶](#sqlalchemy.orm.synonym "Permalink to this definition")
 :   将属性名称表示为映射属性的同义词，因为该属性将镜像另一个属性的值和表达式行为。
 
-    参数：
+    参数：plainplain
 
     -   **名称** [¶](#sqlalchemy.orm.synonym.params.name) -
         现有映射属性的名称。这可以引用该类上配置的任何[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")的字符串名称，包括列绑定的属性和关系。

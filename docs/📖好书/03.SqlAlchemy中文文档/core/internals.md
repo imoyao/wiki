@@ -11,7 +11,7 @@ tags:
 ORM内部[¶](#orm-internals "Permalink to this headline")
 =======================================================
 
-此处列出了其他章节未涉及的关键ORM结构。
+此处列出了其他章节未涉及的关键 ORM 结构。
 
  *class*`sqlalchemy.orm.state.`{.descclassname}`AttributeState`{.descname}(*state*, *key*)[¶](#sqlalchemy.orm.state.AttributeState "Permalink to this definition")
 :   提供与特定映射对象上的特定属性相对应的检查界面。
@@ -1016,7 +1016,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 `sqlalchemy.orm.interfaces。`{.descclassname} `MANYTOONE`{.descname} *= symbol（'MANYTOONE'）* [¶](#sqlalchemy.orm.interfaces.MANYTOONE "Permalink to this definition")
 :   指示[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的多对一方向。
 
-    此符号通常由内部使用，但可能会暴露在某些API功能中。
+    此符号通常由内部使用，但可能会暴露在某些API功能中。plain
 
 `sqlalchemy.orm.interfaces。`{.descclassname} `MANYTOMANY`{.descname} *= symbol（'MANYTOMANY'）* [¶](#sqlalchemy.orm.interfaces.MANYTOMANY "Permalink to this definition")
 :   指示[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的多对多方向。

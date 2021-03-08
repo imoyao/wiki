@@ -7,14 +7,13 @@ categories:
   - SqlAlchemy 中文文档
   - core
 tags:
-  - 
 ---
 反映数据库对象[¶](#reflecting-database-objects "Permalink to this headline")
 ============================================================================
 
 可以指示[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象从数据库中已有的相应数据库模式对象加载有关其自身的信息。这个过程被称为*反射*。在最简单的情况下，你只需要指定表名，一个[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象和`autoload=True`标志。如果[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")不是永久绑定的，还要添加`autoload_with`参数：
 
-    >>> messages = Table('messages', meta, autoload=True, autoload_with=engine)plain
+    >>> messages = Table('messages', meta, autoload=True, autoload_with=engine)plainplain
     >>> [c.name for c in messages.columns]
     ['message_id', 'message_name', 'date']
 
@@ -94,7 +93,7 @@ clear or delete all the rows in a database:
 
 还提供一个低级别接口，它提供了从给定数据库加载架构，表，列和约束描述列表的后端不可知系统。这被称为“检查员”：
 
-    from sqlalchemy import create_engineplain
+    from sqlalchemy import create_engineplainplain
     from sqlalchemy.engine import reflection
     engine = create_engine('...')
     insp = reflection.Inspector.from_engine(engine)
