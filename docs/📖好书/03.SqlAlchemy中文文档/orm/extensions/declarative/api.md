@@ -9,7 +9,6 @@ categories:
   - extensions
   - declarative
 tags:
-  - 
 ---
 声明式 API [¶](#declarative-api "Permalink to this headline")
 ============================================================
@@ -63,10 +62,10 @@ API 参考[¶](#api-reference "Permalink to this headline")
 
     [`as_declarative()`](#sqlalchemy.ext.declarative.as_declarative "sqlalchemy.ext.declarative.as_declarative")
 
-` sqlalchemy.ext.declarative。 T0>  as_declarative  T1> （ T2>  **千瓦 T3> ） T4>  ¶ T5>`{.descclassname}
+`sqlalchemy.ext.declarative。 T0>  as_declarative  T1> （ T2>  **千瓦 T3> ） T4>  ¶ T5>`{.descclassname}
 :   [`declarative_base()`](#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")的类装饰器。
 
-    为发送给[`declarative_base()`](#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")的`cls`参数提供语法快捷方式，允许将基类就地转换为“声明式”基础：
+    为发送给[`declarative_base()`](#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")的`cls`参数提供语法快捷方式，允许将基类就地转换为“声明式”基础：plain
 
         from sqlalchemy.ext.declarative import as_declarative
 
@@ -91,7 +90,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *类 T0\> `sqlalchemy.ext.declarative。 T1>  declared_attr  T2> （ T3>  fget  T4>，级联=假 T5> ） T6> ¶ T7>`{.descclassname}*
 :   基础：`sqlalchemy.orm.base._MappedAttribute`，`__builtin__.property`
 
-    将类级方法标记为表示映射属性或特殊声明性成员名称的定义。
+    将类级方法标记为表示映射属性或特殊声明性成员名称的定义。plain
 
     @declared\_attr将属性转换为可以从未被实例化的类调用的类标量属性。声明式将特别标记为@declared\_attr的属性视为返回特定于映射或声明式表配置的构造。属性的名称是该属性的非动态版本的名称。
 
@@ -411,7 +410,7 @@ New in version 0.7.3.
 
 #### `__abstract__`[¶](#abstract "Permalink to this headline")
 
-`__abstract__`会导致声明性完全跳过为该类生成表或映射器。一个类可以像mixin一样添加到层次结构中（参见[Mixin
+`__abstract__`会导致声明性完全跳过为该类生成表或映射器。一个类可以像 mixin 一样添加到层次结构中（参见[Mixin
 and Custom Base
 Classes](mixins.html#declarative-mixins)），允许子类仅从特殊类扩展：
 

@@ -23,7 +23,7 @@ ORM Event Interfaces](orm_deprecated.html)中描述。
 *class* `sqlalchemy.interfaces。`{.descclassname} `ConnectionProxy`{.descname} [¶](#sqlalchemy.interfaces.ConnectionProxy "Permalink to this definition")
 :   允许通过 Connections 拦截语句执行。
 
-    注意
+    注意plainplain
 
     [`ConnectionProxy`](#sqlalchemy.interfaces.ConnectionProxy "sqlalchemy.interfaces.ConnectionProxy")已弃用。请参阅[`ConnectionEvents`](events.html#sqlalchemy.events.ConnectionEvents "sqlalchemy.events.ConnectionEvents")。
 

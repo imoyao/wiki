@@ -54,7 +54,7 @@ future.
 
 新方法使用命名事件和用户定义的可调参数将活动与事件相关联。API 的外观和感觉受到 JQuery，Blinker 和 Hibernate 等多种来源的驱动，并且在与几十个用户在 Twitter 上的会议期间进行了几次进一步修改，这些用户似乎比邮件列表的响应率高得多这样的问题。
 
-它还具有目标规范的开放式系统，允许将事件与 API 类相关联，例如所有`Session`或`Engine`对象与API类的特定实例，比如针对特定的`Pool`或`Mapper`，以及相关对象（如映射的用户定义类），或者特定于特定属性映射父类的特定子类。单独的监听器子系统可以将包装应用到传入的用户定义的监听器函数中，这些函数修改了它们的调用方式
+它还具有目标规范的开放式系统，允许将事件与 API 类相关联，例如所有`Session`或`Engine`对象与 API 类的特定实例，比如针对特定的`Pool`或`Mapper`，以及相关对象（如映射的用户定义类），或者特定于特定属性映射父类的特定子类。单独的监听器子系统可以将包装应用到传入的用户定义的监听器函数中，这些函数修改了它们的调用方式
 -
 映射器事件可以接收正在被操作的对象的实例或其底层的`InstanceState`对象。属性事件可以选择是否有返回新值的责任。
 
@@ -180,7 +180,7 @@ T0\>](http://www.sqlalchemy.org/docs/07/orm_query.html#sqlalchemy.orm.query.Quer
 
 Index()构造可以与表定义一起内联创建，使用字符串作为列名，作为在表外创建索引的替代方法。那是：
 
-    Table('mytable', metadata,
+    Table('mytable', metadata,plain
             Column('id',Integer, primary_key=True),
             Column('name', String(50), nullable=False),
             Index('idx_name', 'name')
@@ -188,7 +188,7 @@ Index()构造可以与表定义一起内联创建，使用字符串作为列名�
 
 这里的主要基本原理是为了声明`__table_args__`的好处，特别是在与 mixin 一起使用时：
 
-    class HasNameMixin(object):plain
+    class HasNameMixin(object):plainplain
         name = Column('name', String(50), nullable=False)
         @declared_attr
         def __table_args__(cls):
@@ -212,7 +212,7 @@ Server 和 Oracle 支持，可能还有其他支持。
 
 SQLAlchemy 使用`over()`方法提供一个通常通过现有函数子句调用的简单结构，该方法接受`order_by`和`partition_by`关键字参数。下面我们复制 PG 教程中的第一个例子：
 
-    from sqlalchemy.sql import table, column, select, func
+    from sqlalchemy.sql import table, column, select, funcplainplain
 
     empsalary = table('empsalary',
                     column('depname'),
@@ -230,7 +230,7 @@ SQLAlchemy 使用`over()`方法提供一个通常通过现有函数子句调用�
 
 SQL：
 
-    SELECT empsalary.depname, empsalary.empno, empsalary.salary,
+    SELECT empsalary.depname, empsalary.empno, empsalary.salary,plainplain
     avg(empsalary.salary) OVER (PARTITION BY empsalary.depname) AS avg
     FROM empsalary
 
@@ -290,7 +290,7 @@ T0\>](http://www.sqlalchemy.org/docs/07/core_connections.html#sqlalchemy.engine.
 在`Query.count()`中发生的非常古老的猜测已经现代化以使用`.from_self()`。That is, `query.count()` is now
 equivalent to:
 
-    query.from_self(func.count(literal_column('1'))).scalar()plain
+    query.from_self(func.count(literal_column('1'))).scalar()plainplain
 
 以前，内部逻辑试图重写查询本身的列子句，并且在检测到“子查询”条件（例如可能包含聚合的列查询或具有 DISTINCT 的查询）时，会经历复杂重写列子句的过程。这种逻辑在复杂条件下失败了，特别是那些涉及到连接表继承的逻辑，并且由于更全面的`.from_self()`调用已经过时了。
 
@@ -313,7 +313,7 @@ MySQL 用户已经报道过，MyISAM 引擎不会因为这个简单的改变而�
 
 或者用于`count(*)`：
 
-    from sqlalchemy import func, literal_column
+    from sqlalchemy import func, literal_columnplainplain
     session.query(func.count(literal_column('*'))).select_from(MyClass).scalar()
 
 ### LIMIT / OFFSET 子句现在使用绑定参数[¶](#limit-offset-clauses-now-use-bind-parameters "Permalink to this headline")
@@ -347,7 +347,7 @@ Sajip 为我们的日志记录系统提供了一个补丁，使得不再需要�
 
 你可以说：
 
-    session.query(A).options(contains_eager(A.b, B.c))
+    session.query(A).options(contains_eager(A.b, B.c))plain
 
 [＃2032 T0\>](http://www.sqlalchemy.org/trac/ticket/2032)
 
@@ -375,7 +375,7 @@ produce a large number of nose configuration options for all usages of
 `nosetests`, not just the SQLAlchemy unit tests
 themselves, and the additional `sqlalchemy-nose`
 install was an even worse idea, producing an extra package in Python
-environments. 0.7中的`sqla_nose.py`脚本现在是用鼻子运行测试的唯一方法。
+environments. 0.7 中的`sqla_nose.py`脚本现在是用鼻子运行测试的唯一方法。
 
 [＃1949 T0\>](http://www.sqlalchemy.org/trac/ticket/1949)
 
@@ -383,7 +383,7 @@ environments. 0.7中的`sqla_nose.py`脚本现在是用鼻子运行测试的唯�
 
 完全不反对任何`Table`的构造，就像一个函数一样，可以被映射。
 
-    from sqlalchemy import select, func
+    from sqlalchemy import select, funcplainplain
     from sqlalchemy.orm import mapper
 
     class Subset(object):
@@ -437,7 +437,7 @@ Server 将这些类型的长度默认为'1'。
 
 当映射具有`PickleType`或`postgresql.ARRAY`数据类型的列时，此更改引用 ORM 的默认行为。`mutable`标志现在默认设置为`False`。如果现有的应用程序使用这些类型，并且依赖于检测到就地突变，则必须使用`mutable=True`构造类型对象以恢复 0.6 行为：
 
-    Table('mytable', metadata,
+    Table('mytable', metadata,plain
         # ....
 
         Column('pickled_data', PickleType(mutable=True))
@@ -484,7 +484,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 如果将数据合并到版本化状态，则版本 ID 属性可能未定义，并且不会进行版本检查。
 
-这个检查通过检查Hibernate是做什么来确认的 - `merge()`和版本控制功能最初都是从 Hibernate 调整的。
+这个检查通过检查 Hibernate 是做什么来确认的 - `merge()`和版本控制功能最初都是从 Hibernate 调整的。
 
 [＃2027 T0\>](http://www.sqlalchemy.org/trac/ticket/2027)
 
@@ -541,17 +541,17 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 这也意味着像这样的查询会改变它的行为：
 
-    session.query(Parent).filter(Child.id > 7)plain
+    session.query(Parent).filter(Child.id > 7)plainplain
 
 在 0.6 中，这会使得：
 
-    SELECT parent.id AS parent_id
+    SELECT parent.id AS parent_idplain
     FROM parent
     WHERE parent.id > :id_1
 
 在 0.7 中，你会得到：
 
-    SELECT parent.id AS parent_idplain
+    SELECT parent.id AS parent_idplainplain
     FROM parent, child
     WHERE child.id > :id_1
 
@@ -577,7 +577,7 @@ JOIN 改为“child”。该行位于“Parent”中，看到多态身份对应�
 
 给定两个表`foo`和`bar`，每个表具有主键列`id`，现在会产生一个错误：
 
-    foobar = foo.join(bar, foo.c.id==bar.c.foo_id)
+    foobar = foo.join(bar, foo.c.id==bar.c.foo_id)plain
     mapper(FooBar, foobar)
 
 This because the `mapper()` refuses to guess what
@@ -595,7 +595,7 @@ column is the primary representation of `FooBar.id`
 
 这是 0.6 的警告，现在 0.7 的错误。为`polymorphic_on`提供的列必须位于映射可选项中。这可以防止一些偶然的用户错误，例如：
 
-    mapper(SomeClass, sometable, polymorphic_on=some_lookup_table.c.id)
+    mapper(SomeClass, sometable, polymorphic_on=some_lookup_table.c.id)plain
 
 其中 polymorphic\_on 必须位于`sometable`列上，在这种情况下可能是`sometable.c.some_lookup_id`。还有一些“多态联合”情景，其中有时会出现类似的错误。
 
@@ -645,13 +645,13 @@ col 的反映将“autoincrement”标志设置为 False。
 [\#2020](http://www.sqlalchemy.org/trac/ticket/2020)
 [\#2021](http://www.sqlalchemy.org/trac/ticket/2021)
 
-### sys.modules中的`sqlalchemy.exceptions`别名已被移除[¶](#the-sqlalchemy-exceptions-alias-in-sys-modules-is-removed "Permalink to this headline")
+### sys.modules 中的`sqlalchemy.exceptions`别名已被移除[¶](#the-sqlalchemy-exceptions-alias-in-sys-modules-is-removed "Permalink to this headline")
 
 For a few years we’ve added the string `sqlalchemy.exceptions` to `sys.modules`, so that a statement like
 “`import sqlalchemy.exceptions`” would work.
 很久以来，核心例外模块的名称一直是`exc`，因此建议为此模块导入：
 
-    from sqlalchemy import exc
+    from sqlalchemy import excplain
 
 The `exceptions` name is still present in
 “`sqlalchemy`” for applications which might have
@@ -674,7 +674,7 @@ restored as of 0.7b4/0.7.0, but emits a deprecation warning.
 
 如果参数与核心类型（如`Integer`）一起使用，可能是因为您打算使用特定于方言的类型，如`sqlalchemy.dialects.mysql.INTEGER`例如接受一个“display\_width”参数。
 
-### compile\_mappers()重命名为configure\_mappers()，简化了配置内部结构[¶](#compile-mappers-renamed-configure-mappers-simplified-configuration-internals "Permalink to this headline")
+### compile\_mappers()重命名为 configure\_mappers()，简化了配置内部结构[¶](#compile-mappers-renamed-configure-mappers-simplified-configuration-internals "Permalink to this headline")
 
 这个系统慢慢地从小的东西变成了东西，从本地实现到了单个的映射器，并且很少被命名为更具全局性的“注册表”级功能，而且命名得不好，所以我们通过将实现移出`Mapper`并将其重命名为`configure_mappers()`。当一个应用程序通过属性或查询访问需要映射时，通常不需要调用`configure_mappers()`，因为此过程是按照需要发生的。
 
@@ -766,7 +766,7 @@ that of the `alias()` methods on all
 
 将属性或属性名称的列表传递给`Query.join`，`eagerload()`
 
-    # old way, deprecated since 0.5
+    # old way, deprecated since 0.5plain
     session.query(Houses).join([Houses.rooms, Room.closets])
     session.query(Houses).options(eagerload_all([Houses.rooms, Room.closets]))
 

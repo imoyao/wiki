@@ -23,12 +23,12 @@ SQLAlchemy 包括其自己的帮助对象，这有助于建立用户定义的[`�
 
 注意
 
-[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")对象是许多 SQLAlchemy 应用程序使用的非常流行和有用的对象。然而，重要的是要注意，它只向[`会话`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")管理的问题提出**一种方法**。如果您是SQLAlchemy的新手，特别是如果术语“线程局部变量”对您来说看起来很陌生，我们建议您尽可能先熟悉一个现成的集成系统，例如[Flask-SQLAlchemy
+[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")对象是许多 SQLAlchemy 应用程序使用的非常流行和有用的对象。然而，重要的是要注意，它只向[`会话`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")管理的问题提出**一种方法**。如果您是 SQLAlchemy 的新手，特别是如果术语“线程局部变量”对您来说看起来很陌生，我们建议您尽可能先熟悉一个现成的集成系统，例如[Flask-SQLAlchemy
 \< /
 t0\>或](http://packages.python.org/Flask-SQLAlchemy/)[zope.sqlalchemy](http://pypi.python.org/pypi/zope.sqlalchemy)。
 
 通过调用它来构造一个[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")，传递一个**工厂**，可以创建新的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象。一个工厂只是在调用时产生一个新的对象，而在 Session 的情况下，最常见的工厂就是本节前面介绍的 sessionmaker。
-[](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")[``](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")下面我们来说明这个用法：
+[](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")[](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")下面我们来说明这个用法：
 
     >>> from sqlalchemy.orm import scoped_sessionplain
     >>> from sqlalchemy.orm import sessionmaker
@@ -38,12 +38,12 @@ t0\>或](http://packages.python.org/Flask-SQLAlchemy/)[zope.sqlalchemy](http://p
 
 当我们“调用”注册表时，我们创建的[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")对象现在将调用[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")
 
-    >>> some_session = Session()plain
+    >>> some_session = Session()plainplain
 
 以上，`some_session`是[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的一个实例，我们现在可以使用它来与数据库通信。同样的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")也出现在我们创建的[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")注册表中。如果我们再次调用注册表，我们会返回**相同的**
 [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")：
 
-    >>> some_other_session = Session()
+    >>> some_other_session = Session()plain
     >>> some_session is some_other_session
     True
 
@@ -56,7 +56,7 @@ t0\>或](http://packages.python.org/Flask-SQLAlchemy/)[zope.sqlalchemy](http://p
 此时，[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")对象为“空”，并在再次调用时创建**新**
 [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。如下图所示，这与我们之前的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")不一样：
 
-    >>> new_session = Session()
+    >>> new_session = Session()plain
     >>> new_session is some_session
     False
 
@@ -67,7 +67,7 @@ t0\>或](http://packages.python.org/Flask-SQLAlchemy/)[zope.sqlalchemy](http://p
 
 [`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")的工作很简单；为所有需要的人保留一个[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。作为对这个[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")产生更多透明访问的手段，[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")还包含**代理行为**，这意味着注册表本身可以被视为类似直接[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")；当在这个对象上调用方法时，它们被**代理**到由注册表维护的基础[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")：
 
-    Session = scoped_session(some_factory)
+    Session = scoped_session(some_factory)plainplain
 
     # equivalent to:
     #
@@ -87,7 +87,7 @@ usage, where the same [`Session`](session_api.html#sqlalchemy.orm.session.Sessio
 object is maintained across multiple calls, suggests that some process
 needs to be in place such that mutltiple calls across many threads don’t
 actually get a handle to the same session.
-我们称之为**线程本地存储**，这意味着将使用一个特殊的对象来维护每个应用程序线程的独特对象。Python通过[threading.local()](http://docs.python.org/library/threading.html#threading.local)结构提供了这个功能。The
+我们称之为**线程本地存储**，这意味着将使用一个特殊的对象来维护每个应用程序线程的独特对象。Python 通过[threading.local()](http://docs.python.org/library/threading.html#threading.local)结构提供了这个功能。The
 [`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")
 object by default uses this object as storage, so that a single
 [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
@@ -143,7 +143,7 @@ Web 请求和线程的这种简单对应意味着将[`Session`](session_api.html
 
 使用上述流程，将[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")与 Web 应用程序集成的过程有两个要求：
 
-1.  首次启动Web应用程序时，创建一个[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")注册表，确保该对象可由应用程序的其余部分访问。
+1.  首次启动 Web 应用程序时，创建一个[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")注册表，确保该对象可由应用程序的其余部分访问。
 2.  确保在 Web 请求结束时调用[`scoped_session.remove()`](#sqlalchemy.orm.scoping.scoped_session.remove "sqlalchemy.orm.scoping.scoped_session.remove")，通常通过与 Web 框架的事件系统集成以建立“请求结束”事件。
 
 As noted earlier, the above pattern is **just one potential way** to
@@ -178,7 +178,7 @@ current thread.
 
 在上面，我们以通常的方式实例化[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")，不同之处在于我们将我们的请求返回函数作为“scopefunc”传递。这指示[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")在调用注册表返回当前[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")时使用此函数生成字典密钥。在这种情况下，我们确保实施可靠的“删除”系统尤为重要，因为本字典不能自行管理。
 
-上下文会话API [¶](#contextual-session-api "Permalink to this headline")
+上下文会话 API [¶](#contextual-session-api "Permalink to this headline")
 -----------------------------------------------------------------------
 
 *class* `sqlalchemy.orm.scoping。`{.descclassname} `scoped_session`{.descname} （ *session\_factory*，*scopefunc =无 T5\> ） T6\> [¶ T7\>](#sqlalchemy.orm.scoping.scoped_session "Permalink to this definition")*
@@ -246,7 +246,7 @@ current thread.
  *class*`sqlalchemy.util.`{.descclassname}`ScopedRegistry`{.descname}(*createfunc*, *scopefunc*)[¶](#sqlalchemy.util.ScopedRegistry "Permalink to this definition")
 :   基于“范围”功能可以存储单个类的一个或多个实例的注册表。
 
-    该对象将`__call__`实现为“getter”，因此通过调用`myregistry()`，将为当前范围返回包含的对象。
+    该对象将`__call__`实现为“getter”，因此通过调用`myregistry()`，将为当前范围返回包含的对象。plain
 
     参数：
 
@@ -280,6 +280,6 @@ current thread.
 *class* `sqlalchemy.util。`{.descclassname} `ThreadLocalRegistry`{.descname} （ *createfunc* ） t5 \> [¶ T6\>](#sqlalchemy.util.ThreadLocalRegistry "Permalink to this definition")
 :   基础：`sqlalchemy.util._collections.ScopedRegistry`
 
-    一个使用`threading.local()`变量进行存储的[`ScopedRegistry`](#sqlalchemy.util.ScopedRegistry "sqlalchemy.util.ScopedRegistry")。plain
+    一个使用`threading.local()`变量进行存储的[`ScopedRegistry`](#sqlalchemy.util.ScopedRegistry "sqlalchemy.util.ScopedRegistry")。plainplain
 
 

@@ -11,7 +11,7 @@ tags:
 收集配置和技术[¶](#collection-configuration-and-techniques "Permalink to this headline")
 ========================================================================================
 
-[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")函数定义两个类之间的链接。当链接定义了一对多或多对多的关系时，当对象被加载和操作时，它被表示为一个Python集合。本节介绍有关收集配置和技术的其他信息。
+[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")函数定义两个类之间的链接。当链接定义了一对多或多对多的关系时，当对象被加载和操作时，它被表示为一个 Python 集合。本节介绍有关收集配置和技术的其他信息。
 
 使用大集合[¶](#working-with-large-collections "Permalink to this headline")
 ---------------------------------------------------------------------------
@@ -66,11 +66,11 @@ explicitly or via array slices:
 “动态”加载器仅适用于**集合**。使用具有多对一，一对一或 uselist =
 False 关系的“动态”加载器是无效的。在这些情况下，较新版本的 SQLAlchemy 会发出警告或异常。
 
-### 设置Noload，RaiseLoad [¶](#setting-noload-raiseload "Permalink to this headline")
+### 设置 Noload，RaiseLoad [¶](#setting-noload-raiseload "Permalink to this headline")
 
 即使访问，“noload”关系也不会从数据库加载。它使用`lazy='noload'`配置：
 
-    class MyClass(Base):
+    class MyClass(Base):plain
         __tablename__ = 'some_table'
 
         children = relationship(MyOtherClass, lazy='noload')
@@ -167,7 +167,7 @@ deleted by the database.
 we map an `Item` class containing a dictionary of
 `Note` items keyed to the `Note.keyword` attribute:
 
-    from sqlalchemy import Column, Integer, String, ForeignKeyplain
+    from sqlalchemy import Column, Integer, String, ForeignKeyplainplain
     from sqlalchemy.orm import relationship
     from sqlalchemy.orm.collections import attribute_mapped_collection
     from sqlalchemy.ext.declarative import declarative_base
@@ -238,7 +238,7 @@ as below when we establish it as a tuple of `Note.keyword` and the first ten let
 上面我们添加了一个`Note.item`
 backref。指定这种反向关系时，`Note`被添加到`Item.notes`字典中，并且会自动为我们生成密钥：
 
-    >>> item = Item()
+    >>> item = Item()plainplain
     >>> n1 = Note("a", "atext")
     >>> n1.item = item
     >>> item.notes
@@ -246,7 +246,7 @@ backref。指定这种反向关系时，`Note`被添加到`Item.notes`字典中�
 
 其他内置的字典类型包括[`column_mapped_collection()`](#sqlalchemy.orm.collections.column_mapped_collection "sqlalchemy.orm.collections.column_mapped_collection")，它几乎像[`attribute_mapped_collection()`](#sqlalchemy.orm.collections.attribute_mapped_collection "sqlalchemy.orm.collections.attribute_mapped_collection")，直接给定[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
 
-    from sqlalchemy.orm.collections import column_mapped_collectionplain
+    from sqlalchemy.orm.collections import column_mapped_collectionplainplain
 
     class Item(Base):
         __tablename__ = 'item'
@@ -257,7 +257,7 @@ backref。指定这种反向关系时，`Note`被添加到`Item.notes`字典中�
 
 以及传递任何可调用函数的[`mapped_collection()`](#sqlalchemy.orm.collections.mapped_collection "sqlalchemy.orm.collections.mapped_collection")。请注意，如前所述，使用[`attribute_mapped_collection()`](#sqlalchemy.orm.collections.attribute_mapped_collection "sqlalchemy.orm.collections.attribute_mapped_collection")以及`@property`通常更容易：
 
-    from sqlalchemy.orm.collections import mapped_collection
+    from sqlalchemy.orm.collections import mapped_collectionplain
 
     class Item(Base):
         __tablename__ = 'item'
@@ -317,7 +317,7 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
 
 集合包理解列表，集合和字典的基本接口，并将自动将检测应用于这些内置类型及其子类。实现基本集合接口的对象派生类型通过鸭式输入进行检测和检测：
 
-    class ListLike(object):plain
+    class ListLike(object):plainplain
         def __init__(self):
             self.data = []
         def append(self, item):
@@ -391,7 +391,7 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
 *class* `sqlalchemy.orm.collections。`{.descclassname} `集合`{.descname} [¶](#sqlalchemy.orm.collections.collection "Permalink to this definition")
 :   实体集合类的装饰器。
 
-    装饰者分为两组：注释和截取食谱。
+    装饰者分为两组：注释和截取食谱。plain
 
     注释装饰器（appender，remover，iterator，linker，converter，inward\_instrumented）表示方法的用途并且不带任何参数。他们不是与parens写的：
 
@@ -565,7 +565,7 @@ user-defined versions of `__setitem__()` or
 -
 在一个已经检测到的调用中调用它们可能会导致重复触发事件或不恰当地触发事件，从而在极少数情况下导致内部状态损坏：
 
-    from sqlalchemy.orm.collections import MappedCollection,\
+    from sqlalchemy.orm.collections import MappedCollection,\plain
                                         collection
 
     class MyMappedCollection(MappedCollection):
@@ -656,7 +656,7 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
  `sqlalchemy.orm.collections.`{.descclassname}`bulk_replace`{.descname}(*values*, *existing\_adapter*, *new\_adapter*)[¶](#sqlalchemy.orm.collections.bulk_replace "Permalink to this definition")
 :   加载一个新的集合，根据之前的类似成员资格触发事件。
 
-    将`values`中的实例附加到`new_adapter`上。对于`existing_adapter`中不存在的任何实例，都会触发事件。`values`中不存在的`existing_adapter`中的任何实例都将移除在它们上面触发的事件。
+    将`values`中的实例附加到`new_adapter`上。对于`existing_adapter`中不存在的任何实例，都会触发事件。`values`中不存在的`existing_adapter`中的任何实例都将移除在它们上面触发的事件。plain
 
     参数：
 
@@ -705,14 +705,14 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
 *class* `sqlalchemy.orm.collections。`{.descclassname} `InstrumentedList`{.descname} [¶](#sqlalchemy.orm.collections.InstrumentedList "Permalink to this definition")
 :   基础：`__builtin__.list`
 
-    内置列表的检测版本。
+    内置列表的检测版本。plain
 
 *class* `sqlalchemy.orm.collections。`{.descclassname} `InstrumentedSet`{.descname} [¶](#sqlalchemy.orm.collections.InstrumentedSet "Permalink to this definition")
 :   基础：`__builtin__.set`
 
     内置集合的插装版本。
 
-` sqlalchemy.orm.collections。 T0>  prepare_instrumentation  T1> （ T2> 工厂 T3> ） T4> ¶< / T5>`{.descclassname}
+`sqlalchemy.orm.collections。 T0>  prepare_instrumentation  T1> （ T2> 工厂 T3> ） T4> ¶< / T5>`{.descclassname}
 :   为将来使用作为集合类工厂准备一个可调用的函数。
 
     给定一个集合类工厂（无论类型还是无参数），返回另一个工厂，在调用时将生成兼容的实例。

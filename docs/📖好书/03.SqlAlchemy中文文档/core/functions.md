@@ -469,7 +469,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`min`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.min "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.ReturnTypeFromArgs`](#sqlalchemy.sql.functions.ReturnTypeFromArgs "sqlalchemy.sql.functions.ReturnTypeFromArgs")
 
-    `identifier`{.descname} *='min'* [¶](#sqlalchemy.sql.functions.min.identifier "Permalink to this definition")
+    `identifier`{.descname} *='min'* [¶](#sqlalchemy.sql.functions.min.identifier "Permalink to this definition")plain
     :   
 
     `姓名`{.descname} *='分钟'* [¶](#sqlalchemy.sql.functions.min.name "Permalink to this definition")
@@ -617,7 +617,7 @@ SQL 函数 API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `session_user`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.sql.functions.session_user "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.AnsiFunction`](#sqlalchemy.sql.functions.AnsiFunction "sqlalchemy.sql.functions.AnsiFunction")
 
-    `标识符`{.descname} *='session\_user'* [¶](#sqlalchemy.sql.functions.session_user.identifier "Permalink to this definition")plain
+    `标识符`{.descname} *='session\_user'* [¶](#sqlalchemy.sql.functions.session_user.identifier "Permalink to this definition")plainplain
     :   
 
     `name`{.descname} *='session\_user'* [¶](#sqlalchemy.sql.functions.session_user.name "Permalink to this definition")

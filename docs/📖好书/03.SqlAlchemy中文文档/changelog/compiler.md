@@ -32,7 +32,7 @@ Above, `MyColumn` extends [`ColumnClause`](sqlelement.html#sqlalchemy.sql.expres
 the base expression element for named column objects.
 `compiles`修饰符向`MyColumn`类注册自己，以便在对象编译为字符串时调用它：
 
-    from sqlalchemy import select
+    from sqlalchemy import selectplainplainplain
 
     s = select([MyColumn('x'), MyColumn('y')])
     print str(s)
@@ -46,7 +46,7 @@ the base expression element for named column objects.
 
 编译器也可以制作方言特定的。正在使用的方言将调用适当的编译器：
 
-    from sqlalchemy.schema import DDLElement
+    from sqlalchemy.schema import DDLElementplain
 
     class AlterColumn(DDLElement):
 
@@ -89,7 +89,7 @@ the base expression element for named column objects.
 
 生产：
 
-    "INSERT INTO mytable (SELECT mytable.x, mytable.y, mytable.z
+    "INSERT INTO mytable (SELECT mytable.x, mytable.y, mytable.zplain
                           FROM mytable WHERE mytable.x > :x_1)"
 
 注意
@@ -129,7 +129,7 @@ Execution, Implicit Execution](connections.html#dbengine-implicit)）。
 
 目前，一个快速的方法是将[`Executable`](selectable.html#sqlalchemy.sql.expression.Executable "sqlalchemy.sql.expression.Executable")子类化，然后将“autocommit”标志添加到`_execution_options`字典中（注意这是一个“冻结” `union()`方法）：
 
-    from sqlalchemy.sql.expression import Executable, ClauseElement
+    from sqlalchemy.sql.expression import Executable, ClauseElementplain
 
     class MyInsertThing(Executable, ClauseElement):
         _execution_options = \
@@ -141,7 +141,7 @@ can be used, which already is a subclass of [`Executable`](selectable.html#sqlal
 [`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")
 and includes the `autocommit` flag:
 
-    from sqlalchemy.sql.expression import UpdateBase
+    from sqlalchemy.sql.expression import UpdateBaseplain
 
     class MyInsertThing(UpdateBase):
         def __init__(self, ...):
@@ -157,7 +157,7 @@ and includes the `autocommit` flag:
 在新的编译函数中，为了获得“原始”编译例程，使用适当的 visit\_XXX 方法 -
 这是因为 compiler.process()将调用重写例程并导致无限循环。比如，为所有插入语句添加“前缀”：
 
-    from sqlalchemy.sql.expression import Insert
+    from sqlalchemy.sql.expression import Insertplainplain
 
     @compiles(Insert)
     def prefix_inserts(insert, compiler, **kw):
@@ -171,7 +171,7 @@ and includes the `autocommit` flag:
 `compiler`也适用于类型，例如下面我们为`String` /
 `VARCHAR`实现特定于 MS-SQL 的'max'关键字：
 
-    @compiles(String, 'mssql')
+    @compiles(String, 'mssql')plainplainplainplain
     @compiles(VARCHAR, 'mssql')
     def compile_varchar(element, compiler, **kw):
         if element.length == 'max':
@@ -202,7 +202,7 @@ and includes the `autocommit` flag:
     expression’s return type.
     这可以在构造函数的实例级别建立，也可以在类级别建立，如果它通常是常量：
 
-        class timestamp(ColumnElement):
+        class timestamp(ColumnElement):plain
             type = TIMESTAMP()
 
 -   [`FunctionElement`](functions.html#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")
@@ -211,7 +211,7 @@ and includes the `autocommit` flag:
     `FunctionElement` adds in the ability to be used
     in the FROM clause of a `select()` construct:
 
-        from sqlalchemy.sql.expression import FunctionElement
+        from sqlalchemy.sql.expression import FunctionElementplainplain
 
         class coalesce(FunctionElement):
             name = 'coalesce'
@@ -251,7 +251,7 @@ and includes the `autocommit` flag:
 
 对于 Postgresql 和 Microsoft SQL Server：
 
-    from sqlalchemy.sql import expression
+    from sqlalchemy.sql import expressionplain
     from sqlalchemy.ext.compiler import compiles
     from sqlalchemy.types import DateTime
 
@@ -283,7 +283,7 @@ and includes the `autocommit` flag:
 “GREATEST”函数被赋予任意数量的参数，并返回最高值的那个 -
 它等价于 Python 的`max`函数。SQL 标准版本与基于 CASE 的版本相比，它只适用于两个参数：
 
-    from sqlalchemy.sql import expression
+    from sqlalchemy.sql import expressionplain
     from sqlalchemy.ext.compiler import compiles
     from sqlalchemy.types import Numeric
 
@@ -309,7 +309,7 @@ and includes the `autocommit` flag:
 
 用法示例：
 
-    Session.query(Account).\
+    Session.query(Account).\plain
             filter(
                 greatest(
                     Account.checking_balance,
@@ -338,7 +338,7 @@ and includes the `autocommit` flag:
 
 用法示例：
 
-    from sqlalchemy import select, union_all
+    from sqlalchemy import select, union_allplain
 
     exp = union_all(
         select([users.c.name, sql_false().label("enrolled")]),

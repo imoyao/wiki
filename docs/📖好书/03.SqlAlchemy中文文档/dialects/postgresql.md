@@ -60,7 +60,7 @@ command
 
 使用[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")设置隔离级别：
 
-    engine = create_engine(
+    engine = create_engine(plain
         "postgresql+pg8000://scott:tiger@localhost/test",
         isolation_level="READ UNCOMMITTED"
     )
@@ -151,7 +151,7 @@ The above process would deliver to the [`MetaData.tables`](core_metadata.html#sq
 collection `referred` table named **without** the
 schema:
 
-    >>> meta.tables['referred'].schema is Noneplain
+    >>> meta.tables['referred'].schema is Noneplainplain
     True
 
 要改变反射的行为，使得不管`search_path`设置如何都维护所引用的模式，请使用`postgresql_ignore_search_path`选项，该选项可以指定为两种语言的特定于方言的参数[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")以及[`MetaData.reflect()`](core_metadata.html#sqlalchemy.schema.MetaData.reflect "sqlalchemy.schema.MetaData.reflect")：
@@ -172,7 +172,7 @@ schema:
 
 Postgresql Schema反射的最佳实践
 
-Postgresql模式反射行为的描述很复杂，并且是多年处理各种用例和用户偏好的产物。但事实上，如果你只是坚持最简单的使用模式，就没有必要了解它：只将`search_path`设置为默认的`public`，绝不会引用名称`public`作为显式模式名称，否则在构建[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象时显式引用所有其他模式名称。这里描述的选项仅适用于那些不能或不愿意遵守这些准则的用户。
+Postgresql 模式反射行为的描述很复杂，并且是多年处理各种用例和用户偏好的产物。但事实上，如果你只是坚持最简单的使用模式，就没有必要了解它：只将`search_path`设置为默认的`public`，绝不会引用名称`public`作为显式模式名称，否则在构建[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象时显式引用所有其他模式名称。这里描述的选项仅适用于那些不能或不愿意遵守这些准则的用户。
 
 请注意，在所有情况下**，“默认”模式总是反映为`None`。**Postgresql 上的“默认”模式是由 Postgresql
 `current_schema()`函数返回的模式。在典型的Postgresql安装中，这是`public`的名称。因此，引用`public`（即默认）模式中的另一个表的表将始终将`.schema`属性设置为`None`。
@@ -282,8 +282,8 @@ and [`on_conflict_do_nothing()`](#sqlalchemy.dialects.postgresql.dml.Insert.on_c
             )
         conn.execute(stmt)
 
--   [`Insert.on_conflict_do_update.constraint`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.constraint "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")参数用于直接指定索引而不是推断它。这可以是UNIQUE约束，PRIMARY
-    KEY约束或INDEX的名称：
+-   [`Insert.on_conflict_do_update.constraint`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.constraint "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")参数用于直接指定索引而不是推断它。这可以是 UNIQUE 约束，PRIMARY
+    KEY 约束或 INDEX 的名称：
 
         do_update_stmt = insert_stmt.on_conflict_do_update(
             constraint='my_table_idx_1',
@@ -308,7 +308,7 @@ update of the already existing row, using any combination of new values
 as well as values from the proposed insertion.
 这些值是使用[`Insert.on_conflict_do_update.set_`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.set_ "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")参数指定的。该参数接受由 UPDATE 的直接值组成的字典：
 
-    from sqlalchemy.dialects.postgresql import insertplain
+    from sqlalchemy.dialects.postgresql import insertplainplain
 
     stmt = insert(my_table).values(id='some_id', data='inserted value')
     do_update_stmt = stmt.on_conflict_do_update(
@@ -393,7 +393,7 @@ method on any textual column expression.
 
     SELECT text @@ to_tsquery('search string') FROM table
 
-使用标准的[`func`](core_sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结构显式使用Postgresql文本搜索函数，如`to_tsquery()`和`to_tsvector()`。例如：
+使用标准的[`func`](core_sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结构显式使用 Postgresql 文本搜索函数，如`to_tsquery()`和`to_tsvector()`。例如：
 
     select([
         func.to_tsvector('fat cats ate rats').match('cat & rat')
@@ -467,7 +467,7 @@ can be used to produce the `SELECT ... FROM ONLY`,
 Postgresql特定的索引选项[¶](#postgresql-specific-index-options "Permalink to this headline")
 --------------------------------------------------------------------------------------------
 
-对于[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")结构的几个扩展是可用的，特定于PostgreSQL方言。
+对于[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")结构的几个扩展是可用的，特定于 PostgreSQL 方言。
 
 ### 部分索引[¶](#partial-indexes "Permalink to this headline")
 
@@ -577,7 +577,7 @@ it is detected as corresponding to a unique constraint.
 *class* `sqlalchemy.dialects.postgresql.base。`{.descclassname} `PGInspector`{.descname} （ *conn* ） T5\> [¶ T6\>](#sqlalchemy.dialects.postgresql.base.PGInspector "Permalink to this definition")
 :   基础：[`sqlalchemy.engine.reflection.Inspector`](core_reflection.html#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")
 
-    ` get_enums  T0> （ T1> 架构=无 T2> ） T3> ¶ T4>`{.descname}plain
+    ` get_enums  T0> （ T1> 架构=无 T2> ） T3> ¶ T4>`{.descname}plainplain
     :   返回ENUM对象的列表。
 
         每个成员都是包含这些字段的字典：
@@ -643,7 +643,7 @@ TABLE 的几个选项：
 
 -   `WITH OIDS`：
 
-        Table("some_table", metadata, ..., postgresql_with_oids=True)
+        Table("some_table", metadata, ..., postgresql_with_oids=True)plain
 
 -   `WITHOUT OIDS`：
 
@@ -668,7 +668,7 @@ ARRAY 类型[¶](#array-types "Permalink to this headline")
 Postgresql方言支持数组，既可以是多维列类型也可以是数组文字：
 
 -   [`postgresql.ARRAY`](#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")
-    - ARRAY数据类型
+    - ARRAY 数据类型
 -   [`postgresql.array`](#sqlalchemy.dialects.postgresql.array "sqlalchemy.dialects.postgresql.array")
     - 数组字面量
 -   [`postgresql.array_agg()`](#sqlalchemy.dialects.postgresql.array_agg "sqlalchemy.dialects.postgresql.array_agg")
@@ -694,7 +694,7 @@ HSTORE类型[¶](#hstore-type "Permalink to this headline")
 -   [`postgresql.hstore`](#sqlalchemy.dialects.postgresql.hstore "sqlalchemy.dialects.postgresql.hstore")
     - hstore文字
 
-ENUM类型[¶](#enum-types "Permalink to this headline")
+ENUM 类型[¶](#enum-types "Permalink to this headline")
 -----------------------------------------------------
 
 Postgresql 有一个可独立创建的 TYPE 结构，用于实现枚举类型。这种方法在 SQLAlchemy 方面在这种类型应该是 CREATED 和 DROPPED 的时候引入了很大的复杂性。类型对象也是一个可独立反映的实体。应参考以下部分：
@@ -1450,7 +1450,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.postgresql。`{.descclassname} `REAL`{.descname} （ *precision = None*，*asdecimal = False*，*decimal\_return\_scale = None*，*\*\* kwargs* ） [](#sqlalchemy.dialects.postgresql.REAL "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Float`](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")
 
-    SQL REAL类型。
+    SQL REAL类型。plain
 
      `__init__`{.descname}(*precision=None*, *asdecimal=False*, *decimal\_return\_scale=None*, *\*\*kwargs*)[¶](#sqlalchemy.dialects.postgresql.REAL.__init__ "Permalink to this definition")
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.Float.__init__ "sqlalchemy.types.Float.__init__")
@@ -1524,7 +1524,7 @@ PostgreSQL 9.2以后的新范围列类型可以通过以下类型来满足：
 *class* `sqlalchemy.dialects.postgresql。`{.descclassname} `INT4RANGE`{.descname} [¶](#sqlalchemy.dialects.postgresql.INT4RANGE "Permalink to this definition")
 :   基础：[`sqlalchemy.dialects.postgresql.ranges.RangeOperators`](#sqlalchemy.dialects.postgresql.ranges.RangeOperators "sqlalchemy.dialects.postgresql.ranges.RangeOperators")，[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    表示Postgresql INT4RANGE类型。plain
+    表示Postgresql INT4RANGE类型。plainplain
 
     0.8.2版本中的新功能
 
@@ -1552,7 +1552,7 @@ PostgreSQL 9.2以后的新范围列类型可以通过以下类型来满足：
 *class* `sqlalchemy.dialects.postgresql。`{.descclassname} `TSRANGE`{.descname} [¶](#sqlalchemy.dialects.postgresql.TSRANGE "Permalink to this definition")
 :   基础：[`sqlalchemy.dialects.postgresql.ranges.RangeOperators`](#sqlalchemy.dialects.postgresql.ranges.RangeOperators "sqlalchemy.dialects.postgresql.ranges.RangeOperators")，[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    表示Postgresql TSRANGE类型。
+    表示Postgresql TSRANGE类型。plain
 
     0.8.2版本中的新功能
 
@@ -1831,13 +1831,13 @@ psycopg2的文档和下载信息（如果适用）可在以下网址获得：[ht
 
     [Disabling Native Unicode](#psycopg2-disable-native-unicode)
 
--   `isolation_level`：此选项适用于所有PostgreSQL方言，包括使用psycopg2方言时的`AUTOCOMMIT`隔离级别。
+-   `isolation_level`：此选项适用于所有 PostgreSQL 方言，包括使用 psycopg2 方言时的`AUTOCOMMIT`隔离级别。
 
     也可以看看
 
     [Psycopg2 Transaction Isolation Level](#psycopg2-isolation-level)
 
--   `client_encoding`：使用psycopg2的`set_client_encoding()`方法以 libpq 无关的方式设置客户端编码。
+-   `client_encoding`：使用 psycopg2 的`set_client_encoding()`方法以 libpq 无关的方式设置客户端编码。
 
     也可以看看
 
@@ -1845,7 +1845,7 @@ psycopg2的文档和下载信息（如果适用）可在以下网址获得：[ht
 
 ### Unix域连接[¶](#unix-domain-connections "Permalink to this headline")
 
-psycopg2 支持通过 Unix 域连接进行连接。当省略 URL 的`host`部分时，SQLAlchemy将`None`传递给psycopg2，psycopg2指定了Unix域通信而不是TCP / IP通信：
+psycopg2 支持通过 Unix 域连接进行连接。当省略 URL 的`host`部分时，SQLAlchemy 将`None`传递给psycopg2，psycopg2指定了Unix域通信而不是TCP / IP通信：
 
     create_engine("postgresql+psycopg2://user:password@/dbname")
 
@@ -1870,7 +1870,7 @@ T0\>](http://www.postgresql.org/docs/9.1/static/libpq-connect.html#LIBPQ-PQCONNE
     此功能使用“命名”游标与特殊结果处理方法结合使用，以便结果行不会被完全缓冲。如果`None`或未设置，则使用[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的`server_side_cursors`选项。
 
 -   `max_row_buffer` -
-    使用`stream_results`时，是一个整数值，指定一次缓冲的最大行数。这由`BufferedRowResultProxy`解释，如果省略，则缓冲区将增长以最终一次存储1000行。
+    使用`stream_results`时，是一个整数值，指定一次缓冲的最大行数。这由`BufferedRowResultProxy`解释，如果省略，则缓冲区将增长以最终一次存储 1000 行。
 
     版本1.0.6中的新功能
 
@@ -1898,7 +1898,7 @@ this way, the psycopg2 driver emits
 `SET client_encoding TO 'utf8'` on the connection
 explicitly, and works in all Postgresql versions.
 
-请注意，传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")的`client_encoding`设置与最近添加的`client_encoding`参数**不一样**现在直接由 libpq 支持。当将`client_encoding`直接传递给`psycopg2.connect()`，并使用[`create_engine.connect_args`](core_engines.html#sqlalchemy.create_engine.params.connect_args "sqlalchemy.create_engine")参数传递SQLAlchemy时，
+请注意，传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")的`client_encoding`设置与最近添加的`client_encoding`参数**不一样**现在直接由 libpq 支持。当将`client_encoding`直接传递给`psycopg2.connect()`，并使用[`create_engine.connect_args`](core_engines.html#sqlalchemy.create_engine.params.connect_args "sqlalchemy.create_engine")参数传递 SQLAlchemy 时，
 
     # libpq direct parameter setting;
     # only works for Postgresql **9.1 and above**
@@ -1922,7 +1922,7 @@ psycopg2 方言的默认参数样式是“pyformat”，其中 SQL 使用`%(para
 
 对于[`schema.Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的问题有两种解决方案，它包含名称中的这些字符之一。一种是为具有这种名称的列指定[`schema.Column.key`](core_metadata.html#sqlalchemy.schema.Column.params.key "sqlalchemy.schema.Column")：
 
-    measurement = Table('measurement', metadata,
+    measurement = Table('measurement', metadata,plain
         Column('Size (meters)', Integer, key='size_meters')
     )
 
@@ -1936,7 +1936,7 @@ well.
 当 SQL 表达式中创建匿名绑定参数时，SQL 表达式将使用`Column.key`作为命名的来源；此前，此行为仅适用于[`Table.insert()`](core_metadata.html#sqlalchemy.schema.Table.insert "sqlalchemy.schema.Table.insert")和[`Table.update()`](core_metadata.html#sqlalchemy.schema.Table.update "sqlalchemy.schema.Table.update")参数名称。
 
 另一种解决方案是使用位置格式；
-psycopg2允许使用“格式”参数样式，它可以传递给[`create_engine.paramstyle`](core_engines.html#sqlalchemy.create_engine.params.paramstyle "sqlalchemy.create_engine")：
+psycopg2 允许使用“格式”参数样式，它可以传递给[`create_engine.paramstyle`](core_engines.html#sqlalchemy.create_engine.params.paramstyle "sqlalchemy.create_engine")：
 
     engine = create_engine(plain
         'postgresql://scott:tiger@localhost:5432/test', paramstyle='format')
@@ -1948,7 +1948,7 @@ psycopg2允许使用“格式”参数样式，它可以传递给[`create_engine
 
 我们反而看到：
 
-    INSERT INTO measurement ("Size (meters)") VALUES (%s)
+    INSERT INTO measurement ("Size (meters)") VALUES (%s)plain
     (1, )
 
 如上所述，字典样式被转换成具有位置样式的元组。
@@ -1966,7 +1966,7 @@ setting of transaction isolation level both via the
 [`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine"),
 as well as the `isolation_level` argument used by
 [`Connection.execution_options()`](core_connections.html#sqlalchemy.engine.Connection.execution_options "sqlalchemy.engine.Connection.execution_options").
-当使用 psycopg2 方言时，这些选项使用 psycopg2 的`set_isolation_level()`连接方法，而不是发出Postgresql指令；这是因为无论如何psycopg2的API级别设置总是在每个事务开始时发出。
+当使用 psycopg2 方言时，这些选项使用 psycopg2 的`set_isolation_level()`连接方法，而不是发出 Postgresql 指令；这是因为无论如何 psycopg2 的 API 级别设置总是在每个事务开始时发出。
 
 psycopg2方言支持这些常量的隔离级别：
 
@@ -1997,8 +1997,8 @@ psycopg2方言将通过`sqlalchemy.dialects.postgresql`记录器记录Postgresql
 DBAPI 包含一个本地处理 HSTORE 类型编组的扩展。当使用 psycopg2 版本 2.4 或更高版本时，SQLAlchemy
 psycopg2 方言将默认启用此扩展，并且检测到目标数据库已将 HSTORE 类型设置为使用。换句话说，当方言进行第一次连接时，执行如下的一个序列：
 
-1.  使用`psycopg2.extras.HstoreAdapter.get_oids()`请求可用的HSTORE
-    oid。如果这个函数返回一个HSTORE标识符列表，然后我们确定存在`HSTORE`扩展名。This function is **skipped** if the version of
+1.  使用`psycopg2.extras.HstoreAdapter.get_oids()`请求可用的 HSTORE
+    oid。如果这个函数返回一个 HSTORE 标识符列表，然后我们确定存在`HSTORE`扩展名。This function is **skipped** if the version of
     psycopg2 installed is less than version 2.4.
 2.  If the `use_native_hstore` flag is at its
     default of `True`, and we’ve detected that
@@ -2042,7 +2042,7 @@ pg8000将使用PostgreSQL `client_encoding`参数对它和服务器之间的字�
 
 SQLAlchemy 将基于使用`client_encoding`参数传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")的所有新连接执行此SQL：
 
-    engine = create_engine(plain
+    engine = create_engine(plainplainplain
         "postgresql+pg8000://user:pass@host/dbname", client_encoding='utf8')
 
 ### pg8000事务隔离级别[¶](#pg8000-transaction-isolation-level "Permalink to this headline")
@@ -2055,7 +2055,7 @@ pg8000 方言提供与[psycopg2](#psycopg2-isolation-level)方言相同的隔离
 -   `SERIALIZABLE`
 -   `AUTOCOMMIT`
 
-0.9.5版本中的新功能：支持使用pg8000时的AUTOCOMMIT隔离级别。
+0.9.5 版本中的新功能：支持使用 pg8000 时的 AUTOCOMMIT 隔离级别。
 
 也可以看看
 
@@ -2133,4 +2133,4 @@ zxjdbc [¶ T0\>](#module-sqlalchemy.dialects.postgresql.zxjdbc "Permalink to thi
 
 连接字符串：
 
-    postgresql+zxjdbc://scott:tiger@localhost/db
+    postgresql+zxjdbc://scott:tiger@localhost/dbplain

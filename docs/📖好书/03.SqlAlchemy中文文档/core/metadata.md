@@ -15,7 +15,7 @@ tags:
 
 元数据实体的集合存储在一个名为[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")的对象中：
 
-    from sqlalchemy import *
+    from sqlalchemy import *plain
 
     metadata = MetaData()
 
@@ -164,7 +164,7 @@ tables in order of their dependency.
 使用[`drop_all()`](#sqlalchemy.schema.MetaData.drop_all "sqlalchemy.schema.MetaData.drop_all")方法类似地实现删除所有表。这个方法与[`create_all()`](#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")完全相反
 - 首先检查每个表的存在，并且按照与依赖性相反的顺序删除表。
 
-可以通过[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的`create()`和`drop()`方法创建和删除单个表。这些方法默认发出CREATE或DROP，而不管表是否存在：
+可以通过[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的`create()`和`drop()`方法创建和删除单个表。这些方法默认发出 CREATE 或 DROP，而不管表是否存在：
 
     engine = create_engine('sqlite:///:memory:')plain
 

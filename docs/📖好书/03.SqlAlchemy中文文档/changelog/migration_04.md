@@ -60,7 +60,7 @@ of sqlachemy’s sub-modules into your namespace.
 
 在 0.4 中，必须这样做：
 
-    from sqlalchemy import *
+    from sqlalchemy import *plainplain
     from sqlalchemy import types
 
     class UTCDateTime(types.TypeDecorator):
@@ -139,7 +139,7 @@ User.query.select()
 以上将使用别名从订单 -
 \>项目创建两个连接。每个后面的`filter()`调用都会将其表格标准调整为别名标准。要获取`Item`对象，请使用`add_entity()`并使用`id`定位每个连接：
 
-    session.query(Order).join('items', id='j1', aliased=True).
+    session.query(Order).join('items', id='j1', aliased=True).plain
     filter(Item.name == 'item 1').join('items', aliased=True, id='j2').
     filter(Item.name == 'item 3').add_entity(Item, id='j1').add_entity(Item, id='j2')
 
@@ -149,7 +149,7 @@ User.query.select()
 
 所以 query.join()现在可以生成别名。这给了我们什么？自引用查询！连接可以在没有任何`Alias`对象的情况下完成：
 
-    # standard self-referential TreeNode mapper with backref
+    # standard self-referential TreeNode mapper with backrefplain
     mapper(TreeNode, tree_nodes, properties={
         'children':relation(TreeNode, backref=backref('parent', remote_side=tree_nodes.id))
     })
@@ -159,7 +159,7 @@ User.query.select()
 
 要为别名中的每个表添加条件标准，可以使用`from_joinpoint`继续加入同一行别名：
 
-    # search for the treenode along the path "n1/n12/n122"
+    # search for the treenode along the path "n1/n12/n122"plain
 
     # first find a Node with name="n122"
     q = sess.query(Node).filter_by(name='n122')
@@ -178,7 +178,7 @@ User.query.select()
 
 `query.load()`（或`session.refresh()`）的热切版本。如果已经存在于会话中，则从查询加载的每个实例（包括所有急切加载的项目）都会立即刷新：
 
-    session.query(Blah).populate_existing().all()
+    session.query(Blah).populate_existing().all()plain
 
 ### 关系[¶ T0\>](#relations "Permalink to this headline")
 
@@ -186,7 +186,7 @@ User.query.select()
 
 对于在`flush()`期间嵌入式执行 SQL 子句，直接嵌入 UPDATE 或 INSERT 中：
 
-    myobject.foo = mytable.c.value + 1
+    myobject.foo = mytable.c.value + 1plain
 
     user.pwhash = func.md5(password)
 
@@ -216,7 +216,7 @@ User.query.select()
 
 ? 沿着别名进行连接，从父母那里深入三级：
 
-    SELECT
+    SELECTplain
     nodes_3.id AS nodes_3_id, nodes_3.parent_id AS nodes_3_parent_id, nodes_3.name AS nodes_3_name,
     nodes_2.id AS nodes_2_id, nodes_2.parent_id AS nodes_2_parent_id, nodes_2.name AS nodes_2_name,
     nodes_1.id AS nodes_1_id, nodes_1.parent_id AS nodes_1_parent_id, nodes_1.name AS nodes_1_name,
@@ -286,7 +286,7 @@ User.query.select()
 
 一个`relation()`，它为所有读取操作返回一个实时`Query`对象。写操作仅限于`append()`和`remove()`，集合的更改在刷新会话之前不可见。此功能特别适用于在每次查询之前刷新的“自动刷新”会话。
 
-    mapper(Foo, foo_table, properties={
+    mapper(Foo, foo_table, properties={plain
         'bars':dynamic_loader(Bar, backref='foo', <other relation() opts>)
     })
 
@@ -327,7 +327,7 @@ User.query.select()
 
 #### 新集合 API [¶](#new-collection-api "Permalink to this headline")
 
-集合不再由InstrumentedList代理代理，并且对成员，方法和属性的访问是直接的。装饰者现在拦截进入和离开集合的对象，现在可以轻松地编写管理自己的成员资格的自定义集合类。灵活的装饰器也可以替换0.3中定制集合的命名方法接口，从而使任何类都可以很容易地作为集合容器使用。
+集合不再由 InstrumentedList 代理代理，并且对成员，方法和属性的访问是直接的。装饰者现在拦截进入和离开集合的对象，现在可以轻松地编写管理自己的成员资格的自定义集合类。灵活的装饰器也可以替换 0.3 中定制集合的命名方法接口，从而使任何类都可以很容易地作为集合容器使用。
 
 基于字典的集合现在更容易使用，并且完全像`dict`一样。Changing `__iter__` is no longer
 needed for `dict``s, and new built-in ``dict`
@@ -346,7 +346,7 @@ types cover many needs:
 
 这个特性静静地出现在 0.3 中，但在 0.4 下得到了改进，这要归功于能够将子查询转换为表的子查询转换为针对该表的别名的子查询。这对于急切加载，查询中的别名加入等是关键的。当您只需要添加一些额外的列或子查询时，它可以减少对 select 语句创建映射器的需要：
 
-    mapper(User, users, properties={
+    mapper(User, users, properties={plain
            'fullname': column_property((users.c.firstname + users.c.lastname).label('fullname')),
            'numposts': column_property(
                 select([func.count(1)], users.c.id==posts.c.user_id).correlate(users).label('posts')
@@ -373,7 +373,7 @@ types cover many needs:
 
 在您定义`engine`（或任何地方）的位置配置您自己的`Session`类：
 
-    from sqlalchemy import create_engine
+    from sqlalchemy import create_engineplainplain
     from sqlalchemy.orm import sessionmaker
 
     engine = create_engine('myengine://')
@@ -411,7 +411,7 @@ with both `sessionmaker` as well as
     sess2 = Session()
     assert sess is sess2
 
-当使用线程本地的`Session`时，返回的类将所有`Session's`接口实现为classmethods，并且“assignmapper”的功能可以使用`mapper`就像旧的`objectstore`天......
+当使用线程本地的`Session`时，返回的类将所有`Session's`接口实现为classmethods，并且“assignmapper”的功能可以使用`mapper`就像旧的`objectstore`天……
 
     # "assignmapper"-like functionality available via ScopedSession.mapper
     Session.mapper(User, users_table)
@@ -447,7 +447,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
 `commit()`和`rollback()`，以及`begin()`现在直接在`Session`上。不需要为任何事情使用`SessionTransaction`（它仍然在后台）。
 
-    Session = sessionmaker(autoflush=True, transactional=False)
+    Session = sessionmaker(autoflush=True, transactional=False)plain
 
     sess = Session()
     sess.begin()
@@ -458,7 +458,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
 与封闭的引擎级别（即非 ORM）事务共享`Session`非常简单：
 
-    Session = sessionmaker(autoflush=True, transactional=False)
+    Session = sessionmaker(autoflush=True, transactional=False)plain
 
     conn = engine.connect()
     trans = conn.begin()
@@ -471,7 +471,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
 #### 使用 SAVEPOINT [¶](#nested-session-transactions-with-savepoint "Permalink to this headline")嵌套会话事务
 
-在引擎和ORM级别可用。ORM文档到目前为止：
+在引擎和 ORM 级别可用。ORM 文档到目前为止：
 
 [http://www.sqlalchemy.org/docs/04/session.html\#unitofwork\_ma](http://www.sqlalchemy.org/docs/04/session.html#unitofwork_ma)
 naging
@@ -526,18 +526,18 @@ lalchemy.org/docs/04/sqlexpression.html\#sql\_operators
 
 就像它说的那样：
 
-    b = bindparam('foo', type_=String)
+    b = bindparam('foo', type_=String)plain
 
 ### in\_函数更改为接受序列或可选[¶](#in-function-changed-to-accept-sequence-or-selectable "Permalink to this headline")
 
 in\_函数现在将一系列值或可选值作为其唯一参数。以前传入值作为位置参数的 API 仍然有效，但现在已被弃用。这意味着
 
-    my_table.select(my_table.c.id.in_(1,2,3)
+    my_table.select(my_table.c.id.in_(1,2,3)plain
     my_table.select(my_table.c.id.in_(*listOfIds)
 
 应改为
 
-    my_table.select(my_table.c.id.in_([1,2,3])
+    my_table.select(my_table.c.id.in_([1,2,3])plainplain
     my_table.select(my_table.c.id.in_(listOfIds)
 
 架构和反思[¶](#schema-and-reflection "Permalink to this headline")
@@ -567,7 +567,7 @@ in\_函数现在将一系列值或可选值作为其唯一参数。以前传入�
 
 您现在可以加载表定义，并通过一次传递从整个数据库或模式自动创建`Table`对象：
 
-    >>> metadata = MetaData(myengine, reflect=True)
+    >>> metadata = MetaData(myengine, reflect=True)plain
     >>> metadata.tables.keys()
     ['table_a', 'table_b', 'table_c', '...']
 
@@ -585,13 +585,13 @@ SQL 执行[¶](#sql-execution "Permalink to this headline")
 
 连接池现在会在创建新的 DB-API 连接时触发事件，检出并检入池中。例如，您可以使用它们在新连接上执行会话范围的 SQL 安装语句。
 
-### Oracle引擎已修复[¶](#oracle-engine-fixed "Permalink to this headline")
+### Oracle 引擎已修复[¶](#oracle-engine-fixed "Permalink to this headline")
 
 在 0.3.11 中，Oracle 引擎中存在关于如何处理主键的错误。这些错误可能会导致在其他引擎（如 sqlite）中正常工作的程序在使用 Oracle 引擎时失败。在 0.4 版本中，Oracle 引擎已经过修改，修复了这些主键问题。
 
 ### Oracle 的输出参数[¶](#out-parameters-for-oracle "Permalink to this headline")
 
-    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)
+    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)plain
     assert result.out_parameters == {'y':10, 'z':75}
 
 ### 连接绑定`MetaData`，`Sessions` [¶](#connection-bound-metadata-sessions "Permalink to this headline")

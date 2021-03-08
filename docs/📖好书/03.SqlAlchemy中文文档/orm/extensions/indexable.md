@@ -29,7 +29,7 @@ typed column. 在简单的情况下，它可以被视为[`Column`](core_metadata
 
 将`Person`作为包含主键和JSON数据字段的模型。虽然此字段可能包含任何数量的编码元素，但我们希望单独将名为`name`的元素称为专用属性，其行为与独立列相同：
 
-    from sqlalchemy import Column, JSON, Integer
+    from sqlalchemy import Column, JSON, Integerplainplain
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.ext.indexable import index_property
 
@@ -45,11 +45,11 @@ typed column. 在简单的情况下，它可以被视为[`Column`](core_metadata
 
 以上，现在，`name`属性的行为与映射列相似。我们可以编写一个新的`Person`并设置`name`：
 
-    >>> person = Person(name='Alchemist')plain
+    >>> person = Person(name='Alchemist')plainplain
 
 该值现在可以访问：
 
-    >>> person.nameplain
+    >>> person.nameplainplain
     'Alchemist'
 
 在幕后，JSON 字段被初始化为一个新的空字典并且字段被设置：
@@ -84,13 +84,13 @@ typed column. 在简单的情况下，它可以被视为[`Column`](core_metadata
 
 这些属性也可以在课堂上进行访问。下面，我们举例说明用于生成索引 SQL 标准的`Person.name`：
 
-    >>> from sqlalchemy.orm import Sessionplain
+    >>> from sqlalchemy.orm import Sessionplainplain
     >>> session = Session()
     >>> query = session.query(Person).filter(Person.name == 'Alchemist')
 
 上述查询等同于：
 
-    >>> query = session.query(Person).filter(Person.data['name'] == 'Alchemist')
+    >>> query = session.query(Person).filter(Person.data['name'] == 'Alchemist')plain
 
 可以链接多个[`index_property`](#sqlalchemy.ext.indexable.index_property "sqlalchemy.ext.indexable.index_property")对象以产生多级索引：
 
@@ -113,11 +113,11 @@ typed column. 在简单的情况下，它可以被视为[`Column`](core_metadata
 
 以上，一个查询如：
 
-    q = session.query(Person).filter(Person.year == '1980')plain
+    q = session.query(Person).filter(Person.year == '1980')plainplain
 
 在 Postgresql 后端，上述查询将呈现为：
 
-    SELECT person.id, person.dataplain
+    SELECT person.id, person.dataplainplain
     FROM person
     WHERE person.data -> %(data_1)s -> %(param_1)s = %(param_2)s
 
@@ -141,7 +141,7 @@ coercion of values or SQL expressions as they are accessed.
 下面是 Postgresql
 JSON 类型使用的一个常用方法，我们希望还包括自动转换加上`astext()`：
 
-    class pg_json_property(index_property):plain
+    class pg_json_property(index_property):plainplainplainplain
         def __init__(self, attr_name, index, cast_type):
             super(pg_json_property, self).__init__(attr_name, index)
             self.cast_type = cast_type
@@ -152,7 +152,7 @@ JSON 类型使用的一个常用方法，我们希望还包括自动转换加上
 
 上面的子类可以与 Postgresql 特定版本的[`postgresql.JSON`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")一起使用：
 
-    from sqlalchemy import Column, Integer
+    from sqlalchemy import Column, Integerplain
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.dialects.postgresql import JSON
 
@@ -168,7 +168,7 @@ JSON 类型使用的一个常用方法，我们希望还包括自动转换加上
 
 实例级别的`age`属性与之前一样；然而，在渲染 SQL 时，Postgresql 的`->>`运算符将用于索引访问，而不是`->`的常用索引操作符：
 
-    >>> query = session.query(Person).filter(Person.age < 20)
+    >>> query = session.query(Person).filter(Person.age < 20)plainplain
 
 上面的查询将呈现：
 

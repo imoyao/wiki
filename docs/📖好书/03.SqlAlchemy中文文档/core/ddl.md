@@ -23,7 +23,7 @@ and [`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.Met
 in order to issue data definition language (DDL) for all constructs.
 在发布时，调用预定义的操作顺序，并且创建每个表的 DDL 被无条件地创建，包括与其相关联的所有约束和其他对象。对于需要特定于数据库的 DDL 的更复杂场景，SQLAlchemy 提供了两种技术，可用于根据任何条件添加任何 DDL，可以伴随标准的表生成或自身。
 
-自定义DDL [¶](#custom-ddl "Permalink to this headline")
+自定义 DDL [¶](#custom-ddl "Permalink to this headline")
 -------------------------------------------------------
 
 使用[`DDL`](#sqlalchemy.schema.DDL "sqlalchemy.schema.DDL")结构最容易实现自定义 DDL 短语。这个构造像所有其他的 DDL 元素一样工作，除了它接受一个字符串，它是要发射的文本：
@@ -43,7 +43,7 @@ Extension](compiler.html)。
 控制 DDL 序列[¶](#controlling-ddl-sequences "Permalink to this headline")
 -----------------------------------------------------------------------
 
-先前引入的[`DDL`](#sqlalchemy.schema.DDL "sqlalchemy.schema.DDL")构造也具有基于对数据库的检查有条件调用的能力。该功能可以使用[`DDLElement.execute_if()`](#sqlalchemy.schema.DDLElement.execute_if "sqlalchemy.schema.DDLElement.execute_if")方法。例如，如果我们想创建一个触发器，但只能在Postgresql后端上，我们可以这样调用它：
+先前引入的[`DDL`](#sqlalchemy.schema.DDL "sqlalchemy.schema.DDL")构造也具有基于对数据库的检查有条件调用的能力。该功能可以使用[`DDLElement.execute_if()`](#sqlalchemy.schema.DDLElement.execute_if "sqlalchemy.schema.DDLElement.execute_if")方法。例如，如果我们想创建一个触发器，但只能在 Postgresql 后端上，我们可以这样调用它：
 
     mytable = Table(
         'mytable', metadata,
@@ -64,7 +64,7 @@ Extension](compiler.html)。
 
 [`DDLElement.execute_if.dialect`](#sqlalchemy.schema.DDLElement.execute_if.params.dialect "sqlalchemy.schema.DDLElement.execute_if")关键字也接受字符串方言名称的元组：
 
-    event.listen(plain
+    event.listen(plainplain
         mytable,
         "after_create",
         trigger.execute_if(dialect=('postgresql', 'mysql'))
@@ -77,7 +77,7 @@ Extension](compiler.html)。
 
 [`DDLElement.execute_if()`](#sqlalchemy.schema.DDLElement.execute_if "sqlalchemy.schema.DDLElement.execute_if")方法也可以用于可接收数据库连接的可调用函数。在下面的例子中，我们使用它来有条件地创建 CHECK 约束，首先在 Postgresql 目录中查看它是否存在：
 
-    def should_create(ddl, target, connection, **kw):plain
+    def should_create(ddl, target, connection, **kw):plainplain
         row = connection.execute(
             "select conname from pg_constraint where conname='%s'" %
             ddl.element.name).scalar()
@@ -152,7 +152,7 @@ will invoke these constructs unconditionally.
 
 我们可以用[`AddConstraint`](#sqlalchemy.schema.AddConstraint "sqlalchemy.schema.AddConstraint")和[`DropConstraint`](#sqlalchemy.schema.DropConstraint "sqlalchemy.schema.DropConstraint")结构来说明一个事件驱动的例子，因为事件驱动系统可以用于 CHECK 和 UNIQUE 约束，像我们在[`DDLElement.execute_if()`](#sqlalchemy.schema.DDLElement.execute_if "sqlalchemy.schema.DDLElement.execute_if")的前一个例子：
 
-    def should_create(ddl, target, connection, **kw):plain
+    def should_create(ddl, target, connection, **kw):plainplain
         row = connection.execute(
             "select conname from pg_constraint where conname='%s'" %
             ddl.element.name).scalar()
@@ -277,7 +277,7 @@ DDL 表达式构造 API [¶](#ddl-expression-constructs-api "Permalink to this h
 *class* `sqlalchemy.schema。`{.descclassname} `DDLElement`{.descname} [¶](#sqlalchemy.schema.DDLElement "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.Executable`](selectable.html#sqlalchemy.sql.expression.Executable "sqlalchemy.sql.expression.Executable")，`sqlalchemy.schema._DDLCompiles`
 
-    DDL表达式构造的基类。plain
+    DDL表达式构造的基类。plainplainplain
 
     This class is the base for the general purpose [`DDL`](#sqlalchemy.schema.DDL "sqlalchemy.schema.DDL") class, as
     well as the various create/drop clause constructs such as
@@ -507,7 +507,7 @@ DDL 表达式构造 API [¶](#ddl-expression-constructs-api "Permalink to this h
  *class*`sqlalchemy.schema.`{.descclassname}`_CreateDropBase`{.descname}(*element*, *on=None*, *bind=None*)[¶](#sqlalchemy.schema._CreateDropBase "Permalink to this definition")
 :   基础：[`sqlalchemy.schema.DDLElement`](#sqlalchemy.schema.DDLElement "sqlalchemy.schema.DDLElement")
 
-    表示CREATE和DROP或等价物的DDL结构的基类。plain
+    表示CREATE和DROP或等价物的DDL结构的基类。plainplain
 
     \_CreateDropBase的常见主题是单个`element`属性，它指向要创建或删除的元素。
 
@@ -660,7 +660,7 @@ DDL 表达式构造 API [¶](#ddl-expression-constructs-api "Permalink to this h
 *class* `sqlalchemy.schema。`{.descclassname} `DropConstraint`{.descname} （ *元素*，*cascade = False*，*\*\* kw* ） [¶](#sqlalchemy.schema.DropConstraint "Permalink to this definition")
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
 
-    表示一个ALTER TABLE DROP CONSTRAINT语句。
+    表示一个ALTER TABLE DROP CONSTRAINT语句。plain
 
 *class* `sqlalchemy.schema。`{.descclassname} `CreateSchema`{.descname} （ *name*，*quote =无*，*\*\* kw* ） [¶](#sqlalchemy.schema.CreateSchema "Permalink to this definition")
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")

@@ -21,7 +21,7 @@ function onto a selectable unit, typically a [`Table`](core_metadata.html#sqlalc
 
 *声明性映射*是在现代 SQLAlchemy 中构建映射的典型方式。利用[Declarative](extensions_declarative_index.html)系统，可以立即定义用户定义类的组件以及该类映射到的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")元数据：
 
-    from sqlalchemy.ext.declarative import declarative_base
+    from sqlalchemy.ext.declarative import declarative_baseplainplain
     from sqlalchemy import Column, Integer, String, ForeignKey
 
     Base = declarative_base()
@@ -36,7 +36,7 @@ function onto a selectable unit, typically a [`Table`](core_metadata.html#sqlalc
 
 以上是四列的基本单表映射。其他属性，例如与其他映射类的关系，也在类定义中内联声明：
 
-    class User(Base):plain
+    class User(Base):plainplain
         __tablename__ = 'user'
 
         id = Column(Integer, primary_key=True)
@@ -87,7 +87,7 @@ A *经典映射*指的是使用[`mapper()`](mapping_api.html#sqlalchemy.orm.mapp
 object, mapped to a class called `Address`, then
 linked to `User` via [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship"):
 
-    address = Table('address', metadata,plain
+    address = Table('address', metadata,plainplainplainplain
                 Column('id', Integer, primary_key=True),
                 Column('user_id', Integer, ForeignKey('user.id')),
                 Column('email_address', String(50))
@@ -110,7 +110,7 @@ linked to `User` via [`relationship()`](relationship_api.html#sqlalchemy.orm.rel
 使用[Runtime Inspection
 API](core_inspection.html)系统，无论使用何种方法，[`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象都可以从任何映射类中获得。使用[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数，可以从映射类获取[`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")：
 
-    >>> from sqlalchemy import inspectplain
+    >>> from sqlalchemy import inspectplainplain
     >>> insp = inspect(User)
 
 详细信息包括[`Mapper.columns`](mapping_api.html#sqlalchemy.orm.mapper.Mapper.columns "sqlalchemy.orm.mapper.Mapper.columns")：
@@ -120,21 +120,21 @@ API](core_inspection.html)系统，无论使用何种方法，[`Mapper`](mapping
 
 这是一个可以以列表格式或通过个人名称查看的名称空间：
 
-    >>> list(insp.columns)
+    >>> list(insp.columns)plainplainplain
     [Column('id', Integer(), table=<user>, primary_key=True, nullable=False), Column('name', String(length=50), table=<user>), Column('fullname', String(length=50), table=<user>), Column('password', String(length=12), table=<user>)]
     >>> insp.columns.name
     Column('name', String(length=50), table=<user>)
 
 其他名称空间包括[`Mapper.all_orm_descriptors`](mapping_api.html#sqlalchemy.orm.mapper.Mapper.all_orm_descriptors "sqlalchemy.orm.mapper.Mapper.all_orm_descriptors")，其中包含所有映射的属性以及混合，关联代理：
 
-    >>> insp.all_orm_descriptorsplain
+    >>> insp.all_orm_descriptorsplainplainplainplainplain
     <sqlalchemy.util._collections.ImmutableProperties object at 0x1040e2c68>
     >>> insp.all_orm_descriptors.keys()
     ['fullname', 'password', 'name', 'id']
 
 以及[`Mapper.column_attrs`](mapping_api.html#sqlalchemy.orm.mapper.Mapper.column_attrs "sqlalchemy.orm.mapper.Mapper.column_attrs")：
 
-    >>> list(insp.column_attrs)
+    >>> list(insp.column_attrs)plainplainplainplain
     [<ColumnProperty at 0x10403fde0; id>, <ColumnProperty at 0x10403fce8; name>, <ColumnProperty at 0x1040e9050; fullname>, <ColumnProperty at 0x1040e9148; password>]
     >>> insp.column_attrs.name
     <ColumnProperty at 0x10403fce8; name>

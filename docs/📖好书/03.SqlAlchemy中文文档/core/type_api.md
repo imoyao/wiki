@@ -268,7 +268,7 @@ tags:
 *class* `sqlalchemy.types。`{.descclassname} `NullType`{.descname} [¶](#sqlalchemy.types.NullType "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeEngine`](#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    一个未知的类型。plain
+    一个未知的类型。plainplain
 
     [`NullType`](#sqlalchemy.types.NullType "sqlalchemy.types.NullType")
     is used as a default type for those cases where a type cannot be
@@ -290,7 +290,7 @@ tags:
  *class*`sqlalchemy.types.`{.descclassname}`Variant`{.descname}(*base*, *mapping*)[¶](#sqlalchemy.types.Variant "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeDecorator`](custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
 
-    一种包装类型，可根据使用的方言在各种实现中进行选择。plain
+    一种包装类型，可根据使用的方言在各种实现中进行选择。plainplain
 
     [`Variant`](#sqlalchemy.types.Variant "sqlalchemy.types.Variant")类型通常使用[`TypeEngine.with_variant()`](#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")方法构造。
 

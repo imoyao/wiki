@@ -113,7 +113,7 @@ States](session_state_management.html#session-object-states)中首次引入的�
 
 或者使用[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")类本身以及特定的[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")，这可能是最有用的形式：
 
-    from sqlalchemy import eventplain
+    from sqlalchemy import eventplainplain
     from sqlalchemy.orm import sessionmaker
 
     maker = sessionmaker()
@@ -141,7 +141,7 @@ the [`InstanceEvents.init()`](events.html#sqlalchemy.orm.events.InstanceEvents.i
 method is probably the best event.
 此事件适用于特定的类或超类。例如，要拦截特定声明基的所有新对象：
 
-    from sqlalchemy.ext.declarative import declarative_base
+    from sqlalchemy.ext.declarative import declarative_baseplain
     from sqlalchemy import event
 
     Base = declarative_base()
@@ -158,7 +158,7 @@ via the [`Session.add()`](session_api.html#sqlalchemy.orm.session.Session.add "s
 or [`Session.add_all()`](session_api.html#sqlalchemy.orm.session.Session.add_all "sqlalchemy.orm.session.Session.add_all")
 method. 一个对象也可能成为[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的一部分，作为[“cascade”](cascades.html#unitofwork-cascades)中显式添加的引用对象的结果。使用[`SessionEvents.transient_to_pending()`](events.html#sqlalchemy.orm.events.SessionEvents.transient_to_pending "sqlalchemy.orm.events.SessionEvents.transient_to_pending")事件可检测到暂挂转换的暂态：
 
-    @event.listens_for(sessionmaker, "transient_to_pending")
+    @event.listens_for(sessionmaker, "transient_to_pending")plainplainplain
     def intercept_transient_to_pending(session, object_):
         print("transient to pending: %s" % object_)
 
@@ -166,7 +166,7 @@ method. 一个对象也可能成为[`Session`](session_api.html#sqlalchemy.orm.s
 
 对于实例，当 flush 和 INSERT 语句发生时，[pending](glossary.html#term-pending)对象变为[persistent](glossary.html#term-persistent)。该对象现在拥有一个身份密钥。使用[`SessionEvents.pending_to_persistent()`](events.html#sqlalchemy.orm.events.SessionEvents.pending_to_persistent "sqlalchemy.orm.events.SessionEvents.pending_to_persistent")事件跟踪挂起持久化：
 
-    @event.listens_for(sessionmaker, "pending_to_persistent")
+    @event.listens_for(sessionmaker, "pending_to_persistent")plain
     def intercept_pending_to_persistent(session, object_):
         print("pending to persistent: %s" % object_)
 
@@ -180,7 +180,7 @@ method is called before the pending object has been flushed, or if the
 method is called for the object before it is flushed.
 使用[`SessionEvents.pending_to_transient()`](events.html#sqlalchemy.orm.events.SessionEvents.pending_to_transient "sqlalchemy.orm.events.SessionEvents.pending_to_transient")事件跟踪挂起到瞬态：
 
-    @event.listens_for(sessionmaker, "pending_to_transient")plain
+    @event.listens_for(sessionmaker, "pending_to_transient")plainplain
     def intercept_pending_to_transient(session, object_):
         print("transient to pending: %s" % object_)
 
@@ -192,7 +192,7 @@ loaded, and is synonomous with using the [`InstanceEvents.load()`](events.html#s
 instance-level event.
 然而，[`SessionEvents.loaded_as_persistent()`](events.html#sqlalchemy.orm.events.SessionEvents.loaded_as_persistent "sqlalchemy.orm.events.SessionEvents.loaded_as_persistent")事件是以会话为中心的钩子提供的，以便在通过此特定途径进入持久状态时拦截对象：
 
-    @event.listens_for(sessionmaker, "loaded_as_persistent")plain
+    @event.listens_for(sessionmaker, "loaded_as_persistent")plainplainplainplain
     def intercept_loaded_as_persistent(session, object_):
         print("object loaded into persistent state: %s" % object_)
 
@@ -200,7 +200,7 @@ instance-level event.
 
 如果为对象首次添加为待处理的事务调用[`Session.rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")方法，持久对象可以恢复到瞬态状态。在 ROLLBACK 的情况下，使该对象持久化的 INSERT 语句被回滚，并且该对象从[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")被逐出以再次变为瞬态。使用[`SessionEvents.persistent_to_transient()`](events.html#sqlalchemy.orm.events.SessionEvents.persistent_to_transient "sqlalchemy.orm.events.SessionEvents.persistent_to_transient")事件挂钩跟踪从持久性恢复为瞬态的对象：
 
-    @event.listens_for(sessionmaker, "persistent_to_transient")plain
+    @event.listens_for(sessionmaker, "persistent_to_transient")plainplainplain
     def intercept_persistent_to_transient(session, object_):
         print("persistent to transient: %s" % object_)
 
@@ -214,7 +214,7 @@ instance-level event.
 
 使用[`SessionEvents.persistent_to_deleted()`](events.html#sqlalchemy.orm.events.SessionEvents.persistent_to_deleted "sqlalchemy.orm.events.SessionEvents.persistent_to_deleted")跟踪永久删除的转换：
 
-    @event.listens_for(sessionmaker, "persistent_to_deleted")plain
+    @event.listens_for(sessionmaker, "persistent_to_deleted")plainplainplainplain
     def intercept_persistent_to_deleted(session, object_):
         print("object was DELETEd, is now in deleted state: %s" % object_)
 
@@ -245,7 +245,7 @@ methods.
 
 使用[`SessionEvents.persistent_to_detached()`](events.html#sqlalchemy.orm.events.SessionEvents.persistent_to_detached "sqlalchemy.orm.events.SessionEvents.persistent_to_detached")事件跟踪从持久移动到分离的对象：
 
-    @event.listens_for(sessionmaker, "persistent_to_detached")
+    @event.listens_for(sessionmaker, "persistent_to_detached")plainplain
     def intecept_persistent_to_detached(session, object_):
         print("object became detached: %s" % object_)
 
@@ -253,7 +253,7 @@ methods.
 
 使用[`Session.add()`](session_api.html#sqlalchemy.orm.session.Session.add "sqlalchemy.orm.session.Session.add")或等效方法将分离对象重新关联到会话时，分离的对象将变为持久对象。使用[`SessionEvents.detached_to_persistent()`](events.html#sqlalchemy.orm.events.SessionEvents.detached_to_persistent "sqlalchemy.orm.events.SessionEvents.detached_to_persistent")事件跟踪从分离状态回到持久性状态的对象：
 
-    @event.listens_for(sessionmaker, "detached_to_persistent")
+    @event.listens_for(sessionmaker, "detached_to_persistent")plainplain
     def intecept_detached_to_persistent(session, object_):
         print("object became persistent again: %s" % object_)
 
@@ -261,7 +261,7 @@ methods.
 
 当使用[`Session.rollback()`](session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")方法回退已删除 DELETEd 的事务时，[deleted](glossary.html#term-deleted)对象可以恢复为[persistent](glossary.html#term-persistent)状态。使用[`SessionEvents.deleted_to_persistent()`](events.html#sqlalchemy.orm.events.SessionEvents.deleted_to_persistent "sqlalchemy.orm.events.SessionEvents.deleted_to_persistent")事件跟踪已移回到持久状态的已删除对象：
 
-    @event.listens_for(sessionmaker, "transient_to_pending")
+    @event.listens_for(sessionmaker, "transient_to_pending")plain
     def intercept_transient_to_pending(session, object_):
         print("transient to pending: %s" % object_)
 
