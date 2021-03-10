@@ -654,7 +654,7 @@ tags:
     constructs will now interpret ORM entities as target tables to be
     operated upon, e.g.:
 
-        from sqlalchemy import insert, update, deleteplainplain
+        from sqlalchemy import insert, update, deleteplain
 
         ins = insert(SomeMappedClass).values(x=5)
 
@@ -1666,7 +1666,7 @@ tags:
     construct without it interfering with the entities being selected.
     基本上，这样的陈述：
 
-        ua = aliased(User)plainplain
+        ua = aliased(User)
         session.query(User.name).select_from(ua).join(User, User.name > ua.name)
 
     将保持 SELECT 的列子句作为来自未指定的“用户”，如指定的那样；
@@ -1677,12 +1677,12 @@ tags:
 
     请注意，此行为与[`Query.select_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")的原始较旧用例形成对比，这是使用不同的可选项重新表示映射实体的情况：
 
-        session.query(User.name).\plainplainplainplainplain
+        session.query(User.name).\plain
           select_from(user_table.select().where(user_table.c.id > 5))
 
     其中产生：
 
-        SELECT anon_1.name AS anon_1_name FROM (SELECT users.id AS id,plainplainplainplainplain
+        SELECT anon_1.name AS anon_1_name FROM (SELECT users.id AS id,plain
         users.name AS name FROM users WHERE users.id > :id_1) AS anon_1
 
     后一个用例的“别名”行为阻碍了前一个用例。该方法现在特别考虑像[`expression.select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")或[`expression.alias()`](core_selectable.html#sqlalchemy.sql.expression.alias "sqlalchemy.sql.expression.alias")这样的 SQL 表达式，与像[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")
@@ -1730,7 +1730,7 @@ tags:
     method can be called on the returned connection without affecting
     the original. 在使用[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")和[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象作为上下文管理器时允许对称：
 
-        with conn.connect() as c: # leaves the Connection openplainplainplainplainplainplain
+        with conn.connect() as c: # leaves the Connection open
           c.execute("...")
 
         with engine.connect() as c:  # closes the Connection
@@ -1806,7 +1806,7 @@ tags:
     in some cases won’t get in the way of this comparison.
     以前，表达式如下所示：
 
-        expr1 = mycolumn > 2plainplainplain
+        expr1 = mycolumn > 2
         bool(expr1 == expr1)
 
     Would evaluate as `False`, even though this is

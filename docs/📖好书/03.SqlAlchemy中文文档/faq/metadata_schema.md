@@ -25,7 +25,7 @@ MetaData / Schema [¶](#metadata-schema "Permalink to this headline")
 
 这通常对应于两个条件：1.使用对表锁确实严格的 PostgreSQL，以及 2.您的连接仍处于打开状态，其中包含表中的锁，并且与用于 DROP 语句的连接不同。下面是最小版本的模式：
 
-    connection = engine.connect()plainplainplain
+    connection = engine.connect()
     result = connection.execute(mytable.select())
 
     mytable.drop(engine)
@@ -37,7 +37,7 @@ TABLE，该连接将被锁定。
 
 解决方法是在发出 DROP TABLE 之前关闭所有连接：
 
-    connection = engine.connect()plainplainplainplainplain
+    connection = engine.connect()
     result = connection.execute(mytable.select())
 
     # fully read result sets
@@ -63,7 +63,7 @@ Migrations](core_metadata.html#schema-migrations)以便进行讨论。
 
 这可以通过[`MetaData.sorted_tables`](core_metadata.html#sqlalchemy.schema.MetaData.sorted_tables "sqlalchemy.schema.MetaData.sorted_tables")函数使用：
 
-    metadata = MetaData()plainplainplain
+    metadata = MetaData()plain
     # ... add Table objects to metadata
     ti = metadata.sorted_tables:
     for t in ti:
@@ -74,17 +74,17 @@ Migrations](core_metadata.html#schema-migrations)以便进行讨论。
 
 现代 SQLAlchemy 具有代表 DDL 操作的子句结构。这些可以像任何其他 SQL 表达式一样呈现为字符串：
 
-    from sqlalchemy.schema import CreateTableplainplainplain
+    from sqlalchemy.schema import CreateTableplain
 
     print(CreateTable(mytable))
 
 要获取特定于某个引擎的字符串：
 
-    print(CreateTable(mytable).compile(engine))plainplain
+    print(CreateTable(mytable).compile(engine))plain
 
 还有一种特殊的[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")形式，可以让您使用以下配方转储整个元数据创建序列：
 
-    def dump(sql, *multiparams, **params):plainplainplainplainplainplainplainplain
+    def dump(sql, *multiparams, **params):
         print(sql.compile(dialect=engine.dialect))
     engine = create_engine('postgresql://', strategy='mock', executor=dump)
     metadata.create_all(engine, checkfirst=False)

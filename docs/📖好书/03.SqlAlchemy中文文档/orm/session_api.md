@@ -126,7 +126,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
  *class*`sqlalchemy.orm.session.`{.descclassname}`Session`{.descname}(*bind=None*, *autoflush=True*, *expire\_on\_commit=True*, *\_enable\_transaction\_accounting=True*, *autocommit=False*, *twophase=False*, *weak\_identity\_map=True*, *binds=None*, *extension=None*, *info=None*, *query\_cls=\<class 'sqlalchemy.orm.query.Query'\>*)[¶](#sqlalchemy.orm.session.Session "Permalink to this definition")
 :   基础：`sqlalchemy.orm.session._SessionClassMethods`
 
-    管理ORM映射对象的持久性操作。plainplain
+    管理ORM映射对象的持久性操作。plain
 
     会话的使用范例在[*Using the Session*](session.html)中描述。
 
@@ -1097,7 +1097,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
 ` sqlalchemy.orm.session。 T0>  make_transient  T1> （ T2> 实例 T3> ） T4> ¶< / T5>`{.descclassname}
 :   改变给定实例的状态，使其[transient](glossary.html#term-transient)。
 
-    注意
+    注意plain
 
     [`make_transient()`](#sqlalchemy.orm.session.make_transient "sqlalchemy.orm.session.make_transient")仅是高级用例的特例函数。
 
@@ -1204,7 +1204,7 @@ Events*](events.html)中描述的那些函数。
  `sqlalchemy.orm.attributes.`{.descclassname}`init_collection`{.descname}(*obj*, *key*)[¶](#sqlalchemy.orm.attributes.init_collection "Permalink to this definition")
 :   初始化集合属性并返回集合适配器。
 
-    此函数用于提供直接访问以前卸载的属性的集合内部信息。例如。：
+    此函数用于提供直接访问以前卸载的属性的集合内部信息。例如。：plain
 
         collection_adapter = init_collection(someobject, 'elements')
         for elem in values:
@@ -1225,7 +1225,7 @@ Events*](events.html)中描述的那些函数。
     该函数是[`object_state()`](#sqlalchemy.orm.util.object_state "sqlalchemy.orm.util.object_state")的内部版本。[`object_state()`](#sqlalchemy.orm.util.object_state "sqlalchemy.orm.util.object_state")和/或[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数在这里是首选的，因为如果给定的对象未被映射，它们每个都会发出信息异常。
 
  `sqlalchemy.orm.instrumentation.`{.descclassname}`is_instrumented`{.descname}(*instance*, *key*)[¶](#sqlalchemy.orm.instrumentation.is_instrumented "Permalink to this definition")
-:   如果给定实例的给定属性由属性包进行检测，则返回True。
+:   如果给定实例的给定属性由属性包进行检测，则返回 True。
 
     无论直接应用于该类的仪器如何，都可以使用该函数，即不需要描述符。plain
 
@@ -1244,7 +1244,7 @@ Events*](events.html)中描述的那些函数。
 *class* `sqlalchemy.orm.attributes。`{.descclassname} `历史记录`{.descname} [¶](#sqlalchemy.orm.attributes.History "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.attributes.History`](#sqlalchemy.orm.attributes.History "sqlalchemy.orm.attributes.History")
 
-    已添加，未更改和已删除值的三元组，表示在已检测属性上发生的更改。plain
+    已添加，未更改和已删除值的三元组，表示在已检测属性上发生的更改。
 
     为对象的特定属性获取[`History`](#sqlalchemy.orm.attributes.History "sqlalchemy.orm.attributes.History")对象的最简单方法是使用[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数：
 

@@ -38,7 +38,7 @@ Caching](examples.html#examples-caching)中提供了一种演示 SQL 调用和�
 
 面包店允许我们建立一个[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象，方法是将其构造指定为一系列 Python 可调用对象，通常是 lambda 表达式。为简洁起见，它会覆盖`+=`运算符，以便典型的查询构建如下所示：
 
-    from sqlalchemy import bindparamplain
+    from sqlalchemy import bindparam
 
     def search_for_user(session, username, email=None):
 
@@ -87,7 +87,7 @@ Caching](examples.html#examples-caching)中提供了一种演示 SQL 调用和�
 
 与同等的“烘焙”查询相比：
 
-    bakery = baked.bakery()plainplainplainplainplain
+    bakery = baked.bakery()
     s = Session(bind=engine)
     for id_ in random.sample(ids, n):
         q = bakery(lambda s: s.query(Customer))
@@ -104,7 +104,7 @@ Caching](examples.html#examples-caching)中提供了一种演示 SQL 调用和�
 
 就功能强大的笔记本电脑而言，这个数字表示为：
 
-    test_baked_query : test a baked query of the full entity.plainplain
+    test_baked_query : test a baked query of the full entity.
                        (10000 iterations); total time 2.174126 sec
 
     test_orm_query :   test a straight ORM query of the full entity.
@@ -121,7 +121,7 @@ Caching](examples.html#examples-caching)中提供了一种演示 SQL 调用和�
 
 上面的“lambda”方法是更传统的“参数化”方法的超集。假设我们希望构建一个简单的系统，我们只需构建一次[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")，然后将其存储在字典中供重复使用。这可以通过构建查询并通过调用`my_cached_query = query.with_session来移除Session` （无） T6\> T3\>：
 
-    my_simple_cache = {}
+    my_simple_cache = {}plain
 
     def lookup(session, id_argument):
         if "my_key" not in my_simple_cache:
@@ -140,7 +140,7 @@ assume we adapted the recipe in this way and made ourselves a method
 producing a new object that can be invoked with minimal overhead.
 我们的例子变成：
 
-    my_simple_cache = {}plain
+    my_simple_cache = {}
 
     def lookup(session, id_argument):
 
@@ -156,7 +156,7 @@ producing a new object that can be invoked with minimal overhead.
 
 我们可以使用“面包店”的方法来重新构建上述方法，这种方式看起来比“构建 lambda”方法更不寻常，更像是对简单的“重用查询”方法的简单改进：
 
-    bakery = baked.bakery()plain
+    bakery = baked.bakery()
 
     def lookup(session, id_argument):
         def create_model_query(session):
@@ -169,7 +169,7 @@ producing a new object that can be invoked with minimal overhead.
 
 从以上所述，如果我们问自己，“如果查询需要对查询结构做出条件性决定会怎样？”，这就是希望变得明显，为什么“烘焙”就是这样。我们可以从*中的任意数量的*函数构建它，而不是从一个函数构建参数化查询（这是我们认为烘焙最初可能工作的方式）。考虑我们的天真示例，如果我们需要在条件基础上在查询中添加附加子句：
 
-    my_simple_cache = {}plain
+    my_simple_cache = {}
 
     def lookup(session, id_argument, include_frobnizzle=False):
         if include_frobnizzle:
@@ -243,7 +243,7 @@ producing a new object that can be invoked with minimal overhead.
 
 对于每个查询使用，可以使用[`baked_lazyload()`](#sqlalchemy.ext.baked.baked_lazyload "sqlalchemy.ext.baked.baked_lazyload")策略，该策略与任何其他加载程序选项一样。
 
-### 选择与 bake\_queries标志[¶](#opting-out-with-the-bake-queries-flag "Permalink to this headline")
+### 选择与 bake\_queries 标志[¶](#opting-out-with-the-bake-queries-flag "Permalink to this headline")
 
 [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构包含一个标志[`relationship.bake_queries`](relationship_api.html#sqlalchemy.orm.relationship.params.bake_queries "sqlalchemy.orm.relationship")，当设置为 False 时，会导致该关系退出烘焙查询系统，当应用程序范围[`bake_lazy_loaders()`](#sqlalchemy.ext.baked.bake_lazy_loaders "sqlalchemy.ext.baked.bake_lazy_loaders")函数来启用烘焙查询加载器。
 
@@ -256,7 +256,7 @@ API 文档[¶](#api-documentation "Permalink to this headline")
 *class* `sqlalchemy.ext.baked。`{.descclassname} `BakedQuery`{.descname} （ *面包店*，*initial\_fn*，*args =()* ） [¶](#sqlalchemy.ext.baked.BakedQuery "Permalink to this definition")
 :   [`query.Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象的构建器对象。
 
-    `add_criteria`{.descname} （ *fn*，*\* args* ） [](#sqlalchemy.ext.baked.BakedQuery.add_criteria "Permalink to this definition")plain
+    `add_criteria`{.descname} （ *fn*，*\* args* ） [](#sqlalchemy.ext.baked.BakedQuery.add_criteria "Permalink to this definition")
     :   将标准函数添加到此[`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")中。
 
         这相当于使用`+=`运算符就地修改[`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")。
@@ -294,7 +294,7 @@ API 文档[¶](#api-documentation "Permalink to this headline")
  *class*`sqlalchemy.ext.baked.`{.descclassname}`Result`{.descname}(*bq*, *session*)[¶](#sqlalchemy.ext.baked.Result "Permalink to this definition")
 :   针对[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")调用[`BakedQuery`](#sqlalchemy.ext.baked.BakedQuery "sqlalchemy.ext.baked.BakedQuery")。
 
-    [`Result`](#sqlalchemy.ext.baked.Result "sqlalchemy.ext.baked.Result")对象是实际的[`query.Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象被创建或从缓存中检索，针对目标[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，然后被调用为结果。
+    [`Result`](#sqlalchemy.ext.baked.Result "sqlalchemy.ext.baked.Result")对象是实际的[`query.Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象被创建或从缓存中检索，针对目标[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")，然后被调用为结果。plain
 
     `所有 T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   返回所有行。
@@ -329,12 +329,12 @@ API 文档[¶](#api-documentation "Permalink to this headline")
 `sqlalchemy.ext.baked。 T0>  bake_lazy_loaders  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
 :   为全系统的所有 lazyloaders 启用烘焙查询。
 
-    这个操作对于所有懒惰的加载器应该是安全的，并且会减少这些操作的Python开销。plainplain
+    这个操作对于所有懒惰的加载器应该是安全的，并且会减少这些操作的Python开销。
 
 `sqlalchemy.ext.baked。 T0>  unbake_lazy_loaders  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
 :   禁止在系统范围内为所有 lazyloaders 使用烘焙查询。
 
-    该操作将恢复[`bake_lazy_loaders()`](#sqlalchemy.ext.baked.bake_lazy_loaders "sqlalchemy.ext.baked.bake_lazy_loaders")产生的更改。plainplain
+    该操作将恢复[`bake_lazy_loaders()`](#sqlalchemy.ext.baked.bake_lazy_loaders "sqlalchemy.ext.baked.bake_lazy_loaders")产生的更改。plain
 
 `sqlalchemy.ext.baked。 T0>  baked_lazyload  T1> （ T2>  *键 T3> ） T4> ¶  T5>`{.descclassname}
 :   指示应该使用加载中使用的“烘焙”查询使用“延迟”加载来加载给定属性。
@@ -342,7 +342,7 @@ API 文档[¶](#api-documentation "Permalink to this headline")
 `sqlalchemy.ext.baked。 T0>  baked_lazyload_all  T1> （ T2>  *键 T3> ） T4> ¶  T5>`{.descclassname}
 :   为`orm.baked_lazyload()`生成一个独立的“全部”选项。
 
-    从版本0.9.0开始弃用：“\_all()”样式被方法链接取代，例如：plainplain
+    从版本0.9.0开始弃用：“\_all()”样式被方法链接取代，例如：plain
 
         session.query(MyClass).options(
             baked_lazyload("someattribute").baked_lazyload("anotherattribute")

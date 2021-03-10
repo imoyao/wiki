@@ -78,7 +78,7 @@ SQLAlchemy 目前假定 DBAPI 连接处于“非自动提交”模式 -
 
 连接池的连接返回行为的行为可以使用`reset_on_return`进行配置：
 
-    from sqlalchemy import create_engineplainplainplain
+    from sqlalchemy import create_engineplain
     from sqlalchemy.pool import QueuePool
 
     engine = create_engine('mysql://scott:tiger@localhost/myisam_database', pool=QueuePool(reset_on_return=False))
@@ -87,7 +87,7 @@ SQLAlchemy 目前假定 DBAPI 连接处于“非自动提交”模式 -
 
 除了`True`，`False`以外，`reset_on_return`还接受`commit`，`rollback` `None`设置为`commit`会导致 COMMIT，因为任何连接都会返回到池：
 
-    engine = create_engine('mssql://scott:tiger@mydsn', pool=QueuePool(reset_on_return='commit'))plainplainplainplain
+    engine = create_engine('mssql://scott:tiger@mydsn', pool=QueuePool(reset_on_return='commit'))plain
 
 I am using multiple connections with a SQLite database (typically to test transaction operation), and my test program is not working![¶](#i-am-using-multiple-connections-with-a-sqlite-database-typically-to-test-transaction-operation-and-my-test-program-is-not-working "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -115,7 +115,7 @@ PySQLite’s behavior.
 
 作为还原设置的替代方法，您可以在[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")或代理连接上调用[`Connection.detach()`](core_connections.html#sqlalchemy.engine.Connection.detach "sqlalchemy.engine.Connection.detach")方法，该方法将从池中断开连接当[`Connection.close()`](core_connections.html#sqlalchemy.engine.Connection.close "sqlalchemy.engine.Connection.close")被调用时它将被关闭并丢弃：
 
-    conn = engine.connect()plainplainplainplain
+    conn = engine.connect()plain
     conn.detach()  # detaches the DBAPI connection from the connection pool
     conn.connection.<go nuts>
     conn.close()  # connection is closed for real, the pool replaces it with a new connection
@@ -168,7 +168,7 @@ SQLAlchemy [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy
                         (connection_record.info['pid'], pid)
                     )
 ```
-    这些事件一旦创建就会应用于[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")：plainplainplainplainplain
+    这些事件一旦创建就会应用于[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")：plain
 ```plain
         engine = create_engine("...")
 

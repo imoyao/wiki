@@ -24,7 +24,7 @@ SQLAlchemy 0.4 有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-4 "Permalin
 
 如果您使用任何 ORM 功能，请确保从`sqlalchemy.orm`导入：
 
-    from sqlalchemy import *
+    from sqlalchemy import *plain
     from sqlalchemy.orm import *
 
 Secondly, anywhere you used to say `engine=`,
@@ -53,14 +53,14 @@ of sqlachemy’s sub-modules into your namespace.
 
 在 0.3 中，此代码起作用：
 
-    from sqlalchemy import *
+    from sqlalchemy import *plain
 
     class UTCDateTime(types.TypeDecorator):
         pass
 
 在 0.4 中，必须这样做：
 
-    from sqlalchemy import *plainplain
+    from sqlalchemy import *plain
     from sqlalchemy import types
 
     class UTCDateTime(types.TypeDecorator):
@@ -85,7 +85,7 @@ User.query.get\_by（\*\* kwargs）
 
 User.query.select\_by（\*\* kwargs）
 
-    User.query.filter_by(**kwargs).all()
+    User.query.filter_by(**kwargs).all()plain
 
 User.query.select()
 
@@ -95,11 +95,11 @@ User.query.select()
 
 到目前为止，ORM 中最明显的差异是，您现在可以直接使用基于类的属性构建查询条件。使用映射类时，不再需要“.c。”前缀：
 
-    session.query(User).filter(and_(User.name == 'fred', User.id > 17))
+    session.query(User).filter(and_(User.name == 'fred', User.id > 17))plain
 
 尽管简单的基于列的比较没有什么大不了，但类属性有一些新的“更高级别”结构可用，包括以前仅在`filter_by()`中可用的结构：
 
-    # comparison of scalar relations to an instance
+    # comparison of scalar relations to an instanceplain
     filter(Address.user == user)
 
     # return all users who contain a particular address
@@ -133,13 +133,13 @@ User.query.select()
 
 现在你可以别名了：
 
-    session.query(Order).join('items', aliased=True).
+    session.query(Order).join('items', aliased=True).plain
        filter(Item.name='item 1').join('items', aliased=True).filter(Item.name=='item 3')
 
 以上将使用别名从订单 -
 \>项目创建两个连接。每个后面的`filter()`调用都会将其表格标准调整为别名标准。要获取`Item`对象，请使用`add_entity()`并使用`id`定位每个连接：
 
-    session.query(Order).join('items', id='j1', aliased=True).plain
+    session.query(Order).join('items', id='j1', aliased=True).
     filter(Item.name == 'item 1').join('items', aliased=True, id='j2').
     filter(Item.name == 'item 3').add_entity(Item, id='j1').add_entity(Item, id='j2')
 
@@ -178,7 +178,7 @@ User.query.select()
 
 `query.load()`（或`session.refresh()`）的热切版本。如果已经存在于会话中，则从查询加载的每个实例（包括所有急切加载的项目）都会立即刷新：
 
-    session.query(Blah).populate_existing().all()plain
+    session.query(Blah).populate_existing().all()
 
 ### 关系[¶ T0\>](#relations "Permalink to this headline")
 
@@ -186,7 +186,7 @@ User.query.select()
 
 对于在`flush()`期间嵌入式执行 SQL 子句，直接嵌入 UPDATE 或 INSERT 中：
 
-    myobject.foo = mytable.c.value + 1plain
+    myobject.foo = mytable.c.value + 1
 
     user.pwhash = func.md5(password)
 
@@ -198,7 +198,7 @@ User.query.select()
 
 由于我们的 alias-fu 已经改进，所以`relation()`可以沿同一个表加入\*任意次数\*；你告诉它你想走多深。让我们更清楚地显示自引用的`TreeNode`：
 
-    nodes = Table('nodes', metadata,
+    nodes = Table('nodes', metadata,plain
          Column('id', Integer, primary_key=True),
          Column('parent_id', Integer, ForeignKey('nodes.id')),
          Column('name', String(30)))
@@ -216,7 +216,7 @@ User.query.select()
 
 ? 沿着别名进行连接，从父母那里深入三级：
 
-    SELECTplain
+    SELECT
     nodes_3.id AS nodes_3_id, nodes_3.parent_id AS nodes_3_parent_id, nodes_3.name AS nodes_3_name,
     nodes_2.id AS nodes_2_id, nodes_2.parent_id AS nodes_2_parent_id, nodes_2.name AS nodes_2_name,
     nodes_1.id AS nodes_1_id, nodes_1.parent_id AS nodes_1_parent_id, nodes_1.name AS nodes_1_name,
@@ -278,7 +278,7 @@ User.query.select()
 
 如果您想定义映射属性在表达式中使用时生成 SQL 子句的方式，请创建您自己的`sqlalchemy.orm.PropComparator`子类，定义任何常用运算符（如`__eq__()`，`__le__()`等），并将它发送到`composite()`。复合类型也可以作为主键，并可用于`query.get()`中：
 
-    # a Document class which uses a composite Version
+    # a Document class which uses a composite Versionplain
     # object as primary key
     document = query.get(Version(1, 'a'))
 
@@ -302,7 +302,7 @@ User.query.select()
 
 #### 新选项：`undefer_group()`，`eagerload_all()` [¶](#new-options-undefer-group-eagerload-all "Permalink to this headline")
 
-一些方便的查询选项。`undefer_group()`将一组“延迟”列标记为undeferred：
+一些方便的查询选项。`undefer_group()`将一组“延迟”列标记为 undeferred：
 
     mapper(Class, table, properties={
         'foo' : deferred(table.c.foo, group='group1'),
@@ -314,7 +314,7 @@ User.query.select()
 
 和`eagerload_all()`设置一个属性链，以便在一次传递中保持渴望：
 
-    mapper(Foo, foo_table, properties={
+    mapper(Foo, foo_table, properties={plain
        'bar':relation(Bar)
     })
     mapper(Bar, bar_table, properties={
@@ -355,7 +355,7 @@ types cover many needs:
 
 一个典型的查询如下所示：
 
-    SELECT (SELECT count(1) FROM posts WHERE users.id = posts.user_id) AS count,
+    SELECT (SELECT count(1) FROM posts WHERE users.id = posts.user_id) AS count,plain
     users.firstname || users.lastname AS fullname,
     users.id AS users_id, users.firstname AS users_firstname, users.lastname AS users_lastname
     FROM users ORDER BY users.oid
@@ -373,7 +373,7 @@ types cover many needs:
 
 在您定义`engine`（或任何地方）的位置配置您自己的`Session`类：
 
-    from sqlalchemy import create_engineplainplain
+    from sqlalchemy import create_engineplain
     from sqlalchemy.orm import sessionmaker
 
     engine = create_engine('myengine://')
@@ -386,7 +386,7 @@ types cover many needs:
 
 如果您需要后期配置会话，请使用引擎进行配置，稍后使用`configure()`添加它：
 
-    Session.configure(bind=create_engine(...))
+    Session.configure(bind=create_engine(...))plain
 
 All the behaviors of `SessionContext` and the
 `query` and `__init__` methods
@@ -411,9 +411,9 @@ with both `sessionmaker` as well as
     sess2 = Session()
     assert sess is sess2
 
-当使用线程本地的`Session`时，返回的类将所有`Session's`接口实现为classmethods，并且“assignmapper”的功能可以使用`mapper`就像旧的`objectstore`天……
+当使用线程本地的`Session`时，返回的类将所有`Session's`接口实现为 classmethods，并且“assignmapper”的功能可以使用`mapper`就像旧的`objectstore`天……
 
-    # "assignmapper"-like functionality available via ScopedSession.mapper
+    # "assignmapper"-like functionality available via ScopedSession.mapperplain
     Session.mapper(User, users_table)
 
     u = User(name='wendy')
@@ -422,7 +422,7 @@ with both `sessionmaker` as well as
 
 #### 会话再次默认为弱引用[¶](#sessions-are-again-weak-referencing-by-default "Permalink to this headline")
 
-默认情况下，Session 中的 weak\_identity\_map 标志现在设置为`True`。自动从会话中删除外部推断和超出范围的实例。但是，存在“脏”变化的项目将保持强引用状态，直到这些变化被刷新为止，此时对象将恢复为弱引用（这对'可变'类型也适用，如可选属性）。将weak\_identity\_map 设置为`False`为使用会话的用户恢复旧的强引用行为，如缓存。
+默认情况下，Session 中的 weak\_identity\_map 标志现在设置为`True`。自动从会话中删除外部推断和超出范围的实例。但是，存在“脏”变化的项目将保持强引用状态，直到这些变化被刷新为止，此时对象将恢复为弱引用（这对'可变'类型也适用，如可选属性）。将 weak\_identity\_map 设置为`False`为使用会话的用户恢复旧的强引用行为，如缓存。
 
 #### 自动事务会话[¶](#auto-transactional-sessions "Permalink to this headline")
 
@@ -447,7 +447,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
 `commit()`和`rollback()`，以及`begin()`现在直接在`Session`上。不需要为任何事情使用`SessionTransaction`（它仍然在后台）。
 
-    Session = sessionmaker(autoflush=True, transactional=False)plain
+    Session = sessionmaker(autoflush=True, transactional=False)
 
     sess = Session()
     sess.begin()
@@ -458,7 +458,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
 与封闭的引擎级别（即非 ORM）事务共享`Session`非常简单：
 
-    Session = sessionmaker(autoflush=True, transactional=False)plain
+    Session = sessionmaker(autoflush=True, transactional=False)
 
     conn = engine.connect()
     trans = conn.begin()
@@ -526,7 +526,7 @@ lalchemy.org/docs/04/sqlexpression.html\#sql\_operators
 
 就像它说的那样：
 
-    b = bindparam('foo', type_=String)plain
+    b = bindparam('foo', type_=String)
 
 ### in\_函数更改为接受序列或可选[¶](#in-function-changed-to-accept-sequence-or-selectable "Permalink to this headline")
 
@@ -537,7 +537,7 @@ in\_函数现在将一系列值或可选值作为其唯一参数。以前传入�
 
 应改为
 
-    my_table.select(my_table.c.id.in_([1,2,3])plainplain
+    my_table.select(my_table.c.id.in_([1,2,3])
     my_table.select(my_table.c.id.in_(listOfIds)
 
 架构和反思[¶](#schema-and-reflection "Permalink to this headline")
@@ -547,7 +547,7 @@ in\_函数现在将一系列值或可选值作为其唯一参数。以前传入�
 
 在 0.3.x 系列中，不赞成使用`MetaData`和`ThreadLocalMetaData`的`BoundMetaData`和`DynamicMetaData`。0.4 的旧名称已被删除。更新很简单：
 
-    +-------------------------------------+-------------------------+
+    +-------------------------------------+-------------------------+plain
     |If You Had                           | Now Use                 |
     +=====================================+=========================+
     | ``MetaData``                        | ``MetaData``            |
@@ -591,7 +591,7 @@ SQL 执行[¶](#sql-execution "Permalink to this headline")
 
 ### Oracle 的输出参数[¶](#out-parameters-for-oracle "Permalink to this headline")
 
-    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)plain
+    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)
     assert result.out_parameters == {'y':10, 'z':75}
 
 ### 连接绑定`MetaData`，`Sessions` [¶](#connection-bound-metadata-sessions "Permalink to this headline")
@@ -599,7 +599,7 @@ SQL 执行[¶](#sql-execution "Permalink to this headline")
 `MetaData` and `Session` can be
 explicitly bound to a connection:
 
-    conn = engine.connect()
+    conn = engine.connect()plain
     sess = create_session(bind=conn)
 
 ### 更快，更安全`ResultProxy`对象[¶](#faster-more-foolproof-resultproxy-objects "Permalink to this headline")

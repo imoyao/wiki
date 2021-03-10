@@ -35,16 +35,16 @@ SQLAlchemy 0.6 中有什么新东西？[¶](#what-s-new-in-sqlalchemy-0-6 "Perma
 现在，方言模块在单个数据库后端的范围内分解为不同的子组件。方言实现现在位于`sqlalchemy.dialects`包中。`sqlalchemy.databases`包依然以占位符的形式存在，为简单的导入提供一定程度的后向兼容性。
 
 对于每个受支持的数据库，在包含多个文件的`sqlalchemy.dialects`中存在一个子包。每个软件包都包含一个称为`base.py`的模块，该模块定义该数据库使用的特定 SQL 方言。它还包含一个或多个“驱动程序”模块，每个模块对应于特定的 DBAPI
-- 这些文件被命名为与 DBAPI 本身相对应，如`pysqlite`，`cx_oracle`或`pyodbc`SQLAlchemy方言使用的类首先在`base.py`模块中声明，定义数据库定义的所有行为特征。这些包括能力映射，如“支持序列”，“支持返回”等，类型定义和 SQL 编译规则。每个“驱动程序”模块依次提供这些类的子类，以覆盖默认行为以适应该 DBAPI 的附加功能，行为和怪癖。对于支持多个后端（pyodbc，zxJDBC，mxODBC）的 DBAPI，方言模块将使用来自`sqlalchemy.connectors`包的 mixins，它提供了所有后端通用的 DBAPI 功能，通常涉及 connect 参数。这意味着使用 pyodbc，zxJDBC 或 mxODBC 进行连接（实现时）在支持的后端之间非常一致。
+- 这些文件被命名为与 DBAPI 本身相对应，如`pysqlite`，`cx_oracle`或`pyodbc`SQLAlchemy 方言使用的类首先在`base.py`模块中声明，定义数据库定义的所有行为特征。这些包括能力映射，如“支持序列”，“支持返回”等，类型定义和 SQL 编译规则。每个“驱动程序”模块依次提供这些类的子类，以覆盖默认行为以适应该 DBAPI 的附加功能，行为和怪癖。对于支持多个后端（pyodbc，zxJDBC，mxODBC）的 DBAPI，方言模块将使用来自`sqlalchemy.connectors`包的 mixins，它提供了所有后端通用的 DBAPI 功能，通常涉及 connect 参数。这意味着使用 pyodbc，zxJDBC 或 mxODBC 进行连接（实现时）在支持的后端之间非常一致。
 
 由`create_engine()`使用的 URL 格式已得到增强，可以使用受 JDBC 启发的方案来处理特定后端的任意数量的 DBAPI。以前的格式仍然有效，并且会选择一个“默认的”DBAPI 实现，比如下面的 Postgresql
 URL，它将使用 psycopg2：
 
-    create_engine('postgresql://scott:tiger@localhost/test')plain
+    create_engine('postgresql://scott:tiger@localhost/test')
 
 但是，要指定特定的 DBAPI 后端（例如 pg8000），请使用加号“+”将其添加到 URL 的“协议”部分中：
 
-    create_engine('postgresql+pg8000://scott:tiger@localhost/test')plainplain
+    create_engine('postgresql+pg8000://scott:tiger@localhost/test')plain
 
 重要的方言链接：
 
@@ -80,30 +80,30 @@ URL，它将使用 psycopg2：
 表达式语言变化[¶](#expression-language-changes "Permalink to this headline")
 ----------------------------------------------------------------------------
 
-### 重要的表达语言Gotcha [¶](#an-important-expression-language-gotcha "Permalink to this headline")
+### 重要的表达语言 Gotcha [¶](#an-important-expression-language-gotcha "Permalink to this headline")
 
 对于可能影响某些应用程序的表达式语言，有一个非常重要的行为变化。Python 布尔表达式的布尔值，即`==`，`!=`以及类似的，现在可以精确地评估正在比较的两个子对象。
 
 我们知道，将一个`ClauseElement`与任何其他对象进行比较都会返回另一个`ClauseElement`：
 
-    >>> from sqlalchemy.sql import columnplain
+    >>> from sqlalchemy.sql import column
     >>> column('foo') == 5
     <sqlalchemy.sql.expression._BinaryExpression object at 0x1252490>
 
 这样一来，Python 表达式在转换为字符串时就会生成 SQL 表达式：
 
-    >>> str(column('foo') == 5)plainplain
+    >>> str(column('foo') == 5)
     'foo = :foo_1'
 
 但是如果我们这样说会发生什么？
 
-    >>> if column('foo') == 5:plain
+    >>> if column('foo') == 5:
     ...     print("yes")
     ...
 
 在先前版本的 SQLAlchemy 中，返回的`_BinaryExpression`是一个普通的 Python 对象，其计算结果为`True`。现在，它计算实际的`ClauseElement`是否应该与正在比较的哈希值相同。含义：
 
-    >>> bool(column('foo') == 5)plain
+    >>> bool(column('foo') == 5)
     False
     >>> bool(column('foo') == column('foo'))
     False
@@ -119,7 +119,7 @@ URL，它将使用 psycopg2：
 
 如果`expression`是二进制子句，则不会评估。由于不应该使用上述模式，因此如果在布尔上下文中调用，基`ClauseElement`现在会引发异常：
 
-    >>> bool(c)plainplain
+    >>> bool(c)plain
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
       ...
@@ -187,7 +187,7 @@ connecting and fetching 50,000 rows looks like with SQLite, using mostly
 direct SQLite access, a `ResultProxy`, and a simple
 mapped ORM object:
 
-    sqlite select/native: 0.260s
+    sqlite select/native: 0.260splain
 
     0.6 / C extension
 
@@ -214,20 +214,20 @@ extension versus not.
 
 `sqlalchemy.schema`包得到了一些长期需要的关注。最明显的变化是新扩展的 DDL 系统。在 SQLAlchemy 中，从版本 0.5 开始可以创建自定义的 DDL 字符串，并将它们与表或元数据对象关联：
 
-    from sqlalchemy.schema import DDLplainplainplainplain
+    from sqlalchemy.schema import DDL
 
     DDL('CREATE TRIGGER users_trigger ...').execute_at('after-create', metadata)
 
 现在，全套的 DDL 结构在相同的系统下可用，包括 CREATE TABLE，ADD
 CONSTRAINT 等。:
 
-    from sqlalchemy.schema import Constraint, AddConstraintplainplain
+    from sqlalchemy.schema import Constraint, AddConstraintplain
 
     AddContraint(CheckConstraint("value > 5")).execute_at('after-create', mytable)
 
 此外，所有的 DDL 对象现在都是普通的`ClauseElement`对象，就像任何其他 SQLAlchemy 表达式对象一样：
 
-    from sqlalchemy.schema import CreateTableplainplain
+    from sqlalchemy.schema import CreateTable
 
     create = CreateTable(mytable)
 
@@ -239,7 +239,7 @@ CONSTRAINT 等。:
 
 并使用`sqlalchemy.ext.compiler`扩展名，您可以创建自己的：
 
-    from sqlalchemy.schema import DDLElementplain
+    from sqlalchemy.schema import DDLElement
     from sqlalchemy.ext.compiler import compiles
 
     class AlterColumn(DDLElement):
@@ -322,7 +322,7 @@ the parent connection. 池日志记录发送到`log.info()`和`log.debug()` - �
 
 `from_engine()`方法在某些情况下会为后端特定的检查器提供额外的功能，例如提供`get_table_oid()`方法的 Postgresql：
 
-    my_engine = create_engine('postgresql://...')plainplain
+    my_engine = create_engine('postgresql://...')plain
     pg_insp = Inspector.from_engine(my_engine)
 
     print(pg_insp.get_table_oid('my_table'))
@@ -335,7 +335,7 @@ RETURNING 子句。目前不支持任何其他后端。
 
 以与`select()`结构相同的方式给出列表达式的列表，这些列的值将作为常规结果集返回：
 
-    result = connection.execute(plainplain
+    result = connection.execute(
                 table.insert().values(data='some data').returning(table.c.id, table.c.timestamp)
             )
     row = result.first()
@@ -373,7 +373,7 @@ nextval()”系统带来更多的方法开销，该系统使用快速和肮脏�
 
 由于更多的 DBAPI 支持直接返回 Python
 unicode 对象，因此现在基础语言会对第一个连接执行检查，该连接将确定 DBAPI 是否返回 Python
-unicode 对象，以用于基本选择 VARCHAR 值。如果是这样，`String`类型和所有子类（即`Text`，`Unicode`等）将在收到结果行时跳过“unicode”检查/转换步骤。这为大型结果集提供了显着的性能提升。目前已知“unicode模式”适用于：
+unicode 对象，以用于基本选择 VARCHAR 值。如果是这样，`String`类型和所有子类（即`Text`，`Unicode`等）将在收到结果行时跳过“unicode”检查/转换步骤。这为大型结果集提供了显着的性能提升。目前已知“unicode 模式”适用于：
 
 -   sqlite3 / pysqlite
 -   psycopg2 - SQLA
@@ -388,7 +388,7 @@ unicode 对象，以用于基本选择 VARCHAR 值。如果是这样，`String`�
 
 对于明确不需要 unicode 对象的字符串列更通用的解决方案是使用将 unicode 转换回 utf-8 或任何所需的`TypeDecorator`：
 
-    class UTF8Encoded(TypeDecorator):
+    class UTF8Encoded(TypeDecorator):plain
         """Unicode type which coerces to utf-8."""
 
         impl = sa.VARCHAR
@@ -426,7 +426,7 @@ CHECK 策略。请注意，Postgresql ENUM 类型目前不适用于 pg8000 或 z
     NUMERIC, FLOAT, DECIMAL don’t generate any length or scale unless
     specified. 这也继续包括有争议的`String`和`VARCHAR`类型（尽管当 MySQL 被要求渲染 VARCHAR 的时候，方言会先发制人）。假定没有默认值，并且如果在 CREATE
     TABLE 语句中使用它们，则如果底层数据库不允许这些类型的非延长版本，则会引发错误。
--   对于BLOB / BYTEA /类似的类型，`Binary`类型已重命名为`LargeBinary`。对于`BINARY`和`VARBINARY`，它们直接存在于`types.BINARY`，`types.VARBINARY`中，以及 MySQL 和 MS-SQL 方言。
+-   对于 BLOB / BYTEA /类似的类型，`Binary`类型已重命名为`LargeBinary`。对于`BINARY`和`VARBINARY`，它们直接存在于`types.BINARY`，`types.VARBINARY`中，以及 MySQL 和 MS-SQL 方言。
 -   `PickleType` now uses == for comparison of
     values when mutable=True, unless the “comparator” argument with a
     comparison function is specified to the type.
@@ -474,7 +474,7 @@ JOIN，并且不会重新加载父行。
 
 To make room for the new subquery load feature, the existing
 `eagerload()`/`eagerload_all()` options are
-now superseded by ``` ``joinedload()`` ``` and
+now superseded by `joinedload()` and
 `joinedload_all()`.
 就像`relation()`一样，旧名字在可预见的未来将继续存在。
 
@@ -497,14 +497,14 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
 在 mapper 级别：
 
-    mapper(Child, child)plainplain
+    mapper(Child, child)plain
     mapper(Parent, parent, properties={
         'child':relationship(Child, lazy='joined', innerjoin=True)
     })
 
 在查询时间级别：
 
-    session.query(Parent).options(joinedload(Parent.child, innerjoin=True)).all()plain
+    session.query(Parent).options(joinedload(Parent.child, innerjoin=True)).all()
 
 `relationship()`级别的`innerjoin=True`标志也将对任何不覆盖该值的`joinedload()`选项生效。
 
@@ -524,7 +524,7 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
     例如，在 0.5 这个查询中：
 
-        session.query(Address).options(eagerload(Address.user)).limit(10)plainplainplain
+        session.query(Address).options(eagerload(Address.user)).limit(10)plain
 
     会产生如下的 SQL：
 
@@ -536,7 +536,7 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
     在 0.6 中，该逻辑更加敏感，并且可以检测所有渴望的加载器是否表示多对一，在这种情况下，渴望加入不会影响 rowcount：
 
-        SELECT * FROM addresses LEFT OUTER JOIN users AS users_1 ON users_1.id = addresses.user_id LIMIT 10plainplain
+        SELECT * FROM addresses LEFT OUTER JOIN users AS users_1 ON users_1.id = addresses.user_id LIMIT 10plain
 
 ### 加入表继承的可变主键[¶](#mutable-primary-keys-with-joined-table-inheritance "Permalink to this headline")
 
@@ -578,7 +578,7 @@ Beaker 集成的一个有希望的新例子是在`examples/beaker_caching`中。
 -   mapper()上的'select\_table'参数被删除。为此功能使用'with\_polymorphic
     =（“\*”，）'。
 -   同义词()的'代理'参数被删除。这个标志在整个 0.5 中没有做任何事情，因为“代理生成”行为现在是自动的。
--   不推荐将单个元素列表传递给joinedload()，joinedload\_all()，contains\_eager()，lazyload()，defer()和 undefer()而不是多个位置\*参数。
+-   不推荐将单个元素列表传递给 joinedload()，joinedload\_all()，contains\_eager()，lazyload()，defer()和 undefer()而不是多个位置\*参数。
 -   将单个元素列表传递给 query.order\_by()，query.group\_by()，query.join()或query.outerjoin()而不是多个位置\*参数已弃用。
 -   `query.iterate_instances()`被删除。使用`query.instances()`。
 -   `Query.query_from_parent()`被删除。Use the

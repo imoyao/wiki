@@ -274,7 +274,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`array_agg`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.array_agg "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    支持ARRAY\_AGG功能。
+    支持ARRAY\_AGG功能。plain
 
     `func.array_agg(expr)`结构返回[`types.ARRAY`](type_basics.html#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")类型的表达式。
 
@@ -469,7 +469,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`min`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.min "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.ReturnTypeFromArgs`](#sqlalchemy.sql.functions.ReturnTypeFromArgs "sqlalchemy.sql.functions.ReturnTypeFromArgs")
 
-    `identifier`{.descname} *='min'* [¶](#sqlalchemy.sql.functions.min.identifier "Permalink to this definition")plain
+    `identifier`{.descname} *='min'* [¶](#sqlalchemy.sql.functions.min.identifier "Permalink to this definition")
     :   
 
     `姓名`{.descname} *='分钟'* [¶](#sqlalchemy.sql.functions.min.name "Permalink to this definition")
@@ -511,7 +511,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`now`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.now "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    `标识符`{.descname} *='现在'* [¶](#sqlalchemy.sql.functions.now.identifier "Permalink to this definition")
+    `标识符`{.descname} *='现在'* [¶](#sqlalchemy.sql.functions.now.identifier "Permalink to this definition")plain
     :   
 
     `姓名`{.descname} *='现在'* [¶](#sqlalchemy.sql.functions.now.name "Permalink to this definition")
@@ -592,7 +592,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`rank`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.rank "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    实现`rank`假设集合函数。
+    实现`rank`假设集合函数。plain
 
     该函数必须与[`FunctionElement.within_group()`](#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")修饰符一起使用，以提供一个排序表达式来进行操作。
 
@@ -617,7 +617,7 @@ SQL 函数 API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `session_user`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.sql.functions.session_user "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.AnsiFunction`](#sqlalchemy.sql.functions.AnsiFunction "sqlalchemy.sql.functions.AnsiFunction")
 
-    `标识符`{.descname} *='session\_user'* [¶](#sqlalchemy.sql.functions.session_user.identifier "Permalink to this definition")plainplain
+    `标识符`{.descname} *='session\_user'* [¶](#sqlalchemy.sql.functions.session_user.identifier "Permalink to this definition")plain
     :   
 
     `name`{.descname} *='session\_user'* [¶](#sqlalchemy.sql.functions.session_user.name "Permalink to this definition")

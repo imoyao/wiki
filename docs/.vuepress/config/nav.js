@@ -24,6 +24,7 @@ module.exports = [
         items: [
           { text: 'Socket 编程', link: '/socket/index/' },
           { text: '异步编程', link: '/python/async/index/' },
+          { text: 'PEP 系列', link: '/peps/index/' },
         ],
       },
     ],

@@ -39,7 +39,7 @@ explicitly or via array slices:
 
 动态关系通过`append()`和`remove()`方法支持有限的写入操作：
 
-    oldpost = jack.posts.filter(Post.headline=='old post').one()
+    oldpost = jack.posts.filter(Post.headline=='old post').one()plain
     jack.posts.remove(oldpost)
 
     jack.posts.append(Post('new post'))
@@ -95,7 +95,7 @@ False 关系的“动态”加载器是无效的。在这些情况下，较新�
 使用[`passive_deletes`](relationship_api.html#sqlalchemy.orm.relationship.params.passive_deletes "sqlalchemy.orm.relationship")禁用 DELETE 操作上的子对象加载，并结合数据库上的“ON
 DELETE（CASCADE | SET NULL）”来自动级联删除子对象：
 
-    class MyClass(Base):plain
+    class MyClass(Base):
         __tablename__ = 'mytable'
         id = Column(Integer, primary_key=True)
         children = relationship("MyOtherClass",
@@ -137,7 +137,7 @@ deleted by the database.
 
 映射一对多或多对多关系会导致通过父实例上的属性访问值的集合。默认情况下，这个集合是一个`list`：
 
-    class Parent(Base):
+    class Parent(Base):plain
         __tablename__ = 'parent'
         parent_id = Column(Integer, primary_key=True)
 
@@ -149,7 +149,7 @@ deleted by the database.
 
 集合不限于列表。通过在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中指定[`collection_class`](relationship_api.html#sqlalchemy.orm.relationship.params.collection_class "sqlalchemy.orm.relationship")选项，可以使用集合，可变序列和几乎任何其他可充当容器的 Python 对象来代替默认列表：
 
-    class Parent(Base):
+    class Parent(Base):plain
         __tablename__ = 'parent'
         parent_id = Column(Integer, primary_key=True)
 
@@ -167,7 +167,7 @@ deleted by the database.
 we map an `Item` class containing a dictionary of
 `Note` items keyed to the `Note.keyword` attribute:
 
-    from sqlalchemy import Column, Integer, String, ForeignKeyplainplain
+    from sqlalchemy import Column, Integer, String, ForeignKeyplain
     from sqlalchemy.orm import relationship
     from sqlalchemy.orm.collections import attribute_mapped_collection
     from sqlalchemy.ext.declarative import declarative_base
@@ -194,14 +194,14 @@ we map an `Item` class containing a dictionary of
 
 `Item.notes` is then a dictionary:
 
-    >>> item = Item()plain
+    >>> item = Item()
     >>> item.notes['a'] = Note('a', 'atext')
     >>> item.notes.items()
     {'a': <__main__.Note object at 0x2eaaf0>}
 
 [`attribute_mapped_collection()`](#sqlalchemy.orm.collections.attribute_mapped_collection "sqlalchemy.orm.collections.attribute_mapped_collection")将确保每个`Note`的`.keyword`属性符合字典中的键。例如，当分配给`Item.notes`时，我们提供的字典键必须与实际的`Note`对象匹配：
 
-    item = Item()plain
+    item = Item()
     item.notes = {
                 'a': Note('a', 'atext'),
                 'b': Note('b', 'btext')
@@ -212,7 +212,7 @@ a regular Python `@property` allows virtually any
 detail or combination of details about the object to be used as the key,
 as below when we establish it as a tuple of `Note.keyword` and the first ten letters of the `Note.text` field:
 
-    class Item(Base):
+    class Item(Base):plain
         __tablename__ = 'item'
         id = Column(Integer, primary_key=True)
         notes = relationship("Note",
@@ -238,7 +238,7 @@ as below when we establish it as a tuple of `Note.keyword` and the first ten let
 上面我们添加了一个`Note.item`
 backref。指定这种反向关系时，`Note`被添加到`Item.notes`字典中，并且会自动为我们生成密钥：
 
-    >>> item = Item()plainplain
+    >>> item = Item()plain
     >>> n1 = Note("a", "atext")
     >>> n1.item = item
     >>> item.notes
@@ -246,7 +246,7 @@ backref。指定这种反向关系时，`Note`被添加到`Item.notes`字典中�
 
 其他内置的字典类型包括[`column_mapped_collection()`](#sqlalchemy.orm.collections.column_mapped_collection "sqlalchemy.orm.collections.column_mapped_collection")，它几乎像[`attribute_mapped_collection()`](#sqlalchemy.orm.collections.attribute_mapped_collection "sqlalchemy.orm.collections.attribute_mapped_collection")，直接给定[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
 
-    from sqlalchemy.orm.collections import column_mapped_collectionplainplain
+    from sqlalchemy.orm.collections import column_mapped_collectionplain
 
     class Item(Base):
         __tablename__ = 'item'
@@ -289,7 +289,7 @@ Proxies](extensions_associationproxy.html#composite-association-proxy)。
 `sqlalchemy.orm.collections。 T0>  mapped_collection  T1> （ T2>  keyfunc  T3> ） T4> ¶< / T5>`{.descclassname}
 :   基于字典的具有任意键控的集合类型。
 
-    返回带有从keyfunc生成的键控函数的[`MappedCollection`](#sqlalchemy.orm.collections.MappedCollection "sqlalchemy.orm.collections.MappedCollection")工厂，这是一个可调用的实体，它返回一个实体并返回一个键值。
+    返回带有从keyfunc生成的键控函数的[`MappedCollection`](#sqlalchemy.orm.collections.MappedCollection "sqlalchemy.orm.collections.MappedCollection")工厂，这是一个可调用的实体，它返回一个实体并返回一个键值。plain
 
     关键值在对象的生命周期中必须是不可变的。例如，如果这些键值在会话期间发生更改（例如，会话刷新后从无到数据库分配的整数），则无法映射外键值。
 
@@ -317,7 +317,7 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
 
 集合包理解列表，集合和字典的基本接口，并将自动将检测应用于这些内置类型及其子类。实现基本集合接口的对象派生类型通过鸭式输入进行检测和检测：
 
-    class ListLike(object):plainplain
+    class ListLike(object):
         def __init__(self):
             self.data = []
         def append(self, item):
@@ -353,9 +353,9 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
 
 ### 通过装饰器注释自定义集合[¶](#annotating-custom-collections-via-decorators "Permalink to this headline")
 
-装饰器可用于标记ORM管理集合所需的各种方法。当你的课堂并不完全满足其容器类型的常规界面，或者你想用另一种方法完成工作时使用它们。
+装饰器可用于标记 ORM 管理集合所需的各种方法。当你的课堂并不完全满足其容器类型的常规界面，或者你想用另一种方法完成工作时使用它们。
 
-    from sqlalchemy.orm.collections import collection
+    from sqlalchemy.orm.collections import collectionplain
 
     class SetLike(object):
         __emulates__ = set
@@ -565,7 +565,7 @@ user-defined versions of `__setitem__()` or
 -
 在一个已经检测到的调用中调用它们可能会导致重复触发事件或不恰当地触发事件，从而在极少数情况下导致内部状态损坏：
 
-    from sqlalchemy.orm.collections import MappedCollection,\plain
+    from sqlalchemy.orm.collections import MappedCollection,\
                                         collection
 
     class MyMappedCollection(MappedCollection):
@@ -584,7 +584,7 @@ user-defined versions of `__setitem__()` or
             # do something with key
             super(MyMappedCollection, self).__delitem__(key, _sa_initiator)
 
-ORM理解`dict`接口就像列表和集合一样，如果您选择继承`dict`或在类中提供字典集合行为，它将自动处理所有类字典方法鸭子类。但是，必须修饰 appender 和 remover 方法
+ORM 理解`dict`接口就像列表和集合一样，如果您选择继承`dict`或在类中提供字典集合行为，它将自动处理所有类字典方法鸭子类。但是，必须修饰 appender 和 remover 方法
 -
 默认情况下，SQLAlchemy 基本字典接口中没有兼容方法。迭代将经过`itervalues()`，除非另有修饰。
 
@@ -641,7 +641,7 @@ ORM理解`dict`接口就像列表和集合一样，如果您选择继承`dict`�
 
 这些装饰在关系之外是轻量级且无操作的，但是在其他地方触发时它们确实增加了不必要的开销。当使用库类作为集合时，最好使用“平凡的子类”技巧来限制装饰，使其仅用于关系中的使用。例如：
 
-    class MyAwesomeList(some.great.library.AwesomeList):plain
+    class MyAwesomeList(some.great.library.AwesomeList):
         pass
 
     # ... relationship(..., collection_class=MyAwesomeList)
@@ -693,7 +693,7 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
  *class*`sqlalchemy.orm.collections.`{.descclassname}`CollectionAdapter`{.descname}(*attr*, *owner\_state*, *data*)[¶](#sqlalchemy.orm.collections.CollectionAdapter "Permalink to this definition")
 :   ORM 和任意 Python 集合之间的桥梁。
 
-    代理基本级集合操作（​​追加，删除，迭代）到基础Python集合，并为进入或离开集合的实体发出添加/删除事件。plain
+    代理基本级集合操作（​​追加，删除，迭代）到基础Python集合，并为进入或离开集合的实体发出添加/删除事件。
 
     ORM仅使用[`CollectionAdapter`](#sqlalchemy.orm.collections.CollectionAdapter "sqlalchemy.orm.collections.CollectionAdapter")来与实体集合进行交互。
 

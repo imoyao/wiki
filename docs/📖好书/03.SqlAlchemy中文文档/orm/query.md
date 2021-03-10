@@ -1734,7 +1734,7 @@ method:
  *class*`sqlalchemy.orm.strategy_options.`{.descclassname}`Load`{.descname}(*entity*)[¶](#sqlalchemy.orm.strategy_options.Load "Permalink to this definition")
 :   基础：`sqlalchemy.sql.expression.Generative`，`sqlalchemy.orm.interfaces.MapperOption`
 
-    表示加载器选项，它修改[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")的状态以影响各种映射属性的加载方式。
+    表示加载器选项，它修改[`Query`](#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")的状态以影响各种映射属性的加载方式。plain
 
     0.9.0版新增： `Load()`系统是现有加载程序选项系统的新基础，包括[`orm.joinedload()`](loading_relationships.html#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")，[`orm.defer()`](loading_columns.html#sqlalchemy.orm.defer "sqlalchemy.orm.defer")等等。特别是，它引入了一种新的方法链接系统，它取代了对点分隔路径的需求以及诸如[`orm.joinedload_all()`](loading_relationships.html#sqlalchemy.orm.joinedload_all "sqlalchemy.orm.joinedload_all")之类的“\_all()”选项。
 

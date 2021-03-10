@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:45
 permalink: /sqlalchemy/orm/relationship_api/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - orm
 tags:
 ---
@@ -557,7 +557,7 @@ tags:
  `sqlalchemy.orm.`{.descclassname}`backref`{.descname}(*name*, *\*\*kwargs*)[¶](#sqlalchemy.orm.backref "Permalink to this definition")
 :   使用显式关键字参数创建一个后端引用，这些参数是可以发送到[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的相同参数。
 
-    与[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的`backref`关键字参数一起使用以代替字符串参数，例如：plain
+    与[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的`backref`关键字参数一起使用以代替字符串参数，例如：
 
         'items':relationship(
             SomeItem, backref=backref('parent', lazy='subquery'))
@@ -573,7 +573,7 @@ tags:
  `sqlalchemy.orm.`{.descclassname}`dynamic_loader`{.descname}(*argument*, *\*\*kw*)[¶](#sqlalchemy.orm.dynamic_loader "Permalink to this definition")
 :   构建一个动态加载映射器属性。
 
-    这与使用[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中的`lazy='dynamic'`参数基本相同：
+    这与使用[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中的`lazy='dynamic'`参数基本相同：plain
 
         dynamic_loader(SomeClass)
 
