@@ -13,9 +13,9 @@ tags:
 
 连接池是一种标准技术，用于维护内存中长时间运行的连接以实现高效的重用，并提供对应用程序可能同时使用的连接总数的管理。
 
-特别是对于服务器端Web应用程序，连接池是在内存中维护活动数据库连接的“池”的标准方式，这些连接可以跨请求重用。
+特别是对于服务器端 Web 应用程序，连接池是在内存中维护活动数据库连接的“池”的标准方式，这些连接可以跨请求重用。
 
-SQLAlchemy包含几个与[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")集成的连接池实现。它们也可以直接用于想要将池化添加到其他普通 DBAPI 方法的应用程序。
+SQLAlchemy 包含几个与[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")集成的连接池实现。它们也可以直接用于想要将池化添加到其他普通 DBAPI 方法的应用程序。
 
 连接池配置[¶](#connection-pool-configuration "Permalink to this headline")
 --------------------------------------------------------------------------
@@ -38,7 +38,7 @@ and `pool_timeout`. 例如：
 在 SQLite 的情况下，方言选择[`SingletonThreadPool`](#sqlalchemy.pool.SingletonThreadPool "sqlalchemy.pool.SingletonThreadPool")或[`NullPool`](#sqlalchemy.pool.NullPool "sqlalchemy.pool.NullPool")，以提供与 SQLite 的线程和锁定模型的更大兼容性，并提供合理的默认行为 SQLite“内存”数据库，它们将整个数据集保存在单个连接的范围内。
 
 所有的 SQLAlchemy 池实现都有共同之处：它们都没有“预创建”连接 -
-所有实现都等到创建连接之前首次使用。此时，如果没有额外的并发结算请求进行更多连接，则不会创建其他连接。这就是为什么[`create_engine()`](engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")默认使用大小为 5 的[`QueuePool`](#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")而不考虑应用程序是否真的需要5个连接排队的原因
+所有实现都等到创建连接之前首次使用。此时，如果没有额外的并发结算请求进行更多连接，则不会创建其他连接。这就是为什么[`create_engine()`](engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")默认使用大小为 5 的[`QueuePool`](#sqlalchemy.pool.QueuePool "sqlalchemy.pool.QueuePool")而不考虑应用程序是否真的需要 5 个连接排队的原因
 -
 池只有当应用程序实际同时使用5个连接时才会增长到这个大小，在这种情况下，小池的使用是完全适当的默认行为。
 
@@ -52,7 +52,7 @@ and `pool_timeout`. 例如：
 
 使用[`NullPool`](#sqlalchemy.pool.NullPool "sqlalchemy.pool.NullPool")：
 
-    from sqlalchemy.pool import NullPoolplain
+    from sqlalchemy.pool import NullPool
     engine = create_engine(
               'postgresql+psycopg2://scott:tiger@localhost/test',
               poolclass=NullPool)
@@ -62,7 +62,7 @@ and `pool_timeout`. 例如：
 
 所有[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")类接受一个参数`creator`，它是一个可调用的参数，用于创建新的连接。[`create_engine()`](engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")接受这个函数通过一个同名的参数传递给池：
 
-    import sqlalchemy.pool as poolplain
+    import sqlalchemy.pool as pool
     import psycopg2
 
     def getconn():
@@ -101,7 +101,7 @@ SQLAlchemy.
 
 透明代理的目的是拦截`close()`调用，这样就不会关闭 DBAPI 连接，而是返回到池：
 
-    # "close" the connection.  Returnsplain
+    # "close" the connection.  Returns
     # it to the pool.
     conn.close()
 
@@ -111,7 +111,7 @@ SQLAlchemy.
 
 通过将一个特定的预创建的[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")传递给[`create_engine()`](engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")的`pool`参数，可以与一个或多个引擎共享：
 
-    e = create_engine('postgresql://', pool=mypool)plain
+    e = create_engine('postgresql://', pool=mypool)
 
 池事件[¶](#pool-events "Permalink to this headline")
 ----------------------------------------------------
@@ -154,7 +154,7 @@ Session 的典型 Web 应用程序中，上述条件将对应于单个请求失�
 
 可以增加“乐观”方法的其他设置是设置池回收参数。此参数可防止池使用特定时间的特定连接，并适用于数据库后端（如MySQL），该后端可自动关闭在特定时间段后过时的连接：
 
-    from sqlalchemy import create_engineplain
+    from sqlalchemy import create_engine
     e = create_engine("mysql://scott:tiger@localhost/test", pool_recycle=3600)
 
 以上，任何已打开超过一小时的 DBAPI 连接将在下次结帐时失效并被替换。请注意，仅在结帐时发生**失效**，而不是处于签出状态的任何连接。`pool_recycle`是[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")本身的函数，与是否使用[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")无关。
@@ -163,7 +163,7 @@ Session 的典型 Web 应用程序中，上述条件将对应于单个请求失�
 
 以从池中检出的每个连接发出的额外 SQL 为代价，由 checkout 事件处理程序建立的“ping”操作可以在使用前检测到无效连接。在现代 SQLAlchemy 中，最好的方法是使用[`ConnectionEvents.engine_connect()`](events.html#sqlalchemy.events.ConnectionEvents.engine_connect "sqlalchemy.events.ConnectionEvents.engine_connect")事件，假设使用[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")，而不仅仅是一个原始[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")对象：
 
-    from sqlalchemy import excplain
+    from sqlalchemy import exc
     from sqlalchemy import event
     from sqlalchemy import select
 
@@ -208,7 +208,7 @@ Session 的典型 Web 应用程序中，上述条件将对应于单个请求失�
 
 对于不使用[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的情况下使用[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")的常见情况，可以使用较老的方法，如下所示：
 
-    from sqlalchemy import exc
+    from sqlalchemy import excplain
     from sqlalchemy import event
     from sqlalchemy.pool import Pool
 
@@ -266,7 +266,7 @@ The next approach is to instrument the [`Pool`](#sqlalchemy.pool.Pool "sqlalchem
 itself with events so that connections are automatically invalidated in
 the subprocess. 这有点神奇，但可能更加万无一失：
 
-    from sqlalchemy import eventplain
+    from sqlalchemy import event
     from sqlalchemy import exc
     import os
 
@@ -465,7 +465,7 @@ API 文档 - 可用的池实现[¶](#api-documentation-available-pool-implementa
 *class* `sqlalchemy.pool。`{.descclassname} `SingletonThreadPool`{.descname} （ *creator*，*pool\_size = 5*，*\*\* kw* ） [¶](#sqlalchemy.pool.SingletonThreadPool "Permalink to this definition")
 :   基础：[`sqlalchemy.pool.Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")
 
-    每个线程维护一个连接的池。
+    每个线程维护一个连接的池。plain
 
     每个线程维护一个连接，永远不会将连接移动到除创建它之外的线程。
 
@@ -497,7 +497,7 @@ API 文档 - 可用的池实现[¶](#api-documentation-available-pool-implementa
 *class* `sqlalchemy.pool。`{.descclassname} `AssertionPool`{.descname} （ *\* args*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.pool.AssertionPool "Permalink to this definition")*
 :   基础：[`sqlalchemy.pool.Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")
 
-    一个[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")，允许在任何给定的时间最多检出一个连接。plainplain
+    一个[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")，允许在任何给定的时间最多检出一个连接。plain
 
     如果同时检出多个连接，则会引发异常。用于调试使用比期望更多连接的代码。
 
@@ -521,7 +521,7 @@ API 文档 - 可用的池实现[¶](#api-documentation-available-pool-implementa
 *class* `sqlalchemy.pool。`{.descclassname} `StaticPool`{.descname} （ *creator*，*recycle = 1*，*echo = None*，*use\_threadlocal = False*，*logging\_name = None*，*reset\_on\_return = True*， *listeners = None*，*events = None*，*\_dispatch = None*，*\_dialect = None* ） t14 \> [¶ T15\>](#sqlalchemy.pool.StaticPool "Permalink to this definition")
 :   基础：[`sqlalchemy.pool.Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")
 
-    完全由一个连接组成的池，用于所有请求。plain
+    完全由一个连接组成的池，用于所有请求。
 
     此池实施当前不支持重新连接相关的功能，如`recycle`和连接失效（也用于支持自动重新连接），但可以在未来版本中实施。
 
@@ -588,7 +588,7 @@ API 文档 - 可用的池实现[¶](#api-documentation-available-pool-implementa
     :   如果[`_ConnectionFairy`](#sqlalchemy.pool._ConnectionFairy "sqlalchemy.pool._ConnectionFairy")仍然指向活动的DBAPI连接，则返回True。
 
 *class* `sqlalchemy.pool。`{.descclassname} `_ConnectionRecord`{.descname} （ *pool* ） t5 \> [¶ T6\>](#sqlalchemy.pool._ConnectionRecord "Permalink to this definition")
-:   内部对象，它维护由[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")引用的单个DBAPI连接。
+:   内部对象，它维护由[`Pool`](#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")引用的单个 DBAPI 连接。
 
     对于任何特定的DBAPI连接，[`_ConnectionRecord`](#sqlalchemy.pool._ConnectionRecord "sqlalchemy.pool._ConnectionRecord")对象总是存在，而不管该DBAPI连接是否已“检出”。这与[`_ConnectionFairy`](#sqlalchemy.pool._ConnectionFairy "sqlalchemy.pool._ConnectionFairy")形成鲜明对比，它仅在检出时才是DBAPI连接的公共外观。plain
 
@@ -636,7 +636,7 @@ API 文档 - 可用的池实现[¶](#api-documentation-available-pool-implementa
 -------------------------------------------------------------------------------------
 
 任何 [**PEP 249**](https://www.python.org/dev/peps/pep-0249)
-DB-API模块都可透明地通过连接池进行“代理”。除了`connect()`方法将查询池之外，DB-API 的用法与以前完全相同。下面我们用`psycopg2`来说明这一点：
+DB-API 模块都可透明地通过连接池进行“代理”。除了`connect()`方法将查询池之外，DB-API 的用法与以前完全相同。下面我们用`psycopg2`来说明这一点：
 
     import sqlalchemy.pool as pool
     import psycopg2 as psycopg
@@ -677,6 +677,6 @@ weakref callbacks (`__del__` is not used).
 `sqlalchemy.pool。 T0>  clear_managers  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
 :   删除所有当前的 DB-API 2.0 管理器。
 
-    所有游泳池和连接都被丢弃。plain
+    所有游泳池和连接都被丢弃。
 
 

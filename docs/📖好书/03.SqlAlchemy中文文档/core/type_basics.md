@@ -13,7 +13,7 @@ tags:
 
 SQLAlchemy为大多数常用数据库数据类型提供了抽象，并提供了一种用于指定自己的自定义数据类型的机制。
 
-类型对象的方法和属性很少直接使用。Type对象提供给[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")定义，对于数据库驱动程序返回不正确类型的场合，可以作为类型提示提供给functions。
+类型对象的方法和属性很少直接使用。Type 对象提供给[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")定义，对于数据库驱动程序返回不正确类型的场合，可以作为类型提示提供给 functions。
 
     >>> users = Table('users', metadata,
     ...               Column('id', Integer, primary_key=True)
@@ -60,7 +60,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
  *class*`sqlalchemy.types.`{.descclassname}`Date`{.descname}[¶](#sqlalchemy.types.Date "Permalink to this definition")
 :   基础：`sqlalchemy.types._DateAffinity`，[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    `datetime.date()`对象的类型。
+    `datetime.date()`对象的类型。plain
 
 *class* `sqlalchemy.types。`{.descclassname} `DateTime`{.descname} （ *timezone = False* / T5\> [¶ T6\>](#sqlalchemy.types.DateTime "Permalink to this definition")
 :   基础：`sqlalchemy.types._DateAffinity`，[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
@@ -264,7 +264,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
 *class* `sqlalchemy.types。`{.descclassname} `LargeBinary`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.LargeBinary "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
 
-    一种大型二进制字节数据的类型。plainplain
+    一种大型二进制字节数据的类型。
 
     The [`LargeBinary`](#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
     type corresponds to a large and/or unlengthed binary type for the
@@ -493,7 +493,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
 *class* `sqlalchemy.types。`{.descclassname} `Unicode`{.descname} （ *length = None*，*\* \* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.types.Unicode "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.String`](#sqlalchemy.types.String "sqlalchemy.types.String")
 
-    一个可变长度的Unicode字符串类型。plain
+    一个可变长度的Unicode字符串类型。
 
     The [`Unicode`](#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")
     type is a [`String`](#sqlalchemy.types.String "sqlalchemy.types.String")
@@ -560,7 +560,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `ARRAY`{.descname} （ *item\_type*，*as\_tuple = False dimensions = None，*zero\_indexes = False* ） [¶](#sqlalchemy.types.ARRAY "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.Indexable`](type_api.html#sqlalchemy.types.Indexable "sqlalchemy.types.Indexable")，[`sqlalchemy.types.Concatenable`](type_api.html#sqlalchemy.types.Concatenable "sqlalchemy.types.Concatenable")，[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    表示一个SQL数组类型。plain
+    表示一个SQL数组类型。
 
     注意
 
@@ -729,12 +729,12 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `BINARY`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.BINARY "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
 
-    SQL BINARY类型。plainplain
+    SQL BINARY类型。
 
 *class* `sqlalchemy.types。`{.descclassname} `BLOB`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.BLOB "Permalink to this definition")
 :   基础：[`sqlalchemy.types.LargeBinary`](#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
 
-    SQL BLOB类型。plain
+    SQL BLOB类型。
 
  *class*`sqlalchemy.types.`{.descclassname}`BOOLEAN`{.descname}(*create\_constraint=True*, *name=None*, *\_create\_events=True*)[¶](#sqlalchemy.types.BOOLEAN "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Boolean`](#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")
@@ -744,19 +744,19 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `CHAR`{.descname} （ *length = None*，*= None*，*convert\_unicode = False*，*unicode\_error = None*，*\_warn\_on\_bytestring = False ） [¶ T10\>](#sqlalchemy.types.CHAR "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.String`](#sqlalchemy.types.String "sqlalchemy.types.String")
 
-    SQL CHAR类型。plain
+    SQL CHAR类型。
 
 *class* `sqlalchemy.types。`{.descclassname} `CLOB`{.descname} （ *length =无*，*= None*，*convert\_unicode = False*，*unicode\_error = None*，*\_warn\_on\_bytestring = False ） [¶ T10\>](#sqlalchemy.types.CLOB "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.Text`](#sqlalchemy.types.Text "sqlalchemy.types.Text")
 
-    CLOB类型。
+    CLOB类型。plain
 
     这种类型可以在Oracle和Informix中找到。
 
  *class*`sqlalchemy.types.`{.descclassname}`DATE`{.descname}[¶](#sqlalchemy.types.DATE "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Date`](#sqlalchemy.types.Date "sqlalchemy.types.Date")
 
-    SQL DATE类型。
+    SQL DATE类型。plain
 
  *class*`sqlalchemy.types.`{.descclassname}`DATETIME`{.descname}(*timezone=False*)[¶](#sqlalchemy.types.DATETIME "Permalink to this definition")
 :   基础：[`sqlalchemy.types.DateTime`](#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")
@@ -779,7 +779,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `JSON`{.descname} （ *none\_as\_null = False* / T5\> [¶ T6\>](#sqlalchemy.types.JSON "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Indexable`](type_api.html#sqlalchemy.types.Indexable "sqlalchemy.types.Indexable")，[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    表示一个SQL JSON类型。
+    表示一个SQL JSON类型。plain
 
     注意
 
@@ -910,7 +910,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `NCHAR`{.descname} （ *length = None*，*\* \* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.types.NCHAR "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.Unicode`](#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")
 
-    SQL NCHAR类型。
+    SQL NCHAR类型。plain
 
 *class* `sqlalchemy.types。`{.descclassname} `NVARCHAR`{.descname} （ *length = None*，*\* \* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.types.NVARCHAR "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.Unicode`](#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")
@@ -925,7 +925,7 @@ backends that explicitly support them by name.
 *class* `sqlalchemy.types。`{.descclassname} `REAL`{.descname} （ *precision = None*，*asdecimal = False*，*decimal\_return\_scale = None*，*\*\* kwargs* ） [¶](#sqlalchemy.types.REAL "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Float`](#sqlalchemy.types.Float "sqlalchemy.types.Float")
 
-    SQL REAL类型。
+    SQL REAL类型。plain
 
 *class* `sqlalchemy.types。`{.descclassname} `SMALLINT`{.descname} [¶](#sqlalchemy.types.SMALLINT "Permalink to this definition")
 :   基础：[`sqlalchemy.types.SmallInteger`](#sqlalchemy.types.SmallInteger "sqlalchemy.types.SmallInteger")
@@ -935,17 +935,17 @@ backends that explicitly support them by name.
  *class*`sqlalchemy.types.`{.descclassname}`TEXT`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.types.TEXT "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Text`](#sqlalchemy.types.Text "sqlalchemy.types.Text")
 
-    SQL TEXT类型。
+    SQL TEXT类型。plain
 
  *class*`sqlalchemy.types.`{.descclassname}`TIME`{.descname}(*timezone=False*)[¶](#sqlalchemy.types.TIME "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Time`](#sqlalchemy.types.Time "sqlalchemy.types.Time")
 
-    SQL TIME类型。
+    SQL TIME类型。plain
 
 *class* `sqlalchemy.types。`{.descclassname} `TIMESTAMP`{.descname} （ *timezone = False* / T5\> [¶ T6\>](#sqlalchemy.types.TIMESTAMP "Permalink to this definition")
 :   基础：[`sqlalchemy.types.DateTime`](#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")
 
-    SQL TIMESTAMP类型。plainplain
+    SQL TIMESTAMP类型。
 
 *class* `sqlalchemy.types。`{.descclassname} `VARBINARY`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.VARBINARY "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
@@ -973,7 +973,7 @@ backends that explicitly support them by name.
 
 或者一些PostgreSQL类型：
 
-    from sqlalchemy.dialects import postgresqlplainplain
+    from sqlalchemy.dialects import postgresqlplain
 
     table = Table('foo', metadata,
         Column('ipaddress', postgresql.INET),
@@ -984,7 +984,7 @@ backends that explicitly support them by name.
 \_\_集合中提供了该后端支持的完整类型名称集合，因此简单的import
 \*或类似方式将导入为该后端实现的所有受支持类型：
 
-    from sqlalchemy.dialects.postgresql import *plain
+    from sqlalchemy.dialects.postgresql import *
 
     t = Table('mytable', metadata,
                Column('id', INTEGER, primary_key=True),

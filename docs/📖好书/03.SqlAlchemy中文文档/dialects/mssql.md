@@ -28,9 +28,9 @@ DBAPI支持[¶](#dialect-mssql "Permalink to this headline")
 自动增量行为[¶](#auto-increment-behavior "Permalink to this headline")
 ----------------------------------------------------------------------
 
-SQL Server使用`IDENTITY`结构提供所谓的“自动递增”行为，该结构可放置在整数主键上。SQLAlchemy 在[`Column.autoincrement`](core_metadata.html#sqlalchemy.schema.Column.params.autoincrement "sqlalchemy.schema.Column")中描述的默认“autoincrement”行为内考虑`IDENTITY`；这意味着默认情况下，[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中的第一个整数主键列将被视为标识列，并将生成DDL：
+SQL Server 使用`IDENTITY`结构提供所谓的“自动递增”行为，该结构可放置在整数主键上。SQLAlchemy 在[`Column.autoincrement`](core_metadata.html#sqlalchemy.schema.Column.params.autoincrement "sqlalchemy.schema.Column")中描述的默认“autoincrement”行为内考虑`IDENTITY`；这意味着默认情况下，[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中的第一个整数主键列将被视为标识列，并将生成 DDL：
 
-    from sqlalchemy import Table, MetaData, Column, Integer
+    from sqlalchemy import Table, MetaData, Column, Integerplain
 
     m = MetaData()
     t = Table('t', m,
@@ -40,7 +40,7 @@ SQL Server使用`IDENTITY`结构提供所谓的“自动递增”行为，该结
 
 上面的例子将生成DDL：
 
-    CREATE TABLE t (plainplain
+    CREATE TABLE t (
         id INTEGER NOT NULL IDENTITY(1,1),
         x INTEGER NULL,
         PRIMARY KEY (id)
@@ -75,12 +75,12 @@ Server 上，它重新用于指定有关标识列的行为，包括对“开始�
 
 会产生：
 
-    CREATE TABLE test (
+    CREATE TABLE test (plain
       id INTEGER NOT NULL IDENTITY(100,10) PRIMARY KEY,
       name VARCHAR(20) NULL,
       )
 
-请注意，序列的`start`和`increment`值是可选的，默认值为1,1。
+请注意，序列的`start`和`increment`值是可选的，默认值为 1,1。
 
 ### INSERT 行为[¶](#insert-behavior "Permalink to this headline")
 
@@ -106,7 +106,7 @@ Server 上，它重新用于指定有关标识列的行为，包括对“开始�
 
         INSERT将如下所示：
 
-            INSERT INTO t (x) VALUES (?); select scope_identity()
+            INSERT INTO t (x) VALUES (?); select scope_identity()plain
 
     -   Other dialects such as pymssql will call upon
         `SELECT scope_identity() AS lastrowid`
@@ -153,7 +153,7 @@ execution. 给出这个例子：
 
 字符排序规则由基本字符串类型支持，由字符串参数“排序规则”指定：
 
-    from sqlalchemy import VARCHAR
+    from sqlalchemy import VARCHARplain
     Column('login', VARCHAR(32, collation='Latin1_General_CI_AS'))
 
 当这样的列与[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")关联时，此列的 CREATE
@@ -167,13 +167,13 @@ LIMIT / OFFSET 支持[¶](#limit-offset-support "Permalink to this headline")
 -------------------------------------------------------------------------
 
 MSSQL 不支持 LIMIT 或 OFFSET 关键字。LIMIT 通过`TOP`
-Transact SQL关键字直接支持：
+Transact SQL 关键字直接支持：
 
     select.limit
 
 会产生：
 
-    SELECT TOP nplain
+    SELECT TOP n
 
 如果使用SQL Server 2005或更高版本，可通过`ROW_NUMBER OVER`结构使用支持 OFFSET 的 LIMIT。对于 2005 以下的版本，使用 OFFSET 的 LIMIT 将失败。
 
@@ -218,11 +218,11 @@ argument as passed to [`Connection.execution_options()`](core_connections.html#s
 MSSQL 支持三级列可空性。默认的可空性允许空值，并且在 CREATE
 TABLE 结构中是显式的：
 
-    name VARCHAR(20) NULLplain
+    name VARCHAR(20) NULL
 
 如果`nullable=None`被指定，那么没有指定。换句话说，使用数据库的配置默认值。这将呈现：
 
-    name VARCHAR(20)
+    name VARCHAR(20)plain
 
 如果`nullable`是`True`或`False`那么该列将是`NULL`或`t9> NULL`。
 
@@ -253,7 +253,7 @@ Server 在未来的版本中。SQLAlchemy 通常将这些类型与[`UnicodeText`
 
 -   创建方言时，通常可以通过[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")将标志设置为`True`或`False`：
 
-        eng = create_engine("mssql+pymssql://user:pass@host/db",plain
+        eng = create_engine("mssql+pymssql://user:pass@host/db",
                         deprecate_large_types=True)
 
 -   通过使用大写类型对象来完全控制所有 SQLAlchemy 版本是否呈现“旧”或“新”类型：[`NVARCHAR`](core_type_basics.html#sqlalchemy.types.NVARCHAR "sqlalchemy.types.NVARCHAR")，[`VARCHAR`](mysql.html#sqlalchemy.dialects.mysql.VARCHAR "sqlalchemy.dialects.mysql.VARCHAR")，[`types.VARBINARY`](core_type_basics.html#sqlalchemy.types.VARBINARY "sqlalchemy.types.VARBINARY")，[`TEXT`](core_type_basics.html#sqlalchemy.types.TEXT "sqlalchemy.types.TEXT")，[`mssql.NTEXT`](#sqlalchemy.dialects.mssql.NTEXT "sqlalchemy.dialects.mssql.NTEXT")，[`mssql.IMAGE`](#sqlalchemy.dialects.mssql.IMAGE "sqlalchemy.dialects.mssql.IMAGE")将始终保持固定并始终输出该类型。
@@ -272,9 +272,9 @@ Server 在未来的版本中。SQLAlchemy 通常将这些类型与[`UnicodeText`
         schema="customer_schema"
     )
 
-这种传统的渲染模式会假设“customer\_schema.account”不会被SQL语句的所有部分所接受，如下所示：
+这种传统的渲染模式会假设“customer\_schema.account”不会被 SQL 语句的所有部分所接受，如下所示：
 
-    >>> eng = create_engine("mssql+pymssql://mydsn", legacy_schema_aliasing=True)
+    >>> eng = create_engine("mssql+pymssql://mydsn", legacy_schema_aliasing=True)plain
     >>> print(account_table.select().compile(eng))
     SELECT account_1.id, account_1.info
     FROM customer_schema.account AS account_1
@@ -374,7 +374,7 @@ SQLAlchemy 默认使用 OUTPUT
 INSERTED 通过 IDENTITY 列或其他服务器端默认值获取新生成的主键值。MS-SQL 不允许在具有触发器的表上使用 OUTPUT
 INSERTED。要禁用每个表的 OUTPUT INSERTED 用法，请为每个[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")指定`implicit_returning=False`
 
-    Table('mytable', metadata,plain
+    Table('mytable', metadata,
         Column('id', Integer, primary_key=True),
         # ...,
         implicit_returning=False
@@ -398,7 +398,7 @@ Server 驱动程序具有非常有限的能力来返回从 UPDATE 或 DELETE 语
 INSERTED 时，更新的 rowcount 不可用。这会在使用服务器端版本控制方案时影响 SQLAlchemy
 ORM 的版本控制功能。在使用 pyodbc 时，对于使用 version\_id 列与服务器端版本生成器结合使用的任何 ORM 映射类，需要将“implicit\_returning”标志设置为 false：
 
-    class MyTable(Base):
+    class MyTable(Base):plain
         __tablename__ = 'mytable'
         id = Column(Integer, primary_key=True)
         stuff = Column(String(10))
@@ -411,7 +411,7 @@ ORM 的版本控制功能。在使用 pyodbc 时，对于使用 version\_id 列�
             'implicit_returning': False
         }
 
-如果没有上面的 implicit\_returning标志，那么UPDATE语句将使用`OUTPUT inserted.timestamp`，并且 rowcount 将返回-1，导致版本控制逻辑失败。
+如果没有上面的 implicit\_returning 标志，那么 UPDATE 语句将使用`OUTPUT inserted.timestamp`，并且 rowcount 将返回-1，导致版本控制逻辑失败。
 
 启用快照隔离[¶](#enabling-snapshot-isolation "Permalink to this headline")
 --------------------------------------------------------------------------
@@ -524,7 +524,7 @@ Server 的 UPPERCASE 类型都可以从顶级方言导入，无论它们来源�
  *class*`sqlalchemy.dialects.mssql.`{.descclassname}`IMAGE`{.descname}(*length=None*)[¶](#sqlalchemy.dialects.mssql.IMAGE "Permalink to this definition")
 :   基础：[`sqlalchemy.types.LargeBinary`](core_type_basics.html#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
 
-    ` __初始化__  T0> （ T1> 长度=无 T2> ） T3> ¶ T4>`{.descname}plain
+    ` __初始化__  T0> （ T1> 长度=无 T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.LargeBinary.__init__ "sqlalchemy.types.LargeBinary.__init__")
         *method of* [`LargeBinary`](core_type_basics.html#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
 
@@ -789,7 +789,7 @@ A DSN-based connection is **preferred** overall when using ODBC.
 
 上面哪个，将下面的连接字符串传递给PyODBC：
 
-    dsn=mydsn;UID=user;PWD=pass
+    dsn=mydsn;UID=user;PWD=passplain
 
 如果省略用户名和密码，则 DSN 表格还会将`Trusted_Connection=yes`指令添加到 ODBC 字符串中。
 
@@ -806,9 +806,9 @@ Server 驱动程序名称。由于 SQLAlchemy 根据平台和安装的驱动程�
 
 #### 通过精确的 Pyodbc 字符串[¶](#pass-through-exact-pyodbc-string "Permalink to this headline")
 
-PyODBC 连接字符串也可以使用参数`odbc_connect`完全按照[ConnectionStrings](https://code.google.com/p/pyodbc/wiki/ConnectionStrings)中的规定发送到驱动程序中。但是，使用`urllib.quote_plus`时，定界符必须是URL转义的：
+PyODBC 连接字符串也可以使用参数`odbc_connect`完全按照[ConnectionStrings](https://code.google.com/p/pyodbc/wiki/ConnectionStrings)中的规定发送到驱动程序中。但是，使用`urllib.quote_plus`时，定界符必须是 URL 转义的：
 
-    import urllib
+    import urllibplain
     params = urllib.quote_plus("DRIVER={SQL Server Native Client 10.0};SERVER=dagger;DATABASE=test;UID=user;PWD=password")
 
     engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
@@ -841,13 +841,13 @@ mxODBC [¶ T0\>](#module-sqlalchemy.dialects.mssql.mxodbc "Permalink to this hea
 
 ### DBAPI [¶ T0\>](#dialect-mssql-mxodbc-url "Permalink to this headline")
 
-mxODBC的文档和下载信息（如果适用）可在以下网址获得：[http://www.egenix.com/](http://www.egenix.com/)
+mxODBC 的文档和下载信息（如果适用）可在以下网址获得：[http://www.egenix.com/](http://www.egenix.com/)
 
 ### 连接[¶ T0\>](#dialect-mssql-mxodbc-connect "Permalink to this headline")
 
 连接字符串：
 
-    mssql+mxodbc://<username>:<password>@<dsnname>plainplain
+    mssql+mxodbc://<username>:<password>@<dsnname>
 
 ### 执行模式[¶](#execution-modes "Permalink to this headline")
 
@@ -902,7 +902,7 @@ zxjdbc [¶ T0\>](#module-sqlalchemy.dialects.mssql.zxjdbc "Permalink to this hea
 
 连接字符串：
 
-    mssql+zxjdbc://user:pass@host:port/dbname[?key=value&key=value...]plain
+    mssql+zxjdbc://user:pass@host:port/dbname[?key=value&key=value...]
 
 AdoDBAPI [¶ T0\>](#module-sqlalchemy.dialects.mssql.adodbapi "Permalink to this headline")
 ------------------------------------------------------------------------------------------
@@ -911,13 +911,13 @@ AdoDBAPI [¶ T0\>](#module-sqlalchemy.dialects.mssql.adodbapi "Permalink to this
 
 ### DBAPI [¶ T0\>](#dialect-mssql-adodbapi-url "Permalink to this headline")
 
-有关adodbapi的文档和下载信息（如果适用），请访问：[http://adodbapi.sourceforge.net/](http://adodbapi.sourceforge.net/)
+有关 adodbapi 的文档和下载信息（如果适用），请访问：[http://adodbapi.sourceforge.net/](http://adodbapi.sourceforge.net/)
 
 ### 连接[¶ T0\>](#dialect-mssql-adodbapi-connect "Permalink to this headline")
 
 连接字符串：
 
-    mssql+adodbapi://<username>:<password>@<dsnname>
+    mssql+adodbapi://<username>:<password>@<dsnname>plain
 
 注意
 

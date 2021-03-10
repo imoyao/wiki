@@ -20,20 +20,20 @@ SQL 表达式[¶](#sql-expressions "Permalink to this headline")
 
 在绝大多数情况下，SQLAlchemy 语句或 Query 的“字符串化”非常简单：
 
-    print(str(statement))plainplain
+    print(str(statement))plain
 
 这适用于 ORM [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")以及任何[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")或其他语句。此外，要将语句编译为特定的方言或引擎，如果语句本身尚未绑定到某个语句，您可以将它传递给[`ClauseElement.compile()`](core_sqlelement.html#sqlalchemy.sql.expression.ClauseElement.compile "sqlalchemy.sql.expression.ClauseElement.compile")：
 
-    print(statement.compile(someengine))plain
+    print(statement.compile(someengine))
 
 或者没有[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")：
 
-    from sqlalchemy.dialects import postgresqlplainplainplain
+    from sqlalchemy.dialects import postgresqlplain
     print(statement.compile(dialect=postgresql.dialect()))
 
 当给定 ORM [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象时，为了获得[`ClauseElement.compile()`](core_sqlelement.html#sqlalchemy.sql.expression.ClauseElement.compile "sqlalchemy.sql.expression.ClauseElement.compile")方法，我们只需要首先访问[`statement`](orm_query.html#sqlalchemy.orm.query.Query.statement "sqlalchemy.orm.query.Query.statement")访问器：
 
-    statement = query.statement
+    statement = query.statementplain
     print(statement.compile(someengine))
 
 上述表单将在传递给 Python
@@ -52,7 +52,7 @@ DBAPI 适当地处理的，更不用说绕过绑定参数可能是现代 Web 应
 
 要支持对不支持类型的内联文字渲染，请为包含[`TypeDecorator.process_literal_param()`](core_custom_types.html#sqlalchemy.types.TypeDecorator.process_literal_param "sqlalchemy.types.TypeDecorator.process_literal_param")方法的目标类型实现一个[`TypeDecorator`](core_custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")：
 
-    from sqlalchemy import TypeDecorator, Integerplainplain
+    from sqlalchemy import TypeDecorator, Integer
 
 
     class MyFancyType(TypeDecorator):
@@ -72,7 +72,7 @@ DBAPI 适当地处理的，更不用说绕过绑定参数可能是现代 Web 应
 
 产出如下产出：
 
-    SELECT mytable.xplainplain
+    SELECT mytable.xplain
     FROM mytable
     WHERE mytable.x > my_fancy_formatting(5)
 
@@ -81,11 +81,11 @@ DBAPI 适当地处理的，更不用说绕过绑定参数可能是现代 Web 应
 
 关于这个问题的一点介绍。SQL 中的 IN 运算符给出了要与列进行比较的元素列表，但通常不会接受空列表，即可以这样说：
 
-    column IN (1, 2, 3)plainplain
+    column IN (1, 2, 3)plain
 
 这是无效的说：
 
-    column IN ()plain
+    column IN ()
 
 SQLAlchemy 的`Operators.in_()`运算符在给出一个空列表时产生这个表达式：
 
@@ -96,17 +96,17 @@ SQLAlchemy 的`Operators.in_()`运算符在给出一个空列表时产生这个�
 例如，“通过比较 1 = 0 或 1！=
 1 来评估为假”的幼稚方法不能正确处理空值。表达式如下：
 
-    NOT column != columnplainplainplainplain
+    NOT column != columnplain
 
 当“列”为空时不会返回一行，但是不考虑列的表达式：
 
-    NOT 1=0plainplainplain
+    NOT 1=0plain
 
 将。
 
 更接近该商标的是以下 CASE 表达式：
 
-    CASE WHEN column IS NOT NULL THEN 1=0 ELSE NULL ENDplainplain
+    CASE WHEN column IS NOT NULL THEN 1=0 ELSE NULL ENDplain
 
 我们不使用这个表达式，因为它的冗长，而且在 WHERE 子句中它也不被 Oracle 接受
 - 取决于你如何说出它，你会得到“ORA-00905：missing keyword”或者“ORA-00920

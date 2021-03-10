@@ -147,3 +147,4 @@ dmypy.json
 .pyre/
 
 .idea/
+report*.json

@@ -15,7 +15,7 @@ tags:
 
 在这个例子中，我们将使用一个名为`Node`的映射类来表示一个树结构：
 
-    class Node(Base):plain
+    class Node(Base):
         __tablename__ = 'node'
         id = Column(Integer, primary_key=True)
         parent_id = Column(Integer, ForeignKey('node.id'))
@@ -24,14 +24,14 @@ tags:
 
 有了这个结构，一个图形如下：
 
-    root --+---> child1plainplain
+    root --+---> child1
            +---> child2 --+--> subchild1
            |              +--> subchild2
            +---> child3
 
 将用以下数据表示：
 
-    id       parent_id     dataplainplainplainplain
+    id       parent_id     dataplain
     ---      -------       ----
     1        NULL          root
     2        1             child1
@@ -42,7 +42,7 @@ tags:
 
 这里[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")配置与“正常”一对多关系的工作方式相同，除了“方向”，即关系是一对多还是一对多多对一，默认情况下假定为一对多。为了建立多对一的关系，额外的指令被称为[`remote_side`](relationship_api.html#sqlalchemy.orm.relationship.params.remote_side "sqlalchemy.orm.relationship")，它是[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")或[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的集合表明那些应该被认为是“遥远”的那些：
 
-    class Node(Base):plainplainplain
+    class Node(Base):plain
         __tablename__ = 'node'
         id = Column(Integer, primary_key=True)
         parent_id = Column(Integer, ForeignKey('node.id'))
@@ -53,7 +53,7 @@ tags:
 
 与往常一样，可以使用[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")函数将两个方向组合为双向关系：
 
-    class Node(Base):plainplain
+    class Node(Base):plain
         __tablename__ = 'node'
         id = Column(Integer, primary_key=True)
         parent_id = Column(Integer, ForeignKey('node.id'))
@@ -71,7 +71,7 @@ Persistence](examples.html#examples-xmlpersistence)。
 
 邻接列表关系的子类别是连接条件的“本地”和“远程”两侧都存在特定列的罕见情况。一个例子是下面的`Folder`类；使用复合主键，`account_id`列引用自身，以指示与父文件位于同一帐户内的子文件夹；而`folder_id`指的是该帐户中的特定文件夹：
 
-    class Folder(Base):plain
+    class Folder(Base):
         __tablename__ = 'folder'
         __table_args__ = (
           ForeignKeyConstraint(
@@ -98,7 +98,7 @@ Persistence](examples.html#examples-xmlpersistence)。
 
 查询自引用结构的工作方式与其他查询类似：
 
-    # get all nodes named 'child2'plain
+    # get all nodes named 'child2'
     session.query(Node).filter(Node.data=='child2')
 
 但是，当试图沿着外键从树的一级连接到下一级时，需要格外小心。在 SQL 中，从表到它自身的连接要求表达式的至少一侧是“别名”，以便可以毫不含糊地引用它。
@@ -106,7 +106,7 @@ Persistence](examples.html#examples-xmlpersistence)。
 回顾 ORM 教程中的[Using
 Aliases](tutorial.html#ormtutorial-aliases)，[`orm.aliased()`](query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")构造通常用于提供 ORM 实体的“别名”。使用这种技术从`Node`加入自己的过程如下所示：
 
-    from sqlalchemy.orm import aliasedplainplainplain
+    from sqlalchemy.orm import aliased
 
     nodealias = aliased(Node)
     sqlsession.query(Node).filter(Node.data=='subchild1').\
@@ -128,7 +128,7 @@ that can shorten the verbosity self- referential joins, at the expense
 of query flexibility.
 此功能执行与上述相似的“别名”步骤，而不需要明确的实体。调用[`Query.filter()`](query.html#sqlalchemy.orm.query.Query.filter "sqlalchemy.orm.query.Query.filter")以及在别名连接之后的类似操作将**将`Node`实体修改为别名的实体：**
 
-    sqlsession.query(Node).filter(Node.data=='subchild1').\plainplain
+    sqlsession.query(Node).filter(Node.data=='subchild1').\
             join(Node.parent, aliased=True).\
             filter(Node.data=='child2').\
             all()
@@ -142,7 +142,7 @@ of query flexibility.
 
 要将标准添加到更长连接的多个点，请将[`Query.join.from_joinpoint`](query.html#sqlalchemy.orm.query.Query.join.params.from_joinpoint "sqlalchemy.orm.query.Query.join")添加到其他[`join()`](query.html#sqlalchemy.orm.query.Query.join "sqlalchemy.orm.query.Query.join")调用中：
 
-    # get all nodes named 'subchild1' with aplain
+    # get all nodes named 'subchild1' with a
     # parent named 'child2' and a grandparent 'root'
     sqlsession.query(Node).\
             filter(Node.data=='subchild1').\
@@ -164,7 +164,7 @@ of query flexibility.
 
 [`Query.reset_joinpoint()`](query.html#sqlalchemy.orm.query.Query.reset_joinpoint "sqlalchemy.orm.query.Query.reset_joinpoint")也会从过滤调用中移除“别名”：
 
-    session.query(Node).\plainplainplain
+    session.query(Node).\plain
             join(Node.children, aliased=True).\
             filter(Node.data == 'foo').\
             reset_joinpoint().\
@@ -178,7 +178,7 @@ Persistence](examples.html#examples-xmlpersistence)。
 
 在正常的查询操作期间，使用从父表到子表的连接或外连接进行预先加载关系，从而可以从单个 SQL 语句填充父代及其直接子集合或引用，或者可以为所有直接子集合填充第二个语句。在加入相关项目时，SQLAlchemy 的联接和子查询预加载在所有情况下使用别名表，因此与自引用加入兼容。但是，为了使用自引用关系进行加载，需要告诉 SQLAlchemy 应该加入和/或查询多少层；否则急切的负载将不会发生。该深度设置通过[`join_depth`](mapping_api.html#sqlalchemy.orm.mapper.Mapper.relationships.params.join_depth "sqlalchemy.orm.mapper.Mapper.relationships")进行配置：
 
-    class Node(Base):plain
+    class Node(Base):
         __tablename__ = 'node'
         id = Column(Integer, primary_key=True)
         parent_id = Column(Integer, ForeignKey('node.id'))

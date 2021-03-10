@@ -11,7 +11,7 @@ tags:
 甲骨文[¶ T0\>](#module-sqlalchemy.dialects.oracle.base "Permalink to this headline")
 ====================================================================================
 
-支持Oracle数据库。
+支持 Oracle 数据库。
 
 DBAPI 支持[¶](#dialect-oracle "Permalink to this headline")
 ----------------------------------------------------------
@@ -19,7 +19,7 @@ DBAPI 支持[¶](#dialect-oracle "Permalink to this headline")
 以下 dialect / DBAPI 选项可用。请参阅各个 DBAPI 部分的连接信息。
 
 -   [CX-甲骨文 T0\>](#module-sqlalchemy.dialects.oracle.cx_oracle)
--   Jython的[zxJDBC](#module-sqlalchemy.dialects.oracle.zxjdbc)
+-   Jython 的[zxJDBC](#module-sqlalchemy.dialects.oracle.zxjdbc)
 
 连接参数[¶](#connect-arguments "Permalink to this headline")
 ------------------------------------------------------------
@@ -46,7 +46,7 @@ enable autoincrement*.
           Column(...), ...
     )
 
-当使用表反射时，这一步也是必需的，即autoload = True：
+当使用表反射时，这一步也是必需的，即 autoload = True：
 
     t = Table('mytable', metadata,
           Column('id', Integer, Sequence('id_seq'), primary_key=True),
@@ -75,7 +75,7 @@ exact methodology is taken from
     ROWS()”优化关键字默认不使用。要启用此优化指令，请将`optimize_limits=True`指定为[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")。
 -   为极限/偏移量传递的值将作为绑定参数发送。一些用户已经观察到，如果值作为绑定发送并且不是字面呈现，Oracle 会产生一个糟糕的查询计划。要在 SQL 语句中逐字地显示限制/偏移值，请将`use_binds_for_limits=False`指定为[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")。
 
-当使用完全不同的窗口查询方法（即ROW\_NUMBER()OVER（ORDER
+当使用完全不同的窗口查询方法（即 ROW\_NUMBER()OVER（ORDER
 BY））来提供 LIMIT /
 OFFSET（注意大多数用户不会观察到此情况）时，某些用户报告了更好的性能。为了适应这种情况，用于 LIMIT
 /
@@ -89,12 +89,12 @@ Support](#cx-oracle-returning)）。
 
 SQLAlchemy 的“隐式返回”功能通常在 Oracle 后端启用，它在 INSERT 中使用 RETURNING，有时使用 UPDATE 语句来获取新生成的主键值和其他 SQL 默认值和表达式。默认情况下，“隐式返回”通常只会获取嵌入到 INSERT 中的单个`nextval(some_seq)`表达式的值，以便在 INSERT 语句中递增序列并同时返回值。要全面禁用此功能，请将`implicit_returning=False`指定为[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")：
 
-    engine = create_engine("oracle://scott:tiger@dsn",plainplain
+    engine = create_engine("oracle://scott:tiger@dsn",
                            implicit_returning=False)
 
 隐式返回也可作为表选项在逐个表的基础上禁用：
 
-    # Core Tableplainplainplain
+    # Core Tableplain
     my_table = Table("my_table", metadata, ..., implicit_returning=False)
 
 
@@ -143,7 +143,7 @@ schemas or accessed over DBLINK, by passing the flag
 to the [`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
 construct:
 
-    some_table = Table('some_table', autoload=True,plainplain
+    some_table = Table('some_table', autoload=True,plain
                                 autoload_with=some_engine,
                                 oracle_resolve_synonyms=True)
 
@@ -170,7 +170,7 @@ CREATE TABLE 短语通过与[`Table`](core_metadata.html#sqlalchemy.schema.Table
 
 -   `ON COMMIT`：
 
-        Table(plainplain
+        Table(
             "some_table", metadata, ...,
             prefixes=['GLOBAL TEMPORARY'], oracle_on_commit='PRESERVE ROWS')
 
@@ -178,7 +178,7 @@ CREATE TABLE 短语通过与[`Table`](core_metadata.html#sqlalchemy.schema.Table
 
 -   `COMPRESS`
 
-         Table('mytable', metadata, Column('data', String(32)),plainplain
+         Table('mytable', metadata, Column('data', String(32)),plain
              oracle_compress=True)
 
          Table('mytable', metadata, Column('data', String(32)),
@@ -206,7 +206,7 @@ Oracle 特定索引选项[¶](#oracle-specific-index-options "Permalink to this 
 
 对于包含大量重复值的索引，Oracle 具有更高效的存储模式。使用`oracle_compress`参数打开密钥压缩：
 
-    Index('my_index', my_table.c.data, oracle_compress=True)plainplain
+    Index('my_index', my_table.c.data, oracle_compress=True)
 
     Index('my_index', my_table.c.data1, my_table.c.data2, unique=True,
            oracle_compress=1)
@@ -231,7 +231,7 @@ Oracle 数据类型[¶](#oracle-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.oracle.`{.descclassname}`BFILE`{.descname}(*length=None*)[¶](#sqlalchemy.dialects.oracle.BFILE "Permalink to this definition")
 :   基础：[`sqlalchemy.types.LargeBinary`](core_type_basics.html#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
 
-    ` __初始化__  T0> （ T1> 长度=无 T2> ） T3> ¶ T4>`{.descname}
+    ` __初始化__  T0> （ T1> 长度=无 T2> ） T3> ¶ T4>`{.descname}plain
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.LargeBinary.__init__ "sqlalchemy.types.LargeBinary.__init__")
         *method of* [`LargeBinary`](core_type_basics.html#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
 
@@ -273,7 +273,7 @@ Oracle 数据类型[¶](#oracle-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.oracle。`{.descclassname} `INTERVAL`{.descname} （ *day\_precision =无*，*second\_precision =无 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.oracle.INTERVAL "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-     `__init__`{.descname}(*day\_precision=None*, *second\_precision=None*)[¶](#sqlalchemy.dialects.oracle.INTERVAL.__init__ "Permalink to this definition")
+     `__init__`{.descname}(*day\_precision=None*, *second\_precision=None*)[¶](#sqlalchemy.dialects.oracle.INTERVAL.__init__ "Permalink to this definition")plain
     :   构建一个INTERVAL。
 
         请注意，目前仅支持DAY TO
@@ -292,7 +292,7 @@ Oracle 数据类型[¶](#oracle-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.oracle.`{.descclassname}`NCLOB`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.NCLOB "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")
 
-     `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.NCLOB.__init__ "Permalink to this definition")
+     `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.NCLOB.__init__ "Permalink to this definition")plain
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.String.__init__ "sqlalchemy.types.String.__init__")
         *method of* [`String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
 
@@ -421,7 +421,7 @@ cx\_Oracle [¶ T0\>](#module-sqlalchemy.dialects.oracle.cx_oracle "Permalink to 
 
 连接字符串：
 
-    oracle+cx_oracle://user:pass@host:port/dbname[?key=value&key=value...]plainplain
+    oracle+cx_oracle://user:pass@host:port/dbname[?key=value&key=value...]
 
 ### 其他连接参数[¶](#additional-connect-arguments "Permalink to this headline")
 
@@ -495,8 +495,8 @@ cx\_Oracle SQLAlchemy 方言提供了两种不同的选项，用于在 Python
 2 方法停用。在 Python
 3 下，SQLAlchemy 检测到 cx\_Oracle 本地返回 unicode 对象，并使用 cx\_Oracle 的系统。
 
-要在Python
-2下重新启用cx\_Oracle 的输出类型处理程序，可以将`coerce_to_unicode=True`标志（0.9.4中的新值）传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")：
+要在 Python
+2 下重新启用 cx\_Oracle 的输出类型处理程序，可以将`coerce_to_unicode=True`标志（0.9.4中的新值）传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")：
 
     engine = create_engine("oracle+cx_oracle://dsn", coerce_to_unicode=True)plain
 
@@ -510,7 +510,7 @@ cx\_Oracle SQLAlchemy 方言提供了两种不同的选项，用于在 Python
 版本 0.9.2 更改： cx\_Oracle 的 outputtypehandlers 不再用于 Python
 2 中非 Unicode 数据类型的 unicode 结果，因为它们被确定为主要的性能瓶颈。而是使用 SQLAlchemy 自己的 unicode 工具。
 
-版本0.9.4新增：添加了`coerce_to_unicode`标志，以重新启用 cx\_Oracle 的 outputtypehandler 并恢复到 0.9.2 之前的行为。
+版本 0.9.4 新增：添加了`coerce_to_unicode`标志，以重新启用 cx\_Oracle 的 outputtypehandler 并恢复到 0.9.2 之前的行为。
 
 ### 返回支持[¶](#cx-oracle-returning "Permalink to this headline")
 
@@ -521,7 +521,7 @@ API 的支持，因此其他列表达式将以非确定的方式导致问题。
 因此，通过完全禁用 RETURNING 支持可以提高稳定性；否则 SQLAlchemy 将使用 RETURNING 来获取新序列生成的主键。如[RETURNING
 Support](#oracle-returning)所示：
 
-    engine = create_engine("oracle://scott:tiger@dsn",plainplain
+    engine = create_engine("oracle://scott:tiger@dsn",plain
                            implicit_returning=False)
 
 也可以看看

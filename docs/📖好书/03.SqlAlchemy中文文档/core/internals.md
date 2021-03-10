@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:35
 permalink: /sqlalchemy/core/internals/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - core
 tags:
 ---
@@ -1126,7 +1126,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
         与目标映射器关联的每个MapperProperty处理查询上下文引用的语句，并根据需要添加列和/或标准。
 
 `sqlalchemy.orm.interfaces。`{.descclassname} `NOT_EXTENSION`{.descname} *=符号（'NOT\_EXTENSION'）* [¶](#sqlalchemy.orm.interfaces.NOT_EXTENSION "Permalink to this definition")
-:   指示不属于sqlalchemy.ext的`InspectionAttr`的符号。
+:   指示不属于 sqlalchemy.ext 的`InspectionAttr`的符号。
 
     分配给[`InspectionAttr.extension_type`{](#sqlalchemy.orm.base.InspectionAttr.extension_type "sqlalchemy.orm.base.InspectionAttr.extension_type")属性。
 
@@ -1661,7 +1661,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
  *class*`sqlalchemy.orm.properties.`{.descclassname}`RelationshipProperty`{.descname}(*argument*, *secondary=None*, *primaryjoin=None*, *secondaryjoin=None*, *foreign\_keys=None*, *uselist=None*, *order\_by=False*, *backref=None*, *back\_populates=None*, *post\_update=False*, *cascade=False*, *extension=None*, *viewonly=False*, *lazy=True*, *collection\_class=None*, *passive\_deletes=False*, *passive\_updates=True*, *remote\_side=None*, *enable\_typechecks=True*, *join\_depth=None*, *comparator\_factory=None*, *single\_parent=False*, *innerjoin=False*, *distinct\_target\_key=None*, *doc=None*, *active\_history=False*, *cascade\_backrefs=True*, *load\_on\_pending=False*, *bake\_queries=True*, *strategy\_class=None*, *\_local\_remote\_pairs=None*, *query\_class=None*, *info=None*)[¶](#sqlalchemy.orm.properties.RelationshipProperty "Permalink to this definition")
 :   基础：`sqlalchemy.orm.interfaces.StrategizedProperty`
 
-    描述保存与相关数据库表对应的单个项目或项目列表的对象属性。
+    描述保存与相关数据库表对应的单个项目或项目列表的对象属性。plain
 
     公共构造函数是[`orm.relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")函数。
 
@@ -2821,7 +2821,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
  *class*`sqlalchemy.orm.session.`{.descclassname}`UOWTransaction`{.descname}(*session*)[¶](#sqlalchemy.orm.session.UOWTransaction "Permalink to this definition")
 :    `filter_states_for_dep`{.descname}(*dep*, *states*)[¶](#sqlalchemy.orm.session.UOWTransaction.filter_states_for_dep "Permalink to this definition")
-    :   将InstanceState的给定列表筛选为与给定的DependencyProcessor相关的列表。
+    :   将 InstanceState 的给定列表筛选为与给定的 DependencyProcessor 相关的列表。
 
     ` finalize_flush_changes  T0> （ T1> ） T2> ¶ T3>`{.descname}
     :   在成功刷新()后将处理的对象标记为清除/删除。

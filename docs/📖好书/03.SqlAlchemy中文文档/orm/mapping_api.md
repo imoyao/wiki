@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy中文文档
   - orm
 tags:
-  - 
 ---
 类映射 API [¶](#class-mapping-api "Permalink to this headline")
 ==============================================================
@@ -417,7 +416,7 @@ tags:
  `sqlalchemy.orm.util.`{.descclassname}`identity_key`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.orm.util.identity_key "Permalink to this definition")
 :   生成“身份密钥”元组，就像在[`Session.identity_map`](session_api.html#sqlalchemy.orm.session.Session.identity_map "sqlalchemy.orm.session.Session.identity_map")字典中用作键一样。
 
-    这个函数有几种调用方式：plain
+    这个函数有几种调用方式：
 
     -   `identity_key（class， ident）`
 
@@ -475,7 +474,7 @@ tags:
  `sqlalchemy.orm.util.`{.descclassname}`polymorphic_union`{.descname}(*table\_map*, *typecolname*, *aliasname='p\_union'*, *cast\_nulls=True*)[¶](#sqlalchemy.orm.util.polymorphic_union "Permalink to this definition")
 :   创建一个由多态映射器使用的`UNION`语句。
 
-    有关如何使用它的示例，请参阅[Concrete Tableplain
+    有关如何使用它的示例，请参阅[Concrete Table
     Inheritance](inheritance.html#concrete-inheritance)。
 
     参数：
@@ -499,7 +498,7 @@ tags:
  *class*`sqlalchemy.orm.mapper.`{.descclassname}`Mapper`{.descname}(*class\_*, *local\_table=None*, *properties=None*, *primary\_key=None*, *non\_primary=False*, *inherits=None*, *inherit\_condition=None*, *inherit\_foreign\_keys=None*, *extension=None*, *order\_by=False*, *always\_refresh=False*, *version\_id\_col=None*, *version\_id\_generator=None*, *polymorphic\_on=None*, *\_polymorphic\_map=None*, *polymorphic\_identity=None*, *concrete=False*, *with\_polymorphic=None*, *allow\_partial\_pks=True*, *batch=True*, *column\_prefix=None*, *include\_properties=None*, *exclude\_properties=None*, *passive\_updates=True*, *passive\_deletes=False*, *confirm\_deleted\_rows=True*, *eager\_defaults=False*, *legacy\_is\_orphan=False*, *\_compiled\_cache\_size=100*)[¶](#sqlalchemy.orm.mapper.Mapper "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.base.InspectionAttr`](internals.html#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")
 
-    定义类属性与数据库表列的关联。plain
+    定义类属性与数据库表列的关联。
 
     [`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象使用[`mapper()`](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")函数实例化。有关实例化新的[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象的信息，请参阅该函数的文档。
 

@@ -17,13 +17,13 @@ PostgreSQL [¶ T0\>](#module-sqlalchemy.dialects.postgresql.base "Permalink to t
 DBAPI支持[¶](#dialect-postgresql "Permalink to this headline")
 --------------------------------------------------------------
 
-以下dialect / DBAPI选项可用。请参阅各个DBAPI部分的连接信息。
+以下 dialect / DBAPI 选项可用。请参阅各个 DBAPI 部分的连接信息。
 
 -   [psycopg2 T0\>](#module-sqlalchemy.dialects.postgresql.psycopg2)
 -   [pg8000 T0\>](#module-sqlalchemy.dialects.postgresql.pg8000)
 -   [psycopg2cffi
     T0\>](#module-sqlalchemy.dialects.postgresql.psycopg2cffi)
--   [PY-的PostgreSQL
+-   [PY-的 PostgreSQL
     T0\>](#module-sqlalchemy.dialects.postgresql.pypostgresql)
 -   [pygresql T0\>](#module-sqlalchemy.dialects.postgresql.pygresql)
 -   Jython 的[zxJDBC](#module-sqlalchemy.dialects.postgresql.zxjdbc)
@@ -93,7 +93,7 @@ Postgresql 方言可以反映来自任何模式的表格。[`Table.schema`(core_
 
 默认情况下，Postgresql 方言模仿 Postgresql 自己的`pg_get_constraintdef()`内置过程鼓励的行为。此函数返回特定外键约束的样本定义，当该名称也位于Postgresql模式搜索路径中时，省略该定义中引用的模式名称。下面的交互说明了这种行为：
 
-    test=> CREATE TABLE test_schema.referred(id INTEGER PRIMARY KEY);
+    test=> CREATE TABLE test_schema.referred(id INTEGER PRIMARY KEY);plain
     CREATE TABLE
     test=> CREATE TABLE referring(
     test(>         id INTEGER PRIMARY KEY,
@@ -135,7 +135,7 @@ added `test_schema` to the PG
      FOREIGN KEY (referred_id) REFERENCES test_schema.referred(id)
     (1 row)
 
-SQLAlchemy将默认使用`pg_get_constraintdef()`的返回值来确定远程模式名称。也就是说，如果我们的`search_path`被设置为包含`test_schema`，并且我们调用了一个表反射过程，如下所示：
+SQLAlchemy 将默认使用`pg_get_constraintdef()`的返回值来确定远程模式名称。也就是说，如果我们的`search_path`被设置为包含`test_schema`，并且我们调用了一个表反射过程，如下所示：
 
     >>> from sqlalchemy import Table, MetaData, create_engine
     >>> engine = create_engine("postgresql://scott:tiger@localhost/test")
@@ -151,7 +151,7 @@ The above process would deliver to the [`MetaData.tables`](core_metadata.html#sq
 collection `referred` table named **without** the
 schema:
 
-    >>> meta.tables['referred'].schema is Noneplainplain
+    >>> meta.tables['referred'].schema is Noneplain
     True
 
 要改变反射的行为，使得不管`search_path`设置如何都维护所引用的模式，请使用`postgresql_ignore_search_path`选项，该选项可以指定为两种语言的特定于方言的参数[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")以及[`MetaData.reflect()`](core_metadata.html#sqlalchemy.schema.MetaData.reflect "sqlalchemy.schema.MetaData.reflect")：
@@ -272,7 +272,7 @@ and [`on_conflict_do_nothing()`](#sqlalchemy.dialects.postgresql.dml.Insert.on_c
 
 -   当使用[`Insert.on_conflict_do_update.index_elements`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.index_elements "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")推断索引时，可以通过指定使用[`Insert.on_conflict_do_update.index_where`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.index_where "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")参数来推断部分索引：
 
-        from sqlalchemy.dialects.postgresql import insertplain
+        from sqlalchemy.dialects.postgresql import insert
 
         stmt = insert(my_table).values(user_email='a@b.com', data='inserted data')
         stmt = stmt.on_conflict_do_update(
@@ -308,7 +308,7 @@ update of the already existing row, using any combination of new values
 as well as values from the proposed insertion.
 这些值是使用[`Insert.on_conflict_do_update.set_`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.set_ "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")参数指定的。该参数接受由 UPDATE 的直接值组成的字典：
 
-    from sqlalchemy.dialects.postgresql import insertplainplain
+    from sqlalchemy.dialects.postgresql import insertplain
 
     stmt = insert(my_table).values(id='some_id', data='inserted value')
     do_update_stmt = stmt.on_conflict_do_update(
@@ -319,8 +319,8 @@ as well as values from the proposed insertion.
 
 警告
 
-[`Insert.on_conflict_do_update()`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")方法不考虑 Python 方面的默认 UPDATE 值或生成函数，例如****。例如那些使用[`Column.onupdate`](core_metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")指定的。除非在[`Insert.on_conflict_do_update.set_`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.set_ "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")字典中手动指定这些值，否则这些值不会用于ON
-CONFLICT样式的UPDATE。
+[`Insert.on_conflict_do_update()`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")方法不考虑 Python 方面的默认 UPDATE 值或生成函数，例如****。例如那些使用[`Column.onupdate`](core_metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")指定的。除非在[`Insert.on_conflict_do_update.set_`](#sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update.params.set_ "sqlalchemy.dialects.postgresql.dml.Insert.on_conflict_do_update")字典中手动指定这些值，否则这些值不会用于 ON
+CONFLICT 样式的 UPDATE。
 
 为了引用建议的插入行，特殊别名[`excluded`](#sqlalchemy.dialects.postgresql.dml.Insert.excluded "sqlalchemy.dialects.postgresql.dml.Insert.excluded")可作为[`postgresql.dml.Insert`](#sqlalchemy.dialects.postgresql.dml.Insert "sqlalchemy.dialects.postgresql.dml.Insert")对象上的属性；这个对象是一个[`ColumnCollection`](core_sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")，这个别名包含目标表的所有列：
 
@@ -377,7 +377,7 @@ method:
 
 [INSERT .. ON
 CONFLICT](http://www.postgresql.org/docs/current/static/sql-insert.html#SQL-ON-CONFLICT)
-- 在Postgresql文档中。
+- 在 Postgresql 文档中。
 
 全文检索[¶](#full-text-search "Permalink to this headline")
 -----------------------------------------------------------
@@ -385,7 +385,7 @@ CONFLICT](http://www.postgresql.org/docs/current/static/sql-insert.html#SQL-ON-C
 SQLAlchemy makes available the Postgresql `@@`
 operator via the [`ColumnElement.match()`](core_sqlelement.html#sqlalchemy.sql.expression.ColumnElement.match "sqlalchemy.sql.expression.ColumnElement.match")
 method on any textual column expression.
-在Postgresql方言中，表达式如下所示：
+在 Postgresql 方言中，表达式如下所示：
 
     select([sometable.c.text.match("search string")])
 
@@ -464,7 +464,7 @@ can be used to produce the `SELECT ... FROM ONLY`,
     # DELETE FROM ONLY ...
     table.delete().with_hint('ONLY', dialect_name='postgresql')
 
-Postgresql特定的索引选项[¶](#postgresql-specific-index-options "Permalink to this headline")
+Postgresql 特定的索引选项[¶](#postgresql-specific-index-options "Permalink to this headline")
 --------------------------------------------------------------------------------------------
 
 对于[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")结构的几个扩展是可用的，特定于 PostgreSQL 方言。
@@ -473,7 +473,7 @@ Postgresql特定的索引选项[¶](#postgresql-specific-index-options "Permalin
 
 部分索引为索引定义添加标准，以便将索引应用于行的子集。这些可以使用`postgresql_where`关键字参数在[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")中指定：
 
-    Index('my_index', my_table.c.id, postgresql_where=tbl.c.value > 10)
+    Index('my_index', my_table.c.id, postgresql_where=tbl.c.value > 10)plain
 
 ### 运算符类[¶](#operator-classes "Permalink to this headline")
 
@@ -493,11 +493,11 @@ t1
 
 ### 索引类型[¶](#index-types "Permalink to this headline")
 
-PostgreSQL提供了几种索引类型：B-Tree，Hash，GiST和GIN，以及用户创建自己的能力（参见[http://www.postgresql.org/docs/8.3/static/indexes
+PostgreSQL 提供了几种索引类型：B-Tree，Hash，GiST 和 GIN，以及用户创建自己的能力（参见[http://www.postgresql.org/docs/8.3/static/indexes
 -types.html
 T0\>）。](http://www.postgresql.org/docs/8.3/static/indexes-types.html)可以使用`postgresql_using`关键字参数在[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")中指定这些参数：
 
-    Index('my_index', my_table.c.data, postgresql_using='gin')
+    Index('my_index', my_table.c.data, postgresql_using='gin')plain
 
 The value passed to the keyword argument will be simply passed through
 to the underlying CREATE INDEX command, so it *must* be a valid index
@@ -511,7 +511,7 @@ PostgreSQL允许在索引上设置存储参数。可用的存储参数取决于�
 
 版本1.0.6中的新功能
 
-PostgreSQL允许定义要在其中创建索引的表空间。可以使用`postgresql_tablespace`关键字参数在[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")上指定表空间：
+PostgreSQL 允许定义要在其中创建索引的表空间。可以使用`postgresql_tablespace`关键字参数在[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")上指定表空间：
 
     Index('my_index', my_table.c.data, postgresql_tablespace='my_tablespace')plain
 
@@ -567,7 +567,7 @@ it is detected as corresponding to a unique constraint.
 
 用于 Postgresql 后端的[`Inspector`](core_reflection.html#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")是[`PGInspector`](#sqlalchemy.dialects.postgresql.base.PGInspector "sqlalchemy.dialects.postgresql.base.PGInspector")的一个实例，它提供了其他方法：
 
-    from sqlalchemy import create_engine, inspect
+    from sqlalchemy import create_engine, inspectplain
 
     engine = create_engine("postgresql+psycopg2://localhost/test")
     insp = inspect(engine)  # will be a PGInspector
@@ -577,7 +577,7 @@ it is detected as corresponding to a unique constraint.
 *class* `sqlalchemy.dialects.postgresql.base。`{.descclassname} `PGInspector`{.descname} （ *conn* ） T5\> [¶ T6\>](#sqlalchemy.dialects.postgresql.base.PGInspector "Permalink to this definition")
 :   基础：[`sqlalchemy.engine.reflection.Inspector`](core_reflection.html#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")
 
-    ` get_enums  T0> （ T1> 架构=无 T2> ） T3> ¶ T4>`{.descname}plainplain
+    ` get_enums  T0> （ T1> 架构=无 T2> ） T3> ¶ T4>`{.descname}
     :   返回ENUM对象的列表。
 
         每个成员都是包含这些字段的字典：
@@ -674,9 +674,9 @@ Postgresql方言支持数组，既可以是多维列类型也可以是数组文�
 -   [`postgresql.array_agg()`](#sqlalchemy.dialects.postgresql.array_agg "sqlalchemy.dialects.postgresql.array_agg")
     - ARRAY\_AGG SQL函数
 -   [`postgresql.aggregate_order_by`](#sqlalchemy.dialects.postgresql.aggregate_order_by "sqlalchemy.dialects.postgresql.aggregate_order_by")
-    - PG的ORDER BY聚合函数语法的助手。
+    - PG 的 ORDER BY 聚合函数语法的助手。
 
-JSON类型[¶](#json-types "Permalink to this headline")
+JSON 类型[¶](#json-types "Permalink to this headline")
 -----------------------------------------------------
 
 Postgresql 方言支持 JSON 和 JSONB 数据类型，包括 psycopg2 的本地支持和对 Postgresql 所有特殊操作符的支持：
@@ -692,7 +692,7 @@ HSTORE类型[¶](#hstore-type "Permalink to this headline")
 -   [`postgresql.HSTORE`](#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")
     - HSTORE 数据类型
 -   [`postgresql.hstore`](#sqlalchemy.dialects.postgresql.hstore "sqlalchemy.dialects.postgresql.hstore")
-    - hstore文字
+    - hstore 文字
 
 ENUM 类型[¶](#enum-types "Permalink to this headline")
 -----------------------------------------------------
@@ -746,7 +746,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
 
 与所有 SQLAlchemy 方言一样，所有已知可用于 Postgresql 的大写类型都可以从顶级方言导入，无论它们源自[`sqlalchemy.types`](core_type_basics.html#module-sqlalchemy.types "sqlalchemy.types")还是来自本地方言：
 
-    from sqlalchemy.dialects.postgresql import \plain
+    from sqlalchemy.dialects.postgresql import \
         ARRAY, BIGINT, BIT, BOOLEAN, BYTEA, CHAR, CIDR, DATE, \
         DOUBLE_PRECISION, ENUM, FLOAT, HSTORE, INET, INTEGER, \
         INTERVAL, JSON, JSONB, MACADDR, NUMERIC, OID, REAL, SMALLINT, TEXT, \
@@ -823,7 +823,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.postgresql。`{.descclassname} `ARRAY`{.descname} （ *item\_type*，*as\_tuple = False*，*dimensions = None*，*zero\_indexes = False* ） [¶](#sqlalchemy.dialects.postgresql.ARRAY "Permalink to this definition")
 :   基础：`sqlalchemy.sql.expression.SchemaEventTarget`，[`sqlalchemy.types.ARRAY`](core_type_basics.html#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")
 
-    Postgresql ARRAY类型。
+    Postgresql ARRAY类型。plain
 
     版本1.1中更改： [`postgresql.ARRAY`](#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型现在是核心[`types.ARRAY`](core_type_basics.html#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")类型的子类。
 
@@ -913,7 +913,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
  `sqlalchemy.dialects.postgresql.`{.descclassname}`Any`{.descname}(*other*, *arrexpr*, *operator=\<built-in function eq\>*)[¶](#sqlalchemy.dialects.postgresql.Any "Permalink to this definition")
 :   [`ARRAY.Comparator.any()`](core_type_basics.html#sqlalchemy.types.ARRAY.Comparator.any "sqlalchemy.types.ARRAY.Comparator.any")方法的同义词。
 
-    这种方法是遗留的，在这里是为了向后兼容。plain
+    这种方法是遗留的，在这里是为了向后兼容。
 
     也可以看看
 
@@ -922,7 +922,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
  `sqlalchemy.dialects.postgresql.`{.descclassname}`All`{.descname}(*other*, *arrexpr*, *operator=\<built-in function eq\>*)[¶](#sqlalchemy.dialects.postgresql.All "Permalink to this definition")
 :   [`ARRAY.Comparator.all()`](core_type_basics.html#sqlalchemy.types.ARRAY.Comparator.all "sqlalchemy.types.ARRAY.Comparator.all")方法的同义词。
 
-    这种方法是遗留的，在这里是为了向后兼容。
+    这种方法是遗留的，在这里是为了向后兼容。plain
 
     也可以看看
 
@@ -953,7 +953,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.postgresql。`{.descclassname} `DOUBLE_PRECISION`{.descname} （ *precision = None*，*asdecimal = False*，*decimal\_return\_scale = None*，*\*\* kwargs* ） [](#sqlalchemy.dialects.postgresql.DOUBLE_PRECISION "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Float`](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")
 
-     `__init__`{.descname}(*precision=None*, *asdecimal=False*, *decimal\_return\_scale=None*, *\*\*kwargs*)[¶](#sqlalchemy.dialects.postgresql.DOUBLE_PRECISION.__init__ "Permalink to this definition")
+     `__init__`{.descname}(*precision=None*, *asdecimal=False*, *decimal\_return\_scale=None*, *\*\*kwargs*)[¶](#sqlalchemy.dialects.postgresql.DOUBLE_PRECISION.__init__ "Permalink to this definition")plain
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.Float.__init__ "sqlalchemy.types.Float.__init__")
         *method of* [`Float`](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")
 
@@ -1428,7 +1428,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.postgresql。`{.descclassname} `MACADDR`{.descname} [¶](#sqlalchemy.dialects.postgresql.MACADDR "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    ` __初始化__  T0> ¶ T1>`{.descname}
+    ` __初始化__  T0> ¶ T1>`{.descname}plain
     :   *继承自* `__init__`
         *属性* `object`
 
@@ -1450,7 +1450,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.postgresql。`{.descclassname} `REAL`{.descname} （ *precision = None*，*asdecimal = False*，*decimal\_return\_scale = None*，*\*\* kwargs* ） [](#sqlalchemy.dialects.postgresql.REAL "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Float`](core_type_basics.html#sqlalchemy.types.Float "sqlalchemy.types.Float")
 
-    SQL REAL类型。plain
+    SQL REAL类型。
 
      `__init__`{.descname}(*precision=None*, *asdecimal=False*, *decimal\_return\_scale=None*, *\*\*kwargs*)[¶](#sqlalchemy.dialects.postgresql.REAL.__init__ "Permalink to this definition")
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.Float.__init__ "sqlalchemy.types.Float.__init__")
@@ -1482,7 +1482,7 @@ PostgreSQL数据类型[¶](#postgresql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.postgresql。`{.descclassname} `TSVECTOR`{.descname} [¶](#sqlalchemy.dialects.postgresql.TSVECTOR "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    [`postgresql.TSVECTOR`](#sqlalchemy.dialects.postgresql.TSVECTOR "sqlalchemy.dialects.postgresql.TSVECTOR")类型实现了Postgresql文本搜索类型TSVECTOR。plain
+    [`postgresql.TSVECTOR`](#sqlalchemy.dialects.postgresql.TSVECTOR "sqlalchemy.dialects.postgresql.TSVECTOR")类型实现了Postgresql文本搜索类型TSVECTOR。
 
     它可以用来对自然语言文档进行全文查询。
 
@@ -1524,7 +1524,7 @@ PostgreSQL 9.2以后的新范围列类型可以通过以下类型来满足：
 *class* `sqlalchemy.dialects.postgresql。`{.descclassname} `INT4RANGE`{.descname} [¶](#sqlalchemy.dialects.postgresql.INT4RANGE "Permalink to this definition")
 :   基础：[`sqlalchemy.dialects.postgresql.ranges.RangeOperators`](#sqlalchemy.dialects.postgresql.ranges.RangeOperators "sqlalchemy.dialects.postgresql.ranges.RangeOperators")，[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    表示Postgresql INT4RANGE类型。plainplain
+    表示Postgresql INT4RANGE类型。
 
     0.8.2版本中的新功能
 
@@ -1552,7 +1552,7 @@ PostgreSQL 9.2以后的新范围列类型可以通过以下类型来满足：
 *class* `sqlalchemy.dialects.postgresql。`{.descclassname} `TSRANGE`{.descname} [¶](#sqlalchemy.dialects.postgresql.TSRANGE "Permalink to this definition")
 :   基础：[`sqlalchemy.dialects.postgresql.ranges.RangeOperators`](#sqlalchemy.dialects.postgresql.ranges.RangeOperators "sqlalchemy.dialects.postgresql.ranges.RangeOperators")，[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    表示Postgresql TSRANGE类型。plain
+    表示Postgresql TSRANGE类型。
 
     0.8.2版本中的新功能
 
@@ -1609,7 +1609,7 @@ PostgreSQL 9.2以后的新范围列类型可以通过以下类型来满足：
 范围类型 DDL 支持应该适用于任何 Postgres
 DBAPI 驱动程序，但返回的数据类型可能会有所不同。如果您使用`psycopg2`，建议在使用这些列类型之前升级到版本 2.5 或更高版本。
 
-在实例化使用这些列类型的模型时，您应该传递您为列类型使用的DBAPI驱动程序所期望的任何数据类型。对于[`psycopg2`](http://pythonhosted.org/psycopg2/module.html#module-psycopg2 "(in Psycopg v2.6)")这些是[`NumericRange`](http://pythonhosted.org/psycopg2/extras.html#psycopg2.extras.NumericRange "(in Psycopg v2.6)")，[`DateRange`](http://pythonhosted.org/psycopg2/extras.html#psycopg2.extras.DateRange "(in Psycopg v2.6)")，[`DateTimeRange`](http://pythonhosted.org/psycopg2/extras.html#psycopg2.extras.DateTimeRange "(in Psycopg v2.6)")和[`DateTimeTZRange`](http://pythonhosted.org/psycopg2/extras.html#psycopg2.extras.DateTimeTZRange "(in Psycopg v2.6)")已经通过[`register_range()`](http://pythonhosted.org/psycopg2/extras.html#psycopg2.extras.register_range "(in Psycopg v2.6)")进行了注册。
+在实例化使用这些列类型的模型时，您应该传递您为列类型使用的 DBAPI 驱动程序所期望的任何数据类型。对于[`psycopg2`](http://pythonhosted.org/psycopg2/module.html#module-psycopg2 "(in Psycopg v2.6)")这些是[`NumericRange`](http://pythonhosted.org/psycopg2/extras.html#psycopg2.extras.NumericRange "(in Psycopg v2.6)")，[`DateRange`](http://pythonhosted.org/psycopg2/extras.html#psycopg2.extras.DateRange "(in Psycopg v2.6)")，[`DateTimeRange`](http://pythonhosted.org/psycopg2/extras.html#psycopg2.extras.DateTimeRange "(in Psycopg v2.6)")和[`DateTimeTZRange`](http://pythonhosted.org/psycopg2/extras.html#psycopg2.extras.DateTimeTZRange "(in Psycopg v2.6)")已经通过[`register_range()`](http://pythonhosted.org/psycopg2/extras.html#psycopg2.extras.register_range "(in Psycopg v2.6)")进行了注册。
 
 例如：
 
@@ -1631,13 +1631,13 @@ DBAPI 驱动程序，但返回的数据类型可能会有所不同。如果您�
 PostgreSQL 约束类型[¶](#postgresql-constraint-types "Permalink to this headline")
 --------------------------------------------------------------------------------
 
-SQLAlchemy通过[`ExcludeConstraint`](#sqlalchemy.dialects.postgresql.ExcludeConstraint "sqlalchemy.dialects.postgresql.ExcludeConstraint")类支持 Postgresql
+SQLAlchemy 通过[`ExcludeConstraint`](#sqlalchemy.dialects.postgresql.ExcludeConstraint "sqlalchemy.dialects.postgresql.ExcludeConstraint")类支持 Postgresql
 EXCLUDE 约束：
 
  *class*`sqlalchemy.dialects.postgresql.`{.descclassname}`ExcludeConstraint`{.descname}(*\*elements*, *\*\*kw*)[¶](#sqlalchemy.dialects.postgresql.ExcludeConstraint "Permalink to this definition")
 :   基础：[`sqlalchemy.schema.ColumnCollectionConstraint`](core_constraints.html#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
 
-    表级EXCLUDE约束。
+    表级EXCLUDE约束。plain
 
     定义一个EXCLUDE约束，如[postgres文档](http://www.postgresql.org/docs/9.0/static/sql-createtable.html#SQL-CREATETABLE-EXCLUDE)中所述。
 
@@ -1688,7 +1688,7 @@ PostgreSQL DML 构造[¶](#postgresql-dml-constructs "Permalink to this headline
  `sqlalchemy.dialects.postgresql.dml.`{.descclassname}`insert`{.descname}(*table*, *values=None*, *inline=False*, *bind=None*, *prefixes=None*, *returning=None*, *return\_defaults=False*, *\*\*dialect\_kw*)[¶](#sqlalchemy.dialects.postgresql.dml.insert "Permalink to this definition")
 :   构建一个新的[`Insert`](core_dml.html#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")对象。
 
-    这个构造函数被镜像为公共API函数；有关完整的用法和参数说明，请参阅[`insert()`](core_dml.html#sqlalchemy.sql.expression.insert "sqlalchemy.sql.expression.insert")。
+    这个构造函数被镜像为公共API函数；有关完整的用法和参数说明，请参阅[`insert()`](core_dml.html#sqlalchemy.sql.expression.insert "sqlalchemy.sql.expression.insert")。plain
 
  *class*`sqlalchemy.dialects.postgresql.dml.`{.descclassname}`Insert`{.descname}(*table*, *values=None*, *inline=False*, *bind=None*, *prefixes=None*, *returning=None*, *return\_defaults=False*, *\*\*dialect\_kw*)[¶](#sqlalchemy.dialects.postgresql.dml.Insert "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.Insert`](core_dml.html#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")
@@ -1820,7 +1820,7 @@ psycopg2的文档和下载信息（如果适用）可在以下网址获得：[ht
 
 ### psycopg2连接参数[¶](#psycopg2-connect-arguments "Permalink to this headline")
 
-被[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")接受的psycopg2特定的关键字参数是：
+被[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")接受的 psycopg2 特定的关键字参数是：
 
 -   `server_side_cursors`：为支持此功能的SQL语句启用“服务器端游标”。从psycopg2的观点来看，这实质上意味着光标是使用名称创建的，例如，
     `connection.cursor（'some name'）`，其结果是结果行不会在语句执行后立即被预取并缓冲，而是留在服务器上，只根据需要进行检索。当启用此功能时，SQLAlchemy 的[`ResultProxy`](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")使用特殊的行缓冲行为，从而一次可获取 100 行的组，以减少会话开销。请注意，`stream_results=True`执行选项是以每个执行为基础启用此模式的更有针对性的方式。
@@ -1845,7 +1845,7 @@ psycopg2的文档和下载信息（如果适用）可在以下网址获得：[ht
 
 ### Unix域连接[¶](#unix-domain-connections "Permalink to this headline")
 
-psycopg2 支持通过 Unix 域连接进行连接。当省略 URL 的`host`部分时，SQLAlchemy 将`None`传递给psycopg2，psycopg2指定了Unix域通信而不是TCP / IP通信：
+psycopg2 支持通过 Unix 域连接进行连接。当省略 URL 的`host`部分时，SQLAlchemy 将`None`传递给 psycopg2，psycopg2 指定了 Unix 域通信而不是 TCP / IP 通信：
 
     create_engine("postgresql+psycopg2://user:password@/dbname")
 
@@ -1866,7 +1866,7 @@ T0\>](http://www.postgresql.org/docs/9.1/static/libpq-connect.html#LIBPQ-PQCONNE
     Transaction Isolation Level](#psycopg2-isolation-level)。
 
 -   `stream_results` -
-    启用或禁用psycopg2服务器端游标的使用 -
+    启用或禁用 psycopg2 服务器端游标的使用 -
     此功能使用“命名”游标与特殊结果处理方法结合使用，以便结果行不会被完全缓冲。如果`None`或未设置，则使用[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")的`server_side_cursors`选项。
 
 -   `max_row_buffer` -
@@ -1900,7 +1900,7 @@ explicitly, and works in all Postgresql versions.
 
 请注意，传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")的`client_encoding`设置与最近添加的`client_encoding`参数**不一样**现在直接由 libpq 支持。当将`client_encoding`直接传递给`psycopg2.connect()`，并使用[`create_engine.connect_args`](core_engines.html#sqlalchemy.create_engine.params.connect_args "sqlalchemy.create_engine")参数传递 SQLAlchemy 时，
 
-    # libpq direct parameter setting;
+    # libpq direct parameter setting;plain
     # only works for Postgresql **9.1 and above**
     engine = create_engine("postgresql://user:pass@host/dbname",
                            connect_args={'client_encoding': 'utf8'})
@@ -1955,7 +1955,7 @@ psycopg2 允许使用“格式”参数样式，它可以传递给[`create_engin
 
 ### 交易[¶ T0\>](#transactions "Permalink to this headline")
 
-psycopg2方言完全支持SAVEPOINT和两阶段提交操作。
+psycopg2 方言完全支持 SAVEPOINT 和两阶段提交操作。
 
 ### Psycopg2事务隔离级别[¶](#psycopg2-transaction-isolation-level "Permalink to this headline")
 
@@ -2006,7 +2006,7 @@ psycopg2 方言将默认启用此扩展，并且检测到目标数据库已将 H
     `psycopg2.extensions.register_hstore()`
     extension is invoked for all connections.
 
-无论 SQL 中的目标列的类型如何，`register_hstore()`扩展名都具有**所有Python字典都被接受为参数的效果**。字典通过这种扩展转换为文本HSTORE表达式。如果不需要此行为，请通过将`use_native_hstore`设置为`False`来禁用hstore扩展的使用，如下所示：
+无论 SQL 中的目标列的类型如何，`register_hstore()`扩展名都具有**所有 Python 字典都被接受为参数的效果**。字典通过这种扩展转换为文本 HSTORE 表达式。如果不需要此行为，请通过将`use_native_hstore`设置为`False`来禁用hstore扩展的使用，如下所示：
 
     engine = create_engine("postgresql+psycopg2://scott:tiger@localhost/test",
                 use_native_hstore=False)
@@ -2036,16 +2036,16 @@ pg8000将使用PostgreSQL `client_encoding`参数对它和服务器之间的字�
                                  # encoding
     client_encoding = utf8
 
-通过执行SQL，可以为会话覆盖`client_encoding`：
+通过执行 SQL，可以为会话覆盖`client_encoding`：
 
 将CLIENT\_ENCODING 设置为'utf8'；
 
 SQLAlchemy 将基于使用`client_encoding`参数传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")的所有新连接执行此SQL：
 
-    engine = create_engine(plainplainplain
+    engine = create_engine(plain
         "postgresql+pg8000://user:pass@host/dbname", client_encoding='utf8')
 
-### pg8000事务隔离级别[¶](#pg8000-transaction-isolation-level "Permalink to this headline")
+### pg8000 事务隔离级别[¶](#pg8000-transaction-isolation-level "Permalink to this headline")
 
 pg8000 方言提供与[psycopg2](#psycopg2-isolation-level)方言相同的隔离级别设置：
 
@@ -2070,7 +2070,7 @@ psycopg2cffi [¶ T0\>](#module-sqlalchemy.dialects.postgresql.psycopg2cffi "Perm
 
 ### DBAPI [¶ T0\>](#dialect-postgresql-psycopg2cffi-url "Permalink to this headline")
 
-psycopg2cffi的文档和下载信息（如果适用）可在以下网址获得：[http://pypi.python.org/pypi/psycopg2cffi/](http://pypi.python.org/pypi/psycopg2cffi/)
+psycopg2cffi 的文档和下载信息（如果适用）可在以下网址获得：[http://pypi.python.org/pypi/psycopg2cffi/](http://pypi.python.org/pypi/psycopg2cffi/)
 
 ### 连接[¶ T0\>](#dialect-postgresql-psycopg2cffi-connect "Permalink to this headline")
 

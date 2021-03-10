@@ -14,7 +14,7 @@ ORM 事件[¶](#orm-events "Permalink to this headline")
 
 ORM包含各种可用于订阅的挂钩。
 
-有关最常用的ORM事件的介绍，请参见[Tracking Object and Session Changes
+有关最常用的 ORM 事件的介绍，请参见[Tracking Object and Session Changes
 with
 Events](session_events.html)部分。一般的事件系统在[Events](core_event.html)讨论。非 ORM 事件（如关于连接和低级语句执行的事件）在[Core
 Events](core_events.html)中描述。
