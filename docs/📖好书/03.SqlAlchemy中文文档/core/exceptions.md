@@ -34,7 +34,7 @@ SQLAlchemy ORM 异常。
 *异常* `sqlalchemy.orm.exc。`{.descclassname} `ObjectDeletedError`{.descname} （ *状态*，*msg =无 T5\> ） T6\> [¶ T7\>](#sqlalchemy.orm.exc.ObjectDeletedError "Permalink to this definition")*
 :   刷新操作无法检索与对象的已知主键标识相对应的数据库行。
 
-    刷新操作在对象上访问过期属性或使用[`Query.get()`](query.html#sqlalchemy.orm.query.Query.get "sqlalchemy.orm.query.Query.get")检索检索到的对象时检测为过期。基于主键为目标行发出SELECT；如果没有行被返回，则引发此异常。plainplainplainplainplain
+    刷新操作在对象上访问过期属性或使用[`Query.get()`](query.html#sqlalchemy.orm.query.Query.get "sqlalchemy.orm.query.Query.get")检索检索到的对象时检测为过期。基于主键为目标行发出SELECT；如果没有行被返回，则引发此异常。
 
     这个异常的真正含义就是，不存在与持久对象关联的主键标识符的行。该行可能已被删除，或者在某些情况下主键已更新为新值，而不在ORM的目标对象管理之外。
 
@@ -44,7 +44,7 @@ SQLAlchemy ORM 异常。
 *异常* `sqlalchemy.orm.exc。`{.descclassname} `StaleDataError`{.descname} [¶](#sqlalchemy.orm.exc.StaleDataError "Permalink to this definition")
 :   遇到数据库状态的操作未被记录。
 
-    导致这种情况发生的条件包括：plainplainplainplainplainplain
+    导致这种情况发生的条件包括：
 
     -   刷新可能试图更新或删除行，并且在UPDATE或DELETE语句期间意外数量的行被匹配。请注意，当使用version\_id\_col时，UPDATE或DELETE语句中的行也会与当前已知的版本标识符进行匹配。
 

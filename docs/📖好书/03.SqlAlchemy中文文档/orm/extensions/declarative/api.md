@@ -19,7 +19,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.ext.declarative.`{.descclassname}`declarative_base`{.descname}(*bind=None*, *metadata=None*, *mapper=None*, *cls=\<type 'object'\>*, *name='Base'*, *constructor=\<function \_\_init\_\_\>*, *class\_registry=None*, *metaclass=\<class 'sqlalchemy.ext.declarative.api.DeclarativeMeta'\>*)[¶](#sqlalchemy.ext.declarative.declarative_base "Permalink to this definition")
 :   为声明性类定义构造一个基类。
 
-    新的基类将被赋予一个元类，该元类生成适当的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，并根据在类中声明提供的信息以及该类的任何子类进行相应的[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")调用类。
+    新的基类将被赋予一个元类，该元类生成适当的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，并根据在类中声明提供的信息以及该类的任何子类进行相应的[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")调用类。plain
 
     参数：
 
@@ -65,7 +65,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 `sqlalchemy.ext.declarative。 T0>  as_declarative  T1> （ T2>  **千瓦 T3> ） T4>  ¶ T5>`{.descclassname}
 :   [`declarative_base()`](#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")的类装饰器。
 
-    为发送给[`declarative_base()`](#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")的`cls`参数提供语法快捷方式，允许将基类就地转换为“声明式”基础：plain
+    为发送给[`declarative_base()`](#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")的`cls`参数提供语法快捷方式，允许将基类就地转换为“声明式”基础：
 
         from sqlalchemy.ext.declarative import as_declarative
 
@@ -209,7 +209,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.declarative。`{.descclassname} `AbstractConcreteBase`{.descname} [¶](#sqlalchemy.ext.declarative.AbstractConcreteBase "Permalink to this definition")
 :   基础：`sqlalchemy.ext.declarative.api.ConcreteBase`
 
-    “具体”声明映射的助手类。
+    “具体”声明映射的助手类。plain
 
     [`AbstractConcreteBase`](#sqlalchemy.ext.declarative.AbstractConcreteBase "sqlalchemy.ext.declarative.AbstractConcreteBase")
     will use the [`polymorphic_union()`](mapping_api.html#sqlalchemy.orm.util.polymorphic_union "sqlalchemy.orm.util.polymorphic_union")
@@ -287,7 +287,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.declarative。`{.descclassname} `ConcreteBase`{.descname} [¶](#sqlalchemy.ext.declarative.ConcreteBase "Permalink to this definition")
 :   “具体”声明映射的助手类。
 
-    [`ConcreteBase`](#sqlalchemy.ext.declarative.ConcreteBase "sqlalchemy.ext.declarative.ConcreteBase")
+    [`ConcreteBase`](#sqlalchemy.ext.declarative.ConcreteBase "sqlalchemy.ext.declarative.ConcreteBase")plain
     will use the [`polymorphic_union()`](mapping_api.html#sqlalchemy.orm.util.polymorphic_union "sqlalchemy.orm.util.polymorphic_union")
     function automatically, against all tables mapped as a subclass to
     this class. 该函数通过`__declare_last__()`函数调用，该函数本质上是[`after_configured()`](events.html#sqlalchemy.orm.events.MapperEvents.after_configured "sqlalchemy.orm.events.MapperEvents.after_configured")事件的钩子。
@@ -329,7 +329,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.declarative。`{.descclassname} `DeferredReflection`{.descname} [¶](#sqlalchemy.ext.declarative.DeferredReflection "Permalink to this definition")
 :   基于延迟反射步骤构建映射的辅助类。
 
-    通常，通过在声明式类中使用autoload = True将[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象设置为`__table__`属性，可以在声明中使用声明式命令。The caveat is that theplain
+    通常，通过在声明式类中使用autoload = True将[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象设置为`__table__`属性，可以在声明中使用声明式命令。The caveat is that the
     [`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
     must be fully reflected, or at the very least have a primary key
     column, at the point at which a normal declarative mapping is

@@ -17,7 +17,7 @@ tags:
 除了普通表以外，映射器还可以针对任意关系单元（称为*selectables*）构建。例如，[`join()`](core_selectable.html#sqlalchemy.sql.expression.join "sqlalchemy.sql.expression.join")函数创建一个由多个表组成的可选单元，其中包含自己的复合主键，可以像[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
 ：
 
-    from sqlalchemy import Table, Column, Integer, \plainplainplainplainplain
+    from sqlalchemy import Table, Column, Integer, \plain
             String, MetaData, join, ForeignKey
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.orm import column_property
@@ -68,7 +68,7 @@ object as `(AddressUser.id, AddressUser.address_id)`.
 
 类似于对连接的映射，普通的[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")对象也可以与映射器一起使用。下面的示例片段举例说明了将名为`Customer`的类映射到包含对子查询的连接的[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")：
 
-    from sqlalchemy import select, funcplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    from sqlalchemy import select, func
 
     subq = select([
                 func.count(orders.c.id).label('order_count'),

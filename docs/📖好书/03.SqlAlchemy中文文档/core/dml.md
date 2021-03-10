@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy中文文档
   - core
 tags:
-  - 
 ---
 插入、更新、删除[¶](#insert-updates-deletes "Permalink to this headline")
 =========================================================================
@@ -1302,7 +1301,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
  *class*`sqlalchemy.sql.expression.`{.descclassname}`Update`{.descname}(*table*, *whereclause=None*, *values=None*, *inline=False*, *bind=None*, *prefixes=None*, *returning=None*, *return\_defaults=False*, *preserve\_parameter\_order=False*, *\*\*dialect\_kw*)[¶](#sqlalchemy.sql.expression.Update "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ValuesBase`](#sqlalchemy.sql.expression.ValuesBase "sqlalchemy.sql.expression.ValuesBase")
 
-    表示更新构造。
+    表示更新构造。plain
 
     [`Update`](#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")对象是使用[`update()`](#sqlalchemy.sql.expression.update "sqlalchemy.sql.expression.update")函数创建的。
 

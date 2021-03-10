@@ -18,7 +18,7 @@ tags:
 定义外键[¶](#defining-foreign-keys "Permalink to this headline")
 ----------------------------------------------------------------
 
-SQL中的*外键*是表级结构，限制该表中的一个或多个列，使得值能存在不同列中，通常但不总是位于不同的表。我们调用了约束*外键*列的列和它们被约束到*引用的*列的列。被引用的列几乎总是为他们拥有的表定义主键，但也有例外。外键是将具有相互关系的行对连接在一起的“联合”，SQLAlchemy几乎在其操作的每个区域都非常重视这个概念。
+SQL 中的*外键*是表级结构，限制该表中的一个或多个列，使得值能存在不同列中，通常但不总是位于不同的表。我们调用了约束*外键*列的列和它们被约束到*引用的*列的列。被引用的列几乎总是为他们拥有的表定义主键，但也有例外。外键是将具有相互关系的行对连接在一起的“联合”，SQLAlchemy几乎在其操作的每个区域都非常重视这个概念。
 
 在 SQLAlchemy 以及 DDL 中，可以将外键约束定义为 table 子句中的附加属性，或者对于单列外键，可以在单列的定义内指定外键约束。单列外键更常见，并且在列级别通过构建[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")对象作为[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的参数来指定：
 
@@ -43,7 +43,7 @@ columnname＆gt；*。*它也可能是一个实际的[`Column`](metadata.html#sq
 
 外键也可以使用[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象在表级定义。该对象可以描述单列或多列外键。多列外键称为*复合*外键，并且几乎总是引用具有复合主键的表。下面我们定义一个表`invoice`，它有一个复合主键：
 
-    invoice = Table('invoice', metadata,
+    invoice = Table('invoice', metadata,plain
         Column('invoice_id', Integer, primary_key=True),
         Column('ref_num', Integer, primary_key=True),
         Column('description', String(60), nullable=False)
@@ -129,9 +129,9 @@ MyISAM 数据）。因此，这些方法将在这种循环中将约束分解为�
         REFERENCES element (element_id)
 
 为了为这些表发出 DROP，应用相同的逻辑，但请注意，在 SQL 中，要发出 DROP
-CONSTRAINT，需要该约束具有名称。在上面的`'node'`表中，我们没有命名这个约束；系统将因此尝试仅为那些被命名的约束发出DROP：
+CONSTRAINT，需要该约束具有名称。在上面的`'node'`表中，我们没有命名这个约束；系统将因此尝试仅为那些被命名的约束发出 DROP：
 
-    >>> with engine.connect() as conn:
+    >>> with engine.connect() as conn:plain
     ...    metadata.drop_all(conn, checkfirst=False)
     ALTER TABLE element DROP CONSTRAINT fk_element_parent_node_id
     DROP TABLE node
@@ -145,7 +145,7 @@ CONSTRAINT，需要该约束具有名称。在上面的`'node'`表中，我们�
     objects involved in the cycle have names so that they can be dropped
     using DROP CONSTRAINT.
 
-这个错误只适用于DROP情况，因为我们可以在没有名字的CREATE情况下发出“ADD
+这个错误只适用于 DROP 情况，因为我们可以在没有名字的 CREATE 情况下发出“ADD
 CONSTRAINT”；数据库通常自动分配一个。
 
 可以使用[`ForeignKeyConstraint.use_alter`](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")和[`ForeignKey.use_alter`](#sqlalchemy.schema.ForeignKey.params.use_alter "sqlalchemy.schema.ForeignKey")关键字参数来手动解决依赖关系周期。我们只能将这个标志添加到`'element'`表中，如下所示：
@@ -236,7 +236,7 @@ DELETE”短语后输出的任何字符串：
         )
     )
 
-请注意，这些子句在SQLite上不受支持，并且在与MySQL一起使用时需要`InnoDB`表。他们也可能不支持其他数据库。
+请注意，这些子句在 SQLite 上不受支持，并且在与 MySQL 一起使用时需要`InnoDB`表。他们也可能不支持其他数据库。
 
 UNIQUE约束[¶](#unique-constraint "Permalink to this headline")
 --------------------------------------------------------------
@@ -293,7 +293,7 @@ PRIMARY KEY约束[¶](#primary-key-constraint "Permalink to this headline")
 
 根据用[`Column.primary_key`](metadata.html#sqlalchemy.schema.Column.params.primary_key "sqlalchemy.schema.Column")标志标记的[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象，任何[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的主键约束都是隐式存在的。[`PrimaryKeyConstraint`](#sqlalchemy.schema.PrimaryKeyConstraint "sqlalchemy.schema.PrimaryKeyConstraint")对象提供对此约束的显式访问，其中包括直接配置的选项：
 
-    from sqlalchemy import PrimaryKeyConstraint
+    from sqlalchemy import PrimaryKeyConstraintplain
 
     my_table = Table('mytable', metadata,
                 Column('id', Integer),
@@ -307,7 +307,7 @@ PRIMARY KEY约束[¶](#primary-key-constraint "Permalink to this headline")
 [`PrimaryKeyConstraint`](#sqlalchemy.schema.PrimaryKeyConstraint "sqlalchemy.schema.PrimaryKeyConstraint")
 - detailed API documentation.
 
-使用声明式ORM扩展时设置约束[¶](#setting-up-constraints-when-using-the-declarative-orm-extension "Permalink to this headline")
+使用声明式 ORM 扩展时设置约束[¶](#setting-up-constraints-when-using-the-declarative-orm-extension "Permalink to this headline")
 -----------------------------------------------------------------------------------------------------------------------------
 
 [`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")是 SQLAlchemy 核心结构，允许用户定义表格元数据，其中 SQLAlchemy
@@ -318,7 +318,7 @@ object to be created automatically, given the contents of the table
 primarily as a mapping of [`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
 objects.
 
-要将表级约束对象（如[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")）应用于使用Declarative定义的表，请使用[Table
+要将表级约束对象（如[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")）应用于使用 Declarative 定义的表，请使用[Table
 Configuration](orm_extensions_declarative_table_config.html#declarative-table-args)中介绍的`__table_args__`属性。
 
 配置约束命名约定[¶](#configuring-constraint-naming-conventions "Permalink to this headline")
@@ -452,7 +452,7 @@ naming components.
 
 [The Importance of Naming
 Constraints](http://alembic.zzzcomputing.com/en/latest/naming.html#tutorial-constraint-names "(in Alembic v0.8.7)")
-- 在Alembic文档中。
+- 在 Alembic 文档中。
 
 版本0.9.2新增：添加了[`MetaData.naming_convention`(metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")参数。
 
@@ -505,7 +505,7 @@ typical convention is
 
 两者都会产生名称`ck_foo_value`：
 
-    CREATE TABLE foo (
+    CREATE TABLE foo (plain
         value INTEGER,
         CONSTRAINT ck_foo_value CHECK (value > 5)
     )
@@ -567,7 +567,7 @@ CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](ty
 *class* `sqlalchemy.schema。`{.descclassname} `约束`{.descname} （ *name =无*，*可推迟=无*，*开始=无*，*\_create\_rule =无*，*info =无*，*\_type\_bound = False* ，*\*\* dialect\_kw* ） [¶](#sqlalchemy.schema.Constraint "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.base.DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")，[`sqlalchemy.schema.SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-    表级SQL约束。
+    表级SQL约束。plain
 
      `__init__`{.descname}(*name=None*, *deferrable=None*, *initially=None*, *\_create\_rule=None*, *info=None*, *\_type\_bound=False*, *\*\*dialect\_kw*)[¶](#sqlalchemy.schema.Constraint.__init__ "Permalink to this definition")
     :   创建一个SQL约束。
@@ -611,7 +611,7 @@ CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](ty
 :   `列`{.descname} *=无* [¶](#sqlalchemy.schema.ColumnCollectionMixin.columns "Permalink to this definition")
     :   [`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的[`ColumnCollection`](sqlelement.html#sqlalchemy.sql.expression.ColumnCollection "sqlalchemy.sql.expression.ColumnCollection")。
 
-        此集合表示此对象引用的列。
+        此集合表示此对象引用的列。plain
 
 *class* `sqlalchemy.schema。`{.descclassname} `ColumnCollectionConstraint`{.descname} （ *\*列*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.schema.ColumnCollectionConstraint "Permalink to this definition")*
 :   基础：[`sqlalchemy.schema.ColumnCollectionMixin`](#sqlalchemy.schema.ColumnCollectionMixin "sqlalchemy.schema.ColumnCollectionMixin")，[`sqlalchemy.schema.Constraint`](#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")
@@ -746,7 +746,7 @@ CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](ty
  *class*`sqlalchemy.schema.`{.descclassname}`CheckConstraint`{.descname}(*sqltext*, *name=None*, *deferrable=None*, *initially=None*, *table=None*, *info=None*, *\_create\_rule=None*, *\_autoattach=True*, *\_type\_bound=False*)[¶](#sqlalchemy.schema.CheckConstraint "Permalink to this definition")
 :   基础：[`sqlalchemy.schema.ColumnCollectionConstraint`](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
 
-    表或列级CHECK约束。
+    表或列级CHECK约束。plain
 
     可以包含在表或列的定义中。
 

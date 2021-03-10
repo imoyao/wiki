@@ -19,7 +19,7 @@ tags:
 经常需要强制更改类型的“字符串”版本，即在 CREATE
 TABLE 语句或其他 SQL 函数（如 CAST）中呈现的类型。例如，应用程序可能希望强制为所有平台呈现`BINARY`，除了要呈现其中的`BLOB`之外的所有平台。对于大多数使用情况，现有泛型类型（在本例中为[`LargeBinary`](type_basics.html#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")）的使用是首选。但为了更准确地控制类型，每个方言的编译指令可以与任何类型相关联：
 
-    from sqlalchemy.ext.compiler import compiles
+    from sqlalchemy.ext.compiler import compilesplain
     from sqlalchemy.types import BINARY
 
     @compiles(BINARY, "sqlite")
@@ -35,7 +35,7 @@ Constructs and Compilation Extension](compiler.html)的小节）。
 增加现有类型[¶](#augmenting-existing-types "Permalink to this headline")
 ------------------------------------------------------------------------
 
-[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")允许创建自定义类型，将绑定参数和结果处理行为添加到现有的类型对象。当需要对数据库进行额外的Python数据封送处理时使用它。
+[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")允许创建自定义类型，将绑定参数和结果处理行为添加到现有的类型对象。当需要对数据库进行额外的 Python 数据封送处理时使用它。
 
 注意
 
@@ -460,7 +460,7 @@ TypeDecorator Recipes [¶](#typedecorator-recipes "Permalink to this headline")
 
 接下来几个关键的[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")食谱。
 
-### 将编码字符串强制为Unicode [¶](#coercing-encoded-strings-to-unicode "Permalink to this headline")
+### 将编码字符串强制为 Unicode [¶](#coercing-encoded-strings-to-unicode "Permalink to this headline")
 
 A common source of confusion regarding the [`Unicode`](type_basics.html#sqlalchemy.types.Unicode "sqlalchemy.types.Unicode")
 type is that it is intended to deal *only* with Python
@@ -492,7 +492,7 @@ which coerces as needed:
 某些数据库连接器（如 SQL
 Server 的数据库连接器）会在小数位数过多的情况下传递 Decimal。这是一个让他们满意的食谱：
 
-    from sqlalchemy.types import TypeDecorator, Numeric
+    from sqlalchemy.types import TypeDecorator, Numericplain
     from decimal import Decimal
 
     class SafeNumeric(TypeDecorator):
@@ -558,7 +558,7 @@ UUID 类型，并以字符串化的十六进制格式存储它们。如果需要
 
 这种类型使用`simplejson`将 Python 数据结构封送到/来自 JSON。可以修改为使用 Python 的内置 json 编码器：
 
-    from sqlalchemy.types import TypeDecorator, VARCHAR
+    from sqlalchemy.types import TypeDecorator, VARCHARplain
     import json
 
     class JSONEncodedDict(TypeDecorator):
@@ -592,7 +592,7 @@ Tracking](orm_extensions_mutable.html)中的示例。
 
 使用[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")实现绑定/结果级别的大部分类型行为增强。对于需要替换由 SQLAlchemy 在 DBAPI 级别应用的特定处理的罕见场景，可以直接对 SQLAlchemy 类型进行子类化，并且`bind_processor()`或`result_processor()`这样做需要重写`adapt()`方法。此方法是 SQLAlchemy 在执行语句期间生成特定于 DBAPI 的类型行为的机制。覆盖它可以使用自定义类型的副本来代替 DBAPI 特定的类型。下面我们将[`types.TIME`](type_basics.html#sqlalchemy.types.TIME "sqlalchemy.types.TIME")类型进行子类化以具有自定义结果处理行为。`process()`函数将直接从 DBAPI 游标接收`value`：
 
-    class MySpecialTime(TIME):plain
+    class MySpecialTime(TIME):
         def __init__(self, special_argument):
             super(MySpecialTime, self).__init__()
             self.special_argument = special_argument
@@ -626,7 +626,7 @@ Types](#replacing-processors)部分所见，SQLAlchemy 允许在将参数发送�
 
 任何[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")，[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")或[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")子类都可以包含[`TypeEngine.bind_expression()`](type_api.html#sqlalchemy.types.TypeEngine.bind_expression "sqlalchemy.types.TypeEngine.bind_expression")和/或[`TypeEngine.column_expression()`](type_api.html#sqlalchemy.types.TypeEngine.column_expression "sqlalchemy.types.TypeEngine.column_expression")，当定义为返回非`None`值时，应返回要注入 SQL 语句的[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")表达式，参数或列表达式。例如，要构建将所有传入数据应用于 Postgis 函数`ST_GeomFromText`的所有传出值和函数`ST_AsText`的`Geometry`类型，我们可以创建我们自己的[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")的子类，它提供这些方法与[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结合使用：
 
-    from sqlalchemy import func
+    from sqlalchemy import funcplain
     from sqlalchemy.types import UserDefinedType
 
     class Geometry(UserDefinedType):
@@ -747,7 +747,7 @@ exposed as explicit methods on column expressions, such as
 [`ColumnOperators.like()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.like "sqlalchemy.sql.operators.ColumnOperators.like")
 (`table.c.value.like('%ed%')`).
 
-在所有情况下，Core表达式结构都会查询表达式的类型，以确定现有运算符的行为，并找出不属于内置集合的其他运算符。The
+在所有情况下，Core 表达式结构都会查询表达式的类型，以确定现有运算符的行为，并找出不属于内置集合的其他运算符。The
 [`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 base class defines a root “comparison” implementation
 [`TypeEngine.Comparator`](type_api.html#sqlalchemy.types.TypeEngine.Comparator "sqlalchemy.types.TypeEngine.Comparator"),
@@ -778,7 +778,7 @@ are exposed on an owning SQL expression using a `__getattr__` scheme, which expo
 onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement").
 例如，要将`log()`函数添加到整数：
 
-    from sqlalchemy import Integer, funcplain
+    from sqlalchemy import Integer, func
 
     class MyInt(Integer):
         class comparator_factory(Integer.Comparator):
@@ -792,7 +792,7 @@ onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.Colu
 
 一元操作也是可能的。例如，要添加 Postgresql 阶乘运算符的实现，我们将[`UnaryExpression`](sqlelement.html#sqlalchemy.sql.expression.UnaryExpression "sqlalchemy.sql.expression.UnaryExpression")结构与[`custom_op`](sqlelement.html#sqlalchemy.sql.operators.custom_op "sqlalchemy.sql.operators.custom_op")结合起来以产生阶乘表达式：
 
-    from sqlalchemy import Integerplainplain
+    from sqlalchemy import Integer
     from sqlalchemy.sql.expression import UnaryExpression
     from sqlalchemy.sql import operators
 
@@ -813,7 +813,7 @@ onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.Colu
 
 [`TypeEngine.comparator_factory`](type_api.html#sqlalchemy.types.TypeEngine.comparator_factory "sqlalchemy.types.TypeEngine.comparator_factory")
 
-0.8版新增功能：增强了表达式系统，支持按类型级别定制运算符。
+0.8 版新增功能：增强了表达式系统，支持按类型级别定制运算符。
 
 创建新类型[¶](#creating-new-types "Permalink to this headline")
 ---------------------------------------------------------------

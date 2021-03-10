@@ -63,7 +63,7 @@ object contains all of the schema constructs we’ve associated with it.
 - 此构造定义了对远程表的引用，并在[Defining Foreign
 Keys](constraints.html#metadata-foreignkeys)中进行了完整描述。访问关于此表的信息的方法包括：
 
-    # access the column "EMPLOYEE_ID":
+    # access the column "EMPLOYEE_ID":plain
     employees.columns.employee_id
 
     # or just

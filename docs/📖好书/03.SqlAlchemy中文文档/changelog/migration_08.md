@@ -56,7 +56,7 @@ SQLAlchemy 最终也会减少 2.5 的支持 -
     against a class that has multiple foreign key paths to the target.
     只需要`foreign_keys`参数来指定应包含的列：
 
-        class Parent(Base):
+        class Parent(Base):plain
             __tablename__ = 'parent'
             id = Column(Integer, primary_key=True)
             child_id_one = Column(Integer, ForeignKey('child.id'))
@@ -71,7 +71,7 @@ SQLAlchemy 最终也会减少 2.5 的支持 -
 
 -   与自引用关系的关系，现在支持**列指向自身**的复合外键。规范情况如下：
 
-        class Folder(Base):
+        class Folder(Base):plain
             __tablename__ = 'folder'
             __table_args__ = (
               ForeignKeyConstraint(
@@ -114,7 +114,7 @@ SQLAlchemy 最终也会减少 2.5 的支持 -
 
 -   以前很难的自定义连接条件，如涉及函数和/或 CASTing 类型的连接条件，现在在大多数情况下会按预期运行：
 
-        class HostEntry(Base):plainplain
+        class HostEntry(Base):
             __tablename__ = 'host_entry'
 
             id = Column(Integer, primary_key=True)
@@ -130,7 +130,7 @@ SQLAlchemy 最终也会减少 2.5 的支持 -
 
     新的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")机制利用了被称为[annotations](glossary.html#term-annotations)的 SQLAlchemy 概念。这些注释也可以通过[`foreign()`](orm_relationship_api.html#sqlalchemy.orm.foreign "sqlalchemy.orm.foreign")和[`remote()`](orm_relationship_api.html#sqlalchemy.orm.remote "sqlalchemy.orm.remote")函数显式地提供给应用程序代码，作为提高高级配置可读性或直接注入精确度配置，绕过通常的加入检查试探法：
 
-        from sqlalchemy.orm import foreign, remoteplainplain
+        from sqlalchemy.orm import foreign, remote
 
         class HostEntry(Base):
             __tablename__ = 'host_entry'
@@ -310,7 +310,7 @@ target. This method can now be used to target *any number* of target
 subtypes, by combining it with the new [`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")
 function:
 
-    # use eager loading in conjunction with with_polymorphic targetsplain
+    # use eager loading in conjunction with with_polymorphic targets
     Job_P = with_polymorphic(Job, [SubJob, ExtraJob], aliased=True)
     q = s.query(DataContainer).\
                 join(DataContainer.jobs.of_type(Job_P)).\
@@ -324,7 +324,7 @@ attribute is accepted, including with loader functions like
 and comparison methods like [`PropComparator.any()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.any "sqlalchemy.orm.interfaces.PropComparator.any")
 and [`PropComparator.has()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.has "sqlalchemy.orm.interfaces.PropComparator.has"):
 
-    # use eager loading in conjunction with with_polymorphic targets
+    # use eager loading in conjunction with with_polymorphic targetsplain
     Job_P = with_polymorphic(Job, [SubJob, ExtraJob], aliased=True)
     q = s.query(DataContainer).\
                 join(DataContainer.jobs.of_type(Job_P)).\
@@ -439,7 +439,7 @@ or [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.
 
 新的 UPDATE..FROM 机制在 query.update()中工作。下面，我们针对`SomeEntity`发出 UPDATE，并针对`SomeOtherEntity`添加了一个 FROM 子句（或等价物，具体取决于后端）：
 
-    query(SomeEntity).\
+    query(SomeEntity).\plain
         filter(SomeEntity.id==SomeOtherEntity.id).\
         filter(SomeOtherEntity.foo=='bar').\
         update({"data":"x"})
@@ -472,7 +472,7 @@ or [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.
 请注意，Dogpile 示例以及之前的 Beaker 示例所使用的 SQLAlchemy
 API 已稍有变化，特别是如 Beaker 示例所示，需要进行此更改：
 
-    --- examples/beaker_caching/caching_query.py
+    --- examples/beaker_caching/caching_query.pyplain
     +++ examples/beaker_caching/caching_query.py
     @@ -222,7 +222,8 @@
 
@@ -498,12 +498,12 @@ API 已稍有变化，特别是如 Beaker 示例所示，需要进行此更改�
 
 核心迄今从来没有任何系统为 Column 和其他表达式结构添加对新 SQL 运算符的支持，除了[`ColumnOperators.op()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.op "sqlalchemy.sql.operators.ColumnOperators.op")方法，它足以让事情发挥作用。Core 从来没有任何系统可以让现有操作员的行为被覆盖。到目前为止，操作符可以被灵活地重新定义的唯一方法是在 ORM 层中，使用[`column_property()`](orm_mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")给出一个`comparator_factory`参数。因此，像 GeoAlchemy 这样的第三方库不得不以 ORM 为中心，并依靠一系列黑客来应用新的操作，并让它们正确传播。
 
-Core中的新操作系统添加了一直缺少的钩子，它将新的和重载的操作符与*类型*关联。毕竟，它不是真正的列，CAST 运算符或 SQL 函数，它们真正驱动出现的操作类型，它是表达式的*类型*。实现细节是最小的
+Core 中的新操作系统添加了一直缺少的钩子，它将新的和重载的操作符与*类型*关联。毕竟，它不是真正的列，CAST 运算符或 SQL 函数，它们真正驱动出现的操作类型，它是表达式的*类型*。实现细节是最小的
 - 只有一些额外的方法被添加到核心[`ColumnElement`](core_sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")类型中，以便为可选的运算符集咨询它的[`TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")对象。新的或修改的操作可以通过使用[`TypeDecorator`](core_custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")或“全局全面”通过附加新的[`TypeEngine.Comparator`](core_type_api.html#sqlalchemy.types.TypeEngine.Comparator "sqlalchemy.types.TypeEngine.Comparator")
 
 例如，要将对数支持添加到[`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")类型中：
 
-    from sqlalchemy.types import Numericplainplain
+    from sqlalchemy.types import Numeric
     from sqlalchemy.sql import func
 
     class CustomNumeric(Numeric):
@@ -580,7 +580,7 @@ side conversion function on the way to/back from the database.
 
 上面，`LowerString`类型定义了一个 SQL 表达式，只要在 SELECT 语句的 columns 子句中呈现`test_table.c.data`列时就会发出该表达式：
 
-    >>> print(select([test_table]).where(test_table.c.data == 'HI'))
+    >>> print(select([test_table]).where(test_table.c.data == 'HI'))plain
     SELECT lower(test_table.data) AS data
     FROM test_table
     WHERE test_table.data = lower(:data_1)
@@ -650,7 +650,7 @@ type makes great usage of the new operator system to provide a full
 range of operators for HSTORE types, including index access,
 concatenation, and containment methods such as `has_key()`, `has_any()`, and `matrix()`:
 
-    from sqlalchemy.dialects.postgresql import HSTORE
+    from sqlalchemy.dialects.postgresql import HSTOREplain
 
     data = Table('data_table', metadata,
             Column('id', Integer, primary_key=True),
@@ -677,7 +677,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 [`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型将接受可选的“维度”参数，将其固定为固定数量的维度，并在检索结果时大大提高效率：
 
-    # old way, still works since PG supports N-dimensions per row:plainplain
+    # old way, still works since PG supports N-dimensions per row:plain
     Column("my_array", postgresql.ARRAY(Integer))
 
     # new way, will render ARRAY with correct number of [] in DDL,
@@ -687,25 +687,25 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 该类型还引入了新的运算符，使用新的类型特定的运算符框架。新的操作包括索引访问：
 
-    result = conn.execute(plain
+    result = conn.execute(
         select([mytable.c.arraycol[2]])
     )
 
 在 SELECT 中切片访问：
 
-    result = conn.execute(plain
+    result = conn.execute(
         select([mytable.c.arraycol[2:4]])
     )
 
 在更新中切片更新：
 
-    conn.execute(
+    conn.execute(plain
         mytable.update().values({mytable.c.arraycol[2:3]: [7, 8]})
     )
 
 独立阵列文字：
 
-    >>> from sqlalchemy.dialects import postgresqlplain
+    >>> from sqlalchemy.dialects import postgresql
     >>> conn.scalar(
     ...    select([
     ...        postgresql.array([1, 2]) + postgresql.array([3, 4, 5])
@@ -765,7 +765,7 @@ types and will render on any backend, including when features such as
 and [`cast()`](core_sqlelement.html#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")
 is used:
 
-    >>> stmt = select([cast(sometable.c.somechar, String(20, collation='utf8'))])
+    >>> stmt = select([cast(sometable.c.somechar, String(20, collation='utf8'))])plain
     >>> print(stmt)
     SELECT CAST(sometable.somechar AS VARCHAR(20) COLLATE "utf8") AS anon_1
     FROM sometable
@@ -892,7 +892,7 @@ NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基
 
 [＃2655 T0\>](http://www.sqlalchemy.org/trac/ticket/2655)
 
-### after\_attach 事件在与会话相关联而不是之前触发后触发； before\_attach添加[¶](#the-after-attach-event-fires-after-the-item-is-associated-with-the-session-instead-of-before-before-attach-added "Permalink to this headline")
+### after\_attach 事件在与会话相关联而不是之前触发后触发； before\_attach 添加[¶](#the-after-attach-event-fires-after-the-item-is-associated-with-the-session-instead-of-before-before-attach-added "Permalink to this headline")
 
 使用 after\_attach的事件处理程序现在可以假定给定实例与给定会话关联：
 
@@ -902,7 +902,7 @@ NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基
 
 一些用例要求它以这种方式工作。但是，其他用例要求该项目*不是*，而不是会话的一部分，例如，用于加载实例所需状态的查询首先发出自动刷新，否则会过早刷新目标目的。这些用例应该使用新的“before\_attach”事件：
 
-    @event.listens_for(Session, "before_attach")
+    @event.listens_for(Session, "before_attach")plain
     def before_attach(session, instance):
         instance.some_necessary_attribute = session.query(Widget).\
                                                 filter_by(instance.widget_name).\
@@ -914,7 +914,7 @@ NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基
 
 以前有必要调用[`Query.correlate()`](orm_query.html#sqlalchemy.orm.query.Query.correlate "sqlalchemy.orm.query.Query.correlate")以使列或 WHERE 子查询与父项相关联：
 
-    subq = session.query(Entity.value).\plainplain
+    subq = session.query(Entity.value).\
                     filter(Entity.id==Parent.entity_id).\
                     correlate(Parent).\
                     as_scalar()
@@ -943,7 +943,7 @@ actually used in that context.
 
 这种改变只会使渲染 SQL 变得更好，因为在相对于所选内容的 FROM 对象不足的情况下，不再可能渲染非法 SQL：
 
-    from sqlalchemy.sql import table, column, selectplain
+    from sqlalchemy.sql import table, column, select
 
     t1 = table('t1', column('x'))
     t2 = table('t2', column('y'))
@@ -963,7 +963,7 @@ actually used in that context.
 
 在 SELECT 中，相关按预期生效：
 
-    s2 = select([t1, t2]).where(t1.c.x == t2.c.y).where(t1.c.x == s)
+    s2 = select([t1, t2]).where(t1.c.x == t2.c.y).where(t1.c.x == s)plain
 
     print(s2)
 
@@ -988,7 +988,7 @@ actually used in that context.
 The [`InstrumentationEvents`](orm_events.html#sqlalchemy.orm.events.InstrumentationEvents "sqlalchemy.orm.events.InstrumentationEvents")
 series of event targets have documented that the events will only be
 fired off according to the actual class passed as a target.
-通过 0.7，情况并非如此，任何适用于[`InstrumentationEvents`](orm_events.html#sqlalchemy.orm.events.InstrumentationEvents "sqlalchemy.orm.events.InstrumentationEvents")的事件侦听器都将被映射的所有类调用。在0.8中，增加了额外的逻辑，以便事件只会调用那些发送的类。默认情况下，`propagate`标志默认设置为`True`，因为类工具事件通常用于拦截尚未创建的类。
+通过 0.7，情况并非如此，任何适用于[`InstrumentationEvents`](orm_events.html#sqlalchemy.orm.events.InstrumentationEvents "sqlalchemy.orm.events.InstrumentationEvents")的事件侦听器都将被映射的所有类调用。在 0.8 中，增加了额外的逻辑，以便事件只会调用那些发送的类。默认情况下，`propagate`标志默认设置为`True`，因为类工具事件通常用于拦截尚未创建的类。
 
 [＃2590 T0\>](http://www.sqlalchemy.org/trac/ticket/2590)
 
@@ -996,7 +996,7 @@ fired off according to the actual class passed as a target.
 
 我们在 MSSQL 方言中发现了一个非常古老的行为，它会在尝试像这样做时尝试从用户身上抢救用户：
 
-    scalar_subq = select([someothertable.c.id]).where(someothertable.c.data=='foo')
+    scalar_subq = select([someothertable.c.id]).where(someothertable.c.data=='foo')plain
     select([sometable]).where(sometable.c.id==scalar_subq)
 
 SQL Server 不允许与标量 SELECT 进行等同比较，即“x =（SELECT
@@ -1019,7 +1019,7 @@ x”这样的比较会发生同样的事情，总的来说，这种猜测级别�
 
 表达式系统的用户知道[`Select.apply_labels()`](core_selectable.html#sqlalchemy.sql.expression.Select.apply_labels "sqlalchemy.sql.expression.Select.apply_labels")为每个列名添加表名，影响[`Select.c`](core_selectable.html#sqlalchemy.sql.expression.Select.c "sqlalchemy.sql.expression.Select.c")中可用的名称：
 
-    s = select([table1]).apply_labels()plain
+    s = select([table1]).apply_labels()
     s.c.table1_col1
     s.c.table1_col2
 
@@ -1067,7 +1067,7 @@ in both cases:
 
 0.7 添加了一个名为`column_reflect`的新事件，这样可以反映出列的反射，因为每个列都反映出来。我们得到这个事件有点不对，因为事件没有办法获取用于反射的当前`Inspector`和`Connection`，在来自数据库的附加信息的情况下是必要的。由于这是一个尚未广泛使用的新事件，因此我们将直接向其中添加`inspector`参数：
 
-    @event.listens_for(Table, "column_reflect")plain
+    @event.listens_for(Table, "column_reflect")
     def listen_for_col(inspector, table, column_info):
         # ...
 
@@ -1083,7 +1083,7 @@ MySQL 方言执行两个调用，一个是非常昂贵的，用于从数据库�
 
 引用`insert()`或`update()`构造中不存在的列会引发错误而不是警告：
 
-    t1 = table('t1', column('x'))plainplainplain
+    t1 = table('t1', column('x'))plain
     t1.insert().values(x=5, z=5) # raises "Unconsumed column names: z"
 
 [＃2415 T0\>](http://www.sqlalchemy.org/trac/ticket/2415)

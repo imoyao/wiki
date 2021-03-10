@@ -125,7 +125,7 @@ aren’t really aware of them otherwise.
 
 请注意，`query.join()`的所有其他形式保持不变：
 
-    query.join(MyClass.somerelation)plain
+    query.join(MyClass.somerelation)
     query.join("somerelation")
     query.join(MyTarget)
     # ... etc
@@ -148,7 +148,7 @@ ORM “composites”, those configured using [`composite()`](orm_composites.html
 
 [Mutation Tracking](orm_extensions_mutable.html)
 
-### NULLS FIRST / NULLS LAST运算符[¶](#nulls-first-nulls-last-operators "Permalink to this headline")
+### NULLS FIRST / NULLS LAST 运算符[¶](#nulls-first-nulls-last-operators "Permalink to this headline")
 
 这些被实现为`asc()`和`desc()`运算符的扩展，称为`nullsfirst()`和`nullslast()`
 
@@ -180,7 +180,7 @@ T0\>](http://www.sqlalchemy.org/docs/07/orm_query.html#sqlalchemy.orm.query.Quer
 
 Index()构造可以与表定义一起内联创建，使用字符串作为列名，作为在表外创建索引的替代方法。那是：
 
-    Table('mytable', metadata,plain
+    Table('mytable', metadata,
             Column('id',Integer, primary_key=True),
             Column('name', String(50), nullable=False),
             Index('idx_name', 'name')
@@ -188,7 +188,7 @@ Index()构造可以与表定义一起内联创建，使用字符串作为列名�
 
 这里的主要基本原理是为了声明`__table_args__`的好处，特别是在与 mixin 一起使用时：
 
-    class HasNameMixin(object):plainplain
+    class HasNameMixin(object):plain
         name = Column('name', String(50), nullable=False)
         @declared_attr
         def __table_args__(cls):
@@ -212,7 +212,7 @@ Server 和 Oracle 支持，可能还有其他支持。
 
 SQLAlchemy 使用`over()`方法提供一个通常通过现有函数子句调用的简单结构，该方法接受`order_by`和`partition_by`关键字参数。下面我们复制 PG 教程中的第一个例子：
 
-    from sqlalchemy.sql import table, column, select, funcplainplain
+    from sqlalchemy.sql import table, column, select, funcplain
 
     empsalary = table('empsalary',
                     column('depname'),
@@ -230,7 +230,7 @@ SQLAlchemy 使用`over()`方法提供一个通常通过现有函数子句调用�
 
 SQL：
 
-    SELECT empsalary.depname, empsalary.empno, empsalary.salary,plainplain
+    SELECT empsalary.depname, empsalary.empno, empsalary.salary,plain
     avg(empsalary.salary) OVER (PARTITION BY empsalary.depname) AS avg
     FROM empsalary
 
@@ -252,7 +252,7 @@ T0\>](http://www.sqlalchemy.org/docs/07/core_connections.html#sqlalchemy.engine.
 
 ### `TypeDecorator`使用整数主键列[¶](#typedecorator-works-with-integer-primary-key-columns "Permalink to this headline")
 
-扩展`Integer`行为的`TypeDecorator`可以与主键列一起使用。`Column`的“自动增量”功能现在将认识到底层数据库列仍然是一个整数，以便拉斯特瓦尔德机制继续发挥作用。`TypeDecorator`本身将其结果值处理器应用于新生成的主键，包括由DBAPI
+扩展`Integer`行为的`TypeDecorator`可以与主键列一起使用。`Column`的“自动增量”功能现在将认识到底层数据库列仍然是一个整数，以便拉斯特瓦尔德机制继续发挥作用。`TypeDecorator`本身将其结果值处理器应用于新生成的主键，包括由 DBAPI
 `cursor.lastrowid`访问器接收的主键。
 
 [＃2005](http://www.sqlalchemy.org/trac/ticket/2005)
@@ -290,13 +290,13 @@ T0\>](http://www.sqlalchemy.org/docs/07/core_connections.html#sqlalchemy.engine.
 在`Query.count()`中发生的非常古老的猜测已经现代化以使用`.from_self()`。That is, `query.count()` is now
 equivalent to:
 
-    query.from_self(func.count(literal_column('1'))).scalar()plainplain
+    query.from_self(func.count(literal_column('1'))).scalar()
 
 以前，内部逻辑试图重写查询本身的列子句，并且在检测到“子查询”条件（例如可能包含聚合的列查询或具有 DISTINCT 的查询）时，会经历复杂重写列子句的过程。这种逻辑在复杂条件下失败了，特别是那些涉及到连接表继承的逻辑，并且由于更全面的`.from_self()`调用已经过时了。
 
 由`query.count()`发出的 SQL 现在总是如下形式：
 
-    SELECT count(1) AS count_1 FROM (plain
+    SELECT count(1) AS count_1 FROM (
         SELECT user.id AS user_id, user.name AS user_name from user
     ) AS anon_1
 
@@ -313,7 +313,7 @@ MySQL 用户已经报道过，MyISAM 引擎不会因为这个简单的改变而�
 
 或者用于`count(*)`：
 
-    from sqlalchemy import func, literal_columnplainplain
+    from sqlalchemy import func, literal_columnplain
     session.query(func.count(literal_column('*'))).select_from(MyClass).scalar()
 
 ### LIMIT / OFFSET 子句现在使用绑定参数[¶](#limit-offset-clauses-now-use-bind-parameters "Permalink to this headline")
@@ -383,7 +383,7 @@ environments. 0.7 中的`sqla_nose.py`脚本现在是用鼻子运行测试的唯
 
 完全不反对任何`Table`的构造，就像一个函数一样，可以被映射。
 
-    from sqlalchemy import select, funcplainplain
+    from sqlalchemy import select, funcplain
     from sqlalchemy.orm import mapper
 
     class Subset(object):
@@ -437,7 +437,7 @@ Server 将这些类型的长度默认为'1'。
 
 当映射具有`PickleType`或`postgresql.ARRAY`数据类型的列时，此更改引用 ORM 的默认行为。`mutable`标志现在默认设置为`False`。如果现有的应用程序使用这些类型，并且依赖于检测到就地突变，则必须使用`mutable=True`构造类型对象以恢复 0.6 行为：
 
-    Table('mytable', metadata,plain
+    Table('mytable', metadata,
         # ....
 
         Column('pickled_data', PickleType(mutable=True))
@@ -526,7 +526,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 这种方法的主要优点是，现在可以更轻松地构建引用本地列的`primaryjoin`表达式：
 
-    class Child(Parent):plain
+    class Child(Parent):
        __tablename__ = 'child'
         id = Column(Integer, ForeignKey('parent.id'), primary_key=True)
         some_related = relationship("SomeRelated",
@@ -541,7 +541,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 这也意味着像这样的查询会改变它的行为：
 
-    session.query(Parent).filter(Child.id > 7)plainplain
+    session.query(Parent).filter(Child.id > 7)
 
 在 0.6 中，这会使得：
 
@@ -551,7 +551,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 在 0.7 中，你会得到：
 
-    SELECT parent.id AS parent_idplainplain
+    SELECT parent.id AS parent_id
     FROM parent, child
     WHERE child.id > :id_1
 
@@ -561,7 +561,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 0.6 和 0.7 中的哪一个呈现：
 
-    SELECT parent.id AS parent_id, child.id AS child_idplain
+    SELECT parent.id AS parent_id, child.id AS child_id
     FROM parent LEFT OUTER JOIN child ON parent.id = child.id
     WHERE child.id > :id_1
 
@@ -577,7 +577,7 @@ JOIN 改为“child”。该行位于“Parent”中，看到多态身份对应�
 
 给定两个表`foo`和`bar`，每个表具有主键列`id`，现在会产生一个错误：
 
-    foobar = foo.join(bar, foo.c.id==bar.c.foo_id)plain
+    foobar = foo.join(bar, foo.c.id==bar.c.foo_id)
     mapper(FooBar, foobar)
 
 This because the `mapper()` refuses to guess what
@@ -695,7 +695,7 @@ restored as of 0.7b4/0.7.0, but emits a deprecation warning.
 
 这个模糊的特性允许这种模式与 MySQL 后端：
 
-    select([mytable], distinct='ALL', prefixes=['HIGH_PRIORITY'])plain
+    select([mytable], distinct='ALL', prefixes=['HIGH_PRIORITY'])
 
 `prefixes`关键字或`prefix_with()`方法应该用于非标准或不常用的前缀：
 
@@ -766,7 +766,7 @@ that of the `alias()` methods on all
 
 将属性或属性名称的列表传递给`Query.join`，`eagerload()`
 
-    # old way, deprecated since 0.5plain
+    # old way, deprecated since 0.5
     session.query(Houses).join([Houses.rooms, Room.closets])
     session.query(Houses).options(eagerload_all([Houses.rooms, Room.closets]))
 
