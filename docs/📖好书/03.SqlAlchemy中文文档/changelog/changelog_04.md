@@ -76,7 +76,7 @@ tags:
 
 -   **[orm]**在 scoped\_session 方法中添加了“add()”和“add\_all()”。0.4.7 的解决方法：
 
-        from sqlalchemy.orm.scoping import ScopedSession, instrument
+        from sqlalchemy.orm.scoping import ScopedSession, instrumentplainplainplainplainplainplainplainplainplainplain
         setattr(ScopedSession, "add", instrument("add"))
         setattr(ScopedSession, "add_all", instrument("add_all"))
 
@@ -339,7 +339,7 @@ tags:
 
     新方法还会自动允许急切加载为子类（如果存在）工作，例如：
 
-        sess.query(Company).options(plain
+        sess.query(Company).options(plainplainplainplain
          eagerload_all(
         ))
 
@@ -1151,7 +1151,7 @@ tags:
     @converter method to translate objects used in “bulk” assignment
     into a stream of values, as in:
 
-        obj.col =
+        obj.col =plainplainplainplainplainplainplain
         # or
         obj.dictcol = {'foo': newval1, 'bar': newval2}
 
