@@ -343,7 +343,7 @@ tags:
 -   小的修复程序加上订购/限制/偏移[¶](#change-03a4cc85caf469f1dc0aff0590a1863a)
 
 -   utterly remarkable: added a single space between ‘CREATE TABLE’ and
-    ‘(’ since *that’s how MySQL indicates a non- reserved word
+    ‘(’ since *that’s how MySQL indicates a non- reserved word……………………………………
 ……
 …………
     tablename.....*[¶](#change-1afa0092b73a4311513258de8d1bfe61)
@@ -382,7 +382,7 @@ plainplainplainplainplain
 -   新的 MySQL 类型：MSEnum，MSTinyText，MSMediumText，MSLongText 等更多支持 MS 特定长度/精度参数的数值类型补丁 Mike
     Bernson [¶](#change-22f10061c7f8be06b4bdcb04c8b9df8d)
 
--   修正连接池invalidate()[¶](#change-352e899ebdf1244cadff3555b1420e2b)
+-   修正连接池 invalidate()[¶](#change-352e899ebdf1244cadff3555b1420e2b)
 
     参考文献：[＃224](http://www.sqlalchemy.org/trac/ticket/224)
 
@@ -398,7 +398,7 @@ plainplainplainplainplain
 
 -   属性检测模块已被完全重写；现在它的程度更简单，更清晰，速度更快。属性的“历史”不再是每次更改的微观管理，而是第一次加载实例时创建的“CommittedState”对象的一部分。HistoryArraySet 消失后，列表属性的行为现在更加开放式（即它们不再是集合）。[¶](#change-1c0e73f78920f1f97d78a0e02b7db01f)
 
--   在内部使用的py2.4“set”结构，回退到sets.Set何时“set”不可用/需要排序[¶](#change-c64bb0af937cfa88844e4ab96b6733fd)
+-   在内部使用的 py2.4“set”结构，回退到 sets.Set 何时“set”不可用/需要排序[¶](#change-c64bb0af937cfa88844e4ab96b6733fd)
 
 -   修复事务控制，以便重复的 rollback()调用不会失败（当 flush()会在更大的 try
     / except 事务块中引发异常时，会非常糟糕）[¶\< /
@@ -438,7 +438,7 @@ plainplainplainplainplain
 
     参考文献：[＃200](http://www.sqlalchemy.org/trac/ticket/200)
 
--   对 cascade\_mappers的小调整，目前不是很强大的支持函数[¶](#change-63c68a2ab8ee24aabc39666ea967de89)
+-   对 cascade\_mappers 的小调整，目前不是很强大的支持函数[¶](#change-63c68a2ab8ee24aabc39666ea967de89)
 
 -   some fixes to between(), column.between() to propagate typing
     information better[¶](#change-d5c489545664e97beb313f16da2784e8)
@@ -530,7 +530,7 @@ plainplainplainplainplain
 
 -   如果没有 sqlite 模块存在，修复 sqlite 中的异常[¶](#change-7d94f3def3f5ff26407726dd433da955)
 
--   为关联对象doc
+-   为关联对象 doc
     [¶](#change-8abad0d2f2c6c44e00ac58e5c17cadb4)添加了额外的示例细节
 
 -   连接添加了已经关闭的检查[¶](#change-bec5627771341c1349121e09bd06b71e)
