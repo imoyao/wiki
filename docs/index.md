@@ -27,10 +27,14 @@ features: # 可选的
     details: 温故而知新
     link: /how/
     imgUrl: /img/forward.png
-  - title: 📖好书
+  - title: 好书
     details: 好读书，不求甚解
     link: /books/
     imgUrl: /img/books.png
+  - title: 心理学
+    details: 人性的弱点
+    link: /psychology/
+    imgUrl: /img/idea.png
 
 # 文章列表显示方式: detailed 默认，显示详细版文章列表（包括作者、分类、标签、摘要、分页等）| simple => 显示简约版文章列表（仅标题和日期）| none 不显示文章列表
 # postList: detailed
