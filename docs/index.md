@@ -62,7 +62,7 @@ A human being should be able to change a diaper, plan an invasion, butcher a hog
 <br>
 一个人应该能够更换尿布，策划战争，杀一头猪，开船掌舵，设计建筑，写十四行诗，会计结算，粉刷砌墙，治疗脱臼，安慰临终的人，执行命令，发布号令，携手合作，独立行动，解数学方程，分析问题，施肥铲粪，电脑编程，做可口的饭菜，高效地战斗，勇敢地死去。臭虫才囿于一门。
 ::: right
-[美]罗伯特·海因莱因(Robert Anson Heinlein)'
+——[美]罗伯特·海因莱因(Robert Anson Heinlein)
 :::
 
 ::: warning 版权信息
