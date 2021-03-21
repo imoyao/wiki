@@ -75,11 +75,11 @@ tags:
 ### ORM [¶ T0\>](#change-0.4.7p1-orm "Permalink to this headline")
 
 -   **[orm]**在 scoped\_session 方法中添加了“add()”和“add\_all()”。0.4.7 的解决方法：
-
-        from sqlalchemy.orm.scoping import ScopedSession, instrumentplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+```python
+        from sqlalchemy.orm.scoping import ScopedSession, instrument
         setattr(ScopedSession, "add", instrument("add"))
         setattr(ScopedSession, "add_all", instrument("add_all"))
-
+```
     [¶](#change-8845ae575ef66cb76fb504e32b6b0e26)
 
 -   **[orm]**修正了 relation()中 set()和 generator 表达式的非 2.3 兼容用法。[¶](#change-8150f6bc3321b0e5940f462af85fea59)
@@ -329,20 +329,21 @@ tags:
     mapper() as a configuration option.
 
     它通过几种形式设置：
+```python    
     :   with\_polymorphic ='\*'with\_polymorphic = [mappers]
         with\_polymorphic =（'\*'，可选）with\_polymorphic
         =（[mappers]，可选）
-
+```
     这将控制继承的映射器的默认多态加载策略。如果没有给出 selectable，则为所有请求的连接表继承映射器创建外部连接。请注意，自动创建连接与具体的表继承不兼容。
 
     mapper()现有的 select\_table 标志现在已被弃用，并与 with\_polymorphic（'\*'，select\_table）同义。请注意，select\_table 的底层“内核”已被完全删除，并被更新，更灵活的方法所取代。
 
     新方法还会自动允许急切加载为子类（如果存在）工作，例如：
-
-        sess.query(Company).options(plainplainplainplainplainplainplain
+```python
+        sess.query(Company).options(
          eagerload_all(
         ))
-
+```
     加载公司对象，他们的员工以及碰巧是工程师的'机器'员工集合。应该尽快引入“with\_polymorphic”查询选项，这将允许每个查询控制 with\_polymorphic()关系。
 
     [¶](#change-9a3c3752fa2fda67a4fbb703fcd690ab)
@@ -1150,11 +1151,11 @@ tags:
 -   **[orm] [newval2] [newval1]**Custom collections can now specify a
     @converter method to translate objects used in “bulk” assignment
     into a stream of values, as in:
-
-        obj.col =plainplainplainplainplainplainplainplainplainplainplainplainplainplain
+```python
+        obj.col =
         # or
         obj.dictcol = {'foo': newval1, 'bar': newval2}
-
+```
     MappedCollection 使用这个钩子来确保从集合的角度来看传入的键/值对是合理的。
 
     [¶](#change-228dca0bafaa198350cfc39cb6561e8c)
