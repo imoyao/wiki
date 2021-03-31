@@ -770,15 +770,15 @@ tags:
     参考文献：[＃2378](http://www.sqlalchemy.org/trac/ticket/2378)
 
 -   **[engine] [feature]**为引擎，连接添加了一些体面的上下文管理器：
-
-        with engine.begin() as conn:plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
-            <work with conn in a transaction>
-
+    ```python
+    with engine.begin() as conn:
+        <work with conn in a transaction>
+    ```
     和：
-
-        with engine.connect() as conn:plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
-            <work with conn>
-
+    ```python
+    with engine.connect() as conn:
+        <work with conn>
+    ```
     在 engine.begin()完成，提交或回滚事务时出错都关闭连接。
 
     [¶](#change-f22f644c754519a55485cda58f78ade4)
