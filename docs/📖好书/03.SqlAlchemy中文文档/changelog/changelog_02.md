@@ -343,13 +343,10 @@ tags:
 -   小的修复程序加上订购/限制/偏移[¶](#change-03a4cc85caf469f1dc0aff0590a1863a)
 
 -   utterly remarkable: added a single space between ‘CREATE TABLE’ and
-    ‘(’ since *that’s how MySQL indicates a non- reserved word…………
-……
-…………
-    tablename.....*[¶](#change-1afa0092b73a4311513258de8d1bfe61)
+    ‘(’ since *that’s how MySQL indicates a non- reserved word tablename.....*[¶](#change-1afa0092b73a4311513258de8d1bfe61)
 
 g/trac/ticket/206)
-plainplainplainplainplain
+
 -   更多修复了继承问题，与多对多关系正确地保存[¶](#change-4aadd1394222f4244ef7c8cba4717753)
 
 -   fixed bug when specifying explicit module to mysql
