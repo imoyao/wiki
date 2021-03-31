@@ -40,11 +40,11 @@ SQLAlchemy 0.6 中有什么新东西？[¶](#what-s-new-in-sqlalchemy-0-6 "Perma
 由`create_engine()`使用的 URL 格式已得到增强，可以使用受 JDBC 启发的方案来处理特定后端的任意数量的 DBAPI。以前的格式仍然有效，并且会选择一个“默认的”DBAPI 实现，比如下面的 Postgresql
 URL，它将使用 psycopg2：
 
-    create_engine('postgresql://scott:tiger@localhost/test')
+    create_engine('postgresql://scott:tiger@localhost/test')plain
 
 但是，要指定特定的 DBAPI 后端（例如 pg8000），请使用加号“+”将其添加到 URL 的“协议”部分中：
 
-    create_engine('postgresql+pg8000://scott:tiger@localhost/test')plain
+    create_engine('postgresql+pg8000://scott:tiger@localhost/test')
 
 重要的方言链接：
 
@@ -103,7 +103,7 @@ URL，它将使用 psycopg2：
 
 在先前版本的 SQLAlchemy 中，返回的`_BinaryExpression`是一个普通的 Python 对象，其计算结果为`True`。现在，它计算实际的`ClauseElement`是否应该与正在比较的哈希值相同。含义：
 
-    >>> bool(column('foo') == 5)
+    >>> bool(column('foo') == 5)plain
     False
     >>> bool(column('foo') == column('foo'))
     False
@@ -114,12 +114,12 @@ URL，它将使用 psycopg2：
 
 这意味着代码如下：
 
-    if expression:
+    if expression:plain
         print("the expression is:", expression)
 
 如果`expression`是二进制子句，则不会评估。由于不应该使用上述模式，因此如果在布尔上下文中调用，基`ClauseElement`现在会引发异常：
 
-    >>> bool(c)plain
+    >>> bool(c)
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
       ...
@@ -128,7 +128,7 @@ URL，它将使用 psycopg2：
 
 相反，想要检查`ClauseElement`表达式的代码应该如下所示：
 
-    if expression is not None:plain
+    if expression is not None:
         print("the expression is:", expression)
 
 请记住，**这也适用于 Table 和 Column 对象**。
@@ -142,7 +142,7 @@ URL，它将使用 psycopg2：
 
 SQLAlchemy 中的“executemany”对应于对`execute()`的调用，传递一组绑定参数集：
 
-    connection.execute(table.insert(), {'data':'row1'}, {'data':'row2'}, {'data':'row3'})plain
+    connection.execute(table.insert(), {'data':'row1'}, {'data':'row2'}, {'data':'row3'})
 
 当`Connection`对象发送给定的用于编译的`insert()`结构时，它将传递给第一组绑定的键名传递给编译器，以确定该语句的 VALUES 子句。熟悉这个构造的用户会知道其余字典中存在的其他键没有任何影响。What’s
 different now is that all subsequent dictionaries need to include at
@@ -187,7 +187,7 @@ connecting and fetching 50,000 rows looks like with SQLite, using mostly
 direct SQLite access, a `ResultProxy`, and a simple
 mapped ORM object:
 
-    sqlite select/native: 0.260splain
+    sqlite select/native: 0.260s
 
     0.6 / C extension
 
@@ -322,7 +322,7 @@ the parent connection. 池日志记录发送到`log.info()`和`log.debug()` - �
 
 `from_engine()`方法在某些情况下会为后端特定的检查器提供额外的功能，例如提供`get_table_oid()`方法的 Postgresql：
 
-    my_engine = create_engine('postgresql://...')plain
+    my_engine = create_engine('postgresql://...')
     pg_insp = Inspector.from_engine(my_engine)
 
     print(pg_insp.get_table_oid('my_table'))
@@ -413,7 +413,7 @@ CHECK 策略。请注意，Postgresql ENUM 类型目前不适用于 pg8000 或 z
 
 一些在表格元数据中大量使用的应用程序可能希望在反映的表格和/或未反映的表格中比较类型。在`TypeEngine`上有一个名为`_type_affinity`和相关联的比较帮助器`_compare_type_affinity`的半私人访问器。该访问器返回类型对应的“generic”`types`类：
 
-    >>> String(50)._compare_type_affinity(postgresql.VARCHAR(50))plain
+    >>> String(50)._compare_type_affinity(postgresql.VARCHAR(50))
     True
     >>> Integer()._compare_type_affinity(mysql.REAL)
     False
@@ -497,7 +497,7 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
 在 mapper 级别：
 
-    mapper(Child, child)plain
+    mapper(Child, child)
     mapper(Parent, parent, properties={
         'child':relationship(Child, lazy='joined', innerjoin=True)
     })
@@ -524,11 +524,11 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
     例如，在 0.5 这个查询中：
 
-        session.query(Address).options(eagerload(Address.user)).limit(10)plain
+        session.query(Address).options(eagerload(Address.user)).limit(10)
 
     会产生如下的 SQL：
 
-        SELECT * FROM
+        SELECT * FROMplain
           (SELECT * FROM addresses LIMIT 10) AS anon_1
           LEFT OUTER JOIN users AS users_1 ON users_1.id = anon_1.addresses_user_id
 
@@ -536,7 +536,7 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
     在 0.6 中，该逻辑更加敏感，并且可以检测所有渴望的加载器是否表示多对一，在这种情况下，渴望加入不会影响 rowcount：
 
-        SELECT * FROM addresses LEFT OUTER JOIN users AS users_1 ON users_1.id = addresses.user_id LIMIT 10plain
+        SELECT * FROM addresses LEFT OUTER JOIN users AS users_1 ON users_1.id = addresses.user_id LIMIT 10
 
 ### 加入表继承的可变主键[¶](#mutable-primary-keys-with-joined-table-inheritance "Permalink to this headline")
 
@@ -579,7 +579,7 @@ Beaker 集成的一个有希望的新例子是在`examples/beaker_caching`中。
     =（“\*”，）'。
 -   同义词()的'代理'参数被删除。这个标志在整个 0.5 中没有做任何事情，因为“代理生成”行为现在是自动的。
 -   不推荐将单个元素列表传递给 joinedload()，joinedload\_all()，contains\_eager()，lazyload()，defer()和 undefer()而不是多个位置\*参数。
--   将单个元素列表传递给 query.order\_by()，query.group\_by()，query.join()或query.outerjoin()而不是多个位置\*参数已弃用。
+-   将单个元素列表传递给 query.order\_by()，query.group\_by()，query.join()或 query.outerjoin()而不是多个位置\*参数已弃用。
 -   `query.iterate_instances()`被删除。使用`query.instances()`。
 -   `Query.query_from_parent()`被删除。Use the
     sqlalchemy.orm.with\_parent() function to produce a “parent” clause,

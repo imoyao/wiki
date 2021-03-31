@@ -47,11 +47,11 @@ test / orm\_test\_deprecations.py]中查看。
 -   **查询中的列级表达式** -
     详见[教程](http://www.sqlalchemy.org/docs/05/ormtutorial.html)，`Query`有能力创建特定的 SELECT 语句，而不仅仅是针对整行的那些语句：
 
-        session.query(User.name, func.count(Address.id).label("numaddresses")).join(Address).group_by(User.name)
+        session.query(User.name, func.count(Address.id).label("numaddresses")).join(Address).group_by(User.name)plain
 
     任何多列/实体查询返回的元组都是*命名的*元组：
 
-        for row in session.query(User.name, func.count(Address.id).label('numaddresses')).join(Address).group_by(User.name):plain
+        for row in session.query(User.name, func.count(Address.id).label('numaddresses')).join(Address).group_by(User.name):
            print("name", row.name, "number", row.numaddresses)
 
     `Query` has a `statement`
@@ -87,7 +87,7 @@ test / orm\_test\_deprecations.py]中查看。
 
     遍历列：
 
-        for col in table.c:plain
+        for col in table.c:
             print(col)
 
     使用特定列：
@@ -131,13 +131,13 @@ test / orm\_test\_deprecations.py]中查看。
     will be extremely similar to 0.4 or previous, use the
     `order_by` setting on `mapper()` and `relation()`:
 
-        mapper(User, users, properties={plain
+        mapper(User, users, properties={
             'addresses':relation(Address, order_by=addresses.c.id)
         }, order_by=users.c.id)
 
     要设置 backref 的顺序，请使用`backref()`函数：
 
-        'keywords':relation(Keyword, secondary=item_keywords,plain
+        'keywords':relation(Keyword, secondary=item_keywords,
               order_by=keywords.c.name, backref=backref('items', order_by=items.c.id))
 
     使用声明？To help with the new `order_by`
@@ -271,7 +271,7 @@ test / orm\_test\_deprecations.py]中查看。
 
     或者，启用“传统”模式，如下所示：
 
-        from sqlalchemy.databases.sqlite import DateTimeMixin
+        from sqlalchemy.databases.sqlite import DateTimeMixinplain
         DateTimeMixin.__legacy_microseconds__ = True
 
 默认情况下，连接池不再是 threadlocal [¶](#connection-pool-no-longer-threadlocal-by-default "Permalink to this headline")
@@ -292,7 +292,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     their argument now, which allows a path to be formulated using
     descriptors, ie. :
 
-        query.options(eagerload_all(User.orders, Order.items, Item.keywords))
+        query.options(eagerload_all(User.orders, Order.items, Item.keywords))plain
 
     为了向后兼容，仍然接受单个数组参数。
 
@@ -301,7 +301,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     length \*args, with a single array accepted for backwards
     compatibility:
 
-        query.join('orders', 'items')
+        query.join('orders', 'items')plain
         query.join(User.orders, Order.items)
 
 -   列和类似的\_()方法中的`in_()`它不再接受`\*args`。
@@ -321,7 +321,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
     要获得同等功能：
 
-        x = session.query(SomeClass).populate_existing().get(7)plain
+        x = session.query(SomeClass).populate_existing().get(7)
 
     `Session.get(cls, id)` and
     `Session.load(cls, id)` have been removed.
@@ -330,7 +330,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
     `MapperExtension.get()`也被删除（就像`MapperExtension.load()`）。要覆盖`Query.get()`的功能，请使用以下子类：
 
-        class MyQuery(Query):plain
+        class MyQuery(Query):
             def get(self, ident):
                 # ...
 
