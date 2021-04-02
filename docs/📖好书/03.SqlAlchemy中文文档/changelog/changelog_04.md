@@ -1155,7 +1155,7 @@ obj.dictcol = {'foo': newval1, 'bar': newval2}
 ```
 MappedCollection 使用这个钩子来确保从集合的角度来看传入的键/值对是合理的。
 
-    [¶](#change-228dca0bafaa198350cfc39cb6561e8c)
+    [¶](#change-228dca0bafaa198350cfc39cb6561e8c)plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 -   **[orm]**在双向关系的两侧使用 lazy
     =“dynamic”时修复了无限循环问题[¶](#change-abc2dcd6fd504baa411c4ede8eda7189)
