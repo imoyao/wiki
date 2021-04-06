@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:33
 permalink: /sqlalchemy/core/constraints/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - core
 tags:
   - 
@@ -18,11 +18,11 @@ tags:
 定义外键[¶](#defining-foreign-keys "Permalink to this headline")
 ----------------------------------------------------------------
 
-SQL 中的*外键*是表级结构，限制该表中的一个或多个列，使得值能存在不同列中，通常但不总是位于不同的表。我们调用了约束*外键*列的列和它们被约束到*引用的*列的列。被引用的列几乎总是为他们拥有的表定义主键，但也有例外。外键是将具有相互关系的行对连接在一起的“联合”，SQLAlchemy几乎在其操作的每个区域都非常重视这个概念。
+SQL 中的*外键*是表级结构，限制该表中的一个或多个列，使得值能存在不同列中，通常但不总是位于不同的表。我们调用了约束*外键*列的列和它们被约束到*引用的*列的列。被引用的列几乎总是为他们拥有的表定义主键，但也有例外。外键是将具有相互关系的行对连接在一起的“联合”，SQLAlchemy 几乎在其操作的每个区域都非常重视这个概念。
 
 在 SQLAlchemy 以及 DDL 中，可以将外键约束定义为 table 子句中的附加属性，或者对于单列外键，可以在单列的定义内指定外键约束。单列外键更常见，并且在列级别通过构建[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")对象作为[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的参数来指定：
 
-    user_preference = Table('user_preference', metadata,plain
+    user_preference = Table('user_preference', metadata,
         Column('pref_id', Integer, primary_key=True),
         Column('user_id', Integer, ForeignKey("user.user_id"), nullable=False),
         Column('pref_name', String(40), nullable=False),
@@ -37,7 +37,7 @@ t3＆gt；的形式的字符串，或者对于远程模式中的表或“所有�
 schemaname＆gt；。＆lt； tablename＆gt；。＆lt；
 columnname＆gt；*。*它也可能是一个实际的[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象，我们稍后会看到它是通过它的`c`集合从现有的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象进行访问的：
 
-    ForeignKey(user.c.user_id)plain
+    ForeignKey(user.c.user_id)
 
 使用字符串的好处在于，仅当第一次需要时才解析`user`和`user_preference`之间的 in-python 链接，以便可以将表对象轻松地分布到多个模块中，按任何顺序定义。
 
@@ -109,7 +109,7 @@ MyISAM 数据）。因此，这些方法将在这种循环中将约束分解为�
 
 当我们在后端（如 Postgresql 后端）上调用[`MetaData.create_all()`](metadata.html#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")时，解析这两个表之间的循环并分别创建约束：
 
-    >>> with engine.connect() as conn:plain
+    >>> with engine.connect() as conn:
     ...    metadata.create_all(conn, checkfirst=False)
     CREATE TABLE element (
         element_id SERIAL NOT NULL,
@@ -185,7 +185,7 @@ and [`ForeignKey.use_alter`](#sqlalchemy.schema.ForeignKey.params.use_alter "sql
 when used in conjunction with a drop operation, will require that the
 constraint is named, else an error like the following is generated:
 
-    sqlalchemy.exc.CompileError: Can't emit DROP CONSTRAINT for constraint
+    sqlalchemy.exc.CompileError: Can't emit DROP CONSTRAINT for constraintplain
     ForeignKeyConstraint(...); it has no name
 
 Changed in version 1.0.0: - The DDL system invoked by
@@ -198,7 +198,7 @@ objects, without the need to explicitly set the
 [`ForeignKeyConstraint.use_alter`](#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")
 flag.
 
-版本1.0.0中已更改： - [`ForeignKeyConstraint.use_alter`(#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")标志可与未命名的约束一起使用；实际调用时，只有DROP操作会发出特定的错误。
+版本 1.0.0 中已更改： - [`ForeignKeyConstraint.use_alter`(#sqlalchemy.schema.ForeignKeyConstraint.params.use_alter "sqlalchemy.schema.ForeignKeyConstraint")标志可与未命名的约束一起使用；实际调用时，只有DROP操作会发出特定的错误。
 
 也可以看看
 
@@ -238,12 +238,12 @@ DELETE”短语后输出的任何字符串：
 
 请注意，这些子句在 SQLite 上不受支持，并且在与 MySQL 一起使用时需要`InnoDB`表。他们也可能不支持其他数据库。
 
-UNIQUE约束[¶](#unique-constraint "Permalink to this headline")
+UNIQUE 约束[¶](#unique-constraint "Permalink to this headline")
 --------------------------------------------------------------
 
 使用[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")上的`unique`关键字，可以在单个列上匿名创建唯一约束。通过[`UniqueConstraint`](#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")表级构造创建明确命名的唯一约束和/或具有多个列的约束。
 
-    from sqlalchemy import UniqueConstraint
+    from sqlalchemy import UniqueConstraintplain
 
     meta = MetaData()
     mytable = Table('mytable', meta,
@@ -263,7 +263,7 @@ CHECK约束[¶](#check-constraint "Permalink to this headline")
 
 检查约束可以被命名或未命名，可以使用[`CheckConstraint`](#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")结构在列或表级别创建。检查约束的文本直接传递到数据库，因此有限的“数据库无关”行为。列级检查约束通常只应引用它们所在的列，而表级约束可引用表中的任何列。
 
-请注意，有些数据库不支持检查约束，如MySQL。
+请注意，有些数据库不支持检查约束，如 MySQL。
 
     from sqlalchemy import CheckConstraint
 
@@ -288,12 +288,12 @@ CHECK约束[¶](#check-constraint "Permalink to this headline")
         CONSTRAINT check1  CHECK (col2 > col3 + 5)
     )
 
-PRIMARY KEY约束[¶](#primary-key-constraint "Permalink to this headline")
+PRIMARY KEY 约束[¶](#primary-key-constraint "Permalink to this headline")
 ------------------------------------------------------------------------
 
 根据用[`Column.primary_key`](metadata.html#sqlalchemy.schema.Column.params.primary_key "sqlalchemy.schema.Column")标志标记的[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象，任何[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的主键约束都是隐式存在的。[`PrimaryKeyConstraint`](#sqlalchemy.schema.PrimaryKeyConstraint "sqlalchemy.schema.PrimaryKeyConstraint")对象提供对此约束的显式访问，其中包括直接配置的选项：
 
-    from sqlalchemy import PrimaryKeyConstraintplain
+    from sqlalchemy import PrimaryKeyConstraint
 
     my_table = Table('mytable', metadata,
                 Column('id', Integer),
@@ -348,7 +348,7 @@ classes as keys, and Python string templates as values.
 
 适用于基本情况的示例命名约定如下所示：
 
-    convention = {
+    convention = {plain
       "ix": 'ix_%(column_0_label)s',
       "uq": "uq_%(table_name)s_%(column_0_name)s",
       "ck": "ck_%(table_name)s_%(constraint_name)s",
@@ -372,7 +372,7 @@ collection. 例如，我们可以观察创建未命名的[`UniqueConstraint`](#s
 
 即使我们只使用[`Column.unique`](metadata.html#sqlalchemy.schema.Column.params.unique "sqlalchemy.schema.Column")标志，该功能也会生效：
 
-    >>> user_table = Table('user', metadata,
+    >>> user_table = Table('user', metadata,plain
     ...                  Column('id', Integer, primary_key=True),
     ...                  Column('name', String(30), nullable=False, unique=True)
     ...     )
@@ -403,7 +403,7 @@ The tokens available include `%(table_name)s`,
 `%(constraint_name)s`; the documentation for
 [`MetaData.naming_convention`](metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")
 describes each individually.
-通过在naming\_convention 字典中指定一个额外的标记和一个可调用标记，还可以添加新的标记。例如，如果我们想使用 GUID 方案来命名我们的外键约束，我们可以这样做：
+通过在 naming\_convention 字典中指定一个额外的标记和一个可调用标记，还可以添加新的标记。例如，如果我们想使用 GUID 方案来命名我们的外键约束，我们可以这样做：
 
     import uuidplain
 
@@ -454,7 +454,7 @@ naming components.
 Constraints](http://alembic.zzzcomputing.com/en/latest/naming.html#tutorial-constraint-names "(in Alembic v0.8.7)")
 - 在 Alembic 文档中。
 
-版本0.9.2新增：添加了[`MetaData.naming_convention`(metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")参数。
+版本 0.9.2 新增：添加了[`MetaData.naming_convention`(metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")参数。
 
 ### 命名CHECK约束[¶](#naming-check-constraints "Permalink to this headline")
 
@@ -480,7 +480,7 @@ typical convention is
 
 [`CheckConstraint`](#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")还支持`%(columns_0_name)s`标记；我们可以通过确保我们在约束的表达式中使用[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")或[`sql.expression.column()`](sqlelement.html#sqlalchemy.sql.expression.column "sqlalchemy.sql.expression.column")元素来使用它，或者通过声明与表格分开的约束：
 
-    metadata = MetaData(
+    metadata = MetaData(plain
         naming_convention={"ck": "ck_%(table_name)s_%(column_0_name)s"}
     )
 
@@ -512,7 +512,7 @@ typical convention is
 
 通过扫描列对象的给定表达式来确定“列零”的名称。如果表达式存在多个列，则扫描确实使用确定性搜索，但表达式的结构将确定将哪个列标记为“列零”。
 
-版本1.0.0新增： [`CheckConstraint`](#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")对象现在支持`column_0_name`命名约定令牌。
+版本 1.0.0 新增： [`CheckConstraint`](#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")对象现在支持`column_0_name`命名约定令牌。
 
 ### 为布尔型，枚举型和其他架构类型配置命名[¶](#configuring-naming-for-boolean-enum-and-other-schema-types "Permalink to this headline")
 
@@ -540,7 +540,7 @@ typical convention is
         CONSTRAINT ck_foo_flag_bool CHECK (flag IN (0, 1))
     )
 
-[`SchemaType`](type_basics.html#sqlalchemy.types.SchemaType "sqlalchemy.types.SchemaType")类使用特殊的内部符号，因此只能在 DDL 编译时确定命名约定。在 Postgresql 上，有一个本地的 BOOLEAN 类型，所以不需要[`Boolean`](type_basics.html#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")的CHECK约束；我们可以安全地设置一个没有名字的[`Boolean`](type_basics.html#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")类型，即使检查约束有一个命名约定。如果我们针对没有像 SQLite 或 MySQL 这样的本机 BOOLEAN 类型的数据库运行，只会为 CHECK 约束查阅此约定。
+[`SchemaType`](type_basics.html#sqlalchemy.types.SchemaType "sqlalchemy.types.SchemaType")类使用特殊的内部符号，因此只能在 DDL 编译时确定命名约定。在 Postgresql 上，有一个本地的 BOOLEAN 类型，所以不需要[`Boolean`](type_basics.html#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")的 CHECK 约束；我们可以安全地设置一个没有名字的[`Boolean`](type_basics.html#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")类型，即使检查约束有一个命名约定。如果我们针对没有像 SQLite 或 MySQL 这样的本机 BOOLEAN 类型的数据库运行，只会为 CHECK 约束查阅此约定。
 
 CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](type_basics.html#sqlalchemy.types.SchemaType "sqlalchemy.types.SchemaType")很好地配合使用，因为这些约束只有一列：
 
@@ -561,7 +561,7 @@ CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](ty
 
 版本 1.0 更改：不包含`%(constraint_name)s`的约束命名约定再次与[`SchemaType`](type_basics.html#sqlalchemy.types.SchemaType "sqlalchemy.types.SchemaType")约束一起使用。
 
-约束API [¶](#constraints-api "Permalink to this headline")
+约束 API [¶](#constraints-api "Permalink to this headline")
 ----------------------------------------------------------
 
 *class* `sqlalchemy.schema。`{.descclassname} `约束`{.descname} （ *name =无*，*可推迟=无*，*开始=无*，*\_create\_rule =无*，*info =无*，*\_type\_bound = False* ，*\*\* dialect\_kw* ） [¶](#sqlalchemy.schema.Constraint "Permalink to this definition")
@@ -616,7 +616,7 @@ CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](ty
 *class* `sqlalchemy.schema。`{.descclassname} `ColumnCollectionConstraint`{.descname} （ *\*列*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.schema.ColumnCollectionConstraint "Permalink to this definition")*
 :   基础：[`sqlalchemy.schema.ColumnCollectionMixin`](#sqlalchemy.schema.ColumnCollectionMixin "sqlalchemy.schema.ColumnCollectionMixin")，[`sqlalchemy.schema.Constraint`](#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")
 
-    代表ColumnCollection的约束。plain
+    代表ColumnCollection的约束。
 
     `__ init __`{.descname} （ *\*列*，*\*\* kw* ） [T5\>](#sqlalchemy.schema.ColumnCollectionConstraint.__init__ "Permalink to this definition")
     :   参数：
@@ -1336,7 +1336,7 @@ CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](ty
 *class* `sqlalchemy.schema。`{.descclassname} `PrimaryKeyConstraint`{.descname} （ *\*列*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.schema.PrimaryKeyConstraint "Permalink to this definition")*
 :   基础：[`sqlalchemy.schema.ColumnCollectionConstraint`](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
 
-    表级PRIMARY KEY约束。
+    表级PRIMARY KEY约束。plain
 
     The [`PrimaryKeyConstraint`](#sqlalchemy.schema.PrimaryKeyConstraint "sqlalchemy.schema.PrimaryKeyConstraint")
     object is present automatically on any [`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
@@ -1678,7 +1678,7 @@ constraint.
 对于具有特定名称或包含多个列的索引，请使用需要名称的[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")结构。
 
 下面我们举例说明一个[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，其中有几个[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")对象关联。“CREATE
-INDEX”的DDL在表的create语句之后立即发布：
+INDEX”的 DDL 在表的 create 语句之后立即发布：
 
     meta = MetaData()
     mytable = Table('mytable', meta,
@@ -1737,13 +1737,13 @@ INDEX”的DDL在表的create语句之后立即发布：
 
 [`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")对象也支持它自己的`create()`方法：
 
-    i = Index('someindex', mytable.c.col5)
+    i = Index('someindex', mytable.c.col5)plain
     sqli.create(engine)
     CREATE INDEX someindex ON mytable (col5)
 
 ### 功能索引[¶](#functional-indexes "Permalink to this headline")
 
-[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")支持目标后端支持的SQL和函数表达式。要使用降序值对列创建索引，可以使用[`ColumnElement.desc()`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement.desc "sqlalchemy.sql.expression.ColumnElement.desc")修饰符：
+[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")支持目标后端支持的 SQL 和函数表达式。要使用降序值对列创建索引，可以使用[`ColumnElement.desc()`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement.desc "sqlalchemy.sql.expression.ColumnElement.desc")修饰符：
 
     from sqlalchemy import Index
 
@@ -1755,7 +1755,7 @@ INDEX”的DDL在表的create语句之后立即发布：
 
     Index('someindex', func.lower(mytable.c.somecol))
 
-0.8版新增功能： [`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")支持 SQL 表达式和函数以及普通列。
+0.8 版新增功能： [`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")支持 SQL 表达式和函数以及普通列。
 
 索引API [¶](#index-api "Permalink to this headline")
 ----------------------------------------------------

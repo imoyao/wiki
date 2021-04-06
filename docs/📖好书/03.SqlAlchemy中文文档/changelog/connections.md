@@ -78,7 +78,7 @@ SQLAlchemy 目前假定 DBAPI 连接处于“非自动提交”模式 -
 
 连接池的连接返回行为的行为可以使用`reset_on_return`进行配置：
 
-    from sqlalchemy import create_engineplain
+    from sqlalchemy import create_engine
     from sqlalchemy.pool import QueuePool
 
     engine = create_engine('mysql://scott:tiger@localhost/myisam_database', pool=QueuePool(reset_on_return=False))
@@ -114,12 +114,12 @@ PySQLite’s behavior.
 您必须确保将连接上的任何隔离级别设置或其他特定于操作的设置恢复为正常状态，然后才能将其返回到池。
 
 作为还原设置的替代方法，您可以在[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")或代理连接上调用[`Connection.detach()`](core_connections.html#sqlalchemy.engine.Connection.detach "sqlalchemy.engine.Connection.detach")方法，该方法将从池中断开连接当[`Connection.close()`](core_connections.html#sqlalchemy.engine.Connection.close "sqlalchemy.engine.Connection.close")被调用时它将被关闭并丢弃：
-
-    conn = engine.connect()plain
+```python
+    conn = engine.connect()
     conn.detach()  # detaches the DBAPI connection from the connection pool
     conn.connection.<go nuts>
     conn.close()  # connection is closed for real, the pool replaces it with a new connection
-
+```
 我如何使用 Python 多处理引擎/连接/会话或 os.fork()？[¶](#how-do-i-use-engines-connections-sessions-with-python-multiprocessing-or-os-fork "Permalink to this headline")
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -168,7 +168,7 @@ SQLAlchemy [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy
                         (connection_record.info['pid'], pid)
                     )
 ```
-    这些事件一旦创建就会应用于[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")：plain
+    这些事件一旦创建就会应用于[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")：
 ```plain
         engine = create_engine("...")
 
