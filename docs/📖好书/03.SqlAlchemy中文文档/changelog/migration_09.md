@@ -59,7 +59,7 @@ Column Types](orm_composites.html#mapper-composite)中使用映射设置：
 
 此更改与代码中的后向不兼容，该代码需要将单个属性扩展为单个列。要获得该行为，请使用`.clauses`访问器：
 
-    >>> session.query(Vertex.start.clauses, Vertex.end.clauses).\plain
+    >>> session.query(Vertex.start.clauses, Vertex.end.clauses).\
     ...     filter(Vertex.start == Point(3, 4)).all()
     [(3, 4, 5, 6)]
 
@@ -83,7 +83,7 @@ Column Types](orm_composites.html#mapper-composite)中使用映射设置：
 
 上面的语句可预测地呈现如下的 SQL：
 
-    SELECT "user".id AS user_id, "user".name AS user_nameplain
+    SELECT "user".id AS user_id, "user".name AS user_name
     FROM "user" JOIN (SELECT "user".id AS id, "user".name AS name
     FROM "user"
     WHERE "user".id = :id_1) AS anon_1 ON "user".id = anon_1.id
@@ -121,7 +121,7 @@ replaced with `anon_1` as well.
 
     q = session.query(user_from_stmt).filter(user_from_stmt.name == 'ed')
 
-因此，对于 SQLAlchemy 0.9，我们从`select_stmt`中选择的查询产生了我们期望的SQL：
+因此，对于 SQLAlchemy 0.9，我们从`select_stmt`中选择的查询产生了我们期望的 SQL：
 
     -- SQLAlchemy 0.9plain
     SELECT "user".id AS user_id, "user".name AS user_name
@@ -207,7 +207,7 @@ tests continue to function, then upgrade to 0.9 without issue.
 
 通过0.8，查询如下：
 
-    s.query(A).filter(A.b_value == None).all()
+    s.query(A).filter(A.b_value == None).all()plain
 
 会产生：
 
@@ -219,7 +219,7 @@ tests continue to function, then upgrade to 0.9 without issue.
 
 在 0.9 中，它现在产生：
 
-    SELECT a.id AS a_id, a.b_id AS a_b_id
+    SELECT a.id AS a_id, a.b_id AS a_b_idplain
     FROM a
     WHERE (EXISTS (SELECT 1
     FROM b
@@ -227,7 +227,7 @@ tests continue to function, then upgrade to 0.9 without issue.
 
 不同之处在于，它不仅检查`b.value`，还检查`a`是否根本不指向`b`行。这将返回与先前版本不同的结果，对于使用此类比较的系统，其中某些父行没有关联行。
 
-更关键的是，为`A.b_value ！= 无`发出正确的表达式。在0.8中，对于没有`b`的`A`行，这将返回`True`：
+更关键的是，为`A.b_value ！= 无`发出正确的表达式。在 0.8 中，对于没有`b`的`A`行，这将返回`True`：
 
     SELECT a.id AS a_id, a.b_id AS a_b_id
     FROM a
@@ -235,9 +235,9 @@ tests continue to function, then upgrade to 0.9 without issue.
     FROM b
     WHERE b.id = a.b_id AND b.value IS NULL))
 
-现在在 0.9 中，检查已被重新编译，以确保 A.b\_id 行存在，除了`B.value`为非NULL：
+现在在 0.9 中，检查已被重新编译，以确保 A.b\_id 行存在，除了`B.value`为非 NULL：
 
-    SELECT a.id AS a_id, a.b_id AS a_b_id
+    SELECT a.id AS a_id, a.b_id AS a_b_idplain
     FROM a
     WHERE EXISTS (SELECT 1
     FROM b
@@ -263,7 +263,7 @@ tests continue to function, then upgrade to 0.9 without issue.
 
 如果代理对象不存在，则从标量属性到标量的关联代理现在将返回`None`。这与在 SQLAlchemy 中缺少多对一返回 None 的事实一致，所以应该使用代理值。例如。：
 
-    from sqlalchemy import *
+    from sqlalchemy import *plain
     from sqlalchemy.orm import *
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.ext.associationproxy import association_proxy
@@ -306,7 +306,7 @@ at its default of `PASSIVE_OFF`.
 
 这是一个小小的变化，演示如下：
 
-    from sqlalchemy import Column, Integer, String, create_engine, inspect
+    from sqlalchemy import Column, Integer, String, create_engine, inspectplain
     from sqlalchemy.orm import Session, attributes
     from sqlalchemy.ext.declarative import declarative_base
 
@@ -460,7 +460,7 @@ conjunctions](#migration-2804)的渲染
 
 以前，像下面这样的表达式：
 
-    print((column('x') == 'somevalue').collate("en_EN"))
+    print((column('x') == 'somevalue').collate("en_EN"))plain
 
 会产生这样的表达式：
 
@@ -516,7 +516,7 @@ which will again ensure no parentheses are generated:
 新功能[¶](#new-features "Permalink to this headline")
 -----------------------------------------------------
 
-### 事件清除API [¶](#event-removal-api "Permalink to this headline")
+### 事件清除 API [¶](#event-removal-api "Permalink to this headline")
 
 现在可以使用新的[`event.remove()`](core_event.html#sqlalchemy.event.remove "sqlalchemy.event.remove")函数删除使用[`event.listen()`](core_event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")或[`event.listens_for()`](core_event.html#sqlalchemy.event.listens_for "sqlalchemy.event.listens_for")建立的事件。发送到[`event.remove()`](core_event.html#sqlalchemy.event.remove "sqlalchemy.event.remove")的`target`，`identifier`和`fn`参数需要与发送的参数完全匹配聆听，并将该事件从所有已建立的地点删除：
 
@@ -621,7 +621,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 一个新的选项[`load_only()`](orm_loading_columns.html#sqlalchemy.orm.load_only "sqlalchemy.orm.load_only")实现了“推迟一切，但是”的加载方式，只加载给定的列并推迟其余部分：
 
-    from sqlalchemy.orm import load_onlyplain
+    from sqlalchemy.orm import load_only
 
     query(User).options(load_only("name", "fullname"))
 
@@ -671,7 +671,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 -   [`TextClause.columns()`](core_sqlelement.html#sqlalchemy.sql.expression.TextClause.columns "sqlalchemy.sql.expression.TextClause.columns")取代[`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")的`typemap`选项，返回一个新的结构[`TextAsFrom`](core_selectable.html#sqlalchemy.sql.expression.TextAsFrom "sqlalchemy.sql.expression.TextAsFrom")：
 
-        # turn a text() into an alias(), with a .c. collection:
+        # turn a text() into an alias(), with a .c. collection:plain
         stmt = text("SELECT id, name FROM user").columns(id=Integer, name=String)
         stmt = stmt.alias()
 
@@ -679,7 +679,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
                       addresses.join(stmt), addresses.c.user_id == stmt.c.id)
 
 
-        # or into a cte():plain
+        # or into a cte():
         stmt = text("SELECT id, name FROM user").columns(id=Integer, name=String)
         stmt = stmt.cte("x")
 
@@ -745,7 +745,7 @@ the value of `.scale` is used as the default for
 `.decimal_return_scale` if it is not otherwise
 specified. 如果`.scale`和`.decimal_return_scale`都不存在，则默认值为 10。例如。：
 
-    from sqlalchemy.dialects.mysql import DOUBLE
+    from sqlalchemy.dialects.mysql import DOUBLEplain
     import decimal
 
     data = Table('data', metadata,
@@ -1056,7 +1056,7 @@ OUTER JOIN :)：
 
 不会产生内连接；由于来自用户 - \>订单的LEFT OUTER
 JOIN，所以加入的预加载无法使用来自order-\>
-items 的 INNER 连接，而无需更改返回的用户行，而是忽略“链接”`innerjoin=True`0.9.0应该如何实现这将是，而不是：
+items 的 INNER 连接，而无需更改返回的用户行，而是忽略“链接”`innerjoin=True`0.9.0 应该如何实现这将是，而不是：
 
     FROM users LEFT OUTER JOIN orders ON <onclause> LEFT OUTER JOIN items ON <onclause>
 
@@ -1072,7 +1072,7 @@ items 的 INNER 连接，而无需更改返回的用户行，而是忽略“链�
 
 [＃2976 T0\>](http://www.sqlalchemy.org/trac/ticket/2976)
 
-### ORM 可以使用 RETURNING [¶](#orm-can-efficiently-fetch-just-generated-insert-update-defaults-using-returning "Permalink to this headline")高效地获取刚生成的INSERT / UPDATE默认值
+### ORM 可以使用 RETURNING [¶](#orm-can-efficiently-fetch-just-generated-insert-update-defaults-using-returning "Permalink to this headline")高效地获取刚生成的 INSERT / UPDATE 默认值
 
 [`Mapper`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")长期以来支持一个名为`eager_defaults=True`的未公开标志。此标志的作用是，当 INSERT 或 UPDATE 进行时，并且该行已知具有服务器生成的默认值时，SELECT 会立即跟随它，以便“热切”地加载这些新值。通常，服务器生成的列在对象上被标记为“过期”，因此除非应用程序在刷新后实际访问这些列，否则不会产生开销。因此，`eager_defaults`标志没有多大用处，因为它只能降低性能，并且仅用于支持异常事件方案，用户需要在刷新过程中立即使用默认值。
 
@@ -1145,7 +1145,7 @@ removing `c1` from `p1.children`
 while maintaining a check against the propagation from going into an
 endless recursive loop.
 
-最终用户代码是哪一个。使用[`AttributeEvents.set()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.set "sqlalchemy.orm.events.AttributeEvents.set")，[`AttributeEvents.append()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.append "sqlalchemy.orm.events.AttributeEvents.append")或[`AttributeEvents.remove()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.remove "sqlalchemy.orm.events.AttributeEvents.remove")事件，以及b。由于这些事件可能需要修改以防止递归循环，所以启动进一步的属性修改操作，因为属性系统不再阻止事件链在没有backref事件处理程序的情况下无限传播。此外，取决于`initiator`值的代码需要根据新的 API 进行调整，并且必须准备好`initiator`的值以从其原始值因为 backref 处理程序现在可以为某些操作交换新的`initiator`值。
+最终用户代码是哪一个。使用[`AttributeEvents.set()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.set "sqlalchemy.orm.events.AttributeEvents.set")，[`AttributeEvents.append()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.append "sqlalchemy.orm.events.AttributeEvents.append")或[`AttributeEvents.remove()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.remove "sqlalchemy.orm.events.AttributeEvents.remove")事件，以及 b。由于这些事件可能需要修改以防止递归循环，所以启动进一步的属性修改操作，因为属性系统不再阻止事件链在没有 backref 事件处理程序的情况下无限传播。此外，取决于`initiator`值的代码需要根据新的 API 进行调整，并且必须准备好`initiator`的值以从其原始值因为 backref 处理程序现在可以为某些操作交换新的`initiator`值。
 
 [＃2789 T0\>](http://www.sqlalchemy.org/trac/ticket/2789)
 
@@ -1182,7 +1182,7 @@ value should be rendered into an inline DDL statement.
 
 [＃2812 T0\>](http://www.sqlalchemy.org/trac/ticket/2812)
 
-### 改进了布尔常量，NULL常量，连词的渲染[¶](#improved-rendering-of-boolean-constants-null-constants-conjunctions "Permalink to this headline")
+### 改进了布尔常量，NULL 常量，连词的渲染[¶](#improved-rendering-of-boolean-constants-null-constants-conjunctions "Permalink to this headline")
 
 新功能已添加到[`true()`](core_sqlelement.html#sqlalchemy.sql.expression.true "sqlalchemy.sql.expression.true")和[`false()`](core_sqlelement.html#sqlalchemy.sql.expression.false "sqlalchemy.sql.expression.false")常量中，特别是与[`and_()`](core_sqlelement.html#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")和[`or_()`](core_sqlelement.html#sqlalchemy.sql.expression.or_ "sqlalchemy.sql.expression.or_")函数以及 WHERE
 / HAVING 子句与这些类型，整体布尔类型以及[`null()`](core_sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")常量的行为。
@@ -1196,7 +1196,7 @@ value should be rendered into an inline DDL statement.
 select 结构现在将布尔列作为二进制表达式在不具有`true`
 / `false`常量 beahvior 的后端渲染：
 
-    >>> from sqlalchemy import select, and_, false, trueplain
+    >>> from sqlalchemy import select, and_, false, true
     >>> from sqlalchemy.dialects import mysql, postgresql
 
     >>> print(select([t1]).where(t1.c.x).compile(dialect=mysql.dialect()))
@@ -1209,13 +1209,13 @@ truncating a rendered expression, when a [`true()`](core_sqlelement.html#sqlalch
 or [`false()`](core_sqlelement.html#sqlalchemy.sql.expression.false "sqlalchemy.sql.expression.false")
 constant is present:
 
-    >>> print(select([t1]).where(and_(t1.c.y > 5, false())).compile(
+    >>> print(select([t1]).where(and_(t1.c.y > 5, false())).compile(plain
     ...     dialect=postgresql.dialect()))
     SELECT t.x, t.y FROM t WHERE false
 
 [`true()`](core_sqlelement.html#sqlalchemy.sql.expression.true "sqlalchemy.sql.expression.true")可以用作构建表达式的基础：
 
-    >>> expr = true()plain
+    >>> expr = true()
     >>> expr = expr & (t1.c.y > 5)
     >>> print(select([t1]).where(expr))
     SELECT t.x, t.y FROM t WHERE t.y > :y_1
@@ -1224,13 +1224,13 @@ The boolean constants [`true()`](core_sqlelement.html#sqlalchemy.sql.expression.
 and [`false()`](core_sqlelement.html#sqlalchemy.sql.expression.false "sqlalchemy.sql.expression.false")
 themselves render as `0 = 1` and `1 = 1` for a backend with no boolean constants:
 
-    >>> print(select([t1]).where(and_(t1.c.y > 5, false())).compile(plain
+    >>> print(select([t1]).where(and_(t1.c.y > 5, false())).compile(
     ...     dialect=mysql.dialect()))
     SELECT t.x, t.y FROM t WHERE 0 = 1
 
 对`None`的解释至少在现在是一致的，而不是特别有效的 SQL：
 
-    >>> print(select([t1.c.x]).where(None))
+    >>> print(select([t1.c.x]).where(None))plain
     SELECT t.x FROM t WHERE NULL
 
     >>> print(select([t1.c.x]).where(None).where(None))
@@ -1241,14 +1241,14 @@ themselves render as `0 = 1` and `1 = 1` for a backend with no boolean constants
 
 [＃2804 T0\>](http://www.sqlalchemy.org/trac/ticket/2804)
 
-### 现在，标签构造可以在ORDER BY [¶](#label-constructs-can-now-render-as-their-name-alone-in-an-order-by "Permalink to this headline")中作为其名称单独渲染
+### 现在，标签构造可以在 ORDER BY [¶](#label-constructs-can-now-render-as-their-name-alone-in-an-order-by "Permalink to this headline")中作为其名称单独渲染
 
 对于在 column 子句和 SELECT 的 ORDER BY 子句中都使用[`Label`](core_sqlelement.html#sqlalchemy.sql.expression.Label "sqlalchemy.sql.expression.Label")的情况，标签将在 ORDER
 BY 子句中呈现为它的名称，假设底层方言报告支持此功能。
 
 例如。例如：
 
-    from sqlalchemy.sql import table, column, select, funcplain
+    from sqlalchemy.sql import table, column, select, func
 
     t = table('t', column('c1'), column('c2'))
     expr = (func.foo(t.c.c1) + t.c.c2).label("expr")
@@ -1431,7 +1431,7 @@ collection” which expresses that this flag can have a negative effect on
 the database’s ability to process cleanup tasks, and has been reported
 as *lowering* performance as a result.
 
-鉴于这些信息，该标记如何实际使用尚不清楚，而且由于它似乎只是一种性能增强功能，现在默认为`False`。可以通过将标志`retaining=True`传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")调用来控制该值。这是一个新标志，从0.8.2开始添加，因此0.8.2上的应用程序可以根据需要开始将其设置为`True`或`False`。
+鉴于这些信息，该标记如何实际使用尚不清楚，而且由于它似乎只是一种性能增强功能，现在默认为`False`。可以通过将标志`retaining=True`传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")调用来控制该值。这是一个新标志，从 0.8.2 开始添加，因此 0.8.2 上的应用程序可以根据需要开始将其设置为`True`或`False`。
 
 也可以看看
 

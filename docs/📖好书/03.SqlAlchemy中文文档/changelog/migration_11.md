@@ -92,7 +92,7 @@ Behavior](orm_session_state_management.html#session-referencing-behavior)。
 
 对于非持久对象，首次访问尚未设置的属性时，ORM会生成`None`值：
 
-    >>> obj = MyObj()
+    >>> obj = MyObj()plain
     >>> obj.some_value
     None
 
@@ -204,7 +204,7 @@ when the query is against a subquery expression such as an exists:
 
 生产：
 
-    SELECT EXISTS (SELECT 1plain
+    SELECT EXISTS (SELECT 1
     FROM widget
     WHERE widget.data = :data_1 AND widget.type IN (:type_1)) AS anon_1
 
@@ -282,7 +282,7 @@ MySQL 的一个常见情况是当事务内发生死锁时，SAVEPOINT 被取消�
 
 上述计划将提高：
 
-    FlushError: New instance <User at 0x7f0287eca4d0> with identity key
+    FlushError: New instance <User at 0x7f0287eca4d0> with identity keyplain
     (<class 'test.orm.test_transaction.User'>, ('u1',)) conflicts
     with persistent instance <User at 0x7f02889c70d0>
 
@@ -362,7 +362,7 @@ CASCADE 为配置的外键进行。这是使用[`orm.mapper.passive_deletes`(orm
 
 [＃2349 T0\>](http://www.sqlalchemy.org/trac/ticket/2349)
 
-### 相同名称的backrefs在应用于具体继承子类时不会引发错误[¶](#same-named-backrefs-will-not-raise-an-error-when-applied-to-concrete-inheritance-subclasses "Permalink to this headline")
+### 相同名称的 backrefs 在应用于具体继承子类时不会引发错误[¶](#same-named-backrefs-will-not-raise-an-error-when-applied-to-concrete-inheritance-subclasses "Permalink to this headline")
 
 以下映射总是可以没有问题：
 
@@ -417,7 +417,7 @@ CASCADE 为配置的外键进行。这是使用[`orm.mapper.passive_deletes`(orm
 
 混合方法或属性现在将反映原始文档字符串中存在的`__doc__`值：
 
-    class A(Base):
+    class A(Base):plain
         __tablename__ = 'a'
         id = Column(Integer, primary_key=True)
 
@@ -430,7 +430,7 @@ CASCADE 为配置的外键进行。这是使用[`orm.mapper.passive_deletes`(orm
 
 现在，`A.some_name.__doc__`的上述值现在符合：
 
-    >>> A.some_name.__doc__
+    >>> A.some_name.__doc__plain
     The name field
 
 但是，要实现这一点，混合属性的机制必然变得更加复杂。以前，混合类的级别访问器是一个简单的 pass-thru，也就是说，这个测试会成功：
@@ -514,7 +514,7 @@ a mapping of the classes `Parent` and
 
 在最近的 SQLAlchemy 版本中，由多种形式的“多态”查询生成的 SQL 具有比以前更加“平坦”的形式，其中几个表的 JOIN 不再无条件地捆绑到子查询中。为了适应这种情况，现在，[`Query.correlate()`](orm_query.html#sqlalchemy.orm.query.Query.correlate "sqlalchemy.orm.query.Query.correlate")方法从这种多态选择中提取单个表并确保所有都是子查询的“关联”的一部分。假设映射文档中的`Person/Manager/Engineer->Company`设置，使用 with\_polymorphic：
 
-    sess.query(Person.name)plain
+    sess.query(Person.name)
                 .filter(
                     sess.query(Company.name).
                     filter(Company.company_id == Person.company_id).
@@ -535,7 +535,7 @@ would inadvertently attempt to correlate to the join of
 `Person`, `Engineer` and
 `Manager` as a single unit, so `Person` wouldn’t be correlated:
 
-    -- old, incorrect queryplain
+    -- old, incorrect query
     SELECT people.name AS people_name
     FROM people
     LEFT OUTER JOIN engineers ON people.person_id = engineers.person_id
@@ -688,7 +688,7 @@ Tracking](orm_extensions_mutable.html)扩展中，以补充现有的[`MutableDic
 为了帮助防止在加载一系列对象之后发生不需要的延迟加载，可以应用新的“lazy
 ='raise'”策略和相应的加载程序选项[`orm.raiseload()`](orm_loading_relationships.html#sqlalchemy.orm.raiseload "sqlalchemy.orm.raiseload")关系属性，当访问非热切加载的属性以进行读取时，会导致该属性引发`InvalidRequestError`：
 
-    >>> from sqlalchemy.orm import raiseload
+    >>> from sqlalchemy.orm import raiseloadplain
     >>> a1 = s.query(A).options(raiseload(A.bs)).first()
     >>> a1.bs
     Traceback (most recent call last):
@@ -765,7 +765,7 @@ INSERT 将现在将 CTE 呈现在整个语句的顶部，而不是像 1.0 中那
 
 新的[`expression.over.range_`](core_sqlelement.html#sqlalchemy.sql.expression.over.params.range_ "sqlalchemy.sql.expression.over")和[`expression.over.rows`](core_sqlelement.html#sqlalchemy.sql.expression.over.params.rows "sqlalchemy.sql.expression.over")参数允许窗口函数的 RANGE 和 ROWS 表达式：
 
-    >>> from sqlalchemy import func
+    >>> from sqlalchemy import funcplain
 
     >>> print func.row_number().over(order_by='x', range_=(-5, 10))
     row_number() OVER (ORDER BY x RANGE BETWEEN :param_1 PRECEDING AND :param_2 FOLLOWING)
@@ -887,7 +887,7 @@ set up; given a table such as:
 
 对于从服务器端默认或不常见的主键值（如触发器）接收主键值的列，可以使用[`FetchedValue`](core_defaults.html#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")指示存在值生成器：
 
-    Table(
+    Table(plain
         'b', metadata,
         Column('x', Integer, primary_key=True, server_default=FetchedValue()),
         Column('y', Integer, primary_key=True, server_default=FetchedValue())
@@ -1375,7 +1375,7 @@ ENUM 一个新的 CREATE TYPE 语句的情况下，现在将自动与[`TypeDecor
 
 例如，如果`User`类分配了架构“per\_user”：
 
-    class User(Base):plain
+    class User(Base):
         __tablename__ = 'user'
         id = Column(Integer, primary_key=True)
 
@@ -1460,7 +1460,7 @@ dialect](#change-3081)
 
 没有联接的 ON 子句中的 CAST，强类型数据库（如 Postgresql）将拒绝隐式比较整数和失败。
 
-`.pets`的lazyload情况依赖于在加载时用一个绑定参数替换`Person.id`列，该绑定参数接收一个 Python 加载的值。这种替换特别适用于我们的[`type_coerce()`](core_sqlelement.html#sqlalchemy.sql.expression.type_coerce "sqlalchemy.sql.expression.type_coerce")函数的意图会丢失的地方。在更改之前，这个懒惰负载如下所示：
+`.pets`的 lazyload 情况依赖于在加载时用一个绑定参数替换`Person.id`列，该绑定参数接收一个 Python 加载的值。这种替换特别适用于我们的[`type_coerce()`](core_sqlelement.html#sqlalchemy.sql.expression.type_coerce "sqlalchemy.sql.expression.type_coerce")函数的意图会丢失的地方。在更改之前，这个懒惰负载如下所示：
 
     SELECT pets.id AS pets_id, pets.person_id AS pets_person_id
     FROM pets
@@ -1506,7 +1506,7 @@ dialect](#change-3081)
 
 可能更有可能的是，这样的陈述：
 
-    stmt = text("SELECT * FROM table")plain
+    stmt = text("SELECT * FROM table")
     stmt = stmt.columns(my_table.c.id, my_table.c.name, my_table.c.description)
 
 现在有点冒险，因为“\*”规范通常会按照它们出现在表中的顺序传递列。如果表的结构因模式更改而发生更改，则此排序可能不再相同。因此，在使用[`TextClause.columns()`](core_sqlelement.html#sqlalchemy.sql.expression.TextClause.columns "sqlalchemy.sql.expression.TextClause.columns")时，建议在文本 SQL 中明确列出所需的列，但不必再担心文本 SQL 中的名称本身。
@@ -1722,7 +1722,7 @@ Core 和 ORM 中的新参数[`GenerativeSelect.with_for_update.skip_locked`](cor
 
 -   选择关键共享：
 
-        stmt = select([table]).with_for_update(read=True, key_share=True)
+        stmt = select([table]).with_for_update(read=True, key_share=True)plain
 
 方言的改进和改变 - MySQL [¶](#dialect-improvements-and-changes-mysql "Permalink to this headline")
 --------------------------------------------------------------------------------------------------
@@ -1745,7 +1745,7 @@ The MySQL dialect now accepts the value “AUTOCOMMIT” for the
 and [`Connection.execution_options.isolation_level`(core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")
 parameters:
 
-    connection = engine.connect()
+    connection = engine.connect()plain
     connection = connection.execution_options(
         isolation_level="AUTOCOMMIT"
     )
@@ -1778,7 +1778,7 @@ MySQL 方言具有这样的行为，如果 InnoDB 表上的组合主键在不是
 
 这种解决方法已被删除，并替换为仅在主键中声明 AUTO\_INCREMENT 列*first*的更好系统：
 
-    CREATE TABLE some_table (plain
+    CREATE TABLE some_table (
         x INTEGER NOT NULL,
         y INTEGER NOT NULL AUTO_INCREMENT,
         PRIMARY KEY (y, x)
@@ -1870,7 +1870,7 @@ will also indicate these phrases.
 
 ### 增加了SQL Server [¶](#added-transaction-isolation-level-support-for-sql-server "Permalink to this headline")的事务隔离级别支持
 
-所有SQL Server方言都通过[`create_engine.isolation_level`(core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")和[`Connection.execution_options.isolation_level`](core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")参数支持事务隔离级别设置。支持四种标准级别以及`SNAPSHOT`：
+所有 SQL Server 方言都通过[`create_engine.isolation_level`(core_engines.html#sqlalchemy.create_engine.params.isolation_level "sqlalchemy.create_engine")和[`Connection.execution_options.isolation_level`](core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")参数支持事务隔离级别设置。支持四种标准级别以及`SNAPSHOT`：
 
     engine = create_engine(
         "mssql+pyodbc://scott:tiger@ms_2008",
@@ -1888,7 +1888,7 @@ will also indicate these phrases.
 反映[`String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")，[`Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")等类型时其中包括一个长度，SQL
 Server下的“un-extended”类型会将“length”参数复制为值`"max"`：
 
-    >>> from sqlalchemy import create_engine, inspect
+    >>> from sqlalchemy import create_engine, inspectplain
     >>> engine = create_engine('mssql+pyodbc://scott:tiger@ms_2008', echo=True)
     >>> engine.execute("create table s (x varchar(max), y varbinary(max))")
     >>> insp = inspect(engine)

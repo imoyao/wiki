@@ -286,7 +286,7 @@ method allows the user to specify which tables should be present when
 querying against a joined-table entity.
 不幸的是，这个方法很笨拙，只适用于列表中的第一个实体，否则在内部使用和内部使用都会有尴尬的行为。已添加名为[`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")的对[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")结构的新增强，允许将任何实体“别名”为其自身的“多态”版本，可自由使用任何地方：
 
-    from sqlalchemy.orm import with_polymorphic
+    from sqlalchemy.orm import with_polymorphicplain
     palias = with_polymorphic(Person, [Engineer, Manager])
     session.query(Company).\
                 join(palias, Company.employees).\
@@ -324,7 +324,7 @@ attribute is accepted, including with loader functions like
 and comparison methods like [`PropComparator.any()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.any "sqlalchemy.orm.interfaces.PropComparator.any")
 and [`PropComparator.has()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.has "sqlalchemy.orm.interfaces.PropComparator.has"):
 
-    # use eager loading in conjunction with with_polymorphic targetsplain
+    # use eager loading in conjunction with with_polymorphic targets
     Job_P = with_polymorphic(Job, [SubJob, ExtraJob], aliased=True)
     q = s.query(DataContainer).\
                 join(DataContainer.jobs.of_type(Job_P)).\
@@ -358,7 +358,7 @@ and [`PropComparator.has()`](orm_internals.html#sqlalchemy.orm.interfaces.PropCo
 
 Mapper 和实例事件现在可以与一个未映射的超类相关联，其中这些事件将被映射到这些子类时传播到子类。应该使用`propagate=True`标志。此功能允许将事件与声明性基类关联：
 
-    from sqlalchemy.ext.declarative import declarative_baseplain
+    from sqlalchemy.ext.declarative import declarative_base
 
     Base = declarative_base()
 
@@ -620,7 +620,7 @@ now has a method [`Select.correlate_except()`](core_selectable.html#sqlalchemy.s
 which specifies “correlate on all FROM clauses except those specified”.
 它可用于映射相关子查询应正常关联的场景，除了可选的特定目标：
 
-    class SnortEvent(Base):plain
+    class SnortEvent(Base):
         __tablename__ = "event"
 
         id = Column(Integer, primary_key=True)
@@ -650,7 +650,7 @@ type makes great usage of the new operator system to provide a full
 range of operators for HSTORE types, including index access,
 concatenation, and containment methods such as `has_key()`, `has_any()`, and `matrix()`:
 
-    from sqlalchemy.dialects.postgresql import HSTOREplain
+    from sqlalchemy.dialects.postgresql import HSTORE
 
     data = Table('data_table', metadata,
             Column('id', Integer, primary_key=True),
@@ -677,7 +677,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 [`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型将接受可选的“维度”参数，将其固定为固定数量的维度，并在检索结果时大大提高效率：
 
-    # old way, still works since PG supports N-dimensions per row:plain
+    # old way, still works since PG supports N-dimensions per row:
     Column("my_array", postgresql.ARRAY(Integer))
 
     # new way, will render ARRAY with correct number of [] in DDL,
@@ -699,7 +699,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 在更新中切片更新：
 
-    conn.execute(plain
+    conn.execute(
         mytable.update().values({mytable.c.arraycol[2:3]: [7, 8]})
     )
 
@@ -715,7 +715,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 数组串联，其中右侧`[4， 5， 6>`）被强制转换为数组文字：
 
-    select([mytable.c.arraycol + [4, 5, 6]])
+    select([mytable.c.arraycol + [4, 5, 6]])plain
 
 也可以看看
 
@@ -729,7 +729,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 SQLite 没有内置的 DATE，TIME 或 DATETIME 类型，而是提供了一些支持将日期和时间值存储为字符串或整数。SQLite 的日期和时间类型在 0.8 中得到了增强，可以针对特定格式进行更多的配置，包括“微秒”部分是可选的，以及其他几乎所有的部分。
 
-    Column('sometimestamp', sqlite.DATETIME(truncate_microseconds=True))plain
+    Column('sometimestamp', sqlite.DATETIME(truncate_microseconds=True))
     Column('sometimestamp', sqlite.DATETIME(
                         storage_format=(
                                     "%(year)04d%(month)02d%(day)02d"
@@ -894,7 +894,7 @@ NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基
 
 ### after\_attach 事件在与会话相关联而不是之前触发后触发； before\_attach 添加[¶](#the-after-attach-event-fires-after-the-item-is-associated-with-the-session-instead-of-before-before-attach-added "Permalink to this headline")
 
-使用 after\_attach的事件处理程序现在可以假定给定实例与给定会话关联：
+使用 after\_attach 的事件处理程序现在可以假定给定实例与给定会话关联：
 
     @event.listens_for(Session, "after_attach")plain
     def after_attach(session, instance):
@@ -914,7 +914,7 @@ NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基
 
 以前有必要调用[`Query.correlate()`](orm_query.html#sqlalchemy.orm.query.Query.correlate "sqlalchemy.orm.query.Query.correlate")以使列或 WHERE 子查询与父项相关联：
 
-    subq = session.query(Entity.value).\
+    subq = session.query(Entity.value).\plain
                     filter(Entity.id==Parent.entity_id).\
                     correlate(Parent).\
                     as_scalar()
@@ -953,7 +953,7 @@ actually used in that context.
 
 在此更改之前，上述内容将返回：
 
-    SELECT t1.x, t2.y FROM t2plain
+    SELECT t1.x, t2.y FROM t2
 
 这是无效的 SQL，因为“t1”在任何 FROM 子句中都没有引用。
 
@@ -1067,7 +1067,7 @@ in both cases:
 
 0.7 添加了一个名为`column_reflect`的新事件，这样可以反映出列的反射，因为每个列都反映出来。我们得到这个事件有点不对，因为事件没有办法获取用于反射的当前`Inspector`和`Connection`，在来自数据库的附加信息的情况下是必要的。由于这是一个尚未广泛使用的新事件，因此我们将直接向其中添加`inspector`参数：
 
-    @event.listens_for(Table, "column_reflect")
+    @event.listens_for(Table, "column_reflect")plain
     def listen_for_col(inspector, table, column_info):
         # ...
 
