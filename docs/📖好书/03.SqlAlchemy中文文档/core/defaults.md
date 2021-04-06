@@ -35,7 +35,7 @@ SQLAlchemy 针对在 INSERT 和 UPDATE 语句期间发生的列级事件提供�
 
 标量值也可能与 UPDATE 语句相关联，尽管这不是很常见（因为 UPDATE 语句通常在寻找动态默认值）：
 
-    Table("mytable", meta,plain
+    Table("mytable", meta,
         Column("somecolumn", Integer, onupdate=25)
     )
 
@@ -44,7 +44,7 @@ Python 执行的函数[¶](#python-executed-functions "Permalink to this headlin
 
 [`Column.default`](metadata.html#sqlalchemy.schema.Column.params.default "sqlalchemy.schema.Column")和[`Column.onupdate`](metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")关键字参数也接受 Python 函数。如果没有提供该列的其他值，则在插入或更新时调用这些函数，并将返回的值用于该列的值。下面举例说明了一个粗略的“序列”，它将一个递增计数器分配给主键列：
 
-    # a function which counts upwardsplain
+    # a function which counts upwards
     i = 0
     def mydefault():
         global i
@@ -71,7 +71,7 @@ attribute:
     )
 
 当 update 语句执行并且没有为`last_updated`传递值时，将执行`datetime.datetime.now()`
-Python函数并将其返回值用作`last_updated`请注意，我们现在`now`作为函数本身而不调用它（即没有下面的括号） -
+Python 函数并将其返回值用作`last_updated`请注意，我们现在`now`作为函数本身而不调用它（即没有下面的括号） -
 SQLAlchemy 将在语句执行时执行该函数。
 
 ### 上下文相关的默认函数[¶](#context-sensitive-default-functions "Permalink to this headline")
@@ -148,7 +148,7 @@ collections on [`ResultProxy`](connections.html#sqlalchemy.engine.ResultProxy "s
 SQL 表达式默认的变体是[`Column.server_default`](metadata.html#sqlalchemy.schema.Column.params.server_default "sqlalchemy.schema.Column")，它在[`Table.create()`](metadata.html#sqlalchemy.schema.Table.create "sqlalchemy.schema.Table.create")操作期间被放置在 CREATE
 TABLE 语句中：
 
-    t = Table('test', meta,
+    t = Table('test', meta,plain
         Column('abc', String(20), server_default='abc'),
         Column('created_at', DateTime, server_default=text("sysdate"))
     )
@@ -167,7 +167,7 @@ TABLE 语句中：
 
 可以使用[`FetchedValue`](#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")作为标记来调出具有由数据库触发器或其他外部过程设置的值的列：
 
-    t = Table('test', meta,plain
+    t = Table('test', meta,
         Column('abc', String(20), server_default=FetchedValue()),
         Column('def', String(20), server_onupdate=FetchedValue())
     )
@@ -183,7 +183,7 @@ TABLE 语句中：
 
 对于服务器生成的主键值，所有数据库都提供特殊的访问器或其他技术来获取表的“最后插入的主键”列。这些机制不受[`FetchedValue`](#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")的影响。对于使用触发器生成主键值的特殊情况，并且正在使用的数据库不支持`RETURNING`子句，可能需要放弃使用触发器，而是应用 SQL 表达式或用作“预执行”表达式：
 
-    t = Table('test', meta,plain
+    t = Table('test', meta,
             Column('abc', MyType, default=func.generate_new_value(), primary_key=True)
     )
 
@@ -217,7 +217,7 @@ SQLAlchemy 使用[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Seq
 
 [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")对象也可以像 SQL 表达式那样独立执行，具有调用其“下一个值”功能的效果：
 
-    seq = Sequence('some_sequence')
+    seq = Sequence('some_sequence')plain
     nextid = connection.execute(seq)
 
 ### 将序列关联到服务器端默认[¶](#associating-a-sequence-as-the-server-side-default "Permalink to this headline")
@@ -303,7 +303,7 @@ it’s probably a good idea to specify it in this way as well.
 *类 T0\> `sqlalchemy.schema。 T1>  FetchedValue  T2> （ T3>  FOR_UPDATE =假 T4> ）< / T5> ¶ T6>`{.descclassname}*
 :   基础：`sqlalchemy.schema._NotAColumnExpr`，`sqlalchemy.sql.expression.SchemaEventTarget`
 
-    透明数据库默认的标记。plain
+    透明数据库默认的标记。
 
     当数据库配置为为列提供一些自动默认值时，使用[`FetchedValue`](#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")。
 
@@ -320,7 +320,7 @@ it’s probably a good idea to specify it in this way as well.
 *class* `sqlalchemy.schema。`{.descclassname} `PassiveDefault`{.descname} （ *\* arg*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.schema.PassiveDefault "Permalink to this definition")*
 :   基础：[`sqlalchemy.schema.DefaultClause`](#sqlalchemy.schema.DefaultClause "sqlalchemy.schema.DefaultClause")
 
-    DDL指定的DEFAULT列值。
+    DDL指定的DEFAULT列值。plain
 
     从版本0.6开始弃用： [`PassiveDefault`](#sqlalchemy.schema.PassiveDefault "sqlalchemy.schema.PassiveDefault")已弃用。使用[`DefaultClause`](#sqlalchemy.schema.DefaultClause "sqlalchemy.schema.DefaultClause")。
 

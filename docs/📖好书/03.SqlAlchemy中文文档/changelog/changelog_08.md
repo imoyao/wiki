@@ -653,15 +653,15 @@ tags:
     and [`delete()`](core_dml.html#sqlalchemy.sql.expression.delete "sqlalchemy.sql.expression.delete")
     constructs will now interpret ORM entities as target tables to be
     operated upon, e.g.:
+    ```python
+    from sqlalchemy import insert, update, delete
 
-        from sqlalchemy import insert, update, deleteplainplainplainplain
+    ins = insert(SomeMappedClass).values(x=5)
 
-        ins = insert(SomeMappedClass).values(x=5)
+    del_ = delete(SomeMappedClass).where(SomeMappedClass.id == 5)
 
-        del_ = delete(SomeMappedClass).where(SomeMappedClass.id == 5)
-
-        upd = update(SomeMappedClass).where(SomeMappedClass.id == 5).values(name='ed')
-
+    upd = update(SomeMappedClass).where(SomeMappedClass.id == 5).values(name='ed')
+    ```
     [¶](#change-7770102ac46e881dbf4291237e0e33d6)
 
 -   **[sql]
@@ -1665,26 +1665,26 @@ tags:
     method can now be used with a [`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")
     construct without it interfering with the entities being selected.
     基本上，这样的陈述：
-
-        ua = aliased(User)plainplain
-        session.query(User.name).select_from(ua).join(User, User.name > ua.name)
-
+    ```python
+    ua = aliased(User)
+    session.query(User.name).select_from(ua).join(User, User.name > ua.name)
+    ```
     将保持 SELECT 的列子句作为来自未指定的“用户”，如指定的那样；
     select\_from 只发生在 FROM 子句中：
-
-        SELECT users.name AS users_name FROM users AS users_1plainplain
-        JOIN users ON users.name < users_1.name
-
+    ```sql
+    SELECT users.name AS users_name FROM users AS users_1
+    JOIN users ON users.name < users_1.name
+    ```
     请注意，此行为与[`Query.select_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")的原始较旧用例形成对比，这是使用不同的可选项重新表示映射实体的情况：
-
-        session.query(User.name).\plainplainplain
-          select_from(user_table.select().where(user_table.c.id > 5))
-
+    ```python
+    session.query(User.name).
+    select_from(user_table.select().where(user_table.c.id > 5))
+    ```
     其中产生：
-
-        SELECT anon_1.name AS anon_1_name FROM (SELECT users.id AS id,plainplainplainplain
-        users.name AS name FROM users WHERE users.id > :id_1) AS anon_1
-
+    ```sql
+    SELECT anon_1.name AS anon_1_name FROM (SELECT users.id AS id,
+    users.name AS name FROM users WHERE users.id > :id_1) AS anon_1
+    ```
     后一个用例的“别名”行为阻碍了前一个用例。该方法现在特别考虑像[`expression.select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")或[`expression.alias()`](core_selectable.html#sqlalchemy.sql.expression.alias "sqlalchemy.sql.expression.alias")这样的 SQL 表达式，与像[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")
 
     [¶](#change-8d958f76ee47f7155365772401087d1f)
@@ -1729,13 +1729,13 @@ tags:
     [`Connection.close()`](core_connections.html#sqlalchemy.engine.Connection.close "sqlalchemy.engine.Connection.close")
     method can be called on the returned connection without affecting
     the original. 在使用[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")和[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象作为上下文管理器时允许对称：
+    ```python
+    with conn.connect() as c: # leaves the Connection open
+        c.execute("...")
 
-        with conn.connect() as c: # leaves the Connection openplainplainplainplainplainplain
-          c.execute("...")
-
-        with engine.connect() as c:  # closes the Connection
-          c.execute("...")
-
+    with engine.connect() as c:  # closes the Connection
+        c.execute("...")
+    ```
     [¶](#change-28a54006aa013faf00f812929e7c24f9)
 
 -   **[engine] [bug]**Fixed [`MetaData.reflect()`](core_metadata.html#sqlalchemy.schema.MetaData.reflect "sqlalchemy.schema.MetaData.reflect")
@@ -1805,10 +1805,10 @@ tags:
     applied by [`BinaryExpression`](core_sqlelement.html#sqlalchemy.sql.expression.BinaryExpression "sqlalchemy.sql.expression.BinaryExpression")
     in some cases won’t get in the way of this comparison.
     以前，表达式如下所示：
-
-        expr1 = mycolumn > 2plainplainplain
-        bool(expr1 == expr1)
-
+    ```python
+    expr1 = mycolumn > 2
+    bool(expr1 == expr1)
+    ```
     Would evaluate as `False`, even though this is
     an identity comparison, because `mycolumn > 2`
     would be “grouped” before being placed into the
@@ -2664,5 +2664,3 @@ tags:
     [¶](#change-1523176dc77fb5a2a38ee7073b45df68)
 
     参考文献：[＃2589](http://www.sqlalchemy.org/trac/ticket/2589)
-
-

@@ -4,14 +4,14 @@ date: 2021-02-20 22:41:33
 permalink: /sqlalchemy/core/dml/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - core
 tags:
 ---
 插入、更新、删除[¶](#insert-updates-deletes "Permalink to this headline")
 =========================================================================
 
-INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.expression.UpdateBase "sqlalchemy.sql.expression.UpdateBase")开始的层次结构上。[`Insert`](#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")和[`Update`](#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")构建了基于中间值[`ValuesBase`](#sqlalchemy.sql.expression.ValuesBase "sqlalchemy.sql.expression.ValuesBase")的构建。
+INSERT，UPDATE 和 DELETE 语句建立在从[`UpdateBase`](#sqlalchemy.sql.expression.UpdateBase "sqlalchemy.sql.expression.UpdateBase")开始的层次结构上。[`Insert`](#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")和[`Update`](#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")构建了基于中间值[`ValuesBase`](#sqlalchemy.sql.expression.ValuesBase "sqlalchemy.sql.expression.ValuesBase")的构建。
 
  `sqlalchemy.sql.expression.`{.descclassname}`delete`{.descname}(*table*, *whereclause=None*, *bind=None*, *returning=None*, *prefixes=None*, *\*\*dialect\_kw*)[¶](#sqlalchemy.sql.expression.delete "Permalink to this definition")
 :   构建[`删除`](#sqlalchemy.sql.expression.Delete "sqlalchemy.sql.expression.Delete")对象.
@@ -77,13 +77,13 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
  `sqlalchemy.sql.expression.`{.descclassname}`update`{.descname}(*table*, *whereclause=None*, *values=None*, *inline=False*, *bind=None*, *prefixes=None*, *returning=None*, *return\_defaults=False*, *preserve\_parameter\_order=False*, *\*\*dialect\_kw*)[¶](#sqlalchemy.sql.expression.update "Permalink to this definition")
 :   构建一个[`Update`](#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")对象。
 
-    例如。：
+    例如：
+    ```python
+    from sqlalchemy import update
 
-        from sqlalchemy import update
-
-        stmt = update(users).where(users.c.id==5).\
-                values(name='user #5')
-
+    stmt = update(users).where(users.c.id==5).\
+            values(name='user #5')
+    ```
     类似的功能可以通过[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中的[`update()`](selectable.html#sqlalchemy.sql.expression.TableClause.update "sqlalchemy.sql.expression.TableClause.update")方法来使用：
 
         stmt = users.update().\
@@ -1301,7 +1301,7 @@ INSERT，UPDATE和DELETE语句建立在从[`UpdateBase`](#sqlalchemy.sql.express
  *class*`sqlalchemy.sql.expression.`{.descclassname}`Update`{.descname}(*table*, *whereclause=None*, *values=None*, *inline=False*, *bind=None*, *prefixes=None*, *returning=None*, *return\_defaults=False*, *preserve\_parameter\_order=False*, *\*\*dialect\_kw*)[¶](#sqlalchemy.sql.expression.Update "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ValuesBase`](#sqlalchemy.sql.expression.ValuesBase "sqlalchemy.sql.expression.ValuesBase")
 
-    表示更新构造。plain
+    表示更新构造。
 
     [`Update`](#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")对象是使用[`update()`](#sqlalchemy.sql.expression.update "sqlalchemy.sql.expression.update")函数创建的。
 

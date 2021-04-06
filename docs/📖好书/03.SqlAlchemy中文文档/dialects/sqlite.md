@@ -585,7 +585,7 @@ SQLAlchemy 设置池以使用 Pysqlite 的默认行为：
 [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")时临时表表应该在[`Session.commit()`](orm_session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")或[`Session.rollback()`](orm_session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")之后继续保持，必须使用维护单个连接的池。如果仅在当前线程中需要作用域，则使用[`SingletonThreadPool`](core_pooling.html#sqlalchemy.pool.SingletonThreadPool "sqlalchemy.pool.SingletonThreadPool")，或者在这种情况下多个线程内需要[`StaticPool`](core_pooling.html#sqlalchemy.pool.StaticPool "sqlalchemy.pool.StaticPool")作用域：
 
     # maintain the same connection per threadplain
-    from sqlalchemy.pool import SingletonThreadPoolplainplainplainplain
+    from sqlalchemy.pool import SingletonThreadPool
     engine = create_engine('sqlite:///mydb.db',
                         poolclass=SingletonThreadPool)
 
@@ -615,7 +615,7 @@ SQLAlchemy 默认选择不改变这种行为，因为它是 pysqlite 驱动程�
 好消息是，通过一些事件，我们可以完全实现事务性支持，完全禁用 pysqlite 的功能并自行发布 BEGIN。这是通过使用两个事件监听器来实现的：
 
 qlalchemy import create_engine, eventplain
-plainplain
+
     engine = create_engine("sqlite:///myfile.db")
 
     @event.listens_for(engine, "connect")
@@ -637,7 +637,7 @@ at which SQLAlchemy knows that transaction scope is to begin, we emit
 TRANSACTION](http://sqlite.org/lang_transaction.html)中引入的 SQLite 锁定模式，方法是将所需的锁定模式添加到我们的`"BEGIN"`
 
     @event.listens_for(egin")plain
-    def do_begin(conn):plainplain
+    def do_begin(conn):
         conn.execute("BEGIN EXCLUSIVE")
 
 也可以看看
@@ -670,7 +670,7 @@ pysqlcipher 的文档和下载信息（如果适用）可在以下网址获得�
 连接字符串：
 
 +pysqlcipher://:passphrase/file_path[?kdf_iter=<iter>]
-plainplainplain
+plain
 ### 驱动程序[¶ T0\>](#id3 "Permalink to this headline")
 
 这里的驱动程序是使用 SQLCipher 引擎的[pysqlcipher](https://pypi.python.org/pypi/pysqlcipher)驱动程序。该系统基本上向 SQLite 引入了新的 PRAGMA 命令，允许设置密码和其他加密参数，从而允许对数据库文件进行加密。
@@ -684,11 +684,11 @@ plain
 对于绝对文件路径，应该为数据库名称使用两个斜杠：
 
 eate_engine('sqlite+pysqlcipher://:testing@//path/to/foo.db')
-plainplain
+
 在[https://www.zetetic.net/sqlcipher/sqlcipher-api/](https://www.zetetic.net/sqlcipher/sqlcipher-api/)中记录的 SQLCipher 支持的其他与加密相关的编译指示的选择可以在查询字符串中传递，并且会导致 PRAGMA 被称为每个新的连接。目前，支持`cipher`，`kdf_iter` `cipher_page_size`和`cipher_use_hmac`
 
 eate_engine('sqlite+pysqlcipher://:testing@/foo.db?cipher=aes-256-cfb&kdf_iter=64000')plain
-plainplain
+
 ### 合并行为[¶](#pooling-behavior "Permalink to this headline")
 
 驱动程序根据[Threading/Pooling
