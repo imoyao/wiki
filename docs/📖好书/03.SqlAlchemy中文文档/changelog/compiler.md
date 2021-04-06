@@ -32,7 +32,7 @@ Above, `MyColumn` extends [`ColumnClause`](sqlelement.html#sqlalchemy.sql.expres
 the base expression element for named column objects.
 `compiles`修饰符向`MyColumn`类注册自己，以便在对象编译为字符串时调用它：
 
-    from sqlalchemy import selectplain
+    from sqlalchemy import select
 
     s = select([MyColumn('x'), MyColumn('y')])
     print str(s)
@@ -105,7 +105,7 @@ Autocommit on a Construct](#enabling-compiled-autocommit)。
 
 SQL 和 DDL 结构分别使用不同的基本编译器 - `SQLCompiler`和`DDLCompiler`进行编译。常见的需求是从 DDL 表达式中访问 SQL 表达式的编译规则。由于这个原因，`DDLCompiler`包含一个访问器`sql_compiler`，比如下面我们生成一个嵌入 SQL 表达式的 CHECK 约束：
 
-    @compiles(MyConstraint)plain
+    @compiles(MyConstraint)
     def compile_my_constraint(constraint, ddlcompiler, **kw):
         return "CONSTRAINT %s CHECK (%s)" % (
             constraint.name,
@@ -141,7 +141,7 @@ can be used, which already is a subclass of [`Executable`](selectable.html#sqlal
 [`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")
 and includes the `autocommit` flag:
 
-    from sqlalchemy.sql.expression import UpdateBaseplain
+    from sqlalchemy.sql.expression import UpdateBase
 
     class MyInsertThing(UpdateBase):
         def __init__(self, ...):
@@ -157,7 +157,7 @@ and includes the `autocommit` flag:
 在新的编译函数中，为了获得“原始”编译例程，使用适当的 visit\_XXX 方法 -
 这是因为 compiler.process()将调用重写例程并导致无限循环。比如，为所有插入语句添加“前缀”：
 
-    from sqlalchemy.sql.expression import Insertplain
+    from sqlalchemy.sql.expression import Insert
 
     @compiles(Insert)
     def prefix_inserts(insert, compiler, **kw):
@@ -211,7 +211,7 @@ and includes the `autocommit` flag:
     `FunctionElement` adds in the ability to be used
     in the FROM clause of a `select()` construct:
 
-        from sqlalchemy.sql.expression import FunctionElementplain
+        from sqlalchemy.sql.expression import FunctionElement
 
         class coalesce(FunctionElement):
             name = 'coalesce'
@@ -251,7 +251,7 @@ and includes the `autocommit` flag:
 
 对于 Postgresql 和 Microsoft SQL Server：
 
-    from sqlalchemy.sql import expressionplain
+    from sqlalchemy.sql import expression
     from sqlalchemy.ext.compiler import compiles
     from sqlalchemy.types import DateTime
 

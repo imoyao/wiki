@@ -4,7 +4,7 @@ date: 2021-02-20 22:41:31
 permalink: /sqlalchemy/a5cdb7/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - changelog
 tags:
   - 
@@ -24,7 +24,7 @@ SQLAlchemy 0.4 有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-4 "Permalin
 
 如果您使用任何 ORM 功能，请确保从`sqlalchemy.orm`导入：
 
-    from sqlalchemy import *plain
+    from sqlalchemy import *
     from sqlalchemy.orm import *
 
 Secondly, anywhere you used to say `engine=`,
@@ -60,7 +60,7 @@ of sqlachemy’s sub-modules into your namespace.
 
 在 0.4 中，必须这样做：
 
-    from sqlalchemy import *plain
+    from sqlalchemy import *
     from sqlalchemy import types
 
     class UTCDateTime(types.TypeDecorator):
@@ -71,7 +71,7 @@ of sqlachemy’s sub-modules into your namespace.
 
 ### 查询[¶ T0\>](#querying "Permalink to this headline")
 
-#### 新的查询API [¶](#new-query-api "Permalink to this headline")
+#### 新的查询 API [¶](#new-query-api "Permalink to this headline")
 
 查询在生成界面上是标准化的（旧界面仍然存在，仅此而已）。虽然大多数生成接口的可用性为 0.3，但 0.4
 Query 具有与外部生成匹配的内在胆量，并且有更多技巧。所有结果缩小都通过`filter()`和`filter_by()`，限制/偏移可以通过数组切片或`limit()` /
@@ -89,7 +89,7 @@ User.query.select\_by（\*\* kwargs）
 
 User.query.select()
 
-    User.query.filter(xxx).all()
+    User.query.filter(xxx).all()plain
 
 #### 新的基于属性的表达式构造[¶](#new-property-based-expression-constructs "Permalink to this headline")
 
@@ -99,7 +99,7 @@ User.query.select()
 
 尽管简单的基于列的比较没有什么大不了，但类属性有一些新的“更高级别”结构可用，包括以前仅在`filter_by()`中可用的结构：
 
-    # comparison of scalar relations to an instanceplain
+    # comparison of scalar relations to an instance
     filter(Address.user == user)
 
     # return all users who contain a particular address
@@ -178,7 +178,7 @@ User.query.select()
 
 `query.load()`（或`session.refresh()`）的热切版本。如果已经存在于会话中，则从查询加载的每个实例（包括所有急切加载的项目）都会立即刷新：
 
-    session.query(Blah).populate_existing().all()
+    session.query(Blah).populate_existing().all()plain
 
 ### 关系[¶ T0\>](#relations "Permalink to this headline")
 
@@ -232,7 +232,7 @@ User.query.select()
 
 这是 Hibernate 阵营的一员。复合类型允许您定义一个由多个列（或者一列，如果需要）组成的自定义数据类型。让我们定义一个新的类型，`Point`。存储 x / y 坐标：
 
-    class Point(object):
+    class Point(object):plain
         def __init__(self, x, y):
             self.x = x
             self.y = y
@@ -269,7 +269,7 @@ User.query.select()
 
 一旦你设置了你的复合类型，它就像其他任何类型一样可用：
 
-    v = Vertex(Point(3, 4), Point(26,15))
+    v = Vertex(Point(3, 4), Point(26,15))plain
     session.save(v)
     session.flush()
 
@@ -278,7 +278,7 @@ User.query.select()
 
 如果您想定义映射属性在表达式中使用时生成 SQL 子句的方式，请创建您自己的`sqlalchemy.orm.PropComparator`子类，定义任何常用运算符（如`__eq__()`，`__le__()`等），并将它发送到`composite()`。复合类型也可以作为主键，并可用于`query.get()`中：
 
-    # a Document class which uses a composite Versionplain
+    # a Document class which uses a composite Version
     # object as primary key
     document = query.get(Version(1, 'a'))
 
@@ -346,7 +346,7 @@ types cover many needs:
 
 这个特性静静地出现在 0.3 中，但在 0.4 下得到了改进，这要归功于能够将子查询转换为表的子查询转换为针对该表的别名的子查询。这对于急切加载，查询中的别名加入等是关键的。当您只需要添加一些额外的列或子查询时，它可以减少对 select 语句创建映射器的需要：
 
-    mapper(User, users, properties={plain
+    mapper(User, users, properties={
            'fullname': column_property((users.c.firstname + users.c.lastname).label('fullname')),
            'numposts': column_property(
                 select([func.count(1)], users.c.id==posts.c.user_id).correlate(users).label('posts')
@@ -386,7 +386,7 @@ types cover many needs:
 
 如果您需要后期配置会话，请使用引擎进行配置，稍后使用`configure()`添加它：
 
-    Session.configure(bind=create_engine(...))plain
+    Session.configure(bind=create_engine(...))
 
 All the behaviors of `SessionContext` and the
 `query` and `__init__` methods
@@ -447,7 +447,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
 `commit()`和`rollback()`，以及`begin()`现在直接在`Session`上。不需要为任何事情使用`SessionTransaction`（它仍然在后台）。
 
-    Session = sessionmaker(autoflush=True, transactional=False)
+    Session = sessionmaker(autoflush=True, transactional=False)plain
 
     sess = Session()
     sess.begin()
@@ -537,7 +537,7 @@ in\_函数现在将一系列值或可选值作为其唯一参数。以前传入�
 
 应改为
 
-    my_table.select(my_table.c.id.in_([1,2,3])
+    my_table.select(my_table.c.id.in_([1,2,3])plain
     my_table.select(my_table.c.id.in_(listOfIds)
 
 架构和反思[¶](#schema-and-reflection "Permalink to this headline")
@@ -567,7 +567,7 @@ in\_函数现在将一系列值或可选值作为其唯一参数。以前传入�
 
 您现在可以加载表定义，并通过一次传递从整个数据库或模式自动创建`Table`对象：
 
-    >>> metadata = MetaData(myengine, reflect=True)plain
+    >>> metadata = MetaData(myengine, reflect=True)
     >>> metadata.tables.keys()
     ['table_a', 'table_b', 'table_c', '...']
 
@@ -591,7 +591,7 @@ SQL 执行[¶](#sql-execution "Permalink to this headline")
 
 ### Oracle 的输出参数[¶](#out-parameters-for-oracle "Permalink to this headline")
 
-    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)
+    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)plain
     assert result.out_parameters == {'y':10, 'z':75}
 
 ### 连接绑定`MetaData`，`Sessions` [¶](#connection-bound-metadata-sessions "Permalink to this headline")

@@ -460,7 +460,7 @@ order\_by将无法使用标签，因为它会因多态加载而被匿名化：
 
 现在标签的顺序跟踪匿名标签，现在可以使用：
 
-    SELECT a.id AS a_id, a.type AS a_type, (SELECT max(b.id) AS max_1
+    SELECT a.id AS a_id, a.type AS a_type, (SELECT max(b.id) AS max_1plain
     FROM b WHERE b.a_id = a.id) AS anon_1
     FROM a ORDER BY anon_1
 
@@ -477,7 +477,7 @@ order\_by将无法使用标签，因为它会因多态加载而被匿名化：
 除了整数值之外，[`Select.limit()`](core_selectable.html#sqlalchemy.sql.expression.Select.limit "sqlalchemy.sql.expression.Select.limit")和[`Select.offset()`](core_selectable.html#sqlalchemy.sql.expression.Select.offset "sqlalchemy.sql.expression.Select.offset")方法现在接受任何 SQL 表达式作为参数。ORM
 [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象也会将任何表达式传递给底层的[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象。通常，这用于允许传递一个绑定参数，以后可以用一个值替换它：
 
-    sel = select([table]).limit(bindparam('mylimit')).offset(bindparam('myoffset'))
+    sel = select([table]).limit(bindparam('mylimit')).offset(bindparam('myoffset'))plain
 
 不支持非整数 LIMIT 或 OFFSET 表达式的方言可能会继续不支持此行为；第三方方言也可能需要修改才能利用新的行为。当前使用`._limit`或`._offset`属性的方言将继续适用于极限/偏移被指定为简单整数值的情况。但是，当指定SQL表达式时，这两个属性将在访问时引发[`CompileError`](core_exceptions.html#sqlalchemy.exc.CompileError "sqlalchemy.exc.CompileError")。希望支持新功能的第三方方言现在应该调用`._limit_clause`和`._offset_clause`属性来接收完整的 SQL 表达式，而不是整数值。
 
@@ -578,7 +578,7 @@ types](core_constraints.html#naming-schematypes)配置命名
 
 由于至少有 0.8 版本，一个[`Constraint`](core_constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")有能力根据传递的表格附加列自动附加到[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")：
 
-    from sqlalchemy import Table, Column, MetaData, Integer, UniqueConstraint
+    from sqlalchemy import Table, Column, MetaData, Integer, UniqueConstraintplain
 
     m = MetaData()
 
@@ -608,7 +608,7 @@ types](core_constraints.html#naming-schematypes)配置命名
 
 上述功能是版本 1.0.0b3 后期添加的。对于[＃3411](http://www.sqlalchemy.org/trac/ticket/3411)，版本 1.0.4 的修订确保了如果[`Constraint`](core_constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")引用[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的混合并且字符串列名称；因为我们还没有跟踪名称添加到[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的情况：
 
-    from sqlalchemy import Table, Column, MetaData, Integer, UniqueConstraintplain
+    from sqlalchemy import Table, Column, MetaData, Integer, UniqueConstraint
 
     m = MetaData()
 
@@ -701,7 +701,7 @@ bindings”编译器标志将打开。这允许嵌入在 SQL 中的文字正确�
 
 [＃3087 T0\>](http://www.sqlalchemy.org/trac/ticket/3087)
 
-### UniqueConstraint现在是表反射过程的一部分[¶](#uniqueconstraint-is-now-part-of-the-table-reflection-process "Permalink to this headline")
+### UniqueConstraint 现在是表反射过程的一部分[¶](#uniqueconstraint-is-now-part-of-the-table-reflection-process "Permalink to this headline")
 
 使用`autoload=True`填充的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象现在将包含[`UniqueConstraint`](core_constraints.html#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")结构以及[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")结构。这个逻辑对于 Postgresql 和 Mysql 有一些注意事项：
 
@@ -805,7 +805,7 @@ duplicates.
 
 给定的字符串现在是针对实体解析的：
 
-    session.query(User).update({'name': 'moonbeam'})
+    session.query(User).update({'name': 'moonbeam'})plain
 
 通常最好直接使用该属性，以避免任何含糊之处：
 
@@ -908,7 +908,7 @@ use 10, it would use 7, unless the object were flushed first:
 
 对于瞬态对象，它会产生一个破坏的查询：
 
-    SELECT b.id, b.a_idplain
+    SELECT b.id, b.a_id
     FROM b
     WHERE b.a_id != :a_id_1 OR b.a_id IS NULL
     {u'a_id_1': symbol('NEVER_SET')}
@@ -1114,7 +1114,7 @@ That is, the `A.bs` is part of a “path”.
 
 此更改还会影响单表继承目标。使用如下映射：
 
-    from sqlalchemy import Integer, Column, String, ForeignKey
+    from sqlalchemy import Integer, Column, String, ForeignKeyplain
     from sqlalchemy.orm import Session, relationship
     from sqlalchemy.ext.declarative import declarative_base
 
@@ -1330,7 +1330,7 @@ or [`Query.from_self()`](orm_query.html#sqlalchemy.orm.query.Query.from_self "sq
 
 对子类使用[`Query.from_self()`](orm_query.html#sqlalchemy.orm.query.Query.from_self "sqlalchemy.orm.query.Query.from_self")或[`Query.count()`](orm_query.html#sqlalchemy.orm.query.Query.count "sqlalchemy.orm.query.Query.count")会产生子查询，但是将子类型的“WHERE”标准添加到外部：
 
-    sess.query(FooWidget).from_self().all()
+    sess.query(FooWidget).from_self().all()plain
 
 渲染：
 
@@ -1343,7 +1343,7 @@ or [`Query.from_self()`](orm_query.html#sqlalchemy.orm.query.Query.from_self "sq
 
 问题在于，如果内部查询没有指定所有列，那么我们不能在外部添加 WHERE 子句（它实际上会尝试并产生错误的查询）。这个决定显然回到了 0.6.5，注释“可能需要对此做出更多调整”。那么，这些调整已经到来！所以现在上面的查询会呈现：
 
-    SELECT
+    SELECTplain
         anon_1.widgets_id AS anon_1_widgets_id,
         anon_1.widgets_type AS anon_1_widgets_type
     FROM (SELECT widgets.id AS widgets_id, widgets.type AS widgets_type,
@@ -1352,7 +1352,7 @@ or [`Query.from_self()`](orm_query.html#sqlalchemy.orm.query.Query.from_self "sq
 
 所以那些不包含“type”的查询仍然可以工作！:
 
-    sess.query(FooWidget.id).count()plain
+    sess.query(FooWidget.id).count()
 
 呈现：
 
@@ -1436,7 +1436,7 @@ and [`Select.order_by()`](core_selectable.html#sqlalchemy.sql.expression.Select.
 Note that by “SQL expressions” we mean a **full fragment of a SQL
 string**, such as:
 
-    # the argument sent to where() is a full SQL expressionplain
+    # the argument sent to where() is a full SQL expression
     stmt = select([sometable]).where("somecolumn = 'value'")
 
 and we are **not talking about string arguments**, that is, the normal
@@ -1450,11 +1450,11 @@ Core教程一直以来都使用这种技术，使用[`select()`](core_selectable
 
 所以这里的改变是鼓励用户在编写部分或全部由文本片段组成的 SQL 时限定文本字符串。在撰写选择时如下所示：
 
-    stmt = select(["a", "b"]).where("a = b").select_from("sometable")
+    stmt = select(["a", "b"]).where("a = b").select_from("sometable")plain
 
 声明是正常建立的，与以前一样强制执行。但是，您会看到以下警告消息：
 
-    SAWarning: Textual column expression 'a' should be explicitly declared
+    SAWarning: Textual column expression 'a' should be explicitly declaredplain
     with text('a'), or use column('a') for more specificity
     (this warning may be suppressed after 10 occurrences)
 
@@ -1517,7 +1517,7 @@ above statement would produce as we expect, without warnings (though
 note that the `"name"` expression has been resolved
 to `users.name`! ）：
 
-    SELECT users.name, count(users.id) AS id_count
+    SELECT users.name, count(users.id) AS id_countplain
     FROM users GROUP BY users.name ORDER BY id_count
 
 但是，如果我们引用无法找到的名称，则我们再次收到警告，如下所示：
@@ -1577,19 +1577,19 @@ by 或其他表达式进行排序，SQLAlchemy 预期字符串会解析为已知
 
 以前，位置方言会失败，因为不会为其他位置生成绑定：
 
-    Incorrect number of bindings supplied. The current statement uses 6,
+    Incorrect number of bindings supplied. The current statement uses 6,plain
     and there are 4 supplied.
     [SQL: u'INSERT INTO my_table (id, data) VALUES (?, ?), (?, ?), (?, ?)']
     [parameters: (1, 'd1', 'd2', 'd3')]
 
 并且使用“named”方言，“id”的相同值将在每一行中重复使用（因此，此更改与依赖此的系统反向不兼容）：
 
-    INSERT INTO my_table (id, data) VALUES (:id, :data_0), (:id, :data_1), (:id, :data_2)
+    INSERT INTO my_table (id, data) VALUES (:id, :data_0), (:id, :data_1), (:id, :data_2)plain
     {u'data_2': 'd3', u'data_1': 'd2', u'data_0': 'd1', 'id': 1}
 
 系统也会拒绝将“服务器端”默认值作为内联呈现的 SQL 调用，因为无法保证服务器端默认值与此兼容。如果 VALUES 子句为特定列呈现，则需要 Python 端值；如果省略的值仅指服务器端的默认值，则会引发异常：
 
-    t = Table(plain
+    t = Table(
         'my_table', metadata,
         Column('id', Integer, primary_key=True),
         Column('data', String, server_default='some default')
@@ -1609,7 +1609,7 @@ by 或其他表达式进行排序，SQLAlchemy 预期字符串会解析为已知
 
 以前，值“d1”将被复制到第三行的值（但是只能使用命名格式！）：
 
-    INSERT INTO my_table (data) VALUES (:data_0), (:data_1), (:data_0)plain
+    INSERT INTO my_table (data) VALUES (:data_0), (:data_1), (:data_0)
     {u'data_1': 'd2', u'data_0': 'd1'}
 
 [＃3288 T0\>](http://www.sqlalchemy.org/trac/ticket/3288)
@@ -1773,7 +1773,7 @@ Options](dialects_postgresql.html#postgresql-table-options)
 
 [＃2051 T0\>](http://www.sqlalchemy.org/trac/ticket/2051)
 
-### 使用 Postgresql Dialect [¶](#new-get-enums-method-with-postgresql-dialect "Permalink to this headline")的新get\_enums()方法
+### 使用 Postgresql Dialect [¶](#new-get-enums-method-with-postgresql-dialect "Permalink to this headline")的新 get\_enums()方法
 
 在 Postgresql 中，[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")方法返回一个[`PGInspector`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.base.PGInspector "sqlalchemy.dialects.postgresql.base.PGInspector")对象，其中包含一个新的[`PGInspector.get_enums()`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.base.PGInspector.get_enums "sqlalchemy.dialects.postgresql.base.PGInspector.get_enums")方法，该方法返回所有可用的`ENUM`类型：
 
@@ -1906,14 +1906,14 @@ SET 中存储一个空字符串，因为驱动程序给我们返回的字符串�
 
 -   将 MySQL-python 返回的空字符串`''`处理为空 set
     `set()`；
--   将MySQL-Connector-Python返回的单空值集合`set([''])`转换为空 set `set()`；
+-   将 MySQL-Connector-Python 返回的单空值集合`set([''])`转换为空 set `set()`；
 -   为了处理实际希望在其可能值列表中包含空值`''`的集合类型的情况，实现了一个新特性（在这个用例中是必需的），从而设置值被持久化并且作为一个按位整数值加载；添加标志[`mysql.SET.retrieve_as_bitwise`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET.params.retrieve_as_bitwise "sqlalchemy.dialects.mysql.SET")以启用此功能。
 
 通过使用[`mysql.SET.retrieve_as_bitwise`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET.params.retrieve_as_bitwise "sqlalchemy.dialects.mysql.SET")标志，可以保持集合的持久性，并且检索时不会出现任何含糊不清的值。理论上这个标志可以在任何情况下被打开，只要该类型的给定值列表与数据库中声明的顺序完全匹配即可。它只会使 SQL
 echo 输出更加不寻常。
 
 [`mysql.SET`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET "sqlalchemy.dialects.mysql.SET")的默认行为保持不变，使用字符串往返传值。基于字符串的行为现在支持 unicode 完全包含 use\_unicode
-= 0的MySQL-python。
+= 0 的 MySQL-python。
 
 [＃3283 T0\>](http://www.sqlalchemy.org/trac/ticket/3283)
 

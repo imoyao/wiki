@@ -188,7 +188,7 @@ Index()构造可以与表定义一起内联创建，使用字符串作为列名�
 
 这里的主要基本原理是为了声明`__table_args__`的好处，特别是在与 mixin 一起使用时：
 
-    class HasNameMixin(object):plain
+    class HasNameMixin(object):
         name = Column('name', String(50), nullable=False)
         @declared_attr
         def __table_args__(cls):
@@ -343,11 +343,11 @@ Sajip 为我们的日志记录系统提供了一个补丁，使得不再需要�
 
 现在，`contains_eager()`修饰符将自行链接一段更长的路径，而不需要发出单独的`contains_eager()`调用。代替：
 
-    session.query(A).options(contains_eager(A.b), contains_eager(A.b, B.c))
+    session.query(A).options(contains_eager(A.b), contains_eager(A.b, B.c))plain
 
 你可以说：
 
-    session.query(A).options(contains_eager(A.b, B.c))plain
+    session.query(A).options(contains_eager(A.b, B.c))
 
 [＃2032 T0\>](http://www.sqlalchemy.org/trac/ticket/2032)
 
@@ -509,7 +509,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 使用声明式，场景是这样的：
 
-    class Parent(Base):
+    class Parent(Base):plain
         __tablename__ = 'parent'
         id = Column(Integer, primary_key=True)
 
@@ -526,7 +526,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 这种方法的主要优点是，现在可以更轻松地构建引用本地列的`primaryjoin`表达式：
 
-    class Child(Parent):
+    class Child(Parent):plain
        __tablename__ = 'child'
         id = Column(Integer, ForeignKey('parent.id'), primary_key=True)
         some_related = relationship("SomeRelated",
@@ -541,7 +541,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 这也意味着像这样的查询会改变它的行为：
 
-    session.query(Parent).filter(Child.id > 7)
+    session.query(Parent).filter(Child.id > 7)plain
 
 在 0.6 中，这会使得：
 
@@ -561,7 +561,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 0.6 和 0.7 中的哪一个呈现：
 
-    SELECT parent.id AS parent_id, child.id AS child_id
+    SELECT parent.id AS parent_id, child.id AS child_idplain
     FROM parent LEFT OUTER JOIN child ON parent.id = child.id
     WHERE child.id > :id_1
 
@@ -766,7 +766,7 @@ that of the `alias()` methods on all
 
 将属性或属性名称的列表传递给`Query.join`，`eagerload()`
 
-    # old way, deprecated since 0.5
+    # old way, deprecated since 0.5plain
     session.query(Houses).join([Houses.rooms, Room.closets])
     session.query(Houses).options(eagerload_all([Houses.rooms, Room.closets]))
 
