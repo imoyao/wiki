@@ -129,7 +129,7 @@ value. 我们可以改变这个例子来说明这一点：
 
 对于希望构建一个为每个子类创建不同列的声明性混合的漂亮边缘情况，将添加新的修饰符[`declared_attr.cascading`](orm_extensions_declarative_api.html#sqlalchemy.ext.declarative.declared_attr.cascading "sqlalchemy.ext.declarative.declared_attr.cascading")。使用此修饰符，将为映射的继承层次结构中的每个类单独调用修饰的函数。虽然这已经是针对特殊属性（如`__table_args__`和`__mapper_args__`）的行为，但对于列和其他属性，缺省行为假定该属性仅附加到基类，并且只是从子类继承而来。通过[`declared_attr.cascading`](orm_extensions_declarative_api.html#sqlalchemy.ext.declarative.declared_attr.cascading "sqlalchemy.ext.declarative.declared_attr.cascading")，可以应用单个行为：
 
-    class HasSomeAttribute(object):
+    class HasSomeAttribute(object):plain
         @declared_attr.cascading
         def some_id(cls):
             if has_inherited_table(cls):
@@ -349,7 +349,7 @@ queries to different backends.
 
 -   [`Query.count()`](orm_query.html#sqlalchemy.orm.query.Query.count "sqlalchemy.orm.query.Query.count")
 
-        session.query(User).count()plain
+        session.query(User).count()plainplain
 
 -   [`Query.update()`](orm_query.html#sqlalchemy.orm.query.Query.update "sqlalchemy.orm.query.Query.update")和[`Query.delete()`](orm_query.html#sqlalchemy.orm.query.Query.delete "sqlalchemy.orm.query.Query.delete")，用于 UPDATE
     / DELETE 语句以及“fetch”策略使用的 SELECT：
@@ -427,7 +427,7 @@ BY](migration_09.html#migration-1068)中单独呈现其名称）。
 
 这将按错误的列排序：
 
-    SELECT a.id AS a_id, (SELECT max(b.id) AS max_1 FROM b
+    SELECT a.id AS a_id, (SELECT max(b.id) AS max_1 FROM bplain
     WHERE b.a_id = a.id) AS anon_1, a_1.id AS a_1_id,
     (SELECT max(b.id) AS max_2
     FROM b WHERE b.a_id = a_1.id) AS anon_2
@@ -460,7 +460,7 @@ order\_by将无法使用标签，因为它会因多态加载而被匿名化：
 
 现在标签的顺序跟踪匿名标签，现在可以使用：
 
-    SELECT a.id AS a_id, a.type AS a_type, (SELECT max(b.id) AS max_1plain
+    SELECT a.id AS a_id, a.type AS a_type, (SELECT max(b.id) AS max_1plainplain
     FROM b WHERE b.a_id = a.id) AS anon_1
     FROM a ORDER BY anon_1
 
@@ -477,7 +477,7 @@ order\_by将无法使用标签，因为它会因多态加载而被匿名化：
 除了整数值之外，[`Select.limit()`](core_selectable.html#sqlalchemy.sql.expression.Select.limit "sqlalchemy.sql.expression.Select.limit")和[`Select.offset()`](core_selectable.html#sqlalchemy.sql.expression.Select.offset "sqlalchemy.sql.expression.Select.offset")方法现在接受任何 SQL 表达式作为参数。ORM
 [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象也会将任何表达式传递给底层的[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象。通常，这用于允许传递一个绑定参数，以后可以用一个值替换它：
 
-    sel = select([table]).limit(bindparam('mylimit')).offset(bindparam('myoffset'))plain
+    sel = select([table]).limit(bindparam('mylimit')).offset(bindparam('myoffset'))plainplainplain
 
 不支持非整数 LIMIT 或 OFFSET 表达式的方言可能会继续不支持此行为；第三方方言也可能需要修改才能利用新的行为。当前使用`._limit`或`._offset`属性的方言将继续适用于极限/偏移被指定为简单整数值的情况。但是，当指定SQL表达式时，这两个属性将在访问时引发[`CompileError`](core_exceptions.html#sqlalchemy.exc.CompileError "sqlalchemy.exc.CompileError")。希望支持新功能的第三方方言现在应该调用`._limit_clause`和`._offset_clause`属性来接收完整的 SQL 表达式，而不是整数值。
 
@@ -627,7 +627,7 @@ types](core_constraints.html#naming-schematypes)配置命名
 
 当[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")已经包含构造[`Constraint`](core_constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")时的所有目标[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象时，原始自动附加逻辑当然会保持原位：
 
-    from sqlalchemy import Table, Column, MetaData, Integer, UniqueConstraint
+    from sqlalchemy import Table, Column, MetaData, Integer, UniqueConstraintplain
 
     m = MetaData()
 
@@ -667,7 +667,7 @@ are rendered as constants into the SELECT statement:
 
 将呈现：
 
-    INSERT INTO t (x, y) SELECT t.x, somefunction() AS somefunction_1
+    INSERT INTO t (x, y) SELECT t.x, somefunction() AS somefunction_1plain
     FROM t
 
 该功能可以使用[`Insert.from_select.include_defaults`(core_dml.html#sqlalchemy.sql.expression.Insert.from_select.params.include_defaults "sqlalchemy.sql.expression.Insert.from_select")禁用。
@@ -805,7 +805,7 @@ duplicates.
 
 给定的字符串现在是针对实体解析的：
 
-    session.query(User).update({'name': 'moonbeam'})plain
+    session.query(User).update({'name': 'moonbeam'})plainplain
 
 通常最好直接使用该属性，以避免任何含糊之处：
 
@@ -885,7 +885,7 @@ NULL”，然后查询会产生不同的结果。因此，通过这种操作，�
 
 针对与此对象作为目标的多对一关系的查询将在绑定参数中使用值 10：
 
-    s.query(B).filter(B.a == a1)
+    s.query(B).filter(B.a == a1)plain
 
 生产：
 
@@ -929,9 +929,9 @@ and related functions.
 
     >>> obj = Foo()
 
-它总是SQLAlchemy的行为，如果我们访问一个从未设置过的标量属性或多对一属性，它将返回为`None`：
+它总是 SQLAlchemy 的行为，如果我们访问一个从未设置过的标量属性或多对一属性，它将返回为`None`：
 
-    >>> obj.someattrplain
+    >>> obj.someattrplainplain
     None
 
 这个`None`的值实际上现在是`obj`状态的一部分，并且与我们已经明确设置了该属性的情况不同。
@@ -974,7 +974,7 @@ change](#migration-3060)）说明了一些很少的边缘情况实际上我们�
 
 作为[＃3060](http://www.sqlalchemy.org/trac/ticket/3060)的一个副作用，将关系绑定属性设置为`None`现在是一个跟踪的历史事件，它涉及持续存在的意图`None`因为设置关系绑定属性的情况总是会直接分配给外键属性，所以在分配 None 时可以看到行为更改。给定映射：
 
-    class A(Base):
+    class A(Base):plain
         __tablename__ = 'table_a'
 
         id = Column(Integer, primary_key=True)
@@ -988,7 +988,7 @@ change](#migration-3060)）说明了一些很少的边缘情况实际上我们�
 
 在 1.0 中，在所有情况下，关系绑定属性优先于 FK 绑定属性，无论我们分配的值是对`A`对象的引用还是`None`在 0.9 中，行为是不一致的，只有赋值时才会生效；不考虑：
 
-    a1 = A(id=1)
+    a1 = A(id=1)plain
     a2 = A(id=2)
     session.add_all([a1, a2])
     session.flush()
@@ -1098,12 +1098,12 @@ That is, the `A.bs` is part of a “path”.
 
     print(s.query(A).join(B, B.a_id == A.id).join(B, B.a_id == A.id))
 
-在0.9中，这将呈现如下：
+在 0.9 中，这将呈现如下：
 
     SELECT a.id AS a_idplain
     FROM a JOIN b ON b.a_id = a.id JOIN b AS b_1 ON b_1.a_id = a.id
 
-这是有问题的，因为别名是隐含的，并且在不同的ON子句的情况下会导致不可预知的结果。
+这是有问题的，因为别名是隐含的，并且在不同的 ON 子句的情况下会导致不可预知的结果。
 
 在1.0中，没有应用自动别名，我们得到：
 
@@ -1114,7 +1114,7 @@ That is, the `A.bs` is part of a “path”.
 
 此更改还会影响单表继承目标。使用如下映射：
 
-    from sqlalchemy import Integer, Column, String, ForeignKeyplain
+    from sqlalchemy import Integer, Column, String, ForeignKeyplainplain
     from sqlalchemy.orm import Session, relationship
     from sqlalchemy.ext.declarative import declarative_base
 
@@ -1386,7 +1386,7 @@ or [`Query.from_self()`](orm_query.html#sqlalchemy.orm.query.Query.from_self "sq
 
 一段时间以来，关系的加入会为该类型提供一个“单一继承”子句：
 
-    s.query(Related).join(FooWidget, Related.widget).all()plain
+    s.query(Related).join(FooWidget, Related.widget).all()plainplain
 
 SQL 输出：
 
@@ -1529,7 +1529,7 @@ to `users.name`! ）：
 
 输出符合我们的说法，但它又一次警告我们：
 
-    SAWarning: Can't resolve label reference 'some_label'; converting toplain
+    SAWarning: Can't resolve label reference 'some_label'; converting toplainplain
     text() (this warning may be suppressed after 10 occurrences)
 
     SELECT users.name, count(users.id) AS id_count
@@ -1542,7 +1542,7 @@ ON 子句（例如 Postgresql 语法）。
 我们仍然可以使用[`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")为 ORDER
 BY 或其他表达式指定任意表达式：
 
-    stmt = select([users]).order_by(text("some special expression"))plain
+    stmt = select([users]).order_by(text("some special expression"))plainplainplain
 
 整个变化的结果是 SQLAlchemy 现在希望我们在发送字符串时告诉它该字符串显式为[`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")构造，或者列，表等，并且 if 我们使用它作为标签名称，按照 group
 by 或其他表达式进行排序，SQLAlchemy 预期字符串会解析为已知的内容，否则应该再次使用[`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")或类似方法进行限定。
@@ -1857,7 +1857,7 @@ Options](dialects_postgresql.html#postgresql-table-options)
 
 Postgresql 现在支持 9.4 的集合函数的 SQL 标准 FILTER 关键字。SQLAlchemy 允许使用[`FunctionElement.filter()`](core_functions.html#sqlalchemy.sql.functions.FunctionElement.filter "sqlalchemy.sql.functions.FunctionElement.filter")：
 
-    func.count(1).filter(True)plain
+    func.count(1).filter(True)plainplain
 
 也可以看看
 
@@ -2016,7 +2016,7 @@ Deprecation](dialects_mssql.html#mssql-large-type-deprecation)。
 
 CTE 对 Oracle 的支持已经得到了修复，并且还有一个新特性`CTE.with_suffixes()`可以帮助 Oracle 的特殊指令：
 
-    included_parts = select([
+    included_parts = select([plain
         part.c.sub_part, part.c.part, part.c.quantity
     ]).where(part.c.part == "p1").\
         cte(name="included_parts", recursive=True).\

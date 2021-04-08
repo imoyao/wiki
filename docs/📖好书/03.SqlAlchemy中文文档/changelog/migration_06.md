@@ -40,7 +40,7 @@ SQLAlchemy 0.6 中有什么新东西？[¶](#what-s-new-in-sqlalchemy-0-6 "Perma
 由`create_engine()`使用的 URL 格式已得到增强，可以使用受 JDBC 启发的方案来处理特定后端的任意数量的 DBAPI。以前的格式仍然有效，并且会选择一个“默认的”DBAPI 实现，比如下面的 Postgresql
 URL，它将使用 psycopg2：
 
-    create_engine('postgresql://scott:tiger@localhost/test')plain
+    create_engine('postgresql://scott:tiger@localhost/test')plainplainplain
 
 但是，要指定特定的 DBAPI 后端（例如 pg8000），请使用加号“+”将其添加到 URL 的“协议”部分中：
 
@@ -72,7 +72,7 @@ URL，它将使用 psycopg2：
 
 方言的进口结构发生了变化。每种方言现在通过`sqlalchemy.dialects.<name>`导出其基本“方言”类以及该方言支持的全套 SQL 类型。例如，要导入一组 PG 类型：
 
-    from sqlalchemy.dialects.postgresql import INTEGER, BIGINT, SMALLINT,\plain
+    from sqlalchemy.dialects.postgresql import INTEGER, BIGINT, SMALLINT,\plainplainplainplain
                                                 VARCHAR, MACADDR, DATE, BYTEA
 
 在上面，`INTEGER`实际上是`sqlalchemy.types`中普通的`INTEGER`类型，但是 PG 方言使它可以以与那些类型相同的方式是特定于 PG 的，如`BYTEA`和`MACADDR`。
@@ -92,18 +92,18 @@ URL，它将使用 psycopg2：
 
 这样一来，Python 表达式在转换为字符串时就会生成 SQL 表达式：
 
-    >>> str(column('foo') == 5)
+    >>> str(column('foo') == 5)plain
     'foo = :foo_1'
 
 但是如果我们这样说会发生什么？
 
-    >>> if column('foo') == 5:
+    >>> if column('foo') == 5:plain
     ...     print("yes")
     ...
 
 在先前版本的 SQLAlchemy 中，返回的`_BinaryExpression`是一个普通的 Python 对象，其计算结果为`True`。现在，它计算实际的`ClauseElement`是否应该与正在比较的哈希值相同。含义：
 
-    >>> bool(column('foo') == 5)plain
+    >>> bool(column('foo') == 5)plainplain
     False
     >>> bool(column('foo') == column('foo'))
     False
@@ -128,7 +128,7 @@ URL，它将使用 psycopg2：
 
 相反，想要检查`ClauseElement`表达式的代码应该如下所示：
 
-    if expression is not None:
+    if expression is not None:plain
         print("the expression is:", expression)
 
 请记住，**这也适用于 Table 和 Column 对象**。
@@ -149,7 +149,7 @@ different now is that all subsequent dictionaries need to include at
 least *every* key that is present in the first dictionary.
 这意味着这样的调用不再有效：
 
-    connection.execute(table.insert(),plain
+    connection.execute(table.insert(),plainplain
                             {'timestamp':today, 'data':'row1'},
                             {'timestamp':today, 'data':'row2'},
                             {'data':'row3'})
@@ -187,7 +187,7 @@ connecting and fetching 50,000 rows looks like with SQLite, using mostly
 direct SQLite access, a `ResultProxy`, and a simple
 mapped ORM object:
 
-    sqlite select/native: 0.260s
+    sqlite select/native: 0.260splain
 
     0.6 / C extension
 
@@ -214,14 +214,14 @@ extension versus not.
 
 `sqlalchemy.schema`包得到了一些长期需要的关注。最明显的变化是新扩展的 DDL 系统。在 SQLAlchemy 中，从版本 0.5 开始可以创建自定义的 DDL 字符串，并将它们与表或元数据对象关联：
 
-    from sqlalchemy.schema import DDL
+    from sqlalchemy.schema import DDLplain
 
     DDL('CREATE TRIGGER users_trigger ...').execute_at('after-create', metadata)
 
 现在，全套的 DDL 结构在相同的系统下可用，包括 CREATE TABLE，ADD
 CONSTRAINT 等。:
 
-    from sqlalchemy.schema import Constraint, AddConstraintplain
+    from sqlalchemy.schema import Constraint, AddConstraintplainplain
 
     AddContraint(CheckConstraint("value > 5")).execute_at('after-create', mytable)
 
@@ -322,7 +322,7 @@ the parent connection. 池日志记录发送到`log.info()`和`log.debug()` - �
 
 `from_engine()`方法在某些情况下会为后端特定的检查器提供额外的功能，例如提供`get_table_oid()`方法的 Postgresql：
 
-    my_engine = create_engine('postgresql://...')
+    my_engine = create_engine('postgresql://...')plainplainplain
     pg_insp = Inspector.from_engine(my_engine)
 
     print(pg_insp.get_table_oid('my_table'))
@@ -388,7 +388,7 @@ unicode 对象，以用于基本选择 VARCHAR 值。如果是这样，`String`�
 
 对于明确不需要 unicode 对象的字符串列更通用的解决方案是使用将 unicode 转换回 utf-8 或任何所需的`TypeDecorator`：
 
-    class UTF8Encoded(TypeDecorator):plain
+    class UTF8Encoded(TypeDecorator):plainplain
         """Unicode type which coerces to utf-8."""
 
         impl = sa.VARCHAR
@@ -497,7 +497,7 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
 在 mapper 级别：
 
-    mapper(Child, child)
+    mapper(Child, child)plainplain
     mapper(Parent, parent, properties={
         'child':relationship(Child, lazy='joined', innerjoin=True)
     })
@@ -528,7 +528,7 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
     会产生如下的 SQL：
 
-        SELECT * FROMplain
+        SELECT * FROMplainplain
           (SELECT * FROM addresses LIMIT 10) AS anon_1
           LEFT OUTER JOIN users AS users_1 ON users_1.id = anon_1.addresses_user_id
 

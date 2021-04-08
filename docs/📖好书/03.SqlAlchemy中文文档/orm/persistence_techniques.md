@@ -16,7 +16,7 @@ tags:
 
 此功能允许将数据库列的值设置为 SQL 表达式而不是文字值。它对原子更新，调用存储过程等等特别有用。你所做的就是将一个表达式分配给一个属性：
 
-    class SomeClass(object):
+    class SomeClass(object):plainplain
         pass
     mapper(SomeClass, some_table)
 
@@ -63,7 +63,7 @@ a mapped class or [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqla
 instance, which is used to locate the proper context for the desired
 engine:
 
-    Session = sessionmaker()
+    Session = sessionmaker()plainplain
     session = Session()
 
     # need to specify mapper or class when executing
@@ -78,7 +78,7 @@ engine:
 
 ORM 将任何从未在对象上设置的属性视为“默认”情况；该属性将从 INSERT 语句中省略：
 
-    class MyObject(Base):plain
+    class MyObject(Base):plainplainplain
         __tablename__ = 'my_table'
         id = Column(Integer, primary_key=True)
         data = Column(String(50), nullable=True)
@@ -93,7 +93,7 @@ NULL value set, *unless* the column has a default set up, in which case
 the default value will be persisted.
 这既适用于从服务器端默认的纯 SQL 透视角度，也适用于 SQLAlchemy 插入行为的客户端和服务器端默认行为：
 
-    class MyObject(Base):plain
+    class MyObject(Base):plainplain
         __tablename__ = 'my_table'
         id = Column(Integer, primary_key=True)
         data = Column(String(50), nullable=True, server_default="default")
@@ -105,7 +105,7 @@ the default value will be persisted.
 
 但是，在 ORM 中，即使将 Python 值`None`显式指定给对象，也会将该值视为**相同**，就好像该值从未分配过一样：
 
-    class MyObject(Base):plain
+    class MyObject(Base):plainplainplainplain
         __tablename__ = 'my_table'
         id = Column(Integer, primary_key=True)
         data = Column(String(50), nullable=True, server_default="default")
@@ -122,7 +122,7 @@ NULL。这是 ORM 的一个长期存在的行为，许多应用程序都将其�
 那么，如果我们想实际上将 NULL 放入此列，即使该列具有默认值，该怎么办呢？有两种方法。一个是在每个实例级别上，我们使用[`null`](core_sqlelement.html#sqlalchemy.sql.expression.null "sqlalchemy.sql.expression.null")
 SQL 结构分配属性：
 
-    from sqlalchemy import nullplain
+    from sqlalchemy import nullplainplain
 
     obj = MyObject(id=1, data=null())
     session.add(obj)
@@ -168,7 +168,7 @@ through, rather than omitting it as a “missing” value:
 
 垂直分区在多个数据库中放置不同种类的对象或不同的表格：
 
-    engine1 = create_engine('postgresql://db1')plain
+    engine1 = create_engine('postgresql://db1')plainplain
     engine2 = create_engine('postgresql://db2')
 
     Session = sessionmaker(twophase=True)
@@ -195,7 +195,7 @@ Two-Phase Commit](session_transaction.html#session-twophase)。
 
 <!-- -->
 
-    engines = {plain
+    engines = {plainplainplain
         'master':create_engine("sqlite:///master.db"),
         'other':create_engine("sqlite:///other.db"),
         'slave1':create_engine("sqlite:///slave1.db"),
@@ -218,7 +218,7 @@ Two-Phase Commit](session_transaction.html#session-twophase)。
 
 上面的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")类使用`class_`参数插入到[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")中：
 
-    Session = sessionmaker(class_=RoutingSession)
+    Session = sessionmaker(class_=RoutingSession)plain
 
 这种方法可以与多个[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象结合使用，例如使用[\_\_abstract\_\_](extensions_declarative_api.html#declarative-abstract)中描述的声明性`__abstract__`关键字的方法。
 
@@ -259,7 +259,7 @@ methods, including performance metrics.
 
 每个方法都在[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")对象事务的上下文中工作，就像任何其他方法一样：
 
-    s = Session()plain
+    s = Session()plainplainplainplain
     objects = [
         User(name="u1"),
         User(name="u2"),
@@ -269,7 +269,7 @@ methods, including performance metrics.
 
 对于[`Session.bulk_insert_mappings()`](session_api.html#sqlalchemy.orm.session.Session.bulk_insert_mappings "sqlalchemy.orm.session.Session.bulk_insert_mappings")和[`Session.bulk_update_mappings()`](session_api.html#sqlalchemy.orm.session.Session.bulk_update_mappings "sqlalchemy.orm.session.Session.bulk_update_mappings")，传递字典：
 
-    s.bulk_insert_mappings(User,
+    s.bulk_insert_mappings(User,plainplain
       [dict(name="u1"), dict(name="u2"), dict(name="u3")]
     )
 

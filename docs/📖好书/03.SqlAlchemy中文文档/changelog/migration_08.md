@@ -56,7 +56,7 @@ SQLAlchemy 最终也会减少 2.5 的支持 -
     against a class that has multiple foreign key paths to the target.
     只需要`foreign_keys`参数来指定应包含的列：
 
-        class Parent(Base):plain
+        class Parent(Base):plainplain
             __tablename__ = 'parent'
             id = Column(Integer, primary_key=True)
             child_id_one = Column(Integer, ForeignKey('child.id'))
@@ -130,7 +130,7 @@ SQLAlchemy 最终也会减少 2.5 的支持 -
 
     新的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")机制利用了被称为[annotations](glossary.html#term-annotations)的 SQLAlchemy 概念。这些注释也可以通过[`foreign()`](orm_relationship_api.html#sqlalchemy.orm.foreign "sqlalchemy.orm.foreign")和[`remote()`](orm_relationship_api.html#sqlalchemy.orm.remote "sqlalchemy.orm.remote")函数显式地提供给应用程序代码，作为提高高级配置可读性或直接注入精确度配置，绕过通常的加入检查试探法：
 
-        from sqlalchemy.orm import foreign, remote
+        from sqlalchemy.orm import foreign, remoteplain
 
         class HostEntry(Base):
             __tablename__ = 'host_entry'
@@ -286,7 +286,7 @@ method allows the user to specify which tables should be present when
 querying against a joined-table entity.
 不幸的是，这个方法很笨拙，只适用于列表中的第一个实体，否则在内部使用和内部使用都会有尴尬的行为。已添加名为[`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")的对[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")结构的新增强，允许将任何实体“别名”为其自身的“多态”版本，可自由使用任何地方：
 
-    from sqlalchemy.orm import with_polymorphicplain
+    from sqlalchemy.orm import with_polymorphicplainplain
     palias = with_polymorphic(Person, [Engineer, Manager])
     session.query(Company).\
                 join(palias, Company.employees).\
@@ -310,7 +310,7 @@ target. This method can now be used to target *any number* of target
 subtypes, by combining it with the new [`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")
 function:
 
-    # use eager loading in conjunction with with_polymorphic targets
+    # use eager loading in conjunction with with_polymorphic targetsplain
     Job_P = with_polymorphic(Job, [SubJob, ExtraJob], aliased=True)
     q = s.query(DataContainer).\
                 join(DataContainer.jobs.of_type(Job_P)).\
@@ -378,7 +378,7 @@ Mapper 和实例事件现在可以与一个未映射的超类相关联，其中�
 
 Declarative 的一个关键特性是能够使用其字符串名称引用其他映射类。类名注册表现在对给定类的拥有模块和包是敏感的。类可以通过表达式中的虚线名称引用：
 
-    class Snack(Base):plain
+    class Snack(Base):plainplain
         # ...
 
         peanuts = relationship("nuts.Peanut",
@@ -392,7 +392,7 @@ Declarative 的一个关键特性是能够使用其字符串名称引用其他�
 
 “延迟反射”示例已移至声明中的支持功能。这个特性允许只用占位符`Table`元数据构造声明式映射类，直到`prepare()`步骤被调用，给定一个`Engine`充分反映所有表格并建立实际映射。系统支持重写列，单个和联合继承，以及不同的每个引擎基数。现在可以根据在引擎创建时在一个步骤中汇编的现有表创建完整的声明性配置：
 
-    class ReflectedOne(DeferredReflection, Base):
+    class ReflectedOne(DeferredReflection, Base):plain
         __abstract__ = True
 
     class ReflectedTwo(DeferredReflection, Base):
@@ -453,7 +453,7 @@ or [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.
 
 会产生：
 
-    UPDATE engineer SET engineer_data='java' FROM person
+    UPDATE engineer SET engineer_data='java' FROM personplain
     WHERE person.id=engineer.id AND person.name='dilbert'
 
 [＃2365 T0\>](http://www.sqlalchemy.org/trac/ticket/2365)
@@ -472,7 +472,7 @@ or [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.
 请注意，Dogpile 示例以及之前的 Beaker 示例所使用的 SQLAlchemy
 API 已稍有变化，特别是如 Beaker 示例所示，需要进行此更改：
 
-    --- examples/beaker_caching/caching_query.pyplain
+    --- examples/beaker_caching/caching_query.pyplainplain
     +++ examples/beaker_caching/caching_query.py
     @@ -222,7 +222,8 @@
 
@@ -580,7 +580,7 @@ side conversion function on the way to/back from the database.
 
 上面，`LowerString`类型定义了一个 SQL 表达式，只要在 SELECT 语句的 columns 子句中呈现`test_table.c.data`列时就会发出该表达式：
 
-    >>> print(select([test_table]).where(test_table.c.data == 'HI'))plain
+    >>> print(select([test_table]).where(test_table.c.data == 'HI'))plainplain
     SELECT lower(test_table.data) AS data
     FROM test_table
     WHERE test_table.data = lower(:data_1)
@@ -699,13 +699,13 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 在更新中切片更新：
 
-    conn.execute(
+    conn.execute(plainplain
         mytable.update().values({mytable.c.arraycol[2:3]: [7, 8]})
     )
 
 独立阵列文字：
 
-    >>> from sqlalchemy.dialects import postgresql
+    >>> from sqlalchemy.dialects import postgresqlplain
     >>> conn.scalar(
     ...    select([
     ...        postgresql.array([1, 2]) + postgresql.array([3, 4, 5])
@@ -914,7 +914,7 @@ NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基
 
 以前有必要调用[`Query.correlate()`](orm_query.html#sqlalchemy.orm.query.Query.correlate "sqlalchemy.orm.query.Query.correlate")以使列或 WHERE 子查询与父项相关联：
 
-    subq = session.query(Entity.value).\plain
+    subq = session.query(Entity.value).\plainplain
                     filter(Entity.id==Parent.entity_id).\
                     correlate(Parent).\
                     as_scalar()
@@ -943,7 +943,7 @@ actually used in that context.
 
 这种改变只会使渲染 SQL 变得更好，因为在相对于所选内容的 FROM 对象不足的情况下，不再可能渲染非法 SQL：
 
-    from sqlalchemy.sql import table, column, select
+    from sqlalchemy.sql import table, column, selectplain
 
     t1 = table('t1', column('x'))
     t2 = table('t2', column('y'))
@@ -963,7 +963,7 @@ actually used in that context.
 
 在 SELECT 中，相关按预期生效：
 
-    s2 = select([t1, t2]).where(t1.c.x == t2.c.y).where(t1.c.x == s)plain
+    s2 = select([t1, t2]).where(t1.c.x == t2.c.y).where(t1.c.x == s)plainplain
 
     print(s2)
 
@@ -996,7 +996,7 @@ fired off according to the actual class passed as a target.
 
 我们在 MSSQL 方言中发现了一个非常古老的行为，它会在尝试像这样做时尝试从用户身上抢救用户：
 
-    scalar_subq = select([someothertable.c.id]).where(someothertable.c.data=='foo')plain
+    scalar_subq = select([someothertable.c.id]).where(someothertable.c.data=='foo')plainplain
     select([sometable]).where(sometable.c.id==scalar_subq)
 
 SQL Server 不允许与标量 SELECT 进行等同比较，即“x =（SELECT
@@ -1025,7 +1025,7 @@ x”这样的比较会发生同样的事情，总的来说，这种猜测级别�
 
 在 0.8 之前，如果[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")具有不同的`Column.key`，则此键将被忽略，与[`Select.apply_labels()`](core_selectable.html#sqlalchemy.sql.expression.Select.apply_labels "sqlalchemy.sql.expression.Select.apply_labels")不一致用过的：
 
-    # before 0.8
+    # before 0.8plain
     table1 = Table('t1', metadata,
         Column('col1', Integer, key='column_one')
     )
@@ -1067,7 +1067,7 @@ in both cases:
 
 0.7 添加了一个名为`column_reflect`的新事件，这样可以反映出列的反射，因为每个列都反映出来。我们得到这个事件有点不对，因为事件没有办法获取用于反射的当前`Inspector`和`Connection`，在来自数据库的附加信息的情况下是必要的。由于这是一个尚未广泛使用的新事件，因此我们将直接向其中添加`inspector`参数：
 
-    @event.listens_for(Table, "column_reflect")plain
+    @event.listens_for(Table, "column_reflect")plainplain
     def listen_for_col(inspector, table, column_info):
         # ...
 
@@ -1083,7 +1083,7 @@ MySQL 方言执行两个调用，一个是非常昂贵的，用于从数据库�
 
 引用`insert()`或`update()`构造中不存在的列会引发错误而不是警告：
 
-    t1 = table('t1', column('x'))plain
+    t1 = table('t1', column('x'))plainplain
     t1.insert().values(x=5, z=5) # raises "Unconsumed column names: z"
 
 [＃2415 T0\>](http://www.sqlalchemy.org/trac/ticket/2415)
@@ -1092,7 +1092,7 @@ MySQL 方言执行两个调用，一个是非常昂贵的，用于从数据库�
 
 `Inspector`上的这两个方法是多余的，其中`get_primary_keys()`将返回与`get_pk_constraint()`相同的信息减去约束的名称：
 
-    >>> insp.get_primary_keys()
+    >>> insp.get_primary_keys()plain
     ["a", "b"]
 
     >>> insp.get_pk_constraint()

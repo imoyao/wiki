@@ -24,7 +24,7 @@ tags:
 criterion may be applied as well as limits and offsets, either
 explicitly or via array slices:
 
-    class User(Base):
+    class User(Base):plainplain
         __tablename__ = 'user'
 
         posts = relationship(Post, lazy="dynamic")
@@ -48,7 +48,7 @@ explicitly or via array slices:
 
 要在后端参考上放置一个动态关系，请将[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")函数与`lazy='dynamic'`结合使用：
 
-    class Post(Base):
+    class Post(Base):plainplain
         __table__ = posts_table
 
         user = relationship(User,
@@ -149,7 +149,7 @@ deleted by the database.
 
 集合不限于列表。通过在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中指定[`collection_class`](relationship_api.html#sqlalchemy.orm.relationship.params.collection_class "sqlalchemy.orm.relationship")选项，可以使用集合，可变序列和几乎任何其他可充当容器的 Python 对象来代替默认列表：
 
-    class Parent(Base):plain
+    class Parent(Base):plainplain
         __tablename__ = 'parent'
         parent_id = Column(Integer, primary_key=True)
 
@@ -167,7 +167,7 @@ deleted by the database.
 we map an `Item` class containing a dictionary of
 `Note` items keyed to the `Note.keyword` attribute:
 
-    from sqlalchemy import Column, Integer, String, ForeignKeyplain
+    from sqlalchemy import Column, Integer, String, ForeignKeyplainplain
     from sqlalchemy.orm import relationship
     from sqlalchemy.orm.collections import attribute_mapped_collection
     from sqlalchemy.ext.declarative import declarative_base
@@ -194,7 +194,7 @@ we map an `Item` class containing a dictionary of
 
 `Item.notes` is then a dictionary:
 
-    >>> item = Item()
+    >>> item = Item()plain
     >>> item.notes['a'] = Note('a', 'atext')
     >>> item.notes.items()
     {'a': <__main__.Note object at 0x2eaaf0>}
@@ -333,9 +333,9 @@ SQLAlchemy中的集合是透明的*检测*。仪表意味着对集合上的正�
 
 `append`，`remove`和`extend`是已知的类列表方法，并将自动进行检测。`__iter__`不是一个增变器方法，不会被检测，而且`foo`也不会。
 
-当然，鸭子输入（即猜测）并不稳定，所以你可以通过提供一个`__emulates__` class属性来明确你正在实现的接口：
+当然，鸭子输入（即猜测）并不稳定，所以你可以通过提供一个`__emulates__` class 属性来明确你正在实现的接口：
 
-    class SetLike(object):
+    class SetLike(object):plainplain
         __emulates__ = set
 
         def __init__(self):
@@ -565,7 +565,7 @@ user-defined versions of `__setitem__()` or
 -
 在一个已经检测到的调用中调用它们可能会导致重复触发事件或不恰当地触发事件，从而在极少数情况下导致内部状态损坏：
 
-    from sqlalchemy.orm.collections import MappedCollection,\
+    from sqlalchemy.orm.collections import MappedCollection,\plain
                                         collection
 
     class MyMappedCollection(MappedCollection):
@@ -592,7 +592,7 @@ ORM 理解`dict`接口就像列表和集合一样，如果您选择继承`dict`�
 
 由于版本 0.7.6 之前的 MappedCollection 中存在一个错误，通常需要在使用[`collection.internally_instrumented()`](#sqlalchemy.orm.collections.collection.internally_instrumented "sqlalchemy.orm.collections.collection.internally_instrumented")的自定义[`MappedCollection`](#sqlalchemy.orm.collections.MappedCollection "sqlalchemy.orm.collections.MappedCollection")子类之前调用​​此解决方法：
 
-    from sqlalchemy.orm.collections import _instrument_class, MappedCollection
+    from sqlalchemy.orm.collections import _instrument_class, MappedCollectionplain
     _instrument_class(MappedCollection)
 
 这将确保[`MappedCollection`](#sqlalchemy.orm.collections.MappedCollection "sqlalchemy.orm.collections.MappedCollection")在自定义子类中使用之前，已使用自定义`__setitem__()`和`__delitem__()`方法正确初始化。
@@ -600,7 +600,7 @@ ORM 理解`dict`接口就像列表和集合一样，如果您选择继承`dict`�
 *class* `sqlalchemy.orm.collections。`{.descclassname} `MappedCollection`{.descname} （ *keyfunc* ）\< / T5\> [¶ T6\>](#sqlalchemy.orm.collections.MappedCollection "Permalink to this definition")
 :   基础：`__builtin__.dict`
 
-    基本的基于字典的集合类。plain
+    基本的基于字典的集合类。plainplainplain
 
     使用集合类需要的最小包语义扩展字典。`set`和`remove`是通过键控函数实现的：任何可调用的方法都需要一个对象并返回一个用作字典键的对象。
 
@@ -641,7 +641,7 @@ ORM 理解`dict`接口就像列表和集合一样，如果您选择继承`dict`�
 
 这些装饰在关系之外是轻量级且无操作的，但是在其他地方触发时它们确实增加了不必要的开销。当使用库类作为集合时，最好使用“平凡的子类”技巧来限制装饰，使其仅用于关系中的使用。例如：
 
-    class MyAwesomeList(some.great.library.AwesomeList):
+    class MyAwesomeList(some.great.library.AwesomeList):plainplain
         pass
 
     # ... relationship(..., collection_class=MyAwesomeList)
@@ -656,7 +656,7 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
  `sqlalchemy.orm.collections.`{.descclassname}`bulk_replace`{.descname}(*values*, *existing\_adapter*, *new\_adapter*)[¶](#sqlalchemy.orm.collections.bulk_replace "Permalink to this definition")
 :   加载一个新的集合，根据之前的类似成员资格触发事件。
 
-    将`values`中的实例附加到`new_adapter`上。对于`existing_adapter`中不存在的任何实例，都会触发事件。`values`中不存在的`existing_adapter`中的任何实例都将移除在它们上面触发的事件。plain
+    将`values`中的实例附加到`new_adapter`上。对于`existing_adapter`中不存在的任何实例，都会触发事件。`values`中不存在的`existing_adapter`中的任何实例都将移除在它们上面触发的事件。plainplain
 
     参数：
 
@@ -693,7 +693,7 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
  *class*`sqlalchemy.orm.collections.`{.descclassname}`CollectionAdapter`{.descname}(*attr*, *owner\_state*, *data*)[¶](#sqlalchemy.orm.collections.CollectionAdapter "Permalink to this definition")
 :   ORM 和任意 Python 集合之间的桥梁。
 
-    代理基本级集合操作（​​追加，删除，迭代）到基础Python集合，并为进入或离开集合的实体发出添加/删除事件。
+    代理基本级集合操作（​​追加，删除，迭代）到基础Python集合，并为进入或离开集合的实体发出添加/删除事件。plainplain
 
     ORM仅使用[`CollectionAdapter`](#sqlalchemy.orm.collections.CollectionAdapter "sqlalchemy.orm.collections.CollectionAdapter")来与实体集合进行交互。
 
@@ -705,7 +705,7 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
 *class* `sqlalchemy.orm.collections。`{.descclassname} `InstrumentedList`{.descname} [¶](#sqlalchemy.orm.collections.InstrumentedList "Permalink to this definition")
 :   基础：`__builtin__.list`
 
-    内置列表的检测版本。plain
+    内置列表的检测版本。plainplain
 
 *class* `sqlalchemy.orm.collections。`{.descclassname} `InstrumentedSet`{.descname} [¶](#sqlalchemy.orm.collections.InstrumentedSet "Permalink to this definition")
 :   基础：`__builtin__.set`
@@ -715,7 +715,7 @@ ORM 将这种方法用于内置插件，当`list`，`set`或`dict`被直接使�
 `sqlalchemy.orm.collections。 T0>  prepare_instrumentation  T1> （ T2> 工厂 T3> ） T4> ¶< / T5>`{.descclassname}
 :   为将来使用作为集合类工厂准备一个可调用的函数。
 
-    给定一个集合类工厂（无论类型还是无参数），返回另一个工厂，在调用时将生成兼容的实例。
+    给定一个集合类工厂（无论类型还是无参数），返回另一个工厂，在调用时将生成兼容的实例。plain
 
     该函数负责将collection\_class = list转换为collection\_class =
     InstrumentedList的运行时行为。

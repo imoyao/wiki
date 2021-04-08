@@ -43,4 +43,4 @@ normal 和`data`参数是必需的。当像`query(MyMappedClass).one()`那样在
 Designates a method as the “reconstructor”, an `__init__`-like method that will be called by the ORM after the
 instance has been loaded from the database or otherwise
 
-重构器将被调用，不带任何参数。该实例的标量（非集合）数据库映射属性将可用于该函数中。急切加载的集合通常还不可用，通常只包含第一个元素。在此阶段对对象所做的ORM状态更改将不会记录下一次flush()操作，因此重构器中的活动应保守。
+重构器将被调用，不带任何参数。该实例的标量（非集合）数据库映射属性将可用于该函数中。急切加载的集合通常还不可用，通常只包含第一个元素。在此阶段对对象所做的 ORM 状态更改将不会记录下一次 flush()操作，因此重构器中的活动应保守。

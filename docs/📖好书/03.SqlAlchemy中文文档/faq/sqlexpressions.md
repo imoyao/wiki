@@ -24,23 +24,23 @@ SQL 表达式[¶](#sql-expressions "Permalink to this headline")
 
 这适用于 ORM [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")以及任何[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")或其他语句。此外，要将语句编译为特定的方言或引擎，如果语句本身尚未绑定到某个语句，您可以将它传递给[`ClauseElement.compile()`](core_sqlelement.html#sqlalchemy.sql.expression.ClauseElement.compile "sqlalchemy.sql.expression.ClauseElement.compile")：
 
-    print(statement.compile(someengine))
+    print(statement.compile(someengine))plainplainplain
 
 或者没有[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")：
 
-    from sqlalchemy.dialects import postgresqlplain
+    from sqlalchemy.dialects import postgresqlplainplainplainplainplainplain
     print(statement.compile(dialect=postgresql.dialect()))
 
 当给定 ORM [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象时，为了获得[`ClauseElement.compile()`](core_sqlelement.html#sqlalchemy.sql.expression.ClauseElement.compile "sqlalchemy.sql.expression.ClauseElement.compile")方法，我们只需要首先访问[`statement`](orm_query.html#sqlalchemy.orm.query.Query.statement "sqlalchemy.orm.query.Query.statement")访问器：
 
-    statement = query.statementplain
+    statement = query.statementplainplain
     print(statement.compile(someengine))
 
 上述表单将在传递给 Python
 [DBAPI](glossary.html#term-dbapi)时呈现 SQL 语句，其中包括绑定参数不以内联方式呈现。SQLAlchemy 通常不绑定绑定参数，因为这是由 Python
 DBAPI 适当地处理的，更不用说绕过绑定参数可能是现代 Web 应用程序中使用最广泛的安全漏洞。SQLAlchemy 在某些情况下（例如发出 DDL）的能力有限。为了访问这个功能，可以使用传递给`compile_kwargs`的`literal_binds`标志：
 
-    from sqlalchemy.sql import table, column, selectplain
+    from sqlalchemy.sql import table, column, selectplainplain
 
     t = table('t', column('x'))
 
@@ -52,7 +52,7 @@ DBAPI 适当地处理的，更不用说绕过绑定参数可能是现代 Web 应
 
 要支持对不支持类型的内联文字渲染，请为包含[`TypeDecorator.process_literal_param()`](core_custom_types.html#sqlalchemy.types.TypeDecorator.process_literal_param "sqlalchemy.types.TypeDecorator.process_literal_param")方法的目标类型实现一个[`TypeDecorator`](core_custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")：
 
-    from sqlalchemy import TypeDecorator, Integer
+    from sqlalchemy import TypeDecorator, Integerplainplain
 
 
     class MyFancyType(TypeDecorator):
@@ -72,7 +72,7 @@ DBAPI 适当地处理的，更不用说绕过绑定参数可能是现代 Web 应
 
 产出如下产出：
 
-    SELECT mytable.xplain
+    SELECT mytable.xplainplainplain
     FROM mytable
     WHERE mytable.x > my_fancy_formatting(5)
 
@@ -81,7 +81,7 @@ DBAPI 适当地处理的，更不用说绕过绑定参数可能是现代 Web 应
 
 关于这个问题的一点介绍。SQL 中的 IN 运算符给出了要与列进行比较的元素列表，但通常不会接受空列表，即可以这样说：
 
-    column IN (1, 2, 3)plain
+    column IN (1, 2, 3)plainplainplainplain
 
 这是无效的说：
 
@@ -89,18 +89,18 @@ DBAPI 适当地处理的，更不用说绕过绑定参数可能是现代 Web 应
 
 SQLAlchemy 的`Operators.in_()`运算符在给出一个空列表时产生这个表达式：
 
-    column != columnplain
+    column != columnplainplain
 
 从版本 0.6 开始，它也会产生一个警告，指出将会呈现效率较低的比较操作。这个表达式是唯一一个既是数据库不可知的，又能产生正确结果的表达式。
 
 例如，“通过比较 1 = 0 或 1！=
 1 来评估为假”的幼稚方法不能正确处理空值。表达式如下：
 
-    NOT column != columnplain
+    NOT column != columnplainplain
 
 当“列”为空时不会返回一行，但是不考虑列的表达式：
 
-    NOT 1=0plain
+    NOT 1=0plainplain
 
 将。
 

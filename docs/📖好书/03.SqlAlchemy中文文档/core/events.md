@@ -1,18 +1,17 @@
 ---
-title: ORM事件
+title: ORM 事件
 date: 2021-02-20 22:41:34
 permalink: /sqlalchemy/core/events/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - core
 tags:
-  - 
 ---
 ORM 事件[¶](#orm-events "Permalink to this headline")
 ====================================================
 
-ORM包含各种可用于订阅的挂钩。
+ORM 包含各种可用于订阅的挂钩。
 
 有关最常用的 ORM 事件的介绍，请参见[Tracking Object and Session Changes
 with
@@ -25,7 +24,7 @@ Events](core_events.html)中描述。
 *class* `sqlalchemy.orm.events。`{.descclassname} `AttributeEvents`{.descname} [¶](#sqlalchemy.orm.events.AttributeEvents "Permalink to this definition")
 :   基础：[`sqlalchemy.event.base.Events`](core_events.html#sqlalchemy.event.base.Events "sqlalchemy.event.base.Events")
 
-    定义对象属性的事件。
+    定义对象属性的事件。plainplain
 
     这些通常在目标类的类绑定描述符上定义。
 
@@ -333,7 +332,7 @@ Mapper 事件[¶](#mapper-events "Permalink to this headline")
 *class* `sqlalchemy.orm.events。`{.descclassname} `MapperEvents`{.descname} [¶](#sqlalchemy.orm.events.MapperEvents "Permalink to this definition")
 :   基础：[`sqlalchemy.event.base.Events`](core_events.html#sqlalchemy.event.base.Events "sqlalchemy.event.base.Events")
 
-    定义特定于映射的事件。
+    定义特定于映射的事件。plainplainplainplainplainplain
 
     例如。：
 
@@ -865,7 +864,7 @@ Mapper 事件[¶](#mapper-events "Permalink to this headline")
 *class* `sqlalchemy.orm.events。`{.descclassname} `InstanceEvents`{.descname} [¶](#sqlalchemy.orm.events.InstanceEvents "Permalink to this definition")
 :   基础：[`sqlalchemy.event.base.Events`](core_events.html#sqlalchemy.event.base.Events "sqlalchemy.event.base.Events")
 
-    定义特定于对象生命周期的事件。
+    定义特定于对象生命周期的事件。plainplainplain
 
     例如。：
 
@@ -1162,7 +1161,7 @@ Mapper 事件[¶](#mapper-events "Permalink to this headline")
 *class* `sqlalchemy.orm.events。`{.descclassname} `SessionEvents`{.descname} [¶](#sqlalchemy.orm.events.SessionEvents "Permalink to this definition")
 :   基础：[`sqlalchemy.event.base.Events`](core_events.html#sqlalchemy.event.base.Events "sqlalchemy.event.base.Events")
 
-    定义特定于[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")生命周期的事件。
+    定义特定于[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")生命周期的事件。plainplainplain
 
     例如。：
 
@@ -1959,7 +1958,7 @@ Mapper 事件[¶](#mapper-events "Permalink to this headline")
 *class* `sqlalchemy.orm.events。`{.descclassname} `QueryEvents`{.descname} [¶](#sqlalchemy.orm.events.QueryEvents "Permalink to this definition")
 :   基础：[`sqlalchemy.event.base.Events`](core_events.html#sqlalchemy.event.base.Events "sqlalchemy.event.base.Events")
 
-    表示构建[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象内的事件。
+    表示构建[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象内的事件。plainplainplainplainplain
 
     此处的事件旨在用于[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")的尚未发布的检查系统。现在可以进行一些非常基本的操作，但检查系统旨在使复杂的查询操作自动化。
 
@@ -1994,9 +1993,9 @@ Mapper 事件[¶](#mapper-events "Permalink to this headline")
 仪器事件[¶](#module-sqlalchemy.orm.instrumentation "Permalink to this headline")
 --------------------------------------------------------------------------------
 
-定义SQLAlchemy的类检测系统。
+定义 SQLAlchemy 的类检测系统。
 
-该模块通常对用户应用程序不直接可见，但定义了ORM交互性的很大一部分。
+该模块通常对用户应用程序不直接可见，但定义了 ORM 交互性的很大一部分。
 
 instrumentation.py 处理最终用户类的状态跟踪注册。它与分别建立 per-instance 和 per-class-attribute 工具的 state.py 和 attributes.py 紧密交互。
 
@@ -2005,7 +2004,7 @@ instrumentation.py 处理最终用户类的状态跟踪注册。它与分别建�
 *class* `sqlalchemy.orm.events。`{.descclassname} `InstrumentationEvents`{.descname} [¶](#sqlalchemy.orm.events.InstrumentationEvents "Permalink to this definition")
 :   基础：[`sqlalchemy.event.base.Events`](core_events.html#sqlalchemy.event.base.Events "sqlalchemy.event.base.Events")
 
-    与类仪器事件相关的事件。
+    与类仪器事件相关的事件。plain
 
     这里的监听器支持针对任何新的样式类建立对象，即任何属于“类型”的子类的对象。然后，事件将被针对该类别的事件解雇。如果“propagate
     = True”标志被传递给event.listen()，那么该事件也将触发该类的子类。

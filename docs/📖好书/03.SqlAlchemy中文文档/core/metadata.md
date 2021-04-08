@@ -1,14 +1,14 @@
 ---
-title: 用MetaData描述数据库
+title: 用 MetaData 描述数据库
 date: 2021-02-20 22:41:35
 permalink: /sqlalchemy/core/metadata/
 categories:
   - 📖好书
-  - SqlAlchemy中文文档
+  - SqlAlchemy 中文文档
   - core
 tags:
 ---
-用MetaData描述数据库[¶](#module-sqlalchemy.schema "Permalink to this headline")
+用 MetaData 描述数据库[¶](#module-sqlalchemy.schema "Permalink to this headline")
 ===============================================================================
 
 本节讨论基本的[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")和[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象。
@@ -25,7 +25,7 @@ database (or multiple databases) being described.
 
 要表示表，请使用[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")类。它的两个主要参数是表名，然后是它将与之关联的[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象。其余的位置参数大多是描述每列的[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象：
 
-    user = Table('user', metadata,
+    user = Table('user', metadata,plainplain
         Column('user_id', Integer, primary_key=True),
         Column('user_name', String(16), nullable=False),
         Column('email_address', String(60)),
@@ -34,7 +34,7 @@ database (or multiple databases) being described.
 
 以上描述了一个名为`user`的表格，其中包含四列。该表的主键由`user_id`列组成。多列可以分配`primary_key=True`标志，表示多列主键，称为*复合*主键。
 
-还要注意，每列使用对应于泛型类型的对象来描述它的数据类型，比如[`Integer`](type_basics.html#sqlalchemy.types.Integer "sqlalchemy.types.Integer")和[`String`](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")。SQLAlchemy具有数十种不同级别的特异性以及创建自定义类型的能力。关于类型系统的文档可以在[Column
+还要注意，每列使用对应于泛型类型的对象来描述它的数据类型，比如[`Integer`](type_basics.html#sqlalchemy.types.Integer "sqlalchemy.types.Integer")和[`String`](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")。SQLAlchemy 具有数十种不同级别的特异性以及创建自定义类型的能力。关于类型系统的文档可以在[Column
 and Data Types](types.html)中找到。
 
 访问表和列[¶](#accessing-tables-and-columns "Permalink to this headline")
@@ -44,7 +44,7 @@ The [`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
 object contains all of the schema constructs we’ve associated with it.
 它支持访问这些表对象的几种方法，例如按照外键依赖的顺序返回每个[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象列表的`sorted_tables`访问器（也就是说，每个表在它引用的所有表之前）：
 
-    >>> for t in metadata.sorted_tables:
+    >>> for t in metadata.sorted_tables:plainplain
     ...    print(t.name)
     user
     user_preference
@@ -53,7 +53,7 @@ object contains all of the schema constructs we’ve associated with it.
 
 在大多数情况下，单个[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象已被显式声明，并且这些对象通常作为应用程序中的模块级变量直接访问。一旦定义了[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，它就有一整套访问器，允许检查其属性。给定以下[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")定义：
 
-    employees = Table('employees', metadata,
+    employees = Table('employees', metadata,plainplain
         Column('employee_id', Integer, primary_key=True),
         Column('employee_name', String(60), nullable=False),
         Column('employee_dept', Integer, ForeignKey("departments.department_id"))
@@ -63,7 +63,7 @@ object contains all of the schema constructs we’ve associated with it.
 - 此构造定义了对远程表的引用，并在[Defining Foreign
 Keys](constraints.html#metadata-foreignkeys)中进行了完整描述。访问关于此表的信息的方法包括：
 
-    # access the column "EMPLOYEE_ID":plain
+    # access the column "EMPLOYEE_ID":plainplainplainplain
     employees.columns.employee_id
 
     # or just
@@ -119,9 +119,9 @@ included with your database or an existing scripting system - if that’s
 the case, feel free to skip this section - SQLAlchemy has no requirement
 that it be used to create your tables).
 
-发布CREATE的常用方法是在[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象上使用[`create_all()`](#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")。这种方法将发出查询，首先检查每个单独表的存在，如果未找到，将发出CREATE语句：
+发布 CREATE 的常用方法是在[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象上使用[`create_all()`](#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")。这种方法将发出查询，首先检查每个单独表的存在，如果未找到，将发出 CREATE 语句：
 
->     engine = create_engine('sqlite:///:memory:')
+>     engine = create_engine('sqlite:///:memory:')plainplain
 >
 >     metadata = MetaData()
 >
@@ -166,7 +166,7 @@ tables in order of their dependency.
 
 可以通过[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的`create()`和`drop()`方法创建和删除单个表。这些方法默认发出 CREATE 或 DROP，而不管表是否存在：
 
-    engine = create_engine('sqlite:///:memory:')plain
+    engine = create_engine('sqlite:///:memory:')plainplain
 
     meta = MetaData()
 
@@ -185,7 +185,7 @@ tables in order of their dependency.
 
 `drop()`方法：
 
-    sqlemployees.drop(engine)plain
+    sqlemployees.drop(engine)plainplain
     DROP TABLE employees
     {}
 
@@ -197,7 +197,7 @@ tables in order of their dependency.
 通过迁移改变模式[¶](#altering-schemas-through-migrations "Permalink to this headline")
 --------------------------------------------------------------------------------------
 
-尽管 SQLAlchemy 直接支持为模式构造发出 CREATE 和 DROP 语句，但通常通过 ALTER 语句以及其他特定于数据库的构造来更改这些构造的能力超出了 SQLAlchemy 本身的范围。虽然很容易通过传递字符串到[`Connection.execute()`](connections.html#sqlalchemy.engine.Connection.execute "sqlalchemy.engine.Connection.execute")或通过使用[`DDL`](ddl.html#sqlalchemy.schema.DDL "sqlalchemy.schema.DDL")构造来手动发出ALTER语句和类似事件，但这是常见的做法使用模式迁移工具自动维护与应用程序代码相关的数据库模式。
+尽管 SQLAlchemy 直接支持为模式构造发出 CREATE 和 DROP 语句，但通常通过 ALTER 语句以及其他特定于数据库的构造来更改这些构造的能力超出了 SQLAlchemy 本身的范围。虽然很容易通过传递字符串到[`Connection.execute()`](connections.html#sqlalchemy.engine.Connection.execute "sqlalchemy.engine.Connection.execute")或通过使用[`DDL`](ddl.html#sqlalchemy.schema.DDL "sqlalchemy.schema.DDL")构造来手动发出 ALTER 语句和类似事件，但这是常见的做法使用模式迁移工具自动维护与应用程序代码相关的数据库模式。
 
 有两种可用于 SQLAlchemy 的主要迁移工具：
 
@@ -227,16 +227,16 @@ tables in order of their dependency.
 objects can specify references to columns in this table using the form
 `remote_banks.financial_info.id`.
 
-`schema`参数应该用于任何所需的名称限定符，包括Oracle的“所有者”属性和类似名称。它也可以容纳更长方案的虚线名称：
+`schema`参数应该用于任何所需的名称限定符，包括 Oracle 的“所有者”属性和类似名称。它也可以容纳更长方案的虚线名称：
 
     schema="dbo.scott"
 
 后端特定选项[¶](#backend-specific-options "Permalink to this headline")
 -----------------------------------------------------------------------
 
-[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")支持特定于数据库的选项。例如，MySQL有不同的表后端类型，包括“MyISAM”和“InnoDB”。这可以用[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")用`mysql_engine`来表示：
+[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")支持特定于数据库的选项。例如，MySQL 有不同的表后端类型，包括“MyISAM”和“InnoDB”。这可以用[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")用`mysql_engine`来表示：
 
-    addresses = Table('engine_email_addresses', meta,
+    addresses = Table('engine_email_addresses', meta,plainplain
         Column('address_id', Integer, primary_key=True),
         Column('remote_user_id', Integer, ForeignKey(users.c.user_id)),
         Column('email_address', String(20)),
@@ -249,14 +249,14 @@ objects can specify references to columns in this table using the form
 Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this headline")
 ----------------------------------------------------------------------------------------
 
-` sqlalchemy.schema。 T0>  BLANK_SCHEMA  T1> ¶ T2>`{.descclassname}
+`sqlalchemy.schema。 T0>  BLANK_SCHEMA  T1> ¶ T2>`{.descclassname}
 :   Symbol indicating that a [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table") or
     [`Sequence`](defaults.html#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")
     should have ‘None’ for its schema, even if the parent
     [`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
     has specified a schema.
 
-    也可以看看
+    也可以看看plain
 
     [`MetaData.schema`](#sqlalchemy.schema.MetaData.params.schema "sqlalchemy.schema.MetaData")
 
@@ -1174,7 +1174,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 *class* `sqlalchemy.schema。`{.descclassname} `SchemaItem`{.descname} [¶](#sqlalchemy.schema.SchemaItem "Permalink to this definition")
 :   基础：`sqlalchemy.sql.expression.SchemaEventTarget`，`sqlalchemy.sql.visitors.Visitable`
 
-    定义数据库模式的项目的基类。
+    定义数据库模式的项目的基类。plainplain
 
     ` get_children  T0> （ T1>  ** kwargs  T2> ） T3> ¶ T4>`{.descname}
     :   用于允许SchemaVisitor访问
@@ -1192,7 +1192,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 *class* `sqlalchemy.schema。`{.descclassname} `表`{.descname} （ *\* args*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.schema.Table "Permalink to this definition")*
 :   基础：[`sqlalchemy.sql.base.DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")，[`sqlalchemy.schema.SchemaItem`](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")，[`sqlalchemy.sql.expression.TableClause`](selectable.html#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")
 
-    在数据库中表示一个表。
+    在数据库中表示一个表。plain
 
     例如。：
 
@@ -2004,7 +2004,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 *class* `sqlalchemy.schema。`{.descclassname} `ThreadLocalMetaData`{.descname} [¶](#sqlalchemy.schema.ThreadLocalMetaData "Permalink to this definition")
 :   基础：[`sqlalchemy.schema.MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
 
-    一个MetaData变体，它在每个线程中呈现不同的`bind`。
+    一个MetaData变体，它在每个线程中呈现不同的`bind`。plain
 
     使MetaData的`bind`属性成为线程本地值，允许将这些表集合绑定到每个线程中的不同`Engine`实现或连接。
 

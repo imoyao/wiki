@@ -51,7 +51,7 @@ SQLite 自动增量的背景是：[http://sqlite.org/autoinc.html](http://sqlite
 
 要在呈现 DDL 时在主键列上专门呈现 AUTOINCREMENT 关键字，请将以下标记`sqlite_autoincrement=True`添加到 Table 结构中：
 
-    Table('sometable', metadata,plain
+    Table('sometable', metadata,plainplain
             Column('id', Integer, primary_key=True),
             sqlite_autoincrement=True)
 
@@ -76,7 +76,7 @@ autoincrement behavior to be available.
 
 另一种方法是在针对 SQLite 编译时使用[`BigInteger`](core_type_basics.html#sqlalchemy.types.BigInteger "sqlalchemy.types.BigInteger")的子类来覆盖其 DDL 名称为`INTEGER`：
 
-    from sqlalchemy import BigInteger
+    from sqlalchemy import BigIntegerplainplain
     from sqlalchemy.ext.compiler import compiles
 
     class SLBigInteger(BigInteger):
@@ -185,7 +185,7 @@ SQLite 上的约束检查有三个先决条件：
 
 SQLAlchemy 允许通过使用事件自动为新连接发布`PRAGMA`语句：
 
-    from sqlalchemy.engine import Engine
+    from sqlalchemy.engine import Engineplain
     from sqlalchemy import event
 
     @event.listens_for(Engine, "connect")
@@ -265,7 +265,7 @@ reflecting columns.
 
 索引将在创建时呈现为：
 
-    CREATE INDEX test_idx1 ON testtbl (data)
+    CREATE INDEX test_idx1 ON testtbl (data)plainplain
     WHERE data > 5 AND data < 10
 
 版本 0.9.9 中的新功能
@@ -334,7 +334,7 @@ SQLAlchemy 依赖于列名与原始语句匹配的可预测性，因此 SQLAlche
 
 注意上面，即使 SQLAlchemy 过滤掉了这些点，*这两个名字仍然是可寻址的*：
 
-    >>> row = result.first()plain
+    >>> row = result.first()plainplain
     >>> row["a"]
     1
     >>> row["x.a"]
@@ -382,7 +382,7 @@ SQLite 数据类型[¶](#sqlite-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.sqlite.`{.descclassname}`DATETIME`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.dialects.sqlite.DATETIME "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.sqlite.base._DateTimeMixin`，[`sqlalchemy.types.DateTime`](core_type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")
 
-    使用字符串在SQLite中表示Python日期时间对象。
+    使用字符串在SQLite中表示Python日期时间对象。plain
 
     默认的字符串存储格式是：
 
@@ -416,7 +416,7 @@ SQLite 数据类型[¶](#sqlite-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.sqlite。`{.descclassname} `DATE`{.descname} （ *storage\_format =无*，*regexp = None*，*\*\* kw* ） [¶](#sqlalchemy.dialects.sqlite.DATE "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.sqlite.base._DateTimeMixin`，[`sqlalchemy.types.Date`](core_type_basics.html#sqlalchemy.types.Date "sqlalchemy.types.Date")
 
-    使用字符串在SQLite中表示Python日期对象。
+    使用字符串在SQLite中表示Python日期对象。plainplain
 
     默认的字符串存储格式是：
 
@@ -513,7 +513,7 @@ to control this explicitly:
 
 SQLite 数据库的文件规范被认为是 URL 的“数据库”部分。请注意，SQLAlchemy 网址的格式是：
 
-    driver://user:pass@host/databaseplain
+    driver://user:pass@host/databaseplainplainplainplain
 
 这意味着要使用的实际文件名以第三个斜杠的**右侧**中的字符开头。因此连接到相对的文件路径如下所示：
 
@@ -522,12 +522,12 @@ SQLite 数据库的文件规范被认为是 URL 的“数据库”部分。请�
 
 绝对路径，以斜杠开始，表示您需要**四个**斜线：
 
-    # absolute path
+    # absolute pathplain
     e = create_engine('sqlite:////path/to/database.db')
 
 要使用 Windows 路径，可以使用常规的驱动器规格和反斜杠。可能需要双反斜杠：
 
-    # absolute path on Windowsplain
+    # absolute path on Windowsplainplainplain
     e = create_engine('sqlite:///C:\\path\\to\\database.db')
 
 如果没有文件路径存在，sqlite `:memory:`标识符是默认值。指定`sqlite://`，而不是别的：
@@ -549,7 +549,7 @@ pysqlite 驱动程序包括 sqlite3.PARSE\_DECLTYPES 和 sqlite3.PARSE\_COLNAMES
         native_datetime=True
     )
 
-启用此标志时，DATE 和 TIMESTAMP 类型（但注意 -
+启用此标志时，DATE 和 TIMESTAMP 类型（但注意 -……
 …………
 不是 DATETIME 或 TIME 类型......困惑了吗？）将不执行任何绑定参数或结果处理。执行“func.current\_date()”将返回一个字符串。“func.current\_timestamp()”被注册为在 SQLAlchemy 中返回 DATETIME 类型，所以该函数仍然接收 SQLAlchemy 级别的结果处理。
 
@@ -585,7 +585,7 @@ SQLAlchemy 设置池以使用 Pysqlite 的默认行为：
 [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")时临时表表应该在[`Session.commit()`](orm_session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")或[`Session.rollback()`](orm_session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")之后继续保持，必须使用维护单个连接的池。如果仅在当前线程中需要作用域，则使用[`SingletonThreadPool`](core_pooling.html#sqlalchemy.pool.SingletonThreadPool "sqlalchemy.pool.SingletonThreadPool")，或者在这种情况下多个线程内需要[`StaticPool`](core_pooling.html#sqlalchemy.pool.StaticPool "sqlalchemy.pool.StaticPool")作用域：
 
     # maintain the same connection per threadplain
-    from sqlalchemy.pool import SingletonThreadPool
+    from sqlalchemy.pool import SingletonThreadPoolplain
     engine = create_engine('sqlite:///mydb.db',
                         poolclass=SingletonThreadPool)
 
@@ -617,11 +617,11 @@ SQLAlchemy 默认选择不改变这种行为，因为它是 pysqlite 驱动程�
 qlalchemy import create_engine, eventplain
 
     engine = create_engine("sqlite:///myfile.db")
-
+plain
     @event.listens_for(engine, "connect")
     def do_connect(dbapi_connection, connection_record):
         # disable pysqlite's emitting of the BEGIN statement entirely.
-        # also stops it from emitting COMMIT before any DDL.
+        # also stops it from emitting COMMIT before any DDL.plain
         dbapi_connection.isolation_level = None
 
     @event.listens_for(engine, "begin")
@@ -637,7 +637,7 @@ at which SQLAlchemy knows that transaction scope is to begin, we emit
 TRANSACTION](http://sqlite.org/lang_transaction.html)中引入的 SQLite 锁定模式，方法是将所需的锁定模式添加到我们的`"BEGIN"`
 
     @event.listens_for(egin")plain
-    def do_begin(conn):
+    def do_begin(conn):plain
         conn.execute("BEGIN EXCLUSIVE")
 
 也可以看看

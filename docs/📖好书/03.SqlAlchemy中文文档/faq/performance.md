@@ -76,7 +76,7 @@ depth is added (i.e. `r + r*r2 + r*r2*r3` ...)
 
 为此，您需要使用[Python 分析模块](https://docs.python.org/2/library/profile.html)。下面是一个简单的配方，用于分析上下文管理器：
 
-    import cProfileplain
+    import cProfileplainplainplain
     import StringIO
     import pstats
     import contextlib
@@ -96,12 +96,12 @@ depth is added (i.e. `r + r*r2 + r*r2*r3` ...)
 
 要剖析一段代码：
 
-    with profiled():plain
+    with profiled():plainplainplain
         Session.query(FooClass).filter(FooClass.somevalue==8).all()
 
 分析的输出结果可用于了解花费时间的想法。剖析输出的一部分如下所示：
 
-    13726 function calls (13042 primitive calls) in 0.014 secondsplain
+    13726 function calls (13042 primitive calls) in 0.014 secondsplainplain
 
     Ordered by: cumulative time
 
@@ -128,7 +128,7 @@ SQLAlchemy 函数被调用了 222 次（递归的，从外部的 21 次），总
 
 这些电话的具体细节可以告诉我们时间花在哪里。例如，如果您看到时间在`cursor.execute()`之内，例如针对 DBAPI：
 
-    2    0.102    0.102    0.204    0.102 {method 'execute' of 'sqlite3.Cursor' objects}
+    2    0.102    0.102    0.204    0.102 {method 'execute' of 'sqlite3.Cursor' objects}plain
 
 这将表明数据库需要很长时间才能开始返回结果，这意味着您的查询应该进行优化，可以通过添加索引或重新构建查询和/或基础模式来实现。对于该任务，使用诸如 EXPLAIN，SHOW
 PLAN 等的系统来分析查询计划是有保证的。如由数据库后端提供的那样。
@@ -142,7 +142,7 @@ option is used).
 
 在 DBAPI 级别，通过对`fetchall()`进行非常缓慢的调用可以指示过多的行数：
 
-    2    0.300    0.600    0.300    0.600 {method 'fetchall' of 'sqlite3.Cursor' objects}plain
+    2    0.300    0.600    0.300    0.600 {method 'fetchall' of 'sqlite3.Cursor' objects}plainplain
 
 即使最终结果似乎没有多行，意外的大量行也可能是笛卡尔积的结果 -
 当多组行合并在一起而没有适当地将表连接在一起时。如果在复杂的查询中使用了错误的[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象，并引入其他意外的 FROM 子句，那么使用 SQLAlchemy
@@ -150,7 +150,7 @@ Core 或 ORM 查询生成此行为通常很容易。
 
 另一方面，在 DBAPI 级别对`fetchall()`执行快速调用，但是当 SQLAlchemy 的[`ResultProxy`](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")被要求执行`fetchall()`
 
-    # the DBAPI cursor is fast...
+    # the DBAPI cursor is fast...plainplain
     2    0.020    0.040    0.020    0.040 {method 'fetchall' of 'sqlite3.Cursor' objects}
 
     ...
@@ -167,7 +167,7 @@ Core 或 ORM 查询生成此行为通常很容易。
     class Foo(TypeDecorator):
         impl = String
 
-        def process_result_value(self, value, thing):
+        def process_result_value(self, value, thing):plain
             # intentionally add slowness for illustration purposes
             time.sleep(.001)
             return value
@@ -198,15 +198,15 @@ ORM 将行转换为 ORM 映射对象的速度慢是该操作复杂性与 cPython
 
 -   获取单个列而不是完整实体，即：
 
-        session.query(User.id, User.name)plain
+        session.query(User.id, User.name)plainplain
 
     代替：
 
-        session.query(User)plain
+        session.query(User)plainplain
 
 -   使用[`Bundle`](orm_query.html#sqlalchemy.orm.query.Bundle "sqlalchemy.orm.query.Bundle")对象来组织基于列的结果：
 
-        u_b = Bundle('user', User.id, User.name)
+        u_b = Bundle('user', User.id, User.name)plain
         a_b = Bundle('address', Address.id, Address.email)
 
         for user, address in session.query(u_b, a_b).join(User.addresses):
@@ -243,7 +243,7 @@ Operations](orm_persistence_techniques.html#bulk-operations)方法套件，这�
 下面的例子说明了插入行的几种不同方法的基于时间的测试，从最自动化到最小化。使用 cPython
 2.7，运行时观察到：
 
-    classics-MacBook-Pro:sqlalchemy classic$ python test.pyplain
+    classics-MacBook-Pro:sqlalchemy classic$ python test.pyplainplainplainplain
     SQLAlchemy ORM: Total time for 100000 records 12.0471920967 secs
     SQLAlchemy ORM pk given: Total time for 100000 records 7.06283402443 secs
     SQLAlchemy ORM bulk_save_objects(): Total time for 100000 records 0.856323003769 secs
@@ -252,7 +252,7 @@ Operations](orm_persistence_techniques.html#bulk-operations)方法套件，这�
 
 我们可以使用[Pypy](http://pypy.org/)的最新版本将时间缩短三分之一：
 
-    classics-MacBook-Pro:sqlalchemy classic$ /usr/local/src/pypy-2.1-beta2-osx64/bin/pypy test.py
+    classics-MacBook-Pro:sqlalchemy classic$ /usr/local/src/pypy-2.1-beta2-osx64/bin/pypy test.pyplain
     SQLAlchemy ORM: Total time for 100000 records 5.88369488716 secs
     SQLAlchemy ORM pk given: Total time for 100000 records 3.52294301987 secs
     SQLAlchemy Core: Total time for 100000 records 0.613556146622 secs
@@ -260,7 +260,7 @@ Operations](orm_persistence_techniques.html#bulk-operations)方法套件，这�
 
 脚本：
 
-    import timeplain
+    import timeplainplainplainplain
     import sqlite3
 
     from sqlalchemy.ext.declarative import declarative_base
