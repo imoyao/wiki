@@ -48,7 +48,7 @@ Types](core_types.html)中介绍的示例之后，我们从一个自定义类型
 当使用[`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")扩展名时，该值本身会跟踪引用它的所有父项。下面，我们演示一下[`MutableDict`](#sqlalchemy.ext.mutable.MutableDict "sqlalchemy.ext.mutable.MutableDict")字典对象的简单版本，它将[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")
 mixin 应用于普通的 Python 字典：
 
-    from sqlalchemy.ext.mutable import Mutableplain
+    from sqlalchemy.ext.mutable import Mutableplainplainplainplainplainplain
 
     class MutableDict(Mutable, dict):
         @classmethod
@@ -96,7 +96,7 @@ place.
 
 在上面，[`as_mutable()`](#sqlalchemy.ext.mutable.Mutable.as_mutable "sqlalchemy.ext.mutable.Mutable.as_mutable")返回`JSONEncodedDict`的实例（如果类型对象不是已经存在的实例），它将拦截所有映射此类型的属性。下面我们根据`my_data`表建立一个简单映射：
 
-    from sqlalchemy import mapper
+    from sqlalchemy import mapperplain
 
     class MyDataClass(object):
         pass
@@ -145,7 +145,7 @@ place.
 weakrefs and function callbacks.
 在我们的例子中，这是一件好事，因为如果这个字典是可挑选的，它可能会导致我们的值对象的 pickle 大小过大，而这些对象是在父级上下文之外自行挑选的。这里的开发人员责任只是提供一个从 pickle 流中排除[`_parents()`](#sqlalchemy.ext.mutable.MutableBase._parents "sqlalchemy.ext.mutable.MutableBase._parents")集合的`__getstate__`方法：
 
-    class MyMutableType(Mutable):
+    class MyMutableType(Mutable):plainplainplain
         def __getstate__(self):
             d = self.__dict__.copy()
             d.pop('_parents', None)
@@ -213,7 +213,7 @@ any usage of [`orm.composite()`](composites.html#sqlalchemy.orm.composite "sqlal
 that specifies our `Point` type.
 下面，当`Point`映​​射到`Vertex`类时，将建立侦听器，它将将`Point`对象的变化事件路由到`Vertex.start`和`Vertex.end`属性：
 
-    from sqlalchemy.orm import composite, mapperplain
+    from sqlalchemy.orm import composite, mapperplainplain
     from sqlalchemy import Table, Column
 
     vertices = Table('vertices', metadata,
@@ -253,7 +253,7 @@ method is essentially equivalent to using a [`validates()`](mapped_attributes.ht
 validation routine for all attributes which make use of the custom
 composite type:
 
-    class Point(MutableComposite):plain
+    class Point(MutableComposite):plainplainplain
         # other Point methods
         # ...
 
@@ -278,7 +278,7 @@ attribute which isn’t picklable. If we need to pickle instances of
 `Point` or its owning class `Vertex`, we at least need to define a `__getstate__` that doesn’t include the `_parents`
 dictionary. 下面我们定义一个`__getstate__`和一个`__setstate__`，它们包装了我们的`Point`类的最小形式：
 
-    class Point(MutableComposite):
+    class Point(MutableComposite):plain
         # ...
 
         def __getstate__(self):
@@ -295,7 +295,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableBase`{.descname} [¶](#sqlalchemy.ext.mutable.MutableBase "Permalink to this definition")
 :   通用基类为[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")和[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")。
 
-    ` _parents  T0> ¶ T1>`{.descname}plain
+    ` _parents  T0> ¶ T1>`{.descname}plainplainplain
     :   父对象上的字典 - \>属性名称。
 
         这个属性是一个所谓的“memoized”属性。它在第一次访问时使用新的`weakref.WeakKeyDictionary`进行初始化，并在后续访问时返回相同的对象。
@@ -325,7 +325,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `Mutable`{.descname} [¶](#sqlalchemy.ext.mutable.Mutable "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
-    Mixin定义变化事件向父对象的透明传播。plain
+    Mixin定义变化事件向父对象的透明传播。plainplain
 
     有关使用信息，请参阅[Establishing Mutability on Scalar Column
     Values](#mutable-scalars)中的示例。
@@ -423,7 +423,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableComposite`{.descname} [¶](#sqlalchemy.ext.mutable.MutableComposite "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
-    Mixin，定义SQLAlchemy“复合”对象上的变化事件的透明传播给其拥有的父对象或父对象。
+    Mixin，定义SQLAlchemy“复合”对象上的变化事件的透明传播给其拥有的父对象或父对象。plain
 
     有关使用信息，请参阅[Establishing Mutability on
     Composites](#mutable-composites)中的示例。
@@ -434,7 +434,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableDict`{.descname} [¶](#sqlalchemy.ext.mutable.MutableDict "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")，`__builtin__.dict`
 
-    实现[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")的字典类型。
+    实现[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")的字典类型。plainplainplain
 
     [`MutableDict`](#sqlalchemy.ext.mutable.MutableDict "sqlalchemy.ext.mutable.MutableDict")对象实现了一个字典，该字典在字典内容发生更改时（包括添加或删除值时）会将更改事件发送到基础映射。
 

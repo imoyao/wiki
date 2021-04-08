@@ -14,7 +14,7 @@ tags:
  `sqlalchemy.orm.`{.descclassname}`relationship`{.descname}(*argument*, *secondary=None*, *primaryjoin=None*, *secondaryjoin=None*, *foreign\_keys=None*, *uselist=None*, *order\_by=False*, *backref=None*, *back\_populates=None*, *post\_update=False*, *cascade=False*, *extension=None*, *viewonly=False*, *lazy=True*, *collection\_class=None*, *passive\_deletes=False*, *passive\_updates=True*, *remote\_side=None*, *enable\_typechecks=True*, *join\_depth=None*, *comparator\_factory=None*, *single\_parent=False*, *innerjoin=False*, *distinct\_target\_key=None*, *doc=None*, *active\_history=False*, *cascade\_backrefs=True*, *load\_on\_pending=False*, *bake\_queries=True*, *strategy\_class=None*, *\_local\_remote\_pairs=None*, *query\_class=None*, *info=None*)[¶](#sqlalchemy.orm.relationship "Permalink to this definition")
 :   提供两个映射类之间的关系。
 
-    这对应于父子关系或关联表关系。构造的类是[`RelationshipProperty`](internals.html#sqlalchemy.orm.properties.RelationshipProperty "sqlalchemy.orm.properties.RelationshipProperty")的一个实例。plain
+    这对应于父子关系或关联表关系。构造的类是[`RelationshipProperty`](internals.html#sqlalchemy.orm.properties.RelationshipProperty "sqlalchemy.orm.properties.RelationshipProperty")的一个实例。plainplainplainplainplainplain
 
     典型的[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")，用于经典映射中：
 
@@ -557,7 +557,7 @@ tags:
  `sqlalchemy.orm.`{.descclassname}`backref`{.descname}(*name*, *\*\*kwargs*)[¶](#sqlalchemy.orm.backref "Permalink to this definition")
 :   使用显式关键字参数创建一个后端引用，这些参数是可以发送到[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的相同参数。
 
-    与[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的`backref`关键字参数一起使用以代替字符串参数，例如：
+    与[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的`backref`关键字参数一起使用以代替字符串参数，例如：plainplainplainplainplainplainplain
 
         'items':relationship(
             SomeItem, backref=backref('parent', lazy='subquery'))
@@ -573,7 +573,7 @@ tags:
  `sqlalchemy.orm.`{.descclassname}`dynamic_loader`{.descname}(*argument*, *\*\*kw*)[¶](#sqlalchemy.orm.dynamic_loader "Permalink to this definition")
 :   构建一个动态加载映射器属性。
 
-    这与使用[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中的`lazy='dynamic'`参数基本相同：plain
+    这与使用[`relationship()`](#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中的`lazy='dynamic'`参数基本相同：plainplainplainplain
 
         dynamic_loader(SomeClass)
 
@@ -587,7 +587,7 @@ tags:
 `sqlalchemy.orm。 T0> 外国 T1> （ T2>  EXPR  T3> ） T4> ¶ T5 >`{.descclassname}
 :   使用“外部”注释标注一个 primaryjoin 表达式的一部分。
 
-    有关使用说明，请参阅[Creating Custom Foreignplain
+    有关使用说明，请参阅[Creating Custom Foreignplainplainplain
     Conditions](join_conditions.html#relationship-custom-foreign)部分。
 
     0.8版本中的新功能
@@ -602,7 +602,7 @@ tags:
 `sqlalchemy.orm。 T0> 远程 T1> （ T2>  EXPR  T3> ） T4> ¶ T5 >`{.descclassname}
 :   使用'远程'注释标注一个 primaryjoin 表达式的一部分。
 
-    有关使用说明，请参阅[Creating Custom Foreign
+    有关使用说明，请参阅[Creating Custom Foreignplainplainplain
     Conditions](join_conditions.html#relationship-custom-foreign)部分。
 
     0.8版本中的新功能

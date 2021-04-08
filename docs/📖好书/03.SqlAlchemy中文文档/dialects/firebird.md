@@ -41,7 +41,7 @@ Firebird 方言检测这些版本并相应地调整其 SQL 表示。然而，对
 Firebird 积极锁定表格。出于这个原因，DROP
 TABLE 可能会挂起，直到其他事务被释放。SQLAlchemy 尽可能快地释放事务。挂起交易的最常见原因是未完全消费的结果集，即：
 
-    result = engine.execute("select * from table")
+    result = engine.execute("select * from table")plainplainplainplainplain
     row = result.fetchone()
     return
 
@@ -54,7 +54,7 @@ Firebird
 2.0 支持从插入返回结果集，并且 2.1 扩展了它以删除和更新。这通常由 SQLAlchemy
 `returning()`方法公开，例如：
 
-    # INSERT..RETURNING
+    # INSERT..RETURNINGplainplain
     result = table.insert().returning(table.c.col1, table.c.col2).\
                    values(name='foo')
     print result.fetchall()
@@ -85,7 +85,7 @@ fdb 的文档和下载信息（如果适用）可在以下网址获得：[http:/
 
 连接字符串：
 
-    firebird+fdb://user:password@host:port/path/to/db[?key=value&key=value...]plain
+    firebird+fdb://user:password@host:port/path/to/db[?key=value&key=value...]plainplainplainplain
 
 ### 参数[¶ T0\>](#arguments "Permalink to this headline")
 
@@ -97,7 +97,7 @@ fdb 的文档和下载信息（如果适用）可在以下网址获得：[http:/
     因为 SQLA 的 resultproxy 在非结果返回语句后自动关闭游标，因此必须调用 rowcount（如果有的话），在结果对象之前回。此外，cursor.rowcount 可能不会在旧版 Firebird 中返回正确结果，并将此标志设置为 False 也会导致 SQLAlchemy
     ORM 忽略其使用情况。该行为还可以通过[`Connection.execution_options()`](core_connections.html#sqlalchemy.engine.Connection.execution_options "sqlalchemy.engine.Connection.execution_options")使用`enable_rowcount`选项以每个执行为基础进行控制：
 
-        conn = engine.connect().execution_options(enable_rowcount=True)
+        conn = engine.connect().execution_options(enable_rowcount=True)plainplainplainplainplain
         r = conn.execute(stmt)
         print r.rowcount
 
@@ -128,7 +128,7 @@ kinterbasdb [¶ T0\>](#module-sqlalchemy.dialects.firebird.kinterbasdb "Permalin
 
 连接字符串：
 
-    firebird+kinterbasdb://user:password@host:port/path/to/db[?key=value&key=value...]plain
+    firebird+kinterbasdb://user:password@host:port/path/to/db[?key=value&key=value...]plainplainplainplainplainplain
 
 ### 参数[¶ T0\>](#id1 "Permalink to this headline")
 

@@ -90,7 +90,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *类 T0\> `sqlalchemy.ext.declarative。 T1>  declared_attr  T2> （ T3>  fget  T4>，级联=假 T5> ） T6> ¶ T7>`{.descclassname}*
 :   基础：`sqlalchemy.orm.base._MappedAttribute`，`__builtin__.property`
 
-    将类级方法标记为表示映射属性或特殊声明性成员名称的定义。plain
+    将类级方法标记为表示映射属性或特殊声明性成员名称的定义。plainplainplainplain
 
     @declared\_attr将属性转换为可以从未被实例化的类调用的类标量属性。声明式将特别标记为@declared\_attr的属性视为返回特定于映射或声明式表配置的构造。属性的名称是该属性的非动态版本的名称。
 
@@ -168,17 +168,17 @@ API 参考[¶](#api-reference "Permalink to this headline")
 `sqlalchemy.ext.declarative.api。`{.descclassname} `_declarative_constructor`{.descname} （ *self*，*\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.ext.declarative.api._declarative_constructor "Permalink to this definition")
 :   一个简单的构造函数，允许从 kwargs 初始化。
 
-    使用`kwargs`中的名称和值在构造的实例上设置属性。
+    使用`kwargs`中的名称和值在构造的实例上设置属性。plainplain
 
     只有作为实例类的属性存在的键才被允许。例如，这些可以是任何映射的列或关系。
 
-` sqlalchemy.ext.declarative。 T0>  has_inherited_table  T1> （ T2>  CLS  T3> ） T4> ¶< / T5>`{.descclassname}
+`sqlalchemy.ext.declarative。 T0>  has_inherited_table  T1> （ T2>  CLS  T3> ） T4> ¶< / T5>`{.descclassname}
 :   给定一个类，如果它继承的任何类有一个映射表，则返回 True，否则返回 False。
 
  `sqlalchemy.ext.declarative.`{.descclassname}`synonym_for`{.descname}(*name*, *map\_column=False*)[¶](#sqlalchemy.ext.declarative.synonym_for "Permalink to this definition")
 :   装饰者，使 Python @property 成为列的查询同义词。
 
-    [`synonym()`](mapped_attributes.html#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")的装饰版本。正在装饰的函数是'descriptor'，否则将它的参数传递给synonym()：
+    [`synonym()`](mapped_attributes.html#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")的装饰版本。正在装饰的函数是'descriptor'，否则将它的参数传递给synonym()：plainplainplain
 
         @synonym_for('col')
         @property
@@ -209,7 +209,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.declarative。`{.descclassname} `AbstractConcreteBase`{.descname} [¶](#sqlalchemy.ext.declarative.AbstractConcreteBase "Permalink to this definition")
 :   基础：`sqlalchemy.ext.declarative.api.ConcreteBase`
 
-    “具体”声明映射的助手类。plain
+    “具体”声明映射的助手类。plainplainplainplainplainplain
 
     [`AbstractConcreteBase`](#sqlalchemy.ext.declarative.AbstractConcreteBase "sqlalchemy.ext.declarative.AbstractConcreteBase")
     will use the [`polymorphic_union()`](mapping_api.html#sqlalchemy.orm.util.polymorphic_union "sqlalchemy.orm.util.polymorphic_union")
@@ -400,7 +400,7 @@ New in version 0.7.3.
 
 像`__declare_last__()`，但是在映射器配置开始时通过[`MapperEvents.before_configured()`](events.html#sqlalchemy.orm.events.MapperEvents.before_configured "sqlalchemy.orm.events.MapperEvents.before_configured")事件调用：
 
-    class MyClass(Base):plain
+    class MyClass(Base):plainplainplain
         @classmethod
         def __declare_first__(cls):
             ""
@@ -414,7 +414,7 @@ New in version 0.7.3.
 and Custom Base
 Classes](mixins.html#declarative-mixins)），允许子类仅从特殊类扩展：
 
-    class SomeAbstractBase(Base):plain
+    class SomeAbstractBase(Base):plainplainplain
         __abstract__ = True
 
         def some_helpful_method(self):
@@ -429,7 +429,7 @@ Classes](mixins.html#declarative-mixins)），允许子类仅从特殊类扩展�
 
 `__abstract__`的一个可能用途是对不同的基础使用不同的[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")：
 
-    Base = declarative_base()plain
+    Base = declarative_base()plainplainplainplain
 
     class DefaultBase(Base):
         __abstract__ = True

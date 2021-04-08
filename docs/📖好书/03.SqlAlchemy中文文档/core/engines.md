@@ -22,7 +22,7 @@ DBAPI 组合。
 
 只用一个调用就可以创建引擎，[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")：
 
-    from sqlalchemy import create_engine
+    from sqlalchemy import create_engineplainplain
     engine = create_engine('postgresql://scott:tiger@localhost:5432/mydatabase')
 
 The above engine creates a [`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")
@@ -47,7 +47,7 @@ with Engines and Connections](connections.html)将详细介绍[`Engine`](connect
 
 SQLAlchemy includes many [`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect")
 implementations for various backends.
-最常用数据库的方言包含在SQLAlchemy中；少数其他人需要另外安装一个单独的方言。
+最常用数据库的方言包含在 SQLAlchemy 中；少数其他人需要另外安装一个单独的方言。
 
 有关各种可用后端的信息，请参阅[Dialects](dialects_index.html)部分。
 
@@ -67,7 +67,7 @@ implementations for various backends.
 
 Postgresql 方言使用 psycopg2 作为默认的 DBAPI。pg8000 也可用作纯 Python 替代品：
 
-    # defaultplain
+    # defaultplainplain
     engine = create_engine('postgresql://scott:tiger@localhost/mydatabase')
 
     # psycopg2
@@ -83,7 +83,7 @@ Postgresql 方言使用 psycopg2 作为默认的 DBAPI。pg8000 也可用作纯 
 MySQL 方言使用 mysql-python 作为默认的 DBAPI。有许多 MySQL
 DBAPI 可用，包括 MySQL 连接器-python 和 OurSQL：
 
-    # defaultplain
+    # defaultplainplainplain
     engine = create_engine('mysql://scott:tiger@localhost/foo')
 
     # mysql-python
@@ -99,9 +99,9 @@ DBAPI 可用，包括 MySQL 连接器-python 和 OurSQL：
 
 ### 甲骨文[¶ T0\>](#oracle "Permalink to this headline")
 
-Oracle方言使用cx\_oracle 作为默认的 DBAPI：
+Oracle 方言使用 cx\_oracle 作为默认的 DBAPI：
 
-    engine = create_engine('oracle://scott:tiger@127.0.0.1:1521/sidname')
+    engine = create_engine('oracle://scott:tiger@127.0.0.1:1521/sidname')plain
 
     engine = create_engine('oracle+cx_oracle://scott:tiger@tnsname')
 
@@ -111,7 +111,7 @@ Oracle方言使用cx\_oracle 作为默认的 DBAPI：
 
 SQL Server 方言使用 pyodbc 作为默认 DBAPI。pymssql 也可用：
 
-    # pyodbcplain
+    # pyodbcplainplainplainplainplainplain
     engine = create_engine('mssql+pyodbc://scott:tiger@mydsn')
 
     # pymssql
@@ -126,13 +126,13 @@ SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据�
 
 由于 SQLite 连接到本地文件，URL 格式略有不同。URL 的“文件”部分是数据库的文件名。对于相对文件路径，这需要三个斜杠：
 
-    # sqlite://<nohostname>/<path>
+    # sqlite://<nohostname>/<path>plain
     # where <path> is relative:
     engine = create_engine('sqlite:///foo.db')
 
 对于绝对文件路径，三个斜杠后面是绝对路径：
 
-    #Unix/Mac - 4 initial slashes in total
+    #Unix/Mac - 4 initial slashes in totalplain
     engine = create_engine('sqlite:////absolute/path/to/foo.db')
     #Windows
     engine = create_engine('sqlite:///C:\\path\\to\\foo.db')
@@ -141,7 +141,7 @@ SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据�
 
 要使用 SQLite `:memory:`数据库，请指定一个空的 URL：
 
-    engine = create_engine('sqlite://')plain
+    engine = create_engine('sqlite://')plainplain
 
 有关在[SQLite](dialects_sqlite.html)连接到 SQLite 的更多注意事项。
 
@@ -155,7 +155,7 @@ SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据�
 `sqlalchemy。`{.descclassname} `create_engine`{.descname} （ *\* args*，*\*\* kwargs* / T5\> [¶ T6\>](#sqlalchemy.create_engine "Permalink to this definition")
 :   创建一个新的[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")实例。
 
-    标准调用形式是将URL作为第一个位置参数发送，通常是指示数据库方言和连接参数的字符串：plain
+    标准调用形式是将URL作为第一个位置参数发送，通常是指示数据库方言和连接参数的字符串：plainplain
 
         engine = create_engine("postgresql://scott:tiger@localhost/test")
 
@@ -373,7 +373,7 @@ SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据�
 `sqlalchemy。`{.descclassname} `engine_from_config`{.descname} （ *configuration*，*prefix ='sqlalchemy。'*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.engine_from_config "Permalink to this definition")*
 :   使用配置字典创建一个新的引擎实例。
 
-    字典通常由配置文件生成。plain
+    字典通常由配置文件生成。plainplainplain
 
     对`engine_from_config()`感兴趣的键应加上前缀，例如“ `sqlalchemy.url`，`sqlalchemy.echo`等'prefix'参数表示要搜索的前缀。每个匹配键（在前缀被剥离后）都被视为是[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")调用的对应关键字参数。
 
@@ -402,7 +402,7 @@ SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据�
 *class* `sqlalchemy.engine.url。`{.descclassname} `URL`{.descname} （ *drivername*，*=无*，*密码=无*，*主机=无*，*端口=无*，*数据库=无* ，*query = None t\>\> ） [¶](#sqlalchemy.engine.url.URL "Permalink to this definition")*
 :   表示用于连接到数据库的 URL 的组件。
 
-    该对象适合直接传递给[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")调用。URL的字段由[`make_url()`](#sqlalchemy.engine.url.make_url "sqlalchemy.engine.url.make_url")函数从字符串中解析。该URL的字符串格式是RFC-1738样式的字符串。
+    该对象适合直接传递给[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")调用。URL的字段由[`make_url()`](#sqlalchemy.engine.url.make_url "sqlalchemy.engine.url.make_url")函数从字符串中解析。该URL的字符串格式是RFC-1738样式的字符串。plain
 
     所有初始化参数都可用作公共属性。
 
@@ -465,13 +465,13 @@ is not used by default for SQLite engines.
 
 在发布`connect()`调用到底层 DBAPI 时使用的自定义参数可能以三种不同的方式发布。可以直接从 URL 字符串中传递基于字符串的参数作为查询参数：
 
-    db = create_engine('postgresql://scott:tiger@localhost/test?argument1=foo&argument2=bar')
+    db = create_engine('postgresql://scott:tiger@localhost/test?argument1=foo&argument2=bar')plain
 
 如果 SQLAlchemy 的数据库连接器知道特定的查询参数，它可能会将其类型从字符串转换为适当的类型。
 
 [`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")还有一个参数`connect_args`，它是一个将传递给`connect()`的附加字典。这可以在需要字符串以外的参数时使用，并且 SQLAlchemy 的数据库连接器对该参数没有类型转换逻辑：
 
-    db = create_engine('postgresql://scott:tiger@localhost/test', connect_args = {'argument1':17, 'argument2':'bar'})plain
+    db = create_engine('postgresql://scott:tiger@localhost/test', connect_args = {'argument1':17, 'argument2':'bar'})plainplain
 
 全部最可定制的连接方法是传递一个`creator`参数，该参数指定一个返回 DBAPI 连接的可调用对象：
 
