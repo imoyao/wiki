@@ -19,7 +19,7 @@ SQL 表达式作为映射的属性[¶](#sql-expressions-as-mapped-attributes "Pe
 将相对简单的 SQL 表达式链接到类的最简单和最灵活的方法是使用所谓的“混合属性”，如[Hybrid
 Attributes](extensions_hybrid.html)部分中所述。该混合提供了一种既适用于 Python 级别又适用于 SQL 表达级别的表达式。例如，下面我们映射一个类`User`，它包含属性`firstname`和`lastname`，并且包含一个混合，它将为我们提供`fullname`，这是两个字符串的连接：
 
-    from sqlalchemy.ext.hybrid import hybrid_property
+    from sqlalchemy.ext.hybrid import hybrid_propertyplainplainplain
 
     class User(Base):
         __tablename__ = 'user'
@@ -33,16 +33,16 @@ Attributes](extensions_hybrid.html)部分中所述。该混合提供了一种既
 
 上面，`fullname`属性在实例和类级别都被解释，以便它可以从实例中获得：
 
-    some_user = session.query(User).first()
+    some_user = session.query(User).first()plain
     print(some_user.fullname)
 
 以及在查询中可用：
 
-    some_user = session.query(User).filter(User.fullname == "John Smith").first()plain
+    some_user = session.query(User).filter(User.fullname == "John Smith").first()plainplain
 
 字符串连接的例子很简单，Python 表达式可以在实例和类级别双重使用。通常，必须将 SQL 表达式与 Python 表达式区分开来，这可以使用[`hybrid_property.expression()`](extensions_hybrid.html#sqlalchemy.ext.hybrid.hybrid_property.expression "sqlalchemy.ext.hybrid.hybrid_property.expression")来实现。下面我们通过 Python 中的`if`语句和 SQL 表达式的[`sql.expression.case()`](core_sqlelement.html#sqlalchemy.sql.expression.case "sqlalchemy.sql.expression.case")构造来说明条件需要存在于混合内部的情况：
 
-    from sqlalchemy.ext.hybrid import hybrid_propertyplain
+    from sqlalchemy.ext.hybrid import hybrid_propertyplainplainplainplainplain
     from sqlalchemy.sql import case
 
     class User(Base):
@@ -78,7 +78,7 @@ from declarative mixins.
 
 我们的“全名”示例可以使用[`orm.column_property()`](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")表示如下：
 
-    from sqlalchemy.orm import column_propertyplain
+    from sqlalchemy.orm import column_propertyplainplainplainplain
 
     class User(Base):
         __tablename__ = 'user'
@@ -89,7 +89,7 @@ from declarative mixins.
 
 相关的子查询也可以使用。下面我们使用[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造创建一个 SELECT，它将特定`User`可用的`Address`对象的计数链接在一起：
 
-    from sqlalchemy.orm import column_propertyplain
+    from sqlalchemy.orm import column_propertyplainplainplain
     from sqlalchemy import select, func
     from sqlalchemy import Column, Integer, String, ForeignKey
 
@@ -113,7 +113,7 @@ from declarative mixins.
 
 在上面的例子中，我们定义了如下所示的[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构：
 
-    select([func.count(Address.id)]).\
+    select([func.count(Address.id)]).\plain
         where(Address.user_id==id).\
         correlate_except(Address)
 
@@ -135,14 +135,14 @@ long string of joins between `User` and
 
 如果导入问题阻止[`column_property()`](mapping_columns.html#sqlalchemy.orm.column_property "sqlalchemy.orm.column_property")与该类内联定义，则可以在两者都配置后将其分配给类。在 Declarative 中，这具有调用[`Mapper.add_property()`](mapping_api.html#sqlalchemy.orm.mapper.Mapper.add_property "sqlalchemy.orm.mapper.Mapper.add_property")在事实之后添加其他属性的效果：
 
-    User.address_count = column_property(plain
+    User.address_count = column_property(plainplainplain
             select([func.count(Address.id)]).\
                 where(Address.user_id==User.id)
         )
 
 对于多对多关系，使用[`and_()`](core_sqlelement.html#sqlalchemy.sql.expression.and_ "sqlalchemy.sql.expression.and_")将关联表的字段连接到关系中的两个表，这里用经典映射来说明：
 
-    from sqlalchemy import and_
+    from sqlalchemy import and_plainplain
 
     mapper(Author, authors, properties={
         'book_count': column_property(
@@ -161,7 +161,7 @@ long string of joins between `User` and
 is used to locate the [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 corresponding to the current object, which is then used to emit a query:
 
-    from sqlalchemy.orm import object_session
+    from sqlalchemy.orm import object_sessionplain
     from sqlalchemy import select, func
 
     class User(Base):

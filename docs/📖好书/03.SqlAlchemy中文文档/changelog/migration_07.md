@@ -125,7 +125,7 @@ aren’t really aware of them otherwise.
 
 请注意，`query.join()`的所有其他形式保持不变：
 
-    query.join(MyClass.somerelation)
+    query.join(MyClass.somerelation)plain
     query.join("somerelation")
     query.join(MyTarget)
     # ... etc
@@ -188,7 +188,7 @@ Index()构造可以与表定义一起内联创建，使用字符串作为列名�
 
 这里的主要基本原理是为了声明`__table_args__`的好处，特别是在与 mixin 一起使用时：
 
-    class HasNameMixin(object):
+    class HasNameMixin(object):plain
         name = Column('name', String(50), nullable=False)
         @declared_attr
         def __table_args__(cls):
@@ -212,7 +212,7 @@ Server 和 Oracle 支持，可能还有其他支持。
 
 SQLAlchemy 使用`over()`方法提供一个通常通过现有函数子句调用的简单结构，该方法接受`order_by`和`partition_by`关键字参数。下面我们复制 PG 教程中的第一个例子：
 
-    from sqlalchemy.sql import table, column, select, funcplain
+    from sqlalchemy.sql import table, column, select, funcplainplainplain
 
     empsalary = table('empsalary',
                     column('depname'),
@@ -313,7 +313,7 @@ MySQL 用户已经报道过，MyISAM 引擎不会因为这个简单的改变而�
 
 或者用于`count(*)`：
 
-    from sqlalchemy import func, literal_columnplain
+    from sqlalchemy import func, literal_columnplainplain
     session.query(func.count(literal_column('*'))).select_from(MyClass).scalar()
 
 ### LIMIT / OFFSET 子句现在使用绑定参数[¶](#limit-offset-clauses-now-use-bind-parameters "Permalink to this headline")
@@ -343,11 +343,11 @@ Sajip 为我们的日志记录系统提供了一个补丁，使得不再需要�
 
 现在，`contains_eager()`修饰符将自行链接一段更长的路径，而不需要发出单独的`contains_eager()`调用。代替：
 
-    session.query(A).options(contains_eager(A.b), contains_eager(A.b, B.c))plain
+    session.query(A).options(contains_eager(A.b), contains_eager(A.b, B.c))plainplainplain
 
 你可以说：
 
-    session.query(A).options(contains_eager(A.b, B.c))
+    session.query(A).options(contains_eager(A.b, B.c))plainplainplain
 
 [＃2032 T0\>](http://www.sqlalchemy.org/trac/ticket/2032)
 
@@ -494,7 +494,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 给定两个映射类`Foo`和`Bar`，每个类都有一个列`spam`：
 
-    qa = session.query(Foo.spam)
+    qa = session.query(Foo.spam)plain
     qb = session.query(Bar.spam)
 
     qu = qa.union(qb)
@@ -541,7 +541,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 这也意味着像这样的查询会改变它的行为：
 
-    session.query(Parent).filter(Child.id > 7)plain
+    session.query(Parent).filter(Child.id > 7)plainplainplain
 
 在 0.6 中，这会使得：
 
@@ -551,7 +551,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 在 0.7 中，你会得到：
 
-    SELECT parent.id AS parent_id
+    SELECT parent.id AS parent_idplain
     FROM parent, child
     WHERE child.id > :id_1
 
@@ -561,7 +561,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 0.6 和 0.7 中的哪一个呈现：
 
-    SELECT parent.id AS parent_id, child.id AS child_idplain
+    SELECT parent.id AS parent_id, child.id AS child_idplainplainplain
     FROM parent LEFT OUTER JOIN child ON parent.id = child.id
     WHERE child.id > :id_1
 
@@ -695,11 +695,11 @@ restored as of 0.7b4/0.7.0, but emits a deprecation warning.
 
 这个模糊的特性允许这种模式与 MySQL 后端：
 
-    select([mytable], distinct='ALL', prefixes=['HIGH_PRIORITY'])
+    select([mytable], distinct='ALL', prefixes=['HIGH_PRIORITY'])plain
 
 `prefixes`关键字或`prefix_with()`方法应该用于非标准或不常用的前缀：
 
-    select([mytable]).prefix_with('HIGH_PRIORITY', 'ALL')plain
+    select([mytable]).prefix_with('HIGH_PRIORITY', 'ALL')plainplain
 
 ### `useexisting`取代`extend_existing`和`keep_existing` [¶](#useexisting-superseded-by-extend-existing-and-keep-existing "Permalink to this headline")
 
@@ -772,7 +772,7 @@ that of the `alias()` methods on all
 
 这些方法都可以接受 0.5 系列的\*参数：
 
-    # current way, in place since 0.5plain
+    # current way, in place since 0.5plainplainplain
     session.query(Houses).join(Houses.rooms, Room.closets)
     session.query(Houses).options(eagerload_all(Houses.rooms, Room.closets))
 

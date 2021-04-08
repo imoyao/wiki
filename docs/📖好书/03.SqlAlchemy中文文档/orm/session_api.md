@@ -8,10 +8,10 @@ categories:
   - orm
 tags:
 ---
-会话API [¶](#session-api "Permalink to this headline")
+会话 API [¶](#session-api "Permalink to this headline")
 ======================================================
 
-Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headline")
+Session 和 sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headline")
 ----------------------------------------------------------------------------------
 
 *class* `sqlalchemy.orm.session。`{.descclassname} `sessionmaker`{.descname} （ *bind = None*，*class \_ =＆lt； class'sqlalchemy.orm.session.Session'＆gt；*，*autoflush = True*，*autocommit = False*，*expire\_on\_commit = True *info = None*，*\*\* kw* ） [¶](#sqlalchemy.orm.session.sessionmaker "Permalink to this definition")*
@@ -126,7 +126,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
  *class*`sqlalchemy.orm.session.`{.descclassname}`Session`{.descname}(*bind=None*, *autoflush=True*, *expire\_on\_commit=True*, *\_enable\_transaction\_accounting=True*, *autocommit=False*, *twophase=False*, *weak\_identity\_map=True*, *binds=None*, *extension=None*, *info=None*, *query\_cls=\<class 'sqlalchemy.orm.query.Query'\>*)[¶](#sqlalchemy.orm.session.Session "Permalink to this definition")
 :   基础：`sqlalchemy.orm.session._SessionClassMethods`
 
-    管理ORM映射对象的持久性操作。plain
+    管理ORM映射对象的持久性操作。plainplainplain
 
     会话的使用范例在[*Using the Session*](session.html)中描述。
 
@@ -1046,7 +1046,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
 *class* `sqlalchemy.orm.session。`{.descclassname} `SessionTransaction`{.descname} （ *session*，*parent = None*，*nested = False* ） [¶](#sqlalchemy.orm.session.SessionTransaction "Permalink to this definition")
 :   一个[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")级别的事务。
 
-    [`SessionTransaction`](#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")plain
+    [`SessionTransaction`](#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")plainplainplain
     is a mostly behind-the-scenes object not normally referenced
     directly by application code. 它在多个[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象之间进行协调，为每个对象单独维护一个数据库事务，一次提交或回滚所有对象。它还提供可选的两阶段提交行为，可以增强此协调操作。
 
@@ -1094,7 +1094,7 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
 会话实用程序[¶](#session-utilites "Permalink to this headline")
 ---------------------------------------------------------------
 
-` sqlalchemy.orm.session。 T0>  make_transient  T1> （ T2> 实例 T3> ） T4> ¶< / T5>`{.descclassname}
+`sqlalchemy.orm.session。 T0>  make_transient  T1> （ T2> 实例 T3> ） T4> ¶< / T5>`{.descclassname}
 :   改变给定实例的状态，使其[transient](glossary.html#term-transient)。
 
     注意plain
@@ -1124,10 +1124,10 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
 
     [`make_transient_to_detached()`](#sqlalchemy.orm.session.make_transient_to_detached "sqlalchemy.orm.session.make_transient_to_detached")
 
-` sqlalchemy.orm.session。 T0>  make_transient_to_detached  T1> （ T2> 实例 T3> ） T4> ¶< / T5>`{.descclassname}
+`sqlalchemy.orm.session。 T0>  make_transient_to_detached  T1> （ T2> 实例 T3> ） T4> ¶< / T5>`{.descclassname}
 :   使给定的瞬态实例[detached](glossary.html#term-detached)。
 
-    注意
+    注意plainplainplain
 
     [`make_transient_to_detached()`](#sqlalchemy.orm.session.make_transient_to_detached "sqlalchemy.orm.session.make_transient_to_detached")仅是高级用例的一种特例函数。
 
@@ -1147,12 +1147,12 @@ Session和sessionmaker()[¶](#session-and-sessionmaker "Permalink to this headli
 `sqlalchemy.orm.session。 T0>  object_session  T1> （ T2> 实例 T3> ） T4> ¶< / T5>`{.descclassname}
 :   返回给定实例所属的[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。
 
-    这与[`InstanceState.session`{](internals.html#sqlalchemy.orm.state.InstanceState.session "sqlalchemy.orm.state.InstanceState.session")访问器基本相同。详情请参阅该属性。
+    这与[`InstanceState.session`{](internals.html#sqlalchemy.orm.state.InstanceState.session "sqlalchemy.orm.state.InstanceState.session")访问器基本相同。详情请参阅该属性。plain
 
-` sqlalchemy.orm.util。 T0>  was_deleted  T1> （ T2> 对象 T3> ） T4> ¶< / T5>`{.descclassname}
-:   如果给定对象在会话刷新中被删除，则返回True。
+`sqlalchemy.orm.util。 T0>  was_deleted  T1> （ T2> 对象 T3> ） T4> ¶< / T5>`{.descclassname}
+:   如果给定对象在会话刷新中被删除，则返回 True。
 
-    这与对象是否持久或分离无关。
+    这与对象是否持久或分离无关。plainplain
 
     0.8.0版本中的新功能
 
@@ -1169,7 +1169,7 @@ Events*](events.html)中描述的那些函数。
 `sqlalchemy.orm.util。 T0>  object_state  T1> （ T2> 实例 T3> ） T4> ¶< / T5>`{.descclassname}
 :   给定一个对象，返回与该对象关联的[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")。
 
-    如果未配置映射，则引发[`sqlalchemy.orm.exc.UnmappedInstanceError`](exceptions.html#sqlalchemy.orm.exc.UnmappedInstanceError "sqlalchemy.orm.exc.UnmappedInstanceError")。
+    如果未配置映射，则引发[`sqlalchemy.orm.exc.UnmappedInstanceError`](exceptions.html#sqlalchemy.orm.exc.UnmappedInstanceError "sqlalchemy.orm.exc.UnmappedInstanceError")。plain
 
     等效功能可通过[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数使用：
 
@@ -1180,7 +1180,7 @@ Events*](events.html)中描述的那些函数。
  `sqlalchemy.orm.attributes.`{.descclassname}`del_attribute`{.descname}(*instance*, *key*)[¶](#sqlalchemy.orm.attributes.del_attribute "Permalink to this definition")
 :   删除属性的值，激发历史事件。
 
-    无论直接应用于该类的仪器如何，都可以使用该函数，即不需要描述符。自定义属性管理方案需要使用此方法来建立SQLAlchemy所理解的属性状态。plain
+    无论直接应用于该类的仪器如何，都可以使用该函数，即不需要描述符。自定义属性管理方案需要使用此方法来建立SQLAlchemy所理解的属性状态。plainplain
 
 `sqlalchemy.orm.attributes。`{.descclassname} `get_attribute`{.descname} （ *实例*，*键* ） T5\> [¶ T6\>](#sqlalchemy.orm.attributes.get_attribute "Permalink to this definition")
 :   获取属性的值，触发所需的可调用对象。
@@ -1190,7 +1190,7 @@ Events*](events.html)中描述的那些函数。
  `sqlalchemy.orm.attributes.`{.descclassname}`get_history`{.descname}(*obj*, *key*, *passive=symbol('PASSIVE\_OFF')*)[¶](#sqlalchemy.orm.attributes.get_history "Permalink to this definition")
 :   返回给定对象和属性键的[`History`](#sqlalchemy.orm.attributes.History "sqlalchemy.orm.attributes.History")记录。
 
-    参数：
+    参数：plain
 
     -   **obj**[¶](#sqlalchemy.orm.attributes.get_history.params.obj) –
         an object whose class is instrumented by the attributes package.
@@ -1217,9 +1217,9 @@ Events*](events.html)中描述的那些函数。
 `sqlalchemy.orm.attributes。`{.descclassname} `flag_modified`{.descname} （ *实例*，*键* ） T5\> [¶ T6\>](#sqlalchemy.orm.attributes.flag_modified "Permalink to this definition")
 :   将实例上的属性标记为“已修改”。
 
-    这将在实例上设置'修改'标志并为给定属性建立无条件更改事件。
+    这将在实例上设置'修改'标志并为给定属性建立无条件更改事件。plain
 
-` sqlalchemy.orm.attributes。 T0>  instance_state  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
+`sqlalchemy.orm.attributes。 T0>  instance_state  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
 :   为给定的映射对象返回[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")。
 
     该函数是[`object_state()`](#sqlalchemy.orm.util.object_state "sqlalchemy.orm.util.object_state")的内部版本。[`object_state()`](#sqlalchemy.orm.util.object_state "sqlalchemy.orm.util.object_state")和/或[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数在这里是首选的，因为如果给定的对象未被映射，它们每个都会发出信息异常。
@@ -1232,12 +1232,12 @@ Events*](events.html)中描述的那些函数。
  `sqlalchemy.orm.attributes.`{.descclassname}`set_attribute`{.descname}(*instance*, *key*, *value*)[¶](#sqlalchemy.orm.attributes.set_attribute "Permalink to this definition")
 :   设置属性的值，触发历史事件。
 
-    无论直接应用于该类的仪器如何，都可以使用该函数，即不需要描述符。自定义属性管理方案需要使用此方法来建立SQLAlchemy所理解的属性状态。plain
+    无论直接应用于该类的仪器如何，都可以使用该函数，即不需要描述符。自定义属性管理方案需要使用此方法来建立SQLAlchemy所理解的属性状态。plainplainplainplain
 
  `sqlalchemy.orm.attributes.`{.descclassname}`set_committed_value`{.descname}(*instance*, *key*, *value*)[¶](#sqlalchemy.orm.attributes.set_committed_value "Permalink to this definition")
 :   设置没有历史事件的属性的值。
 
-    取消任何以前的历史记录。该值应该是标量保持属性的标量值，或者任何集合保持属性的迭代值。
+    取消任何以前的历史记录。该值应该是标量保持属性的标量值，或者任何集合保持属性的迭代值。plainplainplain
 
     这与懒惰加载器关闭并从数据库加载其他数据时使用的基础方法相同。特别是，这种方法可以被应用程序代码使用，该代码通过单独的查询加载了附加属性或集合，然后可以将其附加到实例，就像它是其原始加载状态的一部分一样。
 

@@ -84,7 +84,7 @@ or [`Session.close()`](orm_session_api.html#sqlalchemy.orm.session.Session.close
 
 它通常对应于捕获[`Session.flush()`](orm_session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")或[`Session.commit()`](orm_session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")中的异常并且没有正确处理异常的应用程序。例如：
 
-    from sqlalchemy import create_engine, Column, Integerplain
+    from sqlalchemy import create_engine, Column, Integerplainplainplainplain
     from sqlalchemy.orm import sessionmaker
     from sqlalchemy.ext.declarative import declarative_base
 
@@ -112,7 +112,7 @@ or [`Session.close()`](orm_session_api.html#sqlalchemy.orm.session.Session.close
 
 [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")的用法应该符合类似于以下的结构：
 
-    try:plain
+    try:plainplainplain
         <use session>
         session.commit()
     except:
@@ -172,11 +172,11 @@ SQLAlchemy 提供的解决这两个问题的方法是通过[`Session.begin_neste
 
     @with_session
     def one():
-       # do stuff
+       # do stuffplain
        two()
 
 
-    @with_session
+    @with_sessionplainplain
     def two():
        # etc.
 
@@ -238,7 +238,7 @@ would link `__len__()` to the [`Query.count()`](orm_query.html#sqlalchemy.orm.qu
 method, which emits a SELECT COUNT.
 这是不可能的原因是因为评估查询作为列表会导致两个 SQL 调用，而不是一个：
 
-    class Iterates(object):
+    class Iterates(object):plainplain
         def __len__(self):
             print("LEN!")
             return 5
@@ -251,7 +251,7 @@ method, which emits a SELECT COUNT.
 
 输出：
 
-    ITER!
+    ITER!plain
     LEN!
 
 如何在 ORM 查询中使用文本 SQL？[¶](#how-do-i-use-textual-sql-with-orm-queries "Permalink to this headline")
@@ -292,26 +292,26 @@ ORM 的构造方式不是支持从外键属性更改驱动的即时关系群体 
 而是设计为以相反方式工作 -
 外键属性由 ORM 在幕后处理，最终用户自然建立对象关系。因此，设置`o.foo`的推荐方法就是这样做 - 设置它！:
 
-    foo = Session.query(Foo).get(7)
+    foo = Session.query(Foo).get(7)plain
     o.foo = foo
     Session.commit()
 
 操纵外键属性当然是完全合法的。但是，将外键属性设置为新值目前不会触发它所涉及的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的“过期”事件。这意味着对于以下顺序：
 
-    o = Session.query(SomeClass).first()plain
+    o = Session.query(SomeClass).first()plainplain
     assert o.foo is None  # accessing an un-set attribute sets it to None
     o.foo_id = 7
 
 `o.foo` is initialized to `None`
 when we first accessed it. 设置`o.foo_id = 7`的值为“7” - 所以`o.foo`仍然是`None`：
 
-    # attribute is already set to None, has not beenplain
+    # attribute is already set to None, has not beenplainplainplain
     # reconciled with o.foo_id = 7 yet
     assert o.foo is None
 
 对于基于外键变异的`o.foo`加载通常会在 commit 后自然实现，它们都会刷新新的外键值并过期所有状态：
 
-    Session.commit()  # expires all attributes
+    Session.commit()  # expires all attributesplain
 
     foo_7 = Session.query(Foo).get(7)
 
@@ -329,7 +329,7 @@ when we first accessed it. 设置`o.foo_id = 7`的值为“7” - 所以`o.foo`�
 
 请注意，如果对象不是持久对象，而是出现在[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中，则称为[pending](glossary.html#term-pending)。这意味着该对象的行尚未被插入到数据库中。对于这样的对象，在插入行之前设置`foo_id`没有意义。否则还没有行：
 
-    new_obj = SomeClass()plain
+    new_obj = SomeClass()plainplain
     new_obj.foo_id = 7
 
     Session.add(new_obj)
@@ -359,7 +359,7 @@ the repurposing of the ORM’s usual object states.
 
 具有与其相关的其他对象的对象将对应于映射器之间设置的[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构。这个代码片段会迭代所有的对象，并修正周期：
 
-    from sqlalchemy import inspect
+    from sqlalchemy import inspectplainplain
 
 
     def walk(obj):
@@ -414,7 +414,7 @@ the repurposing of the ORM’s usual object states.
 
 输出：
 
-    <__main__.A object at 0x10303b190>plain
+    <__main__.A object at 0x10303b190>plainplain
     <__main__.B object at 0x103025210>
     <__main__.B object at 0x10303b0d0>
     <__main__.C object at 0x103025490>

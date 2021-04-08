@@ -14,7 +14,7 @@ tags:
 *class* `sqlalchemy.types。`{.descclassname} `TypeEngine`{.descname} [¶](#sqlalchemy.types.TypeEngine "Permalink to this definition")
 :   基础：`sqlalchemy.sql.visitors.Visitable`
 
-    所有SQL数据类型的最终基类。
+    所有SQL数据类型的最终基类。plainplainplainplainplainplainplainplain
 
     [`TypeEngine`](#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")的通用子类包括[`String`](type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")，[`Integer`](type_basics.html#sqlalchemy.types.Integer "sqlalchemy.types.Integer")和[`Boolean`](type_basics.html#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")。
 
@@ -263,12 +263,12 @@ tags:
 *class* `sqlalchemy.types。`{.descclassname} `可索引`{.descname} [¶](#sqlalchemy.types.Indexable "Permalink to this definition")
 :   mixin 标记类型为支持索引操作，如数组或 JSON 结构。
 
-    版本1.1.0中的新功能plain
+    版本1.1.0中的新功能plainplainplainplainplain
 
 *class* `sqlalchemy.types。`{.descclassname} `NullType`{.descname} [¶](#sqlalchemy.types.NullType "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeEngine`](#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    一个未知的类型。
+    一个未知的类型。plain
 
     [`NullType`](#sqlalchemy.types.NullType "sqlalchemy.types.NullType")
     is used as a default type for those cases where a type cannot be
@@ -290,7 +290,7 @@ tags:
  *class*`sqlalchemy.types.`{.descclassname}`Variant`{.descname}(*base*, *mapping*)[¶](#sqlalchemy.types.Variant "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeDecorator`](custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
 
-    一种包装类型，可根据使用的方言在各种实现中进行选择。
+    一种包装类型，可根据使用的方言在各种实现中进行选择。plainplainplainplainplainplainplain
 
     [`Variant`](#sqlalchemy.types.Variant "sqlalchemy.types.Variant")类型通常使用[`TypeEngine.with_variant()`](#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")方法构造。
 

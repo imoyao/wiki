@@ -60,7 +60,7 @@ of sqlachemy’s sub-modules into your namespace.
 
 在 0.4 中，必须这样做：
 
-    from sqlalchemy import *
+    from sqlalchemy import *plain
     from sqlalchemy import types
 
     class UTCDateTime(types.TypeDecorator):
@@ -85,7 +85,7 @@ User.query.get\_by（\*\* kwargs）
 
 User.query.select\_by（\*\* kwargs）
 
-    User.query.filter_by(**kwargs).all()plain
+    User.query.filter_by(**kwargs).all()plainplain
 
 User.query.select()
 
@@ -95,7 +95,7 @@ User.query.select()
 
 到目前为止，ORM 中最明显的差异是，您现在可以直接使用基于类的属性构建查询条件。使用映射类时，不再需要“.c。”前缀：
 
-    session.query(User).filter(and_(User.name == 'fred', User.id > 17))plain
+    session.query(User).filter(and_(User.name == 'fred', User.id > 17))plainplain
 
 尽管简单的基于列的比较没有什么大不了，但类属性有一些新的“更高级别”结构可用，包括以前仅在`filter_by()`中可用的结构：
 
@@ -129,7 +129,7 @@ User.query.select()
 
 我们现在有一段时间 join()和 outerjoin()：
 
-    session.query(Order).join('items')...
+    session.query(Order).join('items')...plain
 
 现在你可以别名了：
 
@@ -159,7 +159,7 @@ User.query.select()
 
 要为别名中的每个表添加条件标准，可以使用`from_joinpoint`继续加入同一行别名：
 
-    # search for the treenode along the path "n1/n12/n122"plain
+    # search for the treenode along the path "n1/n12/n122"plainplain
 
     # first find a Node with name="n122"
     q = sess.query(Node).filter_by(name='n122')
@@ -178,7 +178,7 @@ User.query.select()
 
 `query.load()`（或`session.refresh()`）的热切版本。如果已经存在于会话中，则从查询加载的每个实例（包括所有急切加载的项目）都会立即刷新：
 
-    session.query(Blah).populate_existing().all()plain
+    session.query(Blah).populate_existing().all()plainplain
 
 ### 关系[¶ T0\>](#relations "Permalink to this headline")
 
@@ -257,7 +257,7 @@ User.query.select()
 
 然后，映射它！我们将创建一个存储两个`Point`对象的`Vertex`对象：
 
-    class Vertex(object):
+    class Vertex(object):plain
         def __init__(self, start, end):
             self.start = start
             self.end = end
@@ -278,7 +278,7 @@ User.query.select()
 
 如果您想定义映射属性在表达式中使用时生成 SQL 子句的方式，请创建您自己的`sqlalchemy.orm.PropComparator`子类，定义任何常用运算符（如`__eq__()`，`__le__()`等），并将它发送到`composite()`。复合类型也可以作为主键，并可用于`query.get()`中：
 
-    # a Document class which uses a composite Version
+    # a Document class which uses a composite Versionplainplain
     # object as primary key
     document = query.get(Version(1, 'a'))
 
@@ -314,7 +314,7 @@ User.query.select()
 
 和`eagerload_all()`设置一个属性链，以便在一次传递中保持渴望：
 
-    mapper(Foo, foo_table, properties={plain
+    mapper(Foo, foo_table, properties={plainplain
        'bar':relation(Bar)
     })
     mapper(Bar, bar_table, properties={
@@ -333,7 +333,7 @@ User.query.select()
 needed for `dict``s, and new built-in ``dict`
 types cover many needs:
 
-    # use a dictionary relation keyed by a column
+    # use a dictionary relation keyed by a columnplainplain
     relation(Item, collection_class=column_mapped_collection(items.c.keyword))
     # or named attribute
     relation(Item, collection_class=attribute_mapped_collection('keyword'))
@@ -346,7 +346,7 @@ types cover many needs:
 
 这个特性静静地出现在 0.3 中，但在 0.4 下得到了改进，这要归功于能够将子查询转换为表的子查询转换为针对该表的别名的子查询。这对于急切加载，查询中的别名加入等是关键的。当您只需要添加一些额外的列或子查询时，它可以减少对 select 语句创建映射器的需要：
 
-    mapper(User, users, properties={
+    mapper(User, users, properties={plain
            'fullname': column_property((users.c.firstname + users.c.lastname).label('fullname')),
            'numposts': column_property(
                 select([func.count(1)], users.c.id==posts.c.user_id).correlate(users).label('posts')
@@ -355,7 +355,7 @@ types cover many needs:
 
 一个典型的查询如下所示：
 
-    SELECT (SELECT count(1) FROM posts WHERE users.id = posts.user_id) AS count,plain
+    SELECT (SELECT count(1) FROM posts WHERE users.id = posts.user_id) AS count,plainplainplain
     users.firstname || users.lastname AS fullname,
     users.id AS users_id, users.firstname AS users_firstname, users.lastname AS users_lastname
     FROM users ORDER BY users.oid
@@ -386,7 +386,7 @@ types cover many needs:
 
 如果您需要后期配置会话，请使用引擎进行配置，稍后使用`configure()`添加它：
 
-    Session.configure(bind=create_engine(...))
+    Session.configure(bind=create_engine(...))plain
 
 All the behaviors of `SessionContext` and the
 `query` and `__init__` methods
@@ -395,7 +395,7 @@ of `assignmapper` are moved into the new
 with both `sessionmaker` as well as
 `create_session()`:
 
-    from sqlalchemy.orm import scoped_session, sessionmaker
+    from sqlalchemy.orm import scoped_session, sessionmakerplainplain
 
     Session = scoped_session(sessionmaker(autoflush=True, transactional=True))
     Session.configure(bind=engine)
@@ -447,7 +447,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
 `commit()`和`rollback()`，以及`begin()`现在直接在`Session`上。不需要为任何事情使用`SessionTransaction`（它仍然在后台）。
 
-    Session = sessionmaker(autoflush=True, transactional=False)plain
+    Session = sessionmaker(autoflush=True, transactional=False)plainplain
 
     sess = Session()
     sess.begin()
@@ -591,7 +591,7 @@ SQL 执行[¶](#sql-execution "Permalink to this headline")
 
 ### Oracle 的输出参数[¶](#out-parameters-for-oracle "Permalink to this headline")
 
-    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)plain
+    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)plainplain
     assert result.out_parameters == {'y':10, 'z':75}
 
 ### 连接绑定`MetaData`，`Sessions` [¶](#connection-bound-metadata-sessions "Permalink to this headline")

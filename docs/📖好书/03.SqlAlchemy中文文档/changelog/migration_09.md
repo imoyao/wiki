@@ -8,7 +8,7 @@ categories:
   - changelog
 tags:
 ---
-SQLAlchemy 0.9有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-9 "Permalink to this headline")
+SQLAlchemy 0.9 有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-9 "Permalink to this headline")
 ===========================================================================================
 
 关于本文档
@@ -205,7 +205,7 @@ tests continue to function, then upgrade to 0.9 without issue.
         id = Column(Integer, primary_key=True)
         value = Column(String)
 
-通过0.8，查询如下：
+通过 0.8，查询如下：
 
     s.query(A).filter(A.b_value == None).all()plain
 
@@ -245,7 +245,7 @@ tests continue to function, then upgrade to 0.9 without issue.
 
 此外，还增强了`has()`运算符，以便您可以在不使用标准的情况下将其称为标量列值，并且它会生成检查存在或不存在的关联行的条件：
 
-    s.query(A).filter(A.b_value.has()).all()plain
+    s.query(A).filter(A.b_value.has()).all()plainplain
 
 输出：
 
@@ -357,7 +357,7 @@ at its default of `PASSIVE_OFF`.
 
 这是一个非常古老的 bug，为 0.8 系列添加了弃用警告，但因为没有人用“-W”标志运行 Python，所以大部分都没有看到：
 
-    $ python -W always::DeprecationWarning ~/dev/sqlalchemy/test.py
+    $ python -W always::DeprecationWarning ~/dev/sqlalchemy/test.pyplain
     /Users/classic/dev/sqlalchemy/test.py:5: SADeprecationWarning: Passing arguments to
     type object constructor <class 'sqlalchemy.types.Date'> is deprecated
       d = Date(storage_format="%(day)02d.%(month)02d.%(year)04d")
@@ -369,7 +369,7 @@ at its default of `PASSIVE_OFF`.
 
 使用特定于方言的参数（如`storage_format`和`display_width`）的正确方法是使用适当的方言特定类型：
 
-    from sqlalchemy.dialects.sqlite import DATE
+    from sqlalchemy.dialects.sqlite import DATEplainplain
     from sqlalchemy.dialects.mysql import INTEGER
 
     d = DATE(storage_format="%(day)02d.%(month)02d.%(year)04d")
@@ -402,7 +402,7 @@ isn’t new, it was added in SQLAlchemy 0.7.2.
 form an AND condition piecemeal.
 即使某些 SQLAlchemy 内部函数使用了它，该模式也不是文档模式：
 
-    condition = Noneplain
+    condition = Noneplainplain
 
     for cond in conditions:
         condition = condition & cond
@@ -550,7 +550,7 @@ etc. 全部基于称为[`Load`](orm_query.html#sqlalchemy.orm.strategy_options.L
 
 要在多元素路径中的每个链接上设置特定的加载样式，必须使用`_all()`选项：
 
-    query(User).options(joinedload_all("orders.items.keywords"))
+    query(User).options(joinedload_all("orders.items.keywords"))plain
 
 **新途径**
 
@@ -574,7 +574,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 只有路径中实际需要[`PropComparator.of_type()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.of_type "sqlalchemy.orm.interfaces.PropComparator.of_type")的元素需要设置为类绑定属性，之后才能恢复基于字符串的名称：
 
-    session.query(Company).\
+    session.query(Company).\plain
         options(
             subqueryload(Company.employees.of_type(Engineer)).
             subqueryload("machines")
@@ -591,11 +591,11 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 现在可以使用[`defaultload()`](orm_loading_relationships.html#sqlalchemy.orm.defaultload "sqlalchemy.orm.defaultload")来为现有加载程序样式应该保持不变的路径中的条目拼写出路径。更详细，但意图更清晰：
 
-    query(User).options(defaultload("orders").defaultload("items").subqueryload("keywords"))plain
+    query(User).options(defaultload("orders").defaultload("items").subqueryload("keywords"))plainplain
 
 虚线样式仍然可以利用，特别是在跳过多个路径元素的情况下：
 
-    query(User).options(defaultload("orders.items").subqueryload("keywords"))
+    query(User).options(defaultload("orders.items").subqueryload("keywords"))plain
 
 **旧方式**
 
@@ -706,7 +706,7 @@ where it will be used to render an `INSERT .. SELECT` construct:
 
 该构造足够智能，可以容纳诸如类和[`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象的 ORM 对象：
 
-    s = Session()plain
+    s = Session()plainplain
     q = s.query(User.id, User.name).filter_by(name='ed')
     ins = insert(Address).from_select((Address.id, Address.email_address), q)
 
@@ -732,7 +732,7 @@ Oracle.
 
 在 Posgtresql 上面的语句可能呈现如下：
 
-    SELECT table.a, table.b FROM table FOR SHARE OF table NOWAIT
+    SELECT table.a, table.b FROM table FOR SHARE OF table NOWAITplainplain
 
 [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象获得了类似的方法[`Query.with_for_update()`](orm_query.html#sqlalchemy.orm.query.Query.with_for_update "sqlalchemy.orm.query.Query.with_for_update")，其行为方式相同。此方法取代了使用不同系统翻译`FOR UPDATE`子句的现有[`Query.with_lockmode()`](orm_query.html#sqlalchemy.orm.query.Query.with_lockmode "sqlalchemy.orm.query.Query.with_lockmode")方法。目前，“lockmode”字符串参数仍然被[`Session.refresh()`](orm_session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")方法接受。
 
@@ -785,7 +785,7 @@ basis](#migration-2824)查询时，复合属性现在以其对象形式返回
 ### 服务器端版本计数[¶](#server-side-version-counting "Permalink to this headline")
 
 ORM的版本控制功能（现在也在[Configuring a Version
-Counter](orm_versioning.html#mapper-version-counter)中有记录）现在可以使用服务器端版本计数方案（例如由触发器或数据库系统列生成的版本计数方案）以及条件编程方案在 version\_id\_counter函数本身之外。通过为`version_id_generator`参数提供`False`值，ORM 将使用已设置的版本标识符，或者同时从每行中获取版本标识符 INSERT 或发布 UPDATE。当使用服务器生成的版本标识符时，强烈建议仅在具有强大 RETURNING 支持的后端使用此功能（Postgresql，SQL
+Counter](orm_versioning.html#mapper-version-counter)中有记录）现在可以使用服务器端版本计数方案（例如由触发器或数据库系统列生成的版本计数方案）以及条件编程方案在 version\_id\_counter 函数本身之外。通过为`version_id_generator`参数提供`False`值，ORM 将使用已设置的版本标识符，或者同时从每行中获取版本标识符 INSERT 或发布 UPDATE。当使用服务器生成的版本标识符时，强烈建议仅在具有强大 RETURNING 支持的后端使用此功能（Postgresql，SQL
 Server；
 Oracle 也支持 RETURNING，但 cx\_oracle 驱动程序只有有限的支持），否则额外的 SELECT 报表将会增加显着的性能开销。在[Server
 Side Version
@@ -836,7 +836,7 @@ Counters](orm_versioning.html#server-side-version-counter)
 
 [＃1535 T0\>](http://www.sqlalchemy.org/trac/ticket/1535)
 
-### Postgresql JSON类型[¶](#postgresql-json-type "Permalink to this headline")
+### Postgresql JSON 类型[¶](#postgresql-json-type "Permalink to this headline")
 
 Postgresql 方言现在使用[`postgresql.JSON`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")类型来补充[`postgresql.HSTORE`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")类型。
 
@@ -914,7 +914,7 @@ JOIN，因为 INNER JOIN 总是被压平）嵌套 JOIN。
 
 这是因为直到版本**3.7.16**的 SQLite 无法解析上述格式的语句：
 
-    SQLite version 3.7.15.2 2013-01-09 11:53:05
+    SQLite version 3.7.15.2 2013-01-09 11:53:05plain
     Enter ".help" for instructions
     Enter SQL statements terminated with a ";"
     sqlite> create table a(id integer);
@@ -974,7 +974,7 @@ OUTER JOIN :)：
 
 多对多连接和 eagerloads 将嵌套“次”和“右”表：
 
-    SELECT order.id, order.name
+    SELECT order.id, order.nameplain
     FROM order LEFT OUTER JOIN
     (order_item JOIN item ON order_item.item_id = item.id AND item.type = 'subitem')
     ON order_item.order_id = order.id
@@ -1021,7 +1021,7 @@ OUTER JOIN :)：
 现在，[`Join.alias()`](core_selectable.html#sqlalchemy.sql.expression.Join.alias "sqlalchemy.sql.expression.Join.alias")，[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")和[`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")函数支持一个新参数`flat=True`此标志默认情况下不会启用，以帮助实现向后兼容性 -
 但现在，可选择的“polymorhpic”可作为目标而不生成任何子查询：
 
-    employee_alias = with_polymorphic(Person, [Engineer, Manager], flat=True)plain
+    employee_alias = with_polymorphic(Person, [Engineer, Manager], flat=True)plainplain
 
     session.query(Company).join(
                         Company.employees.of_type(employee_alias)
@@ -1058,7 +1058,7 @@ OUTER JOIN :)：
 JOIN，所以加入的预加载无法使用来自order-\>
 items 的 INNER 连接，而无需更改返回的用户行，而是忽略“链接”`innerjoin=True`0.9.0 应该如何实现这将是，而不是：
 
-    FROM users LEFT OUTER JOIN orders ON <onclause> LEFT OUTER JOIN items ON <onclause>
+    FROM users LEFT OUTER JOIN orders ON <onclause> LEFT OUTER JOIN items ON <onclause>plain
 
 新的“右嵌套连接是好的”逻辑会启动，我们会得到：
 
@@ -1066,7 +1066,7 @@ items 的 INNER 连接，而无需更改返回的用户行，而是忽略“链�
 
 由于我们错过了这一点，为了避免进一步的回归，我们通过指定字符串`"nested"`到[`joinedload.innerjoin`](orm_loading_relationships.html#sqlalchemy.orm.joinedload.params.innerjoin "sqlalchemy.orm.joinedload")添加了上述功能：
 
-    query(User).options(joinedload("orders", innerjoin=False).joinedload("items", innerjoin="nested"))
+    query(User).options(joinedload("orders", innerjoin=False).joinedload("items", innerjoin="nested"))plain
 
 这个特性在 0.9.4 中是新的。
 
@@ -1100,7 +1100,7 @@ supports “implicit returning”.
 
 [＃2836 T0\>](http://www.sqlalchemy.org/trac/ticket/2836)
 
-### Backref处理程序现在可以传播多个层次[¶](#backref-handlers-can-now-propagate-more-than-one-level-deep "Permalink to this headline")
+### Backref 处理程序现在可以传播多个层次[¶](#backref-handlers-can-now-propagate-more-than-one-level-deep "Permalink to this headline")
 
 属性事件沿其“发起者”传递的机制，即与事件开始相关联的对象已被更改；而不是传递`AttributeImpl`，而是传递一个新对象[`attributes.Event`](orm_internals.html#sqlalchemy.orm.attributes.Event "sqlalchemy.orm.attributes.Event")；此对象引用`AttributeImpl`以及“操作令牌”，表示操作是附加，删除或替换操作。
 
@@ -1215,7 +1215,7 @@ constant is present:
 
 [`true()`](core_sqlelement.html#sqlalchemy.sql.expression.true "sqlalchemy.sql.expression.true")可以用作构建表达式的基础：
 
-    >>> expr = true()
+    >>> expr = true()plain
     >>> expr = expr & (t1.c.y > 5)
     >>> print(select([t1]).where(expr))
     SELECT t.x, t.y FROM t WHERE t.y > :y_1
@@ -1259,12 +1259,12 @@ BY 子句中呈现为它的名称，假设底层方言报告支持此功能。
 
 0.9 之前会呈现为：
 
-    SELECT foo(t.c1) + t.c2 AS expr
+    SELECT foo(t.c1) + t.c2 AS exprplain
     FROM t ORDER BY foo(t.c1) + t.c2
 
 现在呈现为：
 
-    SELECT foo(t.c1) + t.c2 AS exprplain
+    SELECT foo(t.c1) + t.c2 AS exprplainplain
     FROM t ORDER BY expr
 
 如果标签没有进一步嵌入到 ORDER BY 中的表达式中，ORDER
@@ -1425,7 +1425,7 @@ per the Firebird project is now their official Python driver.
 Both the `fdb` and `kinterbasdb`
 DBAPIs support a flag `retaining=True` which can be
 passed to the `commit()` and `rollback()` methods of its connection.
-此标志的记录基本原理是为了提高性能，DBAPI可以为后续事务重新使用内部事务状态。However,
+此标志的记录基本原理是为了提高性能，DBAPI 可以为后续事务重新使用内部事务状态。However,
 newer documentation refers to analyses of Firebird’s “garbage
 collection” which expresses that this flag can have a negative effect on
 the database’s ability to process cleanup tasks, and has been reported

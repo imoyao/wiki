@@ -51,7 +51,7 @@ test / orm\_test\_deprecations.py]中查看。
 
     任何多列/实体查询返回的元组都是*命名的*元组：
 
-        for row in session.query(User.name, func.count(Address.id).label('numaddresses')).join(Address).group_by(User.name):
+        for row in session.query(User.name, func.count(Address.id).label('numaddresses')).join(Address).group_by(User.name):plain
            print("name", row.name, "number", row.numaddresses)
 
     `Query` has a `statement`
@@ -59,7 +59,7 @@ test / orm\_test\_deprecations.py]中查看。
     allow `Query` to be used to create more complex
     combinations:
 
-        subq = session.query(Keyword.id.label('keyword_id')).filter(Keyword.name.in_(['beans', 'carrots'])).subquery()
+        subq = session.query(Keyword.id.label('keyword_id')).filter(Keyword.name.in_(['beans', 'carrots'])).subquery()plainplain
         recipes = session.query(Recipe).filter(exists().
            where(Recipe.id==recipe_keywords.c.recipe_id).
            where(recipe_keywords.c.keyword_id==subq.c.keyword_id)
@@ -83,7 +83,7 @@ test / orm\_test\_deprecations.py]中查看。
 
     为了得到映射类的表（如果你没有保留它）：
 
-        table = class_mapper(someclass).mapped_table
+        table = class_mapper(someclass).mapped_tableplain
 
     遍历列：
 
@@ -145,7 +145,7 @@ test / orm\_test\_deprecations.py]中查看。
     set using strings which are evaluated in Python later on (this works
     **only** with declarative, not plain mappers):
 
-        class MyClass(MyDeclarativeBase):
+        class MyClass(MyDeclarativeBase):plainplainplainplain
             ...
             'addresses':relation("Address", order_by="Address.id")
 
@@ -256,7 +256,7 @@ test / orm\_test\_deprecations.py]中查看。
 -   此外，当与 SQLite 一起使用时，`DateTime`和`Time`类型现在表示 Python
     `datetime.datetime`对象的“microseconds”字段与`str(datetime)`相同的方式 - 分数秒，而不是微秒数。那是：
 
-        dt = datetime.datetime(2008, 6, 27, 12, 0, 0, 125)  # 125 usecplain
+        dt = datetime.datetime(2008, 6, 27, 12, 0, 0, 125)  # 125 usecplainplainplain
 
         # old way
         '2008-06-27 12:00:00.125'
@@ -271,7 +271,7 @@ test / orm\_test\_deprecations.py]中查看。
 
     或者，启用“传统”模式，如下所示：
 
-        from sqlalchemy.databases.sqlite import DateTimeMixinplain
+        from sqlalchemy.databases.sqlite import DateTimeMixinplainplain
         DateTimeMixin.__legacy_microseconds__ = True
 
 默认情况下，连接池不再是 threadlocal [¶](#connection-pool-no-longer-threadlocal-by-default "Permalink to this headline")
@@ -292,7 +292,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     their argument now, which allows a path to be formulated using
     descriptors, ie. :
 
-        query.options(eagerload_all(User.orders, Order.items, Item.keywords))plain
+        query.options(eagerload_all(User.orders, Order.items, Item.keywords))plainplainplain
 
     为了向后兼容，仍然接受单个数组参数。
 
@@ -301,7 +301,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     length \*args, with a single array accepted for backwards
     compatibility:
 
-        query.join('orders', 'items')plain
+        query.join('orders', 'items')plainplainplainplain
         query.join(User.orders, Order.items)
 
 -   列和类似的\_()方法中的`in_()`它不再接受`\*args`。
@@ -321,7 +321,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
     要获得同等功能：
 
-        x = session.query(SomeClass).populate_existing().get(7)
+        x = session.query(SomeClass).populate_existing().get(7)plainplain
 
     `Session.get(cls, id)` and
     `Session.load(cls, id)` have been removed.
@@ -330,7 +330,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
     `MapperExtension.get()`也被删除（就像`MapperExtension.load()`）。要覆盖`Query.get()`的功能，请使用以下子类：
 
-        class MyQuery(Query):
+        class MyQuery(Query):plain
             def get(self, ident):
                 # ...
 
@@ -357,7 +357,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     `join()`, `outerjoin()`,
     `add_entity()` and `add_column()` has been removed. 要将`Query`中的表别名作为结果列，请使用`aliased`结构：
 
-        from sqlalchemy.orm import aliasedplain
+        from sqlalchemy.orm import aliasedplainplain
         address_alias = aliased(Address)
         print(session.query(User, address_alias).join((address_alias, User.addresses)).all())
 

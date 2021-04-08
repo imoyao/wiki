@@ -25,7 +25,7 @@ Mapper 事件[¶](#mapper-events "Permalink to this headline")
 *class* `sqlalchemy.orm.interfaces。`{.descclassname} `MapperExtension`{.descname} [¶](#sqlalchemy.orm.interfaces.MapperExtension "Permalink to this definition")
 :   [`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")事件挂钩的基本实现。
 
-    注意plain
+    注意plainplainplainplainplainplainplain
 
     [`MapperExtension`](#sqlalchemy.orm.interfaces.MapperExtension "sqlalchemy.orm.interfaces.MapperExtension")已弃用。请参阅[`event.listen()`](core_event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")以及[`MapperEvents`](events.html#sqlalchemy.orm.events.MapperEvents "sqlalchemy.orm.events.MapperEvents")。
 
@@ -130,7 +130,7 @@ Mapper 事件[¶](#mapper-events "Permalink to this headline")
 *class* `sqlalchemy.orm.interfaces。`{.descclassname} `SessionExtension`{.descname} [¶](#sqlalchemy.orm.interfaces.SessionExtension "Permalink to this definition")
 :   [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")事件挂钩的基本实现。
 
-    注意plain
+    注意plainplainplainplainplainplainplainplainplainplain
 
     [`SessionExtension`](#sqlalchemy.orm.interfaces.SessionExtension "sqlalchemy.orm.interfaces.SessionExtension")
     is deprecated. 请参阅[`event.listen()`](core_event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")以及[`SessionEvents`](events.html#sqlalchemy.orm.events.SessionEvents "sqlalchemy.orm.events.SessionEvents")。
@@ -210,7 +210,7 @@ Mapper 事件[¶](#mapper-events "Permalink to this headline")
 *class* `sqlalchemy.orm.interfaces。`{.descclassname} `AttributeExtension`{.descname} [¶](#sqlalchemy.orm.interfaces.AttributeExtension "Permalink to this definition")
 :   `AttributeImpl`事件挂钩的基本实现，这是在用户代码中引发属性突变时触发的事件。
 
-    注意
+    注意plainplainplainplainplain
 
     [`AttributeExtension`](#sqlalchemy.orm.interfaces.AttributeExtension "sqlalchemy.orm.interfaces.AttributeExtension")已弃用。请参阅[`event.listen()`](core_event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")以及[`AttributeEvents`](events.html#sqlalchemy.orm.events.AttributeEvents "sqlalchemy.orm.events.AttributeEvents")。
 

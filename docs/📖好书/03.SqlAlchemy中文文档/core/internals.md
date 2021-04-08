@@ -1,5 +1,5 @@
 ---
-title: ORM内部
+title: ORM 内部
 date: 2021-02-20 22:41:35
 permalink: /sqlalchemy/core/internals/
 categories:
@@ -8,7 +8,7 @@ categories:
   - core
 tags:
 ---
-ORM内部[¶](#orm-internals "Permalink to this headline")
+ORM 内部[¶](#orm-internals "Permalink to this headline")
 =======================================================
 
 此处列出了其他章节未涉及的关键 ORM 结构。
@@ -16,7 +16,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
  *class*`sqlalchemy.orm.state.`{.descclassname}`AttributeState`{.descname}(*state*, *key*)[¶](#sqlalchemy.orm.state.AttributeState "Permalink to this definition")
 :   提供与特定映射对象上的特定属性相对应的检查界面。
 
-    [`AttributeState`](#sqlalchemy.orm.state.AttributeState "sqlalchemy.orm.state.AttributeState")对象通过特定[`InstanceState`](#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")的[`InstanceState.attrs`](#sqlalchemy.orm.state.InstanceState.attrs "sqlalchemy.orm.state.InstanceState.attrs")集合进行访问：
+    [`AttributeState`](#sqlalchemy.orm.state.AttributeState "sqlalchemy.orm.state.AttributeState")对象通过特定[`InstanceState`](#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")的[`InstanceState.attrs`](#sqlalchemy.orm.state.InstanceState.attrs "sqlalchemy.orm.state.InstanceState.attrs")集合进行访问：plainplain
 
         from sqlalchemy import inspect
 
@@ -65,10 +65,10 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 
     跟踪发送给relationship()。cascade的选项
 
-*类 T0\> ` sqlalchemy.orm.instrumentation。 T1>  ClassManager  T2> （ T3> 类_  T4> ）< / T5> ¶ T6>`{.descclassname}*
+*类 T0\> `sqlalchemy.orm.instrumentation。 T1>  ClassManager  T2> （ T3> 类_  T4> ）< / T5> ¶ T6>`{.descclassname}*
 :   基础：`__builtin__.dict`
 
-    跟踪课堂级别的状态信息。plain
+    跟踪课堂级别的状态信息。plainplainplain
 
     ` __文件__  T0> ¶ T1>`{.descname}
     :   *inherited from the* `__le__` *attribute of* `dict`
@@ -686,7 +686,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 *class* `sqlalchemy.orm.properties。`{.descclassname} `ComparableProperty`{.descname} （ *comparator\_factory*，*=无*，*doc =无*，*info =无* ） [¶](#sqlalchemy.orm.properties.ComparableProperty "Permalink to this definition")
 :   基础：`sqlalchemy.orm.descriptor_props.DescriptorProperty`
 
-    在查询表达式中使用Python属性。
+    在查询表达式中使用Python属性。plain
 
      `__init__`{.descname}(*comparator\_factory*, *descriptor=None*, *doc=None*, *info=None*)[¶](#sqlalchemy.orm.properties.ComparableProperty.__init__ "Permalink to this definition")
     :   构建一个新的[`ComparableProperty`](#sqlalchemy.orm.properties.ComparableProperty "sqlalchemy.orm.properties.ComparableProperty")对象。
@@ -737,7 +737,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 *class* `sqlalchemy.orm.attributes。`{.descclassname} `Event`{.descname} （ *attribute\_impl*，*op T5\> ） T6\> [¶ T7\>](#sqlalchemy.orm.attributes.Event "Permalink to this definition")*
 :   一个令牌在一系列属性事件中传播。
 
-    作为事件来源的指标，同时也提供了控制属性操作链中传播的手段。
+    作为事件来源的指标，同时也提供了控制属性操作链中传播的手段。plain
 
     The [`Event`](#sqlalchemy.orm.attributes.Event "sqlalchemy.orm.attributes.Event")
     object is sent as the `initiator` argument when
@@ -758,13 +758,13 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
         - 符号`OP_APPEND`，`OP_REMOVE`或`OP_REPLACE`，指示源操作。
 
 *class* `sqlalchemy.orm.identity。`{.descclassname} `IdentityMap`{.descname} [¶](#sqlalchemy.orm.identity.IdentityMap "Permalink to this definition")
-:   ` check_modified  T0> （ T1> ） T2> ¶ T3>`{.descname}
-    :   如果任何InstanceStates存在已被标记为“已修改”，则返回True。
+:   `check_modified  T0> （ T1> ） T2> ¶ T3>`{.descname}
+    :   如果任何 InstanceStates 存在已被标记为“已修改”，则返回 True。
 
 *class* `sqlalchemy.orm.base。`{.descclassname} `InspectionAttr`{.descname} [¶](#sqlalchemy.orm.base.InspectionAttr "Permalink to this definition")
-:   基类应用于所有可由[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数返回的ORM对象。
+:   基类应用于所有可由[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数返回的 ORM 对象。
 
-    这里定义的属性允许使用简单的布尔检查来测试返回对象的基本事实。
+    这里定义的属性允许使用简单的布尔检查来测试返回对象的基本事实。plainplain
 
     虽然这里的布尔检查与使用Python
     isinstance()函数基本相同，但可以在不需要导入所有这些类的情况下使用此处的标记，还可以使SQLAlchemy类系统更改，同时保持标记处于完整状态为了向前兼容。
@@ -813,7 +813,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 *class* `sqlalchemy.orm.base。`{.descclassname} `InspectionAttrInfo`{.descname} [¶](#sqlalchemy.orm.base.InspectionAttrInfo "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.base.InspectionAttr`](#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")
 
-    将`.info`属性添加到[`InspectionAttr`](#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")。
+    将`.info`属性添加到[`InspectionAttr`](#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")。plain
 
     The rationale for [`InspectionAttr`](#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")
     vs. [`InspectionAttrInfo`](#sqlalchemy.orm.base.InspectionAttrInfo "sqlalchemy.orm.base.InspectionAttrInfo")
@@ -843,7 +843,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 *class* `sqlalchemy.orm.state。`{.descclassname} `InstanceState`{.descname} （ *obj*，*manager T5\> ） T6\> [¶ T7\>](#sqlalchemy.orm.state.InstanceState "Permalink to this definition")*
 :   基础：[`sqlalchemy.orm.base.InspectionAttr`](#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")
 
-    跟踪实例级别的状态信息。
+    跟踪实例级别的状态信息。plain
 
     [`InstanceState`](#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")是SQLAlchemy
     ORM使用的关键对象，用于跟踪对象的状态；它是在实例化对象的时刻创建的，通常是SQLAlchemy应用于该类的`__init__()`方法的结果[instrumentation](glossary.html#term-instrumentation)。
@@ -1000,7 +1000,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
  *class*`sqlalchemy.orm.attributes.`{.descclassname}`InstrumentedAttribute`{.descname}(*class\_*, *key*, *impl=None*, *comparator=None*, *parententity=None*, *of\_type=None*)[¶](#sqlalchemy.orm.attributes.InstrumentedAttribute "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.attributes.QueryableAttribute`](#sqlalchemy.orm.attributes.QueryableAttribute "sqlalchemy.orm.attributes.QueryableAttribute")
 
-    添加基本​​[descriptor](glossary.html#term-descriptor)方法的类绑定插装属性。
+    添加基本​​[descriptor](glossary.html#term-descriptor)方法的类绑定插装属性。plainplain
 
     有关大多数功能的描述，请参阅[`QueryableAttribute`](#sqlalchemy.orm.attributes.QueryableAttribute "sqlalchemy.orm.attributes.QueryableAttribute")。
 
@@ -1016,17 +1016,17 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 `sqlalchemy.orm.interfaces。`{.descclassname} `MANYTOONE`{.descname} *= symbol（'MANYTOONE'）* [¶](#sqlalchemy.orm.interfaces.MANYTOONE "Permalink to this definition")
 :   指示[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的多对一方向。
 
-    此符号通常由内部使用，但可能会暴露在某些API功能中。plain
+    此符号通常由内部使用，但可能会暴露在某些API功能中。plainplain
 
 `sqlalchemy.orm.interfaces。`{.descclassname} `MANYTOMANY`{.descname} *= symbol（'MANYTOMANY'）* [¶](#sqlalchemy.orm.interfaces.MANYTOMANY "Permalink to this definition")
 :   指示[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的多对多方向。
 
-    此符号通常由内部使用，但可能会暴露在某些API功能中。
+    此符号通常由内部使用，但可能会暴露在某些API功能中。plain
 
 *class* `sqlalchemy.orm.interfaces。`{.descclassname} `MapperProperty`{.descname} [¶](#sqlalchemy.orm.interfaces.MapperProperty "Permalink to this definition")
 :   基础：`sqlalchemy.orm.base._MappedAttribute`，[`sqlalchemy.orm.base.InspectionAttr`](#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")，`sqlalchemy.util.langhelpers.MemoizedSlots`
 
-    表示由[`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")映​​射的特定类属性。
+    表示由[`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")映​​射的特定类属性。plainplain
 
     最常见的[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")是映射的[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")，它在映射中表示为[`ColumnProperty`](#sqlalchemy.orm.properties.ColumnProperty "sqlalchemy.orm.properties.ColumnProperty")的实例，并且对另一个类的引用由[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")生成，在映射中表示为[`RelationshipProperty`](#sqlalchemy.orm.properties.RelationshipProperty "sqlalchemy.orm.properties.RelationshipProperty")的实例。
 
@@ -1128,7 +1128,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 `sqlalchemy.orm.interfaces。`{.descclassname} `NOT_EXTENSION`{.descname} *=符号（'NOT\_EXTENSION'）* [¶](#sqlalchemy.orm.interfaces.NOT_EXTENSION "Permalink to this definition")
 :   指示不属于 sqlalchemy.ext 的`InspectionAttr`的符号。
 
-    分配给[`InspectionAttr.extension_type`{](#sqlalchemy.orm.base.InspectionAttr.extension_type "sqlalchemy.orm.base.InspectionAttr.extension_type")属性。
+    分配给[`InspectionAttr.extension_type`{](#sqlalchemy.orm.base.InspectionAttr.extension_type "sqlalchemy.orm.base.InspectionAttr.extension_type")属性。plain
 
 `sqlalchemy.orm.interfaces。`{.descclassname} `ONETOMANY`{.descname} *= symbol（'ONETOMANY'）* [¶](#sqlalchemy.orm.interfaces.ONETOMANY "Permalink to this definition")
 :   指示[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的一对多方向。
@@ -1138,7 +1138,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
  *class*`sqlalchemy.orm.interfaces.`{.descclassname}`PropComparator`{.descname}(*prop*, *parentmapper*, *adapt\_to\_entity=None*)[¶](#sqlalchemy.orm.interfaces.PropComparator "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.operators.ColumnOperators`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")
 
-    为[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")对象定义SQL运算符。
+    为[`MapperProperty`](#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")对象定义SQL运算符。plainplain
 
     SQLAlchemy允许在Core和ORM级别重新定义运算符。[`PropComparator`](#sqlalchemy.orm.interfaces.PropComparator "sqlalchemy.orm.interfaces.PropComparator")
     is the base class of operator redefinition for ORM-level operations,
@@ -2823,7 +2823,7 @@ ORM内部[¶](#orm-internals "Permalink to this headline")
 :    `filter_states_for_dep`{.descname}(*dep*, *states*)[¶](#sqlalchemy.orm.session.UOWTransaction.filter_states_for_dep "Permalink to this definition")
     :   将 InstanceState 的给定列表筛选为与给定的 DependencyProcessor 相关的列表。
 
-    ` finalize_flush_changes  T0> （ T1> ） T2> ¶ T3>`{.descname}
+    ` finalize_flush_changes  T0> （ T1> ） T2> ¶ T3>`{.descname}plain
     :   在成功刷新()后将处理的对象标记为清除/删除。
 
         在execute()方法成功且事务已提交后，在flush()方法内调用此方法。
