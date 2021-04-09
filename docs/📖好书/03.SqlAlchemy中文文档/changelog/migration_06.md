@@ -40,11 +40,11 @@ SQLAlchemy 0.6 中有什么新东西？[¶](#what-s-new-in-sqlalchemy-0-6 "Perma
 由`create_engine()`使用的 URL 格式已得到增强，可以使用受 JDBC 启发的方案来处理特定后端的任意数量的 DBAPI。以前的格式仍然有效，并且会选择一个“默认的”DBAPI 实现，比如下面的 Postgresql
 URL，它将使用 psycopg2：
 
-    create_engine('postgresql://scott:tiger@localhost/test')plainplainplain
+    create_engine('postgresql://scott:tiger@localhost/test')plainplainplainplainplain
 
 但是，要指定特定的 DBAPI 后端（例如 pg8000），请使用加号“+”将其添加到 URL 的“协议”部分中：
 
-    create_engine('postgresql+pg8000://scott:tiger@localhost/test')
+    create_engine('postgresql+pg8000://scott:tiger@localhost/test')plain
 
 重要的方言链接：
 
@@ -86,18 +86,18 @@ URL，它将使用 psycopg2：
 
 我们知道，将一个`ClauseElement`与任何其他对象进行比较都会返回另一个`ClauseElement`：
 
-    >>> from sqlalchemy.sql import column
+    >>> from sqlalchemy.sql import columnplainplain
     >>> column('foo') == 5
     <sqlalchemy.sql.expression._BinaryExpression object at 0x1252490>
 
 这样一来，Python 表达式在转换为字符串时就会生成 SQL 表达式：
 
-    >>> str(column('foo') == 5)plain
+    >>> str(column('foo') == 5)plainplainplainplain
     'foo = :foo_1'
 
 但是如果我们这样说会发生什么？
 
-    >>> if column('foo') == 5:plain
+    >>> if column('foo') == 5:plainplain
     ...     print("yes")
     ...
 
@@ -114,12 +114,12 @@ URL，它将使用 psycopg2：
 
 这意味着代码如下：
 
-    if expression:plain
+    if expression:plainplain
         print("the expression is:", expression)
 
 如果`expression`是二进制子句，则不会评估。由于不应该使用上述模式，因此如果在布尔上下文中调用，基`ClauseElement`现在会引发异常：
 
-    >>> bool(c)
+    >>> bool(c)plain
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
       ...
@@ -187,7 +187,7 @@ connecting and fetching 50,000 rows looks like with SQLite, using mostly
 direct SQLite access, a `ResultProxy`, and a simple
 mapped ORM object:
 
-    sqlite select/native: 0.260splain
+    sqlite select/native: 0.260splainplain
 
     0.6 / C extension
 
@@ -388,7 +388,7 @@ unicode 对象，以用于基本选择 VARCHAR 值。如果是这样，`String`�
 
 对于明确不需要 unicode 对象的字符串列更通用的解决方案是使用将 unicode 转换回 utf-8 或任何所需的`TypeDecorator`：
 
-    class UTF8Encoded(TypeDecorator):plainplain
+    class UTF8Encoded(TypeDecorator):plainplainplain
         """Unicode type which coerces to utf-8."""
 
         impl = sa.VARCHAR
@@ -413,7 +413,7 @@ CHECK 策略。请注意，Postgresql ENUM 类型目前不适用于 pg8000 或 z
 
 一些在表格元数据中大量使用的应用程序可能希望在反映的表格和/或未反映的表格中比较类型。在`TypeEngine`上有一个名为`_type_affinity`和相关联的比较帮助器`_compare_type_affinity`的半私人访问器。该访问器返回类型对应的“generic”`types`类：
 
-    >>> String(50)._compare_type_affinity(postgresql.VARCHAR(50))
+    >>> String(50)._compare_type_affinity(postgresql.VARCHAR(50))plain
     True
     >>> Integer()._compare_type_affinity(mysql.REAL)
     False
@@ -497,14 +497,14 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
 在 mapper 级别：
 
-    mapper(Child, child)plainplain
+    mapper(Child, child)plainplainplain
     mapper(Parent, parent, properties={
         'child':relationship(Child, lazy='joined', innerjoin=True)
     })
 
 在查询时间级别：
 
-    session.query(Parent).options(joinedload(Parent.child, innerjoin=True)).all()
+    session.query(Parent).options(joinedload(Parent.child, innerjoin=True)).all()plain
 
 `relationship()`级别的`innerjoin=True`标志也将对任何不覆盖该值的`joinedload()`选项生效。
 
@@ -524,11 +524,11 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
     例如，在 0.5 这个查询中：
 
-        session.query(Address).options(eagerload(Address.user)).limit(10)
+        session.query(Address).options(eagerload(Address.user)).limit(10)plainplain
 
     会产生如下的 SQL：
 
-        SELECT * FROMplainplain
+        SELECT * FROMplainplainplainplain
           (SELECT * FROM addresses LIMIT 10) AS anon_1
           LEFT OUTER JOIN users AS users_1 ON users_1.id = anon_1.addresses_user_id
 
