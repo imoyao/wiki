@@ -51,7 +51,7 @@ test / orm\_test\_deprecations.py]中查看。
 
     任何多列/实体查询返回的元组都是*命名的*元组：
 
-        for row in session.query(User.name, func.count(Address.id).label('numaddresses')).join(Address).group_by(User.name):plain
+        for row in session.query(User.name, func.count(Address.id).label('numaddresses')).join(Address).group_by(User.name):plainplain
            print("name", row.name, "number", row.numaddresses)
 
     `Query` has a `statement`
@@ -59,7 +59,7 @@ test / orm\_test\_deprecations.py]中查看。
     allow `Query` to be used to create more complex
     combinations:
 
-        subq = session.query(Keyword.id.label('keyword_id')).filter(Keyword.name.in_(['beans', 'carrots'])).subquery()plainplain
+        subq = session.query(Keyword.id.label('keyword_id')).filter(Keyword.name.in_(['beans', 'carrots'])).subquery()plainplainplainplain
         recipes = session.query(Recipe).filter(exists().
            where(Recipe.id==recipe_keywords.c.recipe_id).
            where(recipe_keywords.c.keyword_id==subq.c.keyword_id)
@@ -87,7 +87,7 @@ test / orm\_test\_deprecations.py]中查看。
 
     遍历列：
 
-        for col in table.c:
+        for col in table.c:plainplain
             print(col)
 
     使用特定列：
@@ -131,7 +131,7 @@ test / orm\_test\_deprecations.py]中查看。
     will be extremely similar to 0.4 or previous, use the
     `order_by` setting on `mapper()` and `relation()`:
 
-        mapper(User, users, properties={
+        mapper(User, users, properties={plain
             'addresses':relation(Address, order_by=addresses.c.id)
         }, order_by=users.c.id)
 
@@ -145,7 +145,7 @@ test / orm\_test\_deprecations.py]中查看。
     set using strings which are evaluated in Python later on (this works
     **only** with declarative, not plain mappers):
 
-        class MyClass(MyDeclarativeBase):plainplainplainplain
+        class MyClass(MyDeclarativeBase):plainplainplainplainplainplain
             ...
             'addresses':relation("Address", order_by="Address.id")
 
@@ -301,7 +301,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     length \*args, with a single array accepted for backwards
     compatibility:
 
-        query.join('orders', 'items')plainplainplainplain
+        query.join('orders', 'items')plainplainplainplainplain
         query.join(User.orders, Order.items)
 
 -   列和类似的\_()方法中的`in_()`它不再接受`\*args`。
@@ -321,7 +321,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
     要获得同等功能：
 
-        x = session.query(SomeClass).populate_existing().get(7)plainplain
+        x = session.query(SomeClass).populate_existing().get(7)plainplainplain
 
     `Session.get(cls, id)` and
     `Session.load(cls, id)` have been removed.
@@ -330,7 +330,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
 
     `MapperExtension.get()`也被删除（就像`MapperExtension.load()`）。要覆盖`Query.get()`的功能，请使用以下子类：
 
-        class MyQuery(Query):plain
+        class MyQuery(Query):plainplain
             def get(self, ident):
                 # ...
 
@@ -357,7 +357,7 @@ the “threadlocal” strategy via `strategy="threadlocal"`.
     `join()`, `outerjoin()`,
     `add_entity()` and `add_column()` has been removed. 要将`Query`中的表别名作为结果列，请使用`aliased`结构：
 
-        from sqlalchemy.orm import aliasedplainplain
+        from sqlalchemy.orm import aliasedplainplainplainplain
         address_alias = aliased(Address)
         print(session.query(User, address_alias).join((address_alias, User.addresses)).all())
 

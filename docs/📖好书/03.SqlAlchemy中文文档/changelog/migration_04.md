@@ -24,7 +24,7 @@ SQLAlchemy 0.4 有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-4 "Permalin
 
 如果您使用任何 ORM 功能，请确保从`sqlalchemy.orm`导入：
 
-    from sqlalchemy import *
+    from sqlalchemy import *plain
     from sqlalchemy.orm import *
 
 Secondly, anywhere you used to say `engine=`,
@@ -53,7 +53,7 @@ of sqlachemy’s sub-modules into your namespace.
 
 在 0.3 中，此代码起作用：
 
-    from sqlalchemy import *plain
+    from sqlalchemy import *plainplain
 
     class UTCDateTime(types.TypeDecorator):
         pass
@@ -81,25 +81,25 @@ Query 具有与外部生成匹配的内在胆量，并且有更多技巧。所�
 
 User.query.get\_by（\*\* kwargs）
 
-    User.query.filter_by(**kwargs).first()
+    User.query.filter_by(**kwargs).first()plain
 
 User.query.select\_by（\*\* kwargs）
 
-    User.query.filter_by(**kwargs).all()plainplain
+    User.query.filter_by(**kwargs).all()plainplainplain
 
 User.query.select()
 
-    User.query.filter(xxx).all()plain
+    User.query.filter(xxx).all()plainplain
 
 #### 新的基于属性的表达式构造[¶](#new-property-based-expression-constructs "Permalink to this headline")
 
 到目前为止，ORM 中最明显的差异是，您现在可以直接使用基于类的属性构建查询条件。使用映射类时，不再需要“.c。”前缀：
 
-    session.query(User).filter(and_(User.name == 'fred', User.id > 17))plainplain
+    session.query(User).filter(and_(User.name == 'fred', User.id > 17))plainplainplain
 
 尽管简单的基于列的比较没有什么大不了，但类属性有一些新的“更高级别”结构可用，包括以前仅在`filter_by()`中可用的结构：
 
-    # comparison of scalar relations to an instance
+    # comparison of scalar relations to an instanceplain
     filter(Address.user == user)
 
     # return all users who contain a particular address
@@ -304,7 +304,7 @@ User.query.select()
 
 一些方便的查询选项。`undefer_group()`将一组“延迟”列标记为 undeferred：
 
-    mapper(Class, table, properties={
+    mapper(Class, table, properties={plainplain
         'foo' : deferred(table.c.foo, group='group1'),
         'bar' : deferred(table.c.bar, group='group1'),
         'bat' : deferred(table.c.bat, group='group1'),
@@ -386,7 +386,7 @@ types cover many needs:
 
 如果您需要后期配置会话，请使用引擎进行配置，稍后使用`configure()`添加它：
 
-    Session.configure(bind=create_engine(...))plain
+    Session.configure(bind=create_engine(...))plainplainplainplain
 
 All the behaviors of `SessionContext` and the
 `query` and `__init__` methods
@@ -395,7 +395,7 @@ of `assignmapper` are moved into the new
 with both `sessionmaker` as well as
 `create_session()`:
 
-    from sqlalchemy.orm import scoped_session, sessionmakerplainplain
+    from sqlalchemy.orm import scoped_session, sessionmakerplainplainplain
 
     Session = scoped_session(sessionmaker(autoflush=True, transactional=True))
     Session.configure(bind=engine)
@@ -433,7 +433,7 @@ with both `sessionmaker` as well as
 Also, `autoflush=True` means the `Session` will `flush()` before each
 `query` as well as when you call `flush()` or `commit()`. 所以现在这将工作：
 
-    Session = sessionmaker(bind=engine, autoflush=True, transactional=True)
+    Session = sessionmaker(bind=engine, autoflush=True, transactional=True)plain
 
     u = User(name='wendy')
 
@@ -447,7 +447,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
 `commit()`和`rollback()`，以及`begin()`现在直接在`Session`上。不需要为任何事情使用`SessionTransaction`（它仍然在后台）。
 
-    Session = sessionmaker(autoflush=True, transactional=False)plainplain
+    Session = sessionmaker(autoflush=True, transactional=False)plainplainplain
 
     sess = Session()
     sess.begin()
@@ -458,7 +458,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
 与封闭的引擎级别（即非 ORM）事务共享`Session`非常简单：
 
-    Session = sessionmaker(autoflush=True, transactional=False)
+    Session = sessionmaker(autoflush=True, transactional=False)plain
 
     conn = engine.connect()
     trans = conn.begin()
@@ -526,7 +526,7 @@ lalchemy.org/docs/04/sqlexpression.html\#sql\_operators
 
 就像它说的那样：
 
-    b = bindparam('foo', type_=String)
+    b = bindparam('foo', type_=String)plain
 
 ### in\_函数更改为接受序列或可选[¶](#in-function-changed-to-accept-sequence-or-selectable "Permalink to this headline")
 
@@ -537,7 +537,7 @@ in\_函数现在将一系列值或可选值作为其唯一参数。以前传入�
 
 应改为
 
-    my_table.select(my_table.c.id.in_([1,2,3])plain
+    my_table.select(my_table.c.id.in_([1,2,3])plainplain
     my_table.select(my_table.c.id.in_(listOfIds)
 
 架构和反思[¶](#schema-and-reflection "Permalink to this headline")
@@ -591,7 +591,7 @@ SQL 执行[¶](#sql-execution "Permalink to this headline")
 
 ### Oracle 的输出参数[¶](#out-parameters-for-oracle "Permalink to this headline")
 
-    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)plainplain
+    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)plainplainplain
     assert result.out_parameters == {'y':10, 'z':75}
 
 ### 连接绑定`MetaData`，`Sessions` [¶](#connection-bound-metadata-sessions "Permalink to this headline")

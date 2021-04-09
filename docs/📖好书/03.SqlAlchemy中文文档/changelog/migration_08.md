@@ -71,7 +71,7 @@ SQLAlchemy 最终也会减少 2.5 的支持 -
 
 -   与自引用关系的关系，现在支持**列指向自身**的复合外键。规范情况如下：
 
-        class Folder(Base):plain
+        class Folder(Base):plainplainplain
             __tablename__ = 'folder'
             __table_args__ = (
               ForeignKeyConstraint(
@@ -114,7 +114,7 @@ SQLAlchemy 最终也会减少 2.5 的支持 -
 
 -   以前很难的自定义连接条件，如涉及函数和/或 CASTing 类型的连接条件，现在在大多数情况下会按预期运行：
 
-        class HostEntry(Base):
+        class HostEntry(Base):plain
             __tablename__ = 'host_entry'
 
             id = Column(Integer, primary_key=True)
@@ -286,7 +286,7 @@ method allows the user to specify which tables should be present when
 querying against a joined-table entity.
 不幸的是，这个方法很笨拙，只适用于列表中的第一个实体，否则在内部使用和内部使用都会有尴尬的行为。已添加名为[`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")的对[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")结构的新增强，允许将任何实体“别名”为其自身的“多态”版本，可自由使用任何地方：
 
-    from sqlalchemy.orm import with_polymorphicplainplain
+    from sqlalchemy.orm import with_polymorphicplainplainplain
     palias = with_polymorphic(Person, [Engineer, Manager])
     session.query(Company).\
                 join(palias, Company.employees).\
@@ -324,7 +324,7 @@ attribute is accepted, including with loader functions like
 and comparison methods like [`PropComparator.any()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.any "sqlalchemy.orm.interfaces.PropComparator.any")
 and [`PropComparator.has()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.has "sqlalchemy.orm.interfaces.PropComparator.has"):
 
-    # use eager loading in conjunction with with_polymorphic targets
+    # use eager loading in conjunction with with_polymorphic targetsplain
     Job_P = with_polymorphic(Job, [SubJob, ExtraJob], aliased=True)
     q = s.query(DataContainer).\
                 join(DataContainer.jobs.of_type(Job_P)).\
@@ -472,7 +472,7 @@ or [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.
 请注意，Dogpile 示例以及之前的 Beaker 示例所使用的 SQLAlchemy
 API 已稍有变化，特别是如 Beaker 示例所示，需要进行此更改：
 
-    --- examples/beaker_caching/caching_query.pyplainplain
+    --- examples/beaker_caching/caching_query.pyplainplainplain
     +++ examples/beaker_caching/caching_query.py
     @@ -222,7 +222,8 @@
 
@@ -503,7 +503,7 @@ Core 中的新操作系统添加了一直缺少的钩子，它将新的和重载
 
 例如，要将对数支持添加到[`Numeric`](core_type_basics.html#sqlalchemy.types.Numeric "sqlalchemy.types.Numeric")类型中：
 
-    from sqlalchemy.types import Numeric
+    from sqlalchemy.types import Numericplain
     from sqlalchemy.sql import func
 
     class CustomNumeric(Numeric):
@@ -513,7 +513,7 @@ Core 中的新操作系统添加了一直缺少的钩子，它将新的和重载
 
 新的类型可以像任何其他类型一样使用：
 
-    data = Table('data', metadata,plain
+    data = Table('data', metadata,plainplain
               Column('id', Integer, primary_key=True),
               Column('x', CustomNumeric(10, 5)),
               Column('y', CustomNumeric(10, 5))
@@ -541,7 +541,7 @@ multi-VALUES statement such as
 `VALUES (<row1>), (<row2>), ...`.
 这只与支持这种语法的后端相关，包括 Postgresql，SQLite 和 MySQL。它与通常的`executemany()`风格的 INSERT 不同，它保持不变：
 
-    users.insert().values([plain
+    users.insert().values([plainplain
                         {"name": "some name"},
                         {"name": "some other name"},
                         {"name": "yet another name"},
@@ -561,7 +561,7 @@ parameters as well as result row values, passing them through a Python
 side conversion function on the way to/back from the database.
 新功能允许类似的功能，除了在数据库方面：
 
-    from sqlalchemy.types import String
+    from sqlalchemy.types import Stringplain
     from sqlalchemy import func, Table, Column, MetaData
 
     class LowerString(String):
@@ -599,7 +599,7 @@ Processing](core_custom_types.html#types-sql-value-processing)
 [New Class/Object Inspection
 System](#feature-orminspection-08)中引入的[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数也适用于核心。应用于[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")时，它会生成一个[`Inspector`](core_reflection.html#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")对象：
 
-    from sqlalchemy import inspectplain
+    from sqlalchemy import inspectplainplain
     from sqlalchemy import create_engine
 
     engine = create_engine("postgresql://scott:tiger@localhost/test")
@@ -699,7 +699,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 在更新中切片更新：
 
-    conn.execute(plainplain
+    conn.execute(plainplainplain
         mytable.update().values({mytable.c.arraycol[2:3]: [7, 8]})
     )
 
@@ -715,7 +715,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 数组串联，其中右侧`[4， 5， 6>`）被强制转换为数组文字：
 
-    select([mytable.c.arraycol + [4, 5, 6]])plain
+    select([mytable.c.arraycol + [4, 5, 6]])plainplain
 
 也可以看看
 
@@ -765,7 +765,7 @@ types and will render on any backend, including when features such as
 and [`cast()`](core_sqlelement.html#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")
 is used:
 
-    >>> stmt = select([cast(sometable.c.somechar, String(20, collation='utf8'))])plain
+    >>> stmt = select([cast(sometable.c.somechar, String(20, collation='utf8'))])plainplain
     >>> print(stmt)
     SELECT CAST(sometable.somechar AS VARCHAR(20) COLLATE "utf8") AS anon_1
     FROM sometable
@@ -943,7 +943,7 @@ actually used in that context.
 
 这种改变只会使渲染 SQL 变得更好，因为在相对于所选内容的 FROM 对象不足的情况下，不再可能渲染非法 SQL：
 
-    from sqlalchemy.sql import table, column, selectplain
+    from sqlalchemy.sql import table, column, selectplainplain
 
     t1 = table('t1', column('x'))
     t2 = table('t2', column('y'))
@@ -996,7 +996,7 @@ fired off according to the actual class passed as a target.
 
 我们在 MSSQL 方言中发现了一个非常古老的行为，它会在尝试像这样做时尝试从用户身上抢救用户：
 
-    scalar_subq = select([someothertable.c.id]).where(someothertable.c.data=='foo')plainplain
+    scalar_subq = select([someothertable.c.id]).where(someothertable.c.data=='foo')plainplainplain
     select([sometable]).where(sometable.c.id==scalar_subq)
 
 SQL Server 不允许与标量 SELECT 进行等同比较，即“x =（SELECT
@@ -1019,7 +1019,7 @@ x”这样的比较会发生同样的事情，总的来说，这种猜测级别�
 
 表达式系统的用户知道[`Select.apply_labels()`](core_selectable.html#sqlalchemy.sql.expression.Select.apply_labels "sqlalchemy.sql.expression.Select.apply_labels")为每个列名添加表名，影响[`Select.c`](core_selectable.html#sqlalchemy.sql.expression.Select.c "sqlalchemy.sql.expression.Select.c")中可用的名称：
 
-    s = select([table1]).apply_labels()
+    s = select([table1]).apply_labels()plain
     s.c.table1_col1
     s.c.table1_col2
 
@@ -1067,7 +1067,7 @@ in both cases:
 
 0.7 添加了一个名为`column_reflect`的新事件，这样可以反映出列的反射，因为每个列都反映出来。我们得到这个事件有点不对，因为事件没有办法获取用于反射的当前`Inspector`和`Connection`，在来自数据库的附加信息的情况下是必要的。由于这是一个尚未广泛使用的新事件，因此我们将直接向其中添加`inspector`参数：
 
-    @event.listens_for(Table, "column_reflect")plainplain
+    @event.listens_for(Table, "column_reflect")plainplainplain
     def listen_for_col(inspector, table, column_info):
         # ...
 
@@ -1083,7 +1083,7 @@ MySQL 方言执行两个调用，一个是非常昂贵的，用于从数据库�
 
 引用`insert()`或`update()`构造中不存在的列会引发错误而不是警告：
 
-    t1 = table('t1', column('x'))plainplain
+    t1 = table('t1', column('x'))plainplainplainplain
     t1.insert().values(x=5, z=5) # raises "Unconsumed column names: z"
 
 [＃2415 T0\>](http://www.sqlalchemy.org/trac/ticket/2415)
