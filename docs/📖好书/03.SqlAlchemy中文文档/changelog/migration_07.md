@@ -125,7 +125,7 @@ aren’t really aware of them otherwise.
 
 请注意，`query.join()`的所有其他形式保持不变：
 
-    query.join(MyClass.somerelation)plain
+    query.join(MyClass.somerelation)plainplain
     query.join("somerelation")
     query.join(MyTarget)
     # ... etc
@@ -188,7 +188,7 @@ Index()构造可以与表定义一起内联创建，使用字符串作为列名�
 
 这里的主要基本原理是为了声明`__table_args__`的好处，特别是在与 mixin 一起使用时：
 
-    class HasNameMixin(object):plain
+    class HasNameMixin(object):plainplain
         name = Column('name', String(50), nullable=False)
         @declared_attr
         def __table_args__(cls):
@@ -212,7 +212,7 @@ Server 和 Oracle 支持，可能还有其他支持。
 
 SQLAlchemy 使用`over()`方法提供一个通常通过现有函数子句调用的简单结构，该方法接受`order_by`和`partition_by`关键字参数。下面我们复制 PG 教程中的第一个例子：
 
-    from sqlalchemy.sql import table, column, select, funcplainplainplain
+    from sqlalchemy.sql import table, column, select, funcplainplainplainplain
 
     empsalary = table('empsalary',
                     column('depname'),
@@ -296,7 +296,7 @@ equivalent to:
 
 由`query.count()`发出的 SQL 现在总是如下形式：
 
-    SELECT count(1) AS count_1 FROM (
+    SELECT count(1) AS count_1 FROM (plain
         SELECT user.id AS user_id, user.name AS user_name from user
     ) AS anon_1
 
@@ -308,12 +308,12 @@ equivalent to:
 
 MySQL 用户已经报道过，MyISAM 引擎不会因为这个简单的改变而完全落空。请注意，对于针对无法处理简单子查询的 DB 进行优化的简单`count()`，应该使用`func.count()`：
 
-    from sqlalchemy import funcplain
+    from sqlalchemy import funcplainplain
     session.query(func.count(MyClass.id)).scalar()
 
 或者用于`count(*)`：
 
-    from sqlalchemy import func, literal_columnplainplain
+    from sqlalchemy import func, literal_columnplainplainplainplain
     session.query(func.count(literal_column('*'))).select_from(MyClass).scalar()
 
 ### LIMIT / OFFSET 子句现在使用绑定参数[¶](#limit-offset-clauses-now-use-bind-parameters "Permalink to this headline")
@@ -343,11 +343,11 @@ Sajip 为我们的日志记录系统提供了一个补丁，使得不再需要�
 
 现在，`contains_eager()`修饰符将自行链接一段更长的路径，而不需要发出单独的`contains_eager()`调用。代替：
 
-    session.query(A).options(contains_eager(A.b), contains_eager(A.b, B.c))plainplainplain
+    session.query(A).options(contains_eager(A.b), contains_eager(A.b, B.c))plainplainplainplainplain
 
 你可以说：
 
-    session.query(A).options(contains_eager(A.b, B.c))plainplainplain
+    session.query(A).options(contains_eager(A.b, B.c))plainplainplainplainplainplain
 
 [＃2032 T0\>](http://www.sqlalchemy.org/trac/ticket/2032)
 
@@ -437,7 +437,7 @@ Server 将这些类型的长度默认为'1'。
 
 当映射具有`PickleType`或`postgresql.ARRAY`数据类型的列时，此更改引用 ORM 的默认行为。`mutable`标志现在默认设置为`False`。如果现有的应用程序使用这些类型，并且依赖于检测到就地突变，则必须使用`mutable=True`构造类型对象以恢复 0.6 行为：
 
-    Table('mytable', metadata,
+    Table('mytable', metadata,plain
         # ....
 
         Column('pickled_data', PickleType(mutable=True))
@@ -541,7 +541,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 这也意味着像这样的查询会改变它的行为：
 
-    session.query(Parent).filter(Child.id > 7)plainplainplain
+    session.query(Parent).filter(Child.id > 7)plainplainplainplainplain
 
 在 0.6 中，这会使得：
 
@@ -561,7 +561,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 0.6 和 0.7 中的哪一个呈现：
 
-    SELECT parent.id AS parent_id, child.id AS child_idplainplainplain
+    SELECT parent.id AS parent_id, child.id AS child_idplainplainplainplain
     FROM parent LEFT OUTER JOIN child ON parent.id = child.id
     WHERE child.id > :id_1
 
@@ -577,7 +577,7 @@ JOIN 改为“child”。该行位于“Parent”中，看到多态身份对应�
 
 给定两个表`foo`和`bar`，每个表具有主键列`id`，现在会产生一个错误：
 
-    foobar = foo.join(bar, foo.c.id==bar.c.foo_id)
+    foobar = foo.join(bar, foo.c.id==bar.c.foo_id)plain
     mapper(FooBar, foobar)
 
 This because the `mapper()` refuses to guess what
@@ -651,7 +651,7 @@ For a few years we’ve added the string `sqlalchemy.exceptions` to `sys.modules
 “`import sqlalchemy.exceptions`” would work.
 很久以来，核心例外模块的名称一直是`exc`，因此建议为此模块导入：
 
-    from sqlalchemy import excplain
+    from sqlalchemy import excplainplain
 
 The `exceptions` name is still present in
 “`sqlalchemy`” for applications which might have
@@ -695,11 +695,11 @@ restored as of 0.7b4/0.7.0, but emits a deprecation warning.
 
 这个模糊的特性允许这种模式与 MySQL 后端：
 
-    select([mytable], distinct='ALL', prefixes=['HIGH_PRIORITY'])plain
+    select([mytable], distinct='ALL', prefixes=['HIGH_PRIORITY'])plainplain
 
 `prefixes`关键字或`prefix_with()`方法应该用于非标准或不常用的前缀：
 
-    select([mytable]).prefix_with('HIGH_PRIORITY', 'ALL')plainplain
+    select([mytable]).prefix_with('HIGH_PRIORITY', 'ALL')plainplainplain
 
 ### `useexisting`取代`extend_existing`和`keep_existing` [¶](#useexisting-superseded-by-extend-existing-and-keep-existing "Permalink to this headline")
 

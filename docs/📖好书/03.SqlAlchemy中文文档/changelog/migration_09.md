@@ -114,7 +114,7 @@ The above statement is a mess, the ON clause refers
 `anon_1.id = anon_1.id`, our WHERE clause has been
 replaced with `anon_1` as well.
 
-这种行为是非常有意的，但是与[`Query.select_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")流行的用例有不同的用例。上述行为现在可以通过称为[`Query.select_entity_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_entity_from "sqlalchemy.orm.query.Query.select_entity_from")的新方法使用。这是一种较少使用的行为，在现代SQLAlchemy中大致等价于从定制的[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")结构中进行选择：
+这种行为是非常有意的，但是与[`Query.select_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")流行的用例有不同的用例。上述行为现在可以通过称为[`Query.select_entity_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_entity_from "sqlalchemy.orm.query.Query.select_entity_from")的新方法使用。这是一种较少使用的行为，在现代 SQLAlchemy 中大致等价于从定制的[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")结构中进行选择：
 
     select_stmt = select([User]).where(User.id == 7)plain
     user_from_stmt = aliased(User, select_stmt.alias())
@@ -139,7 +139,7 @@ tests continue to function, then upgrade to 0.9 without issue.
 
 ### `viewonly=True` on `relationship()` prevents history from taking effect[¶](#viewonly-true-on-relationship-prevents-history-from-taking-effect "Permalink to this headline")
 
-[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上的`viewonly`标志用于防止更改目标属性在刷新过程中产生任何效果。这是通过消除刷新期间的属性来实现的。但是，直到现在，对该属性的更改仍然会将父对象注册为“脏”并触发潜在的刷新。现在的变化是，`viewonly`标志现在也禁止为目标属性设置历史记录。像backrefs和用户定义事件的属性事件仍然可以继续正常运行。
+[`relationship()`](orm_relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上的`viewonly`标志用于防止更改目标属性在刷新过程中产生任何效果。这是通过消除刷新期间的属性来实现的。但是，直到现在，对该属性的更改仍然会将父对象注册为“脏”并触发潜在的刷新。现在的变化是，`viewonly`标志现在也禁止为目标属性设置历史记录。像 backrefs 和用户定义事件的属性事件仍然可以继续正常运行。
 
 更改说明如下：
 
@@ -345,7 +345,7 @@ at its default of `PASSIVE_OFF`.
 
 通过 0.8 系列，大多数类型的对象接受了被默默忽略的任意关键字参数：
 
-    from sqlalchemy import Date, Integer
+    from sqlalchemy import Date, Integerplain
 
     # storage_format argument here has no effect on any backend;
     # it needs to be on the SQLite-specific type
@@ -378,7 +378,7 @@ at its default of `PASSIVE_OFF`.
 
 那么我们想要方言不可知类型的情况呢？我们使用[`TypeEngine.with_variant()`](core_type_api.html#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")方法：
 
-    from sqlalchemy import Date, Integer
+    from sqlalchemy import Date, Integerplain
     from sqlalchemy.dialects.sqlite import DATE
     from sqlalchemy.dialects.mysql import INTEGER
 
@@ -460,7 +460,7 @@ conjunctions](#migration-2804)的渲染
 
 以前，像下面这样的表达式：
 
-    print((column('x') == 'somevalue').collate("en_EN"))plain
+    print((column('x') == 'somevalue').collate("en_EN"))plainplain
 
 会产生这样的表达式：
 
@@ -520,7 +520,7 @@ which will again ensure no parentheses are generated:
 
 现在可以使用新的[`event.remove()`](core_event.html#sqlalchemy.event.remove "sqlalchemy.event.remove")函数删除使用[`event.listen()`](core_event.html#sqlalchemy.event.listen "sqlalchemy.event.listen")或[`event.listens_for()`](core_event.html#sqlalchemy.event.listens_for "sqlalchemy.event.listens_for")建立的事件。发送到[`event.remove()`](core_event.html#sqlalchemy.event.remove "sqlalchemy.event.remove")的`target`，`identifier`和`fn`参数需要与发送的参数完全匹配聆听，并将该事件从所有已建立的地点删除：
 
-    @event.listens_for(MyClass, "before_insert", propagate=True)plain
+    @event.listens_for(MyClass, "before_insert", propagate=True)plainplainplain
     def my_before_insert(mapper, connection, target):
         """listen for before_insert"""
         # ...
@@ -562,7 +562,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 在基于子类的路径上设置选项要求将路径中的所有链接拼写为类绑定属性，因为需要调用[`PropComparator.of_type()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.of_type "sqlalchemy.orm.interfaces.PropComparator.of_type")方法：
 
-    session.query(Company).\plain
+    session.query(Company).\plainplain
         options(
             subqueryload_all(
                 Company.employees.of_type(Engineer),
@@ -574,7 +574,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 只有路径中实际需要[`PropComparator.of_type()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.of_type "sqlalchemy.orm.interfaces.PropComparator.of_type")的元素需要设置为类绑定属性，之后才能恢复基于字符串的名称：
 
-    session.query(Company).\plain
+    session.query(Company).\plainplain
         options(
             subqueryload(Company.employees.of_type(Engineer)).
             subqueryload("machines")
@@ -595,7 +595,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 虚线样式仍然可以利用，特别是在跳过多个路径元素的情况下：
 
-    query(User).options(defaultload("orders.items").subqueryload("keywords"))plain
+    query(User).options(defaultload("orders.items").subqueryload("keywords"))plainplainplain
 
 **旧方式**
 
@@ -621,7 +621,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 一个新的选项[`load_only()`](orm_loading_columns.html#sqlalchemy.orm.load_only "sqlalchemy.orm.load_only")实现了“推迟一切，但是”的加载方式，只加载给定的列并推迟其余部分：
 
-    from sqlalchemy.orm import load_only
+    from sqlalchemy.orm import load_onlyplain
 
     query(User).options(load_only("name", "fullname"))
 
@@ -696,7 +696,7 @@ construct or other compatible construct can be passed to the new method
 [`Insert.from_select()`](core_dml.html#sqlalchemy.sql.expression.Insert.from_select "sqlalchemy.sql.expression.Insert.from_select")
 where it will be used to render an `INSERT .. SELECT` construct:
 
-    >>> from sqlalchemy.sql import table, column
+    >>> from sqlalchemy.sql import table, columnplain
     >>> t1 = table('t1', column('a'), column('b'))
     >>> t2 = table('t2', column('x'), column('y'))
     >>> print(t1.insert().from_select(['a', 'b'], t2.select().where(t2.c.y == 5)))
@@ -732,7 +732,7 @@ Oracle.
 
 在 Posgtresql 上面的语句可能呈现如下：
 
-    SELECT table.a, table.b FROM table FOR SHARE OF table NOWAITplainplain
+    SELECT table.a, table.b FROM table FOR SHARE OF table NOWAITplainplainplain
 
 [`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象获得了类似的方法[`Query.with_for_update()`](orm_query.html#sqlalchemy.orm.query.Query.with_for_update "sqlalchemy.orm.query.Query.with_for_update")，其行为方式相同。此方法取代了使用不同系统翻译`FOR UPDATE`子句的现有[`Query.with_lockmode()`](orm_query.html#sqlalchemy.orm.query.Query.with_lockmode "sqlalchemy.orm.query.Query.with_lockmode")方法。目前，“lockmode”字符串参数仍然被[`Session.refresh()`](orm_session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")方法接受。
 
@@ -784,7 +784,7 @@ basis](#migration-2824)查询时，复合属性现在以其对象形式返回
 
 ### 服务器端版本计数[¶](#server-side-version-counting "Permalink to this headline")
 
-ORM的版本控制功能（现在也在[Configuring a Version
+ORM 的版本控制功能（现在也在[Configuring a Version
 Counter](orm_versioning.html#mapper-version-counter)中有记录）现在可以使用服务器端版本计数方案（例如由触发器或数据库系统列生成的版本计数方案）以及条件编程方案在 version\_id\_counter 函数本身之外。通过为`version_id_generator`参数提供`False`值，ORM 将使用已设置的版本标识符，或者同时从每行中获取版本标识符 INSERT 或发布 UPDATE。当使用服务器生成的版本标识符时，强烈建议仅在具有强大 RETURNING 支持的后端使用此功能（Postgresql，SQL
 Server；
 Oracle 也支持 RETURNING，但 cx\_oracle 驱动程序只有有限的支持），否则额外的 SELECT 报表将会增加显着的性能开销。在[Server
@@ -803,7 +803,7 @@ Counters](orm_versioning.html#server-side-version-counter)
 
 [`validates()`](orm_mapped_attributes.html#sqlalchemy.orm.validates "sqlalchemy.orm.validates")函数现在接受一个选项`include_backrefs=True`，该选项将绕过针对事件从 backref：
 
-    from sqlalchemy import Column, Integer, ForeignKey
+    from sqlalchemy import Column, Integer, ForeignKeyplain
     from sqlalchemy.orm import relationship, validates
     from sqlalchemy.ext.declarative import declarative_base
 
@@ -858,7 +858,7 @@ them based on given table metadata.
 
 通常使用的[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")可能通过反射产生，但不要求使用反射。最基本的用法说明[`sqlalchemy.ext.automap`](orm_extensions_automap.html#module-sqlalchemy.ext.automap "sqlalchemy.ext.automap")如何基于反射的模式传递映射类，包括关系：
 
-    from sqlalchemy.ext.automap import automap_base
+    from sqlalchemy.ext.automap import automap_baseplain
     from sqlalchemy.orm import Session
     from sqlalchemy import create_engine
 
@@ -946,7 +946,7 @@ OUTER JOIN :)：
 
 假设从`Order`到`Item`的多对多实际上指的是像`Subitem`这样的子类，上述的 SQL 将如下所示：
 
-    SELECT order.id, order.name
+    SELECT order.id, order.nameplain
     FROM order LEFT OUTER JOIN order_item ON order.id = order_item.order_id
     LEFT OUTER JOIN item ON order_item.item_id = item.id AND item.type = 'subitem'
 
@@ -1054,8 +1054,8 @@ OUTER JOIN :)：
 
     query(User).options(joinedload("orders", innerjoin=False).joinedload("items", innerjoin=True))
 
-不会产生内连接；由于来自用户 - \>订单的LEFT OUTER
-JOIN，所以加入的预加载无法使用来自order-\>
+不会产生内连接；由于来自用户 - \>订单的 LEFT OUTER
+JOIN，所以加入的预加载无法使用来自 order-\>
 items 的 INNER 连接，而无需更改返回的用户行，而是忽略“链接”`innerjoin=True`0.9.0 应该如何实现这将是，而不是：
 
     FROM users LEFT OUTER JOIN orders ON <onclause> LEFT OUTER JOIN items ON <onclause>plain
@@ -1108,7 +1108,7 @@ supports “implicit returning”.
 backref 事件处理程序，该处理程序现在接管确保一系列相互依赖的事件（例如追加到集合 A 的角色）的角色。
 bs，在响应中设置多对一的属性 Ba）并没有进入无穷无尽的递归流。这里的基本原理是，如果给定更多的事件传播的细节和控制权，backref 系统最终可以允许发生多于一个级别的操作；典型的情况是集合追加会导致多对一的替换操作，而这又会导致将项目从以前的集合中删除：
 
-    class Parent(Base):
+    class Parent(Base):plain
         __tablename__ = 'parent'
 
         id = Column(Integer, primary_key=True)
@@ -1224,7 +1224,7 @@ The boolean constants [`true()`](core_sqlelement.html#sqlalchemy.sql.expression.
 and [`false()`](core_sqlelement.html#sqlalchemy.sql.expression.false "sqlalchemy.sql.expression.false")
 themselves render as `0 = 1` and `1 = 1` for a backend with no boolean constants:
 
-    >>> print(select([t1]).where(and_(t1.c.y > 5, false())).compile(
+    >>> print(select([t1]).where(and_(t1.c.y > 5, false())).compile(plain
     ...     dialect=mysql.dialect()))
     SELECT t.x, t.y FROM t WHERE 0 = 1
 
@@ -1248,7 +1248,7 @@ BY 子句中呈现为它的名称，假设底层方言报告支持此功能。
 
 例如。例如：
 
-    from sqlalchemy.sql import table, column, select, func
+    from sqlalchemy.sql import table, column, select, funcplainplain
 
     t = table('t', column('c1'), column('c2'))
     expr = (func.foo(t.c.c1) + t.c.c2).label("expr")
@@ -1264,7 +1264,7 @@ BY 子句中呈现为它的名称，假设底层方言报告支持此功能。
 
 现在呈现为：
 
-    SELECT foo(t.c1) + t.c2 AS exprplainplain
+    SELECT foo(t.c1) + t.c2 AS exprplainplainplain
     FROM t ORDER BY expr
 
 如果标签没有进一步嵌入到 ORDER BY 中的表达式中，ORDER
