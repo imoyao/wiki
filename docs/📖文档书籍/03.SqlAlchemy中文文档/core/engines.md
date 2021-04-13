@@ -56,7 +56,7 @@ implementations for various backends.
 
 [`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")函数根据 URL 生成一个[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")对象。这些 URL 遵循[RFC-1738](http://rfc.net/rfc1738.html)，通常可以包含用户名，密码，主机名，数据库名称以及用于其他配置的可选关键字参数。在某些情况下，接受文件路径，而在其他情况下，“数据源名称”替换“主机”和“数据库”部分。数据库 URL 的典型形式是：
 
-    dialect+driver://username:password@host:port/databaseplainplain
+    dialect+driver://username:password@host:port/databaseplainplainplain
 
 方言名称包括 SQLAlchemy 方言的名称，名称如`sqlite`，`mysql`，`postgresql`，`oracle` ，或`mssql`。drivername 是用于使用全部小写字母连接到数据库的 DBAPI 的名称。如果未指定，则将导入“默认”DBAPI（如果可用）
 - 此默认值通常是该后端可用的最广泛的驱动程序。
@@ -101,7 +101,7 @@ DBAPI 可用，包括 MySQL 连接器-python 和 OurSQL：
 
 Oracle 方言使用 cx\_oracle 作为默认的 DBAPI：
 
-    engine = create_engine('oracle://scott:tiger@127.0.0.1:1521/sidname')plain
+    engine = create_engine('oracle://scott:tiger@127.0.0.1:1521/sidname')plainplainplainplain
 
     engine = create_engine('oracle+cx_oracle://scott:tiger@tnsname')
 
@@ -126,13 +126,13 @@ SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据�
 
 由于 SQLite 连接到本地文件，URL 格式略有不同。URL 的“文件”部分是数据库的文件名。对于相对文件路径，这需要三个斜杠：
 
-    # sqlite://<nohostname>/<path>plain
+    # sqlite://<nohostname>/<path>plainplain
     # where <path> is relative:
     engine = create_engine('sqlite:///foo.db')
 
 对于绝对文件路径，三个斜杠后面是绝对路径：
 
-    #Unix/Mac - 4 initial slashes in totalplainplainplain
+    #Unix/Mac - 4 initial slashes in totalplainplainplainplain
     engine = create_engine('sqlite:////absolute/path/to/foo.db')
     #Windows
     engine = create_engine('sqlite:///C:\\path\\to\\foo.db')
@@ -141,7 +141,7 @@ SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据�
 
 要使用 SQLite `:memory:`数据库，请指定一个空的 URL：
 
-    engine = create_engine('sqlite://')plainplain
+    engine = create_engine('sqlite://')plainplainplainplain
 
 有关在[SQLite](dialects_sqlite.html)连接到 SQLite 的更多注意事项。
 
@@ -373,7 +373,7 @@ SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据�
 `sqlalchemy。`{.descclassname} `engine_from_config`{.descname} （ *configuration*，*prefix ='sqlalchemy。'*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.engine_from_config "Permalink to this definition")*
 :   使用配置字典创建一个新的引擎实例。
 
-    字典通常由配置文件生成。plainplainplain
+    字典通常由配置文件生成。plainplainplainplainplain
 
     对`engine_from_config()`感兴趣的键应加上前缀，例如“ `sqlalchemy.url`，`sqlalchemy.echo`等'prefix'参数表示要搜索的前缀。每个匹配键（在前缀被剥离后）都被视为是[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")调用的对应关键字参数。
 
@@ -396,13 +396,13 @@ SQLite 默认使用 Python 内置模块`sqlite3`连接到基于文件的数据�
 `sqlalchemy.engine.url。 T0>  make_url  T1> （ T2>  name_or_url  T3> ） T4> ¶< / T5>`{.descclassname}
 :   给定一个字符串或 unicode 实例，产生一个新的 URL 实例。
 
-    给定的字符串根据RFC
+    给定的字符串根据RFCplain
     1738规范进行分析。如果传递一个现有的URL对象，只返回该对象。
 
 *class* `sqlalchemy.engine.url。`{.descclassname} `URL`{.descname} （ *drivername*，*=无*，*密码=无*，*主机=无*，*端口=无*，*数据库=无* ，*query = None t\>\> ） [¶](#sqlalchemy.engine.url.URL "Permalink to this definition")*
 :   表示用于连接到数据库的 URL 的组件。
 
-    该对象适合直接传递给[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")调用。URL的字段由[`make_url()`](#sqlalchemy.engine.url.make_url "sqlalchemy.engine.url.make_url")函数从字符串中解析。该URL的字符串格式是RFC-1738样式的字符串。plain
+    该对象适合直接传递给[`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")调用。URL的字段由[`make_url()`](#sqlalchemy.engine.url.make_url "sqlalchemy.engine.url.make_url")函数从字符串中解析。该URL的字符串格式是RFC-1738样式的字符串。plainplainplainplainplain
 
     所有初始化参数都可用作公共属性。
 
@@ -471,11 +471,11 @@ is not used by default for SQLite engines.
 
 [`create_engine()`](#sqlalchemy.create_engine "sqlalchemy.create_engine")还有一个参数`connect_args`，它是一个将传递给`connect()`的附加字典。这可以在需要字符串以外的参数时使用，并且 SQLAlchemy 的数据库连接器对该参数没有类型转换逻辑：
 
-    db = create_engine('postgresql://scott:tiger@localhost/test', connect_args = {'argument1':17, 'argument2':'bar'})plainplainplain
+    db = create_engine('postgresql://scott:tiger@localhost/test', connect_args = {'argument1':17, 'argument2':'bar'})plainplainplainplain
 
 全部最可定制的连接方法是传递一个`creator`参数，该参数指定一个返回 DBAPI 连接的可调用对象：
 
-    def connect():
+    def connect():plainplain
         return psycopg.connect(user='scott', host='localhost')
 
     db = create_engine('postgresql://', creator=connect)
@@ -502,7 +502,7 @@ all interact with regular loggers.
 
 例如，要使用 Python 日志记录来记录 SQL 查询，而不是`echo=True`标志：
 
-    import loggingplainplainplainplain
+    import loggingplainplainplainplainplainplain
 
     logging.basicConfig()
     logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)

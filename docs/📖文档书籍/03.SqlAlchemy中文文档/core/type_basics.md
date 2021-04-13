@@ -40,7 +40,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
 *class* `sqlalchemy.types。`{.descclassname} `布尔`{.descname} （ *create\_constraint = True*，*名称=无*，*\_create\_events = True ） [¶](#sqlalchemy.types.Boolean "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")，[`sqlalchemy.types.SchemaType`](#sqlalchemy.types.SchemaType "sqlalchemy.types.SchemaType")
 
-    一个bool数据类型。plain
+    一个bool数据类型。plainplain
 
     布尔值通常在DDL端使用BOOLEAN或SMALLINT，而在Python端则使用`True`或`False`。
 
@@ -480,7 +480,7 @@ Standard Types\`\_](#id1)和本章的其他部分。
 *class* `sqlalchemy.types。`{.descclassname} `Text`{.descname} （ *length = None*，*= None*，*convert\_unicode = False*，*unicode\_error = None*，*\_warn\_on\_bytestring = False ） [¶ T10\>](#sqlalchemy.types.Text "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.String`](#sqlalchemy.types.String "sqlalchemy.types.String")
 
-    可变大小的字符串类型。plain
+    可变大小的字符串类型。plainplain
 
     在SQL中，通常对应于CLOB或TEXT。也可以采用Python
     unicode对象，并在绑定参数中对数据库的编码进行编码（结果集相反）。通常，TEXT对象没有长度；而一些数据库在这里会接受一个长度的参数，它会被别人拒绝。
@@ -773,7 +773,7 @@ backends that explicitly support them by name.
 
     SQL FLOAT类型。plainplain
 
-` sqlalchemy.types。 T0>  INT  T1> ¶ T2>`{.descclassname}
+`sqlalchemy.types。 T0>  INT  T1> ¶ T2>`{.descclassname}
 :   [`INTEGER`](#sqlalchemy.types.INTEGER "sqlalchemy.types.INTEGER")的别名
 
 *class* `sqlalchemy.types。`{.descclassname} `JSON`{.descname} （ *none\_as\_null = False* / T5\> [¶ T6\>](#sqlalchemy.types.JSON "Permalink to this definition")
@@ -940,12 +940,12 @@ backends that explicitly support them by name.
  *class*`sqlalchemy.types.`{.descclassname}`TIME`{.descname}(*timezone=False*)[¶](#sqlalchemy.types.TIME "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Time`](#sqlalchemy.types.Time "sqlalchemy.types.Time")
 
-    SQL TIME类型。plain
+    SQL TIME类型。plainplainplainplain
 
 *class* `sqlalchemy.types。`{.descclassname} `TIMESTAMP`{.descname} （ *timezone = False* / T5\> [¶ T6\>](#sqlalchemy.types.TIMESTAMP "Permalink to this definition")
 :   基础：[`sqlalchemy.types.DateTime`](#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")
 
-    SQL TIMESTAMP类型。
+    SQL TIMESTAMP类型。plain
 
 *class* `sqlalchemy.types。`{.descclassname} `VARBINARY`{.descname} （ *length = None* / T5\> [¶ T6\>](#sqlalchemy.types.VARBINARY "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
@@ -973,7 +973,7 @@ backends that explicitly support them by name.
 
 或者一些 PostgreSQL 类型：
 
-    from sqlalchemy.dialects import postgresqlplain
+    from sqlalchemy.dialects import postgresqlplainplain
 
     table = Table('foo', metadata,
         Column('ipaddress', postgresql.INET),
@@ -981,10 +981,10 @@ backends that explicitly support them by name.
     )
 
 每个方言在\_\_ all
-\_\_集合中提供了该后端支持的完整类型名称集合，因此简单的import
+\_\_集合中提供了该后端支持的完整类型名称集合，因此简单的 import
 \*或类似方式将导入为该后端实现的所有受支持类型：
 
-    from sqlalchemy.dialects.postgresql import *
+    from sqlalchemy.dialects.postgresql import *plain
 
     t = Table('mytable', metadata,
                Column('id', INTEGER, primary_key=True),

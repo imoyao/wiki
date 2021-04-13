@@ -55,7 +55,7 @@ t0\>或](http://packages.python.org/Flask-SQLAlchemy/)[zope.sqlalchemy](http://p
 此时，[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")对象为“空”，并在再次调用时创建**新**
 [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。如下图所示，这与我们之前的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")不一样：
 
-    >>> new_session = Session()plainplainplainplain
+    >>> new_session = Session()plainplainplainplainplainplainplain
     >>> new_session is some_session
     False
 
@@ -66,7 +66,7 @@ t0\>或](http://packages.python.org/Flask-SQLAlchemy/)[zope.sqlalchemy](http://p
 
 [`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")的工作很简单；为所有需要的人保留一个[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")。作为对这个[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")产生更多透明访问的手段，[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")还包含**代理行为**，这意味着注册表本身可以被视为类似直接[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")；当在这个对象上调用方法时，它们被**代理**到由注册表维护的基础[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")：
 
-    Session = scoped_session(some_factory)plain
+    Session = scoped_session(some_factory)plainplain
 
     # equivalent to:
     #
@@ -109,7 +109,7 @@ Web 框架（异常框架 Twisted 和 Tornado 等显着异常）都以简单的�
 
 Web 请求和线程的这种简单对应意味着将[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")与线程相关联意味着它也与该线程内运行的 Web 请求相关联，反之亦然，前提是[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")因此，使用[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")作为将[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")与 Web 应用程序集成的快速方法是一种常见做法。下面的序列图说明了这个流程：
 
-    Web Server          Web Framework        SQLAlchemy ORM Codeplainplainplain
+    Web Server          Web Framework        SQLAlchemy ORM Codeplainplainplainplainplain
     --------------      --------------       ------------------------------
     startup        ->   Web framework        # Session registry is established
                         initializes          Session = scoped_session(sessionmaker())
@@ -166,7 +166,7 @@ current thread.
 
 假设一个 web 框架定义了一个库函数`get_current_request()`。使用此框架构建的应用程序可以随时调用此函数，并且结果将是表示当前正在处理的请求的某种`Request`对象。如果`Request`对象是可散列的，那么这个函数可以很容易地与[`scoped_session`](#sqlalchemy.orm.scoping.scoped_session "sqlalchemy.orm.scoping.scoped_session")集成以将[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")与请求相关联。下面我们结合 Web 框架`on_request_end`提供的假设事件标记来说明这一点，该请求允许在请求结束时调用代码：
 
-    from my_web_framework import get_current_request, on_request_endplainplainplainplain
+    from my_web_framework import get_current_request, on_request_endplainplainplainplainplainplain
     from sqlalchemy.orm import scoped_session, sessionmaker
 
     Session = scoped_session(sessionmaker(bind=some_engine), scopefunc=get_current_request)
@@ -245,7 +245,7 @@ current thread.
  *class*`sqlalchemy.util.`{.descclassname}`ScopedRegistry`{.descname}(*createfunc*, *scopefunc*)[¶](#sqlalchemy.util.ScopedRegistry "Permalink to this definition")
 :   基于“范围”功能可以存储单个类的一个或多个实例的注册表。
 
-    该对象将`__call__`实现为“getter”，因此通过调用`myregistry()`，将为当前范围返回包含的对象。plainplainplainplain
+    该对象将`__call__`实现为“getter”，因此通过调用`myregistry()`，将为当前范围返回包含的对象。plainplainplainplainplainplain
 
     参数：
 
@@ -279,6 +279,6 @@ current thread.
 *class* `sqlalchemy.util。`{.descclassname} `ThreadLocalRegistry`{.descname} （ *createfunc* ） t5 \> [¶ T6\>](#sqlalchemy.util.ThreadLocalRegistry "Permalink to this definition")
 :   基础：`sqlalchemy.util._collections.ScopedRegistry`
 
-    一个使用`threading.local()`变量进行存储的[`ScopedRegistry`](#sqlalchemy.util.ScopedRegistry "sqlalchemy.util.ScopedRegistry")。plainplainplain
+    一个使用`threading.local()`变量进行存储的[`ScopedRegistry`](#sqlalchemy.util.ScopedRegistry "sqlalchemy.util.ScopedRegistry")。plainplainplainplain
 
 

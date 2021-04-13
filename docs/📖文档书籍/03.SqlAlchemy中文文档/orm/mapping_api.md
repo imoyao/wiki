@@ -369,7 +369,7 @@ tags:
  `sqlalchemy.orm.`{.descclassname}`class_mapper`{.descname}(*class\_*, *configure=True*)[¶](#sqlalchemy.orm.class_mapper "Permalink to this definition")
 :   给定一个类，返回与密钥关联的主要[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")。
 
-    如果给定类没有配置映射，则引发[`UnmappedClassError`](exceptions.html#sqlalchemy.orm.exc.UnmappedClassError "sqlalchemy.orm.exc.UnmappedClassError")；如果传递了非类对象，则引发[`ArgumentError`](core_exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。plainplainplain
+    如果给定类没有配置映射，则引发[`UnmappedClassError`](exceptions.html#sqlalchemy.orm.exc.UnmappedClassError "sqlalchemy.orm.exc.UnmappedClassError")；如果传递了非类对象，则引发[`ArgumentError`](core_exceptions.html#sqlalchemy.exc.ArgumentError "sqlalchemy.exc.ArgumentError")。plainplainplainplain
 
     等效功能可通过[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数使用：
 
@@ -404,7 +404,7 @@ tags:
 `sqlalchemy.orm。 T0>  clear_mappers  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
 :   从所有类中移除所有映射器。
 
-    这个函数从类中移除所有的工具并处理它们相关的映射器。一旦被调用，这些类就会被取消映射，并可以在以后用新的映射器重新映射。plainplainplainplainplain
+    这个函数从类中移除所有的工具并处理它们相关的映射器。一旦被调用，这些类就会被取消映射，并可以在以后用新的映射器重新映射。plainplainplainplainplainplain
 
     [`clear_mappers()`](#sqlalchemy.orm.clear_mappers "sqlalchemy.orm.clear_mappers")
     is *not* for normal use, as there is literally no valid usage for it
@@ -474,7 +474,7 @@ tags:
  `sqlalchemy.orm.util.`{.descclassname}`polymorphic_union`{.descname}(*table\_map*, *typecolname*, *aliasname='p\_union'*, *cast\_nulls=True*)[¶](#sqlalchemy.orm.util.polymorphic_union "Permalink to this definition")
 :   创建一个由多态映射器使用的`UNION`语句。
 
-    有关如何使用它的示例，请参阅[Concrete Tableplainplainplainplain
+    有关如何使用它的示例，请参阅[Concrete Tableplainplainplainplainplain
     Inheritance](inheritance.html#concrete-inheritance)。
 
     参数：

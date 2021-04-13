@@ -23,7 +23,7 @@ ORM Event Interfaces](orm_deprecated.html)中描述。
 *class* `sqlalchemy.interfaces。`{.descclassname} `ConnectionProxy`{.descname} [¶](#sqlalchemy.interfaces.ConnectionProxy "Permalink to this definition")
 :   允许通过 Connections 拦截语句执行。
 
-    注意plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    注意plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
     [`ConnectionProxy`](#sqlalchemy.interfaces.ConnectionProxy "sqlalchemy.interfaces.ConnectionProxy")已弃用。请参阅[`ConnectionEvents`](events.html#sqlalchemy.events.ConnectionEvents "sqlalchemy.events.ConnectionEvents")。
 
@@ -88,7 +88,7 @@ ORM Event Interfaces](orm_deprecated.html)中描述。
 *class* `sqlalchemy.interfaces。`{.descclassname} `PoolListener`{.descname} [¶](#sqlalchemy.interfaces.PoolListener "Permalink to this definition")
 :   钩入[`Pool`](pooling.html#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")中连接的生命周期。
 
-    注意plainplainplainplainplainplainplain
+    注意plainplainplainplainplainplainplainplainplain
 
     [`PoolListener`](#sqlalchemy.interfaces.PoolListener "sqlalchemy.interfaces.PoolListener")
     is deprecated. 请参阅[`PoolEvents`](events.html#sqlalchemy.events.PoolEvents "sqlalchemy.events.PoolEvents")。

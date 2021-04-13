@@ -7,7 +7,6 @@ categories:
   - SqlAlchemy 中文文档
   - changelog
 tags:
-  - 
 ---
 SQLAlchemy 0.4 有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-4 "Permalink to this headline")
 ===========================================================================================
@@ -24,14 +23,14 @@ SQLAlchemy 0.4 有哪些新特性？[¶](#what-s-new-in-sqlalchemy-0-4 "Permalin
 
 如果您使用任何 ORM 功能，请确保从`sqlalchemy.orm`导入：
 
-    from sqlalchemy import *plain
+    from sqlalchemy import *plainplain
     from sqlalchemy.orm import *
 
 Secondly, anywhere you used to say `engine=`,
 `connectable=`, `bind_to=`,
 `something.engine`, `metadata.connect()`, use `bind`:
 
-    myengine = create_engine('sqlite://')
+    myengine = create_engine('sqlite://')plainplain
 
     meta = MetaData(myengine)
 
@@ -60,7 +59,7 @@ of sqlachemy’s sub-modules into your namespace.
 
 在 0.4 中，必须这样做：
 
-    from sqlalchemy import *plain
+    from sqlalchemy import *plainplain
     from sqlalchemy import types
 
     class UTCDateTime(types.TypeDecorator):
@@ -81,11 +80,11 @@ Query 具有与外部生成匹配的内在胆量，并且有更多技巧。所�
 
 User.query.get\_by（\*\* kwargs）
 
-    User.query.filter_by(**kwargs).first()plainplain
+    User.query.filter_by(**kwargs).first()plainplainplain
 
 User.query.select\_by（\*\* kwargs）
 
-    User.query.filter_by(**kwargs).all()plainplainplainplainplain
+    User.query.filter_by(**kwargs).all()plainplainplainplainplainplain
 
 User.query.select()
 
@@ -95,11 +94,11 @@ User.query.select()
 
 到目前为止，ORM 中最明显的差异是，您现在可以直接使用基于类的属性构建查询条件。使用映射类时，不再需要“.c。”前缀：
 
-    session.query(User).filter(and_(User.name == 'fred', User.id > 17))plainplainplain
+    session.query(User).filter(and_(User.name == 'fred', User.id > 17))plainplainplainplain
 
 尽管简单的基于列的比较没有什么大不了，但类属性有一些新的“更高级别”结构可用，包括以前仅在`filter_by()`中可用的结构：
 
-    # comparison of scalar relations to an instanceplain
+    # comparison of scalar relations to an instanceplainplain
     filter(Address.user == user)
 
     # return all users who contain a particular address
@@ -129,17 +128,17 @@ User.query.select()
 
 我们现在有一段时间 join()和 outerjoin()：
 
-    session.query(Order).join('items')...plain
+    session.query(Order).join('items')...plainplainplain
 
 现在你可以别名了：
 
-    session.query(Order).join('items', aliased=True).plain
+    session.query(Order).join('items', aliased=True).plainplainplainplainplain
        filter(Item.name='item 1').join('items', aliased=True).filter(Item.name=='item 3')
 
 以上将使用别名从订单 -
 \>项目创建两个连接。每个后面的`filter()`调用都会将其表格标准调整为别名标准。要获取`Item`对象，请使用`add_entity()`并使用`id`定位每个连接：
 
-    session.query(Order).join('items', id='j1', aliased=True).
+    session.query(Order).join('items', id='j1', aliased=True).plain
     filter(Item.name == 'item 1').join('items', aliased=True, id='j2').
     filter(Item.name == 'item 3').add_entity(Item, id='j1').add_entity(Item, id='j2')
 
@@ -159,7 +158,7 @@ User.query.select()
 
 要为别名中的每个表添加条件标准，可以使用`from_joinpoint`继续加入同一行别名：
 
-    # search for the treenode along the path "n1/n12/n122"plainplain
+    # search for the treenode along the path "n1/n12/n122"plainplainplainplainplain
 
     # first find a Node with name="n122"
     q = sess.query(Node).filter_by(name='n122')
@@ -186,7 +185,7 @@ User.query.select()
 
 对于在`flush()`期间嵌入式执行 SQL 子句，直接嵌入 UPDATE 或 INSERT 中：
 
-    myobject.foo = mytable.c.value + 1
+    myobject.foo = mytable.c.value + 1plainplainplainplain
 
     user.pwhash = func.md5(password)
 
@@ -212,11 +211,11 @@ User.query.select()
 
 那么当我们说：
 
-    create_session().query(TreeNode).all()
+    create_session().query(TreeNode).all()plain
 
 ? 沿着别名进行连接，从父母那里深入三级：
 
-    SELECTplain
+    SELECTplainplain
     nodes_3.id AS nodes_3_id, nodes_3.parent_id AS nodes_3_parent_id, nodes_3.name AS nodes_3_name,
     nodes_2.id AS nodes_2_id, nodes_2.parent_id AS nodes_2_parent_id, nodes_2.name AS nodes_2_name,
     nodes_1.id AS nodes_1_id, nodes_1.parent_id AS nodes_1_parent_id, nodes_1.name AS nodes_1_name,
@@ -247,7 +246,7 @@ User.query.select()
 
 我们来创建一个顶点表，每行存储两个点：
 
-    vertices = Table('vertices', metadata,
+    vertices = Table('vertices', metadata,plain
         Column('id', Integer, primary_key=True),
         Column('x1', Integer),
         Column('y1', Integer),
@@ -257,7 +256,7 @@ User.query.select()
 
 然后，映射它！我们将创建一个存储两个`Point`对象的`Vertex`对象：
 
-    class Vertex(object):plain
+    class Vertex(object):plainplainplain
         def __init__(self, start, end):
             self.start = start
             self.end = end
@@ -269,7 +268,7 @@ User.query.select()
 
 一旦你设置了你的复合类型，它就像其他任何类型一样可用：
 
-    v = Vertex(Point(3, 4), Point(26,15))plain
+    v = Vertex(Point(3, 4), Point(26,15))plainplain
     session.save(v)
     session.flush()
 
@@ -333,7 +332,7 @@ User.query.select()
 needed for `dict``s, and new built-in ``dict`
 types cover many needs:
 
-    # use a dictionary relation keyed by a columnplainplainplain
+    # use a dictionary relation keyed by a columnplainplainplainplain
     relation(Item, collection_class=column_mapped_collection(items.c.keyword))
     # or named attribute
     relation(Item, collection_class=attribute_mapped_collection('keyword'))
@@ -373,7 +372,7 @@ types cover many needs:
 
 在您定义`engine`（或任何地方）的位置配置您自己的`Session`类：
 
-    from sqlalchemy import create_engineplainplain
+    from sqlalchemy import create_engineplainplainplain
     from sqlalchemy.orm import sessionmaker
 
     engine = create_engine('myengine://')
@@ -395,7 +394,7 @@ of `assignmapper` are moved into the new
 with both `sessionmaker` as well as
 `create_session()`:
 
-    from sqlalchemy.orm import scoped_session, sessionmakerplainplainplainplain
+    from sqlalchemy.orm import scoped_session, sessionmakerplainplainplainplainplain
 
     Session = scoped_session(sessionmaker(autoflush=True, transactional=True))
     Session.configure(bind=engine)
@@ -413,7 +412,7 @@ with both `sessionmaker` as well as
 
 当使用线程本地的`Session`时，返回的类将所有`Session's`接口实现为 classmethods，并且“assignmapper”的功能可以使用`mapper`就像旧的`objectstore`天……
 
-    # "assignmapper"-like functionality available via ScopedSession.mapperplain
+    # "assignmapper"-like functionality available via ScopedSession.mapperplainplain
     Session.mapper(User, users_table)
 
     u = User(name='wendy')
@@ -433,7 +432,7 @@ with both `sessionmaker` as well as
 Also, `autoflush=True` means the `Session` will `flush()` before each
 `query` as well as when you call `flush()` or `commit()`. 所以现在这将工作：
 
-    Session = sessionmaker(bind=engine, autoflush=True, transactional=True)plainplainplainplain
+    Session = sessionmaker(bind=engine, autoflush=True, transactional=True)plainplainplainplainplain
 
     u = User(name='wendy')
 
@@ -447,7 +446,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
 `commit()`和`rollback()`，以及`begin()`现在直接在`Session`上。不需要为任何事情使用`SessionTransaction`（它仍然在后台）。
 
-    Session = sessionmaker(autoflush=True, transactional=False)plainplainplain
+    Session = sessionmaker(autoflush=True, transactional=False)plainplainplainplainplainplain
 
     sess = Session()
     sess.begin()
@@ -458,7 +457,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
 与封闭的引擎级别（即非 ORM）事务共享`Session`非常简单：
 
-    Session = sessionmaker(autoflush=True, transactional=False)plain
+    Session = sessionmaker(autoflush=True, transactional=False)plainplain
 
     conn = engine.connect()
     trans = conn.begin()
@@ -547,7 +546,7 @@ in\_函数现在将一系列值或可选值作为其唯一参数。以前传入�
 
 在 0.3.x 系列中，不赞成使用`MetaData`和`ThreadLocalMetaData`的`BoundMetaData`和`DynamicMetaData`。0.4 的旧名称已被删除。更新很简单：
 
-    +-------------------------------------+-------------------------+plain
+    +-------------------------------------+-------------------------+plainplain
     |If You Had                           | Now Use                 |
     +=====================================+=========================+
     | ``MetaData``                        | ``MetaData``            |
@@ -591,7 +590,7 @@ SQL 执行[¶](#sql-execution "Permalink to this headline")
 
 ### Oracle 的输出参数[¶](#out-parameters-for-oracle "Permalink to this headline")
 
-    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)plainplainplain
+    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)plainplainplainplain
     assert result.out_parameters == {'y':10, 'z':75}
 
 ### 连接绑定`MetaData`，`Sessions` [¶](#connection-bound-metadata-sessions "Permalink to this headline")
@@ -599,7 +598,7 @@ SQL 执行[¶](#sql-execution "Permalink to this headline")
 `MetaData` and `Session` can be
 explicitly bound to a connection:
 
-    conn = engine.connect()plainplain
+    conn = engine.connect()plainplainplain
     sess = create_session(bind=conn)
 
 ### 更快，更安全`ResultProxy`对象[¶](#faster-more-foolproof-resultproxy-objects "Permalink to this headline")

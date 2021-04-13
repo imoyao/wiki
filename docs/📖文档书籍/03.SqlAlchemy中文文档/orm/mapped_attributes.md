@@ -16,7 +16,7 @@ tags:
 
 向属性添加“验证”例程的一种快速方法是使用[`validates()`](#sqlalchemy.orm.validates "sqlalchemy.orm.validates")装饰器。属性验证器可以引发异常，停止变更属性值的过程，或者可以将给定值更改为不同的值。与所有属性扩展一样，验证器只能由普通的用户级代码调用；当 ORM 填充对象时它们不会被发出：
 
-    from sqlalchemy.orm import validatesplainplain
+    from sqlalchemy.orm import validatesplainplainplain
 
     class EmailAddress(Base):
         __tablename__ = 'address'
@@ -52,7 +52,7 @@ supports reception of these events by specifying
 `include_removes=True` to the decorator.
 当设置此标志时，验证函数必须接收一个额外的布尔参数，如果`True`表明该操作是删除：
 
-    from sqlalchemy.orm import validatesplainplainplain
+    from sqlalchemy.orm import validatesplainplainplainplainplainplain
 
     class User(Base):
         # ...
@@ -70,7 +70,7 @@ supports reception of these events by specifying
 
 使用`include_backrefs=False`选项也可以定制相互依赖的验证器通过 backref 链接的情况；当设置为`False`时，此选项可防止发生验证功能，如果事件是由于 backref 引起的：
 
-    from sqlalchemy.orm import validatesplainplainplain
+    from sqlalchemy.orm import validatesplainplainplainplain
 
     class User(Base):
         # ...
@@ -151,7 +151,7 @@ attribute does not have the usual expression semantics usable with
 [`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query").
 为了提供这些，我们改用如下的[`hybrid`](extensions_hybrid.html#module-sqlalchemy.ext.hybrid "sqlalchemy.ext.hybrid")扩展名：
 
-    from sqlalchemy.ext.hybrid import hybrid_propertyplain
+    from sqlalchemy.ext.hybrid import hybrid_propertyplainplainplainplain
 
     class EmailAddress(Base):
         __tablename__ = 'email_address'
@@ -171,7 +171,7 @@ attribute does not have the usual expression semantics usable with
 `.email`属性除了在我们拥有`EmailAddress`实例时提供 getter /
 setter 行为外，还在类级别使用时提供了 SQL 表达式，也就是说，直接从`EmailAddress`类：
 
-    from sqlalchemy.orm import Sessionplain
+    from sqlalchemy.orm import Sessionplainplainplainplain
     session = Session()
 
     sqladdress = session.query(EmailAddress).\
@@ -190,7 +190,7 @@ setter 行为外，还在类级别使用时提供了 SQL 表达式，也就是�
 
 [`hybrid_property`](extensions_hybrid.html#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")还允许我们改变属性的行为，包括定义在实例级别与类/表达级别访问属性时使用[`hybrid_property.expression()`](extensions_hybrid.html#sqlalchemy.ext.hybrid.hybrid_property.expression "sqlalchemy.ext.hybrid.hybrid_property.expression")修饰符。比如，如果我们想自动添加一个主机名，我们可以定义两组字符串操作逻辑：
 
-    class EmailAddress(Base):plainplainplainplain
+    class EmailAddress(Base):plainplainplainplainplainplainplain
         __tablename__ = 'email_address'
 
         id = Column(Integer, primary_key=True)
@@ -220,7 +220,7 @@ setter 行为外，还在类级别使用时提供了 SQL 表达式，也就是�
 
 以上，访问`EmailAddress`实例的`email`属性将返回`_email`属性的值，删除或添加主机名`@example.com`中的值。当我们查询`email`属性时，会呈现一个 SQL 函数，它会产生相同的效果：
 
-    sqladdress = session.query(EmailAddress).filter(EmailAddress.email == 'address').one()plainplainplainplain
+    sqladdress = session.query(EmailAddress).filter(EmailAddress.email == 'address').one()plainplainplainplainplainplainplainplain
     SELECT address.email AS address_email, address.id AS address_id
     FROM address
     WHERE substr(address.email, ?, length(address.email) - ?) = ?
@@ -236,7 +236,7 @@ Attributes](extensions_hybrid.html)中了解更多关于混合动力的信息。
 
 从最基本的意义上说，同义词是通过附加名称提供某个特定属性的简单方法：
 
-    class MyClass(Base):plainplainplainplainplain
+    class MyClass(Base):plainplainplainplainplainplain
         __tablename__ = 'my_table'
 
         id = Column(Integer, primary_key=True)
@@ -246,7 +246,7 @@ Attributes](extensions_hybrid.html)中了解更多关于混合动力的信息。
 
 上面的类`MyClass`具有两个属性，即`.job_status`和`.status`，它们在表达式级别上表现为一个属性：
 
-    >>> print(MyClass.job_status == 'some_status')plainplainplainplainplainplain
+    >>> print(MyClass.job_status == 'some_status')plainplainplainplainplainplainplain
     my_table.job_status = :job_status_1
 
     >>> print(MyClass.status == 'some_status')
@@ -266,7 +266,7 @@ Attributes](extensions_hybrid.html)中了解更多关于混合动力的信息。
 
 除了简单的镜像之外，也可以使用[`synonym()`](#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")来引用用户定义的[descriptor](glossary.html#term-descriptor)。我们可以用`@property`提供我们的`status`同义词：
 
-    class MyClass(Base):plain
+    class MyClass(Base):plainplain
         __tablename__ = 'my_table'
 
         id = Column(Integer, primary_key=True)
@@ -280,7 +280,7 @@ Attributes](extensions_hybrid.html)中了解更多关于混合动力的信息。
 
 当使用 Declarative 时，可以使用[`synonym_for()`](extensions_declarative_api.html#sqlalchemy.ext.declarative.synonym_for "sqlalchemy.ext.declarative.synonym_for")装饰器更简洁地表达上述模式：
 
-    from sqlalchemy.ext.declarative import synonym_forplain
+    from sqlalchemy.ext.declarative import synonym_forplainplainplainplain
 
     class MyClass(Base):
         __tablename__ = 'my_table'
@@ -299,7 +299,7 @@ attribute](#mapper-hybrids)特性更好地处理了在描述符中增强属性�
  `sqlalchemy.orm.`{.descclassname}`synonym`{.descname}(*name*, *map\_column=None*, *descriptor=None*, *comparator\_factory=None*, *doc=None*, *info=None*)[¶](#sqlalchemy.orm.synonym "Permalink to this definition")
 :   将属性名称表示为映射属性的同义词，因为该属性将镜像另一个属性的值和表达式行为。
 
-    参数：plainplainplain
+    参数：plainplainplainplain
 
     -   **名称** [¶](#sqlalchemy.orm.synonym.params.name) -
         现有映射属性的名称。这可以引用该类上配置的任何[`MapperProperty`](internals.html#sqlalchemy.orm.interfaces.MapperProperty "sqlalchemy.orm.interfaces.MapperProperty")的字符串名称，包括列绑定的属性和关系。
