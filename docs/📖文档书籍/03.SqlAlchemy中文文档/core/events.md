@@ -1958,7 +1958,7 @@ Mapper 事件[¶](#mapper-events "Permalink to this headline")
 *class* `sqlalchemy.orm.events。`{.descclassname} `QueryEvents`{.descname} [¶](#sqlalchemy.orm.events.QueryEvents "Permalink to this definition")
 :   基础：[`sqlalchemy.event.base.Events`](core_events.html#sqlalchemy.event.base.Events "sqlalchemy.event.base.Events")
 
-    表示构建[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象内的事件。plainplainplainplainplain
+    表示构建[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象内的事件。plainplainplainplainplainplain
 
     此处的事件旨在用于[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")的尚未发布的检查系统。现在可以进行一些非常基本的操作，但检查系统旨在使复杂的查询操作自动化。
 

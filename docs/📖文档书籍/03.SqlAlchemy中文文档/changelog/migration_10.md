@@ -129,7 +129,7 @@ value. 我们可以改变这个例子来说明这一点：
 
 对于希望构建一个为每个子类创建不同列的声明性混合的漂亮边缘情况，将添加新的修饰符[`declared_attr.cascading`](orm_extensions_declarative_api.html#sqlalchemy.ext.declarative.declared_attr.cascading "sqlalchemy.ext.declarative.declared_attr.cascading")。使用此修饰符，将为映射的继承层次结构中的每个类单独调用修饰的函数。虽然这已经是针对特殊属性（如`__table_args__`和`__mapper_args__`）的行为，但对于列和其他属性，缺省行为假定该属性仅附加到基类，并且只是从子类继承而来。通过[`declared_attr.cascading`](orm_extensions_declarative_api.html#sqlalchemy.ext.declarative.declared_attr.cascading "sqlalchemy.ext.declarative.declared_attr.cascading")，可以应用单个行为：
 
-    class HasSomeAttribute(object):plain
+    class HasSomeAttribute(object):plainplain
         @declared_attr.cascading
         def some_id(cls):
             if has_inherited_table(cls):
@@ -154,7 +154,7 @@ Scenarios](orm_extensions_declarative_mixins.html#mixin-inheritance-columns)
 
 最后，[`AbstractConcreteBase`](orm_extensions_declarative_api.html#sqlalchemy.ext.declarative.AbstractConcreteBase "sqlalchemy.ext.declarative.AbstractConcreteBase")类已被重写，以便可以在抽象基础上内联设置关系或其他映射器属性：
 
-    from sqlalchemy import Column, Integer, ForeignKeyplain
+    from sqlalchemy import Column, Integer, ForeignKeyplainplain
     from sqlalchemy.orm import relationship
     from sqlalchemy.ext.declarative import (declarative_base, declared_attr,
         AbstractConcreteBase)
@@ -198,7 +198,7 @@ relationship `something`.
 `loading.py`模块的机制以及标识映射经过了内联，重构和修剪的几个过程，因此现在的行加载大约比基于 OR​​M 的对象快大约 25％
 。假设有一个 1M 行表，类似下面的脚本说明了最受改善的负载类型：
 
-    import time
+    import timeplain
     from sqlalchemy import Integer, Column, create_engine, Table
     from sqlalchemy.orm import Session
     from sqlalchemy.ext.declarative import declarative_base
@@ -238,7 +238,7 @@ relationship `something`.
 
 使用[`KeyedTuple`](orm_query.html#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")类而不是 Python 的`collections.namedtuple()`，因为后者有一个非常复杂的类型创建例程，其基准测试比[`KeyedTuple`](orm_query.html#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")但是，当获取成千上万行时，`collections.namedtuple()`快速超过[`KeyedTuple`](orm_query.html#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")，随着实例调用的增加，它变得非常慢。该怎么办？两种方法之间进行对冲的新类型。基于哪种情况，新的“轻量级键控元组”要么针对“大小”（返回的行数）和“num”（针对不同查询的数量），要么优于两者，要么滞后于较快的对象。在“甜蜜点”中，我们既创建了大量新类型，又获取了很多行，轻量级对象完全吸引了名为 tuple 和 KeyedTuple：
 
-    -----------------plain
+    -----------------plainplain
     size=10 num=10000                 # few rows, lots of queries
     namedtuple: 3.60302400589         # namedtuple falls over
     keyedtuple: 0.255059957504        # KeyedTuple very fast
@@ -268,7 +268,7 @@ relationship `something`.
 利用 heapy 测量 Nova 的启动大小的一个工作台说明了在基本导入“nova.db.”的过程中，SQLAlchemy 的对象，相关字典以及弱引用占用了大约 3.7 个 megs 或 46％的差异，即 46％。
 sqlalchemy.models”：
 
-    # reported by heapy, summation of SQLAlchemy objects +
+    # reported by heapy, summation of SQLAlchemy objects +plain
     # associated dicts + weakref-related objects with core of Nova imported:
 
         Before: total count 26477 total bytes 7975712
@@ -435,7 +435,7 @@ BY](migration_09.html#migration-1068)中单独呈现其名称）。
 
 新产出：
 
-    SELECT a.id AS a_id, (SELECT max(b.id) AS max_1
+    SELECT a.id AS a_id, (SELECT max(b.id) AS max_1plain
     FROM b WHERE b.a_id = a.id) AS anon_1, a_1.id AS a_1_id,
     (SELECT max(b.id) AS max_2
     FROM b WHERE b.a_id = a_1.id) AS anon_2
@@ -443,7 +443,7 @@ BY](migration_09.html#migration-1068)中单独呈现其名称）。
 
 也有许多情况下，“按顺序排列”逻辑将无法按标签排序，例如，如果映射是“多态”：
 
-    class A(Base):
+    class A(Base):plain
         __tablename__ = 'a'
 
         id = Column(Integer, primary_key=True)
@@ -464,7 +464,7 @@ order\_by将无法使用标签，因为它会因多态加载而被匿名化：
     FROM b WHERE b.a_id = a.id) AS anon_1
     FROM a ORDER BY anon_1
 
-这些修复包括各种可能破坏`aliased()`结构状态的heisenbugs，这样标签逻辑将再次失败；这些也已被修复。
+这些修复包括各种可能破坏`aliased()`结构状态的 heisenbugs，这样标签逻辑将再次失败；这些也已被修复。
 
 [＃3148](http://www.sqlalchemy.org/trac/ticket/3148)
 [＃3188](http://www.sqlalchemy.org/trac/ticket/3188)
@@ -541,7 +541,7 @@ well as establishing the fetch methods as “closed”.
 [＃3330](http://www.sqlalchemy.org/trac/ticket/3330)
 [＃3329](http://www.sqlalchemy.org/trac/ticket/3329)
 
-### CHECK Constraints现在支持命名约定中的`%(column_0_name)s`标记[¶](#check-constraints-now-support-the-column-0-name-s-token-in-naming-conventions "Permalink to this headline")
+### CHECK Constraints 现在支持命名约定中的`%(column_0_name)s`标记[¶](#check-constraints-now-support-the-column-0-name-s-token-in-naming-conventions "Permalink to this headline")
 
 `%(column_0_name)s`将从在[`CheckConstraint`](core_constraints.html#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")的表达式中找到的第一列派生：
 
@@ -593,7 +593,7 @@ types](core_constraints.html#naming-schematypes)配置命名
 
 为了协助某些倾向于使用声明的情况，即使[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象尚未与[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")关联，此相同的自动附件逻辑现在也可以运行；额外的事件被建立，当那些[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象关联时，[`Constraint`](core_constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")也被添加：
 
-    from sqlalchemy import Table, Column, MetaData, Integer, UniqueConstraint
+    from sqlalchemy import Table, Column, MetaData, Integer, UniqueConstraintplain
 
     m = MetaData()
 
@@ -627,7 +627,7 @@ types](core_constraints.html#naming-schematypes)配置命名
 
 当[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")已经包含构造[`Constraint`](core_constraints.html#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")时的所有目标[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象时，原始自动附加逻辑当然会保持原位：
 
-    from sqlalchemy import Table, Column, MetaData, Integer, UniqueConstraintplain
+    from sqlalchemy import Table, Column, MetaData, Integer, UniqueConstraintplainplain
 
     m = MetaData()
 
@@ -667,7 +667,7 @@ are rendered as constants into the SELECT statement:
 
 将呈现：
 
-    INSERT INTO t (x, y) SELECT t.x, somefunction() AS somefunction_1plain
+    INSERT INTO t (x, y) SELECT t.x, somefunction() AS somefunction_1plainplain
     FROM t
 
 该功能可以使用[`Insert.from_select.include_defaults`(core_dml.html#sqlalchemy.sql.expression.Insert.from_select.params.include_defaults "sqlalchemy.sql.expression.Insert.from_select")禁用。
@@ -677,7 +677,7 @@ are rendered as constants into the SELECT statement:
 当由[`Column.server_default`](core_metadata.html#sqlalchemy.schema.Column.params.server_default "sqlalchemy.schema.Column")设置的[`DefaultClause`](core_defaults.html#sqlalchemy.schema.DefaultClause "sqlalchemy.schema.DefaultClause")作为要编译的 SQL 表达式存在时，“literal
 bindings”编译器标志将打开。这允许嵌入在 SQL 中的文字正确呈现，例如：
 
-    from sqlalchemy import Table, Column, MetaData, Text
+    from sqlalchemy import Table, Column, MetaData, Textplainplainplain
     from sqlalchemy.schema import CreateTable
     from sqlalchemy.dialects.postgresql import ARRAY, array
     from sqlalchemy.dialects import postgresql
@@ -746,7 +746,7 @@ Reflection](dialects_mysql.html#mysql-unique-constraints)
 
 ### 新系统安全地发出参数化警告[¶](#new-systems-to-safely-emit-parameterized-warnings "Permalink to this headline")
 
-很长一段时间，警告消息不能引用数据元素，这样一个特定的函数可能会发出无数个独特的警告。发生这种情况的关键在于`Unicode 类型 收到 tt> 非unicode / t5> 参数 值`警告。在这个消息中放置数据值将意味着该模块的Python
+很长一段时间，警告消息不能引用数据元素，这样一个特定的函数可能会发出无数个独特的警告。发生这种情况的关键在于`Unicode 类型 收到 tt> 非unicode / t5> 参数 值`警告。在这个消息中放置数据值将意味着该模块的 Python
 `__warningregistry__`，或者在某些情况下，Python全局`warnings.onceregistry`将变得无界限，如同大多数警告情况下，这两个集合中的一个会填充每条不同的警告消息。
 
 The change here is that by using a special `string`
@@ -831,7 +831,7 @@ duplicates.
 
 这个变化在 1.0.1 中是新的。一些用户正在执行基本上是这种形式的查询：
 
-    session.query(Address).filter(Address.user == User(id=None))
+    session.query(Address).filter(Address.user == User(id=None))plain
 
 SQLAlchemy 目前不支持此模式。对于所有版本，它发出的 SQL 类似于：
 
@@ -885,7 +885,7 @@ NULL”，然后查询会产生不同的结果。因此，通过这种操作，�
 
 针对与此对象作为目标的多对一关系的查询将在绑定参数中使用值 10：
 
-    s.query(B).filter(B.a == a1)plain
+    s.query(B).filter(B.a == a1)plainplain
 
 生产：
 
@@ -897,7 +897,7 @@ NULL”，然后查询会产生不同的结果。因此，通过这种操作，�
 However, before this change, the negation of this criteria would **not**
 use 10, it would use 7, unless the object were flushed first:
 
-    s.query(B).filter(B.a != a1)
+    s.query(B).filter(B.a != a1)plain
 
 产生（0.9 以及 1.0.1 之前的所有版本）：
 
@@ -931,7 +931,7 @@ and related functions.
 
 它总是 SQLAlchemy 的行为，如果我们访问一个从未设置过的标量属性或多对一属性，它将返回为`None`：
 
-    >>> obj.someattrplainplainplain
+    >>> obj.someattrplainplainplainplain
     None
 
 这个`None`的值实际上现在是`obj`状态的一部分，并且与我们已经明确设置了该属性的情况不同。
@@ -943,14 +943,14 @@ get”在历史和事件方面会有不同的表现。它不会发射任何属�
 
 也就是说，就好像该属性始终是`None`，并且从未更改过。这与我们先设置属性的情况明显不同：
 
-    >>> obj = Foo()plain
+    >>> obj = Foo()plainplain
     >>> obj.someattr = None
     >>> inspect(obj).attrs.someattr.history
     History(added=[None], unchanged=(), deleted=())  # all versions
 
 以上意味着我们的“设置”操作的行为可能会被之前通过“get”访问的值所破坏。在 1.0 中，这种不一致性已经解决了，当使用默认的“getter”时，不再实际设置任何东西。
 
-    >>> obj = Foo()
+    >>> obj = Foo()plain
     >>> obj.someattr
     None
     >>> inspect(obj).attrs.someattr.history
@@ -1014,7 +1014,7 @@ change](#migration-3060)）说明了一些很少的边缘情况实际上我们�
 
 [`Session.expunge()`](orm_session_api.html#sqlalchemy.orm.session.Session.expunge "sqlalchemy.orm.session.Session.expunge")的行为存在导致关于已删除对象的行为不一致的错误。在清除之后，[`object_session()`](orm_session_api.html#sqlalchemy.orm.session.object_session "sqlalchemy.orm.session.object_session")函数以及[`InstanceState.session`](orm_internals.html#sqlalchemy.orm.state.InstanceState.session "sqlalchemy.orm.state.InstanceState.session")属性仍然会将对象报告为属于[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 
-    u1 = sess.query(User).first()
+    u1 = sess.query(User).first()plainplain
     sess.delete(u1)
 
     sess.flush()
@@ -1045,7 +1045,7 @@ transaction is committed.
 
 或使用[`Query.enable_eagerloads()`](orm_query.html#sqlalchemy.orm.query.Query.enable_eagerloads "sqlalchemy.orm.query.Query.enable_eagerloads")：
 
-    q = sess.query(Object).enable_eagerloads(False).yield_per(100)plain
+    q = sess.query(Object).enable_eagerloads(False).yield_per(100)plainplain
 
 [`lazyload()`](orm_loading_relationships.html#sqlalchemy.orm.lazyload "sqlalchemy.orm.lazyload")选项的优点是，仍然可以使用额外的多对一连接的加载器选项：
 
@@ -1092,11 +1092,11 @@ transaction is committed.
 That is, the `A.bs` is part of a “path”.
 作为[＃3367](http://www.sqlalchemy.org/trac/ticket/3367)的一部分，两次到达相同的端点而不是大路径的一部分现在将发出警告：
 
-    SAWarning: Pathed join target A.bs has already been joined to; skipping
+    SAWarning: Pathed join target A.bs has already been joined to; skippingplain
 
 当加入实体而不使用关系路径时，更大的变化涉及到。如果我们加入`B`两次：
 
-    print(s.query(A).join(B, B.a_id == A.id).join(B, B.a_id == A.id))
+    print(s.query(A).join(B, B.a_id == A.id).join(B, B.a_id == A.id))plain
 
 在 0.9 中，这将呈现如下：
 
@@ -1107,7 +1107,7 @@ That is, the `A.bs` is part of a “path”.
 
 在1.0中，没有应用自动别名，我们得到：
 
-    SELECT a.id AS a_id
+    SELECT a.id AS a_idplain
     FROM a JOIN b ON b.a_id = a.id JOIN b ON b.a_id = a.id
 
 这会引发数据库错误。虽然如果我们加入冗余关系和基于冗余非关系的目标，如果“重复连接目标”的行为相同，那么现在我们只是在更严重的情况下改变行为，在这种情况下，先前会出现隐式锯齿，并且只会在关系案例中发出警告。最终，两次加入相同的事物而没有任何混淆消除歧义的行为会在所有情况下产生错误。
@@ -1169,7 +1169,7 @@ That is, the `A.bs` is part of a “path”.
 
 最终结果是依赖于这个错误的应用程序现在会有数据库引发的错误。解决方案是使用预期的形式。在查询中引用单一继承实体的多个子类时，必须手动使用别名来消除表的歧义，因为所有子类通常引用同一个表：
 
-    asub2_alias = aliased(ASub2)
+    asub2_alias = aliased(ASub2)plain
 
     print(s.query(ASub1).join(B, ASub1.b).join(asub2_alias, B.a.of_type(asub2_alias)))
 
@@ -1233,7 +1233,7 @@ load chained to an outer join eager load will use a right-nested join.
 
 使用新的默认值，这将以下面的形式呈现 FROM 子句：
 
-    FROM users LEFT OUTER JOIN (orders JOIN items ON <onclause>) ON <onclause>plain
+    FROM users LEFT OUTER JOIN (orders JOIN items ON <onclause>) ON <onclause>plainplain
 
 也就是说，对 INNER 连接使用右嵌套连接，以便可以返回`users`的完整结果。INNER 连接的使用比使用 OUTER 连接更有效，并允许[`joinedload.innerjoin`](orm_loading_relationships.html#sqlalchemy.orm.joinedload.params.innerjoin "sqlalchemy.orm.joinedload")优化参数在所有情况下都生效。
 
@@ -1285,7 +1285,7 @@ one” relationship.
 
 然而，由于内部查询的到外层一个上的关系是至多只有一排在`uselist=False`
 
-    SELECT a.id AS a_id, b_1.id AS b_1_id, b_1.a_id AS b_1_a_id
+    SELECT a.id AS a_id, b_1.id AS b_1_id, b_1.a_id AS b_1_a_idplain
     FROM a LEFT OUTER JOIN b AS b_1 ON a.id = b_1.a_id
     LIMIT :param_1
 
@@ -1322,7 +1322,7 @@ or [`Query.from_self()`](orm_query.html#sqlalchemy.orm.query.Query.from_self "sq
 
 给定一个单表继承映射，如：
 
-    class Widget(Base):
+    class Widget(Base):plain
         __table__ = 'widget_table'
 
     class FooWidget(Widget):
@@ -1352,7 +1352,7 @@ or [`Query.from_self()`](orm_query.html#sqlalchemy.orm.query.Query.from_self "sq
 
 所以那些不包含“type”的查询仍然可以工作！:
 
-    sess.query(FooWidget.id).count()plain
+    sess.query(FooWidget.id).count()plainplainplain
 
 呈现：
 
@@ -1367,7 +1367,7 @@ or [`Query.from_self()`](orm_query.html#sqlalchemy.orm.query.Query.from_self "sq
 
 当连接到单表继承子类目标时，ORM 在加入关系时总是添加“单表标准”。给定映射为：
 
-    class Widget(Base):plain
+    class Widget(Base):plainplainplainplain
         __tablename__ = 'widget'
         id = Column(Integer, primary_key=True)
         type = Column(String)
@@ -1401,7 +1401,7 @@ criteria to the ON clause.
 这里的变化是，`AND widget.type IN()`条件现在附加到*任何*
 ON 子句，不只是从关系中产生的那些，包括一个明确说明的关系：
 
-    # ON clause will now render as
+    # ON clause will now render asplain
     # related.id = widget.related_id AND widget.type IN (:type_1)
     s.query(Related).join(FooWidget, FooWidget.related_id == Related.id).all()
 
@@ -1424,7 +1424,7 @@ ON 子句，不只是从关系中产生的那些，包括一个明确说明的�
 
 ### 将完整的 SQL 片段强制转换为 text()[¶](#warnings-emitted-when-coercing-full-sql-fragments-into-text "Permalink to this headline")时发出警告
 
-自从SQLAlchemy开始以来，一直强调不妨碍纯文本的使用。The Core and ORM
+自从 SQLAlchemy 开始以来，一直强调不妨碍纯文本的使用。The Core and ORM
 expression systems were intended to allow any number of points at which
 the user can just use plain text SQL expressions, not just in the sense
 that you can send a full SQL string to [`Connection.execute()`](core_connections.html#sqlalchemy.engine.Connection.execute "sqlalchemy.engine.Connection.execute"),
@@ -1446,7 +1446,7 @@ behavior of passing string values that become parameterized:
     # we aren't talking about this!!
     stmt = select([sometable]).where(sometable.c.somecolumn == 'value')
 
-Core教程一直以来都使用这种技术，使用[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造，其中几乎所有组件都被指定为直线。然而，尽管这种长期存在的行为和示例，用户显然对这种行为存在感到惊讶，并且在询问社区时，我无法找到任何实际上*没有感到惊讶的用户，您可以将完整的字符串发送到像[`Query.filter()`](orm_query.html#sqlalchemy.orm.query.Query.filter "sqlalchemy.orm.query.Query.filter")这样的方法中。*
+Core 教程一直以来都使用这种技术，使用[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")构造，其中几乎所有组件都被指定为直线。然而，尽管这种长期存在的行为和示例，用户显然对这种行为存在感到惊讶，并且在询问社区时，我无法找到任何实际上*没有感到惊讶的用户，您可以将完整的字符串发送到像[`Query.filter()`](orm_query.html#sqlalchemy.orm.query.Query.filter "sqlalchemy.orm.query.Query.filter")这样的方法中。*
 
 所以这里的改变是鼓励用户在编写部分或全部由文本片段组成的 SQL 时限定文本字符串。在撰写选择时如下所示：
 
@@ -1529,7 +1529,7 @@ to `users.name`! ）：
 
 输出符合我们的说法，但它又一次警告我们：
 
-    SAWarning: Can't resolve label reference 'some_label'; converting toplainplain
+    SAWarning: Can't resolve label reference 'some_label'; converting toplainplainplain
     text() (this warning may be suppressed after 10 occurrences)
 
     SELECT users.name, count(users.id) AS id_count
@@ -1572,12 +1572,12 @@ by 或其他表达式进行排序，SQLAlchemy 预期字符串会解析为已知
 
 上面的例子将会像预期的那样分别为每一行调用`next(counter)`：
 
-    INSERT INTO my_table (id, data) VALUES (?, ?), (?, ?), (?, ?)
+    INSERT INTO my_table (id, data) VALUES (?, ?), (?, ?), (?, ?)plain
     (1, 'd1', 2, 'd2', 3, 'd3')
 
 以前，位置方言会失败，因为不会为其他位置生成绑定：
 
-    Incorrect number of bindings supplied. The current statement uses 6,plain
+    Incorrect number of bindings supplied. The current statement uses 6,plainplain
     and there are 4 supplied.
     [SQL: u'INSERT INTO my_table (id, data) VALUES (?, ?), (?, ?), (?, ?)']
     [parameters: (1, 'd1', 'd2', 'd3')]
@@ -1609,7 +1609,7 @@ by 或其他表达式进行排序，SQLAlchemy 预期字符串会解析为已知
 
 以前，值“d1”将被复制到第三行的值（但是只能使用命名格式！）：
 
-    INSERT INTO my_table (data) VALUES (:data_0), (:data_1), (:data_0)
+    INSERT INTO my_table (data) VALUES (:data_0), (:data_1), (:data_0)plain
     {u'data_1': 'd2', u'data_0': 'd1'}
 
 [＃3288 T0\>](http://www.sqlalchemy.org/trac/ticket/3288)
@@ -1857,7 +1857,7 @@ Options](dialects_postgresql.html#postgresql-table-options)
 
 Postgresql 现在支持 9.4 的集合函数的 SQL 标准 FILTER 关键字。SQLAlchemy 允许使用[`FunctionElement.filter()`](core_functions.html#sqlalchemy.sql.functions.FunctionElement.filter "sqlalchemy.sql.functions.FunctionElement.filter")：
 
-    func.count(1).filter(True)plainplain
+    func.count(1).filter(True)plainplainplain
 
 也可以看看
 

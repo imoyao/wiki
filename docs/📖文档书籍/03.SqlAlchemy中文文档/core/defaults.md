@@ -27,7 +27,7 @@ SQLAlchemy 针对在 INSERT 和 UPDATE 语句期间发生的列级事件提供�
 
 最简单的默认值是一个用作列默认值的标量值：
 
-    Table("mytable", meta,plainplain
+    Table("mytable", meta,plainplainplain
         Column("somecolumn", Integer, default=12)
     )
 
@@ -35,7 +35,7 @@ SQLAlchemy 针对在 INSERT 和 UPDATE 语句期间发生的列级事件提供�
 
 标量值也可能与 UPDATE 语句相关联，尽管这不是很常见（因为 UPDATE 语句通常在寻找动态默认值）：
 
-    Table("mytable", meta,plain
+    Table("mytable", meta,plainplain
         Column("somecolumn", Integer, onupdate=25)
     )
 
@@ -78,7 +78,7 @@ SQLAlchemy 将在语句执行时执行该函数。
 
 由[`Column.default`](metadata.html#sqlalchemy.schema.Column.params.default "sqlalchemy.schema.Column")和[`Column.onupdate`](metadata.html#sqlalchemy.schema.Column.params.onupdate "sqlalchemy.schema.Column")使用的 Python 函数也可以使用当前语句的上下文来确定一个值。语句的 context 是一个内部 SQLAlchemy 对象，它包含有关正在执行的语句的所有信息，包括其源表达式，与其关联的参数以及游标。与默认生成有关的上下文的典型用例是访问在该行上插入或更新的其他值。要访问上下文，请提供一个接受单个`context`参数的函数：
 
-    def mydefault(context):plain
+    def mydefault(context):plainplain
         return context.current_parameters['counter'] + 12
 
     t = Table('mytable', meta,
@@ -148,7 +148,7 @@ collections on [`ResultProxy`](connections.html#sqlalchemy.engine.ResultProxy "s
 SQL 表达式默认的变体是[`Column.server_default`](metadata.html#sqlalchemy.schema.Column.params.server_default "sqlalchemy.schema.Column")，它在[`Table.create()`](metadata.html#sqlalchemy.schema.Table.create "sqlalchemy.schema.Table.create")操作期间被放置在 CREATE
 TABLE 语句中：
 
-    t = Table('test', meta,plainplainplain
+    t = Table('test', meta,plainplainplainplain
         Column('abc', String(20), server_default='abc'),
         Column('created_at', DateTime, server_default=text("sysdate"))
     )
@@ -183,7 +183,7 @@ TABLE 语句中：
 
 对于服务器生成的主键值，所有数据库都提供特殊的访问器或其他技术来获取表的“最后插入的主键”列。这些机制不受[`FetchedValue`](#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")的影响。对于使用触发器生成主键值的特殊情况，并且正在使用的数据库不支持`RETURNING`子句，可能需要放弃使用触发器，而是应用 SQL 表达式或用作“预执行”表达式：
 
-    t = Table('test', meta,plainplainplain
+    t = Table('test', meta,plainplainplainplain
             Column('abc', MyType, default=func.generate_new_value(), primary_key=True)
     )
 
@@ -217,7 +217,7 @@ SQLAlchemy 使用[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Seq
 
 [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")对象也可以像 SQL 表达式那样独立执行，具有调用其“下一个值”功能的效果：
 
-    seq = Sequence('some_sequence')plainplainplainplain
+    seq = Sequence('some_sequence')plainplainplainplainplainplainplain
     nextid = connection.execute(seq)
 
 ### 将序列关联到服务器端默认[¶](#associating-a-sequence-as-the-server-side-default "Permalink to this headline")
@@ -226,7 +226,7 @@ SQLAlchemy 使用[`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Seq
 only**关联。将为我们的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")生成的 CREATE
 TABLE 不会引用此序列。如果我们希望将序列用作服务器端缺省值，即使我们从 SQL 命令行向表中发出 INSERT 命令，也可以使用[`Column.server_default`](metadata.html#sqlalchemy.schema.Column.params.server_default "sqlalchemy.schema.Column")参数与序列的值生成函数一起使用，可以从[`Sequence.next_value()`](#sqlalchemy.schema.Sequence.next_value "sqlalchemy.schema.Sequence.next_value")方法获得：
 
-    cart_id_seq = Sequence('cart_id_seq')plainplain
+    cart_id_seq = Sequence('cart_id_seq')plainplainplain
     table = Table("cartitems", meta,
         Column(
             "cart_id", Integer, cart_id_seq,
@@ -237,7 +237,7 @@ TABLE 不会引用此序列。如果我们希望将序列用作服务器端缺�
 
 上面的元数据将在 Postgresql 上生成一个 CREATE TABLE 语句，如下所示：
 
-    CREATE TABLE cartitems (plainplainplain
+    CREATE TABLE cartitems (plainplainplainplain
         cart_id INTEGER DEFAULT nextval('cart_id_seq') NOT NULL,
         description VARCHAR(40),
         createdate TIMESTAMP WITHOUT TIME ZONE,
@@ -255,7 +255,7 @@ it’s probably a good idea to specify it in this way as well.
 *class* `sqlalchemy.schema。`{.descclassname} `ColumnDefault`{.descname} （ *arg*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.schema.ColumnDefault "Permalink to this definition")*
 :   基础：[`sqlalchemy.schema.DefaultGenerator`](#sqlalchemy.schema.DefaultGenerator "sqlalchemy.schema.DefaultGenerator")
 
-    列上的普通默认值。plainplain
+    列上的普通默认值。plainplainplain
 
     这可以对应于常量，可调用函数或SQL子句。
 
@@ -275,7 +275,7 @@ it’s probably a good idea to specify it in this way as well.
  *class*`sqlalchemy.schema.`{.descclassname}`DefaultClause`{.descname}(*arg*, *for\_update=False*, *\_reflected=False*)[¶](#sqlalchemy.schema.DefaultClause "Permalink to this definition")
 :   基础：[`sqlalchemy.schema.FetchedValue`](#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")
 
-    DDL指定的DEFAULT列值。plain
+    DDL指定的DEFAULT列值。plainplainplain
 
     [`DefaultClause`](#sqlalchemy.schema.DefaultClause "sqlalchemy.schema.DefaultClause")
     is a [`FetchedValue`](#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")
@@ -298,12 +298,12 @@ it’s probably a good idea to specify it in this way as well.
 *class* `sqlalchemy.schema。`{.descclassname} `DefaultGenerator`{.descname} （ *for\_update = False* / T5\> [¶ T6\>](#sqlalchemy.schema.DefaultGenerator "Permalink to this definition")
 :   基础：`sqlalchemy.schema._NotAColumnExpr`，[`sqlalchemy.schema.SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-    列*默认*值的基类。
+    列*默认*值的基类。plain
 
 *类 T0\> `sqlalchemy.schema。 T1>  FetchedValue  T2> （ T3>  FOR_UPDATE =假 T4> ）< / T5> ¶ T6>`{.descclassname}*
 :   基础：`sqlalchemy.schema._NotAColumnExpr`，`sqlalchemy.sql.expression.SchemaEventTarget`
 
-    透明数据库默认的标记。plainplain
+    透明数据库默认的标记。plainplainplainplain
 
     当数据库配置为为列提供一些自动默认值时，使用[`FetchedValue`](#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")。
 
@@ -320,14 +320,14 @@ it’s probably a good idea to specify it in this way as well.
 *class* `sqlalchemy.schema。`{.descclassname} `PassiveDefault`{.descname} （ *\* arg*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.schema.PassiveDefault "Permalink to this definition")*
 :   基础：[`sqlalchemy.schema.DefaultClause`](#sqlalchemy.schema.DefaultClause "sqlalchemy.schema.DefaultClause")
 
-    DDL指定的DEFAULT列值。plain
+    DDL指定的DEFAULT列值。plainplainplain
 
     从版本0.6开始弃用： [`PassiveDefault`](#sqlalchemy.schema.PassiveDefault "sqlalchemy.schema.PassiveDefault")已弃用。使用[`DefaultClause`](#sqlalchemy.schema.DefaultClause "sqlalchemy.schema.DefaultClause")。
 
  *class*`sqlalchemy.schema.`{.descclassname}`Sequence`{.descname}(*name*, *start=None*, *increment=None*, *minvalue=None*, *maxvalue=None*, *nominvalue=None*, *nomaxvalue=None*, *cycle=None*, *schema=None*, *optional=False*, *quote=None*, *metadata=None*, *quote\_schema=None*, *for\_update=False*)[¶](#sqlalchemy.schema.Sequence "Permalink to this definition")
 :   基础：[`sqlalchemy.schema.DefaultGenerator`](#sqlalchemy.schema.DefaultGenerator "sqlalchemy.schema.DefaultGenerator")
 
-    表示一个命名的数据库序列。plain
+    表示一个命名的数据库序列。plainplainplain
 
     [`Sequence`](#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")对象表示数据库序列的名称和配置参数。它还表示一个可以由SQLAlchemy
     [`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")执行的构造，为目标数据库呈现适当的“下一个值”函数并返回结果。

@@ -116,7 +116,7 @@ aren’t really aware of them otherwise.
 
 现在使用显式语句向目标发布`query.join()`的默认方法是：
 
-    query.join(SomeClass, SomeClass.id==ParentClass.some_id)plainplainplain
+    query.join(SomeClass, SomeClass.id==ParentClass.some_id)plainplainplainplain
 
 在 0.6 中，这个用法被认为是一个错误，因为`join()`接受多个对应于多个 JOIN 子句的参数 -
 两个参数形式需要在一个元组中以消除单参数和双参数连接目标。在 0.6 的中间，我们为这种特定的调用风格增加了检测和错误消息，因为它很常见。在 0.7 中，由于我们无论如何都在检测确切的模式，并且由于不必理由地键入元组是非常烦人的，所以非元组方法现在变成了“正常”的方式。与单连接情况相比，“多 JOIN”用例非常罕见，并且通过多次调用`join()`可以更清楚地表示多个连接。
@@ -125,7 +125,7 @@ aren’t really aware of them otherwise.
 
 请注意，`query.join()`的所有其他形式保持不变：
 
-    query.join(MyClass.somerelation)plainplain
+    query.join(MyClass.somerelation)plainplainplain
     query.join("somerelation")
     query.join(MyTarget)
     # ... etc
@@ -212,7 +212,7 @@ Server 和 Oracle 支持，可能还有其他支持。
 
 SQLAlchemy 使用`over()`方法提供一个通常通过现有函数子句调用的简单结构，该方法接受`order_by`和`partition_by`关键字参数。下面我们复制 PG 教程中的第一个例子：
 
-    from sqlalchemy.sql import table, column, select, funcplainplainplainplain
+    from sqlalchemy.sql import table, column, select, funcplainplainplainplainplain
 
     empsalary = table('empsalary',
                     column('depname'),
@@ -290,13 +290,13 @@ T0\>](http://www.sqlalchemy.org/docs/07/core_connections.html#sqlalchemy.engine.
 在`Query.count()`中发生的非常古老的猜测已经现代化以使用`.from_self()`。That is, `query.count()` is now
 equivalent to:
 
-    query.from_self(func.count(literal_column('1'))).scalar()
+    query.from_self(func.count(literal_column('1'))).scalar()plainplain
 
 以前，内部逻辑试图重写查询本身的列子句，并且在检测到“子查询”条件（例如可能包含聚合的列查询或具有 DISTINCT 的查询）时，会经历复杂重写列子句的过程。这种逻辑在复杂条件下失败了，特别是那些涉及到连接表继承的逻辑，并且由于更全面的`.from_self()`调用已经过时了。
 
 由`query.count()`发出的 SQL 现在总是如下形式：
 
-    SELECT count(1) AS count_1 FROM (plain
+    SELECT count(1) AS count_1 FROM (plainplainplain
         SELECT user.id AS user_id, user.name AS user_name from user
     ) AS anon_1
 
@@ -308,12 +308,12 @@ equivalent to:
 
 MySQL 用户已经报道过，MyISAM 引擎不会因为这个简单的改变而完全落空。请注意，对于针对无法处理简单子查询的 DB 进行优化的简单`count()`，应该使用`func.count()`：
 
-    from sqlalchemy import funcplainplain
+    from sqlalchemy import funcplainplainplain
     session.query(func.count(MyClass.id)).scalar()
 
 或者用于`count(*)`：
 
-    from sqlalchemy import func, literal_columnplainplainplainplain
+    from sqlalchemy import func, literal_columnplainplainplainplainplainplainplain
     session.query(func.count(literal_column('*'))).select_from(MyClass).scalar()
 
 ### LIMIT / OFFSET 子句现在使用绑定参数[¶](#limit-offset-clauses-now-use-bind-parameters "Permalink to this headline")
@@ -343,11 +343,11 @@ Sajip 为我们的日志记录系统提供了一个补丁，使得不再需要�
 
 现在，`contains_eager()`修饰符将自行链接一段更长的路径，而不需要发出单独的`contains_eager()`调用。代替：
 
-    session.query(A).options(contains_eager(A.b), contains_eager(A.b, B.c))plainplainplainplainplainplainplainplainplain
+    session.query(A).options(contains_eager(A.b), contains_eager(A.b, B.c))plainplainplainplainplainplainplainplainplainplainplainplain
 
 你可以说：
 
-    session.query(A).options(contains_eager(A.b, B.c))plainplainplainplainplainplain
+    session.query(A).options(contains_eager(A.b, B.c))plainplainplainplainplainplainplain
 
 [＃2032 T0\>](http://www.sqlalchemy.org/trac/ticket/2032)
 
@@ -383,7 +383,7 @@ environments. 0.7 中的`sqla_nose.py`脚本现在是用鼻子运行测试的唯
 
 完全不反对任何`Table`的构造，就像一个函数一样，可以被映射。
 
-    from sqlalchemy import select, funcplainplainplain
+    from sqlalchemy import select, funcplainplainplainplain
     from sqlalchemy.orm import mapper
 
     class Subset(object):
@@ -437,7 +437,7 @@ Server 将这些类型的长度默认为'1'。
 
 当映射具有`PickleType`或`postgresql.ARRAY`数据类型的列时，此更改引用 ORM 的默认行为。`mutable`标志现在默认设置为`False`。如果现有的应用程序使用这些类型，并且依赖于检测到就地突变，则必须使用`mutable=True`构造类型对象以恢复 0.6 行为：
 
-    Table('mytable', metadata,plain
+    Table('mytable', metadata,plainplainplain
         # ....
 
         Column('pickled_data', PickleType(mutable=True))
@@ -494,7 +494,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 给定两个映射类`Foo`和`Bar`，每个类都有一个列`spam`：
 
-    qa = session.query(Foo.spam)plainplain
+    qa = session.query(Foo.spam)plainplainplain
     qb = session.query(Bar.spam)
 
     qu = qa.union(qb)
@@ -509,7 +509,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 使用声明式，场景是这样的：
 
-    class Parent(Base):plainplainplainplain
+    class Parent(Base):plainplainplainplainplainplainplain
         __tablename__ = 'parent'
         id = Column(Integer, primary_key=True)
 
@@ -526,7 +526,7 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 这种方法的主要优点是，现在可以更轻松地构建引用本地列的`primaryjoin`表达式：
 
-    class Child(Parent):plainplain
+    class Child(Parent):plainplainplainplainplain
        __tablename__ = 'child'
         id = Column(Integer, ForeignKey('parent.id'), primary_key=True)
         some_related = relationship("SomeRelated",
@@ -545,23 +545,23 @@ Session.merge()将检查传入状态的版本 ID 与数据库的版本 ID，假�
 
 在 0.6 中，这会使得：
 
-    SELECT parent.id AS parent_idplain
+    SELECT parent.id AS parent_idplainplain
     FROM parent
     WHERE parent.id > :id_1
 
 在 0.7 中，你会得到：
 
-    SELECT parent.id AS parent_idplainplain
+    SELECT parent.id AS parent_idplainplainplainplain
     FROM parent, child
     WHERE child.id > :id_1
 
 你会注意到它是一个笛卡尔积 - 这个行为现在等同于`Child`本地的任何其他属性的行为。使用`with_polymorphic()`方法或显式连接底层`Table`对象的类似策略来针对所有`Parent`对象呈现查询按照与 0.5 和 0.6 相同的方式对`Child`进行标准化：
 
-    print(s.query(Parent).with_polymorphic([Child]).filter(Child.id > 7))plain
+    print(s.query(Parent).with_polymorphic([Child]).filter(Child.id > 7))plainplain
 
 0.6 和 0.7 中的哪一个呈现：
 
-    SELECT parent.id AS parent_id, child.id AS child_idplainplainplainplain
+    SELECT parent.id AS parent_id, child.id AS child_idplainplainplainplainplain
     FROM parent LEFT OUTER JOIN child ON parent.id = child.id
     WHERE child.id > :id_1
 
@@ -595,7 +595,7 @@ column is the primary representation of `FooBar.id`
 
 这是 0.6 的警告，现在 0.7 的错误。为`polymorphic_on`提供的列必须位于映射可选项中。这可以防止一些偶然的用户错误，例如：
 
-    mapper(SomeClass, sometable, polymorphic_on=some_lookup_table.c.id)plainplain
+    mapper(SomeClass, sometable, polymorphic_on=some_lookup_table.c.id)plainplainplain
 
 其中 polymorphic\_on 必须位于`sometable`列上，在这种情况下可能是`sometable.c.some_lookup_id`。还有一些“多态联合”情景，其中有时会出现类似的错误。
 
@@ -651,7 +651,7 @@ For a few years we’ve added the string `sqlalchemy.exceptions` to `sys.modules
 “`import sqlalchemy.exceptions`” would work.
 很久以来，核心例外模块的名称一直是`exc`，因此建议为此模块导入：
 
-    from sqlalchemy import excplainplainplain
+    from sqlalchemy import excplainplainplainplainplainplainplain
 
 The `exceptions` name is still present in
 “`sqlalchemy`” for applications which might have
@@ -695,11 +695,11 @@ restored as of 0.7b4/0.7.0, but emits a deprecation warning.
 
 这个模糊的特性允许这种模式与 MySQL 后端：
 
-    select([mytable], distinct='ALL', prefixes=['HIGH_PRIORITY'])plainplain
+    select([mytable], distinct='ALL', prefixes=['HIGH_PRIORITY'])plainplainplain
 
 `prefixes`关键字或`prefix_with()`方法应该用于非标准或不常用的前缀：
 
-    select([mytable]).prefix_with('HIGH_PRIORITY', 'ALL')plainplainplainplain
+    select([mytable]).prefix_with('HIGH_PRIORITY', 'ALL')plainplainplainplainplainplain
 
 ### `useexisting`取代`extend_existing`和`keep_existing` [¶](#useexisting-superseded-by-extend-existing-and-keep-existing "Permalink to this headline")
 
@@ -772,7 +772,7 @@ that of the `alias()` methods on all
 
 这些方法都可以接受 0.5 系列的\*参数：
 
-    # current way, in place since 0.5plainplainplain
+    # current way, in place since 0.5plainplainplainplain
     session.query(Houses).join(Houses.rooms, Room.closets)
     session.query(Houses).options(eagerload_all(Houses.rooms, Room.closets))
 

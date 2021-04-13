@@ -13,7 +13,7 @@ tags:
 
 可以指示[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象从数据库中已有的相应数据库模式对象加载有关其自身的信息。这个过程被称为*反射*。在最简单的情况下，你只需要指定表名，一个[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象和`autoload=True`标志。如果[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")不是永久绑定的，还要添加`autoload_with`参数：
 
-    >>> messages = Table('messages', meta, autoload=True, autoload_with=engine)plainplainplain
+    >>> messages = Table('messages', meta, autoload=True, autoload_with=engine)plainplainplainplain
     >>> [c.name for c in messages.columns]
     ['message_id', 'message_name', 'date']
 
@@ -41,7 +41,7 @@ object is created for each distinct table name.
 
 反映表时，可以使用显式值重写单个列；这对指定自定义数据类型，例如可能未在数据库中配置的主键等约束很方便。:
 
-    >>> mytable = Table('mytable', meta,
+    >>> mytable = Table('mytable', meta,plainplain
     ... Column('id', Integer, primary_key=True),   # override reflected 'id' to have primary key
     ... Column('mydata', Unicode(50)),    # override reflected 'mydata' to be Unicode
     ... autoload=True)
@@ -51,7 +51,7 @@ object is created for each distinct table name.
 
 反射系统也可以反映意见。基本用法与表格的基本用法相同：
 
-    my_view = Table("some_view", metadata, autoload=True)plainplainplainplainplainplain
+    my_view = Table("some_view", metadata, autoload=True)plainplainplainplainplainplainplain
 
 Above, `my_view` is a [`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
 object with [`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
@@ -83,7 +83,7 @@ object can also get a listing of tables and reflect the full set.
 `metadata.reflect()` also provides a handy way to
 clear or delete all the rows in a database:
 
-    meta = MetaData()plainplainplain
+    meta = MetaData()plainplainplainplain
     meta.reflect(bind=someengine)
     for table in reversed(meta.sorted_tables):
         someengine.execute(table.delete())
@@ -93,7 +93,7 @@ clear or delete all the rows in a database:
 
 还提供一个低级别接口，它提供了从给定数据库加载架构，表，列和约束描述列表的后端不可知系统。这被称为“检查员”：
 
-    from sqlalchemy import create_engineplainplainplain
+    from sqlalchemy import create_engineplainplainplainplain
     from sqlalchemy.engine import reflection
     engine = create_engine('...')
     insp = reflection.Inspector.from_engine(engine)
@@ -102,7 +102,7 @@ clear or delete all the rows in a database:
  *class*`sqlalchemy.engine.reflection.`{.descclassname}`Inspector`{.descname}(*bind*)[¶](#sqlalchemy.engine.reflection.Inspector "Permalink to this definition")
 :   执行数据库模式检查。
 
-    The Inspector acts as a proxy to the reflection methods of theplainplainplainplain
+    The Inspector acts as a proxy to the reflection methods of theplainplainplainplainplain
     [`Dialect`](internals.html#sqlalchemy.engine.interfaces.Dialect "sqlalchemy.engine.interfaces.Dialect"),
     providing a consistent interface as well as caching support for
     previously fetched metadata.

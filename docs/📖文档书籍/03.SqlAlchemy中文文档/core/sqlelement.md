@@ -64,7 +64,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
 ` sqlalchemy.sql.expression。 T0> 任何_  T1> （ T2>  EXPR  T3> ） T4> ¶< / T5>`{.descclassname}
 :   产生一个 ANY 表达式。
 
-    这可能适用于某些方言的数组类型（例如postgresql），或适用于其他方面的子查询（例如mysql）。例如。：
+    这可能适用于某些方言的数组类型（例如postgresql），或适用于其他方面的子查询（例如mysql）。例如。：plain
 
         # postgresql '5 = ANY (somearray)'
         expr = 5 == any_(mytable.c.somearray)
@@ -582,7 +582,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
 ` sqlalchemy.sql.expression。 T0> 不同 T1> （ T2>  EXPR  T3> ） T4> ¶< / T5>`{.descclassname}
 :   生成列表达式级别的一元`DISTINCT`子句。
 
-    这将`DISTINCT`关键字应用于单个列表达式，并且通常包含在聚合函数中，如下所示：plain
+    这将`DISTINCT`关键字应用于单个列表达式，并且通常包含在聚合函数中，如下所示：plainplain
 
         from sqlalchemy import distinct, func
         stmt = select([func.count(distinct(users_table.c.name))])
@@ -2790,7 +2790,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  *class*`sqlalchemy.sql.expression.`{.descclassname}`Over`{.descname}(*element*, *partition\_by=None*, *order\_by=None*, *range\_=None*, *rows=None*)[¶](#sqlalchemy.sql.expression.Over "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
-    代表OVER子句。
+    代表OVER子句。plain
 
     这是一个针对所谓的“窗口”函数的特殊操作符，以及任何聚合函数，它会产生相对于结果集本身的结果。它仅受特定数据库后端支持。
 
@@ -2953,7 +2953,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  *class*`sqlalchemy.sql.expression.`{.descclassname}`Tuple`{.descname}(*\*clauses*, *\*\*kw*)[¶](#sqlalchemy.sql.expression.Tuple "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ClauseList`](#sqlalchemy.sql.expression.ClauseList "sqlalchemy.sql.expression.ClauseList")，[`sqlalchemy.sql.expression.ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
-    表示一个SQL元组。
+    表示一个SQL元组。plain
 
     `__ init __`{.descname} （ *\*子句*，*\*\* kw* ） [T5\>](#sqlalchemy.sql.expression.Tuple.__init__ "Permalink to this definition")
     :   构建一个新的[`Tuple`](#sqlalchemy.sql.expression.Tuple "sqlalchemy.sql.expression.Tuple")对象。

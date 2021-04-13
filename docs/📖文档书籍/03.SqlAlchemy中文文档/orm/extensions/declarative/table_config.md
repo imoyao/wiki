@@ -15,13 +15,13 @@ tags:
 
 除了名称，元数据和映射列参数之外的表参数是使用`__table_args__`类属性指定的。该属性包含通常发送到[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")构造函数的位置和关键字参数。该属性可以用两种形式之一来指定。一个是字典：
 
-    class MyClass(Base):plainplainplainplainplainplainplainplain
+    class MyClass(Base):plainplainplainplainplainplainplainplainplainplain
         __tablename__ = 'sometable'
         __table_args__ = {'mysql_engine':'InnoDB'}
 
 另一个是元组，每个参数都是位置的（通常是约束条件）：
 
-    class MyClass(Base):plainplainplainplainplainplain
+    class MyClass(Base):plainplainplainplainplainplainplainplainplainplain
         __tablename__ = 'sometable'
         __table_args__ = (
                 ForeignKeyConstraint(['id'], ['remote_table.id']),
@@ -30,7 +30,7 @@ tags:
 
 通过将最后一个参数指定为字典，可以使用上述形式指定关键字参数：
 
-    class MyClass(Base):plainplainplainplain
+    class MyClass(Base):plainplainplainplainplainplainplainplainplainplain
         __tablename__ = 'sometable'
         __table_args__ = (
                 ForeignKeyConstraint(['id'], ['remote_table.id']),
@@ -43,7 +43,7 @@ tags:
 
 作为`__tablename__`的替代方案，可以使用直接的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")结构。在这种情况下需要名称的[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象将被添加到映射中，就像正常映射到表一样：
 
-    class MyClass(Base):plainplainplainplainplainplainplainplain
+    class MyClass(Base):plainplainplainplainplainplainplainplainplainplainplainplainplainplain
         __table__ = Table('my_table', Base.metadata,
             Column('id', Integer, primary_key=True),
             Column('name', String(50))
@@ -54,7 +54,7 @@ for establishing table metadata, while still getting most of the
 benefits of using declarative.
 使用反射的应用程序可能希望在其他地方加载表元数据并将其传递给声明性类：
 
-    from sqlalchemy.ext.declarative import declarative_baseplainplainplainplain
+    from sqlalchemy.ext.declarative import declarative_baseplainplainplainplainplainplain
 
     Base = declarative_base()
     Base.metadata.reflect(some_engine)
@@ -69,7 +69,7 @@ benefits of using declarative.
 
 请注意，当使用`__table__`方法时，该对象可立即用作类声明主体本身内的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，因为 Python 类只是另一个语法块。在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的`primaryjoin`条件中使用`id`列来说明以下情况：
 
-    class MyClass(Base):plainplainplain
+    class MyClass(Base):plainplainplainplainplainplainplainplainplainplainplainplain
         __table__ = Table('my_table', Base.metadata,
             Column('id', Integer, primary_key=True),
             Column('name', String(50))
@@ -80,7 +80,7 @@ benefits of using declarative.
 
 类似地，引用`__table__`的映射属性可以内联放置，如下我们将`name`列分配给属性`_name`，生成同义词对于`name`：
 
-    from sqlalchemy.ext.declarative import synonym_forplainplainplainplain
+    from sqlalchemy.ext.declarative import synonym_forplainplainplainplainplainplainplainplainplain
 
     class MyClass(Base):
         __table__ = Table('my_table', Base.metadata,
@@ -99,14 +99,14 @@ benefits of using declarative.
 
 将`autoload=True`与映射类结合使用的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")很容易：
 
-    class MyClass(Base):plainplainplainplainplainplainplainplain
+    class MyClass(Base):plainplainplainplainplainplainplainplainplainplainplainplain
         __table__ = Table('mytable', Base.metadata,
                         autoload=True, autoload_with=some_engine)
 
 然而，这里可以做出的一个改进是在首次声明类时不要求[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")可用。为了达到这个目的，使用[`DeferredReflection`](api.html#sqlalchemy.ext.declarative.DeferredReflection "sqlalchemy.ext.declarative.DeferredReflection")
 mixin，它只有在调用一个特殊的`prepare(engine)`步骤后才能设置映射：
 
-    from sqlalchemy.ext.declarative import declarative_base, DeferredReflectionplain
+    from sqlalchemy.ext.declarative import declarative_base, DeferredReflectionplainplainplain
 
     Base = declarative_base(cls=DeferredReflection)
 

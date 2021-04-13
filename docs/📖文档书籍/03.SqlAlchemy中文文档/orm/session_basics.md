@@ -43,7 +43,7 @@ is a regular Python class which can be directly instantiated.
 
 [`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")的用法如下所示：
 
-    from sqlalchemy import create_engineplainplain
+    from sqlalchemy import create_engineplainplainplainplain
     from sqlalchemy.orm import sessionmaker
 
     # an Engine, which the Session will use for connection
@@ -79,7 +79,7 @@ it?](#session-faq-whentocreate)。
 
 一个常见的场景是在模块导入时调用[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")，但是要生成一个或多个与[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")关联的[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")尚未进行。对于这个用例，[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")结构提供了[`sessionmaker.configure()`](session_api.html#sqlalchemy.orm.session.sessionmaker.configure "sqlalchemy.orm.session.sessionmaker.configure")方法，该方法将其他配置指令放入现有的[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")当构造被调用时发生：
 
-    from sqlalchemy.orm import sessionmakerplainplainplain
+    from sqlalchemy.orm import sessionmakerplainplainplainplainplainplainplain
     from sqlalchemy import create_engine
 
     # configure Session class with desired options
@@ -107,7 +107,7 @@ factory’s [`sessionmaker.__call__()`](session_api.html#sqlalchemy.orm.session.
 method.
 这些参数将覆盖已经放置的任何配置，比如下面的，其中针对特定[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")构建新的[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")：
 
-    # at the module level, the global sessionmaker,plain
+    # at the module level, the global sessionmaker,plainplainplain
     # bound to a specific Engine
     Session = sessionmaker(bind=engine)
 
@@ -198,7 +198,7 @@ session *externally* to functions that deal with specific data.
 
 例如。 **不要这样做**：
 
-    ### this is the **wrong way to do it** ###plainplain
+    ### this is the **wrong way to do it** ###plainplainplainplainplainplainplain
 
     class ThingOne(object):
         def go(self):
@@ -226,7 +226,7 @@ session *externally* to functions that deal with specific data.
 
 保持会话（通常是交易）的生命周期**独立和外部**：
 
-    ### this is a **better** (but not the only) way to do it ###plain
+    ### this is a **better** (but not the only) way to do it ###plainplainplain
 
     class ThingOne(object):
         def go(self, session):
@@ -251,7 +251,7 @@ session *externally* to functions that deal with specific data.
 
 高级开发人员将尽量保持会话，事务和异常管理的细节，尽可能避免程序工作的细节。例如，我们可以使用[上下文管理器](http://docs.python.org/3/library/contextlib.html#contextlib.contextmanager)进一步分离关注点：
 
-    ### another way (but again *not the only way*) to do it ###plainplainplain
+    ### another way (but again *not the only way*) to do it ###plainplainplainplainplainplain
 
     from contextlib import contextmanager
 
@@ -289,11 +289,11 @@ Caching](examples.html#examples-caching)示例提供了实现二级缓存的模�
 使用[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")上的[`object_session()`](session_api.html#sqlalchemy.orm.session.Session.object_session "sqlalchemy.orm.session.Session.object_session")
 classmethod：
 
-    session = Session.object_session(someobject)plainplainplainplainplain
+    session = Session.object_session(someobject)plainplainplainplainplainplain
 
 更新的[Runtime Inspection API](core_inspection.html)系统也可以使用：
 
-    from sqlalchemy import inspectplainplainplain
+    from sqlalchemy import inspectplainplainplainplainplain
     session = inspect(someobject).session
 
 ### 会话是线程安全的吗？[¶](#is-the-session-thread-safe "Permalink to this headline")
@@ -324,7 +324,7 @@ or its state.
 
 [`query()`](session_api.html#sqlalchemy.orm.session.Session.query "sqlalchemy.orm.session.Session.query")函数接受一个或多个*实体*并返回一个新的[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象，该对象将在本会话的上下文中发出映射器查询。实体被定义为映射类，[`Mapper`](mapping_api.html#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象，启用 orm 的*描述符*或`AliasedClass`对象：
 
-    # query from a classplainplainplainplain
+    # query from a classplainplainplainplainplainplain
     session.query(User).filter_by(name='ed').all()
 
     # query with multiple classes, returns tuples
@@ -359,7 +359,7 @@ Tutorial](tutorial.html)中有详细介绍，并在 query\_api\_toplevel 中进�
 
 要一次向会话添加项目列表，请使用[`add_all()`](session_api.html#sqlalchemy.orm.session.Session.add_all "sqlalchemy.orm.session.Session.add_all")：
 
-    session.add_all([item1, item2, item3])plainplainplainplain
+    session.add_all([item1, item2, item3])plainplainplainplainplainplainplainplain
 
 沿`save-update`级联的[`add()`](session_api.html#sqlalchemy.orm.session.Session.add "sqlalchemy.orm.session.Session.add")操作**级联**。欲了解更多详情，请参阅[Cascades](cascades.html#unitofwork-cascades)部分。
 
@@ -378,7 +378,7 @@ Tutorial](tutorial.html)中有详细介绍，并在 query\_api\_toplevel 中进�
 
 关于[`delete()`](session_api.html#sqlalchemy.orm.session.Session.delete "sqlalchemy.orm.session.Session.delete")出现的常见混淆是当集合的成员对象被删除时。集合成员被标记为从数据库中删除时，这不会影响集合本身在内存中，直到集合过期。下面我们举例说明即使在`Address`对象被标记为删除之后，即使在刷新之后，它仍然存在于与父`User`关联的集合中：
 
-    >>> address = user.addresses[1]plain
+    >>> address = user.addresses[1]plainplainplainplain
     >>> session.delete(address)
     >>> session.flush()
     >>> address in user.addresses
@@ -386,13 +386,13 @@ Tutorial](tutorial.html)中有详细介绍，并在 query\_api\_toplevel 中进�
 
 当上述会话提交时，所有属性都已过期。`user.addresses`的下一次访问将重新加载集合，从而显示所需的状态：
 
-    >>> session.commit()plainplainplain
+    >>> session.commit()plainplainplainplain
     >>> address in user.addresses
     False
 
 删除集合中项目的通常做法是直接使用[`delete()`](session_api.html#sqlalchemy.orm.session.Session.delete "sqlalchemy.orm.session.Session.delete")，而是使用级联行为自从从父集合中删除对象后自动调用删除。`delete-orphan`级联完成了这一点，如下例所示：
 
-    mapper(User, users_table, properties={
+    mapper(User, users_table, properties={plainplainplainplain
         'addresses':relationship(Address, cascade="all, delete, delete-orphan")
     })
     del user.addresses[1]
@@ -410,7 +410,7 @@ passing it to [`delete()`](session_api.html#sqlalchemy.orm.session.Session.delet
 
 对`Session.delete()`的警告是你需要有一个方便的对象来删除。查询包含一个[`delete()`](query.html#sqlalchemy.orm.query.Query.delete "sqlalchemy.orm.query.Query.delete")方法，该方法根据过滤标准删除：
 
-    session.query(User).filter(User.id==7).delete()plainplainplainplainplain
+    session.query(User).filter(User.id==7).delete()plainplainplainplainplainplainplain
 
 `Query.delete()`方法包含将会话中已存在的符合条件的对象“过期”的功能。然而，它确实有一些注意事项，包括“删除”和“删除孤立”级联不能充分表达已经加载的集合。有关更多详细信息，请参阅[`delete()`](query.html#sqlalchemy.orm.query.Query.delete "sqlalchemy.orm.query.Query.delete")的 API 文档。
 
@@ -420,11 +420,11 @@ passing it to [`delete()`](session_api.html#sqlalchemy.orm.session.Session.delet
 
 无论自动刷新设置如何，都可以通过发出[`flush()`](session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")来强制刷新：
 
-    session.flush()plainplainplainplainplain
+    session.flush()plainplainplainplainplainplainplain
 
 通过使用标志`autoflush=False`构造[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")，可以禁用行为的“flush-on-Query”方面：
 
-    Session = sessionmaker(autoflush=False)
+    Session = sessionmaker(autoflush=False)plain
 
 另外，可以随时通过设置`autoflush`标志暂时禁用自动刷新：
 

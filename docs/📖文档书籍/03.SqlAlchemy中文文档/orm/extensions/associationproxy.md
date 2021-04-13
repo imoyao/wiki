@@ -109,7 +109,7 @@ Many](basic_relationships.html#relationships-many-to-many)中描述） ：
 
 这个例子在这里工作，因为我们设计了`Keyword`的构造函数来接受一个位置参数`keyword`。对于单参数构造函数不可行的情况，可以使用`creator`参数来定制关联代理的创建行为，该参数引用可调用的函数（即 Python 函数），该函数将产生一个新的对象实例给出单数论证。下面我们用典型的 lambda 来说明这一点：
 
-    class User(Base):plainplain
+    class User(Base):plainplainplain
         # ...
 
         # use Keyword(keyword=kw) on append() events
@@ -196,7 +196,7 @@ Object](basic_relationships.html#association-pattern)中进行了描述。关联
 
 对于那些我们希望`special_key`具有值的情况，我们显式创建`UserKeyword`对象。下面我们分配所有三个属性，其中`.user`的赋值将`UserKeyword`的作用附加到`User.user_keywords`集合中：
 
-    >>> UserKeyword(Keyword('its_wood'), user, special_key='my special key')plain
+    >>> UserKeyword(Keyword('its_wood'), user, special_key='my special key')plainplain
 
 关联代理向我们返回由所有这些操作表示的`Keyword`对象的集合：
 
@@ -279,7 +279,7 @@ Dictionary-Based Collections](collections.html#id1)中描述的扩展技术。
 
 考虑到我们之前从关系到标量属性，代理跨越关联对象以及代理字典的代理示例，我们可以将所有三种技术组合在一起以给出`User` a `keywords`字典严格处理映射到字符串`keyword`的`special_key`的字符串值。`UserKeyword`和`Keyword`类都完全隐藏。这是通过在`User`上建立一个关联代理实现的，该代理引用`UserKeyword`上存在的关联代理：
 
-    from sqlalchemy import Column, Integer, String, ForeignKey
+    from sqlalchemy import Column, Integer, String, ForeignKeyplainplainplain
     from sqlalchemy.orm import relationship, backref
 
     from sqlalchemy.ext.associationproxy import association_proxy
@@ -339,7 +339,7 @@ string, where `UserKeyword` and `Keyword` objects are created and removed for us
 association proxy.
 在下面的例子中，我们举例说明了赋值运算符的用法，也可以由关联代理进行适当处理，以便将字典值同时应用于集合：
 
-    >>> user = User('log')plain
+    >>> user = User('log')plainplain
     >>> user.keywords = {
     ...     'sk1':'kw1',
     ...     'sk2':'kw2'
@@ -363,7 +363,7 @@ association proxy.
 
 [`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")具有简单的 SQL 构造功能，这些功能与使用中的基础[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")）以及目标属性相关。例如，[`RelationshipProperty.Comparator.any()`](internals.html#sqlalchemy.orm.properties.RelationshipProperty.Comparator.any "sqlalchemy.orm.properties.RelationshipProperty.Comparator.any")和[`RelationshipProperty.Comparator.has()`](internals.html#sqlalchemy.orm.properties.RelationshipProperty.Comparator.has "sqlalchemy.orm.properties.RelationshipProperty.Comparator.has")操作是可用的，并且会产生一个“嵌套的”EXISTS 子句，如 in 我们的基本关联对象示例：
 
-    >>> print(session.query(User).filter(User.keywords.any(keyword='jek')))
+    >>> print(session.query(User).filter(User.keywords.any(keyword='jek')))plain
     SELECT user.id AS user_id, user.name AS user_name
     FROM user
     WHERE EXISTS (SELECT 1
@@ -397,7 +397,7 @@ can be used with [`Query.join()`](query.html#sqlalchemy.orm.query.Query.join "sq
 somewhat manually using the [`attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.attr "sqlalchemy.ext.associationproxy.AssociationProxy.attr")
 attribute in a star-args context:
 
-    q = session.query(User).join(*User.keywords.attr)plain
+    q = session.query(User).join(*User.keywords.attr)plainplain
 
 版本 0.7.3 中的新增内容： [`attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.attr "sqlalchemy.ext.associationproxy.AssociationProxy.attr")属性在 star-args 上下文中。
 
@@ -419,7 +419,7 @@ API 文档[¶](#api-documentation "Permalink to this headline")
  `sqlalchemy.ext.associationproxy.`{.descclassname}`association_proxy`{.descname}(*target\_collection*, *attr*, *\*\*kw*)[¶](#sqlalchemy.ext.associationproxy.association_proxy "Permalink to this definition")
 :   返回实现目标属性视图的 Python 属性，该属性引用目标成员上的属性。
 
-    返回的值是[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")的一个实例。
+    返回的值是[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")的一个实例。plain
 
     将一个表示关系的Python属性实现为一组简单值或一个标量值。被代理的属性将模仿目标（列表，字典或集合）的集合类型，或者在一对一关系的情况下，它是一个简单的标量值。
 
@@ -461,7 +461,7 @@ API 文档[¶](#api-documentation "Permalink to this headline")
  *class*`sqlalchemy.ext.associationproxy.`{.descclassname}`AssociationProxy`{.descname}(*target\_collection*, *attr*, *creator=None*, *getset\_factory=None*, *proxy\_factory=None*, *proxy\_bulk\_set=None*, *info=None*)[¶](#sqlalchemy.ext.associationproxy.AssociationProxy "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.base.InspectionAttrInfo`](internals.html#sqlalchemy.orm.base.InspectionAttrInfo "sqlalchemy.orm.base.InspectionAttrInfo")
 
-    呈现对象属性的读/写视图的描述符。plain
+    呈现对象属性的读/写视图的描述符。plainplainplainplainplain
 
      `__init__`{.descname}(*target\_collection*, *attr*, *creator=None*, *getset\_factory=None*, *proxy\_factory=None*, *proxy\_bulk\_set=None*, *info=None*)[¶](#sqlalchemy.ext.associationproxy.AssociationProxy.__init__ "Permalink to this definition")
     :   构建一个新的[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")。
