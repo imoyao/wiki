@@ -492,7 +492,7 @@ which coerces as needed:
 某些数据库连接器（如 SQL
 Server 的数据库连接器）会在小数位数过多的情况下传递 Decimal。这是一个让他们满意的食谱：
 
-    from sqlalchemy.types import TypeDecorator, Numericplainplain
+    from sqlalchemy.types import TypeDecorator, Numericplainplainplainplainplain
     from decimal import Decimal
 
     class SafeNumeric(TypeDecorator):
@@ -558,7 +558,7 @@ UUID 类型，并以字符串化的十六进制格式存储它们。如果需要
 
 这种类型使用`simplejson`将 Python 数据结构封送到/来自 JSON。可以修改为使用 Python 的内置 json 编码器：
 
-    from sqlalchemy.types import TypeDecorator, VARCHARplainplainplainplain
+    from sqlalchemy.types import TypeDecorator, VARCHARplainplainplainplainplain
     import json
 
     class JSONEncodedDict(TypeDecorator):
@@ -655,7 +655,7 @@ function before passing into a result set, and
 `ST_GeomFromText` is run on the bound parameter so
 that the passed-in value is converted:
 
-    SELECT geometry.geom_id, ST_AsText(geometry.geom_data) AS geom_data_1plain
+    SELECT geometry.geom_id, ST_AsText(geometry.geom_data) AS geom_data_1plainplainplain
     FROM geometry
     WHERE geometry.geom_data = ST_GeomFromText(:geom_data_2)
 
@@ -664,7 +664,7 @@ method interacts with the mechanics of the compiler such that the SQL
 expression does not interfere with the labeling of the wrapped
 expression. 例如，如果我们针对表达式的[`label()`](sqlelement.html#sqlalchemy.sql.expression.label "sqlalchemy.sql.expression.label")呈现[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")，则将字符串标签移动到包装表达式的外部：
 
-    print(select([geometry.c.geom_data.label('my_data')]))plainplain
+    print(select([geometry.c.geom_data.label('my_data')]))plainplainplain
 
 输出：
 
@@ -765,7 +765,7 @@ class. 用户定义的[`TypeEngine.Comparator`](type_api.html#sqlalchemy.types.T
 
 用法：
 
-    >>> sometable = Table("sometable", metadata, Column("data", MyInt))plainplainplain
+    >>> sometable = Table("sometable", metadata, Column("data", MyInt))plainplainplainplain
     >>> print(sometable.c.data + 5)
     sometable.data goofy :data_1
 
@@ -787,7 +787,7 @@ onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.Colu
 
 使用以上类型：
 
-    >>> print(sometable.c.data.log(5))
+    >>> print(sometable.c.data.log(5))plain
     log(:log_1, :log_2)
 
 一元操作也是可能的。例如，要添加 Postgresql 阶乘运算符的实现，我们将[`UnaryExpression`](sqlelement.html#sqlalchemy.sql.expression.UnaryExpression "sqlalchemy.sql.expression.UnaryExpression")结构与[`custom_op`](sqlelement.html#sqlalchemy.sql.operators.custom_op "sqlalchemy.sql.operators.custom_op")结合起来以产生阶乘表达式：
@@ -805,7 +805,7 @@ onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.Colu
 
 使用以上类型：
 
-    >>> from sqlalchemy.sql import columnplainplain
+    >>> from sqlalchemy.sql import columnplainplainplain
     >>> print(column('x', MyInteger).factorial())
     x !
 

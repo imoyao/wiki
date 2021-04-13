@@ -19,7 +19,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.ext.declarative.`{.descclassname}`declarative_base`{.descname}(*bind=None*, *metadata=None*, *mapper=None*, *cls=\<type 'object'\>*, *name='Base'*, *constructor=\<function \_\_init\_\_\>*, *class\_registry=None*, *metaclass=\<class 'sqlalchemy.ext.declarative.api.DeclarativeMeta'\>*)[¶](#sqlalchemy.ext.declarative.declarative_base "Permalink to this definition")
 :   为声明性类定义构造一个基类。
 
-    新的基类将被赋予一个元类，该元类生成适当的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，并根据在类中声明提供的信息以及该类的任何子类进行相应的[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")调用类。plainplain
+    新的基类将被赋予一个元类，该元类生成适当的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，并根据在类中声明提供的信息以及该类的任何子类进行相应的[`mapper()`](mapping_api.html#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")调用类。plainplainplain
 
     参数：
 
@@ -65,7 +65,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 `sqlalchemy.ext.declarative。 T0>  as_declarative  T1> （ T2>  **千瓦 T3> ） T4>  ¶ T5>`{.descclassname}
 :   [`declarative_base()`](#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")的类装饰器。
 
-    为发送给[`declarative_base()`](#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")的`cls`参数提供语法快捷方式，允许将基类就地转换为“声明式”基础：plain
+    为发送给[`declarative_base()`](#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")的`cls`参数提供语法快捷方式，允许将基类就地转换为“声明式”基础：plainplain
 
         from sqlalchemy.ext.declarative import as_declarative
 
@@ -168,7 +168,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 `sqlalchemy.ext.declarative.api。`{.descclassname} `_declarative_constructor`{.descname} （ *self*，*\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.ext.declarative.api._declarative_constructor "Permalink to this definition")
 :   一个简单的构造函数，允许从 kwargs 初始化。
 
-    使用`kwargs`中的名称和值在构造的实例上设置属性。plainplain
+    使用`kwargs`中的名称和值在构造的实例上设置属性。plainplainplain
 
     只有作为实例类的属性存在的键才被允许。例如，这些可以是任何映射的列或关系。
 
@@ -178,7 +178,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.ext.declarative.`{.descclassname}`synonym_for`{.descname}(*name*, *map\_column=False*)[¶](#sqlalchemy.ext.declarative.synonym_for "Permalink to this definition")
 :   装饰者，使 Python @property 成为列的查询同义词。
 
-    [`synonym()`](mapped_attributes.html#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")的装饰版本。正在装饰的函数是'descriptor'，否则将它的参数传递给synonym()：plainplainplain
+    [`synonym()`](mapped_attributes.html#sqlalchemy.orm.synonym "sqlalchemy.orm.synonym")的装饰版本。正在装饰的函数是'descriptor'，否则将它的参数传递给synonym()：plainplainplainplainplainplain
 
         @synonym_for('col')
         @property
@@ -192,7 +192,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 `sqlalchemy.ext.declarative。 T0>  comparable_using  T1> （ T2>  comparator_factory  T3> ） T4> ¶< / T5>`{.descclassname}
 :   装饰者，允许在查询标准中使用 Python @property。
 
-    这是通过comparator\_factory和正在装饰的函数的`comparable_property()`的装饰器前端：
+    这是通过comparator\_factory和正在装饰的函数的`comparable_property()`的装饰器前端：plain
 
         @comparable_using(MyComparatorType)
         @property
@@ -388,7 +388,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 
 `__declare_last__()`钩子允许定义由[`MapperEvents.after_configured()`](events.html#sqlalchemy.orm.events.MapperEvents.after_configured "sqlalchemy.orm.events.MapperEvents.after_configured")事件自动调用的类级别函数，该映射假定映射已完成，并且'configure'步骤已经完成：
 
-    class MyClass(Base):plain
+    class MyClass(Base):plainplain
         @classmethod
         def __declare_last__(cls):
             ""
@@ -400,7 +400,7 @@ New in version 0.7.3.
 
 像`__declare_last__()`，但是在映射器配置开始时通过[`MapperEvents.before_configured()`](events.html#sqlalchemy.orm.events.MapperEvents.before_configured "sqlalchemy.orm.events.MapperEvents.before_configured")事件调用：
 
-    class MyClass(Base):plainplainplain
+    class MyClass(Base):plainplainplainplain
         @classmethod
         def __declare_first__(cls):
             ""
@@ -429,7 +429,7 @@ Classes](mixins.html#declarative-mixins)），允许子类仅从特殊类扩展�
 
 `__abstract__`的一个可能用途是对不同的基础使用不同的[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")：
 
-    Base = declarative_base()plainplainplainplain
+    Base = declarative_base()plainplainplainplainplainplain
 
     class DefaultBase(Base):
         __abstract__ = True

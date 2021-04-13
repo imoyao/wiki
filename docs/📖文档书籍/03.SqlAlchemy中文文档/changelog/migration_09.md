@@ -53,7 +53,7 @@ C 扩展已经移植到支持 Python 3，现在可以在 Python 2 和 Python 3 �
 将[`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")与复合属性结合使用现在返回由该复合物维护的对象类型，而不是分解为单独的列。在[Composite
 Column Types](orm_composites.html#mapper-composite)中使用映射设置：
 
-    >>> session.query(Vertex.start, Vertex.end).\
+    >>> session.query(Vertex.start, Vertex.end).\plain
     ...     filter(Vertex.start == Point(3, 4)).all()
     [(Point(x=3, y=4), Point(x=5, y=6))]
 
@@ -83,7 +83,7 @@ Column Types](orm_composites.html#mapper-composite)中使用映射设置：
 
 上面的语句可预测地呈现如下的 SQL：
 
-    SELECT "user".id AS user_id, "user".name AS user_nameplainplain
+    SELECT "user".id AS user_id, "user".name AS user_nameplainplainplain
     FROM "user" JOIN (SELECT "user".id AS id, "user".name AS name
     FROM "user"
     WHERE "user".id = :id_1) AS anon_1 ON "user".id = anon_1.id
@@ -91,7 +91,7 @@ Column Types](orm_composites.html#mapper-composite)中使用映射设置：
 
 如果我们想要颠倒 JOIN 的左侧和右侧元素的顺序，文档将导致我们相信我们可以使用[`Query.select_from()`](orm_query.html#sqlalchemy.orm.query.Query.select_from "sqlalchemy.orm.query.Query.select_from")来执行此操作：
 
-    q = session.query(User).\plain
+    q = session.query(User).\plainplainplain
             select_from(select_stmt).\
             join(User, User.id == select_stmt.c.id).\
             filter(User.name == 'ed')
@@ -191,7 +191,7 @@ tests continue to function, then upgrade to 0.9 without issue.
 
 考虑这个映射：
 
-    class A(Base):
+    class A(Base):plain
         __tablename__ = 'a'
 
         id = Column(Integer, primary_key=True)
@@ -306,7 +306,7 @@ at its default of `PASSIVE_OFF`.
 
 这是一个小小的变化，演示如下：
 
-    from sqlalchemy import Column, Integer, String, create_engine, inspectplain
+    from sqlalchemy import Column, Integer, String, create_engine, inspectplainplainplain
     from sqlalchemy.orm import Session, attributes
     from sqlalchemy.ext.declarative import declarative_base
 
@@ -345,7 +345,7 @@ at its default of `PASSIVE_OFF`.
 
 通过 0.8 系列，大多数类型的对象接受了被默默忽略的任意关键字参数：
 
-    from sqlalchemy import Date, Integerplain
+    from sqlalchemy import Date, Integerplainplain
 
     # storage_format argument here has no effect on any backend;
     # it needs to be on the SQLite-specific type
@@ -357,7 +357,7 @@ at its default of `PASSIVE_OFF`.
 
 这是一个非常古老的 bug，为 0.8 系列添加了弃用警告，但因为没有人用“-W”标志运行 Python，所以大部分都没有看到：
 
-    $ python -W always::DeprecationWarning ~/dev/sqlalchemy/test.pyplain
+    $ python -W always::DeprecationWarning ~/dev/sqlalchemy/test.pyplainplain
     /Users/classic/dev/sqlalchemy/test.py:5: SADeprecationWarning: Passing arguments to
     type object constructor <class 'sqlalchemy.types.Date'> is deprecated
       d = Date(storage_format="%(day)02d.%(month)02d.%(year)04d")
@@ -369,7 +369,7 @@ at its default of `PASSIVE_OFF`.
 
 使用特定于方言的参数（如`storage_format`和`display_width`）的正确方法是使用适当的方言特定类型：
 
-    from sqlalchemy.dialects.sqlite import DATEplainplain
+    from sqlalchemy.dialects.sqlite import DATEplainplainplain
     from sqlalchemy.dialects.mysql import INTEGER
 
     d = DATE(storage_format="%(day)02d.%(month)02d.%(year)04d")
@@ -378,7 +378,7 @@ at its default of `PASSIVE_OFF`.
 
 那么我们想要方言不可知类型的情况呢？我们使用[`TypeEngine.with_variant()`](core_type_api.html#sqlalchemy.types.TypeEngine.with_variant "sqlalchemy.types.TypeEngine.with_variant")方法：
 
-    from sqlalchemy import Date, Integerplain
+    from sqlalchemy import Date, Integerplainplain
     from sqlalchemy.dialects.sqlite import DATE
     from sqlalchemy.dialects.mysql import INTEGER
 
@@ -421,7 +421,7 @@ form an AND condition piecemeal.
 
 另一个适用于所有后端的变种 0.9，但在 0.8 上只适用于支持布尔常量的后端：
 
-    from sqlalchemy.sql import trueplain
+    from sqlalchemy.sql import trueplainplainplain
 
     condition = true()
 
@@ -464,7 +464,7 @@ conjunctions](#migration-2804)的渲染
 
 会产生这样的表达式：
 
-    -- 0.8 behavior
+    -- 0.8 behaviorplainplainplain
     (x = :x_1) COLLATE en_EN
 
 上述内容被 MSSQL 误解，通常不是针对任何数据库建议的语法。该表达式现在将生成大多数数据库文档所说明的语法：
@@ -482,7 +482,7 @@ conjunctions](#migration-2804)的渲染
 
 然而在 0.9 中，现在会产生更准确但可能不是你想要的形式：
 
-    x = (:param_1 COLLATE en_EN)
+    x = (:param_1 COLLATE en_EN)plain
 
 The [`ColumnOperators.collate()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.collate "sqlalchemy.sql.operators.ColumnOperators.collate")
 operator now works more appropriately within an `ORDER BY` expression as well, as a specific precedence has been given to
@@ -562,7 +562,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 在基于子类的路径上设置选项要求将路径中的所有链接拼写为类绑定属性，因为需要调用[`PropComparator.of_type()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.of_type "sqlalchemy.orm.interfaces.PropComparator.of_type")方法：
 
-    session.query(Company).\plainplain
+    session.query(Company).\plainplainplain
         options(
             subqueryload_all(
                 Company.employees.of_type(Engineer),
@@ -574,7 +574,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 只有路径中实际需要[`PropComparator.of_type()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.of_type "sqlalchemy.orm.interfaces.PropComparator.of_type")的元素需要设置为类绑定属性，之后才能恢复基于字符串的名称：
 
-    session.query(Company).\plainplain
+    session.query(Company).\plainplainplain
         options(
             subqueryload(Company.employees.of_type(Engineer)).
             subqueryload("machines")
@@ -591,7 +591,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 现在可以使用[`defaultload()`](orm_loading_relationships.html#sqlalchemy.orm.defaultload "sqlalchemy.orm.defaultload")来为现有加载程序样式应该保持不变的路径中的条目拼写出路径。更详细，但意图更清晰：
 
-    query(User).options(defaultload("orders").defaultload("items").subqueryload("keywords"))plainplain
+    query(User).options(defaultload("orders").defaultload("items").subqueryload("keywords"))plainplainplain
 
 虚线样式仍然可以利用，特别是在跳过多个路径元素的情况下：
 
@@ -613,7 +613,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 可以直接使用[`Load`](orm_query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")类来提供“绑定”目标，特别是当存在多个父实体时：
 
-    from sqlalchemy.orm import Load
+    from sqlalchemy.orm import Loadplain
 
     query(User, Address).options(Load(Address).joinedload("entries"))
 
@@ -679,7 +679,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
                       addresses.join(stmt), addresses.c.user_id == stmt.c.id)
 
 
-        # or into a cte():
+        # or into a cte():plainplain
         stmt = text("SELECT id, name FROM user").columns(id=Integer, name=String)
         stmt = stmt.cte("x")
 
@@ -858,7 +858,7 @@ them based on given table metadata.
 
 通常使用的[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")可能通过反射产生，但不要求使用反射。最基本的用法说明[`sqlalchemy.ext.automap`](orm_extensions_automap.html#module-sqlalchemy.ext.automap "sqlalchemy.ext.automap")如何基于反射的模式传递映射类，包括关系：
 
-    from sqlalchemy.ext.automap import automap_baseplain
+    from sqlalchemy.ext.automap import automap_baseplainplain
     from sqlalchemy.orm import Session
     from sqlalchemy import create_engine
 
@@ -926,7 +926,7 @@ JOIN，因为 INNER JOIN 总是被压平）嵌套 JOIN。
 右外连接当然是解决右括号的另一种方法；这将会非常复杂并且在视觉上很难实现，但幸运的是 SQLite 不支持 RIGHT
 OUTER JOIN :)：
 
-    sqlite> select a.id, b.id, c.id from b join c on b.id=c.idplainplain
+    sqlite> select a.id, b.id, c.id from b join c on b.id=c.idplainplainplain
        ...> right outer join a on b.id=a.id;
     Error: RIGHT and FULL OUTER JOINs are not currently supported
 
@@ -942,11 +942,11 @@ OUTER JOIN :)：
 
 在 ON 子句中存在特殊标准的多对多关系中产生连接时，会出现另外一个问题。考虑像下面这样的热切加载连接：
 
-    session.query(Order).outerjoin(Order.items)
+    session.query(Order).outerjoin(Order.items)plainplain
 
 假设从`Order`到`Item`的多对多实际上指的是像`Subitem`这样的子类，上述的 SQL 将如下所示：
 
-    SELECT order.id, order.nameplain
+    SELECT order.id, order.nameplainplain
     FROM order LEFT OUTER JOIN order_item ON order.id = order_item.order_id
     LEFT OUTER JOIN item ON order_item.item_id = item.id AND item.type = 'subitem'
 
@@ -959,7 +959,7 @@ OUTER JOIN :)：
 
 所以一个普通的`query(Parent).join(Subclass)`现在通常会产生一个更简单的表达式：
 
-    SELECT parent.id AS parent_idplainplain
+    SELECT parent.id AS parent_idplainplainplain
     FROM parent JOIN (
             base_table JOIN subclass_table
             ON base_table.id = subclass_table.id) ON parent.id = base_table.parent_id
@@ -1021,7 +1021,7 @@ OUTER JOIN :)：
 现在，[`Join.alias()`](core_selectable.html#sqlalchemy.sql.expression.Join.alias "sqlalchemy.sql.expression.Join.alias")，[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")和[`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")函数支持一个新参数`flat=True`此标志默认情况下不会启用，以帮助实现向后兼容性 -
 但现在，可选择的“polymorhpic”可作为目标而不生成任何子查询：
 
-    employee_alias = with_polymorphic(Person, [Engineer, Manager], flat=True)plainplainplain
+    employee_alias = with_polymorphic(Person, [Engineer, Manager], flat=True)plainplainplainplain
 
     session.query(Company).join(
                         Company.employees.of_type(employee_alias)
@@ -1062,11 +1062,11 @@ items 的 INNER 连接，而无需更改返回的用户行，而是忽略“链�
 
 新的“右嵌套连接是好的”逻辑会启动，我们会得到：
 
-    FROM users LEFT OUTER JOIN (orders JOIN items ON <onclause>) ON <onclause>
+    FROM users LEFT OUTER JOIN (orders JOIN items ON <onclause>) ON <onclause>plain
 
 由于我们错过了这一点，为了避免进一步的回归，我们通过指定字符串`"nested"`到[`joinedload.innerjoin`](orm_loading_relationships.html#sqlalchemy.orm.joinedload.params.innerjoin "sqlalchemy.orm.joinedload")添加了上述功能：
 
-    query(User).options(joinedload("orders", innerjoin=False).joinedload("items", innerjoin="nested"))plain
+    query(User).options(joinedload("orders", innerjoin=False).joinedload("items", innerjoin="nested"))plainplain
 
 这个特性在 0.9.4 中是新的。
 
@@ -1086,7 +1086,7 @@ supports “implicit returning”.
 
 也就是说，当从 A-\> B进行多对一的子查询加载时：
 
-    SELECT b.id AS b_id, b.name AS b_name, anon_1.b_id AS a_b_id
+    SELECT b.id AS b_id, b.name AS b_name, anon_1.b_id AS a_b_idplainplain
     FROM (SELECT DISTINCT a_b_id FROM a) AS anon_1
     JOIN b ON b.id = anon_1.a_b_id
 
@@ -1158,7 +1158,7 @@ for [`TypeDecorator`](core_custom_types.html#sqlalchemy.types.TypeDecorator "sql
 which take on the task of rendering so-called “inline literal paramters”
 - parameters that normally render as “bound” values, but are instead
 being rendered inline into the SQL statement due to the compiler
-configuration. 当为诸如[`CheckConstraint`](core_constraints.html#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")的结构生成DDL时，以及在使用诸如`op.inline_literal()`的结构时由 Alembic 使用此功能。之前，检查了一些简单的“isinstance”检查了一些基本类型，并且无条件地使用了“绑定处理器”，从而导致字符串被过早编码为 utf-8 等问题。
+configuration. 当为诸如[`CheckConstraint`](core_constraints.html#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")的结构生成 DDL 时，以及在使用诸如`op.inline_literal()`的结构时由 Alembic 使用此功能。之前，检查了一些简单的“isinstance”检查了一些基本类型，并且无条件地使用了“绑定处理器”，从而导致字符串被过早编码为 utf-8 等问题。
 
 Custom types written with [`TypeDecorator`](core_custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
 should continue to work in “inline literal” scenarios, as the
@@ -1209,7 +1209,7 @@ truncating a rendered expression, when a [`true()`](core_sqlelement.html#sqlalch
 or [`false()`](core_sqlelement.html#sqlalchemy.sql.expression.false "sqlalchemy.sql.expression.false")
 constant is present:
 
-    >>> print(select([t1]).where(and_(t1.c.y > 5, false())).compile(plain
+    >>> print(select([t1]).where(and_(t1.c.y > 5, false())).compile(plainplainplain
     ...     dialect=postgresql.dialect()))
     SELECT t.x, t.y FROM t WHERE false
 
@@ -1259,7 +1259,7 @@ BY 子句中呈现为它的名称，假设底层方言报告支持此功能。
 
 0.9 之前会呈现为：
 
-    SELECT foo(t.c1) + t.c2 AS exprplainplainplain
+    SELECT foo(t.c1) + t.c2 AS exprplainplainplainplain
     FROM t ORDER BY foo(t.c1) + t.c2
 
 现在呈现为：
@@ -1307,7 +1307,7 @@ is not mutated in place. 其次，在编译[`Insert`](core_dml.html#sqlalchemy.s
 
 如果我们使用这个参数如下：
 
-    expr = mytable.c.col == bp
+    expr = mytable.c.col == bpplain
 
 The type for `bp` remains as `NullType`, however if `mytable.c.col` is of type
 `String`, then `expr.right`,
@@ -1364,7 +1364,7 @@ initialize their parent column.
 
 1.  只要目标[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")与相同的[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")关联，[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")中的类型立即出现。无论首先配置哪一侧，这都可以工作：
 
-        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKeyplain
+        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKeyplainplain
         >>> metadata = MetaData()
         >>> t2 = Table('t2', metadata, Column('t1id', ForeignKey('t1.id')))
         >>> t2.c.t1id.type
@@ -1375,7 +1375,7 @@ initialize their parent column.
 
 2.  系统现在也可以使用[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")：
 
-        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKeyConstraintplainplain
+        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKeyConstraintplainplainplain
         >>> metadata = MetaData()
         >>> t2 = Table('t2', metadata,
         ...     Column('t1a'), Column('t1b'),

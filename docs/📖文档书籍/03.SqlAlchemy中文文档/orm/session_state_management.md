@@ -41,7 +41,7 @@ Events](session_events.html#session-lifecycle-events)部分，以及如何以编
 
 任何映射对象的实际状态都可以在任何时候使用[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")系统查看：
 
-    >>> from sqlalchemy import inspectplainplainplain
+    >>> from sqlalchemy import inspectplainplainplainplain
     >>> insp = inspect(my_object)
     >>> insp.persistent
     True
@@ -63,17 +63,17 @@ Events](session_events.html#session-lifecycle-events)部分，以及如何以编
 
 [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")本身的行为有点像集合式集合。所有存在的项目都可以使用迭代器接口访问：
 
-    for obj in session:
+    for obj in session:plainplain
         print(obj)
 
 可以使用常规的“包含”语义测试存在性：
 
-    if obj in session:plainplainplainplain
+    if obj in session:plainplainplainplainplain
         print("Object is present")
 
 会话还跟踪所有新创建的（即挂起的）对象，自上次加载或保存之后发生更改的所有对象（即“脏”）以及标记为已删除的所有对象：
 
-    # pending objects recently added to the Session
+    # pending objects recently added to the Sessionplainplain
     session.new
 
     # persistent objects which currently have changes detected
@@ -101,7 +101,7 @@ Events](session_events.html#session-lifecycle-events)部分，以及如何以编
 
 基于事件的方法也是可行的。当所有对象保持在[persistent](glossary.html#term-persistent)状态时，为所有对象提供“强引用”行为的简单配方如下所示：
 
-    from sqlalchemy import eventplainplain
+    from sqlalchemy import eventplainplainplainplain
 
     def strong_reference_session(session):
         @event.listens_for(session, "pending_to_persistent")
@@ -135,14 +135,14 @@ hooks to intercept objects as they leave the persistent state.
 
 对于任何[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")可以调用上面的函数，以便在每个会话[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")
 
-    from sqlalchemy.orm import Session
+    from sqlalchemy.orm import Sessionplainplain
 
     my_session = Session()
     strong_reference_session(my_session)
 
 它也可能被任何[`sessionmaker`](session_api.html#sqlalchemy.orm.session.sessionmaker "sqlalchemy.orm.session.sessionmaker")调用：
 
-    from sqlalchemy.orm import sessionmakerplainplain
+    from sqlalchemy.orm import sessionmakerplainplainplain
 
     maker = sessionmaker()
     strong_reference_session(maker)
@@ -199,7 +199,7 @@ is an extremely useful method for many purposes.
 
 让我们使用 User 和 Address 对象的规范例子：
 
-    class User(Base):plain
+    class User(Base):plainplainplain
         __tablename__ = 'user'
 
         id = Column(Integer, primary_key=True)
@@ -221,12 +221,12 @@ is an extremely useful method for many purposes.
 
 我们现在创建`a1`，一个会话之外的对象，我们要在现有的`Address`之上合并：
 
-    >>> existing_a1 = u1.addresses[0]plainplainplainplainplain
+    >>> existing_a1 = u1.addresses[0]plainplainplainplainplainplain
     >>> a1 = Address(id=existing_a1.id)
 
 如果我们这样说，会发生一个惊喜：
 
-    >>> a1.user = u1plainplainplain
+    >>> a1.user = u1plainplainplainplainplain
     >>> a1 = session.merge(a1)
     >>> session.commit()
     sqlalchemy.orm.exc.FlushError: New instance <Address at 0x1298f50>
@@ -236,7 +236,7 @@ is an extremely useful method for many purposes.
 这是为什么 ？我们没有注意到我们的瀑布。将`a1.user`赋值给级联到`User.addresses`的 backref 的持久对象，并使我们的`a1`对象处于挂起状态，就好像我们已经添加它。现在我们在会话中有*两个*
 `Address`对象：
 
-    >>> a1 = Address()plainplainplainplainplain
+    >>> a1 = Address()plainplainplainplainplainplainplainplain
     >>> a1.user = u1
     >>> a1 in session
     True
@@ -258,7 +258,7 @@ solution here would usually be to not assign `a1.user` to an object already pers
 
 意外状态的另一个例子：
 
-    >>> a1 = Address(id=existing_a1.id, user_id=u1.id)plain
+    >>> a1 = Address(id=existing_a1.id, user_id=u1.id)plainplainplain
     >>> assert a1.user is None
     >>> True
     >>> a1 = session.merge(a1)
@@ -284,7 +284,7 @@ Where above, both `user_id` and `user` are assigned to, and change events are em
 
 或者在对象上有我们不想要的状态？检查`__dict__`是检查以下内容的快速方法：
 
-    >>> a1 = Address(id=existing_a1, user_id=user.id)plainplain
+    >>> a1 = Address(id=existing_a1, user_id=user.id)plainplainplainplainplain
     >>> a1.user
     >>> a1.__dict__
     {'_sa_instance_state': <sqlalchemy.orm.state.InstanceState object at 0x1298d10>,
@@ -302,7 +302,7 @@ Where above, both `user_id` and `user` are assigned to, and change events are em
 
 清除从会话中删除对象，将持久实例发送到分离状态，并将待处理实例发送到瞬态：
 
-    session.expunge(obj1)plain
+    session.expunge(obj1)plainplain
 
 要删除所有项目，请调用[`expunge_all()`](session_api.html#sqlalchemy.orm.session.Session.expunge_all "sqlalchemy.orm.session.Session.expunge_all")（此方法以前称为`clear()`）。
 
@@ -313,11 +313,11 @@ Where above, both `user_id` and `user` are assigned to, and change events are em
 
 当我们谈论数据到期时，我们通常会谈论处于[persistent](glossary.html#term-persistent)状态的对象。例如，如果我们加载一个对象如下：
 
-    user = session.query(User).filter_by(name='user1').first()plain
+    user = session.query(User).filter_by(name='user1').first()plainplain
 
 上面的`User`对象是持久的，并且有一系列属性存在；如果我们要查看它的`__dict__`，我们会看到加载状态：
 
-    >>> user.__dict__plain
+    >>> user.__dict__plainplainplain
     {
       'id': 1, 'name': u'user1',
       '_sa_instance_state': <...>,
@@ -327,13 +327,13 @@ Where above, both `user_id` and `user` are assigned to, and change events are em
 
 此时，我们的`User`对象中的状态与加载的数据库行的状态匹配。但是在使用诸如[`Session.expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")之类的方法使对象过期时，我们看到状态被删除：
 
-    >>> session.expire(user)plainplain
+    >>> session.expire(user)plainplainplainplain
     >>> user.__dict__
     {'_sa_instance_state': <...>}
 
 我们看到，虽然内部“状态”仍然存在，但与`id`和`name`列对应的值已消失。如果我们要访问这些列中的一个并且正在观察 SQL，我们会看到：
 
-    >>> print(user.name)plainplain
+    >>> print(user.name)plainplainplain
     SELECT user.id AS user_id, user.name AS user_name
     FROM user
     WHERE user.id = ?
@@ -343,7 +343,7 @@ Where above, both `user_id` and `user` are assigned to, and change events are em
 以上，在访问过期属性`user.name`时，ORM 通过发出用户行的 SELECT 来启动[lazy
 load](glossary.html#term-lazy-load)以从数据库中检索最新状态这个用户提到的。之后，再次填充`__dict__`：
 
-    >>> user.__dict__
+    >>> user.__dict__plain
     {
       'id': 1, 'name': u'user1',
       '_sa_instance_state': <...>,
@@ -360,13 +360,13 @@ ORM 所维护的属性而言（SQLA 领域之外的其他属性都可以）。**
 
 但是我们在没有先调用[`flush()`](session_api.html#sqlalchemy.orm.session.Session.flush "sqlalchemy.orm.session.Session.flush")的情况下调用[`expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")，我们的`'user2'`的未决值将被丢弃：
 
-    >>> session.expire(user)plain
+    >>> session.expire(user)plainplainplainplainplain
     >>> user.name
     'user1'
 
 可以使用[`expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")方法将实例的所有 ORM 映射属性标记为“过期”：
 
-    # expire all ORM-mapped attributes on obj1plain
+    # expire all ORM-mapped attributes on obj1plainplainplain
     session.expire(obj1)
 
 它也可以传递一个字符串属性名称列表，引用特定的属性来标记为过期：
@@ -376,7 +376,7 @@ ORM 所维护的属性而言（SQLA 领域之外的其他属性都可以）。**
 
 [`refresh()`](session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")方法有一个类似的接口，但不是过期，而是立即为对象的行发出立即的 SELECT：
 
-    # reload all attributes on obj1plain
+    # reload all attributes on obj1plainplain
     session.refresh(obj1)
 
 [`refresh()`](session_api.html#sqlalchemy.orm.session.Session.refresh "sqlalchemy.orm.session.Session.refresh")也接受字符串属性名称列表，但与[`expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")不同，期望至少有一个名称是列映射属性的名称：
@@ -386,7 +386,7 @@ ORM 所维护的属性而言（SQLA 领域之外的其他属性都可以）。**
 
 [`Session.expire_all()`](session_api.html#sqlalchemy.orm.session.Session.expire_all "sqlalchemy.orm.session.Session.expire_all")方法允许我们实时调用[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中包含的所有对象的[`Session.expire()`](session_api.html#sqlalchemy.orm.session.Session.expire "sqlalchemy.orm.session.Session.expire")
 
-    session.expire_all()plainplainplain
+    session.expire_all()plainplainplainplain
 
 ### 什么实际上加载[¶](#what-actually-loads "Permalink to this headline")
 

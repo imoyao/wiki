@@ -51,7 +51,7 @@ columnname＆gt；*。*它也可能是一个实际的[`Column`](metadata.html#sq
 
 然后使用引用`invoice`的复合外键的表`invoice_item`：
 
-    invoice_item = Table('invoice_item', metadata,
+    invoice_item = Table('invoice_item', metadata,plainplainplain
         Column('item_id', Integer, primary_key=True),
         Column('item_name', String(60), nullable=False),
         Column('invoice_id', Integer, nullable=False),
@@ -456,7 +456,7 @@ Constraints](http://alembic.zzzcomputing.com/en/latest/naming.html#tutorial-cons
 
 版本 0.9.2 新增：添加了[`MetaData.naming_convention`(metadata.html#sqlalchemy.schema.MetaData.params.naming_convention "sqlalchemy.schema.MetaData")参数。
 
-### 命名CHECK约束[¶](#naming-check-constraints "Permalink to this headline")
+### 命名 CHECK 约束[¶](#naming-check-constraints "Permalink to this headline")
 
 [`CheckConstraint`](#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")对象是针对任意 SQL 表达式配置的，该表达式可以包含任意数量的列，另外通常使用原始 SQL 字符串进行配置。因此，与[`CheckConstraint`](#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")一起使用的通用约定是我们期望该对象已经拥有一个名称的公约，然后我们使用其他约定元素对其进行了增强。A
 typical convention is
@@ -535,7 +535,7 @@ typical convention is
 
 上表将生成约束名称`ck_foo_flag_bool`：
 
-    CREATE TABLE foo (plain
+    CREATE TABLE foo (plainplain
         flag BOOL,
         CONSTRAINT ck_foo_flag_bool CHECK (flag IN (0, 1))
     )
@@ -616,7 +616,7 @@ CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](ty
 *class* `sqlalchemy.schema。`{.descclassname} `ColumnCollectionConstraint`{.descname} （ *\*列*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.schema.ColumnCollectionConstraint "Permalink to this definition")*
 :   基础：[`sqlalchemy.schema.ColumnCollectionMixin`](#sqlalchemy.schema.ColumnCollectionMixin "sqlalchemy.schema.ColumnCollectionMixin")，[`sqlalchemy.schema.Constraint`](#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")
 
-    代表ColumnCollection的约束。
+    代表ColumnCollection的约束。plain
 
     `__ init __`{.descname} （ *\*列*，*\*\* kw* ） [T5\>](#sqlalchemy.schema.ColumnCollectionConstraint.__init__ "Permalink to this definition")
     :   参数：
@@ -746,7 +746,7 @@ CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](ty
  *class*`sqlalchemy.schema.`{.descclassname}`CheckConstraint`{.descname}(*sqltext*, *name=None*, *deferrable=None*, *initially=None*, *table=None*, *info=None*, *\_create\_rule=None*, *\_autoattach=True*, *\_type\_bound=False*)[¶](#sqlalchemy.schema.CheckConstraint "Permalink to this definition")
 :   基础：[`sqlalchemy.schema.ColumnCollectionConstraint`](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
 
-    表或列级CHECK约束。plain
+    表或列级CHECK约束。plainplain
 
     可以包含在表或列的定义中。
 
@@ -1124,7 +1124,7 @@ CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](ty
  *class*`sqlalchemy.schema.`{.descclassname}`ForeignKeyConstraint`{.descname}(*columns*, *refcolumns*, *name=None*, *onupdate=None*, *ondelete=None*, *deferrable=None*, *initially=None*, *use\_alter=False*, *link\_to\_name=False*, *match=None*, *table=None*, *info=None*, *\*\*dialect\_kw*)[¶](#sqlalchemy.schema.ForeignKeyConstraint "Permalink to this definition")
 :   基础：[`sqlalchemy.schema.ColumnCollectionConstraint`](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
 
-    表级别的FOREIGN KEY约束。
+    表级别的FOREIGN KEY约束。plain
 
     定义单列或复合FOREIGN KEY ... REFERENCES约束。For a no-frills,
     single column foreign key, adding a [`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")
@@ -1637,7 +1637,7 @@ CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](ty
  `sqlalchemy.schema.`{.descclassname}`conv`{.descname}(*cls*, *value*, *quote=None*)[¶](#sqlalchemy.schema.conv "Permalink to this definition")
 :   标记一个字符串，表明名称已经通过命名约定转换。
 
-    这是一个字符串子类，它指示不应受任何进一步命名约定的名称。plainplain
+    这是一个字符串子类，它指示不应受任何进一步命名约定的名称。plainplainplainplain
 
     例如。当我们使用命名约定创建[`Constraint`](#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")时，如下所示：
 

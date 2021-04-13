@@ -31,7 +31,7 @@ auto-generating ad-hoc mappings.
 
 最简单的用法是将现有数据库反映到新模型中。我们使用[`automap_base()`](#sqlalchemy.ext.automap.automap_base "sqlalchemy.ext.automap.automap_base")创建一个新的[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类，类似于我们如何创建声明性基类。然后，我们在生成的基类上调用[`AutomapBase.prepare()`](#sqlalchemy.ext.automap.AutomapBase.prepare "sqlalchemy.ext.automap.AutomapBase.prepare")，要求它反映模式并生成映射：
 
-    from sqlalchemy.ext.automap import automap_baseplain
+    from sqlalchemy.ext.automap import automap_baseplainplain
     from sqlalchemy.orm import Session
     from sqlalchemy import create_engine
 
@@ -77,7 +77,7 @@ will get a new mapped class generated automatically.
 
 我们可以将预先声明的[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象传递给[`automap_base()`](#sqlalchemy.ext.automap.automap_base "sqlalchemy.ext.automap.automap_base")。这个对象可以以任何方式构造，包括以编程方式，从序列化的文件中，或从使用[`MetaData.reflect()`](core_metadata.html#sqlalchemy.schema.MetaData.reflect "sqlalchemy.schema.MetaData.reflect")反映的本身。下面我们举例说明反射和显式表声明的组合：
 
-    from sqlalchemy import create_engine, MetaData, Table, Column, ForeignKeyplainplain
+    from sqlalchemy import create_engine, MetaData, Table, Column, ForeignKeyplainplainplain
     engine = create_engine("sqlite:///mydatabase.db")
 
     # produce our own MetaData object
@@ -110,7 +110,7 @@ will get a new mapped class generated automatically.
 method will make use of the classes we’ve established based on the table
 name we use. 如果我们的模式包含表`user`和`address`，我们可以定义一个或两个要使用的类：
 
-    from sqlalchemy.ext.automap import automap_baseplain
+    from sqlalchemy.ext.automap import automap_baseplainplain
     from sqlalchemy import create_engine
 
     # automap base
@@ -321,7 +321,7 @@ generate many-to-many relationships, e.g. those which contain a
 
 请注意，这意味着 automap 不会为从子类链接到超类的外键生成*任何*关系。如果映射具有从子类到超类的实际关系，那么这些映射需要是明确的。下面，我们有两个独立的从`Engineer`到`Employee`的外键，我们需要设置我们想要的关系以及`inherit_condition` ，因为这些不是 SQLAlchemy 可以猜测的东西：
 
-    class Employee(Base):plainplain
+    class Employee(Base):plainplainplain
         __tablename__ = 'employee'
         id = Column(Integer, primary_key=True)
         type = Column(String(50))
@@ -347,7 +347,7 @@ generate many-to-many relationships, e.g. those which contain a
 
 在映射过程中命名冲突的情况下，根据需要覆盖[`classname_for_table()`](#sqlalchemy.ext.automap.classname_for_table "sqlalchemy.ext.automap.classname_for_table")，[`name_for_scalar_relationship()`](#sqlalchemy.ext.automap.name_for_scalar_relationship "sqlalchemy.ext.automap.name_for_scalar_relationship")和[`name_for_collection_relationship()`](#sqlalchemy.ext.automap.name_for_collection_relationship "sqlalchemy.ext.automap.name_for_collection_relationship")中的任何一个。例如，如果 automap 试图命名与现有列相同的多对一关系，则可以有条件地选择替代约定。给定一个模式：
 
-    CREATE TABLE table_a (plainplain
+    CREATE TABLE table_a (plainplainplain
         id INTEGER PRIMARY KEY
     );
 
@@ -361,7 +361,7 @@ generate many-to-many relationships, e.g. those which contain a
 
 我们可以通过使用下划线来解决这个冲突，如下所示：
 
-    def name_for_scalar_relationship(base, local_cls, referred_cls, constraint):plainplain
+    def name_for_scalar_relationship(base, local_cls, referred_cls, constraint):plainplainplain
         name = referred_cls.__name__.lower()
         local_table = local_cls.__table__
         if name in local_table.columns:
@@ -380,7 +380,7 @@ generate many-to-many relationships, e.g. those which contain a
 Distinctly from Attribute
 Names](mapping_columns.html#mapper-column-distinct-names)区别命名列的方法修改，通过将列明确分配给新名称：
 
-    Base = automap_base()
+    Base = automap_base()plain
 
     class TableB(Base):
         __tablename__ = 'table_b'
@@ -453,7 +453,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.automap。`{.descclassname} `AutomapBase`{.descname} [¶](#sqlalchemy.ext.automap.AutomapBase "Permalink to this definition")
 :   “自动映射”模式的基类。
 
-    可以将[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类与由[`declarative.declarative_base()`](declarative_api.html#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")函数生成的“声明性基本”类进行比较。在实践中，[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类总是作为一个mixin与一个实际的声明基础一起使用。plain
+    可以将[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类与由[`declarative.declarative_base()`](declarative_api.html#sqlalchemy.ext.declarative.declarative_base "sqlalchemy.ext.declarative.declarative_base")函数生成的“声明性基本”类进行比较。在实践中，[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")类总是作为一个mixin与一个实际的声明基础一起使用。plainplain
 
     通常使用[`automap_base()`](#sqlalchemy.ext.automap.automap_base "sqlalchemy.ext.automap.automap_base")函数即时创建一个新的子类化的[`AutomapBase`](#sqlalchemy.ext.automap.AutomapBase "sqlalchemy.ext.automap.AutomapBase")。
 
@@ -578,7 +578,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.ext.automap.`{.descclassname}`name_for_collection_relationship`{.descname}(*base*, *local\_cls*, *referred\_cls*, *constraint*)[¶](#sqlalchemy.ext.automap.name_for_collection_relationship "Permalink to this definition")
 :   返回应该用于从一个类引用到另一个类的属性名称作为集合引用。
 
-    默认的实现是：plainplainplain
+    默认的实现是：plainplainplainplain
 
         return referred_cls.__name__.lower() + "_collection"
 
@@ -602,7 +602,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 `sqlalchemy.ext.automap。 T0>  generate_relationship  T1> （ T2> 碱 T3>，方向 T4>， return_fn  T5>， attrname  T6>， local_cls  T7>， referred_cls  T8>， **千瓦 T9> ） T10 > ¶ T11>`{.descclassname}
 :   代表两个映射类生成[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")或[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")。
 
-    该函数的一个替代实现可以使用[`AutomapBase.prepare.generate_relationship`](#sqlalchemy.ext.automap.AutomapBase.prepare.params.generate_relationship "sqlalchemy.ext.automap.AutomapBase.prepare")参数指定。plainplain
+    该函数的一个替代实现可以使用[`AutomapBase.prepare.generate_relationship`](#sqlalchemy.ext.automap.AutomapBase.prepare.params.generate_relationship "sqlalchemy.ext.automap.AutomapBase.prepare")参数指定。plainplainplain
 
     这个函数的默认实现如下：
 

@@ -32,7 +32,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 `sqlalchemy.ext.instrumentation。`{.descclassname} `INSTRUMENTATION_MANAGER`{.descname} *='\_\_sa\_instrumentation\_manager \_\_'* [¶](#sqlalchemy.ext.instrumentation.INSTRUMENTATION_MANAGER "Permalink to this definition")
 :   属性，在存在于映射类上时选择自定义检测。
 
-    允许类指定一个稍微或非常不同的技术来跟踪对映射的属性和集合所做的更改。plainplainplainplainplainplainplainplainplain
+    允许类指定一个稍微或非常不同的技术来跟踪对映射的属性和集合所做的更改。plainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
     在给定的对象继承层次结构中只允许使用一个工具实现。
 
@@ -51,7 +51,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  *class*`sqlalchemy.ext.instrumentation.`{.descclassname}`InstrumentationManager`{.descname}(*class\_*)[¶](#sqlalchemy.ext.instrumentation.InstrumentationManager "Permalink to this definition")
 :   用户定义的类工具扩展。
 
-    [`InstrumentationManager`](#sqlalchemy.ext.instrumentation.InstrumentationManager "sqlalchemy.ext.instrumentation.InstrumentationManager")plainplainplainplainplainplainplainplain
+    [`InstrumentationManager`](#sqlalchemy.ext.instrumentation.InstrumentationManager "sqlalchemy.ext.instrumentation.InstrumentationManager")plainplainplainplainplainplainplainplainplainplainplain
     can be subclassed in order to change how class instrumentation
     proceeds.
     此类存在用于与其他对象管理框架集成的目的，这些对象管理框架将完全修改ORM的检测方法，并且不打算用于常规用法。要拦截类工具事件，请参阅[`InstrumentationEvents`](events.html#sqlalchemy.orm.events.InstrumentationEvents "sqlalchemy.orm.events.InstrumentationEvents")。
