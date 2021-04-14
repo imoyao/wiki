@@ -519,7 +519,7 @@ class Child(Base):
         back_populates="children")
 ```
 当使用 relationship.backref 参数而不是 relationship.back_populates 时，backref 将自动使用相同的`relationship.secondary`参数用于反向关系：
-```pythpn
+```python
 association_table = Table('association', Base.metadata,
     Column('left_id', Integer, ForeignKey('left.id')),
     Column('right_id', Integer, ForeignKey('right.id'))
