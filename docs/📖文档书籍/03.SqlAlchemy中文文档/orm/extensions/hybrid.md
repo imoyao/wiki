@@ -52,13 +52,13 @@ tags:
 
 以上，`length`属性返回`end`和`start`属性之间的差异。使用`Interval`的实例，使用正常的 Python 描述符机制，在 Python 中进行相减：
 
-    >>> i1 = Interval(5, 10)plainplainplainplainplainplain
+    >>> i1 = Interval(5, 10)plainplainplainplainplainplainplain
     >>> i1.length
     5
 
 当处理`Interval`类本身时，[`hybrid_property`](#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")描述符将给定`Interval`类的函数体评估为参数，当使用 SQLAlchemy 表达式机制返回一个新的 SQL 表达式：
 
-    >>> print Interval.lengthplainplainplain
+    >>> print Interval.lengthplainplainplainplainplain
     interval."end" - interval.start
 
     >>> print Session().query(Interval).filter(Interval.length > 10)
@@ -80,7 +80,7 @@ can also be used with hybrid attributes:
 `Interval`类示例还演示了`contains()`和`intersects()`两种方法，用[`hybrid_method`](#sqlalchemy.ext.hybrid.hybrid_method "sqlalchemy.ext.hybrid.hybrid_method")修饰。该装饰器将相同的想法应用于[`hybrid_property`](#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")应用于属性的方法。这些方法返回布尔值，并利用 Python
 `|`和`&`位运算符来产生等效的实例级和 SQL 表达式级布尔行为：
 
-    >>> i1.contains(6)plainplainplainplain
+    >>> i1.contains(6)plainplainplainplainplain
     True
     >>> i1.contains(15)
     False
@@ -154,7 +154,7 @@ Python 函数`abs()`用于实例级操作，SQL 函数`ABS()`通过[`func`](core
 
 现在在 set 中调用`长度（self， value）`方法：
 
-    >>> i1 = Interval(5, 10)plainplainplain
+    >>> i1 = Interval(5, 10)plainplainplainplain
     >>> i1.length
     5
     >>> i1.length = 12
@@ -283,7 +283,7 @@ column\_property](mapped_sql_expr.html#mapper-column-property-sql-expressions)�
 
 下面的示例类允许对名为`word_insensitive`的属性进行不区分大小写的比较：
 
-    from sqlalchemy.ext.hybrid import Comparator, hybrid_propertyplainplainplain
+    from sqlalchemy.ext.hybrid import Comparator, hybrid_propertyplainplainplainplain
     from sqlalchemy import func, Column, Integer, String
     from sqlalchemy.orm import Session
     from sqlalchemy.ext.declarative import declarative_base
@@ -317,7 +317,7 @@ SQL 函数应用于双方：
 
 上面的`CaseInsensitiveComparator`实现了[`ColumnOperators`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")接口的一部分。可以对所有比较操作（即，`eq`，`lt`，`gt`等）应用“强制”使用[`Operators.operate()`](core_sqlelement.html#sqlalchemy.sql.operators.Operators.operate "sqlalchemy.sql.operators.Operators.operate")：
 
-    class CaseInsensitiveComparator(Comparator):plainplainplainplain
+    class CaseInsensitiveComparator(Comparator):plainplainplainplainplain
         def operate(self, op, other):
             return op(func.lower(self.__clause_element__()), func.lower(other))
 
@@ -376,7 +376,7 @@ a Python native. 通过重写`operate()`和`__clause_element__()`以根据`self.
 
 SQL 表达式与 SQL 表达式：
 
-    >>> sw1 = aliased(SearchWord)plainplain
+    >>> sw1 = aliased(SearchWord)plainplainplain
     >>> sw2 = aliased(SearchWord)
     >>> print Session().query(
     ...                    sw1.word_insensitive,
@@ -391,7 +391,7 @@ SQL 表达式与 SQL 表达式：
 
 仅 Python 表达式：
 
-    >>> ws1 = SearchWord(word="SomeWord")plainplain
+    >>> ws1 = SearchWord(word="SomeWord")plainplainplainplain
     >>> ws1.word_insensitive == "sOmEwOrD"
     True
     >>> ws1.word_insensitive == "XOmEwOrX"
@@ -418,7 +418,7 @@ SQL 表达式与 SQL 表达式：
 
 考虑一个映射的类`Node`，它将使用邻接表进行汇编成一个分层树形模式：
 
-    from sqlalchemy import Column, Integer, ForeignKeyplainplain
+    from sqlalchemy import Column, Integer, ForeignKeyplainplainplain
     from sqlalchemy.orm import relationship
     from sqlalchemy.ext.declarative import declarative_base
     Base = declarative_base()
@@ -447,7 +447,7 @@ twice along `Node.parent` to get to the
 `grandparent`.
 我们可以返回一个转换可调用对象，我们将与[`Comparator`](#sqlalchemy.ext.hybrid.Comparator "sqlalchemy.ext.hybrid.Comparator")类结合使用来接收任何[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象，并返回一个与`Node.parent`属性，并根据给定的标准进行过滤：
 
-    from sqlalchemy.ext.hybrid import Comparatorplainplainplainplain
+    from sqlalchemy.ext.hybrid import Comparatorplainplainplainplainplainplain
 
     class GrandparentTransformer(Comparator):
         def operate(self, op, other):
@@ -481,7 +481,7 @@ callable as well as the right side of the comparison
 `Node(id=5)`. 然后返回一个函数`transform`，它将首先转换[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")以加入到`Node.parent`，然后比较`parent_alias`
 \>在左侧和右侧使用`Operators.eq`，传入`Query.filter`：
 
-    >>> from sqlalchemy.orm import Sessionplainplain
+    >>> from sqlalchemy.orm import Sessionplainplainplain
     >>> session = Session()
     sql>>> session.query(Node).\
     ...        with_transformation(Node.grandparent==Node(id=5)).\
@@ -497,7 +497,7 @@ tricky part here is ensuring that successive instances of
 object against `Node`.
 下面我们使用一个简单的记忆方法，将一个`GrandparentTransformer`与每个类关联起来：
 
-    class Node(Base):plain
+    class Node(Base):plainplainplainplain
 
         # ...
 
@@ -538,7 +538,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  *class*`sqlalchemy.ext.hybrid.`{.descclassname}`hybrid_method`{.descname}(*func*, *expr=None*)[¶](#sqlalchemy.ext.hybrid.hybrid_method "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.base.InspectionAttrInfo`](internals.html#sqlalchemy.orm.base.InspectionAttrInfo "sqlalchemy.orm.base.InspectionAttrInfo")
 
-    一个装饰器，允许定义具有实例级和类级行为的Python对象方法。plainplainplainplainplain
+    一个装饰器，允许定义具有实例级和类级行为的Python对象方法。plainplainplainplainplainplain
 
     `__ init __`{.descname} （ *func*，*expr = None* ） [t5 \>](#sqlalchemy.ext.hybrid.hybrid_method.__init__ "Permalink to this definition")
     :   创建一个新的[`hybrid_method`](#sqlalchemy.ext.hybrid.hybrid_method "sqlalchemy.ext.hybrid.hybrid_method")。
@@ -562,7 +562,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *类 T0\> `sqlalchemy.ext.hybrid。 T1>  hybrid_property  T2> （ T3>  fget  T4>， FSET = None，fdel = None，expr = None ） ¶`{.descclassname}*
 :   基础：[`sqlalchemy.orm.base.InspectionAttrInfo`](internals.html#sqlalchemy.orm.base.InspectionAttrInfo "sqlalchemy.orm.base.InspectionAttrInfo")
 
-    一个装饰器，允许定义具有实例级别和类级别行为的Python描述符。plain
+    一个装饰器，允许定义具有实例级别和类级别行为的Python描述符。plainplainplain
 
      `__init__`{.descname}(*fget*, *fset=None*, *fdel=None*, *expr=None*)[¶](#sqlalchemy.ext.hybrid.hybrid_property.__init__ "Permalink to this definition")
     :   创建一个新的[`hybrid_property`](#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")。

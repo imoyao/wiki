@@ -41,7 +41,7 @@ is available at:
 
 连接字符串：
 
-    sybase+pysybase://<username>:<password>@<dsn>/[database name]plainplainplainplainplainplainplainplainplainplainplain
+    sybase+pysybase://<username>:<password>@<dsn>/[database name]plainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 ### Unicode 支持[¶](#unicode-support "Permalink to this headline")
 
@@ -60,13 +60,13 @@ PyODBC 的文档和下载信息（如果适用）可在以下网址获得：[htt
 
 连接字符串：
 
-    sybase+pyodbc://<username>:<password>@<dsnname>[/<database>]plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    sybase+pyodbc://<username>:<password>@<dsnname>[/<database>]plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 ### Unicode 支持[¶](#id1 "Permalink to this headline")
 
 pyodbc 驱动程序当前支持使用 Unicode 或多字节字符串的这些 Sybase 类型：
 
-    CHARplainplainplainplainplainplainplainplainplain
+    CHARplainplainplainplainplainplainplainplainplainplainplainplain
     NCHAR
     NVARCHAR
     TEXT
@@ -74,7 +74,7 @@ pyodbc 驱动程序当前支持使用 Unicode 或多字节字符串的这些 Syb
 
 目前*不支持*的是：
 
-    UNICHARplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    UNICHARplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
     UNITEXT
     UNIVARCHAR
 
@@ -91,7 +91,7 @@ mxODBC 的文档和下载信息（如果适用）可在以下网址获得：[htt
 
 连接字符串：
 
-    sybase+mxodbc://<username>:<password>@<dsnname>plainplainplainplainplainplainplainplainplainplainplainplainplain
+    sybase+mxodbc://<username>:<password>@<dsnname>plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 注意
 

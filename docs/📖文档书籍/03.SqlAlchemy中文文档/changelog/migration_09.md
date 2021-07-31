@@ -211,7 +211,7 @@ tests continue to function, then upgrade to 0.9 without issue.
 
 会产生：
 
-    SELECT a.id AS a_id, a.b_id AS a_b_id
+    SELECT a.id AS a_id, a.b_id AS a_b_idplain
     FROM a
     WHERE EXISTS (SELECT 1
     FROM b
@@ -263,7 +263,7 @@ tests continue to function, then upgrade to 0.9 without issue.
 
 如果代理对象不存在，则从标量属性到标量的关联代理现在将返回`None`。这与在 SQLAlchemy 中缺少多对一返回 None 的事实一致，所以应该使用代理值。例如。：
 
-    from sqlalchemy import *plain
+    from sqlalchemy import *plainplain
     from sqlalchemy.orm import *
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.ext.associationproxy import association_proxy
@@ -357,7 +357,7 @@ at its default of `PASSIVE_OFF`.
 
 这是一个非常古老的 bug，为 0.8 系列添加了弃用警告，但因为没有人用“-W”标志运行 Python，所以大部分都没有看到：
 
-    $ python -W always::DeprecationWarning ~/dev/sqlalchemy/test.pyplainplain
+    $ python -W always::DeprecationWarning ~/dev/sqlalchemy/test.pyplainplainplain
     /Users/classic/dev/sqlalchemy/test.py:5: SADeprecationWarning: Passing arguments to
     type object constructor <class 'sqlalchemy.types.Date'> is deprecated
       d = Date(storage_format="%(day)02d.%(month)02d.%(year)04d")
@@ -499,11 +499,11 @@ which will again ensure no parentheses are generated:
 
 [＃2879 T0\>](http://www.sqlalchemy.org/trac/ticket/2879)
 
-### Postgresql CREATE TYPE AS ENUM现在将引用应用于值[¶](#postgresql-create-type-x-as-enum-now-applies-quoting-to-values "Permalink to this headline")
+### Postgresql CREATE TYPE AS ENUM 现在将引用应用于值[¶](#postgresql-create-type-x-as-enum-now-applies-quoting-to-values "Permalink to this headline")
 
 现在，[`postgresql.ENUM`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ENUM "sqlalchemy.dialects.postgresql.ENUM")类型将对枚举值中的单引号进行转义：
 
-    >>> from sqlalchemy.dialects import postgresqlplain
+    >>> from sqlalchemy.dialects import postgresqlplainplain
     >>> type = postgresql.ENUM('one', 'two', "three's", name="myenum")
     >>> from sqlalchemy.dialects.postgresql import base
     >>> print(base.CreateEnumType(type).compile(dialect=postgresql.dialect()))
@@ -550,13 +550,13 @@ etc. 全部基于称为[`Load`](orm_query.html#sqlalchemy.orm.strategy_options.L
 
 要在多元素路径中的每个链接上设置特定的加载样式，必须使用`_all()`选项：
 
-    query(User).options(joinedload_all("orders.items.keywords"))plain
+    query(User).options(joinedload_all("orders.items.keywords"))plainplain
 
 **新途径**
 
 Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样适用于每个链接，无需在[`joinedload()`](orm_loading_relationships.html#sqlalchemy.orm.joinedload "sqlalchemy.orm.joinedload")和[`joinedload_all()`](orm_loading_relationships.html#sqlalchemy.orm.joinedload_all "sqlalchemy.orm.joinedload_all")
 
-    query(User).options(joinedload("orders").joinedload("items").joinedload("keywords"))plain
+    query(User).options(joinedload("orders").joinedload("items").joinedload("keywords"))plainplain
 
 **旧方式**
 
@@ -574,7 +574,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 只有路径中实际需要[`PropComparator.of_type()`](orm_internals.html#sqlalchemy.orm.interfaces.PropComparator.of_type "sqlalchemy.orm.interfaces.PropComparator.of_type")的元素需要设置为类绑定属性，之后才能恢复基于字符串的名称：
 
-    session.query(Company).\plainplainplain
+    session.query(Company).\plainplainplainplainplain
         options(
             subqueryload(Company.employees.of_type(Engineer)).
             subqueryload("machines")
@@ -585,13 +585,13 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 在长路径中的最后一个链接上设置加载器选项使用的语法看起来很像它应该为路径中的所有链接设置选项，导致混淆：
 
-    query(User).options(subqueryload("orders.items.keywords"))plain
+    query(User).options(subqueryload("orders.items.keywords"))plainplain
 
 **新途径**
 
 现在可以使用[`defaultload()`](orm_loading_relationships.html#sqlalchemy.orm.defaultload "sqlalchemy.orm.defaultload")来为现有加载程序样式应该保持不变的路径中的条目拼写出路径。更详细，但意图更清晰：
 
-    query(User).options(defaultload("orders").defaultload("items").subqueryload("keywords"))plainplainplain
+    query(User).options(defaultload("orders").defaultload("items").subqueryload("keywords"))plainplainplainplain
 
 虚线样式仍然可以利用，特别是在跳过多个路径元素的情况下：
 
@@ -613,7 +613,7 @@ Loader 选项现在是可链接的，所以同样的`joinedload(x)`方法同样�
 
 可以直接使用[`Load`](orm_query.html#sqlalchemy.orm.strategy_options.Load "sqlalchemy.orm.strategy_options.Load")类来提供“绑定”目标，特别是当存在多个父实体时：
 
-    from sqlalchemy.orm import Loadplain
+    from sqlalchemy.orm import Loadplainplain
 
     query(User, Address).options(Load(Address).joinedload("entries"))
 
@@ -706,7 +706,7 @@ where it will be used to render an `INSERT .. SELECT` construct:
 
 该构造足够智能，可以容纳诸如类和[`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")对象的 ORM 对象：
 
-    s = Session()plainplain
+    s = Session()plainplainplain
     q = s.query(User.id, User.name).filter_by(name='ed')
     ins = insert(Address).from_select((Address.id, Address.email_address), q)
 
@@ -914,7 +914,7 @@ JOIN，因为 INNER JOIN 总是被压平）嵌套 JOIN。
 
 这是因为直到版本**3.7.16**的 SQLite 无法解析上述格式的语句：
 
-    SQLite version 3.7.15.2 2013-01-09 11:53:05plain
+    SQLite version 3.7.15.2 2013-01-09 11:53:05plainplain
     Enter ".help" for instructions
     Enter SQL statements terminated with a ";"
     sqlite> create table a(id integer);
@@ -946,7 +946,7 @@ OUTER JOIN :)：
 
 假设从`Order`到`Item`的多对多实际上指的是像`Subitem`这样的子类，上述的 SQL 将如下所示：
 
-    SELECT order.id, order.nameplainplain
+    SELECT order.id, order.nameplainplainplain
     FROM order LEFT OUTER JOIN order_item ON order.id = order_item.order_id
     LEFT OUTER JOIN item ON order_item.item_id = item.id AND item.type = 'subitem'
 
@@ -966,7 +966,7 @@ OUTER JOIN :)：
 
 加入像`query(Parent).options(joinedload(Parent.subclasses))`这样的预先加载将替换个别表而不是包装在`ANON_1`中：
 
-    SELECT parent.*, base_table_1.*, subclass_table_1.* FROM parent
+    SELECT parent.*, base_table_1.*, subclass_table_1.* FROM parentplain
         LEFT OUTER JOIN (
             base_table AS base_table_1 JOIN subclass_table AS subclass_table_1
             ON base_table_1.id = subclass_table_1.id)
@@ -982,7 +982,7 @@ OUTER JOIN :)：
 所有这些连接在使用特别指定`use_labels=True`的[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")语句进行呈现时（对于 ORM 发出的所有查询都是如此），这些连接都是“连接重写”
 ，这是将所有这些右嵌套连接重写为嵌套 SELECT 语句的过程，同时保持由[`Select`](core_selectable.html#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")使用的相同标签。因此 SQLite 即使在 2013 年也不支持这种非常常见的 SQL 语法的一个数据库本身就具有额外的复杂性，上面的查询被重写为：
 
-    -- sqlite only!
+    -- sqlite only!plain
     SELECT parent.id AS parent_id
         FROM parent JOIN (
             SELECT base_table.id AS base_table_id,
@@ -1021,7 +1021,7 @@ OUTER JOIN :)：
 现在，[`Join.alias()`](core_selectable.html#sqlalchemy.sql.expression.Join.alias "sqlalchemy.sql.expression.Join.alias")，[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")和[`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")函数支持一个新参数`flat=True`此标志默认情况下不会启用，以帮助实现向后兼容性 -
 但现在，可选择的“polymorhpic”可作为目标而不生成任何子查询：
 
-    employee_alias = with_polymorphic(Person, [Engineer, Manager], flat=True)plainplainplainplain
+    employee_alias = with_polymorphic(Person, [Engineer, Manager], flat=True)plainplainplainplainplain
 
     session.query(Company).join(
                         Company.employees.of_type(employee_alias)
@@ -1052,7 +1052,7 @@ OUTER JOIN :)：
 
 通常情况下，加入一个像以下这样的热切加载链：
 
-    query(User).options(joinedload("orders", innerjoin=False).joinedload("items", innerjoin=True))plain
+    query(User).options(joinedload("orders", innerjoin=False).joinedload("items", innerjoin=True))plainplain
 
 不会产生内连接；由于来自用户 - \>订单的 LEFT OUTER
 JOIN，所以加入的预加载无法使用来自 order-\>
@@ -1375,7 +1375,7 @@ initialize their parent column.
 
 2.  系统现在也可以使用[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")：
 
-        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKeyConstraintplainplainplain
+        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKeyConstraintplainplainplainplain
         >>> metadata = MetaData()
         >>> t2 = Table('t2', metadata,
         ...     Column('t1a'), Column('t1b'),
@@ -1394,7 +1394,7 @@ initialize their parent column.
 
 3.  它甚至适用于“多跳” - 也就是说，引用另一个[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的引用[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")：
 
-        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKey
+        >>> from sqlalchemy import Table, MetaData, Column, Integer, ForeignKeyplain
         >>> metadata = MetaData()
         >>> t2 = Table('t2', metadata, Column('t1id', ForeignKey('t1.id')))
         >>> t3 = Table('t3', metadata, Column('t2t1id', ForeignKey('t2.t1id')))

@@ -88,7 +88,7 @@ User.query.select\_by（\*\* kwargs）
 
 User.query.select()
 
-    User.query.filter(xxx).all()plainplain
+    User.query.filter(xxx).all()plainplainplain
 
 #### 新的基于属性的表达式构造[¶](#new-property-based-expression-constructs "Permalink to this headline")
 
@@ -148,7 +148,7 @@ User.query.select()
 
 所以 query.join()现在可以生成别名。这给了我们什么？自引用查询！连接可以在没有任何`Alias`对象的情况下完成：
 
-    # standard self-referential TreeNode mapper with backrefplainplainplain
+    # standard self-referential TreeNode mapper with backrefplainplainplainplain
     mapper(TreeNode, tree_nodes, properties={
         'children':relation(TreeNode, backref=backref('parent', remote_side=tree_nodes.id))
     })
@@ -158,7 +158,7 @@ User.query.select()
 
 要为别名中的每个表添加条件标准，可以使用`from_joinpoint`继续加入同一行别名：
 
-    # search for the treenode along the path "n1/n12/n122"plainplainplainplainplain
+    # search for the treenode along the path "n1/n12/n122"plainplainplainplainplainplain
 
     # first find a Node with name="n122"
     q = sess.query(Node).filter_by(name='n122')
@@ -185,7 +185,7 @@ User.query.select()
 
 对于在`flush()`期间嵌入式执行 SQL 子句，直接嵌入 UPDATE 或 INSERT 中：
 
-    myobject.foo = mytable.c.value + 1plainplainplainplain
+    myobject.foo = mytable.c.value + 1plainplainplainplainplain
 
     user.pwhash = func.md5(password)
 
@@ -197,7 +197,7 @@ User.query.select()
 
 由于我们的 alias-fu 已经改进，所以`relation()`可以沿同一个表加入\*任意次数\*；你告诉它你想走多深。让我们更清楚地显示自引用的`TreeNode`：
 
-    nodes = Table('nodes', metadata,plain
+    nodes = Table('nodes', metadata,plainplainplain
          Column('id', Integer, primary_key=True),
          Column('parent_id', Integer, ForeignKey('nodes.id')),
          Column('name', String(30)))
@@ -211,11 +211,11 @@ User.query.select()
 
 那么当我们说：
 
-    create_session().query(TreeNode).all()plain
+    create_session().query(TreeNode).all()plainplain
 
 ? 沿着别名进行连接，从父母那里深入三级：
 
-    SELECTplainplain
+    SELECTplainplainplain
     nodes_3.id AS nodes_3_id, nodes_3.parent_id AS nodes_3_parent_id, nodes_3.name AS nodes_3_name,
     nodes_2.id AS nodes_2_id, nodes_2.parent_id AS nodes_2_parent_id, nodes_2.name AS nodes_2_name,
     nodes_1.id AS nodes_1_id, nodes_1.parent_id AS nodes_1_parent_id, nodes_1.name AS nodes_1_name,
@@ -246,7 +246,7 @@ User.query.select()
 
 我们来创建一个顶点表，每行存储两个点：
 
-    vertices = Table('vertices', metadata,plain
+    vertices = Table('vertices', metadata,plainplain
         Column('id', Integer, primary_key=True),
         Column('x1', Integer),
         Column('y1', Integer),
@@ -256,7 +256,7 @@ User.query.select()
 
 然后，映射它！我们将创建一个存储两个`Point`对象的`Vertex`对象：
 
-    class Vertex(object):plainplainplain
+    class Vertex(object):plainplainplainplain
         def __init__(self, start, end):
             self.start = start
             self.end = end
@@ -268,7 +268,7 @@ User.query.select()
 
 一旦你设置了你的复合类型，它就像其他任何类型一样可用：
 
-    v = Vertex(Point(3, 4), Point(26,15))plainplain
+    v = Vertex(Point(3, 4), Point(26,15))plainplainplain
     session.save(v)
     session.flush()
 
@@ -285,7 +285,7 @@ User.query.select()
 
 一个`relation()`，它为所有读取操作返回一个实时`Query`对象。写操作仅限于`append()`和`remove()`，集合的更改在刷新会话之前不可见。此功能特别适用于在每次查询之前刷新的“自动刷新”会话。
 
-    mapper(Foo, foo_table, properties={plain
+    mapper(Foo, foo_table, properties={plainplain
         'bars':dynamic_loader(Bar, backref='foo', <other relation() opts>)
     })
 
@@ -303,7 +303,7 @@ User.query.select()
 
 一些方便的查询选项。`undefer_group()`将一组“延迟”列标记为 undeferred：
 
-    mapper(Class, table, properties={plainplainplainplainplainplain
+    mapper(Class, table, properties={plainplainplainplainplainplainplainplain
         'foo' : deferred(table.c.foo, group='group1'),
         'bar' : deferred(table.c.bar, group='group1'),
         'bat' : deferred(table.c.bat, group='group1'),
@@ -313,7 +313,7 @@ User.query.select()
 
 和`eagerload_all()`设置一个属性链，以便在一次传递中保持渴望：
 
-    mapper(Foo, foo_table, properties={plainplain
+    mapper(Foo, foo_table, properties={plainplainplain
        'bar':relation(Bar)
     })
     mapper(Bar, bar_table, properties={
@@ -345,7 +345,7 @@ types cover many needs:
 
 这个特性静静地出现在 0.3 中，但在 0.4 下得到了改进，这要归功于能够将子查询转换为表的子查询转换为针对该表的别名的子查询。这对于急切加载，查询中的别名加入等是关键的。当您只需要添加一些额外的列或子查询时，它可以减少对 select 语句创建映射器的需要：
 
-    mapper(User, users, properties={plainplain
+    mapper(User, users, properties={plainplainplain
            'fullname': column_property((users.c.firstname + users.c.lastname).label('fullname')),
            'numposts': column_property(
                 select([func.count(1)], users.c.id==posts.c.user_id).correlate(users).label('posts')
@@ -372,7 +372,7 @@ types cover many needs:
 
 在您定义`engine`（或任何地方）的位置配置您自己的`Session`类：
 
-    from sqlalchemy import create_engineplainplainplain
+    from sqlalchemy import create_engineplainplainplainplainplain
     from sqlalchemy.orm import sessionmaker
 
     engine = create_engine('myengine://')
@@ -446,7 +446,7 @@ Also, `autoflush=True` means the `Session` will `flush()` before each
 
 `commit()`和`rollback()`，以及`begin()`现在直接在`Session`上。不需要为任何事情使用`SessionTransaction`（它仍然在后台）。
 
-    Session = sessionmaker(autoflush=True, transactional=False)plainplainplainplainplainplain
+    Session = sessionmaker(autoflush=True, transactional=False)plainplainplainplainplainplainplain
 
     sess = Session()
     sess.begin()
@@ -590,7 +590,7 @@ SQL 执行[¶](#sql-execution "Permalink to this headline")
 
 ### Oracle 的输出参数[¶](#out-parameters-for-oracle "Permalink to this headline")
 
-    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)plainplainplainplain
+    result = engine.execute(text("begin foo(:x, :y, :z); end;", bindparams=[bindparam('x', Numeric), outparam('y', Numeric), outparam('z', Numeric)]), x=5)plainplainplainplainplain
     assert result.out_parameters == {'y':10, 'z':75}
 
 ### 连接绑定`MetaData`，`Sessions` [¶](#connection-bound-metadata-sessions "Permalink to this headline")

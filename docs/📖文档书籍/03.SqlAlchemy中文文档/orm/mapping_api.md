@@ -14,7 +14,7 @@ tags:
  `sqlalchemy.orm.`{.descclassname}`mapper`{.descname}(*class\_*, *local\_table=None*, *properties=None*, *primary\_key=None*, *non\_primary=False*, *inherits=None*, *inherit\_condition=None*, *inherit\_foreign\_keys=None*, *extension=None*, *order\_by=False*, *always\_refresh=False*, *version\_id\_col=None*, *version\_id\_generator=None*, *polymorphic\_on=None*, *\_polymorphic\_map=None*, *polymorphic\_identity=None*, *concrete=False*, *with\_polymorphic=None*, *allow\_partial\_pks=True*, *batch=True*, *column\_prefix=None*, *include\_properties=None*, *exclude\_properties=None*, *passive\_updates=True*, *passive\_deletes=False*, *confirm\_deleted\_rows=True*, *eager\_defaults=False*, *legacy\_is\_orphan=False*, *\_compiled\_cache\_size=100*)[¶](#sqlalchemy.orm.mapper "Permalink to this definition")
 :   返回一个新的[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象。
 
-    该功能通常通过声明扩展在幕后使用。当使用Declarative时，许多通常的[`mapper()`](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")参数由Declarative扩展本身处理，包括`class_`，`local_table`，`properties`，`inherits`。其他选项使用`__mapper_args__`类变量传递给[`mapper()`](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")：plainplain
+    该功能通常通过声明扩展在幕后使用。当使用Declarative时，许多通常的[`mapper()`](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")参数由Declarative扩展本身处理，包括`class_`，`local_table`，`properties`，`inherits`。其他选项使用`__mapper_args__`类变量传递给[`mapper()`](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")：plainplainplainplain
 
         class MyClass(Base):
             __tablename__ = 'my_table'
@@ -358,7 +358,7 @@ tags:
 `sqlalchemy.orm。 T0>  object_mapper  T1> （ T2> 实例 T3> ） T4> ¶ T5 >`{.descclassname}
 :   给定一个对象，返回与对象实例关联的主映射器。
 
-    如果未配置映射，则引发[`sqlalchemy.orm.exc.UnmappedInstanceError`](exceptions.html#sqlalchemy.orm.exc.UnmappedInstanceError "sqlalchemy.orm.exc.UnmappedInstanceError")。plainplain
+    如果未配置映射，则引发[`sqlalchemy.orm.exc.UnmappedInstanceError`](exceptions.html#sqlalchemy.orm.exc.UnmappedInstanceError "sqlalchemy.orm.exc.UnmappedInstanceError")。plainplainplainplainplainplainplainplain
 
     该功能可通过检查系统获得：
 
@@ -380,7 +380,7 @@ tags:
 `sqlalchemy.orm。 T0>  configure_mappers  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
 :   初始化到目前为止已经构建的所有映射器的映射器间关系。
 
-    这个函数可以调用任意次数，但在大多数情况下会自动调用，使用第一次映射，以及每当使用映射和额外尚未配置的映射器已经构建。plainplainplain
+    这个函数可以调用任意次数，但在大多数情况下会自动调用，使用第一次映射，以及每当使用映射和额外尚未配置的映射器已经构建。plainplainplainplainplainplainplain
 
     出现这种情况的要点包括何时将映射类实例化为实例，以及何时使用[`Session.query()`](session_api.html#sqlalchemy.orm.session.Session.query "sqlalchemy.orm.session.Session.query")方法。
 
@@ -404,7 +404,7 @@ tags:
 `sqlalchemy.orm。 T0>  clear_mappers  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
 :   从所有类中移除所有映射器。
 
-    这个函数从类中移除所有的工具并处理它们相关的映射器。一旦被调用，这些类就会被取消映射，并可以在以后用新的映射器重新映射。plainplainplainplainplainplain
+    这个函数从类中移除所有的工具并处理它们相关的映射器。一旦被调用，这些类就会被取消映射，并可以在以后用新的映射器重新映射。plainplainplainplainplainplainplain
 
     [`clear_mappers()`](#sqlalchemy.orm.clear_mappers "sqlalchemy.orm.clear_mappers")
     is *not* for normal use, as there is literally no valid usage for it
@@ -416,7 +416,7 @@ tags:
  `sqlalchemy.orm.util.`{.descclassname}`identity_key`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.orm.util.identity_key "Permalink to this definition")
 :   生成“身份密钥”元组，就像在[`Session.identity_map`](session_api.html#sqlalchemy.orm.session.Session.identity_map "sqlalchemy.orm.session.Session.identity_map")字典中用作键一样。
 
-    这个函数有几种调用方式：
+    这个函数有几种调用方式：plainplainplainplain
 
     -   `identity_key（class， ident）`
 
@@ -474,7 +474,7 @@ tags:
  `sqlalchemy.orm.util.`{.descclassname}`polymorphic_union`{.descname}(*table\_map*, *typecolname*, *aliasname='p\_union'*, *cast\_nulls=True*)[¶](#sqlalchemy.orm.util.polymorphic_union "Permalink to this definition")
 :   创建一个由多态映射器使用的`UNION`语句。
 
-    有关如何使用它的示例，请参阅[Concrete Tableplainplainplainplainplain
+    有关如何使用它的示例，请参阅[Concrete Tableplainplainplainplainplainplainplain
     Inheritance](inheritance.html#concrete-inheritance)。
 
     参数：
@@ -498,7 +498,7 @@ tags:
  *class*`sqlalchemy.orm.mapper.`{.descclassname}`Mapper`{.descname}(*class\_*, *local\_table=None*, *properties=None*, *primary\_key=None*, *non\_primary=False*, *inherits=None*, *inherit\_condition=None*, *inherit\_foreign\_keys=None*, *extension=None*, *order\_by=False*, *always\_refresh=False*, *version\_id\_col=None*, *version\_id\_generator=None*, *polymorphic\_on=None*, *\_polymorphic\_map=None*, *polymorphic\_identity=None*, *concrete=False*, *with\_polymorphic=None*, *allow\_partial\_pks=True*, *batch=True*, *column\_prefix=None*, *include\_properties=None*, *exclude\_properties=None*, *passive\_updates=True*, *passive\_deletes=False*, *confirm\_deleted\_rows=True*, *eager\_defaults=False*, *legacy\_is\_orphan=False*, *\_compiled\_cache\_size=100*)[¶](#sqlalchemy.orm.mapper.Mapper "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.base.InspectionAttr`](internals.html#sqlalchemy.orm.base.InspectionAttr "sqlalchemy.orm.base.InspectionAttr")
 
-    定义类属性与数据库表列的关联。plainplainplainplain
+    定义类属性与数据库表列的关联。plainplainplainplainplain
 
     [`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象使用[`mapper()`](#sqlalchemy.orm.mapper "sqlalchemy.orm.mapper")函数实例化。有关实例化新的[`Mapper`](#sqlalchemy.orm.mapper.Mapper "sqlalchemy.orm.mapper.Mapper")对象的信息，请参阅该函数的文档。
 

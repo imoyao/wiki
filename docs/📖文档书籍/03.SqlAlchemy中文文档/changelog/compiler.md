@@ -18,7 +18,7 @@ tags:
 
 用法涉及创建一个或多个[`ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")子类和一个或多个定义其编译的可调参数：
 
-    from sqlalchemy.ext.compiler import compilesplainplainplainplainplainplainplain
+    from sqlalchemy.ext.compiler import compilesplainplainplainplainplainplainplainplain
     from sqlalchemy.sql.expression import ColumnClause
 
     class MyColumn(ColumnClause):
@@ -32,21 +32,21 @@ Above, `MyColumn` extends [`ColumnClause`](sqlelement.html#sqlalchemy.sql.expres
 the base expression element for named column objects.
 `compiles`修饰符向`MyColumn`类注册自己，以便在对象编译为字符串时调用它：
 
-    from sqlalchemy import selectplainplainplainplainplainplain
+    from sqlalchemy import selectplainplainplainplainplainplainplain
 
     s = select([MyColumn('x'), MyColumn('y')])
     print str(s)
 
 生产：
 
-    SELECT [x], [y]plainplainplainplainplainplainplain
+    SELECT [x], [y]plainplainplainplainplainplainplainplainplain
 
 特定于方言的编译规则[¶](#dialect-specific-compilation-rules "Permalink to this headline")
 -----------------------------------------------------------------------------------------
 
 编译器也可以制作方言特定的。正在使用的方言将调用适当的编译器：
 
-    from sqlalchemy.schema import DDLElementplainplainplainplainplainplainplainplainplain
+    from sqlalchemy.schema import DDLElementplainplainplainplainplainplainplainplainplainplain
 
     class AlterColumn(DDLElement):
 
@@ -70,7 +70,7 @@ the base expression element for named column objects.
 
 `compiler`参数是正在使用的[`Compiled`](internals.html#sqlalchemy.engine.interfaces.Compiled "sqlalchemy.engine.interfaces.Compiled")对象。可以检查此对象是否有任何关于正在进行的编译的信息，包括`compiler.dialect`，`compiler.statement`等。[`SQLCompiler`](internals.html#sqlalchemy.sql.compiler.SQLCompiler "sqlalchemy.sql.compiler.SQLCompiler")和[`DDLCompiler`](internals.html#sqlalchemy.sql.compiler.DDLCompiler "sqlalchemy.sql.compiler.DDLCompiler")都包含一个`process()`方法，可用于编译嵌入属性：
 
-    from sqlalchemy.sql.expression import Executable, ClauseElementplainplainplainplain
+    from sqlalchemy.sql.expression import Executable, ClauseElementplainplainplainplainplainplain
 
     class InsertFromSelect(Executable, ClauseElement):
         def __init__(self, table, select):
@@ -129,7 +129,7 @@ Execution, Implicit Execution](connections.html#dbengine-implicit)）。
 
 目前，一个快速的方法是将[`Executable`](selectable.html#sqlalchemy.sql.expression.Executable "sqlalchemy.sql.expression.Executable")子类化，然后将“autocommit”标志添加到`_execution_options`字典中（注意这是一个“冻结” `union()`方法）：
 
-    from sqlalchemy.sql.expression import Executable, ClauseElementplainplainplainplain
+    from sqlalchemy.sql.expression import Executable, ClauseElementplainplainplainplainplain
 
     class MyInsertThing(Executable, ClauseElement):
         _execution_options = \
@@ -171,7 +171,7 @@ and includes the `autocommit` flag:
 `compiler`也适用于类型，例如下面我们为`String` /
 `VARCHAR`实现特定于 MS-SQL 的'max'关键字：
 
-    @compiles(String, 'mssql')plain
+    @compiles(String, 'mssql')plainplain
     @compiles(VARCHAR, 'mssql')
     def compile_varchar(element, compiler, **kw):
         if element.length == 'max':
@@ -202,7 +202,7 @@ and includes the `autocommit` flag:
     expression’s return type.
     这可以在构造函数的实例级别建立，也可以在类级别建立，如果它通常是常量：
 
-        class timestamp(ColumnElement):plainplainplainplainplainplain
+        class timestamp(ColumnElement):plainplainplainplainplainplainplainplain
             type = TIMESTAMP()
 
 -   [`FunctionElement`](functions.html#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")
@@ -211,7 +211,7 @@ and includes the `autocommit` flag:
     `FunctionElement` adds in the ability to be used
     in the FROM clause of a `select()` construct:
 
-        from sqlalchemy.sql.expression import FunctionElementplainplainplainplainplain
+        from sqlalchemy.sql.expression import FunctionElementplainplainplainplainplainplain
 
         class coalesce(FunctionElement):
             name = 'coalesce'
@@ -268,7 +268,7 @@ and includes the `autocommit` flag:
 
 用法示例：
 
-    from sqlalchemy import (plainplainplainplainplainplainplain
+    from sqlalchemy import (plainplainplainplainplainplainplainplainplain
                 Table, Column, Integer, String, DateTime, MetaData
             )
     metadata = MetaData()
@@ -283,7 +283,7 @@ and includes the `autocommit` flag:
 “GREATEST”函数被赋予任意数量的参数，并返回最高值的那个 -
 它等价于 Python 的`max`函数。SQL 标准版本与基于 CASE 的版本相比，它只适用于两个参数：
 
-    from sqlalchemy.sql import expressionplainplainplainplain
+    from sqlalchemy.sql import expressionplainplainplainplainplainplain
     from sqlalchemy.ext.compiler import compiles
     from sqlalchemy.types import Numeric
 
@@ -309,7 +309,7 @@ and includes the `autocommit` flag:
 
 用法示例：
 
-    Session.query(Account).\plainplainplainplain
+    Session.query(Account).\plainplainplainplainplain
             filter(
                 greatest(
                     Account.checking_balance,
@@ -320,7 +320,7 @@ and includes the `autocommit` flag:
 
 呈现“false”常量表达式，在没有“false”常量的平台上呈现为“0”：
 
-    from sqlalchemy.sql import expressionplainplainplainplainplainplainplainplain
+    from sqlalchemy.sql import expressionplainplainplainplainplainplainplainplainplainplain
     from sqlalchemy.ext.compiler import compiles
 
     class sql_false(expression.ColumnElement):
@@ -338,7 +338,7 @@ and includes the `autocommit` flag:
 
 用法示例：
 
-    from sqlalchemy import select, union_allplainplainplainplainplain
+    from sqlalchemy import select, union_allplainplainplainplainplainplain
 
     exp = union_all(
         select([users.c.name, sql_false().label("enrolled")]),

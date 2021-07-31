@@ -24,7 +24,7 @@ SQLAlchemy 支持三种继承形式：**单表继承**，其中几种类由单�
 
 在连接的表继承中，沿着父类的特定类列表的每个类都由唯一的表来表示。特定实例的全部属性集合表示为沿其继承路径中所有表的连接。在这里，我们首先定义`Employee`类。该表将包含主键列（或多个列），以及由`Employee`表示的每个属性的列。在这种情况下，它只是`name`：
 
-    class Employee(Base):plainplain
+    class Employee(Base):plainplainplain
         __tablename__ = 'employee'
         id = Column(Integer, primary_key=True)
         name = Column(String(50))
@@ -47,7 +47,7 @@ SQLAlchemy 支持三种继承形式：**单表继承**，其中几种类由单�
 
 接下来我们定义`Employee`的`Engineer`和`Manager`子类。每个都包含表示它们表示的子类唯一的属性的列。每个表还必须包含一个主键列（或多个列），并且在大多数情况下还需要对父表的外键引用：
 
-    class Engineer(Employee):plainplainplain
+    class Engineer(Employee):plainplainplainplain
         __tablename__ = 'engineer'
         id = Column(Integer, ForeignKey('employee.id'), primary_key=True)
         engineer_name = Column(String(30))
@@ -94,7 +94,7 @@ a statement.
 
 ...仅从`employee`表中选择。从数据库加载新鲜数据时，我们的连接表设置将仅使用如下所示的 SQL 从父表进行查询：
 
-    SELECT employee.id AS employee_id,
+    SELECT employee.id AS employee_id,plain
         employee.name AS employee_name, employee.type AS employee_type
     FROM employee
     []
@@ -105,7 +105,7 @@ is issued for the columns in that related row, if the data was not
 already loaded.
 因此，在访问这些对象之后，您会看到更多的 SQL 按以下方式发布：
 
-    SELECT manager.id AS manager_id,plainplainplainplain
+    SELECT manager.id AS manager_id,plainplainplainplainplain
         manager.manager_data AS manager_manager_data
     FROM manager
     WHERE ? = manager.id
@@ -146,7 +146,7 @@ already loaded.
 
 由[`orm.with_polymorphic()`](#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")返回的实体是一个[`AliasedClass`](query.html#sqlalchemy.orm.util.AliasedClass "sqlalchemy.orm.util.AliasedClass")对象，它可以像任何其他别名一样在[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")中使用，包括命名属性对于`Employee`类中的这些属性。在我们的例子中，`eng_plus_manager`成为我们用于引用上面三向外连接的实体。它还包括在类列表中命名的每个类的名称空间，以便可以调用特定于这些子类的属性。以下示例说明如何根据`eng_plus_manager`调用特定于`Engineer`以及`Manager`的属性：
 
-    eng_plus_manager = with_polymorphic(Employee, [Engineer, Manager])plainplainplainplainplainplain
+    eng_plus_manager = with_polymorphic(Employee, [Engineer, Manager])plainplainplainplainplainplainplain
     query = session.query(eng_plus_manager).filter(
                     or_(
                         eng_plus_manager.Engineer.engineer_info=='x',
@@ -339,7 +339,7 @@ including `engineer` or `manager` in the mix. 如果我们希望具有专门针�
 
 这样的一个长效版本将涉及到在 2 元组中可选的完整目标：
 
-    employee = Employee.__table__plainplain
+    employee = Employee.__table__plainplainplain
     engineer = Engineer.__table__
 
     session.query(Company).\
@@ -348,7 +348,7 @@ including `engineer` or `manager` in the mix. 如果我们希望具有专门针�
 
 [`of_type()`](internals.html#sqlalchemy.orm.interfaces.PropComparator.of_type "sqlalchemy.orm.interfaces.PropComparator.of_type")接受一个类参数。通过连接到上面的显式连接，或者使用[`orm.with_polymorphic()`](#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")函数创建一个多态可选：
 
-    manager_and_engineer = with_polymorphic(plainplainplain
+    manager_and_engineer = with_polymorphic(plainplainplainplain
                                 Employee, [Manager, Engineer],
                                 aliased=True)
 
@@ -361,15 +361,15 @@ including `engineer` or `manager` in the mix. 如果我们希望具有专门针�
 
 在上面，我们在`orm.with_polymorhpic()`中使用了`aliased=True`参数，这样`Company`和`manager_and_engineer`转换为别名子查询。某些后端（如 SQLite 和旧版本的 MySQL）无法处理以下格式的 FROM 子句：
 
-    FROM x JOIN (y JOIN z ON <onclause>) ON <onclause>plain
+    FROM x JOIN (y JOIN z ON <onclause>) ON <onclause>plainplainplain
 
 使用`aliased=True`而不是将其呈现为：
 
-    FROM x JOIN (SELECT * FROM y JOIN z ON <onclause>) AS anon_1 ON <onclause>plainplain
+    FROM x JOIN (SELECT * FROM y JOIN z ON <onclause>) AS anon_1 ON <onclause>plainplainplain
 
 上面的连接也可以通过将`of_type()`与多态结构相结合来更简洁地表达：
 
-    manager_and_engineer = with_polymorphic(plain
+    manager_and_engineer = with_polymorphic(plainplainplain
                                 Employee, [Manager, Engineer],
                                 aliased=True)
 
@@ -484,7 +484,7 @@ targets.
 
 这种继承形式将每个类映射到不同的表。由于具体继承有更多的概念开销，首先我们将说明这些表看起来像 Core 表元数据：
 
-    employees_table = Table(
+    employees_table = Table(plainplain
         'employee', metadata,
         Column('id', Integer, primary_key=True),
         Column('name', String(50)),
@@ -509,7 +509,7 @@ targets.
 使用经典映射，我们可以独立映射我们的三个类，而不需要任何关系；
 `Engineer`和`Manager`从`Employee`继承的事实对经典映射没有任何影响：
 
-    class Employee(object):plain
+    class Employee(object):plainplainplain
         pass
 
     class Manager(Employee):
@@ -524,7 +524,7 @@ targets.
 
 但是，当使用 Declarative 时，Declarative 假定类之间有继承映射，因为它们已经处于继承关系中。因此，为了以声明方式映射我们的三个类，我们必须在`__mapper_args__`中包含[`orm.mapper.concrete`](mapping_api.html#sqlalchemy.orm.mapper.params.concrete "sqlalchemy.orm.mapper")参数：
 
-    class Employee(Base):plainplainplain
+    class Employee(Base):plainplainplainplain
         __tablename__ = 'employee'
 
         id = Column(Integer, primary_key=True)
@@ -818,7 +818,7 @@ configure back references in such a configuration the
 `A(object)` and `B(A)`
 bidirectionally reference `C`:
 
-    ajoin = polymorphic_union({plainplain
+    ajoin = polymorphic_union({plainplainplainplainplain
             'a':a_table,
             'b':b_table
         }, 'type', 'ajoin')

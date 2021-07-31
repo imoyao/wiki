@@ -49,7 +49,7 @@ of Existing Types](#replacing-processors)部分。
  *class*`sqlalchemy.types.`{.descclassname}`TypeDecorator`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.types.TypeDecorator "Permalink to this definition")
 :   基础：`sqlalchemy.sql.expression.SchemaEventTarget`，[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    允许创建向现有类型添加附加功能的类型。plain
+    允许创建向现有类型添加附加功能的类型。plainplain
 
     此方法优先于指定SQLAlchemy内置类型的子类化，因为它确保所有必需的基础类型功能都保留在原位。
 
@@ -474,7 +474,7 @@ is strings that contain non-ASCII characters and are not `u''` objects in Python
 [`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
 which coerces as needed:
 
-    from sqlalchemy.types import TypeDecorator, Unicodeplain
+    from sqlalchemy.types import TypeDecorator, Unicodeplainplainplain
 
     class CoerceUTF8(TypeDecorator):
         """Safely coerce Python bytestrings to Unicode
@@ -492,7 +492,7 @@ which coerces as needed:
 某些数据库连接器（如 SQL
 Server 的数据库连接器）会在小数位数过多的情况下传递 Decimal。这是一个让他们满意的食谱：
 
-    from sqlalchemy.types import TypeDecorator, Numericplainplainplainplainplain
+    from sqlalchemy.types import TypeDecorator, Numericplainplainplainplainplainplainplainplain
     from decimal import Decimal
 
     class SafeNumeric(TypeDecorator):
@@ -517,7 +517,7 @@ Server 的数据库连接器）会在小数位数过多的情况下传递 Decima
 uuid()对象。在其他后端使用 Postgresql，CHAR（32）时使用 PG
 UUID 类型，并以字符串化的十六进制格式存储它们。如果需要，可以修改以在 CHAR（16）中存储二进制文件：
 
-    from sqlalchemy.types import TypeDecorator, CHARplainplain
+    from sqlalchemy.types import TypeDecorator, CHARplainplainplain
     from sqlalchemy.dialects.postgresql import UUID
     import uuid
 
@@ -592,7 +592,7 @@ Tracking](orm_extensions_mutable.html)中的示例。
 
 使用[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")实现绑定/结果级别的大部分类型行为增强。对于需要替换由 SQLAlchemy 在 DBAPI 级别应用的特定处理的罕见场景，可以直接对 SQLAlchemy 类型进行子类化，并且`bind_processor()`或`result_processor()`这样做需要重写`adapt()`方法。此方法是 SQLAlchemy 在执行语句期间生成特定于 DBAPI 的类型行为的机制。覆盖它可以使用自定义类型的副本来代替 DBAPI 特定的类型。下面我们将[`types.TIME`](type_basics.html#sqlalchemy.types.TIME "sqlalchemy.types.TIME")类型进行子类化以具有自定义结果处理行为。`process()`函数将直接从 DBAPI 游标接收`value`：
 
-    class MySpecialTime(TIME):plainplain
+    class MySpecialTime(TIME):plainplainplain
         def __init__(self, special_argument):
             super(MySpecialTime, self).__init__()
             self.special_argument = special_argument
@@ -626,7 +626,7 @@ Types](#replacing-processors)部分所见，SQLAlchemy 允许在将参数发送�
 
 任何[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")，[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")或[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")子类都可以包含[`TypeEngine.bind_expression()`](type_api.html#sqlalchemy.types.TypeEngine.bind_expression "sqlalchemy.types.TypeEngine.bind_expression")和/或[`TypeEngine.column_expression()`](type_api.html#sqlalchemy.types.TypeEngine.column_expression "sqlalchemy.types.TypeEngine.column_expression")，当定义为返回非`None`值时，应返回要注入 SQL 语句的[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")表达式，参数或列表达式。例如，要构建将所有传入数据应用于 Postgis 函数`ST_GeomFromText`的所有传出值和函数`ST_AsText`的`Geometry`类型，我们可以创建我们自己的[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")的子类，它提供这些方法与[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结合使用：
 
-    from sqlalchemy import funcplain
+    from sqlalchemy import funcplainplain
     from sqlalchemy.types import UserDefinedType
 
     class Geometry(UserDefinedType):
@@ -641,7 +641,7 @@ Types](#replacing-processors)部分所见，SQLAlchemy 允许在将参数发送�
 
 我们可以将`Geometry`类型应用到[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")元数据中，并将其用于[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构中：
 
-    geometry = Table('geometry', metadata,plain
+    geometry = Table('geometry', metadata,plainplain
                   Column('geom_id', Integer, primary_key=True),
                   Column('geom_data', Geometry)
                 )
@@ -714,7 +714,7 @@ expression. 例如，如果我们针对表达式的[`label()`](sqlelement.html#s
 
 `pgp_sym_encrypt`和`pgp_sym_decrypt`函数应用于 INSERT 和 SELECT 语句：
 
-    INSERT INTO message (username, message)plain
+    INSERT INTO message (username, message)plainplainplain
       VALUES (%(username)s, pgp_sym_encrypt(%(message)s, %(pgp_sym_encrypt_1)s))
       {'username': 'some user', 'message': 'this is my message',
         'pgp_sym_encrypt_1': 'this is my passphrase'}
@@ -765,7 +765,7 @@ class. 用户定义的[`TypeEngine.Comparator`](type_api.html#sqlalchemy.types.T
 
 用法：
 
-    >>> sometable = Table("sometable", metadata, Column("data", MyInt))plainplainplainplain
+    >>> sometable = Table("sometable", metadata, Column("data", MyInt))plainplainplainplainplain
     >>> print(sometable.c.data + 5)
     sometable.data goofy :data_1
 
@@ -778,7 +778,7 @@ are exposed on an owning SQL expression using a `__getattr__` scheme, which expo
 onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement").
 例如，要将`log()`函数添加到整数：
 
-    from sqlalchemy import Integer, func
+    from sqlalchemy import Integer, funcplainplain
 
     class MyInt(Integer):
         class comparator_factory(Integer.Comparator):
@@ -792,7 +792,7 @@ onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.Colu
 
 一元操作也是可能的。例如，要添加 Postgresql 阶乘运算符的实现，我们将[`UnaryExpression`](sqlelement.html#sqlalchemy.sql.expression.UnaryExpression "sqlalchemy.sql.expression.UnaryExpression")结构与[`custom_op`](sqlelement.html#sqlalchemy.sql.operators.custom_op "sqlalchemy.sql.operators.custom_op")结合起来以产生阶乘表达式：
 
-    from sqlalchemy import Integerplainplainplain
+    from sqlalchemy import Integerplainplainplainplainplain
     from sqlalchemy.sql.expression import UnaryExpression
     from sqlalchemy.sql import operators
 
@@ -805,7 +805,7 @@ onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.Colu
 
 使用以上类型：
 
-    >>> from sqlalchemy.sql import columnplainplainplain
+    >>> from sqlalchemy.sql import columnplainplainplainplainplain
     >>> print(column('x', MyInteger).factorial())
     x !
 
@@ -826,7 +826,7 @@ database types.
 *class* `sqlalchemy.types。`{.descclassname} `UserDefinedType`{.descname} [¶](#sqlalchemy.types.UserDefinedType "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    用户定义类型的基础。
+    用户定义类型的基础。plain
 
     这应该是新类型的基础。请注意，对于大多数情况，[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")可能更合适：
 
