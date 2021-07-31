@@ -238,7 +238,7 @@ relationship `something`.
 
 使用[`KeyedTuple`](orm_query.html#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")类而不是 Python 的`collections.namedtuple()`，因为后者有一个非常复杂的类型创建例程，其基准测试比[`KeyedTuple`](orm_query.html#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")但是，当获取成千上万行时，`collections.namedtuple()`快速超过[`KeyedTuple`](orm_query.html#sqlalchemy.util.KeyedTuple "sqlalchemy.util.KeyedTuple")，随着实例调用的增加，它变得非常慢。该怎么办？两种方法之间进行对冲的新类型。基于哪种情况，新的“轻量级键控元组”要么针对“大小”（返回的行数）和“num”（针对不同查询的数量），要么优于两者，要么滞后于较快的对象。在“甜蜜点”中，我们既创建了大量新类型，又获取了很多行，轻量级对象完全吸引了名为 tuple 和 KeyedTuple：
 
-    -----------------plainplain
+    -----------------plainplainplain
     size=10 num=10000                 # few rows, lots of queries
     namedtuple: 3.60302400589         # namedtuple falls over
     keyedtuple: 0.255059957504        # KeyedTuple very fast
@@ -268,7 +268,7 @@ relationship `something`.
 利用 heapy 测量 Nova 的启动大小的一个工作台说明了在基本导入“nova.db.”的过程中，SQLAlchemy 的对象，相关字典以及弱引用占用了大约 3.7 个 megs 或 46％的差异，即 46％。
 sqlalchemy.models”：
 
-    # reported by heapy, summation of SQLAlchemy objects +plain
+    # reported by heapy, summation of SQLAlchemy objects +plainplain
     # associated dicts + weakref-related objects with core of Nova imported:
 
         Before: total count 26477 total bytes 7975712
@@ -381,7 +381,7 @@ queries to different backends.
 
 `InspectionAttr.info`集合现在可用于从[`Mapper.all_orm_descriptors`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper.all_orm_descriptors "sqlalchemy.orm.mapper.Mapper.all_orm_descriptors")集合中检索的每种对象。这包括[`hybrid_property`](orm_extensions_hybrid.html#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")和[`association_proxy()`](orm_extensions_associationproxy.html#sqlalchemy.ext.associationproxy.association_proxy "sqlalchemy.ext.associationproxy.association_proxy")。但是，由于这些对象是类绑定描述符，因此必须从它们所连接的类中分别访问**，以便获取该属性。**下面是使用[`Mapper.all_orm_descriptors`](orm_mapping_api.html#sqlalchemy.orm.mapper.Mapper.all_orm_descriptors "sqlalchemy.orm.mapper.Mapper.all_orm_descriptors")名称空间的示例：
 
-    class SomeObject(Base):plainplain
+    class SomeObject(Base):plainplainplain
         # ...
 
         @hybrid_property
@@ -778,7 +778,7 @@ duplicates.
 
 这里的警告格式是：
 
-    /path/lib/sqlalchemy/sql/sqltypes.py:186: SAWarning: Unicode type received
+    /path/lib/sqlalchemy/sql/sqltypes.py:186: SAWarning: Unicode type receivedplain
       non-unicode bind param value 'foo_4852'. (this warning may be
       suppressed after 10 occurrences)
 
@@ -885,7 +885,7 @@ NULL”，然后查询会产生不同的结果。因此，通过这种操作，�
 
 针对与此对象作为目标的多对一关系的查询将在绑定参数中使用值 10：
 
-    s.query(B).filter(B.a == a1)plainplain
+    s.query(B).filter(B.a == a1)plainplainplain
 
 生产：
 
@@ -901,7 +901,7 @@ use 10, it would use 7, unless the object were flushed first:
 
 产生（0.9 以及 1.0.1 之前的所有版本）：
 
-    SELECT b.id AS b_id, b.a_id AS b_a_id
+    SELECT b.id AS b_id, b.a_id AS b_a_idplain
     FROM b
     WHERE b.a_id != ? OR b.a_id IS NULL
     (7,)
@@ -1085,7 +1085,7 @@ transaction is committed.
 
 该查询会重复删除多余的`A.bs`，因为它试图支持如下所示的情况：
 
-    s.query(A).join(A.bs).\plainplain
+    s.query(A).join(A.bs).\plainplainplain
         filter(B.foo == 'bar').\
         reset_joinpoint().join(A.bs, B.cs).filter(C.bar == 'bat')
 
@@ -1100,7 +1100,7 @@ That is, the `A.bs` is part of a “path”.
 
 在 0.9 中，这将呈现如下：
 
-    SELECT a.id AS a_idplain
+    SELECT a.id AS a_idplainplain
     FROM a JOIN b ON b.a_id = a.id JOIN b AS b_1 ON b_1.a_id = a.id
 
 这是有问题的，因为别名是隐含的，并且在不同的 ON 子句的情况下会导致不可预知的结果。
@@ -1356,7 +1356,7 @@ or [`Query.from_self()`](orm_query.html#sqlalchemy.orm.query.Query.from_self "sq
 
 呈现：
 
-    SELECT count(*) AS count_1plain
+    SELECT count(*) AS count_1plainplain
     FROM (SELECT widgets.id AS widgets_id
     FROM widgets
     WHERE widgets.type IN (?)) AS anon_1
@@ -1390,7 +1390,7 @@ or [`Query.from_self()`](orm_query.html#sqlalchemy.orm.query.Query.from_self "sq
 
 SQL 输出：
 
-    SELECT related.id AS related_idplain
+    SELECT related.id AS related_idplainplain
     FROM related JOIN widget ON related.id = widget.related_id AND widget.type IN (:type_1)
 
 Above, because we joined to a subclass `FooWidget`,
@@ -1442,7 +1442,7 @@ string**, such as:
 and we are **not talking about string arguments**, that is, the normal
 behavior of passing string values that become parameterized:
 
-    # This is a normal Core expression with a string argument -
+    # This is a normal Core expression with a string argument -plain
     # we aren't talking about this!!
     stmt = select([sometable]).where(sometable.c.somecolumn == 'value')
 
@@ -1479,7 +1479,7 @@ Warnings Filter](https://docs.python.org/2/library/warnings.html)：
 
 鉴于上述警告，我们的声明工作得很好，但为了摆脱警告，我们将重写我们的声明如下：
 
-    from sqlalchemy import select, textplain
+    from sqlalchemy import select, textplainplain
     stmt = select([
             text("a"),
             text("b")
@@ -1505,7 +1505,7 @@ and [`Query.having()`](orm_query.html#sqlalchemy.orm.query.Query.having "sqlalch
 有一种情况使用字符串具有特殊含义，并且作为此更改的一部分，我们已增强其功能。当我们有一个引用某个列名或命名标签的[`select()`](core_selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")或[`Query`](orm_query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")时，我们可能想要 GROUP
 BY 和/或 ORDER BY 已知列或标签：
 
-    stmt = select([plain
+    stmt = select([plainplain
         user.c.name,
         func.count(user.c.id).label("id_count")
     ]).group_by("name").order_by("id_count")
@@ -1517,19 +1517,19 @@ above statement would produce as we expect, without warnings (though
 note that the `"name"` expression has been resolved
 to `users.name`! ）：
 
-    SELECT users.name, count(users.id) AS id_countplain
+    SELECT users.name, count(users.id) AS id_countplainplain
     FROM users GROUP BY users.name ORDER BY id_count
 
 但是，如果我们引用无法找到的名称，则我们再次收到警告，如下所示：
 
-    stmt = select([plain
+    stmt = select([plainplainplainplain
             user.c.name,
             func.count(user.c.id).label("id_count")
         ]).order_by("some_label")
 
 输出符合我们的说法，但它又一次警告我们：
 
-    SAWarning: Can't resolve label reference 'some_label'; converting toplainplainplain
+    SAWarning: Can't resolve label reference 'some_label'; converting toplainplainplainplain
     text() (this warning may be suppressed after 10 occurrences)
 
     SELECT users.name, count(users.id) AS id_count
@@ -1723,7 +1723,7 @@ object will be created *and* dropped corresponding to
 [`Table.create()`](core_metadata.html#sqlalchemy.schema.Table.create "sqlalchemy.schema.Table.create")
 and [`Table.drop()`](core_metadata.html#sqlalchemy.schema.Table.drop "sqlalchemy.schema.Table.drop"):
 
-    table = Table('sometable', metadata,plain
+    table = Table('sometable', metadata,plainplain
         Column('some_enum', ENUM('a', 'b', 'c', name='myenum'))
     )
 
@@ -1787,7 +1787,7 @@ Options](dialects_postgresql.html#postgresql-table-options)
 
 [`PGInspector.get_enums()`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.base.PGInspector.get_enums "sqlalchemy.dialects.postgresql.base.PGInspector.get_enums")
 
-### Postgresql Dialect反映了物化视图，外部表[¶](#postgresql-dialect-reflects-materialized-views-foreign-tables "Permalink to this headline")
+### Postgresql Dialect 反映了物化视图，外部表[¶](#postgresql-dialect-reflects-materialized-views-foreign-tables "Permalink to this headline")
 
 变化如下：
 
@@ -1807,7 +1807,7 @@ Options](dialects_postgresql.html#postgresql-table-options)
 
 这是一个简单的修复，现在可以使用临时表的“有表”，以便可以继续执行以下代码：
 
-    from sqlalchemy import *plain
+    from sqlalchemy import *plainplain
 
     metadata = MetaData()
     user_tmp = Table(
@@ -1897,7 +1897,7 @@ NULL 默认值。但是，MySQL
 
 [＃3155 T0\>](http://www.sqlalchemy.org/trac/ticket/3155)
 
-### MySQL SET Type大写，支持空集，unicode，空值处理[¶](#mysql-set-type-overhauled-to-support-empty-sets-unicode-blank-value-handling "Permalink to this headline")
+### MySQL SET Type 大写，支持空集，unicode，空值处理[¶](#mysql-set-type-overhauled-to-support-empty-sets-unicode-blank-value-handling "Permalink to this headline")
 
 [`mysql.SET`](dialects_mysql.html#sqlalchemy.dialects.mysql.SET "sqlalchemy.dialects.mysql.SET")类型历史上不包括分别处理空白集和空值的系统；因为不同的驱动程序在处理空字符串和空字符集表示方面有不同的行为，所以 SET 类型只试图在这些行为之间进行对冲，选择将空集作为`set([''])`这里的部分原因是，否则实际上不可能在 MySQL
 SET 中存储一个空字符串，因为驱动程序给我们返回的字符串无法区分`set([''])`和`set()`用户确定是否`set([''])`实际上表示“空集”。

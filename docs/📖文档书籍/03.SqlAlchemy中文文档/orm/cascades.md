@@ -17,7 +17,7 @@ tags:
 
 在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")中使用[`cascade`](relationship_api.html#sqlalchemy.orm.relationship.params.cascade "sqlalchemy.orm.relationship")选项配置级联行为：
 
-    class Order(Base):plainplainplainplainplain
+    class Order(Base):plainplainplainplainplainplainplainplain
         __tablename__ = 'order'
 
         items = relationship("Item", cascade="all, delete-orphan")
@@ -25,7 +25,7 @@ tags:
 
 要设置 backref 上的级联，同一个标志可以与[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")函数一起使用，该函数最终将其参数返回给[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")：
 
-    class Item(Base):plainplainplainplainplainplainplainplain
+    class Item(Base):plainplainplainplainplainplainplainplainplainplain
         __tablename__ = 'item'
 
         order = relationship("Order",
@@ -56,14 +56,14 @@ all the objects associated with it via this [`relationship()`](relationship_api.
 should also be added to that same [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session").
 假设我们有一个包含两个相关对象`address1`，`address2`的对象`user1`：
 
-    >>> user1 = User()plainplainplainplain
+    >>> user1 = User()plainplainplainplainplainplain
     >>> address1, address2 = Address(), Address()
     >>> user1.addresses = [address1, address2]
 
 If we add `user1` to a [`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session"),
 it will also add `address1`, `address2` implicitly:
 
-    >>> sess = Session()plainplainplainplainplainplainplain
+    >>> sess = Session()plainplainplainplainplainplainplainplainplain
     >>> sess.add(user1)
     >>> address1 in sess
     True
@@ -85,7 +85,7 @@ or in some cases a scalar attribute may also be pulled into the
 of a parent object; this is so that the flush process may handle that
 related object appropriately. 这种情况通常只能在从一个[`Session`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")中删除一个对象并添加到另一个时才会出现：
 
-    >>> user1 = sess1.query(User).filter_by(id=1).first()plainplainplainplainplainplainplainplainplain
+    >>> user1 = sess1.query(User).filter_by(id=1).first()plainplainplainplainplainplainplainplainplainplainplainplain
     >>> address1 = user1.addresses[0]
     >>> sess1.close()   # user1, address1 no longer associated with sess1
     >>> user1.addresses.remove(address1)  # address1 no longer associated with user1
@@ -119,12 +119,12 @@ Backrefs](#backref-cascade).
 
 如果使用上述映射，我们有一个`User`对象和两个相关的`Address`对象：
 
-    >>> user1 = sess.query(User).filter_by(id=1).first()plainplainplainplainplain
+    >>> user1 = sess.query(User).filter_by(id=1).first()plainplainplainplainplainplain
     >>> address1, address2 = user1.addresses
 
 如果我们将`user1`标记为删除，在刷新操作继续之后，`address1`和`address2`也将被删除：
 
-    >>> sess.delete(user1)plainplainplainplain
+    >>> sess.delete(user1)plainplainplainplainplainplain
     >>> sess.commit()
     DELETE FROM address WHERE address.id = ?
     ((1,), (2,))
@@ -143,7 +143,7 @@ default behavior is to instead de-associate `address1` and `address2` from `user
 
 在删除父`User`对象时，`address`中的行不会被删除，而是取消关联：
 
-    >>> sess.delete(user1)plainplainplain
+    >>> sess.delete(user1)plainplainplainplainplain
     >>> sess.commit()
     UPDATE address SET user_id=? WHERE address.id = ?
     (None, 1)
@@ -241,7 +241,7 @@ the operation should be propagated down to referred objects.
 
 缺省情况下，[save-update](#cascade-save-update)级联发生在从 backrefs 发出的属性更改事件上。这可能是一个令人困惑的陈述，通过示范更容易描述；这意味着，给定一个这样的映射：
 
-    mapper(Order, order_table, properties={plainplain
+    mapper(Order, order_table, properties={plainplainplain
         'items' : relationship(Item, backref='order')
     })
 
@@ -250,7 +250,7 @@ assigned to the `order` attribute of an
 `Item`, the backref appends the `Item` to the `items` collection of that
 `Order`, resulting in the `save-update` cascade taking place:
 
-    >>> o1 = Order()plainplainplainplainplainplainplainplain
+    >>> o1 = Order()plainplainplainplainplainplainplainplainplainplain
     >>> session.add(o1)
     >>> o1 in session
     True

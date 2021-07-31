@@ -32,7 +32,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 `sqlalchemy.ext.instrumentation。`{.descclassname} `INSTRUMENTATION_MANAGER`{.descname} *='\_\_sa\_instrumentation\_manager \_\_'* [¶](#sqlalchemy.ext.instrumentation.INSTRUMENTATION_MANAGER "Permalink to this definition")
 :   属性，在存在于映射类上时选择自定义检测。
 
-    允许类指定一个稍微或非常不同的技术来跟踪对映射的属性和集合所做的更改。plainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    允许类指定一个稍微或非常不同的技术来跟踪对映射的属性和集合所做的更改。plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
     在给定的对象继承层次结构中只允许使用一个工具实现。
 
@@ -51,7 +51,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  *class*`sqlalchemy.ext.instrumentation.`{.descclassname}`InstrumentationManager`{.descname}(*class\_*)[¶](#sqlalchemy.ext.instrumentation.InstrumentationManager "Permalink to this definition")
 :   用户定义的类工具扩展。
 
-    [`InstrumentationManager`](#sqlalchemy.ext.instrumentation.InstrumentationManager "sqlalchemy.ext.instrumentation.InstrumentationManager")plainplainplainplainplainplainplainplainplainplainplain
+    [`InstrumentationManager`](#sqlalchemy.ext.instrumentation.InstrumentationManager "sqlalchemy.ext.instrumentation.InstrumentationManager")plainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
     can be subclassed in order to change how class instrumentation
     proceeds.
     此类存在用于与其他对象管理框架集成的目的，这些对象管理框架将完全修改ORM的检测方法，并且不打算用于常规用法。要拦截类工具事件，请参阅[`InstrumentationEvents`](events.html#sqlalchemy.orm.events.InstrumentationEvents "sqlalchemy.orm.events.InstrumentationEvents")。
@@ -113,13 +113,13 @@ API 参考[¶](#api-reference "Permalink to this headline")
 `sqlalchemy.ext.instrumentation。`{.descclassname} `instrumentation_finders`{.descname} *= [＆lt；函数 find\_native\_user\_instrumentation\_hook at 0x7f43​​0c541230＆gt；]* [¶](#sqlalchemy.ext.instrumentation.instrumentation_finders "Permalink to this definition")
 :   可扩展的可调用序列，返回仪器实现
 
-    当一个类被注册时，每个可调用对象将被传递一个类对象。如果返回None，则会查询序列中的下一个查找器。否则，返回必须是符合sqlalchemy.ext.instrumentation.INSTRUMENTATION\_MANAGER相同准则的检测工厂。plainplainplain
+    当一个类被注册时，每个可调用对象将被传递一个类对象。如果返回None，则会查询序列中的下一个查找器。否则，返回必须是符合sqlalchemy.ext.instrumentation.INSTRUMENTATION\_MANAGER相同准则的检测工厂。plainplainplainplainplainplain
 
     默认情况下，唯一的查找程序是find\_native\_user\_instrumentation\_hook，它搜索INSTRUMENTATION\_MANAGER。如果所有查找器都返回None，则使用标准的ClassManager工具。
 
 *class* `sqlalchemy.ext.instrumentation。`{.descclassname} `ExtendedInstrumentationRegistry`{.descname} [¶](#sqlalchemy.ext.instrumentation.ExtendedInstrumentationRegistry "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.instrumentation.InstrumentationFactory`](#sqlalchemy.orm.instrumentation.InstrumentationFactory "sqlalchemy.orm.instrumentation.InstrumentationFactory")
 
-    扩展[`InstrumentationFactory`](#sqlalchemy.orm.instrumentation.InstrumentationFactory "sqlalchemy.orm.instrumentation.InstrumentationFactory")以增加簿记，以适应多种类别的经理。plainplainplainplainplainplainplainplainplain
+    扩展[`InstrumentationFactory`](#sqlalchemy.orm.instrumentation.InstrumentationFactory "sqlalchemy.orm.instrumentation.InstrumentationFactory")以增加簿记，以适应多种类别的经理。plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 

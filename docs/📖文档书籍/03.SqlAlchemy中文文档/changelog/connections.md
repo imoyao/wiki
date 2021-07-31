@@ -78,7 +78,7 @@ SQLAlchemy 目前假定 DBAPI 连接处于“非自动提交”模式 -
 
 连接池的连接返回行为的行为可以使用`reset_on_return`进行配置：
 
-    from sqlalchemy import create_engineplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    from sqlalchemy import create_engineplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
     from sqlalchemy.pool import QueuePool
 
     engine = create_engine('mysql://scott:tiger@localhost/myisam_database', pool=QueuePool(reset_on_return=False))
@@ -87,7 +87,7 @@ SQLAlchemy 目前假定 DBAPI 连接处于“非自动提交”模式 -
 
 除了`True`，`False`以外，`reset_on_return`还接受`commit`，`rollback` `None`设置为`commit`会导致 COMMIT，因为任何连接都会返回到池：
 
-    engine = create_engine('mssql://scott:tiger@mydsn', pool=QueuePool(reset_on_return='commit'))plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    engine = create_engine('mssql://scott:tiger@mydsn', pool=QueuePool(reset_on_return='commit'))plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 I am using multiple connections with a SQLite database (typically to test transaction operation), and my test program is not working![¶](#i-am-using-multiple-connections-with-a-sqlite-database-typically-to-test-transaction-operation-and-my-test-program-is-not-working "Permalink to this headline")
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -168,7 +168,7 @@ SQLAlchemy [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy
                         (connection_record.info['pid'], pid)
                     )
 ```
-    这些事件一旦创建就会应用于[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")：plainplainplainplainplainplainplainplainplainplainplain
+    这些事件一旦创建就会应用于[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")：plainplainplainplainplainplainplainplainplainplainplainplain
 ```plain
         engine = create_engine("...")
 

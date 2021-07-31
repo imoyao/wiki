@@ -41,7 +41,7 @@ Firebird 方言检测这些版本并相应地调整其 SQL 表示。然而，对
 Firebird 积极锁定表格。出于这个原因，DROP
 TABLE 可能会挂起，直到其他事务被释放。SQLAlchemy 尽可能快地释放事务。挂起交易的最常见原因是未完全消费的结果集，即：
 
-    result = engine.execute("select * from table")plainplainplainplainplainplainplainplainplainplainplainplainplain
+    result = engine.execute("select * from table")plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
     row = result.fetchone()
     return
 
@@ -54,7 +54,7 @@ Firebird
 2.0 支持从插入返回结果集，并且 2.1 扩展了它以删除和更新。这通常由 SQLAlchemy
 `returning()`方法公开，例如：
 
-    # INSERT..RETURNINGplainplainplainplainplainplain
+    # INSERT..RETURNINGplainplainplainplainplainplainplainplainplain
     result = table.insert().returning(table.c.col1, table.c.col2).\
                    values(name='foo')
     print result.fetchall()
@@ -85,7 +85,7 @@ fdb 的文档和下载信息（如果适用）可在以下网址获得：[http:/
 
 连接字符串：
 
-    firebird+fdb://user:password@host:port/path/to/db[?key=value&key=value...]plainplainplainplainplainplainplainplainplainplainplainplain
+    firebird+fdb://user:password@host:port/path/to/db[?key=value&key=value...]plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 ### 参数[¶ T0\>](#arguments "Permalink to this headline")
 
@@ -128,7 +128,7 @@ kinterbasdb [¶ T0\>](#module-sqlalchemy.dialects.firebird.kinterbasdb "Permalin
 
 连接字符串：
 
-    firebird+kinterbasdb://user:password@host:port/path/to/db[?key=value&key=value...]plainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    firebird+kinterbasdb://user:password@host:port/path/to/db[?key=value&key=value...]plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 ### 参数[¶ T0\>](#id1 "Permalink to this headline")
 

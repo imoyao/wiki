@@ -72,7 +72,7 @@ URL，它将使用 psycopg2：
 
 方言的进口结构发生了变化。每种方言现在通过`sqlalchemy.dialects.<name>`导出其基本“方言”类以及该方言支持的全套 SQL 类型。例如，要导入一组 PG 类型：
 
-    from sqlalchemy.dialects.postgresql import INTEGER, BIGINT, SMALLINT,\plainplainplainplainplainplain
+    from sqlalchemy.dialects.postgresql import INTEGER, BIGINT, SMALLINT,\plainplainplainplainplainplainplain
                                                 VARCHAR, MACADDR, DATE, BYTEA
 
 在上面，`INTEGER`实际上是`sqlalchemy.types`中普通的`INTEGER`类型，但是 PG 方言使它可以以与那些类型相同的方式是特定于 PG 的，如`BYTEA`和`MACADDR`。
@@ -97,7 +97,7 @@ URL，它将使用 psycopg2：
 
 但是如果我们这样说会发生什么？
 
-    >>> if column('foo') == 5:plainplainplainplainplain
+    >>> if column('foo') == 5:plainplainplainplainplainplain
     ...     print("yes")
     ...
 
@@ -114,7 +114,7 @@ URL，它将使用 psycopg2：
 
 这意味着代码如下：
 
-    if expression:plainplain
+    if expression:plainplainplainplain
         print("the expression is:", expression)
 
 如果`expression`是二进制子句，则不会评估。由于不应该使用上述模式，因此如果在布尔上下文中调用，基`ClauseElement`现在会引发异常：
@@ -142,14 +142,14 @@ URL，它将使用 psycopg2：
 
 SQLAlchemy 中的“executemany”对应于对`execute()`的调用，传递一组绑定参数集：
 
-    connection.execute(table.insert(), {'data':'row1'}, {'data':'row2'}, {'data':'row3'})plainplain
+    connection.execute(table.insert(), {'data':'row1'}, {'data':'row2'}, {'data':'row3'})plainplainplain
 
 当`Connection`对象发送给定的用于编译的`insert()`结构时，它将传递给第一组绑定的键名传递给编译器，以确定该语句的 VALUES 子句。熟悉这个构造的用户会知道其余字典中存在的其他键没有任何影响。What’s
 different now is that all subsequent dictionaries need to include at
 least *every* key that is present in the first dictionary.
 这意味着这样的调用不再有效：
 
-    connection.execute(table.insert(),plainplainplainplainplain
+    connection.execute(table.insert(),plainplainplainplainplainplainplain
                             {'timestamp':today, 'data':'row1'},
                             {'timestamp':today, 'data':'row2'},
                             {'data':'row3'})
@@ -214,7 +214,7 @@ extension versus not.
 
 `sqlalchemy.schema`包得到了一些长期需要的关注。最明显的变化是新扩展的 DDL 系统。在 SQLAlchemy 中，从版本 0.5 开始可以创建自定义的 DDL 字符串，并将它们与表或元数据对象关联：
 
-    from sqlalchemy.schema import DDLplain
+    from sqlalchemy.schema import DDLplainplain
 
     DDL('CREATE TRIGGER users_trigger ...').execute_at('after-create', metadata)
 
@@ -227,7 +227,7 @@ CONSTRAINT 等。:
 
 此外，所有的 DDL 对象现在都是普通的`ClauseElement`对象，就像任何其他 SQLAlchemy 表达式对象一样：
 
-    from sqlalchemy.schema import CreateTableplainplain
+    from sqlalchemy.schema import CreateTableplainplainplain
 
     create = CreateTable(mytable)
 
@@ -239,7 +239,7 @@ CONSTRAINT 等。:
 
 并使用`sqlalchemy.ext.compiler`扩展名，您可以创建自己的：
 
-    from sqlalchemy.schema import DDLElementplainplainplain
+    from sqlalchemy.schema import DDLElementplainplainplainplain
     from sqlalchemy.ext.compiler import compiles
 
     class AlterColumn(DDLElement):
@@ -315,7 +315,7 @@ the parent connection. 池日志记录发送到`log.info()`和`log.debug()` - �
 
 要使用检查员：
 
-    from sqlalchemy.engine.reflection import Inspectorplainplainplainplain
+    from sqlalchemy.engine.reflection import Inspectorplainplainplainplainplain
     insp = Inspector.from_engine(my_engine)
 
     print(insp.get_schema_names())
@@ -335,7 +335,7 @@ RETURNING 子句。目前不支持任何其他后端。
 
 以与`select()`结构相同的方式给出列表达式的列表，这些列的值将作为常规结果集返回：
 
-    result = connection.execute(plainplainplainplain
+    result = connection.execute(plainplainplainplainplain
                 table.insert().values(data='some data').returning(table.c.id, table.c.timestamp)
             )
     row = result.first()
@@ -497,14 +497,14 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
 在 mapper 级别：
 
-    mapper(Child, child)plainplainplainplainplain
+    mapper(Child, child)plainplainplainplainplainplainplainplainplain
     mapper(Parent, parent, properties={
         'child':relationship(Child, lazy='joined', innerjoin=True)
     })
 
 在查询时间级别：
 
-    session.query(Parent).options(joinedload(Parent.child, innerjoin=True)).all()plainplain
+    session.query(Parent).options(joinedload(Parent.child, innerjoin=True)).all()plainplainplain
 
 `relationship()`级别的`innerjoin=True`标志也将对任何不覆盖该值的`joinedload()`选项生效。
 
@@ -524,7 +524,7 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
     例如，在 0.5 这个查询中：
 
-        session.query(Address).options(eagerload(Address.user)).limit(10)plainplainplainplain
+        session.query(Address).options(eagerload(Address.user)).limit(10)plainplainplainplainplain
 
     会产生如下的 SQL：
 
@@ -536,7 +536,7 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
     在 0.6 中，该逻辑更加敏感，并且可以检测所有渴望的加载器是否表示多对一，在这种情况下，渴望加入不会影响 rowcount：
 
-        SELECT * FROM addresses LEFT OUTER JOIN users AS users_1 ON users_1.id = addresses.user_id LIMIT 10plainplainplainplain
+        SELECT * FROM addresses LEFT OUTER JOIN users AS users_1 ON users_1.id = addresses.user_id LIMIT 10plainplainplainplainplainplain
 
 ### 加入表继承的可变主键[¶](#mutable-primary-keys-with-joined-table-inheritance "Permalink to this headline")
 

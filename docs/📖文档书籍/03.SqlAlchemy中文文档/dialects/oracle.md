@@ -41,14 +41,14 @@ the Oracle dialect, *a sequence must always be explicitly specified to
 enable autoincrement*.
 这与假定使用具有自动增量功能的数据库的大多数文档示例不同。要指定序列，请使用传递给 Column 构造的 sqlalchemy.schema.Sequence 对象：
 
-    t = Table('mytable', metadata,plainplainplainplainplain
+    t = Table('mytable', metadata,plainplainplainplainplainplainplain
           Column('id', Integer, Sequence('id_seq'), primary_key=True),
           Column(...), ...
     )
 
 当使用表反射时，这一步也是必需的，即 autoload = True：
 
-    t = Table('mytable', metadata,plainplain
+    t = Table('mytable', metadata,plainplainplain
           Column('id', Integer, Sequence('id_seq'), primary_key=True),
           autoload=True
     )
@@ -89,7 +89,7 @@ Support](#cx-oracle-returning)）。
 
 SQLAlchemy 的“隐式返回”功能通常在 Oracle 后端启用，它在 INSERT 中使用 RETURNING，有时使用 UPDATE 语句来获取新生成的主键值和其他 SQL 默认值和表达式。默认情况下，“隐式返回”通常只会获取嵌入到 INSERT 中的单个`nextval(some_seq)`表达式的值，以便在 INSERT 语句中递增序列并同时返回值。要全面禁用此功能，请将`implicit_returning=False`指定为[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")：
 
-    engine = create_engine("oracle://scott:tiger@dsn",plainplain
+    engine = create_engine("oracle://scott:tiger@dsn",plainplainplain
                            implicit_returning=False)
 
 隐式返回也可作为表选项在逐个表的基础上禁用：
@@ -170,7 +170,7 @@ CREATE TABLE 短语通过与[`Table`](core_metadata.html#sqlalchemy.schema.Table
 
 -   `ON COMMIT`：
 
-        Table(plainplainplain
+        Table(plainplainplainplainplain
             "some_table", metadata, ...,
             prefixes=['GLOBAL TEMPORARY'], oracle_on_commit='PRESERVE ROWS')
 
@@ -178,7 +178,7 @@ CREATE TABLE 短语通过与[`Table`](core_metadata.html#sqlalchemy.schema.Table
 
 -   `COMPRESS`
 
-         Table('mytable', metadata, Column('data', String(32)),plain
+         Table('mytable', metadata, Column('data', String(32)),plainplainplain
              oracle_compress=True)
 
          Table('mytable', metadata, Column('data', String(32)),
@@ -206,7 +206,7 @@ Oracle 特定索引选项[¶](#oracle-specific-index-options "Permalink to this 
 
 对于包含大量重复值的索引，Oracle 具有更高效的存储模式。使用`oracle_compress`参数打开密钥压缩：
 
-    Index('my_index', my_table.c.data, oracle_compress=True)plainplain
+    Index('my_index', my_table.c.data, oracle_compress=True)plainplainplain
 
     Index('my_index', my_table.c.data1, my_table.c.data2, unique=True,
            oracle_compress=1)
@@ -220,7 +220,7 @@ Oracle 数据类型[¶](#oracle-data-types "Permalink to this headline")
 
 与所有 SQLAlchemy 方言一样，所有已知可用于 Oracle 的 UPPERCASE 类型都可以从顶级方言导入，无论它们源自[`sqlalchemy.types`](core_type_basics.html#module-sqlalchemy.types "sqlalchemy.types")还是来自当地方言：
 
-    from sqlalchemy.dialects.oracle import \plainplainplainplainplainplain
+    from sqlalchemy.dialects.oracle import \plainplainplainplainplainplainplain
                 BFILE, BLOB, CHAR, CLOB, DATE, \
                 DOUBLE_PRECISION, FLOAT, INTERVAL, LONG, NCLOB, \
                 NUMBER, NVARCHAR, NVARCHAR2, RAW, TIMESTAMP, VARCHAR, \
@@ -231,7 +231,7 @@ Oracle 数据类型[¶](#oracle-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.oracle.`{.descclassname}`BFILE`{.descname}(*length=None*)[¶](#sqlalchemy.dialects.oracle.BFILE "Permalink to this definition")
 :   基础：[`sqlalchemy.types.LargeBinary`](core_type_basics.html#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
 
-    ` __初始化__  T0> （ T1> 长度=无 T2> ） T3> ¶ T4>`{.descname}plainplainplain
+    ` __初始化__  T0> （ T1> 长度=无 T2> ） T3> ¶ T4>`{.descname}plainplainplainplain
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.LargeBinary.__init__ "sqlalchemy.types.LargeBinary.__init__")
         *method of* [`LargeBinary`](core_type_basics.html#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
 
@@ -247,7 +247,7 @@ Oracle 数据类型[¶](#oracle-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.oracle。`{.descclassname} `DATE`{.descname} （ *timezone = False* ） T5\> [¶ T6\>](#sqlalchemy.dialects.oracle.DATE "Permalink to this definition")
 :   Bases: [`sqlalchemy.types.DateTime`](core_type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")
 
-    提供oracle DATE类型。
+    提供oracle DATE类型。plainplain
 
     这种类型没有特殊的Python行为，除了它的子类[`types.DateTime`](core_type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")；这是为了适应Oracle
     `DATE`类型支持时间值的事实。
@@ -273,7 +273,7 @@ Oracle 数据类型[¶](#oracle-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.oracle。`{.descclassname} `INTERVAL`{.descname} （ *day\_precision =无*，*second\_precision =无 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.oracle.INTERVAL "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-     `__init__`{.descname}(*day\_precision=None*, *second\_precision=None*)[¶](#sqlalchemy.dialects.oracle.INTERVAL.__init__ "Permalink to this definition")plainplainplainplain
+     `__init__`{.descname}(*day\_precision=None*, *second\_precision=None*)[¶](#sqlalchemy.dialects.oracle.INTERVAL.__init__ "Permalink to this definition")plainplainplainplainplain
     :   构建一个INTERVAL。
 
         请注意，目前仅支持DAY TO
@@ -292,7 +292,7 @@ Oracle 数据类型[¶](#oracle-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.oracle.`{.descclassname}`NCLOB`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.NCLOB "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")
 
-     `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.NCLOB.__init__ "Permalink to this definition")plainplainplainplain
+     `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.NCLOB.__init__ "Permalink to this definition")plainplainplainplainplain
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.String.__init__ "sqlalchemy.types.String.__init__")
         *method of* [`String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
 
@@ -352,7 +352,7 @@ Oracle 数据类型[¶](#oracle-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.oracle.`{.descclassname}`LONG`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.LONG "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")
 
-     `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.LONG.__init__ "Permalink to this definition")plainplainplainplain
+     `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.oracle.LONG.__init__ "Permalink to this definition")plainplainplainplainplainplain
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.String.__init__ "sqlalchemy.types.String.__init__")
         *method of* [`String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
 
@@ -503,7 +503,7 @@ cx\_Oracle SQLAlchemy 方言提供了两种不同的选项，用于在 Python
 或者，如果不使用 cx\_Oracle 的本地处理程序，则可以使用[`text()`](core_sqlelement.html#sqlalchemy.sql.expression.text "sqlalchemy.sql.expression.text")功能来运行纯字符串 SQL 语句并以 Python
 2 unicode 的形式获取`VARCHAR`
 
-    from sqlalchemy import text, Unicodeplainplainplainplainplain
+    from sqlalchemy import text, Unicodeplainplainplainplainplainplain
     result = conn.execute(
         text("select username from user").columns(username=Unicode))
 
@@ -562,7 +562,7 @@ SQLAlchemy 方言经历了很多步骤以确保十进制数字的发送和接收
 
 由于处理程序首先在所有情况下都强制`Decimal`，该功能会显着影响性能。如果不需要精度数字，则可以通过将标志`coerce_to_decimal=False`传递给[`create_engine()`](core_engines.html#sqlalchemy.create_engine "sqlalchemy.create_engine")来禁用十进制处理：
 
-    engine = create_engine("oracle+cx_oracle://dsn", coerce_to_decimal=False)plainplainplain
+    engine = create_engine("oracle+cx_oracle://dsn", coerce_to_decimal=False)plainplainplainplain
 
 New in version 0.7.6: Add the `coerce_to_decimal`
 flag.
@@ -604,4 +604,4 @@ zxjdbc [¶ T0\>](#module-sqlalchemy.dialects.oracle.zxjdbc "Permalink to this he
 
 连接字符串：
 
-    oracle+zxjdbc://user:pass@host/dbnameplainplainplainplain
+    oracle+zxjdbc://user:pass@host/dbnameplainplainplainplainplain

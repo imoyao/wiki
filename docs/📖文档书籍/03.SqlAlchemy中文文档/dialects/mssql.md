@@ -105,7 +105,7 @@ Server 上，它重新用于指定有关标识列的行为，包括对“开始�
 
         INSERT 将如下所示：
 
-            INSERT INTO t (x) VALUES (?); select scope_identity()plainplainplain
+            INSERT INTO t (x) VALUES (?); select scope_identity()plainplainplainplain
 
     -   Other dialects such as pymssql will call upon
         `SELECT scope_identity() AS lastrowid`
@@ -123,7 +123,7 @@ prior to the insert statement proceeding, and
 `SET IDENTITY_INSERT OFF` subsequent to the
 execution. 给出这个例子：
 
-    m = MetaData()plain
+    m = MetaData()plainplain
     t = Table('t', m, Column('id', Integer, primary_key=True),
                     Column('x', Integer))
     m.create_all(engine)
@@ -196,7 +196,7 @@ argument as passed to [`Connection.execution_options()`](core_connections.html#s
 
 要设置使用每个连接执行选项：
 
-    connection = engine.connect()plain
+    connection = engine.connect()plainplain
     connection = connection.execution_options(
         isolation_level="READ COMMITTED"
     )
@@ -273,7 +273,7 @@ Server 在未来的版本中。SQLAlchemy 通常将这些类型与[`UnicodeText`
 
 这种传统的渲染模式会假设“customer\_schema.account”不会被 SQL 语句的所有部分所接受，如下所示：
 
-    >>> eng = create_engine("mssql+pymssql://mydsn", legacy_schema_aliasing=True)plainplain
+    >>> eng = create_engine("mssql+pymssql://mydsn", legacy_schema_aliasing=True)plainplainplain
     >>> print(account_table.select().compile(eng))
     SELECT account_1.id, account_1.info
     FROM customer_schema.account AS account_1
@@ -289,7 +289,7 @@ MSSQL 方言通过`mssql_clustered`选项支持聚簇索引（和主键）。此
 
 要生成聚簇索引：
 
-    Index("my_index", table.c.x, mssql_clustered=True)plain
+    Index("my_index", table.c.x, mssql_clustered=True)plainplain
 
 它将索引呈现为`CREATE CLUSTERED INDEX my_index ON  table （x）`。
 
@@ -316,7 +316,7 @@ MSSQL 方言通过`mssql_clustered`选项支持聚簇索引（和主键）。此
 
 要显式请求非集群主键（例如，当需要单独的集群索引时），请使用：
 
-    Table('my_table', metadata,plainplainplain
+    Table('my_table', metadata,plainplainplainplain
           Column('x', ...),
           Column('y', ...),
           PrimaryKeyConstraint("x", "y", mssql_clustered=False))
@@ -338,7 +338,7 @@ MSSQL 特定的索引选项[¶](#mssql-specific-index-options "Permalink to this
 
 `mssql_include`选项为给定的字符串名称呈现INCLUDE（colname）：
 
-    Index("my_index", table.c.x, mssql_include=['y'])plain
+    Index("my_index", table.c.x, mssql_include=['y'])plainplainplainplain
 
 将使该指数为`创建 T1>  INDEX  T2>  my_index  T3>  ON  T4> 表 T5> （x） INCLUDE （y）`
 
@@ -373,7 +373,7 @@ SQLAlchemy 默认使用 OUTPUT
 INSERTED 通过 IDENTITY 列或其他服务器端默认值获取新生成的主键值。MS-SQL 不允许在具有触发器的表上使用 OUTPUT
 INSERTED。要禁用每个表的 OUTPUT INSERTED 用法，请为每个[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")指定`implicit_returning=False`
 
-    Table('mytable', metadata,plainplainplainplain
+    Table('mytable', metadata,plainplainplainplainplain
         Column('id', Integer, primary_key=True),
         # ...,
         implicit_returning=False
@@ -397,7 +397,7 @@ Server 驱动程序具有非常有限的能力来返回从 UPDATE 或 DELETE 语
 INSERTED 时，更新的 rowcount 不可用。这会在使用服务器端版本控制方案时影响 SQLAlchemy
 ORM 的版本控制功能。在使用 pyodbc 时，对于使用 version\_id 列与服务器端版本生成器结合使用的任何 ORM 映射类，需要将“implicit\_returning”标志设置为 false：
 
-    class MyTable(Base):plain
+    class MyTable(Base):plainplainplain
         __tablename__ = 'mytable'
         id = Column(Integer, primary_key=True)
         stuff = Column(String(10))
@@ -438,7 +438,7 @@ SQL Server数据类型[¶](#sql-server-data-types "Permalink to this headline")
 与所有 SQLAlchemy 方言一样，所有已知可用于 SQL
 Server 的 UPPERCASE 类型都可以从顶级方言导入，无论它们来源于[`sqlalchemy.types`](core_type_basics.html#module-sqlalchemy.types "sqlalchemy.types")还是来自本地方言：
 
-    from sqlalchemy.dialects.mssql import \plainplainplainplain
+    from sqlalchemy.dialects.mssql import \plainplainplainplainplain
         BIGINT, BINARY, BIT, CHAR, DATE, DATETIME, DATETIME2, \
         DATETIMEOFFSET, DECIMAL, FLOAT, IMAGE, INTEGER, MONEY, \
         NCHAR, NTEXT, NUMERIC, NVARCHAR, REAL, SMALLDATETIME, \
@@ -607,7 +607,7 @@ Server 的 UPPERCASE 类型都可以从顶级方言导入，无论它们来源�
 *class* `sqlalchemy.dialects.mssql。`{.descclassname} `SMALLMONEY`{.descname} [¶](#sqlalchemy.dialects.mssql.SMALLMONEY "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    ` __初始化__  T0> ¶ T1>`{.descname}plain
+    ` __初始化__  T0> ¶ T1>`{.descname}plainplainplain
     :   *继承自* `__init__`
         *属性* `object`
 
@@ -625,7 +625,7 @@ Server 的 UPPERCASE 类型都可以从顶级方言导入，无论它们来源�
  *class*`sqlalchemy.dialects.mssql.`{.descclassname}`TEXT`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.mssql.TEXT "Permalink to this definition")
 :   基础：[`sqlalchemy.types.Text`](core_type_basics.html#sqlalchemy.types.Text "sqlalchemy.types.Text")
 
-    SQL TEXT类型。plain
+    SQL TEXT类型。plainplain
 
      `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.mssql.TEXT.__init__ "Permalink to this definition")
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.String.__init__ "sqlalchemy.types.String.__init__")
@@ -695,7 +695,7 @@ Server 的 UPPERCASE 类型都可以从顶级方言导入，无论它们来源�
 *class* `sqlalchemy.dialects.mssql。`{.descclassname} `UNIQUEIDENTIFIER`{.descname} [¶](#sqlalchemy.dialects.mssql.UNIQUEIDENTIFIER "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    ` __初始化__  T0> ¶ T1>`{.descname}plainplainplain
+    ` __初始化__  T0> ¶ T1>`{.descname}plainplainplainplain
     :   *继承自* `__init__`
         *属性* `object`
 
@@ -704,7 +704,7 @@ Server 的 UPPERCASE 类型都可以从顶级方言导入，无论它们来源�
  *class*`sqlalchemy.dialects.mssql.`{.descclassname}`VARCHAR`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.mssql.VARCHAR "Permalink to this definition")
 :   基础：[`sqlalchemy.types.String`](core_type_basics.html#sqlalchemy.types.String "sqlalchemy.types.String")
 
-    SQL VARCHAR类型。plain
+    SQL VARCHAR类型。plainplainplain
 
      `__init__`{.descname}(*length=None*, *collation=None*, *convert\_unicode=False*, *unicode\_error=None*, *\_warn\_on\_bytestring=False*)[¶](#sqlalchemy.dialects.mssql.VARCHAR.__init__ "Permalink to this definition")
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.String.__init__ "sqlalchemy.types.String.__init__")
@@ -796,7 +796,7 @@ A DSN-based connection is **preferred** overall when using ODBC.
 
 基于主机名的连接**不是首选**，但是受支持。ODBC 驱动程序名称必须明确指定：
 
-    engine = create_engine("mssql+pyodbc://scott:tiger@myhost:port/databasename?driver=SQL+Server+Native+Client+10.0")plain
+    engine = create_engine("mssql+pyodbc://scott:tiger@myhost:port/databasename?driver=SQL+Server+Native+Client+10.0")plainplain
 
 版本 1.0.0 中已更改：现在，基于主机名的 PyODBC 连接需要明确指定的 SQL
 Server 驱动程序名称。由于 SQLAlchemy 根据平台和安装的驱动程序而有所不同，SQLAlchemy 无法选择最佳默认值。
@@ -812,7 +812,7 @@ PyODBC 连接字符串也可以使用参数`odbc_connect`完全按照[Connection
 
     engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-### Unicode绑定[¶](#unicode-binds "Permalink to this headline")
+### Unicode 绑定[¶](#unicode-binds "Permalink to this headline")
 
 关于 unicode，PyTBC 在 FreeTDS 和/或 EasySoft 后端的当前状态很差；不同操作系统平台和版本的 UnixODBC 与 IODBC 与 FreeTDS
 /

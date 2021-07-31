@@ -50,7 +50,7 @@ should be compared. 有多种情况需要定制此行为。
 
 上面的映射，当我们尝试使用它时，会产生错误：
 
-    sqlalchemy.exc.AmbiguousForeignKeysError: Could not determine joinplainplainplain
+    sqlalchemy.exc.AmbiguousForeignKeysError: Could not determine joinplainplainplainplain
     condition between parent/child tables on relationship
     Customer.billing_address - there are multiple foreign key
     paths linking the tables.  Specify the 'foreign_keys' argument,
@@ -61,7 +61,7 @@ should be compared. 有多种情况需要定制此行为。
 
 在这种情况下，消息希望我们通过指示每个关键字列应该被考虑，来限定每个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")，并且适当的格式如下：
 
-    class Customer(Base):plainplainplainplainplainplain
+    class Customer(Base):plainplainplainplainplainplainplainplainplainplain
         __tablename__ = 'customer'
         id = Column(Integer, primary_key=True)
         name = Column(String)
@@ -98,7 +98,7 @@ the `Customer.billing_address` relationship from a
 
 在下面的示例中，使用`User`类以及存储街道地址的`Address`类，我们创建一个关系`boston_addresses`加载指定城市“波士顿”的`Address`对象：
 
-    from sqlalchemy import Integer, ForeignKey, String, Columnplainplainplain
+    from sqlalchemy import Integer, ForeignKey, String, Columnplainplainplainplain
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.orm import relationship
 
@@ -158,7 +158,7 @@ the `Customer.billing_address` relationship from a
 
 上面的关系会产生一个连接，如：
 
-    SELECT host_entry.id, host_entry.ip_address, host_entry.contentplainplain
+    SELECT host_entry.id, host_entry.ip_address, host_entry.contentplainplainplain
     FROM host_entry JOIN host_entry AS host_entry_1
     ON host_entry_1.ip_address = CAST(host_entry.content AS INET)
 
@@ -205,7 +205,7 @@ fixed list containing known comparison operators such as `==`, `<`, etc.
 
 一个完整的例子：
 
-    class IPA(Base):plainplainplain
+    class IPA(Base):plainplainplainplainplain
         __tablename__ = 'ip_address'
 
         id = Column(Integer, primary_key=True)
@@ -224,7 +224,7 @@ fixed list containing known comparison operators such as `==`, `<`, etc.
 
 以上，一个查询如：
 
-    session.query(IPA).join(IPA.network)plainplainplain
+    session.query(IPA).join(IPA.network)plainplainplainplain
 
 将呈现为：
 
@@ -247,7 +247,7 @@ well, `Article.magazine_id` is involved in two
 separate relationships; `Article.magazine` and
 `Article.writer`:
 
-    class Magazine(Base):plainplainplainplain
+    class Magazine(Base):plainplainplainplainplainplainplain
         __tablename__ = 'magazine'
 
         id = Column(Integer, primary_key=True)
@@ -281,7 +281,7 @@ separate relationships; `Article.magazine` and
 
 当上面的映射配置完成后，我们会看到这个警告发出：
 
-    SAWarning: relationship 'Article.writer' will copy columnplainplainplain
+    SAWarning: relationship 'Article.writer' will copy columnplainplainplainplainplain
     writer.magazine_id to column article.magazine_id,
     which conflicts with relationship(s): 'Article.magazine'
     (copies magazine.id to article.magazine_id). Consider applying
@@ -337,7 +337,7 @@ To get just \#1 and \#2, we could specify only
 
 因此，为了充分利用＃1，＃2 和＃3，我们通过将[`primaryjoin`(relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")完整地与[`foreign_keys`](relationship_api.html#sqlalchemy.orm.relationship.params.foreign_keys "sqlalchemy.orm.relationship")参数，或者通过使用[`foreign()`](relationship_api.html#sqlalchemy.orm.foreign "sqlalchemy.orm.foreign")进行注释更简洁：
 
-    class Article(Base):plainplainplainplainplain
+    class Article(Base):plainplainplainplainplainplain
         # ...
 
         writer = relationship(
@@ -418,7 +418,7 @@ column object available yet or the `node_to_node`
 table perhaps isn’t yet available.
 当在一个声明性字符串中引用一个普通的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象时，我们使用该表的字符串名称，因为它存在于[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")中：
 
-    class Node(Base):plainplainplainplainplainplain
+    class Node(Base):plainplainplainplainplainplainplain
         __tablename__ = 'node'
         id = Column(Integer, primary_key=True)
         label = Column(String)
@@ -533,7 +533,7 @@ support any references between `A` and `B` directly.
 
 下面通过从`A`到`B`的简单连接示出了[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")，但是主连接条件增加了两个附加实体`C`和`D`，它们也必须具有与`A`和`B`中的行同时排列的行：
 
-    class A(Base):plainplainplainplain
+    class A(Base):plainplainplainplainplain
         __tablename__ = 'a'
 
         id = Column(Integer, primary_key=True)
@@ -573,7 +573,7 @@ support any references between `A` and `B` directly.
 
 在上面的例子中，当我们查询时，我们的`B`的非主映射器会发出额外的列；这些可以被忽略：
 
-    sess.query(A).join(A.b).all()plainplainplain
+    sess.query(A).join(A.b).all()plainplainplainplain
 
     SELECT a.id AS a_id, a.b_id AS a_b_id
     FROM a JOIN (b JOIN d ON d.b_id = b.id JOIN c ON c.id = d.c_id) ON a.b_id = b.id
@@ -583,7 +583,7 @@ support any references between `A` and `B` directly.
 
 非常雄心勃勃的自定义连接条件可能无法直接持久化，并且在某些情况下甚至可能无法正确加载。要移除等式的持久性部分，请在[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上使用标记[`viewonly`](relationship_api.html#sqlalchemy.orm.relationship.params.viewonly "sqlalchemy.orm.relationship")，将其建立为只读属性（写入集合的数据将为在 flush()上被忽略）。但是，在极端情况下，请考虑将常规 Python 属性与[`Query`](query.html#sqlalchemy.orm.query.Query "sqlalchemy.orm.query.Query")结合使用，如下所示：
 
-    class User(Base):plainplainplain
+    class User(Base):plainplainplainplain
         __tablename__ = 'user'
         id = Column(Integer, primary_key=True)
 
