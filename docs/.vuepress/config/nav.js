@@ -15,7 +15,7 @@ module.exports = [
       {
         text: '进阶',
         items: [
-          { text: 'Python 工匠系列', link: '/craftsman/index/' },
+          { text: 'Python 工匠系列', link: '/pythonista/index/' },
           { text: '高阶知识点', link: '/python/GIL/' },
         ],
       },
