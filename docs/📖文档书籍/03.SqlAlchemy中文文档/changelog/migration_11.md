@@ -99,7 +99,7 @@ Behavior](orm_session_state_management.html#session-referencing-behavior)。
 对于这个 Python 内部值来说，有一个用例与 Core 生成的默认值相对应，甚至在该对象被保存之前。为了适应这种用例，添加了一个新事件[`AttributeEvents.init_scalar()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.init_scalar "sqlalchemy.orm.events.AttributeEvents.init_scalar")。在[Attribute
 Instrumentation](orm_examples.html#examples-instrumentation)处的新示例`active_column_defaults.py`演示了一个示例用法，因此效果可以是：
 
-    >>> obj = MyObj()plainplain
+    >>> obj = MyObj()plainplainplain
     >>> obj.some_value
     "my default"
 
@@ -146,7 +146,7 @@ object, which is handled distinctly:
 
 [Indexable](orm_extensions_indexable.html)扩展是对混合属性功能的扩展，它允许构建引用“可索引”数据类型的特定元素（如数组或 JSON 字段）的属性：
 
-    class Person(Base):plain
+    class Person(Base):plainplain
         __tablename__ = 'person'
 
         id = Column(Integer, primary_key=True)
@@ -156,7 +156,7 @@ object, which is handled distinctly:
 
 以上，在初始化为空字典之后，`name`属性将从 JSON 列`data`读取/写入字段`"name"`：
 
-    >>> person = Person(name='foobar')plain
+    >>> person = Person(name='foobar')plainplain
     >>> person.name
     foobar
 
@@ -514,7 +514,7 @@ a mapping of the classes `Parent` and
 
 在最近的 SQLAlchemy 版本中，由多种形式的“多态”查询生成的 SQL 具有比以前更加“平坦”的形式，其中几个表的 JOIN 不再无条件地捆绑到子查询中。为了适应这种情况，现在，[`Query.correlate()`](orm_query.html#sqlalchemy.orm.query.Query.correlate "sqlalchemy.orm.query.Query.correlate")方法从这种多态选择中提取单个表并确保所有都是子查询的“关联”的一部分。假设映射文档中的`Person/Manager/Engineer->Company`设置，使用 with\_polymorphic：
 
-    sess.query(Person.name)
+    sess.query(Person.name)plain
                 .filter(
                     sess.query(Company.name).
                     filter(Company.company_id == Person.company_id).
@@ -650,7 +650,7 @@ where they both refer to the same identity, the `C.d` element will still be load
 
 像下面这样的查询现在只会增加 SELECT 列表中缺少的那些列，而没有重复：
 
-    q = session.query(User.id, User.name.label('name')).\plainplain
+    q = session.query(User.id, User.name.label('name')).\plainplainplain
         distinct().\
         order_by(User.id, User.name, User.fullname)
 
@@ -688,7 +688,7 @@ Tracking](orm_extensions_mutable.html)扩展中，以补充现有的[`MutableDic
 为了帮助防止在加载一系列对象之后发生不需要的延迟加载，可以应用新的“lazy
 ='raise'”策略和相应的加载程序选项[`orm.raiseload()`](orm_loading_relationships.html#sqlalchemy.orm.raiseload "sqlalchemy.orm.raiseload")关系属性，当访问非热切加载的属性以进行读取时，会导致该属性引发`InvalidRequestError`：
 
-    >>> from sqlalchemy.orm import raiseloadplainplain
+    >>> from sqlalchemy.orm import raiseloadplainplainplain
     >>> a1 = s.query(A).options(raiseload(A.bs)).first()
     >>> a1.bs
     Traceback (most recent call last):
@@ -720,7 +720,7 @@ INSERT 将现在将 CTE 呈现在整个语句的顶部，而不是像 1.0 中那
 
 下面是一个在一个语句中呈现 UPDATE，INSERT 和 SELECT 全部的例子：
 
-    >>> from sqlalchemy import table, column, select, literal, existsplainplain
+    >>> from sqlalchemy import table, column, select, literal, existsplainplainplain
     >>> orders = table(
     ...     'orders',
     ...     column('region'),
@@ -875,7 +875,7 @@ set up; given a table such as:
 
 一个 INSERT 发出没有值的表将产生异常：
 
-    CompileError: Column 'b.x' is marked as a member of the primaryplainplainplain
+    CompileError: Column 'b.x' is marked as a member of the primaryplainplainplainplain
     key for table 'b', but has no Python-side or server-side default
     generator indicated, nor does it indicate 'autoincrement=True',
     and no explicit value is passed.  Primary key columns may not
@@ -887,7 +887,7 @@ set up; given a table such as:
 
 对于从服务器端默认或不常见的主键值（如触发器）接收主键值的列，可以使用[`FetchedValue`](core_defaults.html#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")指示存在值生成器：
 
-    Table(plainplainplain
+    Table(plainplainplainplain
         'b', metadata,
         Column('x', Integer, primary_key=True, server_default=FetchedValue()),
         Column('y', Integer, primary_key=True, server_default=FetchedValue())
@@ -916,7 +916,7 @@ New operators [`ColumnOperators.is_distinct_from()`](core_sqlelement.html#sqlalc
 and [`ColumnOperators.isnot_distinct_from()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.isnot_distinct_from "sqlalchemy.sql.operators.ColumnOperators.isnot_distinct_from")
 allow the IS DISTINCT FROM and IS NOT DISTINCT FROM sql operation:
 
-    >>> print column('x').is_distinct_from(None)plainplainplain
+    >>> print column('x').is_distinct_from(None)plainplainplainplain
     x IS DISTINCT FROM NULL
 
 处理提供了 NULL，True 和 False：
@@ -938,7 +938,7 @@ available at the Core and ORM level, instructs the compiler to render
 `FULL OUTER JOIN` where it would normally render
 `LEFT OUTER JOIN`:
 
-    stmt = select([t1]).select_from(t1.outerjoin(t2, full=True))
+    stmt = select([t1]).select_from(t1.outerjoin(t2, full=True))plain
 
 该标志也适用于 ORM 级别：
 
@@ -992,7 +992,7 @@ Behaviors](core_tutorial.html#sqlexpression-text-columns) - 在 Core 教程中
 passed positionally](#behavior-change-3501) - backwards compatibility
 remarks
 
-#### 位置匹配对于 core\_ORM SQL结构[¶](#positional-matching-is-trusted-over-name-based-matching-for-core-orm-sql-constructs "Permalink to this headline")的基于名称的匹配值得信赖
+#### 位置匹配对于 core\_ORM SQL 结构[¶](#positional-matching-is-trusted-over-name-based-matching-for-core-orm-sql-constructs "Permalink to this headline")的基于名称的匹配值得信赖
 
 此更改的另一方面是匹配列的规则也已被修改，以便更加充分地依赖编译 SQL 结构的“位置”匹配。给出如下的声明：
 
@@ -1137,7 +1137,7 @@ Python sequence, both in the pure Python and C-extension version.
 与其他人一样，SQLite 缺乏能力驱动的问题现在已得到增强，可用于所有支持的后端。我们引用的查询是 SELECT 语句的 UNION，它们本身包含行限制或排序功能，其中包括 LIMIT，OFFSET 和/或 ORDER
 BY：
 
-    (SELECT x FROM table1 ORDER BY y LIMIT 1) UNIONplain
+    (SELECT x FROM table1 ORDER BY y LIMIT 1) UNIONplainplain
     (SELECT x FROM table2 ORDER BY y LIMIT 2)
 
 上面的查询需要在每个子选择内部进行括号，以便正确地对子结果进行分组。在 SQLAlchemy
@@ -1224,7 +1224,7 @@ cases:
 如果该属性根本没有设置，那么列级别的默认值*将*触发并且/或者 SQL
 NULL 按预期插入，就像以前的行为一样。下面说明两个变体：
 
-    obj = MyObject(json_value=None)plain
+    obj = MyObject(json_value=None)plainplain
     session.add(obj)
     session.commit()   # *will not* fire off column defaults, will insert JSON 'null'
 
@@ -1309,7 +1309,7 @@ SQL 函数实现预先键入的函数，该函数现在可以使用[`array_agg`]
 用于聚合 ORDER
 BY 的 Postgresql 元素也通过[`postgresql.aggregate_order_by`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.aggregate_order_by "sqlalchemy.dialects.postgresql.aggregate_order_by")添加：
 
-    from sqlalchemy.dialects.postgresql import aggregate_order_byplainplain
+    from sqlalchemy.dialects.postgresql import aggregate_order_byplainplainplain
     expr = func.array_agg(aggregate_order_by(table.c.a, table.c.b.desc()))
     stmt = select([expr])
 
@@ -1339,7 +1339,7 @@ modifier:
 
 上面的语句会产生 SQL 类似于：
 
-    SELECT department.id, percentile_cont(0.5)plainplain
+    SELECT department.id, percentile_cont(0.5)plainplainplainplain
     WITHIN GROUP (ORDER BY department.salary DESC)
 
 现在为这些函数提供了正确返回类型的占位符，它们包括[`percentile_cont`](core_functions.html#sqlalchemy.sql.functions.percentile_cont "sqlalchemy.sql.functions.percentile_cont")，[`percentile_disc`](core_functions.html#sqlalchemy.sql.functions.percentile_disc "sqlalchemy.sql.functions.percentile_disc")，[`rank`](core_functions.html#sqlalchemy.sql.functions.rank "sqlalchemy.sql.functions.rank")，[`dense_rank`](core_functions.html#sqlalchemy.sql.functions.dense_rank "sqlalchemy.sql.functions.dense_rank")
@@ -1462,7 +1462,7 @@ dialect](#change-3081)
 
 `.pets`的 lazyload 情况依赖于在加载时用一个绑定参数替换`Person.id`列，该绑定参数接收一个 Python 加载的值。这种替换特别适用于我们的[`type_coerce()`](core_sqlelement.html#sqlalchemy.sql.expression.type_coerce "sqlalchemy.sql.expression.type_coerce")函数的意图会丢失的地方。在更改之前，这个懒惰负载如下所示：
 
-    SELECT pets.id AS pets_id, pets.person_id AS pets_person_id
+    SELECT pets.id AS pets_id, pets.person_id AS pets_person_idplain
     FROM pets
     WHERE pets.person_id = CAST(CAST(%(param_1)s AS VARCHAR) AS INTEGER)
     {'param_1': 5}
@@ -1718,7 +1718,7 @@ Core 和 ORM 中的新参数[`GenerativeSelect.with_for_update.skip_locked`](cor
 
 -   SELECT FOR UPDATE SKIP LOCKED：
 
-        stmt = select([table]).with_for_update(skip_locked=True)plain
+        stmt = select([table]).with_for_update(skip_locked=True)plainplain
 
 -   选择关键共享：
 
@@ -1778,7 +1778,7 @@ MySQL 方言具有这样的行为，如果 InnoDB 表上的组合主键在不是
 
 这种解决方法已被删除，并替换为仅在主键中声明 AUTO\_INCREMENT 列*first*的更好系统：
 
-    CREATE TABLE some_table (
+    CREATE TABLE some_table (plain
         x INTEGER NOT NULL,
         y INTEGER NOT NULL AUTO_INCREMENT,
         PRIMARY KEY (y, x)
@@ -1902,7 +1902,7 @@ Server 下的“un-extended”类型会将“length”参数复制为值`"max"`�
 Server 方言解释为“max”的无限长度。然后修正是这样的，这些长度是 None，所以这些类型对象在非 SQL
 Server 上下文中工作：
 
-    >>> for col in insp.get_columns("s"):
+    >>> for col in insp.get_columns("s"):plain
     ...     print(col['type'].__class__, col['type'].length)
     ...
     <class 'sqlalchemy.sql.sqltypes.VARCHAR'> None

@@ -21,7 +21,7 @@ subclasses).
  `sqlalchemy.sql.expression.`{.descclassname}`alias`{.descname}(*selectable*, *name=None*, *flat=False*)[¶](#sqlalchemy.sql.expression.alias "Permalink to this definition")
 :   返回一个[`Alias`](#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")对象。
 
-    An [`Alias`](#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")
+    An [`Alias`](#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")plain
     represents any [`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
     with an alternate name assigned within SQL, typically using the
     `AS` clause when generated, e.g.
@@ -53,7 +53,7 @@ subclasses).
  `sqlalchemy.sql.expression.`{.descclassname}`except_`{.descname}(*\*selects*, *\*\*kwargs*)[¶](#sqlalchemy.sql.expression.except_ "Permalink to this definition")
 :   返回多个可选项的`EXCEPT`。
 
-    返回的对象是[`CompoundSelect`](#sqlalchemy.sql.expression.CompoundSelect "sqlalchemy.sql.expression.CompoundSelect")的一个实例。plainplain
+    返回的对象是[`CompoundSelect`](#sqlalchemy.sql.expression.CompoundSelect "sqlalchemy.sql.expression.CompoundSelect")的一个实例。plainplainplain
 
     \*选择
     :   [`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")实例列表。
@@ -73,7 +73,7 @@ subclasses).
  `sqlalchemy.sql.expression.`{.descclassname}`exists`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.expression.exists "Permalink to this definition")
 :   针对现有的[`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")对象构建新的`Exists`。
 
-    调用样式具有以下形式：plain
+    调用样式具有以下形式：plainplain
 
         # use on an existing select()
         s = select([table.c.col1]).where(table.c.col2==5)
@@ -153,7 +153,7 @@ subclasses).
  `sqlalchemy.sql.expression.`{.descclassname}`lateral`{.descname}(*selectable*, *name=None*)[¶](#sqlalchemy.sql.expression.lateral "Permalink to this definition")
 :   返回一个[`Lateral`](#sqlalchemy.sql.expression.Lateral "sqlalchemy.sql.expression.Lateral")对象。
 
-    [`Lateral`](#sqlalchemy.sql.expression.Lateral "sqlalchemy.sql.expression.Lateral")是一个[`Alias`](#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")子类，它表示应用了LATERAL关键字的子查询。
+    [`Lateral`](#sqlalchemy.sql.expression.Lateral "sqlalchemy.sql.expression.Lateral")是一个[`Alias`](#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")子类，它表示应用了LATERAL关键字的子查询。plain
 
     LATERAL子查询的特殊行为是它出现在封闭SELECT的FROM子句中，但可能与该SELECT的其他FROM子句相关。这是子查询的一种特殊情况，只有少数后端支持，现在是更新的Postgresql版本。
 
@@ -167,7 +167,7 @@ subclasses).
  `sqlalchemy.sql.expression.`{.descclassname}`outerjoin`{.descname}(*left*, *right*, *onclause=None*, *full=False*)[¶](#sqlalchemy.sql.expression.outerjoin "Permalink to this definition")
 :   返回一个`OUTER JOIN`子句元素。
 
-    返回的对象是[`Join`](#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")的实例。
+    返回的对象是[`Join`](#sqlalchemy.sql.expression.Join "sqlalchemy.sql.expression.Join")的实例。plain
 
     类似的功能也可以通过任何[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")上的[`outerjoin()`](#sqlalchemy.sql.expression.FromClause.outerjoin "sqlalchemy.sql.expression.FromClause.outerjoin")方法使用。
 
@@ -366,7 +366,7 @@ subclasses).
 `sqlalchemy.sql.expression。`{.descclassname} `子查询 tt> （ 别名，* args， ** kwargs  T5> ） T6> ¶ T7>`{.descname}
 :   返回从[`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")派生的[`Alias`](#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")对象。
 
-    名称
+    名称plain
     :   别名
 
     \* args，\*\* kwargs
@@ -376,7 +376,7 @@ subclasses).
  `sqlalchemy.sql.expression.`{.descclassname}`table`{.descname}(*name*, *\*columns*)[¶](#sqlalchemy.sql.expression.table "Permalink to this definition")
 :   产生一个新的[`TableClause`](#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")。
 
-    返回的对象是一个[`TableClause`](#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")实例，它表示模式级别[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的“语法”部分。它可能被用来构造轻量级的表格结构。
+    返回的对象是一个[`TableClause`](#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")实例，它表示模式级别[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的“语法”部分。它可能被用来构造轻量级的表格结构。plain
 
     Changed in version 1.0.0: [`expression.table()`](#sqlalchemy.sql.expression.table "sqlalchemy.sql.expression.table")
     can now be imported from the plain `sqlalchemy`
@@ -435,7 +435,7 @@ subclasses).
  `sqlalchemy.sql.expression.`{.descclassname}`union`{.descname}(*\*selects*, *\*\*kwargs*)[¶](#sqlalchemy.sql.expression.union "Permalink to this definition")
 :   返回多个可选择的`UNION`。
 
-    返回的对象是[`CompoundSelect`](#sqlalchemy.sql.expression.CompoundSelect "sqlalchemy.sql.expression.CompoundSelect")的一个实例。plainplain
+    返回的对象是[`CompoundSelect`](#sqlalchemy.sql.expression.CompoundSelect "sqlalchemy.sql.expression.CompoundSelect")的一个实例。plainplainplainplain
 
     所有[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")子类都有一个类似的[`union()`](#sqlalchemy.sql.expression.union "sqlalchemy.sql.expression.union")方法。
 
@@ -447,7 +447,7 @@ subclasses).
  `sqlalchemy.sql.expression.`{.descclassname}`union_all`{.descname}(*\*selects*, *\*\*kwargs*)[¶](#sqlalchemy.sql.expression.union_all "Permalink to this definition")
 :   返回多个可选项的`UNION ALL`。
 
-    返回的对象是[`CompoundSelect`](#sqlalchemy.sql.expression.CompoundSelect "sqlalchemy.sql.expression.CompoundSelect")的一个实例。
+    返回的对象是[`CompoundSelect`](#sqlalchemy.sql.expression.CompoundSelect "sqlalchemy.sql.expression.CompoundSelect")的一个实例。plainplain
 
     所有[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")子类中都有一个类似的[`union_all()`](#sqlalchemy.sql.expression.union_all "sqlalchemy.sql.expression.union_all")方法。
 
@@ -459,7 +459,7 @@ subclasses).
 *class* `sqlalchemy.sql.expression。`{.descclassname} `别名`{.descname} （ *可选*，*名称=无 T5\> ） T6\> [¶ T7\>](#sqlalchemy.sql.expression.Alias "Permalink to this definition")*
 :   基础：[`sqlalchemy.sql.expression.FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
 
-    表示一个表或可选别名（AS）。
+    表示一个表或可选别名（AS）。plain
 
     使用`AS`关键字（或在某些数据库（例如Oracle）上没有关键字），通常应用于SQL语句内的任何表或子选择，表示别名。
 
@@ -1841,7 +1841,7 @@ subclasses).
 *class* `sqlalchemy.sql.expression。`{.descclassname} `FromClause`{.descname} [¶](#sqlalchemy.sql.expression.FromClause "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.Selectable`](#sqlalchemy.sql.expression.Selectable "sqlalchemy.sql.expression.Selectable")
 
-    表示可以在`SELECT`语句的`FROM`子句中使用的元素。plainplainplain
+    表示可以在`SELECT`语句的`FROM`子句中使用的元素。plainplainplainplainplain
 
     最常见的[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")形式是[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")和[`select()`](#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构。所有[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")对象共有的主要特征包括：
 
@@ -2055,7 +2055,7 @@ subclasses).
  *class*`sqlalchemy.sql.expression.`{.descclassname}`GenerativeSelect`{.descname}(*use\_labels=False*, *for\_update=False*, *limit=None*, *offset=None*, *order\_by=None*, *group\_by=None*, *bind=None*, *autocommit=None*)[¶](#sqlalchemy.sql.expression.GenerativeSelect "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.SelectBase`](#sqlalchemy.sql.expression.SelectBase "sqlalchemy.sql.expression.SelectBase")
 
-    可以添加其他元素的SELECT语句的基类。plain
+    可以添加其他元素的SELECT语句的基类。plainplain
 
     这可以作为[`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")和[`CompoundSelect`](#sqlalchemy.sql.expression.CompoundSelect "sqlalchemy.sql.expression.CompoundSelect")的基础，其中可以添加ORDER
     BY，GROUP BY等元素，并且可以控制列呈现。与[`TextAsFrom`](#sqlalchemy.sql.expression.TextAsFrom "sqlalchemy.sql.expression.TextAsFrom")相比，它虽然它的子类为[`SelectBase`](#sqlalchemy.sql.expression.SelectBase "sqlalchemy.sql.expression.SelectBase")，并且也是一个SELECT构造，它表示一个固定的文本字符串，不能在此级别进行更改，只能打包为子查询。
@@ -2754,7 +2754,7 @@ subclasses).
 *class* `sqlalchemy.sql.expression。`{.descclassname} `HasCTE`{.descname} [¶](#sqlalchemy.sql.expression.HasCTE "Permalink to this definition")
 :   Mixin 声明一个类包含 CTE 支持。
 
-    版本1.1中的新功能
+    版本1.1中的新功能plainplainplain
 
      `cte`{.descname}(*name=None*, *recursive=False*)[¶](#sqlalchemy.sql.expression.HasCTE.cte "Permalink to this definition")
     :   返回一个新的[`CTE`](#sqlalchemy.sql.expression.CTE "sqlalchemy.sql.expression.CTE")或公共表表达式实例。
@@ -4702,7 +4702,7 @@ subclasses).
 *class* `sqlalchemy.sql.expression。`{.descclassname} `SelectBase`{.descname} [¶](#sqlalchemy.sql.expression.SelectBase "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.HasCTE`](#sqlalchemy.sql.expression.HasCTE "sqlalchemy.sql.expression.HasCTE")，[`sqlalchemy.sql.expression.Executable`](#sqlalchemy.sql.expression.Executable "sqlalchemy.sql.expression.Executable")，[`sqlalchemy.sql.expression.FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
 
-    SELECT语句的基类。plainplain
+    SELECT语句的基类。plainplainplain
 
     这包括[`Select`](#sqlalchemy.sql.expression.Select "sqlalchemy.sql.expression.Select")，[`CompoundSelect`](#sqlalchemy.sql.expression.CompoundSelect "sqlalchemy.sql.expression.CompoundSelect")和[`TextAsFrom`](#sqlalchemy.sql.expression.TextAsFrom "sqlalchemy.sql.expression.TextAsFrom")。
 
@@ -5108,7 +5108,7 @@ subclasses).
  *class*`sqlalchemy.sql.expression.`{.descclassname}`TableSample`{.descname}(*selectable*, *sampling*, *name=None*, *seed=None*)[¶](#sqlalchemy.sql.expression.TableSample "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.Alias`](#sqlalchemy.sql.expression.Alias "sqlalchemy.sql.expression.Alias")
 
-    表示一个TABLESAMPLE子句。
+    表示一个TABLESAMPLE子句。plain
 
     该对象由所有[`FromClause`](#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")子类上的[`tablesample()`](#sqlalchemy.sql.expression.tablesample "sqlalchemy.sql.expression.tablesample")模块级函数以及[`FromClause.tablesample()`](#sqlalchemy.sql.expression.FromClause.tablesample "sqlalchemy.sql.expression.FromClause.tablesample")方法构造而成。
 

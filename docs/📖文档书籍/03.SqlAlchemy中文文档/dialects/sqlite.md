@@ -51,7 +51,7 @@ SQLite 自动增量的背景是：[http://sqlite.org/autoinc.html](http://sqlite
 
 要在呈现 DDL 时在主键列上专门呈现 AUTOINCREMENT 关键字，请将以下标记`sqlite_autoincrement=True`添加到 Table 结构中：
 
-    Table('sometable', metadata,plainplainplainplain
+    Table('sometable', metadata,plainplainplainplainplain
             Column('id', Integer, primary_key=True),
             sqlite_autoincrement=True)
 
@@ -76,7 +76,7 @@ autoincrement behavior to be available.
 
 另一种方法是在针对 SQLite 编译时使用[`BigInteger`](core_type_basics.html#sqlalchemy.types.BigInteger "sqlalchemy.types.BigInteger")的子类来覆盖其 DDL 名称为`INTEGER`：
 
-    from sqlalchemy import BigIntegerplainplainplainplain
+    from sqlalchemy import BigIntegerplainplainplainplainplain
     from sqlalchemy.ext.compiler import compiles
 
     class SLBigInteger(BigInteger):
@@ -265,7 +265,7 @@ reflecting columns.
 
 索引将在创建时呈现为：
 
-    CREATE INDEX test_idx1 ON testtbl (data)plainplainplainplain
+    CREATE INDEX test_idx1 ON testtbl (data)plainplainplainplainplain
     WHERE data > 5 AND data < 10
 
 版本 0.9.9 中的新功能
@@ -280,7 +280,7 @@ SQLite 有一个错误，它要求 SQLAlchemy 过滤掉这些结果集中的点�
 
 这个错误完全在 SQLAlchemy 之外，可以这样说明：
 
-    import sqlite3plain
+    import sqlite3plainplain
 
     assert sqlite3.sqlite_version_info < (3, 10, 0), "bug is fixed in this version"
 
@@ -313,7 +313,7 @@ SQLite 有一个错误，它要求 SQLAlchemy 过滤掉这些结果集中的点�
 
 SQLAlchemy 依赖于列名与原始语句匹配的可预测性，因此 SQLAlchemy 方言别无选择，只能将其过滤掉：
 
-    from sqlalchemy import create_engineplainplainplainplainplain
+    from sqlalchemy import create_engineplainplainplainplainplainplain
 
     eng = create_engine("sqlite://")
     conn = eng.connect()
@@ -356,7 +356,7 @@ is required to return these dotted names unmodified, the
 provided, either on a per-[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")
 basis:
 
-    result = conn.execution_options(sqlite_raw_colnames=True).execute('''plainplainplainplain
+    result = conn.execution_options(sqlite_raw_colnames=True).execute('''plainplainplainplainplain
         select x.a, x.b from x where a=1
         union
         select x.a, x.b from x where a=2
@@ -365,7 +365,7 @@ basis:
 
 或基于每个[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")：
 
-    engine = create_engine("sqlite://", execution_options={"sqlite_raw_colnames": True})plainplainplainplain
+    engine = create_engine("sqlite://", execution_options={"sqlite_raw_colnames": True})plainplainplainplainplain
 
 在使用 per- [`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")执行选项时，请注意**使用 UNION 的核心和 ORM 查询可能无法正常工作**。
 
@@ -382,7 +382,7 @@ SQLite 数据类型[¶](#sqlite-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.sqlite.`{.descclassname}`DATETIME`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.dialects.sqlite.DATETIME "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.sqlite.base._DateTimeMixin`，[`sqlalchemy.types.DateTime`](core_type_basics.html#sqlalchemy.types.DateTime "sqlalchemy.types.DateTime")
 
-    使用字符串在SQLite中表示Python日期时间对象。plainplainplain
+    使用字符串在SQLite中表示Python日期时间对象。plainplainplainplain
 
     默认的字符串存储格式是：
 
@@ -450,7 +450,7 @@ SQLite 数据类型[¶](#sqlite-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.sqlite.`{.descclassname}`TIME`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.dialects.sqlite.TIME "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.sqlite.base._DateTimeMixin`，[`sqlalchemy.types.Time`](core_type_basics.html#sqlalchemy.types.Time "sqlalchemy.types.Time")
 
-    使用字符串在SQLite中表示一个Python时间对象。plainplain
+    使用字符串在SQLite中表示一个Python时间对象。plainplainplain
 
     默认的字符串存储格式是：
 
@@ -495,7 +495,7 @@ pysqlite 的文档和下载信息（如果适用）可在以下网址获得：[h
 
 连接字符串：
 
-    sqlite+pysqlite:///file_pathplainplain
+    sqlite+pysqlite:///file_pathplainplainplainplain
 
 ### 驱动程序[¶ T0\>](#driver "Permalink to this headline")
 
@@ -527,12 +527,12 @@ SQLite 数据库的文件规范被认为是 URL 的“数据库”部分。请�
 
 要使用 Windows 路径，可以使用常规的驱动器规格和反斜杠。可能需要双反斜杠：
 
-    # absolute path on Windowsplainplainplainplainplain
+    # absolute path on Windowsplainplainplainplainplainplain
     e = create_engine('sqlite:///C:\\path\\to\\database.db')
 
 如果没有文件路径存在，sqlite `:memory:`标识符是默认值。指定`sqlite://`，而不是别的：
 
-    # in-memory databaseplainplain
+    # in-memory databaseplainplainplain
     e = create_engine('sqlite://')
 
 ### 与 sqlite3“native”日期和日期时间类型兼容[¶](#compatibility-with-sqlite3-native-date-and-datetime-types "Permalink to this headline")
@@ -543,13 +543,13 @@ pysqlite 驱动程序包括 sqlite3.PARSE\_DECLTYPES 和 sqlite3.PARSE\_COLNAMES
 请记住，建议不要使用 pysqlite 的解析选项，也不需要使用 SQLAlchemy，如果在 create\_engine()上配置了“native\_datetime
 = True”，则可以强制使用 PARSE\_DECLTYPES：
 
-    engine = create_engine('sqlite://',plainplainplain
+    engine = create_engine('sqlite://',plainplainplainplain
         connect_args={'detect_types':
             sqlite3.PARSE_DECLTYPES|sqlite3.PARSE_COLNAMES},
         native_datetime=True
     )
 
-启用此标志时，DATE 和 TIMESTAMP 类型（但注意 -…………………………
+启用此标志时，DATE 和 TIMESTAMP 类型（但注意 -……………………………………
 …………
 不是 DATETIME 或 TIME 类型......困惑了吗？）将不执行任何绑定参数或结果处理。执行“func.current\_date()”将返回一个字符串。“func.current\_timestamp()”被注册为在 SQLAlchemy 中返回 DATETIME 类型，所以该函数仍然接收 SQLAlchemy 级别的结果处理。
 
@@ -585,7 +585,7 @@ SQLAlchemy 设置池以使用 Pysqlite 的默认行为：
 [`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")时临时表表应该在[`Session.commit()`](orm_session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit")或[`Session.rollback()`](orm_session_api.html#sqlalchemy.orm.session.Session.rollback "sqlalchemy.orm.session.Session.rollback")之后继续保持，必须使用维护单个连接的池。如果仅在当前线程中需要作用域，则使用[`SingletonThreadPool`](core_pooling.html#sqlalchemy.pool.SingletonThreadPool "sqlalchemy.pool.SingletonThreadPool")，或者在这种情况下多个线程内需要[`StaticPool`](core_pooling.html#sqlalchemy.pool.StaticPool "sqlalchemy.pool.StaticPool")作用域：
 
     # maintain the same connection per threadplain
-    from sqlalchemy.pool import SingletonThreadPoolplain
+    from sqlalchemy.pool import SingletonThreadPoolplainplain
     engine = create_engine('sqlite:///mydb.db',
                         poolclass=SingletonThreadPool)
 
@@ -617,7 +617,7 @@ SQLAlchemy 默认选择不改变这种行为，因为它是 pysqlite 驱动程�
 qlalchemy import create_engine, eventplain
 
     engine = create_engine("sqlite:///myfile.db")
-plainplainplain
+plainplainplainplain
     @event.listens_for(engine, "connect")
     def do_connect(dbapi_connection, connection_record):
         # disable pysqlite's emitting of the BEGIN statement entirely.
@@ -680,7 +680,7 @@ plain
 连接字符串的格式与[`pysqlite`](#module-sqlalchemy.dialects.sqlite.pysqlite "sqlalchemy.dialects.sqlite.pysqlite")驱动程序的格式相同，只是现在接受了“密码”字段，其中应包含密码短语：
 
     e = create_engine('sqlite+pysqlcipher://:testing@/foo.db')
-plain
+plainplainplain
 对于绝对文件路径，应该为数据库名称使用两个斜杠：
 
 eate_engine('sqlite+pysqlcipher://:testing@//path/to/foo.db')

@@ -76,7 +76,7 @@ depth is added (i.e. `r + r*r2 + r*r2*r3` ...)
 
 为此，您需要使用[Python 分析模块](https://docs.python.org/2/library/profile.html)。下面是一个简单的配方，用于分析上下文管理器：
 
-    import cProfileplainplainplain
+    import cProfileplainplainplainplain
     import StringIO
     import pstats
     import contextlib
@@ -101,7 +101,7 @@ depth is added (i.e. `r + r*r2 + r*r2*r3` ...)
 
 分析的输出结果可用于了解花费时间的想法。剖析输出的一部分如下所示：
 
-    13726 function calls (13042 primitive calls) in 0.014 secondsplainplainplain
+    13726 function calls (13042 primitive calls) in 0.014 secondsplainplainplainplain
 
     Ordered by: cumulative time
 
@@ -142,7 +142,7 @@ option is used).
 
 在 DBAPI 级别，通过对`fetchall()`进行非常缓慢的调用可以指示过多的行数：
 
-    2    0.300    0.600    0.300    0.600 {method 'fetchall' of 'sqlite3.Cursor' objects}plainplainplainplainplainplain
+    2    0.300    0.600    0.300    0.600 {method 'fetchall' of 'sqlite3.Cursor' objects}plainplainplainplainplainplainplainplainplainplain
 
 即使最终结果似乎没有多行，意外的大量行也可能是笛卡尔积的结果 -
 当多组行合并在一起而没有适当地将表连接在一起时。如果在复杂的查询中使用了错误的[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象，并引入其他意外的 FROM 子句，那么使用 SQLAlchemy
@@ -150,7 +150,7 @@ Core 或 ORM 查询生成此行为通常很容易。
 
 另一方面，在 DBAPI 级别对`fetchall()`执行快速调用，但是当 SQLAlchemy 的[`ResultProxy`](core_connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")被要求执行`fetchall()`
 
-    # the DBAPI cursor is fast...plainplainplain
+    # the DBAPI cursor is fast...plainplainplainplain
     2    0.020    0.040    0.020    0.040 {method 'fetchall' of 'sqlite3.Cursor' objects}
 
     ...
@@ -167,7 +167,7 @@ Core 或 ORM 查询生成此行为通常很容易。
     class Foo(TypeDecorator):
         impl = String
 
-        def process_result_value(self, value, thing):plainplainplainplain
+        def process_result_value(self, value, thing):plainplainplainplainplainplainplainplain
             # intentionally add slowness for illustration purposes
             time.sleep(.001)
             return value
@@ -188,7 +188,7 @@ Core 或 ORM 查询生成此行为通常很容易。
 
 为了检测行的 ORM 读取缓慢（这是性能关注的最常见区域），诸如`populate_state()`和`_instance()`的调用将说明单个 ORM 对象群体：
 
-    # the ORM calls _instance for each ORM-loaded row it sees, andplainplainplain
+    # the ORM calls _instance for each ORM-loaded row it sees, andplainplainplainplainplainplain
     # populate_state for each ORM-loaded row that results in the population
     # of an object's attributes
     220/20    0.001    0.000    0.010    0.000 lib/sqlalchemy/faq/orm_loading.py:327(_instance)
@@ -198,15 +198,15 @@ ORM 将行转换为 ORM 映射对象的速度慢是该操作复杂性与 cPython
 
 -   获取单个列而不是完整实体，即：
 
-        session.query(User.id, User.name)plainplainplain
+        session.query(User.id, User.name)plainplainplainplain
 
     代替：
 
-        session.query(User)plainplainplainplain
+        session.query(User)plainplainplainplainplain
 
 -   使用[`Bundle`](orm_query.html#sqlalchemy.orm.query.Bundle "sqlalchemy.orm.query.Bundle")对象来组织基于列的结果：
 
-        u_b = Bundle('user', User.id, User.name)plainplainplain
+        u_b = Bundle('user', User.id, User.name)plainplainplainplain
         a_b = Bundle('address', Address.id, Address.email)
 
         for user, address in session.query(u_b, a_b).join(User.addresses):
@@ -252,7 +252,7 @@ Operations](orm_persistence_techniques.html#bulk-operations)方法套件，这�
 
 我们可以使用[Pypy](http://pypy.org/)的最新版本将时间缩短三分之一：
 
-    classics-MacBook-Pro:sqlalchemy classic$ /usr/local/src/pypy-2.1-beta2-osx64/bin/pypy test.pyplainplainplainplain
+    classics-MacBook-Pro:sqlalchemy classic$ /usr/local/src/pypy-2.1-beta2-osx64/bin/pypy test.pyplainplainplainplainplainplainplain
     SQLAlchemy ORM: Total time for 100000 records 5.88369488716 secs
     SQLAlchemy ORM pk given: Total time for 100000 records 3.52294301987 secs
     SQLAlchemy Core: Total time for 100000 records 0.613556146622 secs

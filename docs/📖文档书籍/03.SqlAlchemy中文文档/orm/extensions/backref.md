@@ -16,7 +16,7 @@ tags:
 Relational
 Tutorial](tutorial.html)中引入的，在这里的许多示例中都提到过。它实际上做了什么？让我们从规范的`User`和`Address`场景开始：
 
-    from sqlalchemy import Integer, ForeignKey, String, Columnplainplainplainplainplain
+    from sqlalchemy import Integer, ForeignKey, String, Columnplainplainplainplainplainplainplain
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.orm import relationship
 
@@ -39,7 +39,7 @@ Tutorial](tutorial.html)中引入的，在这里的许多示例中都提到过�
 
 实际上，[`backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")关键字只是在`地址`映射中放置第二个[`关系()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的常见快捷方式，包括建立一个事件两侧的侦听器将镜像两个方向的属性操作。以上配置相当于：
 
-    from sqlalchemy import Integer, ForeignKey, String, Columnplainplainplainplainplain
+    from sqlalchemy import Integer, ForeignKey, String, Columnplainplainplainplainplainplainplain
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.orm import relationship
 
@@ -66,7 +66,7 @@ directive tells each relationship about the other one, indicating that
 they should establish “bidirectional” behavior between each other.
 这种配置的主要作用是关系将事件处理程序添加到两个属性中，这两个属性的行为是“当发生附加或设置事件时，使用这个特定属性名称将自己设置为传入属性”。行为如下所示。从`User`和`Address`实例开始。`.addresses`集合为空，`.user`属性为`None`：
 
-    >>> u1 = User()plainplainplainplainplainplainplain
+    >>> u1 = User()plainplainplainplainplainplainplainplain
     >>> a1 = Address()
     >>> u1.addresses
     []
@@ -75,7 +75,7 @@ they should establish “bidirectional” behavior between each other.
 
 但是，一旦将`Address`追加到`u1.addresses`集合中，集合和标量属性都将被填充：
 
-    >>> u1.addresses.append(a1)plainplainplainplainplainplainplainplainplain
+    >>> u1.addresses.append(a1)plainplainplainplainplainplainplainplainplainplain
     >>> u1.addresses
     [<__main__.Address object at 0x12a6ed0>]
     >>> a1.user
@@ -83,7 +83,7 @@ they should establish “bidirectional” behavior between each other.
 
 这种行为当然也适用于移除操作，以及双方的等效操作。例如，当`.user`再次设置为`None`时，`Address`对象将从反向集合中删除：
 
-    >>> a1.user = Noneplainplainplainplainplain
+    >>> a1.user = Noneplainplainplainplainplainplain
     >>> u1.addresses
     []
 
@@ -106,7 +106,7 @@ argument is discussed in [Specifying Alternate Join
 Conditions](join_conditions.html#relationship-primaryjoin)).
 例如，如果我们将`Address`对象的列表限制为以“tony”开头的列表：
 
-    from sqlalchemy import Integer, ForeignKey, String, Columnplainplainplainplainplainplainplainplainplain
+    from sqlalchemy import Integer, ForeignKey, String, Columnplainplainplainplainplainplainplainplainplainplainplainplain
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.orm import relationship
 
@@ -130,7 +130,7 @@ Conditions](join_conditions.html#relationship-primaryjoin)).
 
 我们可以通过检查所得到的财产来观察，双方的关系是否适用了这种连接条件：
 
-    >>> print(User.addresses.property.primaryjoin)plainplainplainplainplainplain
+    >>> print(User.addresses.property.primaryjoin)plainplainplainplainplainplainplainplainplain
     "user".id = address.user_id AND address.email LIKE :email_1 || '%%'
     >>>
     >>> print(Address.user.property.primaryjoin)
@@ -154,7 +154,7 @@ arguments like [`lazy`](relationship_api.html#sqlalchemy.orm.relationship.params
 and [`cascade_backrefs`](relationship_api.html#sqlalchemy.orm.relationship.params.cascade_backrefs "sqlalchemy.orm.relationship").
 对于这种情况，我们使用[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")函数代替字符串：
 
-    # <other imports>plainplainplainplainplainplain
+    # <other imports>plainplainplainplainplainplainplain
     from sqlalchemy.orm import backref
 
     class User(Base):
@@ -175,7 +175,7 @@ and [`cascade_backrefs`](relationship_api.html#sqlalchemy.orm.relationship.param
 
 以我们前面的例子为例，我们建立了[`primaryjoin`](relationship_api.html#sqlalchemy.orm.relationship.params.primaryjoin "sqlalchemy.orm.relationship")，该集合仅限于`Address`对象的电子邮件地址以`tony`开头，通常 backref 行为是所有项目都在两个方向上填充。我们不希望出现类似以下情况的此行为：
 
-    >>> u1 = User()plainplainplainplainplainplainplainplain
+    >>> u1 = User()plainplainplainplainplainplainplainplainplainplain
     >>> a1 = Address(email='mary')
     >>> a1.user = u1
     >>> u1.addresses
@@ -183,7 +183,7 @@ and [`cascade_backrefs`](relationship_api.html#sqlalchemy.orm.relationship.param
 
 以上，`Address`对象与`u1`的`addresses`集合中的条件不匹配。在刷新这些对象之后，提交的事务及其属性在重新加载时到期，`addresses`集合将在下次访问时触发数据库，​​并且不再具有此`Address`对象目前，由于过滤条件。但是，我们可以通过使用两个单独的[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")结构，仅在一侧放置[`back_populates`](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")来消除 Python 端“backref”行为的这一不需要的一方：
 
-    from sqlalchemy import Integer, ForeignKey, String, Columnplainplainplainplainplainplain
+    from sqlalchemy import Integer, ForeignKey, String, Columnplainplainplainplainplainplainplainplain
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.orm import relationship
 
@@ -208,7 +208,7 @@ and [`cascade_backrefs`](relationship_api.html#sqlalchemy.orm.relationship.param
 在上面的场景中，将`Address`对象附加到`User`的`.addresses`集合将始终建立`.user`
 \>属性在`Address`上：
 
-    >>> u1 = User()plainplainplainplainplainplainplainplainplainplainplainplain
+    >>> u1 = User()plainplainplainplainplainplainplainplainplainplainplainplainplain
     >>> a1 = Address(email='tony')
     >>> u1.addresses.append(a1)
     >>> a1.user
@@ -216,7 +216,7 @@ and [`cascade_backrefs`](relationship_api.html#sqlalchemy.orm.relationship.param
 
 但是，将`User`应用于`Address`的`.user`属性不会将`Address`对象附加到采集：
 
-    >>> a2 = Address(email='mary')plainplainplainplainplainplain
+    >>> a2 = Address(email='mary')plainplainplainplainplainplainplain
     >>> a2.user = u1
     >>> a2 in u1.addresses
     False

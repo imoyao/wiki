@@ -167,7 +167,7 @@ ORM 模型也完全可以反映内容，但这从来就不是一个完全稳定�
 
 一些关键功能的演练如下：
 
-    >>> class User(Base):plainplain
+    >>> class User(Base):plainplainplain
     ...     __tablename__ = 'user'
     ...     id = Column(Integer, primary_key=True)
     ...     name = Column(String)
@@ -286,7 +286,7 @@ method allows the user to specify which tables should be present when
 querying against a joined-table entity.
 不幸的是，这个方法很笨拙，只适用于列表中的第一个实体，否则在内部使用和内部使用都会有尴尬的行为。已添加名为[`with_polymorphic()`](orm_inheritance.html#sqlalchemy.orm.with_polymorphic "sqlalchemy.orm.with_polymorphic")的对[`aliased()`](orm_query.html#sqlalchemy.orm.aliased "sqlalchemy.orm.aliased")结构的新增强，允许将任何实体“别名”为其自身的“多态”版本，可自由使用任何地方：
 
-    from sqlalchemy.orm import with_polymorphicplainplainplain
+    from sqlalchemy.orm import with_polymorphicplainplainplainplain
     palias = with_polymorphic(Person, [Engineer, Manager])
     session.query(Company).\
                 join(palias, Company.employees).\
@@ -358,7 +358,7 @@ and [`PropComparator.has()`](orm_internals.html#sqlalchemy.orm.interfaces.PropCo
 
 Mapper 和实例事件现在可以与一个未映射的超类相关联，其中这些事件将被映射到这些子类时传播到子类。应该使用`propagate=True`标志。此功能允许将事件与声明性基类关联：
 
-    from sqlalchemy.ext.declarative import declarative_baseplainplain
+    from sqlalchemy.ext.declarative import declarative_baseplainplainplain
 
     Base = declarative_base()
 
@@ -392,7 +392,7 @@ Declarative 的一个关键特性是能够使用其字符串名称引用其他�
 
 “延迟反射”示例已移至声明中的支持功能。这个特性允许只用占位符`Table`元数据构造声明式映射类，直到`prepare()`步骤被调用，给定一个`Engine`充分反映所有表格并建立实际映射。系统支持重写列，单个和联合继承，以及不同的每个引擎基数。现在可以根据在引擎创建时在一个步骤中汇编的现有表创建完整的声明性配置：
 
-    class ReflectedOne(DeferredReflection, Base):plainplain
+    class ReflectedOne(DeferredReflection, Base):plainplainplainplain
         __abstract__ = True
 
     class ReflectedTwo(DeferredReflection, Base):
@@ -427,7 +427,7 @@ the mapped class itself would not be recognized when passed to
 or [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.correlate "sqlalchemy.sql.expression.Select.correlate").
 新的 SQL 注册系统允许映射类在核心内被接受为 FROM 子句：
 
-    from sqlalchemy import selectplainplain
+    from sqlalchemy import selectplainplainplain
 
     stmt = select([User]).where(User.id == 5)
 
@@ -472,7 +472,7 @@ or [`Select.correlate()`](core_selectable.html#sqlalchemy.sql.expression.Select.
 请注意，Dogpile 示例以及之前的 Beaker 示例所使用的 SQLAlchemy
 API 已稍有变化，特别是如 Beaker 示例所示，需要进行此更改：
 
-    --- examples/beaker_caching/caching_query.pyplainplainplainplainplain
+    --- examples/beaker_caching/caching_query.pyplainplainplainplainplainplain
     +++ examples/beaker_caching/caching_query.py
     @@ -222,7 +222,8 @@
 
@@ -580,7 +580,7 @@ side conversion function on the way to/back from the database.
 
 上面，`LowerString`类型定义了一个 SQL 表达式，只要在 SELECT 语句的 columns 子句中呈现`test_table.c.data`列时就会发出该表达式：
 
-    >>> print(select([test_table]).where(test_table.c.data == 'HI'))plainplainplain
+    >>> print(select([test_table]).where(test_table.c.data == 'HI'))plainplainplainplain
     SELECT lower(test_table.data) AS data
     FROM test_table
     WHERE test_table.data = lower(:data_1)
@@ -599,7 +599,7 @@ Processing](core_custom_types.html#types-sql-value-processing)
 [New Class/Object Inspection
 System](#feature-orminspection-08)中引入的[`inspect()`](core_inspection.html#sqlalchemy.inspection.inspect "sqlalchemy.inspection.inspect")函数也适用于核心。应用于[`Engine`](core_connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")时，它会生成一个[`Inspector`](core_reflection.html#sqlalchemy.engine.reflection.Inspector "sqlalchemy.engine.reflection.Inspector")对象：
 
-    from sqlalchemy import inspectplainplain
+    from sqlalchemy import inspectplainplainplain
     from sqlalchemy import create_engine
 
     engine = create_engine("postgresql://scott:tiger@localhost/test")
@@ -620,7 +620,7 @@ now has a method [`Select.correlate_except()`](core_selectable.html#sqlalchemy.s
 which specifies “correlate on all FROM clauses except those specified”.
 它可用于映射相关子查询应正常关联的场景，除了可选的特定目标：
 
-    class SnortEvent(Base):
+    class SnortEvent(Base):plain
         __tablename__ = "event"
 
         id = Column(Integer, primary_key=True)
@@ -643,7 +643,7 @@ which specifies “correlate on all FROM clauses except those specified”.
 
 [`Select.correlate_except()`](core_selectable.html#sqlalchemy.sql.expression.Select.correlate_except "sqlalchemy.sql.expression.Select.correlate_except")
 
-### Postgresql HSTORE类型[¶](#postgresql-hstore-type "Permalink to this headline")
+### Postgresql HSTORE 类型[¶](#postgresql-hstore-type "Permalink to this headline")
 
 对 Postgresql 的`HSTORE`类型的支持现在可用作[`postgresql.HSTORE`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")。This
 type makes great usage of the new operator system to provide a full
@@ -715,7 +715,7 @@ concatenation, and containment methods such as `has_key()`, `has_any()`, and `ma
 
 数组串联，其中右侧`[4， 5， 6>`）被强制转换为数组文字：
 
-    select([mytable.c.arraycol + [4, 5, 6]])plainplainplain
+    select([mytable.c.arraycol + [4, 5, 6]])plainplainplainplain
 
 也可以看看
 
@@ -780,7 +780,7 @@ is used:
 
 面向 MySQL，可以在任何这些结构中呈现“前缀”。例如。：
 
-    stmt = table.delete().prefix_with("LOW_PRIORITY", dialect="mysql")plainplainplainplainplain
+    stmt = table.delete().prefix_with("LOW_PRIORITY", dialect="mysql")plainplainplainplainplainplain
 
 
     stmt = table.update().prefix_with("LOW_PRIORITY", dialect="mysql")
@@ -896,7 +896,7 @@ NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基
 
 使用 after\_attach 的事件处理程序现在可以假定给定实例与给定会话关联：
 
-    @event.listens_for(Session, "after_attach")plain
+    @event.listens_for(Session, "after_attach")plainplain
     def after_attach(session, instance):
         assert instance in session
 
@@ -914,7 +914,7 @@ NULL 外键列未被填充。ORM 决定让这些 INSERT 尝试发生，这是基
 
 以前有必要调用[`Query.correlate()`](orm_query.html#sqlalchemy.orm.query.Query.correlate "sqlalchemy.orm.query.Query.correlate")以使列或 WHERE 子查询与父项相关联：
 
-    subq = session.query(Entity.value).\plainplain
+    subq = session.query(Entity.value).\plainplainplain
                     filter(Entity.id==Parent.entity_id).\
                     correlate(Parent).\
                     as_scalar()
@@ -943,7 +943,7 @@ actually used in that context.
 
 这种改变只会使渲染 SQL 变得更好，因为在相对于所选内容的 FROM 对象不足的情况下，不再可能渲染非法 SQL：
 
-    from sqlalchemy.sql import table, column, selectplainplain
+    from sqlalchemy.sql import table, column, selectplainplainplain
 
     t1 = table('t1', column('x'))
     t2 = table('t2', column('y'))
@@ -953,13 +953,13 @@ actually used in that context.
 
 在此更改之前，上述内容将返回：
 
-    SELECT t1.x, t2.y FROM t2plain
+    SELECT t1.x, t2.y FROM t2plainplain
 
 这是无效的 SQL，因为“t1”在任何 FROM 子句中都没有引用。
 
 现在，在没有包含 SELECT 的情况下，它会返回：
 
-    SELECT t1.x, t2.y FROM t1, t2
+    SELECT t1.x, t2.y FROM t1, t2plain
 
 在 SELECT 中，相关按预期生效：
 
@@ -1019,13 +1019,13 @@ x”这样的比较会发生同样的事情，总的来说，这种猜测级别�
 
 表达式系统的用户知道[`Select.apply_labels()`](core_selectable.html#sqlalchemy.sql.expression.Select.apply_labels "sqlalchemy.sql.expression.Select.apply_labels")为每个列名添加表名，影响[`Select.c`](core_selectable.html#sqlalchemy.sql.expression.Select.c "sqlalchemy.sql.expression.Select.c")中可用的名称：
 
-    s = select([table1]).apply_labels()plainplainplain
+    s = select([table1]).apply_labels()plainplainplainplain
     s.c.table1_col1
     s.c.table1_col2
 
 在 0.8 之前，如果[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")具有不同的`Column.key`，则此键将被忽略，与[`Select.apply_labels()`](core_selectable.html#sqlalchemy.sql.expression.Select.apply_labels "sqlalchemy.sql.expression.Select.apply_labels")不一致用过的：
 
-    # before 0.8plainplain
+    # before 0.8plainplainplain
     table1 = Table('t1', metadata,
         Column('col1', Integer, key='column_one')
     )
@@ -1067,7 +1067,7 @@ in both cases:
 
 0.7 添加了一个名为`column_reflect`的新事件，这样可以反映出列的反射，因为每个列都反映出来。我们得到这个事件有点不对，因为事件没有办法获取用于反射的当前`Inspector`和`Connection`，在来自数据库的附加信息的情况下是必要的。由于这是一个尚未广泛使用的新事件，因此我们将直接向其中添加`inspector`参数：
 
-    @event.listens_for(Table, "column_reflect")plainplainplainplainplain
+    @event.listens_for(Table, "column_reflect")plainplainplainplainplainplain
     def listen_for_col(inspector, table, column_info):
         # ...
 
