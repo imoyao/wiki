@@ -40,7 +40,7 @@ SQLAlchemy 通过现代版本支持从 4.1 版本开始的 MySQL。但是，如�
 
 MySQL 具有自动连接关闭行为，适用于闲置八小时或更长时间的连接。为了避免发生此问题，请使用控制任何连接的最大使用期限的`pool_recycle`选项：
 
-    engine = create_engine('mysql+mysqldb://...', pool_recycle=3600)plainplain
+    engine = create_engine('mysql+mysqldb://...', pool_recycle=3600)plain
 
 也可以看看
 
@@ -58,7 +58,7 @@ including `ENGINE`, `CHARSET`,
 of `utf8`, and `KEY_BLOCK_SIZE`
 of `1024`:
 
-    Table('mytable', metadata,plainplainplainplain
+    Table('mytable', metadata,plain
           Column('data', String(32)),
           mysql_engine='InnoDB',
           mysql_charset='utf8',
@@ -154,7 +154,7 @@ AUTO\_INCREMENT 行为[¶](#auto-increment-behavior "Permalink to this headline"
 
 您可以通过将`False`传递给[`Column`](core_metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")的[`autoincrement`](core_metadata.html#sqlalchemy.schema.Column.params.autoincrement "sqlalchemy.schema.Column")参数来禁用此行为。此标志还可用于启用某些存储引擎的多列键中辅助列的自动递增：
 
-    Table('mytable', metadata,plainplainplain
+    Table('mytable', metadata,
           Column('gid', Integer, primary_key=True, autoincrement=False),
           Column('id', Integer, primary_key=True)
          )
@@ -228,7 +228,7 @@ MySQL SQL 扩展[¶](#mysql-sql-extensions "Permalink to this headline")
 
 许多 MySQL SQL 扩展都是通过 SQLAlchemy 的通用函数和运算符支持来处理的：
 
-    table.select(table.c.password==func.md5('plaintext'))plainplain
+    table.select(table.c.password==func.md5('plaintext'))
     table.select(table.c.username.op('regexp')('^[a-d]'))
 
 当然，任何有效的 MySQL 语句也可以作为字符串执行。
@@ -297,7 +297,7 @@ MySQL 提供了创建具有一定长度的索引条目的选项，其中“lengt
 
 某些 MySQL 存储引擎允许您在创建索引或主键约束时指定索引类型。SQLAlchemy 通过[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")上的`mysql_using`参数提供此功能：
 
-    Index('my_index', my_table.c.data, mysql_using='hash')plainplain
+    Index('my_index', my_table.c.data, mysql_using='hash')
 
 以及[`PrimaryKeyConstraint`](core_constraints.html#sqlalchemy.schema.PrimaryKeyConstraint "sqlalchemy.schema.PrimaryKeyConstraint")上的`mysql_using`参数：
 
@@ -324,7 +324,7 @@ MySQL 关于外键的行为有一些重要的注意事项。
 
 MySQL 不支持外键参数“DEFERRABLE”，“INITIALLY”或“MATCH”。对[`ForeignKeyConstraint`](core_constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")或[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")使用`deferrable`或`initially`关键字参数将会产生这些关键字在 DDL 表达式，这会在 MySQL 上引发错误。为了在外键上使用这些关键字，同时让它们在 MySQL 后端上被忽略，请使用自定义编译规则：
 
-    from sqlalchemy.ext.compiler import compilesplain
+    from sqlalchemy.ext.compiler import compiles
     from sqlalchemy.schema import ForeignKeyConstraint
 
     @compiles(ForeignKeyConstraint, "mysql")
@@ -355,7 +355,7 @@ or [`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy
 loaded by table reflection will not include foreign keys.
 对于这些表，您可以在反射时提供`ForeignKeyConstraint`：
 
-    Table('mytable', metadata,plainplain
+    Table('mytable', metadata,
           ForeignKeyConstraint(['other_id'], ['othertable.other_id']),
           autoload=True
          )
@@ -416,7 +416,7 @@ MySQL 的这种行为可以使用 MySQL
 
 但是，为了适应绝大多数不指定此新标志的 MySQL 数据库，SQLAlchemy 会使用任何未指定`nullable=False`的 TIMESTAMP 列显式地发出“NULL”说明符。为了适应更新的指定`explicit_defaults_for_timestamp`的数据库，SQLAlchemy 还为指定`nullable=False`的 TIMESTAMP 列发出 NOT NULL。以下示例说明：
 
-    from sqlalchemy import MetaData, Integer, Table, Column, textplainplain
+    from sqlalchemy import MetaData, Integer, Table, Column, text
     from sqlalchemy.dialects.mysql import TIMESTAMP
 
     m = MetaData()
@@ -434,7 +434,7 @@ MySQL 的这种行为可以使用 MySQL
 
 输出：
 
-    CREATE TABLE ts_test (plainplainplain
+    CREATE TABLE ts_test (
         a INTEGER,
         b INTEGER NOT NULL,
         c TIMESTAMP NULL,
@@ -449,7 +449,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 
 与所有 SQLAlchemy 方言一样，所有已知可用于 MySQL 的 UPPERCASE 类型都可从顶级方言导入：
 
-    from sqlalchemy.dialects.mysql import \plainplain
+    from sqlalchemy.dialects.mysql import \
             BIGINT, BINARY, BIT, BLOB, BOOLEAN, CHAR, DATE, \
             DATETIME, DECIMAL, DECIMAL, DOUBLE, ENUM, FLOAT, INTEGER, \
             LONGBLOB, LONGTEXT, MEDIUMBLOB, MEDIUMINT, MEDIUMTEXT, NCHAR, \
@@ -461,7 +461,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `BIGINT`{.descname} （ *display\_width = None*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.BIGINT "Permalink to this definition")*
 :   基础：`sqlalchemy.dialects.mysql.types._IntegerType`，[`sqlalchemy.types.BIGINT`](core_type_basics.html#sqlalchemy.types.BIGINT "sqlalchemy.types.BIGINT")
 
-    MySQL BIGINTEGER类型。plainplain
+    MySQL BIGINTEGER类型。
 
     `__ init __`{.descname} （ *display\_width = None*，*\*\* kw* ） [/ T5\>](#sqlalchemy.dialects.mysql.BIGINT.__init__ "Permalink to this definition")
     :   构建一个BIGINTEGER。
@@ -481,12 +481,12 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.mysql.`{.descclassname}`BINARY`{.descname}(*length=None*)[¶](#sqlalchemy.dialects.mysql.BINARY "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
 
-    SQL BINARY类型。plainplain
+    SQL BINARY类型。
 
  *class*`sqlalchemy.dialects.mysql.`{.descclassname}`BIT`{.descname}(*length=None*)[¶](#sqlalchemy.dialects.mysql.BIT "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    MySQL BIT类型。plainplainplain
+    MySQL BIT类型。
 
     这种类型适用于MyISAM的MySQL
     5.0.3或更高版本，以及MyISAM，MEMORY，InnoDB和BDB的5.0.5或更高版本。对于旧版本，请使用MSTinyInteger()类型。
@@ -502,7 +502,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.mysql.`{.descclassname}`BLOB`{.descname}(*length=None*)[¶](#sqlalchemy.dialects.mysql.BLOB "Permalink to this definition")
 :   基础：[`sqlalchemy.types.LargeBinary`](core_type_basics.html#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")
 
-    SQL BLOB类型。plain
+    SQL BLOB类型。
 
     ` __初始化__  T0> （ T1> 长度=无 T2> ） T3> ¶ T4>`{.descname}
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.LargeBinary.__init__ "sqlalchemy.types.LargeBinary.__init__")
@@ -520,7 +520,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `BOOLEAN`{.descname} （ *create\_constraint = True*，*name = None*，*\_create\_events = True tt\> ） [¶](#sqlalchemy.dialects.mysql.BOOLEAN "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.Boolean`](core_type_basics.html#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")
 
-    SQL BOOLEAN类型。plainplainplain
+    SQL BOOLEAN类型。
 
     `__ init __`{.descname} （ *create\_constraint = True*，*name =无*，*\_create\_events = True* ） T5\> [¶ T6\>](#sqlalchemy.dialects.mysql.BOOLEAN.__init__ "Permalink to this definition")
     :   *inherited from the* [`__init__()`](core_type_basics.html#sqlalchemy.types.Boolean.__init__ "sqlalchemy.types.Boolean.__init__")
@@ -572,7 +572,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `DATETIME`{.descname} （ *timezone = False*，*FSP =无 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.DATETIME "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.DATETIME`](core_type_basics.html#sqlalchemy.types.DATETIME "sqlalchemy.types.DATETIME")
 
-    MySQL DATETIME类型。plainplainplain
+    MySQL DATETIME类型。
 
      `__init__`{.descname}(*timezone=False*, *fsp=None*)[¶](#sqlalchemy.dialects.mysql.DATETIME.__init__ "Permalink to this definition")
     :   构建一个MySQL DATETIME类型。
@@ -620,7 +620,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `DOUBLE`{.descname} （ *precision = None*，*scale = None*，*asdecimal = True*，*\*\* kw* ） [](#sqlalchemy.dialects.mysql.DOUBLE "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.mysql.types._FloatType`
 
-    MySQL DOUBLE类型。plainplain
+    MySQL DOUBLE类型。
 
      `__init__`{.descname}(*precision=None*, *scale=None*, *asdecimal=True*, *\*\*kw*)[¶](#sqlalchemy.dialects.mysql.DOUBLE.__init__ "Permalink to this definition")
     :   构建一个DOUBLE。
@@ -698,7 +698,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `FLOAT`{.descname} （ *precision = None*，*scale = None*，*asdecimal = False*，*\*\* kw* ） [](#sqlalchemy.dialects.mysql.FLOAT "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.mysql.types._FloatType`，[`sqlalchemy.types.FLOAT`](core_type_basics.html#sqlalchemy.types.FLOAT "sqlalchemy.types.FLOAT")
 
-    MySQL FLOAT类型。plainplain
+    MySQL FLOAT类型。
 
      `__init__`{.descname}(*precision=None*, *scale=None*, *asdecimal=False*, *\*\*kw*)[¶](#sqlalchemy.dialects.mysql.FLOAT.__init__ "Permalink to this definition")
     :   构建一个浮动。
@@ -720,7 +720,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `INTEGER`{.descname} （ *display\_width = None*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.INTEGER "Permalink to this definition")*
 :   基础：`sqlalchemy.dialects.mysql.types._IntegerType`，[`sqlalchemy.types.INTEGER`](core_type_basics.html#sqlalchemy.types.INTEGER "sqlalchemy.types.INTEGER")
 
-    MySQL INTEGER类型。plainplain
+    MySQL INTEGER类型。
 
     `__ init __`{.descname} （ *display\_width = None*，*\*\* kw* ） [/ T5\>](#sqlalchemy.dialects.mysql.INTEGER.__init__ "Permalink to this definition")
     :   构建一个INTEGER。
@@ -752,12 +752,12 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `LONGBLOB`{.descname} （ *length = None* ） T5\> [¶ T6\>](#sqlalchemy.dialects.mysql.LONGBLOB "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
 
-    MySQL LONGBLOB类型，用于最多2 \^ 32字节的二进制数据。plainplain
+    MySQL LONGBLOB类型，用于最多2 \^ 32字节的二进制数据。
 
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `LONGTEXT`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.dialects.mysql.LONGTEXT "Permalink to this definition")
 :   基础：`sqlalchemy.dialects.mysql.types._StringType`
 
-    MySQL LONGTEXT类型，文本最多2 \^ 32个字符。plain
+    MySQL LONGTEXT类型，文本最多2 \^ 32个字符。
 
     ` __初始化__  T0> （ T1>  ** kwargs  T2> ） T3> ¶ T4>`{.descname}
     :   构建一个LONGTEXT。
@@ -785,12 +785,12 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `MEDIUMBLOB`{.descname} （ *length = None* ） T5\> [¶ T6\>](#sqlalchemy.dialects.mysql.MEDIUMBLOB "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
 
-    MySQL MEDIUMBLOB类型，用于最大2 \^ 24字节的二进制数据。plainplainplain
+    MySQL MEDIUMBLOB类型，用于最大2 \^ 24字节的二进制数据。plain
 
 *class* `sqlalchemy.dialects.mysql。 tt> MEDIUMINT`{.descclassname} （ *display\_width = None*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.MEDIUMINT "Permalink to this definition")*
 :   基础：`sqlalchemy.dialects.mysql.types._IntegerType`
 
-    MySQL MEDIUMINTEGER类型。plainplainplainplain
+    MySQL MEDIUMINTEGER类型。plain
 
     `__ init __`{.descname} （ *display\_width = None*，*\*\* kw* ） [/ T5\>](#sqlalchemy.dialects.mysql.MEDIUMINT.__init__ "Permalink to this definition")
     :   构建一个MEDIUMINTEGER
@@ -838,7 +838,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `NCHAR`{.descname} （ *length = None*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.NCHAR "Permalink to this definition")*
 :   基础：`sqlalchemy.dialects.mysql.types._StringType`，[`sqlalchemy.types.NCHAR`](core_type_basics.html#sqlalchemy.types.NCHAR "sqlalchemy.types.NCHAR")
 
-    MySQL NCHAR类型。plainplainplain
+    MySQL NCHAR类型。
 
     用于服务器配置的国家字符集中的固定长度字符数据。
 
@@ -989,7 +989,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `SMALLINT`{.descname} （ *display\_width = None*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.SMALLINT "Permalink to this definition")*
 :   基础：`sqlalchemy.dialects.mysql.types._IntegerType`，[`sqlalchemy.types.SMALLINT`](core_type_basics.html#sqlalchemy.types.SMALLINT "sqlalchemy.types.SMALLINT")
 
-    MySQL SMALLINTEGER类型。plain
+    MySQL SMALLINTEGER类型。
 
     `__ init __`{.descname} （ *display\_width = None*，*\*\* kw* ） [/ T5\>](#sqlalchemy.dialects.mysql.SMALLINT.__init__ "Permalink to this definition")
     :   构建一个SMALLINTEGER。
@@ -1009,7 +1009,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `TEXT`{.descname} （ *length = None*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.TEXT "Permalink to this definition")*
 :   基础：`sqlalchemy.dialects.mysql.types._StringType`，[`sqlalchemy.types.TEXT`](core_type_basics.html#sqlalchemy.types.TEXT "sqlalchemy.types.TEXT")
 
-    MySQL文本类型，文本最多2 \^ 16个字符。plainplain
+    MySQL文本类型，文本最多2 \^ 16个字符。
 
     ` __初始化__  T0> （ T1> 长度=无 T2>， **千瓦 T3> ） T4> ¶< / T5>`{.descname}
     :   构建一个TEXT。
@@ -1041,7 +1041,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
  *class*`sqlalchemy.dialects.mysql.`{.descclassname}`TIME`{.descname}(*timezone=False*, *fsp=None*)[¶](#sqlalchemy.dialects.mysql.TIME "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TIME`](core_type_basics.html#sqlalchemy.types.TIME "sqlalchemy.types.TIME")
 
-    MySQL TIME类型。plainplainplain
+    MySQL TIME类型。
 
      `__init__`{.descname}(*timezone=False*, *fsp=None*)[¶](#sqlalchemy.dialects.mysql.TIME.__init__ "Permalink to this definition")
     :   构建一个MySQL TIME类型。
@@ -1066,7 +1066,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `TIMESTAMP`{.descname} （ *timezone = False*，*FSP =无 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.TIMESTAMP "Permalink to this definition")*
 :   基础：[`sqlalchemy.types.TIMESTAMP`](core_type_basics.html#sqlalchemy.types.TIMESTAMP "sqlalchemy.types.TIMESTAMP")
 
-    MySQL TIMESTAMP类型。plain
+    MySQL TIMESTAMP类型。
 
      `__init__`{.descname}(*timezone=False*, *fsp=None*)[¶](#sqlalchemy.dialects.mysql.TIMESTAMP.__init__ "Permalink to this definition")
     :   构建一个MySQL TIMESTAMP类型。
@@ -1092,12 +1092,12 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `TINYBLOB`{.descname} （ *length = None* ） T5\> [¶ T6\>](#sqlalchemy.dialects.mysql.TINYBLOB "Permalink to this definition")
 :   基础：`sqlalchemy.types._Binary`
 
-    MySQL TINYBLOB类型，用于2 \^ 8字节的二进制数据。plainplainplain
+    MySQL TINYBLOB类型，用于2 \^ 8字节的二进制数据。
 
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `TINYINT`{.descname} （ *display\_width = None*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.TINYINT "Permalink to this definition")*
 :   基础：`sqlalchemy.dialects.mysql.types._IntegerType`
 
-    MySQL TINYINT类型。plainplainplain
+    MySQL TINYINT类型。
 
     `__ init __`{.descname} （ *display\_width = None*，*\*\* kw* ） [/ T5\>](#sqlalchemy.dialects.mysql.TINYINT.__init__ "Permalink to this definition")
     :   构建一个TINYINT。
@@ -1150,7 +1150,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `VARCHAR`{.descname} （ *length = None*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.dialects.mysql.VARCHAR "Permalink to this definition")*
 :   基础：`sqlalchemy.dialects.mysql.types._StringType`，[`sqlalchemy.types.VARCHAR`](core_type_basics.html#sqlalchemy.types.VARCHAR "sqlalchemy.types.VARCHAR")
 
-    MySQL VARCHAR类型，用于可变长度字符数据。plainplain
+    MySQL VARCHAR类型，用于可变长度字符数据。
 
     `__ init __`{.descname} （ *length = None*，*\*\* kwargs* ） [/ T5\>](#sqlalchemy.dialects.mysql.VARCHAR.__init__ "Permalink to this definition")
     :   构建一个VARCHAR。
@@ -1178,7 +1178,7 @@ MySQL 数据类型[¶](#mysql-data-types "Permalink to this headline")
 *class* `sqlalchemy.dialects.mysql。`{.descclassname} `YEAR`{.descname} （ *display\_width = None* ） T5\> [¶ T6\>](#sqlalchemy.dialects.mysql.YEAR "Permalink to this definition")
 :   基础：[`sqlalchemy.types.TypeEngine`](core_type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    MySQL YEAR类型，用于1901-2155年的单字节存储。plainplain
+    MySQL YEAR类型，用于1901-2155年的单字节存储。
 
 的 MySQL 的 Python [¶ T0\>](#module-sqlalchemy.dialects.mysql.mysqldb "Permalink to this headline")
 ------------------------------------------------------------------------------------------------
@@ -1193,7 +1193,7 @@ MySQL-Python 的文档和下载信息（如果适用）可在以下网址找到�
 
 连接字符串：
 
-    mysql+mysqldb://<user>:<password>@<host>[:<port>]/<dbname>plainplainplain
+    mysql+mysqldb://<user>:<password>@<host>[:<port>]/<dbname>
 
 ### Unicode 的[¶ T0\>](#mysqldb-unicode "Permalink to this headline")
 
@@ -1210,7 +1210,7 @@ bugfixes.
 
 Google Cloud SQL 现在推荐使用 MySQLdb 方言。使用以下 URL 连接：
 
-    mysql+mysqldb://root@/<dbname>?unix_socket=/cloudsql/<projectid>:<instancename>plainplain
+    mysql+mysqldb://root@/<dbname>?unix_socket=/cloudsql/<projectid>:<instancename>
 
 pymysql [¶ T0\>](#module-sqlalchemy.dialects.mysql.pymysql "Permalink to this headline")
 ----------------------------------------------------------------------------------------
@@ -1225,7 +1225,7 @@ PyMySQL 的文档和下载信息（如果适用）可在以下网址获得：[ht
 
 连接字符串：
 
-    mysql+pymysql://<username>:<password>@<host>/<dbname>[?<options>]plainplain
+    mysql+pymysql://<username>:<password>@<host>/<dbname>[?<options>]
 
 ### Unicode 的[¶ T0\>](#id3 "Permalink to this headline")
 
@@ -1236,7 +1236,7 @@ PyMySQL 的文档和下载信息（如果适用）可在以下网址获得：[ht
 pymysql
 DBAPI 是 MySQL-python（MySQLdb）驱动程序的纯 Python 端口，其目标是 100％的兼容性。MySQL-python 的大多数行为注释也适用于 pymysql 驱动程序。
 
-MySQL的 - 连接器[¶ T0\>](#module-sqlalchemy.dialects.mysql.mysqlconnector "Permalink to this headline")
+MySQL 的 - 连接器[¶ T0\>](#module-sqlalchemy.dialects.mysql.mysqlconnector "Permalink to this headline")
 -------------------------------------------------------------------------------------------------------
 
 通过 MySQL Connector / Python 驱动程序支持 MySQL 数据库。
@@ -1250,7 +1250,7 @@ Python 的文档和下载信息（如果适用）可在以下网址获得：[htt
 
 连接字符串：
 
-    mysql+mysqlconnector://<user>:<password>@<host>[:<port>]/<dbname>plainplain
+    mysql+mysqlconnector://<user>:<password>@<host>[:<port>]/<dbname>
 
 ### Unicode 的[¶ T0\>](#id4 "Permalink to this headline")
 
@@ -1269,7 +1269,7 @@ CyMySQL 的文档和下载信息（如果适用）可在以下网址获得：[ht
 
 连接字符串：
 
-    mysql+cymysql://<username>:<password>@<host>/<dbname>[?<options>]plainplainplainplain
+    mysql+cymysql://<username>:<password>@<host>/<dbname>[?<options>]plain
 
 OurSQL [¶ T0\>](#module-sqlalchemy.dialects.mysql.oursql "Permalink to this headline")
 --------------------------------------------------------------------------------------
@@ -1314,7 +1314,7 @@ SQL 的文档和下载信息（如果适用），请访问：[https://developers
 
 连接字符串：
 
-    mysql+gaerdbms:///<dbname>?instance=<instancename>plain
+    mysql+gaerdbms:///<dbname>?instance=<instancename>
 
 ### 汇集[¶ T0\>](#pooling "Permalink to this headline")
 
@@ -1338,7 +1338,7 @@ PyODBC 的文档和下载信息（如果适用）可在以下网址获得：[htt
 
 连接字符串：
 
-    mysql+pyodbc://<username>:<password>@<dsnname>plainplain
+    mysql+pyodbc://<username>:<password>@<dsnname>
 
 zxjdbc [¶ T0\>](#module-sqlalchemy.dialects.mysql.zxjdbc "Permalink to this headline")
 --------------------------------------------------------------------------------------
@@ -1357,7 +1357,7 @@ zxjdbc [¶ T0\>](#module-sqlalchemy.dialects.mysql.zxjdbc "Permalink to this hea
 
 连接字符串：
 
-    mysql+zxjdbc://<user>:<password>@<hostname>[:<port>]/<database>plainplain
+    mysql+zxjdbc://<user>:<password>@<hostname>[:<port>]/<database>
 
 ### 字符集[¶](#character-sets "Permalink to this headline")
 

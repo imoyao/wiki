@@ -48,7 +48,7 @@ Types](core_types.html)中介绍的示例之后，我们从一个自定义类型
 当使用[`sqlalchemy.ext.mutable`](#module-sqlalchemy.ext.mutable "sqlalchemy.ext.mutable")扩展名时，该值本身会跟踪引用它的所有父项。下面，我们演示一下[`MutableDict`](#sqlalchemy.ext.mutable.MutableDict "sqlalchemy.ext.mutable.MutableDict")字典对象的简单版本，它将[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")
 mixin 应用于普通的 Python 字典：
 
-    from sqlalchemy.ext.mutable import Mutableplainplainplainplainplainplainplainplain
+    from sqlalchemy.ext.mutable import Mutable
 
     class MutableDict(Mutable, dict):
         @classmethod
@@ -87,7 +87,7 @@ place.
 
 我们新的`MutableDict`类型提供了一个类方法[`as_mutable()`](#sqlalchemy.ext.mutable.Mutable.as_mutable "sqlalchemy.ext.mutable.Mutable.as_mutable")，我们可以在列元数据中使用它来与类型关联。此方法捕获给定类型的对象或类，并关联侦听器，该侦听器将检测此类型的所有未来映射，并将事件侦听工具应用于映射的属性。比如，用经典的表格元数据：
 
-    from sqlalchemy import Table, Column, Integerplainplainplain
+    from sqlalchemy import Table, Column, Integer
 
     my_data = Table('my_data', metadata,
         Column('id', Integer, primary_key=True),
@@ -96,7 +96,7 @@ place.
 
 在上面，[`as_mutable()`](#sqlalchemy.ext.mutable.Mutable.as_mutable "sqlalchemy.ext.mutable.Mutable.as_mutable")返回`JSONEncodedDict`的实例（如果类型对象不是已经存在的实例），它将拦截所有映射此类型的属性。下面我们根据`my_data`表建立一个简单映射：
 
-    from sqlalchemy import mapperplainplainplain
+    from sqlalchemy import mapper
 
     class MyDataClass(object):
         pass
@@ -108,7 +108,7 @@ place.
 
 使用声明时，使用方式没有区别：
 
-    from sqlalchemy.ext.declarative import declarative_baseplainplainplain
+    from sqlalchemy.ext.declarative import declarative_base
 
     Base = declarative_base()
 
@@ -119,7 +119,7 @@ place.
 
 对`MyDataClass.data`成员进行任何就地更改都会将该属性标记为父对象上的“脏”：
 
-    >>> from sqlalchemy.orm import Sessionplainplainplainplain
+    >>> from sqlalchemy.orm import Sessionplain
 
     >>> sess = Session()
     >>> m1 = MyDataClass(data={'value1':'foo'})
@@ -132,7 +132,7 @@ place.
 
 使用[`associate_with()`](#sqlalchemy.ext.mutable.Mutable.associate_with "sqlalchemy.ext.mutable.Mutable.associate_with")，`MutableDict`可以与`JSONEncodedDict`的所有未来实例关联。这与[`as_mutable()`](#sqlalchemy.ext.mutable.Mutable.as_mutable "sqlalchemy.ext.mutable.Mutable.as_mutable")类似，只是它将无条件地截取所有映射中所有出现的`MutableDict`，而不需要单独声明它：
 
-    MutableDict.associate_with(JSONEncodedDict)plainplainplainplainplain
+    MutableDict.associate_with(JSONEncodedDict)
 
     class MyDataClass(Base):
         __tablename__ = 'my_data'
@@ -145,7 +145,7 @@ place.
 weakrefs and function callbacks.
 在我们的例子中，这是一件好事，因为如果这个字典是可挑选的，它可能会导致我们的值对象的 pickle 大小过大，而这些对象是在父级上下文之外自行挑选的。这里的开发人员责任只是提供一个从 pickle 流中排除[`_parents()`](#sqlalchemy.ext.mutable.MutableBase._parents "sqlalchemy.ext.mutable.MutableBase._parents")集合的`__getstate__`方法：
 
-    class MyMutableType(Mutable):plainplainplainplainplainplain
+    class MyMutableType(Mutable):
         def __getstate__(self):
             d = self.__dict__.copy()
             d.pop('_parents', None)
@@ -180,7 +180,7 @@ Types](composites.html#mapper-composite) to subclass
 and to also route attribute set events via `__setattr__` to the [`MutableComposite.changed()`](#sqlalchemy.ext.mutable.MutableComposite.changed "sqlalchemy.ext.mutable.MutableComposite.changed")
 method:
 
-    from sqlalchemy.ext.mutable import MutableCompositeplainplainplainplain
+    from sqlalchemy.ext.mutable import MutableCompositeplain
 
     class Point(MutableComposite):
         def __init__(self, x, y):
@@ -213,7 +213,7 @@ any usage of [`orm.composite()`](composites.html#sqlalchemy.orm.composite "sqlal
 that specifies our `Point` type.
 下面，当`Point`映​​射到`Vertex`类时，将建立侦听器，它将将`Point`对象的变化事件路由到`Vertex.start`和`Vertex.end`属性：
 
-    from sqlalchemy.orm import composite, mapperplainplainplainplainplain
+    from sqlalchemy.orm import composite, mapper
     from sqlalchemy import Table, Column
 
     vertices = Table('vertices', metadata,
@@ -234,7 +234,7 @@ that specifies our `Point` type.
 
 对`Vertex.start`或`Vertex.end`成员进行任何就地更改都会将该属性标记为父对象上的“脏”：
 
-    >>> from sqlalchemy.orm import Sessionplainplain
+    >>> from sqlalchemy.orm import Session
 
     >>> sess = Session()
     >>> v1 = Vertex(start=Point(3, 4), end=Point(12, 15))
@@ -253,7 +253,7 @@ method is essentially equivalent to using a [`validates()`](mapped_attributes.ht
 validation routine for all attributes which make use of the custom
 composite type:
 
-    class Point(MutableComposite):plainplainplainplainplainplainplainplain
+    class Point(MutableComposite):
         # other Point methods
         # ...
 
@@ -278,7 +278,7 @@ attribute which isn’t picklable. If we need to pickle instances of
 `Point` or its owning class `Vertex`, we at least need to define a `__getstate__` that doesn’t include the `_parents`
 dictionary. 下面我们定义一个`__getstate__`和一个`__setstate__`，它们包装了我们的`Point`类的最小形式：
 
-    class Point(MutableComposite):plainplain
+    class Point(MutableComposite):
         # ...
 
         def __getstate__(self):
@@ -295,7 +295,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableBase`{.descname} [¶](#sqlalchemy.ext.mutable.MutableBase "Permalink to this definition")
 :   通用基类为[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")和[`MutableComposite`](#sqlalchemy.ext.mutable.MutableComposite "sqlalchemy.ext.mutable.MutableComposite")。
 
-    ` _parents  T0> ¶ T1>`{.descname}plainplainplainplain
+    ` _parents  T0> ¶ T1>`{.descname}plain
     :   父对象上的字典 - \>属性名称。
 
         这个属性是一个所谓的“memoized”属性。它在第一次访问时使用新的`weakref.WeakKeyDictionary`进行初始化，并在后续访问时返回相同的对象。
@@ -325,7 +325,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `Mutable`{.descname} [¶](#sqlalchemy.ext.mutable.Mutable "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
-    Mixin定义变化事件向父对象的透明传播。plainplainplainplainplainplain
+    Mixin定义变化事件向父对象的透明传播。
 
     有关使用信息，请参阅[Establishing Mutability on Scalar Column
     Values](#mutable-scalars)中的示例。
@@ -423,7 +423,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableComposite`{.descname} [¶](#sqlalchemy.ext.mutable.MutableComposite "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.MutableBase`](#sqlalchemy.ext.mutable.MutableBase "sqlalchemy.ext.mutable.MutableBase")
 
-    Mixin，定义SQLAlchemy“复合”对象上的变化事件的透明传播给其拥有的父对象或父对象。plainplain
+    Mixin，定义SQLAlchemy“复合”对象上的变化事件的透明传播给其拥有的父对象或父对象。
 
     有关使用信息，请参阅[Establishing Mutability on
     Composites](#mutable-composites)中的示例。
@@ -434,7 +434,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableDict`{.descname} [¶](#sqlalchemy.ext.mutable.MutableDict "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")，`__builtin__.dict`
 
-    实现[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")的字典类型。plainplainplainplainplain
+    实现[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")的字典类型。
 
     [`MutableDict`](#sqlalchemy.ext.mutable.MutableDict "sqlalchemy.ext.mutable.MutableDict")对象实现了一个字典，该字典在字典内容发生更改时（包括添加或删除值时）会将更改事件发送到基础映射。
 
@@ -472,7 +472,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableList`{.descname} [¶](#sqlalchemy.ext.mutable.MutableList "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")，`__builtin__.list`
 
-    实现[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")的列表类型。plainplainplain
+    实现[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")的列表类型。
 
     [`MutableList`](#sqlalchemy.ext.mutable.MutableList "sqlalchemy.ext.mutable.MutableList")对象实现了一个列表，当列表内容发生更改时（包括添加或删除值时），这些列表将发出更改事件到底层映射。
 
@@ -519,7 +519,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
 *class* `sqlalchemy.ext.mutable。`{.descclassname} `MutableSet`{.descname} [¶](#sqlalchemy.ext.mutable.MutableSet "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.mutable.Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")，`__builtin__.set`
 
-    实现[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")的集合类型。plainplainplainplain
+    实现[`Mutable`](#sqlalchemy.ext.mutable.Mutable "sqlalchemy.ext.mutable.Mutable")的集合类型。plain
 
     [`MutableSet`](#sqlalchemy.ext.mutable.MutableSet "sqlalchemy.ext.mutable.MutableSet")对象实现了一个集合，当集合的内容发生更改时（包括添加或删除值时），该集合将发生更改事件到底层映射。
 

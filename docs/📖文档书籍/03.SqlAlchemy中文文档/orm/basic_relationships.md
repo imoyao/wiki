@@ -16,7 +16,7 @@ tags:
 
 用于以下各节的导入如下：
 
-    from sqlalchemy import Table, Column, Integer, ForeignKeyplainplainplainplainplainplain
+    from sqlalchemy import Table, Column, Integer, ForeignKey
     from sqlalchemy.orm import relationship
     from sqlalchemy.ext.declarative import declarative_base
 
@@ -28,7 +28,7 @@ tags:
 一对多关系中，在引用 parent 表的 child 表中配置一个外键。[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
 指定 parent 表,作为代表 child 表的项目集合的引用
 
-    class Parent(Base):plainplainplainplain
+    class Parent(Base):plain
         __tablename__ = 'parent'
         id = Column(Integer, primary_key=True)
         children = relationship("Child")
@@ -43,7 +43,7 @@ tags:
 和用 [`relationship.back_populates`](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")
 参数连接俩个表:
 
-    class Parent(Base):plainplainplainplain
+    class Parent(Base):plain
         __tablename__ = 'parent'
         id = Column(Integer, primary_key=True)
         children = relationship("Child", back_populates="parent")
@@ -58,7 +58,7 @@ tags:
 
 或者，可以在单个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上使用[`backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")选项，而不使用[`back_populates`](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")。
 
-    class Parent(Base):plainplainplain
+    class Parent(Base):
         __tablename__ = 'parent'
         id = Column(Integer, primary_key=True)
         children = relationship("Child", backref="parent")
@@ -69,7 +69,7 @@ tags:
 多对一中，在引用 child 表的 parent 表中放置外键。[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")
 在 paren 表上声明，将创建一个新的标量保持属性：
 
-    class Parent(Base):plainplainplainplainplain
+    class Parent(Base):
         __tablename__ = 'parent'
         id = Column(Integer, primary_key=True)
         child_id = Column(Integer, ForeignKey('child.id'))
@@ -83,7 +83,7 @@ tags:
 并应用 [`relationship.back_populates`](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")
 参数 来达到双向行为
 
-    class Parent(Base):plainplain
+    class Parent(Base):
         __tablename__ = 'parent'
         id = Column(Integer, primary_key=True)
         child_id = Column(Integer, ForeignKey('child.id'))
@@ -96,7 +96,7 @@ tags:
 
 或者，可以在单个[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")上使用[`backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")参数，例如`Parent.child`。
 
-    class Parent(Base):plainplainplainplainplainplainplain
+    class Parent(Base):plain
         __tablename__ = 'parent'
         id = Column(Integer, primary_key=True)
         child_id = Column(Integer, ForeignKey('child.id'))
@@ -107,7 +107,7 @@ tags:
 
 一对一本质上是在两边都是标量属性的双向关系。为了实现这一点，放置指示标量属性的[`uselist`](relationship_api.html#sqlalchemy.orm.relationship.params.uselist "sqlalchemy.orm.relationship")标志，来代替“多”侧关系的集合。来将一对多转换为一对一：
 
-    class Parent(Base):plainplainplainplainplain
+    class Parent(Base):
         __tablename__ = 'parent'
         id = Column(Integer, primary_key=True)
         child = relationship("Child", uselist=False, back_populates="parent")
@@ -120,7 +120,7 @@ tags:
 
 或者多对一：
 
-    class Parent(Base):plainplainplainplain
+    class Parent(Base):plain
         __tablename__ = 'parent'
         id = Column(Integer, primary_key=True)
         child_id = Column(Integer, ForeignKey('child.id'))
@@ -133,7 +133,7 @@ tags:
 
 总之，可以使用[`relationship.backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")和[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")函数来代替[`relationship.back_populates`](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")方法；要在反向引用上指定`uselist`，请使用[`backref()`](relationship_api.html#sqlalchemy.orm.backref "sqlalchemy.orm.backref")函数：
 
-    from sqlalchemy.orm import backrefplainplainplainplainplainplainplain
+    from sqlalchemy.orm import backrefplain
 
     class Parent(Base):
         __tablename__ = 'parent'
@@ -146,7 +146,7 @@ tags:
 
 在“多对多”中，需要在两个类之间添加了一个关联表。关联表由[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数指示。通常，[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")使用与声明性基类关联的[`MetaData`](core_metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象，以便[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")指令可以定位要链接的远程表：
 
-    association_table = Table('association', Base.metadata,plainplainplainplainplainplainplain
+    association_table = Table('association', Base.metadata,plain
         Column('left_id', Integer, ForeignKey('left.id')),
         Column('right_id', Integer, ForeignKey('right.id'))
     )
@@ -163,7 +163,7 @@ tags:
 
 对于双向关系，关系的两侧都包含集合。使用[`relationship.back_populates`](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")指定，并为每个[`关系()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")指定公共关联表：
 
-    association_table = Table('association', Base.metadata,plainplainplainplainplainplain
+    association_table = Table('association', Base.metadata,
         Column('left_id', Integer, ForeignKey('left.id')),
         Column('right_id', Integer, ForeignKey('right.id'))
     )
@@ -186,7 +186,7 @@ tags:
 
 当使用[`backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")参数而不是[`relationship.back_populates`](relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")时，反向引用将自动对反向关系使用相同的[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数：
 
-    association_table = Table('association', Base.metadata,plainplain
+    association_table = Table('association', Base.metadata,
         Column('left_id', Integer, ForeignKey('left.id')),
         Column('right_id', Integer, ForeignKey('right.id'))
     )
@@ -204,7 +204,7 @@ tags:
 
 [`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数也接受一个可返回最终参数的 callable，只有在首次使用 mappers 时才会计算。.使用它，稍后我们可以定义`association_table`，只要在所有模块初始化完成后便可调用。
 
-    class Parent(Base):plainplainplainplainplainplain
+    class Parent(Base):
         __tablename__ = 'left'
         id = Column(Integer, primary_key=True)
         children = relationship("Child",
@@ -213,7 +213,7 @@ tags:
 
 使用声明式扩展，传统的“表的字符串名称”也被接受，与存储在`Base.metadata.tables`中的表的名称匹配：
 
-    class Parent(Base):plainplainplainplainplainplain
+    class Parent(Base):
         __tablename__ = 'left'
         id = Column(Integer, primary_key=True)
         children = relationship("Child",
@@ -224,13 +224,13 @@ tags:
 
 对于[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")的[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数唯一的行为是指定这里的[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")自动受限于 INSERT 和 DELETE 语句，因为对象从集合中添加或删除。这里**不需要手动从此表中删除**。从集合中删除记录的操作将影响正在删除的行：
 
-    # row will be deleted from the "secondary" tableplainplainplainplain
+    # row will be deleted from the "secondary" tableplain
     # automatically
     myparent.children.remove(somechild)
 
 经常出现的一个问题是，当子对象直接传递给[`Session.delete()`](session_api.html#sqlalchemy.orm.session.Session.delete "sqlalchemy.orm.session.Session.delete")时，“secondary”表中的行是如何删除的：
 
-    session.delete(somechild)plainplainplain
+    session.delete(somechild)
 
 这里有几种可能性：
 
@@ -253,7 +253,7 @@ tags:
 关联对象模式是多对多的变体：当关联表包含除左表和右表外键之外的其他列时使用。而不是使用[`secondary`](relationship_api.html#sqlalchemy.orm.relationship.params.secondary "sqlalchemy.orm.relationship")参数，将一个新类直接映射到关联表。关系的左侧通过一对多引用关联对象，关联类通过多对一引用右侧。下面我们示出映射到`Association`类的关联表，这包括被称为`extra_data`的列，它是一个储存在相互关联`Parent`和
 `Child`中的 string 值。
 
-    class Association(Base):plainplainplainplainplainplainplainplainplain
+    class Association(Base):
         __tablename__ = 'association'
         left_id = Column(Integer, ForeignKey('left.id'), primary_key=True)
         right_id = Column(Integer, ForeignKey('right.id'), primary_key=True)
@@ -271,7 +271,7 @@ tags:
 
 一如既往，双向关系使用[`relationship.back_populates`(relationship_api.html#sqlalchemy.orm.relationship.params.back_populates "sqlalchemy.orm.relationship")或[`relationship.backref`](relationship_api.html#sqlalchemy.orm.relationship.params.backref "sqlalchemy.orm.relationship")：
 
-    class Association(Base):plainplainplainplainplainplainplain
+    class Association(Base):plain
         __tablename__ = 'association'
         left_id = Column(Integer, ForeignKey('left.id'), primary_key=True)
         right_id = Column(Integer, ForeignKey('right.id'), primary_key=True)
@@ -291,7 +291,7 @@ tags:
 
 以直接形式使用关联模式要求子对象在关联到关联实例之前附加到父对象；类似地，从 parent 到 child 的访问通过关联对象：
 
-    # create parent, append a child via associationplainplainplain
+    # create parent, append a child via association
     p = Parent()
     a = Association(extra_data="some data")
     a.child = Child()
@@ -312,7 +312,7 @@ Proxy）关联代理](extensions_associationproxy.html)扩展。此扩展允许�
 
 以下，对`Parent.children`所做的更改不会与在 Python 中对`Parent.child_associations`或`Child.parent_associations`所做的更改协调；而所有这些关系将自己继续正常工作，在[`会话`](session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")过期之前，在一个上的更改不会显示在另一个中，通常发生在[`Session.commit()`](session_api.html#sqlalchemy.orm.session.Session.commit "sqlalchemy.orm.session.Session.commit"):
 
-    class Association(Base):plainplainplainplainplain
+    class Association(Base):
         __tablename__ = 'association'
 
         left_id = Column(Integer, ForeignKey('left.id'), primary_key=True)
@@ -334,7 +334,7 @@ Proxy）关联代理](extensions_associationproxy.html)扩展。此扩展允许�
 
 此外，正如一个关系的更改不会自动反映在其他关系中一样，将相同的数据写入这两个关系也会导致冲突的 INSERT 或 DELETE 语句，例如下面的示例中，我们在`Parent`和`Child`对象建立两次相同的关系：
 
-    p1 = Parent()plainplainplain
+    p1 = Parent()
     c1 = Child()
     p1.children.append(c1)
 

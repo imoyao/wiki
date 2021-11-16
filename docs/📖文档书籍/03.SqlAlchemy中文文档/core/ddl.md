@@ -28,7 +28,7 @@ in order to issue data definition language (DDL) for all constructs.
 
 使用[`DDL`](#sqlalchemy.schema.DDL "sqlalchemy.schema.DDL")结构最容易实现自定义 DDL 短语。这个构造像所有其他的 DDL 元素一样工作，除了它接受一个字符串，它是要发射的文本：
 
-    event.listen(plainplain
+    event.listen(
         metadata,
         "after_create",
         DDL("ALTER TABLE users ADD CONSTRAINT "
@@ -45,7 +45,7 @@ Extension](compiler.html)。
 
 先前引入的[`DDL`](#sqlalchemy.schema.DDL "sqlalchemy.schema.DDL")构造也具有基于对数据库的检查有条件调用的能力。该功能可以使用[`DDLElement.execute_if()`](#sqlalchemy.schema.DDLElement.execute_if "sqlalchemy.schema.DDLElement.execute_if")方法。例如，如果我们想创建一个触发器，但只能在 Postgresql 后端上，我们可以这样调用它：
 
-    mytable = Table(plainplainplain
+    mytable = Table(
         'mytable', metadata,
         Column('id', Integer, primary_key=True),
         Column('data', String(50))
@@ -64,7 +64,7 @@ Extension](compiler.html)。
 
 [`DDLElement.execute_if.dialect`](#sqlalchemy.schema.DDLElement.execute_if.params.dialect "sqlalchemy.schema.DDLElement.execute_if")关键字也接受字符串方言名称的元组：
 
-    event.listen(plainplainplain
+    event.listen(
         mytable,
         "after_create",
         trigger.execute_if(dialect=('postgresql', 'mysql'))
@@ -77,7 +77,7 @@ Extension](compiler.html)。
 
 [`DDLElement.execute_if()`](#sqlalchemy.schema.DDLElement.execute_if "sqlalchemy.schema.DDLElement.execute_if")方法也可以用于可接收数据库连接的可调用函数。在下面的例子中，我们使用它来有条件地创建 CHECK 约束，首先在 Postgresql 目录中查看它是否存在：
 
-    def should_create(ddl, target, connection, **kw):plainplainplainplainplain
+    def should_create(ddl, target, connection, **kw):
         row = connection.execute(
             "select conname from pg_constraint where conname='%s'" %
             ddl.element.name).scalar()
@@ -121,7 +121,7 @@ Extension](compiler.html)。
 
 `sqlalchemy.schema`包包含提供 DDL 表达式的 SQL 表达式结构。例如，要产生一个`CREATE TABLE`语句：
 
-    from sqlalchemy.schema import CreateTableplainplain
+    from sqlalchemy.schema import CreateTable
     sqlengine.execute(CreateTable(mytable))
     CREATE TABLE mytable (
         col1 INTEGER,
@@ -152,7 +152,7 @@ will invoke these constructs unconditionally.
 
 我们可以用[`AddConstraint`](#sqlalchemy.schema.AddConstraint "sqlalchemy.schema.AddConstraint")和[`DropConstraint`](#sqlalchemy.schema.DropConstraint "sqlalchemy.schema.DropConstraint")结构来说明一个事件驱动的例子，因为事件驱动系统可以用于 CHECK 和 UNIQUE 约束，像我们在[`DDLElement.execute_if()`](#sqlalchemy.schema.DDLElement.execute_if "sqlalchemy.schema.DDLElement.execute_if")的前一个例子：
 
-    def should_create(ddl, target, connection, **kw):plainplainplainplain
+    def should_create(ddl, target, connection, **kw):plain
         row = connection.execute(
             "select conname from pg_constraint where conname='%s'" %
             ddl.element.name).scalar()
@@ -201,7 +201,7 @@ DDL 表达式构造 API [¶](#ddl-expression-constructs-api "Permalink to this h
  `sqlalchemy.schema.`{.descclassname}`sort_tables`{.descname}(*tables*, *skip\_fn=None*, *extra\_dependencies=None*)[¶](#sqlalchemy.schema.sort_tables "Permalink to this definition")
 :   根据依赖关系排序[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的集合。
 
-    这是一个依赖排序的排序，它将发射[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，以便它们将遵循其依赖的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象。根据[`ForeignKeyConstraint`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象的存在以及[`Table.add_is_dependent_on()`](metadata.html#sqlalchemy.schema.Table.add_is_dependent_on "sqlalchemy.schema.Table.add_is_dependent_on")添加的显式依赖关系，表依赖于另一个表。plainplain
+    这是一个依赖排序的排序，它将发射[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象，以便它们将遵循其依赖的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象。根据[`ForeignKeyConstraint`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象的存在以及[`Table.add_is_dependent_on()`](metadata.html#sqlalchemy.schema.Table.add_is_dependent_on "sqlalchemy.schema.Table.add_is_dependent_on")添加的显式依赖关系，表依赖于另一个表。
 
     警告
 
@@ -238,7 +238,7 @@ DDL 表达式构造 API [¶](#ddl-expression-constructs-api "Permalink to this h
 :   对[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
     / [`ForeignKeyConstraint`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象的集合进行排序。
 
-    这是一个依赖排序的排序，它将发出`（Table， [ForeignKeyConstraint， ...]）  t0的元组>使得每个Table`遵循其依赖的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象。Remaining
+    这是一个依赖排序的排序，它将发出`（Table， [ForeignKeyConstraint， ...]）  t0的元组>使得每个Table`遵循其依赖的[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象。Remainingplain
     [`ForeignKeyConstraint`](constraints.html#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")
     objects that are separate due to dependency rules not satisifed by
     the sort are emitted afterwards as
@@ -426,7 +426,7 @@ DDL 表达式构造 API [¶](#ddl-expression-constructs-api "Permalink to this h
 *class* `sqlalchemy.schema。`{.descclassname} `DDL`{.descname} （ *语句*，*on =无 context = None，*bind = None* ） [¶](#sqlalchemy.schema.DDL "Permalink to this definition")*
 :   基础：[`sqlalchemy.schema.DDLElement`](#sqlalchemy.schema.DDLElement "sqlalchemy.schema.DDLElement")
 
-    一个文字DDL语句。plainplainplain
+    一个文字DDL语句。
 
     指定要由数据库执行的文字SQL
     DDL。DDL对象充当DDL事件侦听器，可以使用[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")或[`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象作为目标来订阅[`DDLEvents`](events.html#sqlalchemy.events.DDLEvents "sqlalchemy.events.DDLEvents")中列出的事件。基本模板支持允许单个DDL实例处理多个表的重复任务。
@@ -507,14 +507,14 @@ DDL 表达式构造 API [¶](#ddl-expression-constructs-api "Permalink to this h
  *class*`sqlalchemy.schema.`{.descclassname}`_CreateDropBase`{.descname}(*element*, *on=None*, *bind=None*)[¶](#sqlalchemy.schema._CreateDropBase "Permalink to this definition")
 :   基础：[`sqlalchemy.schema.DDLElement`](#sqlalchemy.schema.DDLElement "sqlalchemy.schema.DDLElement")
 
-    表示CREATE和DROP或等价物的DDL结构的基类。plainplainplainplain
+    表示CREATE和DROP或等价物的DDL结构的基类。
 
     \_CreateDropBase的常见主题是单个`element`属性，它指向要创建或删除的元素。
 
  *class*`sqlalchemy.schema.`{.descclassname}`CreateTable`{.descname}(*element*, *on=None*, *bind=None*, *include\_foreign\_key\_constraints=None*)[¶](#sqlalchemy.schema.CreateTable "Permalink to this definition")
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
 
-    表示一个CREATE TABLE语句。plainplain
+    表示一个CREATE TABLE语句。
 
      `__init__`{.descname}(*element*, *on=None*, *bind=None*, *include\_foreign\_key\_constraints=None*)[¶](#sqlalchemy.schema.CreateTable.__init__ "Permalink to this definition")
     :   创建一个[`CreateTable`](#sqlalchemy.schema.CreateTable "sqlalchemy.schema.CreateTable")结构。
@@ -540,12 +540,12 @@ DDL 表达式构造 API [¶](#ddl-expression-constructs-api "Permalink to this h
  *class*`sqlalchemy.schema.`{.descclassname}`DropTable`{.descname}(*element*, *on=None*, *bind=None*)[¶](#sqlalchemy.schema.DropTable "Permalink to this definition")
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
 
-    表示DROP TABLE语句。plainplainplainplain
+    表示DROP TABLE语句。plain
 
 *class* `sqlalchemy.schema。`{.descclassname} `CreateColumn`{.descname} （ *元素* ） t5 \> [¶ T6\>](#sqlalchemy.schema.CreateColumn "Permalink to this definition")
 :   基础：`sqlalchemy.schema._DDLCompiles`
 
-    将[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")表示为通过[`CreateTable`](#sqlalchemy.schema.CreateTable "sqlalchemy.schema.CreateTable")结构呈现在CREATEplainplain
+    将[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")表示为通过[`CreateTable`](#sqlalchemy.schema.CreateTable "sqlalchemy.schema.CreateTable")结构呈现在CREATE
     TABLE语句中。
 
     通过使用[Custom SQL Constructs and Compilation
@@ -635,27 +635,27 @@ DDL 表达式构造 API [¶](#ddl-expression-constructs-api "Permalink to this h
  *class*`sqlalchemy.schema.`{.descclassname}`CreateSequence`{.descname}(*element*, *on=None*, *bind=None*)[¶](#sqlalchemy.schema.CreateSequence "Permalink to this definition")
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
 
-    表示一个CREATE SEQUENCE语句。plainplainplainplainplainplain
+    表示一个CREATE SEQUENCE语句。
 
  *class*`sqlalchemy.schema.`{.descclassname}`DropSequence`{.descname}(*element*, *on=None*, *bind=None*)[¶](#sqlalchemy.schema.DropSequence "Permalink to this definition")
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
 
-    表示DROP SEQUENCE语句。plainplain
+    表示DROP SEQUENCE语句。plain
 
  *class*`sqlalchemy.schema.`{.descclassname}`CreateIndex`{.descname}(*element*, *on=None*, *bind=None*)[¶](#sqlalchemy.schema.CreateIndex "Permalink to this definition")
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
 
-    表示CREATE INDEX语句。plainplainplainplain
+    表示CREATE INDEX语句。plain
 
  *class*`sqlalchemy.schema.`{.descclassname}`DropIndex`{.descname}(*element*, *on=None*, *bind=None*)[¶](#sqlalchemy.schema.DropIndex "Permalink to this definition")
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
 
-    代表DROP INDEX语句。plainplainplainplainplainplain
+    代表DROP INDEX语句。
 
 *class* `sqlalchemy.schema。`{.descclassname} `AddConstraint`{.descname} （ *元素*，*/ t5\>，*\*\* kw* ） [¶](#sqlalchemy.schema.AddConstraint "Permalink to this definition")*
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
 
-    表示ALTER TABLE ADD CONSTRAINT语句。plainplainplain
+    表示ALTER TABLE ADD CONSTRAINT语句。
 
 *class* `sqlalchemy.schema。`{.descclassname} `DropConstraint`{.descname} （ *元素*，*cascade = False*，*\*\* kw* ） [¶](#sqlalchemy.schema.DropConstraint "Permalink to this definition")
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
@@ -665,7 +665,7 @@ DDL 表达式构造 API [¶](#ddl-expression-constructs-api "Permalink to this h
 *class* `sqlalchemy.schema。`{.descclassname} `CreateSchema`{.descname} （ *name*，*quote =无*，*\*\* kw* ） [¶](#sqlalchemy.schema.CreateSchema "Permalink to this definition")
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
 
-    表示CREATE SCHEMA语句。plainplain
+    表示CREATE SCHEMA语句。
 
     New in version 0.7.4.
 
@@ -677,7 +677,7 @@ DDL 表达式构造 API [¶](#ddl-expression-constructs-api "Permalink to this h
 *class* `sqlalchemy.schema。`{.descclassname} `DropSchema`{.descname} （ *name*，*quote =无 cascade = False，*\*\* kw* ） [¶](#sqlalchemy.schema.DropSchema "Permalink to this definition")*
 :   基础：[`sqlalchemy.schema._CreateDropBase`](#sqlalchemy.schema._CreateDropBase "sqlalchemy.schema._CreateDropBase")
 
-    代表DROP SCHEMA语句。plainplainplainplain
+    代表DROP SCHEMA语句。plain
 
     这里的参数是模式的字符串名称。
 

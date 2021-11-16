@@ -21,14 +21,14 @@ tags:
 
 例如：
 
-              userplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+              user
     ---------------------------------
     user_id    name   related_user_id
        1       'ed'          1
 
 要么：
 
-                 widget                                                  entryplainplainplainplainplainplainplain
+                 widget                                                  entryplain
     -------------------------------------------             ---------------------------------
     widget_id     name        favorite_entry_id             entry_id      name      widget_id
        1       'somewidget'          5                         5       'someentry'     1
@@ -42,7 +42,7 @@ flag should be placed on just *one* of the relationships, preferably the
 many-to-one side.
 下面我们举例说明一个完整的例子，包括两个[`ForeignKey`](core_constraints.html#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")结构：
 
-    from sqlalchemy import Integer, ForeignKey, Columnplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    from sqlalchemy import Integer, ForeignKey, Column
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.orm import relationship
 
@@ -72,7 +72,7 @@ many-to-one side.
 
 当一个针对上述配置的结构被刷新时，“widget”行将被 INSERT 减去“favorite\_entry\_id”值，然后所有的“entry”行将被 INSERTed 引用父“widget”行，然后将填充 UPDATE 语句“小部件”表的“favorite\_entry\_id”列（暂时为一行）：
 
-    >>> w1 = Widget(name='somewidget')plainplainplainplainplainplainplainplainplainplainplain
+    >>> w1 = Widget(name='somewidget')
     >>> e1 = Entry(name='someentry')
     >>> w1.favorite_entry = e1
     >>> w1.entries = [e1]
@@ -89,7 +89,7 @@ many-to-one side.
 
 我们可以指定的额外配置是在`Widget`上提供更全面的外键约束，这样可以保证`favorite_entry_id`引用`Entry`也指这个`Widget`。我们可以使用复合外键，如下所示：
 
-    from sqlalchemy import Integer, ForeignKey, String, \plainplainplainplainplainplainplainplainplainplain
+    from sqlalchemy import Integer, ForeignKey, String, \plain
             Column, UniqueConstraint, ForeignKeyConstraint
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.orm import relationship
@@ -150,7 +150,7 @@ natural primary keys with mutable values to use the
 `ON UPDATE CASCADE` capabilities of the database.
 说明这一点的示例映射是：
 
-    class User(Base):plainplainplainplainplainplainplainplainplainplain
+    class User(Base):plain
         __tablename__ = 'user'
         __table_args__ = {'mysql_engine': 'InnoDB'}
 
@@ -192,7 +192,7 @@ Support](dialects_sqlite.html#sqlite-foreign-keys)中介绍的配置启用参照
 
 我们之前使用`passive_updates=False`的映射如下所示：
 
-    class User(Base):plainplainplainplainplainplainplain
+    class User(Base):plain
         __tablename__ = 'user'
 
         username = Column(String(50), primary_key=True)

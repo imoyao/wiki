@@ -21,7 +21,7 @@ relationships. 它将拦截在[`relationship()`](relationship_api.html#sqlalchem
 
 示例：一个`slide`表，其中每一行引用相关`bullet`表中的零个或多个条目。幻灯片中的项目符号将根据`bullet`表中的`position`列的值依次显示。当条目在内存中重新排序时，`position`属性的值应该更新以反映新的排序顺序：
 
-    Base = declarative_base()plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    Base = declarative_base()plain
 
     class Slide(Base):
         __tablename__ = 'slide'
@@ -42,7 +42,7 @@ relationships. 它将拦截在[`relationship()`](relationship_api.html#sqlalchem
 
 [`OrderingList`](#sqlalchemy.ext.orderinglist.OrderingList "sqlalchemy.ext.orderinglist.OrderingList")对象自动执行此任务，管理集合中所有`Bullet`对象上的`position`属性。它是使用[`ordering_list()`](#sqlalchemy.ext.orderinglist.ordering_list "sqlalchemy.ext.orderinglist.ordering_list")工厂构造的：
 
-    from sqlalchemy.ext.orderinglist import ordering_listplainplainplainplainplainplainplainplainplainplainplainplainplain
+    from sqlalchemy.ext.orderinglist import ordering_listplain
 
     Base = declarative_base()
 
@@ -64,7 +64,7 @@ relationships. 它将拦截在[`relationship()`](relationship_api.html#sqlalchem
 
 通过上面的映射，管理`Bullet.position`属性：
 
-    s = Slide()plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    s = Slide()
     s.bullets.append(Bullet())
     s.bullets.append(Bullet())
     s.bullets[1].position
@@ -98,7 +98,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.ext.orderinglist.`{.descclassname}`ordering_list`{.descname}(*attr*, *count\_from=None*, *\*\*kw*)[¶](#sqlalchemy.ext.orderinglist.ordering_list "Permalink to this definition")
 :   准备一个用于映射器定义的[`OrderingList`](#sqlalchemy.ext.orderinglist.OrderingList "sqlalchemy.ext.orderinglist.OrderingList")工厂。
 
-    返回适合用作Mapper关系的`collection_class`选项参数的对象。例如。：plainplainplainplainplainplainplainplainplainplainplain
+    返回适合用作Mapper关系的`collection_class`选项参数的对象。例如。：
 
         from sqlalchemy.ext.orderinglist import ordering_list
 
@@ -136,7 +136,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  *class*`sqlalchemy.ext.orderinglist.`{.descclassname}`OrderingList`{.descname}(*ordering\_attr=None*, *ordering\_func=None*, *reorder\_on\_append=False*)[¶](#sqlalchemy.ext.orderinglist.OrderingList "Permalink to this definition")
 :   基础：`__builtin__.list`
 
-    管理其子女的位置信息的自定义列表。plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    管理其子女的位置信息的自定义列表。
 
     [`OrderingList`](#sqlalchemy.ext.orderinglist.OrderingList "sqlalchemy.ext.orderinglist.OrderingList")对象通常使用[`ordering_list()`](#sqlalchemy.ext.orderinglist.ordering_list "sqlalchemy.ext.orderinglist.ordering_list")工厂函数设置，与[`relationship()`](relationship_api.html#sqlalchemy.orm.relationship "sqlalchemy.orm.relationship")函数结合使用。
 

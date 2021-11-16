@@ -24,7 +24,7 @@ SQL 函数 API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `AnsiFunction`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.sql.functions.AnsiFunction "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    `标识符`{.descname} *='AnsiFunction'* [¶](#sqlalchemy.sql.functions.AnsiFunction.identifier "Permalink to this definition")plainplain
+    `标识符`{.descname} *='AnsiFunction'* [¶](#sqlalchemy.sql.functions.AnsiFunction.identifier "Permalink to this definition")
     :   
 
     `姓名`{.descname} *='AnsiFunction'* [¶](#sqlalchemy.sql.functions.AnsiFunction.name "Permalink to this definition")
@@ -33,7 +33,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`Function`{.descname}(*name*, *\*clauses*, *\*\*kw*)[¶](#sqlalchemy.sql.functions.Function "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")
 
-    描述一个命名的SQL函数。plainplain
+    描述一个命名的SQL函数。
 
     有关公共方法的描述，请参阅超类[`FunctionElement`](#sqlalchemy.sql.functions.FunctionElement "sqlalchemy.sql.functions.FunctionElement")。
 
@@ -53,7 +53,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`FunctionElement`{.descname}(*\*clauses*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.FunctionElement "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.Executable`](selectable.html#sqlalchemy.sql.expression.Executable "sqlalchemy.sql.expression.Executable")，[`sqlalchemy.sql.expression.ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")，[`sqlalchemy.sql.expression.FromClause`](selectable.html#sqlalchemy.sql.expression.FromClause "sqlalchemy.sql.expression.FromClause")
 
-    基于SQL函数的构造。plainplainplain
+    基于SQL函数的构造。
 
     也可以看看
 
@@ -245,7 +245,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`OrderedSetAgg`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.OrderedSetAgg "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    定义一个返回类型基于传递给[`FunctionElement.within_group()`](#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")方法的表达式定义的排序表达式类型的函数。plainplainplain
+    定义一个返回类型基于传递给[`FunctionElement.within_group()`](#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")方法的表达式定义的排序表达式类型的函数。
 
     `array_for_multi_clause`{.descname} *= False* [¶](#sqlalchemy.sql.functions.OrderedSetAgg.array_for_multi_clause "Permalink to this definition")
     :   
@@ -262,7 +262,7 @@ SQL 函数 API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `ReturnTypeFromArgs`{.descname} （ *\* args*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.sql.functions.ReturnTypeFromArgs "Permalink to this definition")*
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    定义一个返回类型与其参数相同的函数。plainplainplain
+    定义一个返回类型与其参数相同的函数。
 
     `标识符`{.descname} *='ReturnTypeFromArgs'* [¶](#sqlalchemy.sql.functions.ReturnTypeFromArgs.identifier "Permalink to this definition")
     :   
@@ -273,7 +273,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`array_agg`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.array_agg "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    支持ARRAY\_AGG功能。plainplainplain
+    支持ARRAY\_AGG功能。plain
 
     `func.array_agg(expr)`结构返回[`types.ARRAY`](type_basics.html#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")类型的表达式。
 
@@ -300,7 +300,7 @@ SQL 函数 API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `char_length`{.descname} （ *arg*，*\* \* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.sql.functions.char_length "Permalink to this definition")*
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    `标识符`{.descname} *='char\_length'* [¶](#sqlalchemy.sql.functions.char_length.identifier "Permalink to this definition")plainplainplainplainplainplain
+    `标识符`{.descname} *='char\_length'* [¶](#sqlalchemy.sql.functions.char_length.identifier "Permalink to this definition")
     :   
 
     `name`{.descname} *='char\_length'* [¶](#sqlalchemy.sql.functions.char_length.name "Permalink to this definition")
@@ -347,7 +347,7 @@ SQL 函数 API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `cume_dist`{.descname} （ *\* args*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.sql.functions.cume_dist "Permalink to this definition")*
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    实现`cume_dist`假设集合函数。plainplain
+    实现`cume_dist`假设集合函数。
 
     该函数必须与[`FunctionElement.within_group()`](#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")修饰符一起使用，以提供一个排序表达式来进行操作。
 
@@ -379,7 +379,7 @@ SQL 函数 API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `current_time`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.sql.functions.current_time "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.AnsiFunction`](#sqlalchemy.sql.functions.AnsiFunction "sqlalchemy.sql.functions.AnsiFunction")
 
-    `标识符`{.descname} *='current\_time'* [¶](#sqlalchemy.sql.functions.current_time.identifier "Permalink to this definition")plainplain
+    `标识符`{.descname} *='current\_time'* [¶](#sqlalchemy.sql.functions.current_time.identifier "Permalink to this definition")
     :   
 
     `name`{.descname} *='current\_time'* [¶](#sqlalchemy.sql.functions.current_time.name "Permalink to this definition")
@@ -391,7 +391,7 @@ SQL 函数 API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `current_timestamp`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.sql.functions.current_timestamp "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.AnsiFunction`](#sqlalchemy.sql.functions.AnsiFunction "sqlalchemy.sql.functions.AnsiFunction")
 
-    `标识符`{.descname} *='current\_timestamp'* [¶](#sqlalchemy.sql.functions.current_timestamp.identifier "Permalink to this definition")plainplain
+    `标识符`{.descname} *='current\_timestamp'* [¶](#sqlalchemy.sql.functions.current_timestamp.identifier "Permalink to this definition")
     :   
 
     `name`{.descname} *='current\_timestamp'* [¶](#sqlalchemy.sql.functions.current_timestamp.name "Permalink to this definition")
@@ -403,7 +403,7 @@ SQL 函数 API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `current_user`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.sql.functions.current_user "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.AnsiFunction`](#sqlalchemy.sql.functions.AnsiFunction "sqlalchemy.sql.functions.AnsiFunction")
 
-    `标识符`{.descname} *='current\_user'* [¶](#sqlalchemy.sql.functions.current_user.identifier "Permalink to this definition")plainplain
+    `标识符`{.descname} *='current\_user'* [¶](#sqlalchemy.sql.functions.current_user.identifier "Permalink to this definition")
     :   
 
     `name`{.descname} *='current\_user'* [¶](#sqlalchemy.sql.functions.current_user.name "Permalink to this definition")
@@ -415,7 +415,7 @@ SQL 函数 API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `dense_rank`{.descname} （ *\* args*，*\*\* kwargs T5\> ） T6\> [¶ T7\>](#sqlalchemy.sql.functions.dense_rank "Permalink to this definition")*
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    实现`dense_rank`假设集合函数。plainplain
+    实现`dense_rank`假设集合函数。
 
     该函数必须与[`FunctionElement.within_group()`](#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")修饰符一起使用，以提供一个排序表达式来进行操作。
 
@@ -468,7 +468,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`min`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.min "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.ReturnTypeFromArgs`](#sqlalchemy.sql.functions.ReturnTypeFromArgs "sqlalchemy.sql.functions.ReturnTypeFromArgs")
 
-    `identifier`{.descname} *='min'* [¶](#sqlalchemy.sql.functions.min.identifier "Permalink to this definition")plainplainplain
+    `identifier`{.descname} *='min'* [¶](#sqlalchemy.sql.functions.min.identifier "Permalink to this definition")plain
     :   
 
     `姓名`{.descname} *='分钟'* [¶](#sqlalchemy.sql.functions.min.name "Permalink to this definition")
@@ -477,7 +477,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`mode`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.mode "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.OrderedSetAgg`](#sqlalchemy.sql.functions.OrderedSetAgg "sqlalchemy.sql.functions.OrderedSetAgg")
 
-    实现`mode`有序集聚合函数。plainplain
+    实现`mode`有序集聚合函数。
 
     该函数必须与[`FunctionElement.within_group()`](#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")修饰符一起使用，以提供一个排序表达式来进行操作。
 
@@ -494,7 +494,7 @@ SQL 函数 API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `next_value`{.descname} （ *seq*，*\* \*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.sql.functions.next_value "Permalink to this definition")*
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    以[`Sequence`](defaults.html#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")作为其单个参数，表示'下一个值'。plain
+    以[`Sequence`](defaults.html#sqlalchemy.schema.Sequence "sqlalchemy.schema.Sequence")作为其单个参数，表示'下一个值'。
 
     编译为每个后端的相应函数，或者如果在不支持序列的后端上使用，则会引发NotImplementedError。
 
@@ -542,7 +542,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`percentile_cont`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.percentile_cont "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.OrderedSetAgg`](#sqlalchemy.sql.functions.OrderedSetAgg "sqlalchemy.sql.functions.OrderedSetAgg")
 
-    实现`percentile_cont`有序集合函数。plainplainplainplain
+    实现`percentile_cont`有序集合函数。plain
 
     该函数必须与[`FunctionElement.within_group()`](#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")修饰符一起使用，以提供一个排序表达式来进行操作。
 
@@ -562,7 +562,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`percentile_disc`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.percentile_disc "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.OrderedSetAgg`](#sqlalchemy.sql.functions.OrderedSetAgg "sqlalchemy.sql.functions.OrderedSetAgg")
 
-    实现`percentile_disc`有序集合函数。plainplainplain
+    实现`percentile_disc`有序集合函数。
 
     该函数必须与[`FunctionElement.within_group()`](#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")修饰符一起使用，以提供一个排序表达式来进行操作。
 
@@ -591,7 +591,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`rank`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.rank "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.GenericFunction`](#sqlalchemy.sql.functions.GenericFunction "sqlalchemy.sql.functions.GenericFunction")
 
-    实现`rank`假设集合函数。plainplainplain
+    实现`rank`假设集合函数。
 
     该函数必须与[`FunctionElement.within_group()`](#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")修饰符一起使用，以提供一个排序表达式来进行操作。
 
@@ -611,7 +611,7 @@ SQL 函数 API，工厂和内置函数。
  `sqlalchemy.sql.functions.`{.descclassname}`register_function`{.descname}(*identifier*, *fn*, *package='\_default'*)[¶](#sqlalchemy.sql.functions.register_function "Permalink to this definition")
 :   将可调用函数与特定的函数关联。名称。
 
-    这通常由\_GenericMeta调用，但也可以自行使用，以便非函数结构可以与[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")访问器关联（即，CAST，EXTRACT）。plainplainplainplainplainplainplain
+    这通常由\_GenericMeta调用，但也可以自行使用，以便非函数结构可以与[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")访问器关联（即，CAST，EXTRACT）。plain
 
 *class* `sqlalchemy.sql.functions。`{.descclassname} `session_user`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.sql.functions.session_user "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.AnsiFunction`](#sqlalchemy.sql.functions.AnsiFunction "sqlalchemy.sql.functions.AnsiFunction")
@@ -628,7 +628,7 @@ SQL 函数 API，工厂和内置函数。
  *class*`sqlalchemy.sql.functions.`{.descclassname}`sum`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.sql.functions.sum "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.ReturnTypeFromArgs`](#sqlalchemy.sql.functions.ReturnTypeFromArgs "sqlalchemy.sql.functions.ReturnTypeFromArgs")
 
-    `标识符`{.descname} *='sum'* [¶](#sqlalchemy.sql.functions.sum.identifier "Permalink to this definition")plainplainplainplain
+    `标识符`{.descname} *='sum'* [¶](#sqlalchemy.sql.functions.sum.identifier "Permalink to this definition")
     :   
 
     `name`{.descname} *='sum'* [¶](#sqlalchemy.sql.functions.sum.name "Permalink to this definition")
@@ -637,7 +637,7 @@ SQL 函数 API，工厂和内置函数。
 *class* `sqlalchemy.sql.functions。`{.descclassname} `sysdate`{.descname} （ *\*\* kwargs* ） T5\> [¶ T6\>](#sqlalchemy.sql.functions.sysdate "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.functions.AnsiFunction`](#sqlalchemy.sql.functions.AnsiFunction "sqlalchemy.sql.functions.AnsiFunction")
 
-    `标识符`{.descname} *='sysdate'* [¶](#sqlalchemy.sql.functions.sysdate.identifier "Permalink to this definition")plainplain
+    `标识符`{.descname} *='sysdate'* [¶](#sqlalchemy.sql.functions.sysdate.identifier "Permalink to this definition")
     :   
 
     `name`{.descname} *='sysdate'* [¶](#sqlalchemy.sql.functions.sysdate.name "Permalink to this definition")
