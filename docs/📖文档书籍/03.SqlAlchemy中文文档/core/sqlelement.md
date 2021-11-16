@@ -168,7 +168,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  `sqlalchemy.sql.expression.`{.descclassname}`bindparam`{.descname}(*key*, *value=symbol('NO\_ARG')*, *type\_=None*, *unique=False*, *required=symbol('NO\_ARG')*, *quote=None*, *callable\_=None*, *isoutparam=False*, *\_compared\_to\_operator=None*, *\_compared\_to\_type=None*)[¶](#sqlalchemy.sql.expression.bindparam "Permalink to this definition")
 :   产生一个“约束表达”。
 
-    返回值是[`BindParameter`](#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")的一个实例；这是一个[`ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")子类，它表示SQL表达式中所谓的“占位符”值，其值是在针对数据库连接执行的语句处提供的。plainplain
+    返回值是[`BindParameter`](#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")的一个实例；这是一个[`ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")子类，它表示SQL表达式中所谓的“占位符”值，其值是在针对数据库连接执行的语句处提供的。
 
     在SQLAlchemy中，[`bindparam()`](#sqlalchemy.sql.expression.bindparam "sqlalchemy.sql.expression.bindparam")构造能够携带将在表达时最终使用的实际值。通过这种方式，它不仅可以作为最终人口的“占位符”，还可以作为表示不应直接在SQL语句中呈现的所谓“不安全”值的手段，而应该传递给[DBAPI](glossary.html#term-dbapi)作为需要正确转义并可能为了类型安全性而处理的值。
 
@@ -411,7 +411,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  `sqlalchemy.sql.expression.`{.descclassname}`cast`{.descname}(*expression*, *type\_*)[¶](#sqlalchemy.sql.expression.cast "Permalink to this definition")
 :   产生一个`CAST`表达式。
 
-    [`cast()`](#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")返回[`Cast`](#sqlalchemy.sql.expression.Cast "sqlalchemy.sql.expression.Cast")的实例。plainplain
+    [`cast()`](#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")返回[`Cast`](#sqlalchemy.sql.expression.Cast "sqlalchemy.sql.expression.Cast")的实例。
 
     例如。：
 
@@ -455,7 +455,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  `sqlalchemy.sql.expression.`{.descclassname}`column`{.descname}(*text*, *type\_=None*, *is\_literal=False*, *\_selectable=None*)[¶](#sqlalchemy.sql.expression.column "Permalink to this definition")
 :   生成一个[`ColumnClause`](#sqlalchemy.sql.expression.ColumnClause "sqlalchemy.sql.expression.ColumnClause")对象。
 
-    [`ColumnClause`](#sqlalchemy.sql.expression.ColumnClause "sqlalchemy.sql.expression.ColumnClause")是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")类的轻量级模拟。[`column()`](#sqlalchemy.sql.expression.column "sqlalchemy.sql.expression.column")函数可以仅用一个名字来调用，如下所示：plainplain
+    [`ColumnClause`](#sqlalchemy.sql.expression.ColumnClause "sqlalchemy.sql.expression.ColumnClause")是[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")类的轻量级模拟。[`column()`](#sqlalchemy.sql.expression.column "sqlalchemy.sql.expression.column")函数可以仅用一个名字来调用，如下所示：
 
         from sqlalchemy import column
 
@@ -582,7 +582,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
 ` sqlalchemy.sql.expression。 T0> 不同 T1> （ T2>  EXPR  T3> ） T4> ¶< / T5>`{.descclassname}
 :   生成列表达式级别的一元`DISTINCT`子句。
 
-    这将`DISTINCT`关键字应用于单个列表达式，并且通常包含在聚合函数中，如下所示：plainplain
+    这将`DISTINCT`关键字应用于单个列表达式，并且通常包含在聚合函数中，如下所示：
 
         from sqlalchemy import distinct, func
         stmt = select([func.count(distinct(users_table.c.name))])
@@ -696,7 +696,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  `sqlalchemy.sql.expression.`{.descclassname}`funcfilter`{.descname}(*func*, *\*criterion*)[¶](#sqlalchemy.sql.expression.funcfilter "Permalink to this definition")
 :   针对一个函数产生一个[`FunctionFilter`](#sqlalchemy.sql.expression.FunctionFilter "sqlalchemy.sql.expression.FunctionFilter")对象。
 
-    用于聚合和窗口函数，用于支持“FILTER”子句的数据库后端。plainplain
+    用于聚合和窗口函数，用于支持“FILTER”子句的数据库后端。
 
     例如。：
 
@@ -730,7 +730,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  `sqlalchemy.sql.expression.`{.descclassname}`literal`{.descname}(*value*, *type\_=None*)[¶](#sqlalchemy.sql.expression.literal "Permalink to this definition")
 :   返回绑定到绑定参数的文字子句。
 
-    当非[`ClauseElement`](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")对象（例如字符串，整数，日期等）时，将自动创建文本子句。用于与[`ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")子类的比较操作，例如[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象。使用此函数强制生成一个文字子句，该子句将被创建为具有绑定值的[`BindParameter`](#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")。plain
+    当非[`ClauseElement`](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")对象（例如字符串，整数，日期等）时，将自动创建文本子句。用于与[`ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")子类的比较操作，例如[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象。使用此函数强制生成一个文字子句，该子句将被创建为具有绑定值的[`BindParameter`](#sqlalchemy.sql.expression.BindParameter "sqlalchemy.sql.expression.BindParameter")。
 
     参数：
 
@@ -885,7 +885,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  `sqlalchemy.sql.expression.`{.descclassname}`outparam`{.descname}(*key*, *type\_=None*)[¶](#sqlalchemy.sql.expression.outparam "Permalink to this definition")
 :   创建一个'OUT'参数用于函数（存储过程），用于支持它们的数据库。
 
-    `outparam`可以像常规函数参数一样使用。“output”值将通过其`out_parameters`属性从[`ResultProxy`](connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")对象中提供，该属性返回包含这些值的字典。plainplain
+    `outparam`可以像常规函数参数一样使用。“output”值将通过其`out_parameters`属性从[`ResultProxy`](connections.html#sqlalchemy.engine.ResultProxy "sqlalchemy.engine.ResultProxy")对象中提供，该属性返回包含这些值的字典。
 
  `sqlalchemy.sql.expression.`{.descclassname}`over`{.descname}(*element*, *partition\_by=None*, *order\_by=None*, *range\_=None*, *rows=None*)[¶](#sqlalchemy.sql.expression.over "Permalink to this definition")
 :   针对函数生成[`Over`](#sqlalchemy.sql.expression.Over "sqlalchemy.sql.expression.Over")对象。
@@ -963,7 +963,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  `sqlalchemy.sql.expression.`{.descclassname}`text`{.descname}(*text*, *bind=None*, *bindparams=None*, *typemap=None*, *autocommit=None*)[¶](#sqlalchemy.sql.expression.text "Permalink to this definition")
 :   构造一个新的[`TextClause`](#sqlalchemy.sql.expression.TextClause "sqlalchemy.sql.expression.TextClause")子句，直接表示文本 SQL 字符串。
 
-    例如。：plainplain
+    例如。：
 
         from sqlalchemy import text
 
@@ -1120,7 +1120,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
 `sqlalchemy.sql.expression。`{.descclassname} `type_coerce`{.descname} （ *表达式*，*类型\_* ） T5\> [¶ T6\>](#sqlalchemy.sql.expression.type_coerce "Permalink to this definition")
 :   将 SQL 表达式与特定类型关联，而不呈现`CAST`。
 
-    例如。：plainplain
+    例如。：
 
         from sqlalchemy import type_coerce
 
@@ -1252,7 +1252,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  *class*`sqlalchemy.sql.expression.`{.descclassname}`Case`{.descname}(*whens*, *value=None*, *else\_=None*)[¶](#sqlalchemy.sql.expression.Case "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
-    代表一个`CASE`表达式。plainplain
+    代表一个`CASE`表达式。
 
     [`Case`](#sqlalchemy.sql.expression.Case "sqlalchemy.sql.expression.Case")是使用[`case()`](#sqlalchemy.sql.expression.case "sqlalchemy.sql.expression.case")工厂函数生成的，如下所示：
 
@@ -1283,7 +1283,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  *class*`sqlalchemy.sql.expression.`{.descclassname}`Cast`{.descname}(*expression*, *type\_*)[¶](#sqlalchemy.sql.expression.Cast "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
-    表示一个`CAST`表达式。plainplain
+    表示一个`CAST`表达式。
 
     [`Cast`](#sqlalchemy.sql.expression.Cast "sqlalchemy.sql.expression.Cast")是使用[`cast()`](#sqlalchemy.sql.expression.cast "sqlalchemy.sql.expression.cast")工厂函数生成的，如下所示：
 
@@ -1413,7 +1413,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  *class*`sqlalchemy.sql.expression.`{.descclassname}`ClauseList`{.descname}(*\*clauses*, *\*\*kwargs*)[¶](#sqlalchemy.sql.expression.ClauseList "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ClauseElement`](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")
 
-    描述由操作员分隔的子句列表。plainplainplain
+    描述由操作员分隔的子句列表。
 
     默认情况下，以逗号分隔，例如列列表。
 
@@ -1459,7 +1459,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  *class*`sqlalchemy.sql.expression.`{.descclassname}`ColumnCollection`{.descname}(*\*columns*)[¶](#sqlalchemy.sql.expression.ColumnCollection "Permalink to this definition")
 :   基础：`sqlalchemy.util._collections.OrderedProperties`
 
-    存储ColumnElement实例列表的有序字典。plainplain
+    存储ColumnElement实例列表的有序字典。
 
     覆盖`__eq__()`方法以在相关列集之间生成SQL子句。
 
@@ -1483,7 +1483,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
 *class* `sqlalchemy.sql.expression。`{.descclassname} `ColumnElement`{.descname} [¶](#sqlalchemy.sql.expression.ColumnElement "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.operators.ColumnOperators`](#sqlalchemy.sql.operators.ColumnOperators "sqlalchemy.sql.operators.ColumnOperators")，[`sqlalchemy.sql.expression.ClauseElement`](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")
 
-    表示适用于“列”子句，WHERE子句等的面向列的SQL表达式的声明。plainplain
+    表示适用于“列”子句，WHERE子句等的面向列的SQL表达式的声明。
 
     While the most familiar kind of [`ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
     is the [`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")
@@ -2708,7 +2708,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  *class*`sqlalchemy.sql.expression.`{.descclassname}`Extract`{.descname}(*field*, *expr*, *\*\*kwargs*)[¶](#sqlalchemy.sql.expression.Extract "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
-    表示一个SQL EXTRACT子句，`提取（field FROM expr）`。plainplain
+    表示一个SQL EXTRACT子句，`提取（field FROM expr）`。
 
      `__init__`{.descname}(*field*, *expr*, *\*\*kwargs*)[¶](#sqlalchemy.sql.expression.Extract.__init__ "Permalink to this definition")
     :   构建一个新的[`Extract`](#sqlalchemy.sql.expression.Extract "sqlalchemy.sql.expression.Extract")对象。
@@ -2725,7 +2725,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
 *class* `sqlalchemy.sql.expression。`{.descclassname} `FunctionFilter`{.descname} （ *func*，*\*标准 T5\> ） T6\> [¶ T7\>](#sqlalchemy.sql.expression.FunctionFilter "Permalink to this definition")*
 :   基础：[`sqlalchemy.sql.expression.ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
-    表示一个函数FILTER子句。plainplain
+    表示一个函数FILTER子句。
 
     这是一个针对聚集和窗口函数的特殊操作符，它控制将哪些行传递给它。它仅受特定数据库后端支持。
 
@@ -2807,7 +2807,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
 *class* `sqlalchemy.sql.expression。`{.descclassname} `TextClause`{.descname} （ *text*，*=无 T5\> ） T6\> [¶ T7\>](#sqlalchemy.sql.expression.TextClause "Permalink to this definition")*
 :   基础：[`sqlalchemy.sql.expression.Executable`](selectable.html#sqlalchemy.sql.expression.Executable "sqlalchemy.sql.expression.Executable")，[`sqlalchemy.sql.expression.ClauseElement`](#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")
 
-    表示一个文字SQL文本片段。plainplainplain
+    表示一个文字SQL文本片段。
 
     例如。：
 
@@ -2953,7 +2953,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  *class*`sqlalchemy.sql.expression.`{.descclassname}`Tuple`{.descname}(*\*clauses*, *\*\*kw*)[¶](#sqlalchemy.sql.expression.Tuple "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ClauseList`](#sqlalchemy.sql.expression.ClauseList "sqlalchemy.sql.expression.ClauseList")，[`sqlalchemy.sql.expression.ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
-    表示一个SQL元组。plainplain
+    表示一个SQL元组。
 
     `__ init __`{.descname} （ *\*子句*，*\*\* kw* ） [T5\>](#sqlalchemy.sql.expression.Tuple.__init__ "Permalink to this definition")
     :   构建一个新的[`Tuple`](#sqlalchemy.sql.expression.Tuple "sqlalchemy.sql.expression.Tuple")对象。
@@ -2963,7 +2963,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  *class*`sqlalchemy.sql.expression.`{.descclassname}`WithinGroup`{.descname}(*element*, *\*order\_by*)[¶](#sqlalchemy.sql.expression.WithinGroup "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
-    代表一个WITHIN GROUP（ORDER BY）子句。plainplain
+    代表一个WITHIN GROUP（ORDER BY）子句。
 
     这是针对所谓的“有序集合”和“假设集合”函数的特殊运算符，包括`percentile_cont()`，`rank()`，`dense_rank()`等。
 
@@ -2993,7 +2993,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
  *class*`sqlalchemy.sql.expression.`{.descclassname}`TypeCoerce`{.descname}(*expression*, *type\_*)[¶](#sqlalchemy.sql.expression.TypeCoerce "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ColumnElement`](#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")
 
-    表示一个Python端的类型强制包装器。plainplain
+    表示一个Python端的类型强制包装器。
 
     [`TypeCoerce`](#sqlalchemy.sql.expression.TypeCoerce "sqlalchemy.sql.expression.TypeCoerce")
     supplies the [`expression.type_coerce()`](#sqlalchemy.sql.expression.type_coerce "sqlalchemy.sql.expression.type_coerce")
@@ -3013,7 +3013,7 @@ SQL 表达式 API 最基本的部分是“列元素”，它允许基本的 SQL 
 *class* `sqlalchemy.sql.operators。`{.descclassname} `custom_op`{.descname} （ *opstring*，*precedence = 0*，*is\_comparison = False*，*natural\_self\_precedent = False* ） [¶](#sqlalchemy.sql.operators.custom_op "Permalink to this definition")
 :   代表一个'自定义'操作符。
 
-    当使用[`ColumnOperators.op()`](#sqlalchemy.sql.operators.ColumnOperators.op "sqlalchemy.sql.operators.ColumnOperators.op")方法创建自定义操作符可调用时，[`custom_op`](#sqlalchemy.sql.operators.custom_op "sqlalchemy.sql.operators.custom_op")通常是即时创建的。当以编程方式构造表达式时，该类也可以直接使用。例如。代表“阶乘”操作：plainplain
+    当使用[`ColumnOperators.op()`](#sqlalchemy.sql.operators.ColumnOperators.op "sqlalchemy.sql.operators.ColumnOperators.op")方法创建自定义操作符可调用时，[`custom_op`](#sqlalchemy.sql.operators.custom_op "sqlalchemy.sql.operators.custom_op")通常是即时创建的。当以编程方式构造表达式时，该类也可以直接使用。例如。代表“阶乘”操作：
 
         from sqlalchemy.sql import UnaryExpression
         from sqlalchemy.sql import operators

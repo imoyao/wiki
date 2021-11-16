@@ -22,7 +22,7 @@ view of a target attribute across a relationship.
 考虑两个类（`User`和`Keyword`）之间的多对多映射。每个`User`可以包含任意数量的`Keyword`对象，反之亦然（多对多模式在[Many To
 Many](basic_relationships.html#relationships-many-to-many)中描述） ：
 
-    from sqlalchemy import Column, Integer, String, ForeignKey, Tableplainplainplainplain
+    from sqlalchemy import Column, Integer, String, ForeignKey, Tableplain
     from sqlalchemy.orm import relationship
     from sqlalchemy.ext.declarative import declarative_base
 
@@ -65,7 +65,7 @@ Many](basic_relationships.html#relationships-many-to-many)中描述） ：
 
 对`User`类应用`association_proxy`以产生`kw`关系的“视图”，该关系仅显示字符串值`.keyword`与每个`Keyword`对象关联：
 
-    from sqlalchemy.ext.associationproxy import association_proxyplainplainplainplainplainplain
+    from sqlalchemy.ext.associationproxy import association_proxy
 
     class User(Base):
         __tablename__ = 'user'
@@ -81,7 +81,7 @@ Many](basic_relationships.html#relationships-many-to-many)中描述） ：
 
 我们现在可以将`.keywords`集合引用为可读写的字符串列表。新的`Keyword`对象是透明地为我们创建的：
 
-    >>> user = User('jek')plainplain
+    >>> user = User('jek')
     >>> user.keywords.append('cheese inspector')
     >>> user.keywords
     ['cheese inspector']
@@ -101,15 +101,15 @@ Many](basic_relationships.html#relationships-many-to-many)中描述） ：
 当列表 append()事件（或 set add()，dictionary \_\_setitem
 \_\_()或标量赋值事件）被关联代理拦截时，它使用其构造函数实例化“中间”对象的新实例，作为单个论证给定的价值。在我们上面的例子中，一个操作如下：
 
-    user.keywords.append('cheese inspector')plainplain
+    user.keywords.append('cheese inspector')
 
 由协会代理翻译成操作：
 
-    user.kw.append(Keyword('cheese inspector'))plainplainplain
+    user.kw.append(Keyword('cheese inspector'))
 
 这个例子在这里工作，因为我们设计了`Keyword`的构造函数来接受一个位置参数`keyword`。对于单参数构造函数不可行的情况，可以使用`creator`参数来定制关联代理的创建行为，该参数引用可调用的函数（即 Python 函数），该函数将产生一个新的对象实例给出单数论证。下面我们用典型的 lambda 来说明这一点：
 
-    class User(Base):plainplainplain
+    class User(Base):
         # ...
 
         # use Keyword(keyword=kw) on append() events
@@ -181,7 +181,7 @@ Object](basic_relationships.html#association-pattern)中进行了描述。关联
 
 通过上述配置，我们可以对每个`User`对象的`.keywords`集合进行操作，并且隐藏`UserKeyword`的用法：
 
-    >>> user = User('log')plainplain
+    >>> user = User('log')
     >>> for kw in (Keyword('new_from_blammo'), Keyword('its_big')):
     ...     user.keywords.append(kw)
     ...
@@ -190,17 +190,17 @@ Object](basic_relationships.html#association-pattern)中进行了描述。关联
 
 在上面，每个`.keywords.append()`操作相当于：
 
-    >>> user.user_keywords.append(UserKeyword(Keyword('its_heavy')))plainplain
+    >>> user.user_keywords.append(UserKeyword(Keyword('its_heavy')))
 
 这个`UserKeyword`关联对象在这里有两个属性被填充；作为第一个参数传递`Keyword`对象的结果，直接填充`.keyword`属性。当`UserKeyword`对象附加到`User.user_keywords`集合时，`.user`参数被分配，其中`User.user_keywords`和`UserKeyword.user`会导致`UserKeyword.user`属性的填充。上面的`special_key`参数保留默认值`None`。
 
 对于那些我们希望`special_key`具有值的情况，我们显式创建`UserKeyword`对象。下面我们分配所有三个属性，其中`.user`的赋值将`UserKeyword`的作用附加到`User.user_keywords`集合中：
 
-    >>> UserKeyword(Keyword('its_wood'), user, special_key='my special key')plainplainplain
+    >>> UserKeyword(Keyword('its_wood'), user, special_key='my special key')
 
 关联代理向我们返回由所有这些操作表示的`Keyword`对象的集合：
 
-    >>> user.keywordsplainplainplainplainplainplain
+    >>> user.keywords
     [Keyword('new_from_blammo'), Keyword('its_big'), Keyword('its_heavy'), Keyword('its_wood')]
 
 代理基于字典的集合[¶](#proxying-to-dictionary-based-collections "Permalink to this headline")
@@ -213,7 +213,7 @@ Dictionary-Based Collections](collections.html#id1)中描述的扩展技术。
 
 下面，我们修改我们的`UserKeyword`示例，使得`User.user_keywords`集合现在将使用字典进行映射，其中`UserKeyword.special_key`参数将会被用作字典的关键字。然后，我们将`creator`参数应用于`User.keywords`代理，以便在将新元素添加到字典时适当地分配这些值：
 
-    from sqlalchemy import Column, Integer, String, ForeignKeyplainplainplainplainplain
+    from sqlalchemy import Column, Integer, String, ForeignKey
     from sqlalchemy.orm import relationship, backref
     from sqlalchemy.ext.associationproxy import association_proxy
     from sqlalchemy.ext.declarative import declarative_base
@@ -279,7 +279,7 @@ Dictionary-Based Collections](collections.html#id1)中描述的扩展技术。
 
 考虑到我们之前从关系到标量属性，代理跨越关联对象以及代理字典的代理示例，我们可以将所有三种技术组合在一起以给出`User` a `keywords`字典严格处理映射到字符串`keyword`的`special_key`的字符串值。`UserKeyword`和`Keyword`类都完全隐藏。这是通过在`User`上建立一个关联代理实现的，该代理引用`UserKeyword`上存在的关联代理：
 
-    from sqlalchemy import Column, Integer, String, ForeignKeyplainplainplain
+    from sqlalchemy import Column, Integer, String, ForeignKey
     from sqlalchemy.orm import relationship, backref
 
     from sqlalchemy.ext.associationproxy import association_proxy
@@ -339,7 +339,7 @@ string, where `UserKeyword` and `Keyword` objects are created and removed for us
 association proxy.
 在下面的例子中，我们举例说明了赋值运算符的用法，也可以由关联代理进行适当处理，以便将字典值同时应用于集合：
 
-    >>> user = User('log')plainplain
+    >>> user = User('log')
     >>> user.keywords = {
     ...     'sk1':'kw1',
     ...     'sk2':'kw2'
@@ -374,7 +374,7 @@ association proxy.
 
 对于标量属性的代理，支持`__eq__()`：
 
-    >>> print(session.query(UserKeyword).filter(UserKeyword.keyword == 'jek'))plainplainplainplainplain
+    >>> print(session.query(UserKeyword).filter(UserKeyword.keyword == 'jek'))
     SELECT user_keyword.*
     FROM user_keyword
     WHERE EXISTS (SELECT 1
@@ -383,7 +383,7 @@ association proxy.
 
 和`.contains()`可用于标量集合的代理：
 
-    >>> print(session.query(User).filter(User.keywords.contains('jek')))plainplain
+    >>> print(session.query(User).filter(User.keywords.contains('jek')))
     SELECT user.*
     FROM user
     WHERE EXISTS (SELECT 1
@@ -397,13 +397,13 @@ can be used with [`Query.join()`](query.html#sqlalchemy.orm.query.Query.join "sq
 somewhat manually using the [`attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.attr "sqlalchemy.ext.associationproxy.AssociationProxy.attr")
 attribute in a star-args context:
 
-    q = session.query(User).join(*User.keywords.attr)plainplainplainplain
+    q = session.query(User).join(*User.keywords.attr)plain
 
 版本 0.7.3 中的新增内容： [`attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.attr "sqlalchemy.ext.associationproxy.AssociationProxy.attr")属性在 star-args 上下文中。
 
 [`attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.attr "sqlalchemy.ext.associationproxy.AssociationProxy.attr")由[`AssociationProxy.local_attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.local_attr "sqlalchemy.ext.associationproxy.AssociationProxy.local_attr")和[`AssociationProxy.remote_attr`](#sqlalchemy.ext.associationproxy.AssociationProxy.remote_attr "sqlalchemy.ext.associationproxy.AssociationProxy.remote_attr")组成，它们只是实际代理属性的同义词，也可用于查询：
 
-    uka = aliased(UserKeyword)plainplainplainplainplainplain
+    uka = aliased(UserKeyword)
     ka = aliased(Keyword)
     q = session.query(User).\
             join(uka, User.keywords.local_attr).\
@@ -461,7 +461,7 @@ API 文档[¶](#api-documentation "Permalink to this headline")
  *class*`sqlalchemy.ext.associationproxy.`{.descclassname}`AssociationProxy`{.descname}(*target\_collection*, *attr*, *creator=None*, *getset\_factory=None*, *proxy\_factory=None*, *proxy\_bulk\_set=None*, *info=None*)[¶](#sqlalchemy.ext.associationproxy.AssociationProxy "Permalink to this definition")
 :   基础：[`sqlalchemy.orm.base.InspectionAttrInfo`](internals.html#sqlalchemy.orm.base.InspectionAttrInfo "sqlalchemy.orm.base.InspectionAttrInfo")
 
-    呈现对象属性的读/写视图的描述符。plainplainplainplainplainplainplain
+    呈现对象属性的读/写视图的描述符。plain
 
      `__init__`{.descname}(*target\_collection*, *attr*, *creator=None*, *getset\_factory=None*, *proxy\_factory=None*, *proxy\_bulk\_set=None*, *info=None*)[¶](#sqlalchemy.ext.associationproxy.AssociationProxy.__init__ "Permalink to this definition")
     :   构建一个新的[`AssociationProxy`](#sqlalchemy.ext.associationproxy.AssociationProxy "sqlalchemy.ext.associationproxy.AssociationProxy")。

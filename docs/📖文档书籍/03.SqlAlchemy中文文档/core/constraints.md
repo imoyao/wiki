@@ -22,7 +22,7 @@ SQL 中的*外键*是表级结构，限制该表中的一个或多个列，使�
 
 在 SQLAlchemy 以及 DDL 中，可以将外键约束定义为 table 子句中的附加属性，或者对于单列外键，可以在单列的定义内指定外键约束。单列外键更常见，并且在列级别通过构建[`ForeignKey`](#sqlalchemy.schema.ForeignKey "sqlalchemy.schema.ForeignKey")对象作为[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象的参数来指定：
 
-    user_preference = Table('user_preference', metadata,plainplain
+    user_preference = Table('user_preference', metadata,
         Column('pref_id', Integer, primary_key=True),
         Column('user_id', Integer, ForeignKey("user.user_id"), nullable=False),
         Column('pref_name', String(40), nullable=False),
@@ -43,7 +43,7 @@ columnname＆gt；*。*它也可能是一个实际的[`Column`](metadata.html#sq
 
 外键也可以使用[`ForeignKeyConstraint`](#sqlalchemy.schema.ForeignKeyConstraint "sqlalchemy.schema.ForeignKeyConstraint")对象在表级定义。该对象可以描述单列或多列外键。多列外键称为*复合*外键，并且几乎总是引用具有复合主键的表。下面我们定义一个表`invoice`，它有一个复合主键：
 
-    invoice = Table('invoice', metadata,plainplain
+    invoice = Table('invoice', metadata,
         Column('invoice_id', Integer, primary_key=True),
         Column('ref_num', Integer, primary_key=True),
         Column('description', String(60), nullable=False)
@@ -51,7 +51,7 @@ columnname＆gt；*。*它也可能是一个实际的[`Column`](metadata.html#sq
 
 然后使用引用`invoice`的复合外键的表`invoice_item`：
 
-    invoice_item = Table('invoice_item', metadata,plainplainplain
+    invoice_item = Table('invoice_item', metadata,
         Column('item_id', Integer, primary_key=True),
         Column('item_name', String(60), nullable=False),
         Column('invoice_id', Integer, nullable=False),
@@ -109,7 +109,7 @@ MyISAM 数据）。因此，这些方法将在这种循环中将约束分解为�
 
 当我们在后端（如 Postgresql 后端）上调用[`MetaData.create_all()`](metadata.html#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")时，解析这两个表之间的循环并分别创建约束：
 
-    >>> with engine.connect() as conn:plainplain
+    >>> with engine.connect() as conn:
     ...    metadata.create_all(conn, checkfirst=False)
     CREATE TABLE element (
         element_id SERIAL NOT NULL,
@@ -131,7 +131,7 @@ MyISAM 数据）。因此，这些方法将在这种循环中将约束分解为�
 为了为这些表发出 DROP，应用相同的逻辑，但请注意，在 SQL 中，要发出 DROP
 CONSTRAINT，需要该约束具有名称。在上面的`'node'`表中，我们没有命名这个约束；系统将因此尝试仅为那些被命名的约束发出 DROP：
 
-    >>> with engine.connect() as conn:plainplain
+    >>> with engine.connect() as conn:
     ...    metadata.drop_all(conn, checkfirst=False)
     ALTER TABLE element DROP CONSTRAINT fk_element_parent_node_id
     DROP TABLE node
@@ -139,7 +139,7 @@ CONSTRAINT，需要该约束具有名称。在上面的`'node'`表中，我们�
 
 在循环无法解析的情况下，例如，如果我们没有在这里为任一约束应用名称，我们将收到以下错误：
 
-    sqlalchemy.exc.CircularDependencyError: Can't sort tables for DROP;plainplain
+    sqlalchemy.exc.CircularDependencyError: Can't sort tables for DROP;
     an unresolvable foreign key dependency exists between tables:
     element, node.  Please ensure that the ForeignKey and ForeignKeyConstraint
     objects involved in the cycle have names so that they can be dropped
@@ -362,7 +362,7 @@ The above convention will establish names for all constraints within the
 target [`MetaData`](metadata.html#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
 collection. 例如，我们可以观察创建未命名的[`UniqueConstraint`](#sqlalchemy.schema.UniqueConstraint "sqlalchemy.schema.UniqueConstraint")时产生的名称：
 
-    >>> user_table = Table('user', metadata,plainplainplain
+    >>> user_table = Table('user', metadata,
     ...                 Column('id', Integer, primary_key=True),
     ...                 Column('name', String(30), nullable=False),
     ...                 UniqueConstraint('name')
@@ -372,7 +372,7 @@ collection. 例如，我们可以观察创建未命名的[`UniqueConstraint`](#s
 
 即使我们只使用[`Column.unique`](metadata.html#sqlalchemy.schema.Column.params.unique "sqlalchemy.schema.Column")标志，该功能也会生效：
 
-    >>> user_table = Table('user', metadata,plainplainplainplain
+    >>> user_table = Table('user', metadata,plain
     ...                  Column('id', Integer, primary_key=True),
     ...                  Column('name', String(30), nullable=False, unique=True)
     ...     )
@@ -462,7 +462,7 @@ Constraints](http://alembic.zzzcomputing.com/en/latest/naming.html#tutorial-cons
 typical convention is
 `"ck_%(table_name)s_%(constraint_name)s"`:
 
-    metadata = MetaData(plainplain
+    metadata = MetaData(
         naming_convention={"ck": "ck_%(table_name)s_%(constraint_name)s"}
     )
 
@@ -480,7 +480,7 @@ typical convention is
 
 [`CheckConstraint`](#sqlalchemy.schema.CheckConstraint "sqlalchemy.schema.CheckConstraint")还支持`%(columns_0_name)s`标记；我们可以通过确保我们在约束的表达式中使用[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")或[`sql.expression.column()`](sqlelement.html#sqlalchemy.sql.expression.column "sqlalchemy.sql.expression.column")元素来使用它，或者通过声明与表格分开的约束：
 
-    metadata = MetaData(plainplain
+    metadata = MetaData(
         naming_convention={"ck": "ck_%(table_name)s_%(column_0_name)s"}
     )
 
@@ -492,7 +492,7 @@ typical convention is
 
 或通过内联使用[`sql.expression.column()`](sqlelement.html#sqlalchemy.sql.expression.column "sqlalchemy.sql.expression.column")：
 
-    from sqlalchemy import columnplainplainplain
+    from sqlalchemy import column
 
     metadata = MetaData(
         naming_convention={"ck": "ck_%(table_name)s_%(column_0_name)s"}
@@ -505,7 +505,7 @@ typical convention is
 
 两者都会产生名称`ck_foo_value`：
 
-    CREATE TABLE foo (plain
+    CREATE TABLE foo (
         value INTEGER,
         CONSTRAINT ck_foo_value CHECK (value > 5)
     )
@@ -535,7 +535,7 @@ typical convention is
 
 上表将生成约束名称`ck_foo_flag_bool`：
 
-    CREATE TABLE foo (plainplain
+    CREATE TABLE foo (
         flag BOOL,
         CONSTRAINT ck_foo_flag_bool CHECK (flag IN (0, 1))
     )
@@ -567,7 +567,7 @@ CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](ty
 *class* `sqlalchemy.schema。`{.descclassname} `约束`{.descname} （ *name =无*，*可推迟=无*，*开始=无*，*\_create\_rule =无*，*info =无*，*\_type\_bound = False* ，*\*\* dialect\_kw* ） [¶](#sqlalchemy.schema.Constraint "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.base.DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")，[`sqlalchemy.schema.SchemaItem`](metadata.html#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-    表级SQL约束。plainplainplainplain
+    表级SQL约束。plain
 
      `__init__`{.descname}(*name=None*, *deferrable=None*, *initially=None*, *\_create\_rule=None*, *info=None*, *\_type\_bound=False*, *\*\*dialect\_kw*)[¶](#sqlalchemy.schema.Constraint.__init__ "Permalink to this definition")
     :   创建一个SQL约束。
@@ -746,7 +746,7 @@ CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](ty
  *class*`sqlalchemy.schema.`{.descclassname}`CheckConstraint`{.descname}(*sqltext*, *name=None*, *deferrable=None*, *initially=None*, *table=None*, *info=None*, *\_create\_rule=None*, *\_autoattach=True*, *\_type\_bound=False*)[¶](#sqlalchemy.schema.CheckConstraint "Permalink to this definition")
 :   基础：[`sqlalchemy.schema.ColumnCollectionConstraint`](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
 
-    表或列级CHECK约束。plainplainplainplain
+    表或列级CHECK约束。plain
 
     可以包含在表或列的定义中。
 
@@ -1336,7 +1336,7 @@ CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](ty
 *class* `sqlalchemy.schema。`{.descclassname} `PrimaryKeyConstraint`{.descname} （ *\*列*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.schema.PrimaryKeyConstraint "Permalink to this definition")*
 :   基础：[`sqlalchemy.schema.ColumnCollectionConstraint`](#sqlalchemy.schema.ColumnCollectionConstraint "sqlalchemy.schema.ColumnCollectionConstraint")
 
-    表级PRIMARY KEY约束。plainplainplain
+    表级PRIMARY KEY约束。
 
     The [`PrimaryKeyConstraint`](#sqlalchemy.schema.PrimaryKeyConstraint "sqlalchemy.schema.PrimaryKeyConstraint")
     object is present automatically on any [`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")
@@ -1637,7 +1637,7 @@ CHECK 约束还可以使用`column_0_name`标记，该标记与[`SchemaType`](ty
  `sqlalchemy.schema.`{.descclassname}`conv`{.descname}(*cls*, *value*, *quote=None*)[¶](#sqlalchemy.schema.conv "Permalink to this definition")
 :   标记一个字符串，表明名称已经通过命名约定转换。
 
-    这是一个字符串子类，它指示不应受任何进一步命名约定的名称。plainplainplainplainplain
+    这是一个字符串子类，它指示不应受任何进一步命名约定的名称。
 
     例如。当我们使用命名约定创建[`Constraint`](#sqlalchemy.schema.Constraint "sqlalchemy.schema.Constraint")时，如下所示：
 
@@ -1717,7 +1717,7 @@ INDEX”的 DDL 在表的 create 语句之后立即发布：
 
 注意在上面的例子中，[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")构造是直接使用[`Column`](metadata.html#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象在它所对应的表的外部创建的。[`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")还支持[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")中的“内联”定义，使用字符串名称来标识列：
 
-    meta = MetaData()plainplain
+    meta = MetaData()
     mytable = Table('mytable', meta,
         Column('col1', Integer),
 
@@ -1737,7 +1737,7 @@ INDEX”的 DDL 在表的 create 语句之后立即发布：
 
 [`Index`](#sqlalchemy.schema.Index "sqlalchemy.schema.Index")对象也支持它自己的`create()`方法：
 
-    i = Index('someindex', mytable.c.col5)plainplain
+    i = Index('someindex', mytable.c.col5)
     sqli.create(engine)
     CREATE INDEX someindex ON mytable (col5)
 
@@ -1751,7 +1751,7 @@ INDEX”的 DDL 在表的 create 语句之后立即发布：
 
 或者使用支持 Postgresql 等函数索引的后端，可以使用`lower()`函数创建“不区分大小写”的索引：
 
-    from sqlalchemy import func, Indexplainplainplain
+    from sqlalchemy import func, Index
 
     Index('someindex', func.lower(mytable.c.somecol))
 

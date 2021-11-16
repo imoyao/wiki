@@ -19,7 +19,7 @@ tags:
 经常需要强制更改类型的“字符串”版本，即在 CREATE
 TABLE 语句或其他 SQL 函数（如 CAST）中呈现的类型。例如，应用程序可能希望强制为所有平台呈现`BINARY`，除了要呈现其中的`BLOB`之外的所有平台。对于大多数使用情况，现有泛型类型（在本例中为[`LargeBinary`](type_basics.html#sqlalchemy.types.LargeBinary "sqlalchemy.types.LargeBinary")）的使用是首选。但为了更准确地控制类型，每个方言的编译指令可以与任何类型相关联：
 
-    from sqlalchemy.ext.compiler import compilesplainplainplain
+    from sqlalchemy.ext.compiler import compiles
     from sqlalchemy.types import BINARY
 
     @compiles(BINARY, "sqlite")
@@ -49,7 +49,7 @@ of Existing Types](#replacing-processors)部分。
  *class*`sqlalchemy.types.`{.descclassname}`TypeDecorator`{.descname}(*\*args*, *\*\*kwargs*)[¶](#sqlalchemy.types.TypeDecorator "Permalink to this definition")
 :   基础：`sqlalchemy.sql.expression.SchemaEventTarget`，[`sqlalchemy.types.TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")
 
-    允许创建向现有类型添加附加功能的类型。plainplain
+    允许创建向现有类型添加附加功能的类型。
 
     此方法优先于指定SQLAlchemy内置类型的子类化，因为它确保所有必需的基础类型功能都保留在原位。
 
@@ -474,7 +474,7 @@ is strings that contain non-ASCII characters and are not `u''` objects in Python
 [`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")
 which coerces as needed:
 
-    from sqlalchemy.types import TypeDecorator, Unicodeplainplainplain
+    from sqlalchemy.types import TypeDecorator, Unicode
 
     class CoerceUTF8(TypeDecorator):
         """Safely coerce Python bytestrings to Unicode
@@ -492,7 +492,7 @@ which coerces as needed:
 某些数据库连接器（如 SQL
 Server 的数据库连接器）会在小数位数过多的情况下传递 Decimal。这是一个让他们满意的食谱：
 
-    from sqlalchemy.types import TypeDecorator, Numericplainplainplainplainplainplainplainplain
+    from sqlalchemy.types import TypeDecorator, Numeric
     from decimal import Decimal
 
     class SafeNumeric(TypeDecorator):
@@ -517,7 +517,7 @@ Server 的数据库连接器）会在小数位数过多的情况下传递 Decima
 uuid()对象。在其他后端使用 Postgresql，CHAR（32）时使用 PG
 UUID 类型，并以字符串化的十六进制格式存储它们。如果需要，可以修改以在 CHAR（16）中存储二进制文件：
 
-    from sqlalchemy.types import TypeDecorator, CHARplainplainplain
+    from sqlalchemy.types import TypeDecorator, CHAR
     from sqlalchemy.dialects.postgresql import UUID
     import uuid
 
@@ -558,7 +558,7 @@ UUID 类型，并以字符串化的十六进制格式存储它们。如果需要
 
 这种类型使用`simplejson`将 Python 数据结构封送到/来自 JSON。可以修改为使用 Python 的内置 json 编码器：
 
-    from sqlalchemy.types import TypeDecorator, VARCHARplainplainplainplainplain
+    from sqlalchemy.types import TypeDecorator, VARCHAR
     import json
 
     class JSONEncodedDict(TypeDecorator):
@@ -592,7 +592,7 @@ Tracking](orm_extensions_mutable.html)中的示例。
 
 使用[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")实现绑定/结果级别的大部分类型行为增强。对于需要替换由 SQLAlchemy 在 DBAPI 级别应用的特定处理的罕见场景，可以直接对 SQLAlchemy 类型进行子类化，并且`bind_processor()`或`result_processor()`这样做需要重写`adapt()`方法。此方法是 SQLAlchemy 在执行语句期间生成特定于 DBAPI 的类型行为的机制。覆盖它可以使用自定义类型的副本来代替 DBAPI 特定的类型。下面我们将[`types.TIME`](type_basics.html#sqlalchemy.types.TIME "sqlalchemy.types.TIME")类型进行子类化以具有自定义结果处理行为。`process()`函数将直接从 DBAPI 游标接收`value`：
 
-    class MySpecialTime(TIME):plainplainplain
+    class MySpecialTime(TIME):
         def __init__(self, special_argument):
             super(MySpecialTime, self).__init__()
             self.special_argument = special_argument
@@ -626,7 +626,7 @@ Types](#replacing-processors)部分所见，SQLAlchemy 允许在将参数发送�
 
 任何[`TypeEngine`](type_api.html#sqlalchemy.types.TypeEngine "sqlalchemy.types.TypeEngine")，[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")或[`TypeDecorator`](#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")子类都可以包含[`TypeEngine.bind_expression()`](type_api.html#sqlalchemy.types.TypeEngine.bind_expression "sqlalchemy.types.TypeEngine.bind_expression")和/或[`TypeEngine.column_expression()`](type_api.html#sqlalchemy.types.TypeEngine.column_expression "sqlalchemy.types.TypeEngine.column_expression")，当定义为返回非`None`值时，应返回要注入 SQL 语句的[`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement")表达式，参数或列表达式。例如，要构建将所有传入数据应用于 Postgis 函数`ST_GeomFromText`的所有传出值和函数`ST_AsText`的`Geometry`类型，我们可以创建我们自己的[`UserDefinedType`](#sqlalchemy.types.UserDefinedType "sqlalchemy.types.UserDefinedType")的子类，它提供这些方法与[`func`](sqlelement.html#sqlalchemy.sql.expression.func "sqlalchemy.sql.expression.func")结合使用：
 
-    from sqlalchemy import funcplainplain
+    from sqlalchemy import func
     from sqlalchemy.types import UserDefinedType
 
     class Geometry(UserDefinedType):
@@ -641,7 +641,7 @@ Types](#replacing-processors)部分所见，SQLAlchemy 允许在将参数发送�
 
 我们可以将`Geometry`类型应用到[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")元数据中，并将其用于[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")结构中：
 
-    geometry = Table('geometry', metadata,plainplain
+    geometry = Table('geometry', metadata,
                   Column('geom_id', Integer, primary_key=True),
                   Column('geom_data', Geometry)
                 )
@@ -655,7 +655,7 @@ function before passing into a result set, and
 `ST_GeomFromText` is run on the bound parameter so
 that the passed-in value is converted:
 
-    SELECT geometry.geom_id, ST_AsText(geometry.geom_data) AS geom_data_1plainplainplain
+    SELECT geometry.geom_id, ST_AsText(geometry.geom_data) AS geom_data_1
     FROM geometry
     WHERE geometry.geom_data = ST_GeomFromText(:geom_data_2)
 
@@ -664,16 +664,16 @@ method interacts with the mechanics of the compiler such that the SQL
 expression does not interfere with the labeling of the wrapped
 expression. 例如，如果我们针对表达式的[`label()`](sqlelement.html#sqlalchemy.sql.expression.label "sqlalchemy.sql.expression.label")呈现[`select()`](selectable.html#sqlalchemy.sql.expression.select "sqlalchemy.sql.expression.select")，则将字符串标签移动到包装表达式的外部：
 
-    print(select([geometry.c.geom_data.label('my_data')]))plainplainplain
+    print(select([geometry.c.geom_data.label('my_data')]))
 
 输出：
 
-    SELECT ST_AsText(geometry.geom_data) AS my_dataplainplain
+    SELECT ST_AsText(geometry.geom_data) AS my_data
     FROM geometry
 
 对于直接对内置类型进行子类化的示例，我们继承[`postgresql.BYTEA`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.BYTEA "sqlalchemy.dialects.postgresql.BYTEA")以提供一个`PGPString`，它将利用 Postgresql `pgcrypto`透明地扩展到 encrpyt /解密值：
 
-    from sqlalchemy import create_engine, String, select, func, \plainplain
+    from sqlalchemy import create_engine, String, select, func, \
             MetaData, Table, Column, type_coerce
 
     from sqlalchemy.dialects.postgresql import BYTEA
@@ -714,7 +714,7 @@ expression. 例如，如果我们针对表达式的[`label()`](sqlelement.html#s
 
 `pgp_sym_encrypt`和`pgp_sym_decrypt`函数应用于 INSERT 和 SELECT 语句：
 
-    INSERT INTO message (username, message)plainplainplain
+    INSERT INTO message (username, message)
       VALUES (%(username)s, pgp_sym_encrypt(%(message)s, %(pgp_sym_encrypt_1)s))
       {'username': 'some user', 'message': 'this is my message',
         'pgp_sym_encrypt_1': 'this is my passphrase'}
@@ -754,7 +754,7 @@ base class defines a root “comparison” implementation
 and many specific types provide their own sub-implementations of this
 class. 用户定义的[`TypeEngine.Comparator`](type_api.html#sqlalchemy.types.TypeEngine.Comparator "sqlalchemy.types.TypeEngine.Comparator")实现可以直接构建到特定类型的简单子类中，以覆盖或定义新的操作。下面，我们创建一个覆盖[`ColumnOperators.__add__()`](sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.__add__ "sqlalchemy.sql.operators.ColumnOperators.__add__")运算符的[`Integer`](type_basics.html#sqlalchemy.types.Integer "sqlalchemy.types.Integer")子类。
 
-    from sqlalchemy import Integerplainplain
+    from sqlalchemy import Integer
 
     class MyInt(Integer):
         class comparator_factory(Integer.Comparator):
@@ -765,7 +765,7 @@ class. 用户定义的[`TypeEngine.Comparator`](type_api.html#sqlalchemy.types.T
 
 用法：
 
-    >>> sometable = Table("sometable", metadata, Column("data", MyInt))plainplainplainplainplain
+    >>> sometable = Table("sometable", metadata, Column("data", MyInt))
     >>> print(sometable.c.data + 5)
     sometable.data goofy :data_1
 
@@ -778,7 +778,7 @@ are exposed on an owning SQL expression using a `__getattr__` scheme, which expo
 onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.ColumnElement "sqlalchemy.sql.expression.ColumnElement").
 例如，要将`log()`函数添加到整数：
 
-    from sqlalchemy import Integer, funcplainplain
+    from sqlalchemy import Integer, func
 
     class MyInt(Integer):
         class comparator_factory(Integer.Comparator):
@@ -792,7 +792,7 @@ onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.Colu
 
 一元操作也是可能的。例如，要添加 Postgresql 阶乘运算符的实现，我们将[`UnaryExpression`](sqlelement.html#sqlalchemy.sql.expression.UnaryExpression "sqlalchemy.sql.expression.UnaryExpression")结构与[`custom_op`](sqlelement.html#sqlalchemy.sql.operators.custom_op "sqlalchemy.sql.operators.custom_op")结合起来以产生阶乘表达式：
 
-    from sqlalchemy import Integerplainplainplainplainplain
+    from sqlalchemy import Integer
     from sqlalchemy.sql.expression import UnaryExpression
     from sqlalchemy.sql import operators
 
@@ -805,7 +805,7 @@ onto the owning [`ColumnElement`](sqlelement.html#sqlalchemy.sql.expression.Colu
 
 使用以上类型：
 
-    >>> from sqlalchemy.sql import columnplainplainplainplainplain
+    >>> from sqlalchemy.sql import column
     >>> print(column('x', MyInteger).factorial())
     x !
 

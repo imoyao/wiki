@@ -40,11 +40,11 @@ SQLAlchemy 0.6 中有什么新东西？[¶](#what-s-new-in-sqlalchemy-0-6 "Perma
 由`create_engine()`使用的 URL 格式已得到增强，可以使用受 JDBC 启发的方案来处理特定后端的任意数量的 DBAPI。以前的格式仍然有效，并且会选择一个“默认的”DBAPI 实现，比如下面的 Postgresql
 URL，它将使用 psycopg2：
 
-    create_engine('postgresql://scott:tiger@localhost/test')plainplainplainplainplainplain
+    create_engine('postgresql://scott:tiger@localhost/test')plain
 
 但是，要指定特定的 DBAPI 后端（例如 pg8000），请使用加号“+”将其添加到 URL 的“协议”部分中：
 
-    create_engine('postgresql+pg8000://scott:tiger@localhost/test')plainplain
+    create_engine('postgresql+pg8000://scott:tiger@localhost/test')plain
 
 重要的方言链接：
 
@@ -72,7 +72,7 @@ URL，它将使用 psycopg2：
 
 方言的进口结构发生了变化。每种方言现在通过`sqlalchemy.dialects.<name>`导出其基本“方言”类以及该方言支持的全套 SQL 类型。例如，要导入一组 PG 类型：
 
-    from sqlalchemy.dialects.postgresql import INTEGER, BIGINT, SMALLINT,\plainplainplainplainplainplainplain
+    from sqlalchemy.dialects.postgresql import INTEGER, BIGINT, SMALLINT,\plain
                                                 VARCHAR, MACADDR, DATE, BYTEA
 
 在上面，`INTEGER`实际上是`sqlalchemy.types`中普通的`INTEGER`类型，但是 PG 方言使它可以以与那些类型相同的方式是特定于 PG 的，如`BYTEA`和`MACADDR`。
@@ -86,24 +86,24 @@ URL，它将使用 psycopg2：
 
 我们知道，将一个`ClauseElement`与任何其他对象进行比较都会返回另一个`ClauseElement`：
 
-    >>> from sqlalchemy.sql import columnplainplainplainplainplainplainplain
+    >>> from sqlalchemy.sql import column
     >>> column('foo') == 5
     <sqlalchemy.sql.expression._BinaryExpression object at 0x1252490>
 
 这样一来，Python 表达式在转换为字符串时就会生成 SQL 表达式：
 
-    >>> str(column('foo') == 5)plainplainplainplain
+    >>> str(column('foo') == 5)
     'foo = :foo_1'
 
 但是如果我们这样说会发生什么？
 
-    >>> if column('foo') == 5:plainplainplainplainplainplain
+    >>> if column('foo') == 5:
     ...     print("yes")
     ...
 
 在先前版本的 SQLAlchemy 中，返回的`_BinaryExpression`是一个普通的 Python 对象，其计算结果为`True`。现在，它计算实际的`ClauseElement`是否应该与正在比较的哈希值相同。含义：
 
-    >>> bool(column('foo') == 5)plainplain
+    >>> bool(column('foo') == 5)
     False
     >>> bool(column('foo') == column('foo'))
     False
@@ -114,12 +114,12 @@ URL，它将使用 psycopg2：
 
 这意味着代码如下：
 
-    if expression:plainplainplainplain
+    if expression:
         print("the expression is:", expression)
 
 如果`expression`是二进制子句，则不会评估。由于不应该使用上述模式，因此如果在布尔上下文中调用，基`ClauseElement`现在会引发异常：
 
-    >>> bool(c)plainplainplainplain
+    >>> bool(c)
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
       ...
@@ -142,14 +142,14 @@ URL，它将使用 psycopg2：
 
 SQLAlchemy 中的“executemany”对应于对`execute()`的调用，传递一组绑定参数集：
 
-    connection.execute(table.insert(), {'data':'row1'}, {'data':'row2'}, {'data':'row3'})plainplainplain
+    connection.execute(table.insert(), {'data':'row1'}, {'data':'row2'}, {'data':'row3'})
 
 当`Connection`对象发送给定的用于编译的`insert()`结构时，它将传递给第一组绑定的键名传递给编译器，以确定该语句的 VALUES 子句。熟悉这个构造的用户会知道其余字典中存在的其他键没有任何影响。What’s
 different now is that all subsequent dictionaries need to include at
 least *every* key that is present in the first dictionary.
 这意味着这样的调用不再有效：
 
-    connection.execute(table.insert(),plainplainplainplainplainplainplain
+    connection.execute(table.insert(),
                             {'timestamp':today, 'data':'row1'},
                             {'timestamp':today, 'data':'row2'},
                             {'data':'row3'})
@@ -187,7 +187,7 @@ connecting and fetching 50,000 rows looks like with SQLite, using mostly
 direct SQLite access, a `ResultProxy`, and a simple
 mapped ORM object:
 
-    sqlite select/native: 0.260splainplainplainplainplainplainplainplain
+    sqlite select/native: 0.260s
 
     0.6 / C extension
 
@@ -214,20 +214,20 @@ extension versus not.
 
 `sqlalchemy.schema`包得到了一些长期需要的关注。最明显的变化是新扩展的 DDL 系统。在 SQLAlchemy 中，从版本 0.5 开始可以创建自定义的 DDL 字符串，并将它们与表或元数据对象关联：
 
-    from sqlalchemy.schema import DDLplainplain
+    from sqlalchemy.schema import DDL
 
     DDL('CREATE TRIGGER users_trigger ...').execute_at('after-create', metadata)
 
 现在，全套的 DDL 结构在相同的系统下可用，包括 CREATE TABLE，ADD
 CONSTRAINT 等。:
 
-    from sqlalchemy.schema import Constraint, AddConstraintplainplainplain
+    from sqlalchemy.schema import Constraint, AddConstraintplain
 
     AddContraint(CheckConstraint("value > 5")).execute_at('after-create', mytable)
 
 此外，所有的 DDL 对象现在都是普通的`ClauseElement`对象，就像任何其他 SQLAlchemy 表达式对象一样：
 
-    from sqlalchemy.schema import CreateTableplainplainplain
+    from sqlalchemy.schema import CreateTable
 
     create = CreateTable(mytable)
 
@@ -239,7 +239,7 @@ CONSTRAINT 等。:
 
 并使用`sqlalchemy.ext.compiler`扩展名，您可以创建自己的：
 
-    from sqlalchemy.schema import DDLElementplainplainplainplain
+    from sqlalchemy.schema import DDLElementplain
     from sqlalchemy.ext.compiler import compiles
 
     class AlterColumn(DDLElement):
@@ -315,14 +315,14 @@ the parent connection. 池日志记录发送到`log.info()`和`log.debug()` - �
 
 要使用检查员：
 
-    from sqlalchemy.engine.reflection import Inspectorplainplainplainplainplain
+    from sqlalchemy.engine.reflection import Inspector
     insp = Inspector.from_engine(my_engine)
 
     print(insp.get_schema_names())
 
 `from_engine()`方法在某些情况下会为后端特定的检查器提供额外的功能，例如提供`get_table_oid()`方法的 Postgresql：
 
-    my_engine = create_engine('postgresql://...')plainplainplainplain
+    my_engine = create_engine('postgresql://...')plain
     pg_insp = Inspector.from_engine(my_engine)
 
     print(pg_insp.get_table_oid('my_table'))
@@ -335,7 +335,7 @@ RETURNING 子句。目前不支持任何其他后端。
 
 以与`select()`结构相同的方式给出列表达式的列表，这些列的值将作为常规结果集返回：
 
-    result = connection.execute(plainplainplainplainplain
+    result = connection.execute(
                 table.insert().values(data='some data').returning(table.c.id, table.c.timestamp)
             )
     row = result.first()
@@ -388,7 +388,7 @@ unicode 对象，以用于基本选择 VARCHAR 值。如果是这样，`String`�
 
 对于明确不需要 unicode 对象的字符串列更通用的解决方案是使用将 unicode 转换回 utf-8 或任何所需的`TypeDecorator`：
 
-    class UTF8Encoded(TypeDecorator):plainplainplainplainplain
+    class UTF8Encoded(TypeDecorator):
         """Unicode type which coerces to utf-8."""
 
         impl = sa.VARCHAR
@@ -413,7 +413,7 @@ CHECK 策略。请注意，Postgresql ENUM 类型目前不适用于 pg8000 或 z
 
 一些在表格元数据中大量使用的应用程序可能希望在反映的表格和/或未反映的表格中比较类型。在`TypeEngine`上有一个名为`_type_affinity`和相关联的比较帮助器`_compare_type_affinity`的半私人访问器。该访问器返回类型对应的“generic”`types`类：
 
-    >>> String(50)._compare_type_affinity(postgresql.VARCHAR(50))plainplainplainplainplainplain
+    >>> String(50)._compare_type_affinity(postgresql.VARCHAR(50))
     True
     >>> Integer()._compare_type_affinity(mysql.REAL)
     False
@@ -497,14 +497,14 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
 在 mapper 级别：
 
-    mapper(Child, child)plainplainplainplainplainplainplainplainplain
+    mapper(Child, child)plain
     mapper(Parent, parent, properties={
         'child':relationship(Child, lazy='joined', innerjoin=True)
     })
 
 在查询时间级别：
 
-    session.query(Parent).options(joinedload(Parent.child, innerjoin=True)).all()plainplainplain
+    session.query(Parent).options(joinedload(Parent.child, innerjoin=True)).all()
 
 `relationship()`级别的`innerjoin=True`标志也将对任何不覆盖该值的`joinedload()`选项生效。
 
@@ -524,11 +524,11 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
     例如，在 0.5 这个查询中：
 
-        session.query(Address).options(eagerload(Address.user)).limit(10)plainplainplainplainplain
+        session.query(Address).options(eagerload(Address.user)).limit(10)
 
     会产生如下的 SQL：
 
-        SELECT * FROMplainplainplainplainplainplain
+        SELECT * FROMplain
           (SELECT * FROM addresses LIMIT 10) AS anon_1
           LEFT OUTER JOIN users AS users_1 ON users_1.id = anon_1.addresses_user_id
 
@@ -536,7 +536,7 @@ JOIN。在 Postgresql 上，据观察，在某些查询中提供了 300-600％�
 
     在 0.6 中，该逻辑更加敏感，并且可以检测所有渴望的加载器是否表示多对一，在这种情况下，渴望加入不会影响 rowcount：
 
-        SELECT * FROM addresses LEFT OUTER JOIN users AS users_1 ON users_1.id = addresses.user_id LIMIT 10plainplainplainplainplainplain
+        SELECT * FROM addresses LEFT OUTER JOIN users AS users_1 ON users_1.id = addresses.user_id LIMIT 10plain
 
 ### 加入表继承的可变主键[¶](#mutable-primary-keys-with-joined-table-inheritance "Permalink to this headline")
 

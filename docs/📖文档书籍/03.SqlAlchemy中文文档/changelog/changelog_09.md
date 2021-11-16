@@ -1391,12 +1391,12 @@ tags:
 
     例如，诸如[`Index`](core_constraints.html#sqlalchemy.schema.Index "sqlalchemy.schema.Index")之类的结构将在构建之后再次接受[`Index.kwargs`](core_constraints.html#sqlalchemy.schema.Index.kwargs "sqlalchemy.schema.Index.kwargs")集合内的临时关键字参数：
 
-        idx = Index('a', 'b')plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+        idx = Index('a', 'b')
         idx.kwargs['mysql_someargument'] = True
 
     为了适应在构建时允许自定义参数的用例，现在允许此注册：[`DialectKWArgs.argument_for()`](core_sqlelement.html#sqlalchemy.sql.base.DialectKWArgs.argument_for "sqlalchemy.sql.base.DialectKWArgs.argument_for")方法：
 
-        Index.argument_for('mysql', 'someargument', False)plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+        Index.argument_for('mysql', 'someargument', False)plain
 
         idx = Index('a', 'b', mysql_someargument=True)
 
@@ -2190,7 +2190,7 @@ tags:
     and [`or_()`](core_sqlelement.html#sqlalchemy.sql.expression.or_ "sqlalchemy.sql.expression.or_")
     can now accept Python generators as a single argument, e.g.:
 
-        and_(x == y for x, y in tuples)plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+        and_(x == y for x, y in tuples)
 
     这里的逻辑查找单个参数`*args`，其中第一个元素是`types.GeneratorType`的实例。
 
@@ -3170,7 +3170,7 @@ tags:
     constructs will now interpret ORM entities as target tables to be
     operated upon, e.g.:
 
-        from sqlalchemy import insert, update, deleteplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+        from sqlalchemy import insert, update, delete
 
         ins = insert(SomeMappedClass).values(x=5)
 

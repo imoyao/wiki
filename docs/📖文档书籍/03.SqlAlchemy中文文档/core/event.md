@@ -24,7 +24,7 @@ New in version 0.7: The system supersedes the previous system of
 
 事件的名称和相应侦听器函数的参数签名是从类绑定规范方法派生的，该方法绑定到文档中描述的标记类。例如，[`PoolEvents.connect()`](events.html#sqlalchemy.events.PoolEvents.connect "sqlalchemy.events.PoolEvents.connect")的文档指出事件名称为`"connect"`，并且用户定义的侦听器函数应该接收两个位置参数：
 
-    from sqlalchemy.event import listenplainplainplainplainplainplainplainplainplain
+    from sqlalchemy.event import listenplain
     from sqlalchemy.pool import Pool
 
     def my_on_connect(dbapi_con, connection_record):
@@ -34,7 +34,7 @@ New in version 0.7: The system supersedes the previous system of
 
 使用[`listens_for()`](#sqlalchemy.event.listens_for "sqlalchemy.event.listens_for")装饰器来收听看起来像：
 
-    from sqlalchemy.event import listens_forplainplainplainplainplainplainplainplainplain
+    from sqlalchemy.event import listens_forplain
     from sqlalchemy.pool import Pool
 
     @listens_for(Pool, "connect")
@@ -50,7 +50,7 @@ that accepts `**keyword` arguments, by passing
 `named=True` to either [`listen()`](#sqlalchemy.event.listen "sqlalchemy.event.listen") or
 [`listens_for()`](#sqlalchemy.event.listens_for "sqlalchemy.event.listens_for"):
 
-    from sqlalchemy.event import listens_forplainplainplainplainplain
+    from sqlalchemy.event import listens_for
     from sqlalchemy.pool import Pool
 
     @listens_for(Pool, "connect", named=True)
@@ -61,7 +61,7 @@ that accepts `**keyword` arguments, by passing
 
 命名样式按名称传递所有参数，而不管函数签名如何，因此只要名称匹配，可以以任意顺序列出具体参数：
 
-    from sqlalchemy.event import listens_forplainplainplainplainplainplainplainplainplain
+    from sqlalchemy.event import listens_for
     from sqlalchemy.pool import Pool
 
     @listens_for(Pool, "connect", named=True)
@@ -78,7 +78,7 @@ that accepts `**keyword` arguments, by passing
 
 关于目标，[`listen()`](#sqlalchemy.event.listen "sqlalchemy.event.listen")函数非常灵活。它通常接受类，这些类的实例以及从中派生出适当目标的相关类或对象。例如，上面提到的`"connect"`事件接受[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")类和对象以及[`Pool`](pooling.html#sqlalchemy.pool.Pool "sqlalchemy.pool.Pool")类和对象：
 
-    from sqlalchemy.event import listenplainplainplainplainplain
+    from sqlalchemy.event import listen
     from sqlalchemy.pool import Pool, QueuePool
     from sqlalchemy import create_engine
     from sqlalchemy.engine import Engine
@@ -108,7 +108,7 @@ that accepts `**keyword` arguments, by passing
 
 有些侦听器允许将修饰符传递给[`listen()`](#sqlalchemy.event.listen "sqlalchemy.event.listen")。这些修饰符有时会为侦听器提供替代调用签名。比如对于 ORM 事件，一些事件监听器可以有一个返回值来修改后续的处理。默认情况下，没有侦听器需要返回值，但通过传递`retval=True`可以支持此值：
 
-    def validate_phone(target, value, oldvalue, initiator):plainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    def validate_phone(target, value, oldvalue, initiator):plain
         """Strip non-numeric characters from a phone number"""
 
         return re.sub(r'(?![0-9])', '', value)
@@ -137,7 +137,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.event.`{.descclassname}`listen`{.descname}(*target*, *identifier*, *fn*, *\*args*, *\*\*kw*)[¶](#sqlalchemy.event.listen "Permalink to this definition")
 :   为给定目标注册侦听器函数。
 
-    例如。：plainplainplainplainplainplainplainplain
+    例如。：
 
         from sqlalchemy import event
         from sqlalchemy.schema import UniqueConstraint
@@ -178,7 +178,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.event.`{.descclassname}`listens_for`{.descname}(*target*, *identifier*, *\*args*, *\*\*kw*)[¶](#sqlalchemy.event.listens_for "Permalink to this definition")
 :   装饰一个函数作为给定目标+标识符的侦听器。
 
-    例如。：plainplainplainplainplainplainplainplainplainplainplainplainplain
+    例如。：
 
         from sqlalchemy import event
         from sqlalchemy.schema import UniqueConstraint
@@ -206,7 +206,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.event.`{.descclassname}`remove`{.descname}(*target*, *identifier*, *fn*)[¶](#sqlalchemy.event.remove "Permalink to this definition")
 :   删除一个事件监听器。
 
-    这里的参数应该与发送到[`listen()`](#sqlalchemy.event.listen "sqlalchemy.event.listen")的参数完全匹配。所有通过此调用进行的事件注册将通过使用相同参数调用[`remove()`](#sqlalchemy.event.remove "sqlalchemy.event.remove")进行恢复。plainplainplainplainplainplain
+    这里的参数应该与发送到[`listen()`](#sqlalchemy.event.listen "sqlalchemy.event.listen")的参数完全匹配。所有通过此调用进行的事件注册将通过使用相同参数调用[`remove()`](#sqlalchemy.event.remove "sqlalchemy.event.remove")进行恢复。plain
 
     例如。：
 
@@ -237,6 +237,6 @@ API 参考[¶](#api-reference "Permalink to this headline")
  `sqlalchemy.event.`{.descclassname}`contains`{.descname}(*target*, *identifier*, *fn*)[¶](#sqlalchemy.event.contains "Permalink to this definition")
 :   如果给定的 target / ident / fn 设置为侦听，则返回 True。
 
-    版本0.9.0中的新功能plainplainplainplainplainplainplainplainplainplainplain
+    版本0.9.0中的新功能
 
 

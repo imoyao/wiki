@@ -16,7 +16,7 @@ INSERT，UPDATE 和 DELETE 语句建立在从[`UpdateBase`](#sqlalchemy.sql.expr
  `sqlalchemy.sql.expression.`{.descclassname}`delete`{.descname}(*table*, *whereclause=None*, *bind=None*, *returning=None*, *prefixes=None*, *\*\*dialect\_kw*)[¶](#sqlalchemy.sql.expression.delete "Permalink to this definition")
 :   构建[`删除`](#sqlalchemy.sql.expression.Delete "sqlalchemy.sql.expression.Delete")对象.
 
-    类似的功能可以通过[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")上的[`delete()`](selectable.html#sqlalchemy.sql.expression.TableClause.delete "sqlalchemy.sql.expression.TableClause.delete")方法获得。plainplainplainplainplainplain
+    类似的功能可以通过[`Table`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")上的[`delete()`](selectable.html#sqlalchemy.sql.expression.TableClause.delete "sqlalchemy.sql.expression.TableClause.delete")方法获得。
 
     参数：
 
@@ -35,7 +35,7 @@ INSERT，UPDATE 和 DELETE 语句建立在从[`UpdateBase`](#sqlalchemy.sql.expr
  `sqlalchemy.sql.expression.`{.descclassname}`insert`{.descname}(*table*, *values=None*, *inline=False*, *bind=None*, *prefixes=None*, *returning=None*, *return\_defaults=False*, *\*\*dialect\_kw*)[¶](#sqlalchemy.sql.expression.insert "Permalink to this definition")
 :   构建[`插入`](#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")对象.
 
-    类似的功能可以通过 [`insert()`](selectable.html#sqlalchemy.sql.expression.TableClause.insert "sqlalchemy.sql.expression.TableClause.insert")plainplainplainplainplainplain
+    类似的功能可以通过 [`insert()`](selectable.html#sqlalchemy.sql.expression.TableClause.insert "sqlalchemy.sql.expression.TableClause.insert")
     方法 [`得到`](metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table").
 
     参数：
@@ -77,7 +77,7 @@ INSERT，UPDATE 和 DELETE 语句建立在从[`UpdateBase`](#sqlalchemy.sql.expr
  `sqlalchemy.sql.expression.`{.descclassname}`update`{.descname}(*table*, *whereclause=None*, *values=None*, *inline=False*, *bind=None*, *prefixes=None*, *returning=None*, *return\_defaults=False*, *preserve\_parameter\_order=False*, *\*\*dialect\_kw*)[¶](#sqlalchemy.sql.expression.update "Permalink to this definition")
 :   构建一个[`Update`](#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")对象。
 
-    例如：plainplainplainplainplainplainplain
+    例如：plain
     ```python
     from sqlalchemy import update
 
@@ -162,7 +162,7 @@ INSERT，UPDATE 和 DELETE 语句建立在从[`UpdateBase`](#sqlalchemy.sql.expr
  *class*`sqlalchemy.sql.expression.`{.descclassname}`Delete`{.descname}(*table*, *whereclause=None*, *bind=None*, *returning=None*, *prefixes=None*, *\*\*dialect\_kw*)[¶](#sqlalchemy.sql.expression.Delete "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.UpdateBase`](#sqlalchemy.sql.expression.UpdateBase "sqlalchemy.sql.expression.UpdateBase")
 
-    表示一个DELETE构造。plainplainplainplainplainplain
+    表示一个DELETE构造。
 
     使用[`delete()`](#sqlalchemy.sql.expression.delete "sqlalchemy.sql.expression.delete")函数创建[`Delete`](#sqlalchemy.sql.expression.Delete "sqlalchemy.sql.expression.Delete")对象。
 
@@ -640,7 +640,7 @@ INSERT，UPDATE 和 DELETE 语句建立在从[`UpdateBase`](#sqlalchemy.sql.expr
  *class*`sqlalchemy.sql.expression.`{.descclassname}`Insert`{.descname}(*table*, *values=None*, *inline=False*, *bind=None*, *prefixes=None*, *returning=None*, *return\_defaults=False*, *\*\*dialect\_kw*)[¶](#sqlalchemy.sql.expression.Insert "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ValuesBase`](#sqlalchemy.sql.expression.ValuesBase "sqlalchemy.sql.expression.ValuesBase")
 
-    表示一个INSERT构造。plainplain
+    表示一个INSERT构造。
 
     [`Insert`](#sqlalchemy.sql.expression.Insert "sqlalchemy.sql.expression.Insert")对象是使用[`insert()`](#sqlalchemy.sql.expression.insert "sqlalchemy.sql.expression.insert")函数创建的。
 
@@ -1301,7 +1301,7 @@ INSERT，UPDATE 和 DELETE 语句建立在从[`UpdateBase`](#sqlalchemy.sql.expr
  *class*`sqlalchemy.sql.expression.`{.descclassname}`Update`{.descname}(*table*, *whereclause=None*, *values=None*, *inline=False*, *bind=None*, *prefixes=None*, *returning=None*, *return\_defaults=False*, *preserve\_parameter\_order=False*, *\*\*dialect\_kw*)[¶](#sqlalchemy.sql.expression.Update "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.ValuesBase`](#sqlalchemy.sql.expression.ValuesBase "sqlalchemy.sql.expression.ValuesBase")
 
-    表示更新构造。plainplain
+    表示更新构造。
 
     [`Update`](#sqlalchemy.sql.expression.Update "sqlalchemy.sql.expression.Update")对象是使用[`update()`](#sqlalchemy.sql.expression.update "sqlalchemy.sql.expression.update")函数创建的。
 
@@ -1922,7 +1922,7 @@ INSERT，UPDATE 和 DELETE 语句建立在从[`UpdateBase`](#sqlalchemy.sql.expr
 *class* `sqlalchemy.sql.expression。`{.descclassname} `UpdateBase`{.descname} [¶](#sqlalchemy.sql.expression.UpdateBase "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.HasCTE`](selectable.html#sqlalchemy.sql.expression.HasCTE "sqlalchemy.sql.expression.HasCTE")，[`sqlalchemy.sql.base.DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")，[`sqlalchemy.sql.expression.HasPrefixes`](selectable.html#sqlalchemy.sql.expression.HasPrefixes "sqlalchemy.sql.expression.HasPrefixes")，[`sqlalchemy.sql.expression.Executable`](selectable.html#sqlalchemy.sql.expression.Executable "sqlalchemy.sql.expression.Executable")，[`sqlalchemy.sql.expression.ClauseElement`](sqlelement.html#sqlalchemy.sql.expression.ClauseElement "sqlalchemy.sql.expression.ClauseElement")
 
-    为`INSERT`，`UPDATE`和`DELETE`语句形成基础。plainplainplainplainplainplain
+    为`INSERT`，`UPDATE`和`DELETE`语句形成基础。
 
     ` __初始化__  T0> ¶ T1>`{.descname}
     :   *继承自* `__init__`
@@ -2395,7 +2395,7 @@ INSERT，UPDATE 和 DELETE 语句建立在从[`UpdateBase`](#sqlalchemy.sql.expr
  *class*`sqlalchemy.sql.expression.`{.descclassname}`ValuesBase`{.descname}(*table*, *values*, *prefixes*)[¶](#sqlalchemy.sql.expression.ValuesBase "Permalink to this definition")
 :   基础：[`sqlalchemy.sql.expression.UpdateBase`](#sqlalchemy.sql.expression.UpdateBase "sqlalchemy.sql.expression.UpdateBase")
 
-    提供对[`ValuesBase.values()`](#sqlalchemy.sql.expression.ValuesBase.values "sqlalchemy.sql.expression.ValuesBase.values")到INSERT和UPDATE结构的支持。plainplainplainplainplain
+    提供对[`ValuesBase.values()`](#sqlalchemy.sql.expression.ValuesBase.values "sqlalchemy.sql.expression.ValuesBase.values")到INSERT和UPDATE结构的支持。
 
     ` return_defaults  T0> （ T1>  * COLS  T2> ） T3> ¶ T4>`{.descname}
     :   利用[RETURNING](glossary.html#term-returning)子句获取服务器端表达式和默认值。
