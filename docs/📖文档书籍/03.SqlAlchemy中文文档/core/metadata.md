@@ -25,7 +25,7 @@ database (or multiple databases) being described.
 
 要表示表，请使用[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")类。它的两个主要参数是表名，然后是它将与之关联的[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象。其余的位置参数大多是描述每列的[`Column`](#sqlalchemy.schema.Column "sqlalchemy.schema.Column")对象：
 
-    user = Table('user', metadata,plainplainplainplainplain
+    user = Table('user', metadata,
         Column('user_id', Integer, primary_key=True),
         Column('user_name', String(16), nullable=False),
         Column('email_address', String(60)),
@@ -44,7 +44,7 @@ The [`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
 object contains all of the schema constructs we’ve associated with it.
 它支持访问这些表对象的几种方法，例如按照外键依赖的顺序返回每个[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象列表的`sorted_tables`访问器（也就是说，每个表在它引用的所有表之前）：
 
-    >>> for t in metadata.sorted_tables:plainplain
+    >>> for t in metadata.sorted_tables:
     ...    print(t.name)
     user
     user_preference
@@ -53,7 +53,7 @@ object contains all of the schema constructs we’ve associated with it.
 
 在大多数情况下，单个[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象已被显式声明，并且这些对象通常作为应用程序中的模块级变量直接访问。一旦定义了[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")，它就有一整套访问器，允许检查其属性。给定以下[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")定义：
 
-    employees = Table('employees', metadata,plainplainplainplain
+    employees = Table('employees', metadata,plain
         Column('employee_id', Integer, primary_key=True),
         Column('employee_name', String(60), nullable=False),
         Column('employee_dept', Integer, ForeignKey("departments.department_id"))
@@ -63,7 +63,7 @@ object contains all of the schema constructs we’ve associated with it.
 - 此构造定义了对远程表的引用，并在[Defining Foreign
 Keys](constraints.html#metadata-foreignkeys)中进行了完整描述。访问关于此表的信息的方法包括：
 
-    # access the column "EMPLOYEE_ID":plainplainplainplain
+    # access the column "EMPLOYEE_ID":plain
     employees.columns.employee_id
 
     # or just
@@ -121,7 +121,7 @@ that it be used to create your tables).
 
 发布 CREATE 的常用方法是在[`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")对象上使用[`create_all()`](#sqlalchemy.schema.MetaData.create_all "sqlalchemy.schema.MetaData.create_all")。这种方法将发出查询，首先检查每个单独表的存在，如果未找到，将发出 CREATE 语句：
 
->     engine = create_engine('sqlite:///:memory:')plainplain
+>     engine = create_engine('sqlite:///:memory:')
 >
 >     metadata = MetaData()
 >
@@ -166,7 +166,7 @@ tables in order of their dependency.
 
 可以通过[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")的`create()`和`drop()`方法创建和删除单个表。这些方法默认发出 CREATE 或 DROP，而不管表是否存在：
 
-    engine = create_engine('sqlite:///:memory:')plainplain
+    engine = create_engine('sqlite:///:memory:')
 
     meta = MetaData()
 
@@ -185,7 +185,7 @@ tables in order of their dependency.
 
 `drop()`方法：
 
-    sqlemployees.drop(engine)plainplain
+    sqlemployees.drop(engine)
     DROP TABLE employees
     {}
 
@@ -229,14 +229,14 @@ objects can specify references to columns in this table using the form
 
 `schema`参数应该用于任何所需的名称限定符，包括 Oracle 的“所有者”属性和类似名称。它也可以容纳更长方案的虚线名称：
 
-    schema="dbo.scott"plainplainplain
+    schema="dbo.scott"
 
 后端特定选项[¶](#backend-specific-options "Permalink to this headline")
 -----------------------------------------------------------------------
 
 [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")支持特定于数据库的选项。例如，MySQL 有不同的表后端类型，包括“MyISAM”和“InnoDB”。这可以用[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")用`mysql_engine`来表示：
 
-    addresses = Table('engine_email_addresses', meta,plainplainplainplain
+    addresses = Table('engine_email_addresses', meta,plain
         Column('address_id', Integer, primary_key=True),
         Column('remote_user_id', Integer, ForeignKey(users.c.user_id)),
         Column('email_address', String(20)),
@@ -256,7 +256,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
     [`MetaData`](#sqlalchemy.schema.MetaData "sqlalchemy.schema.MetaData")
     has specified a schema.
 
-    也可以看看plainplainplainplain
+    也可以看看plain
 
     [`MetaData.schema`](#sqlalchemy.schema.MetaData.params.schema "sqlalchemy.schema.MetaData")
 
@@ -918,7 +918,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
  *class*`sqlalchemy.schema.`{.descclassname}`MetaData`{.descname}(*bind=None*, *reflect=False*, *schema=None*, *quote\_schema=None*, *naming\_convention=immutabledict({'ix': 'ix\_%(column\_0\_label)s'})*, *info=None*)[¶](#sqlalchemy.schema.MetaData "Permalink to this definition")
 :   基础：[`sqlalchemy.schema.SchemaItem`](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")
 
-    [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象及其关联的模式结构的集合。plainplain
+    [`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象及其关联的模式结构的集合。
 
     保存[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象的集合以及对[`Engine`](connections.html#sqlalchemy.engine.Engine "sqlalchemy.engine.Engine")或[`Connection`](connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")的可选绑定。如果绑定，集合中的[`Table`](#sqlalchemy.schema.Table "sqlalchemy.schema.Table")对象及其列可以参与隐式SQL执行。
 
@@ -1174,7 +1174,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 *class* `sqlalchemy.schema。`{.descclassname} `SchemaItem`{.descname} [¶](#sqlalchemy.schema.SchemaItem "Permalink to this definition")
 :   基础：`sqlalchemy.sql.expression.SchemaEventTarget`，`sqlalchemy.sql.visitors.Visitable`
 
-    定义数据库模式的项目的基类。plainplainplainplain
+    定义数据库模式的项目的基类。
 
     ` get_children  T0> （ T1>  ** kwargs  T2> ） T3> ¶ T4>`{.descname}
     :   用于允许SchemaVisitor访问
@@ -1192,7 +1192,7 @@ Column，Table，MetaData API [¶](#column-table-metadata-api "Permalink to this
 *class* `sqlalchemy.schema。`{.descclassname} `表`{.descname} （ *\* args*，*\*\*千瓦 T5\> ） T6\> [¶ T7\>](#sqlalchemy.schema.Table "Permalink to this definition")*
 :   基础：[`sqlalchemy.sql.base.DialectKWArgs`](sqlelement.html#sqlalchemy.sql.base.DialectKWArgs "sqlalchemy.sql.base.DialectKWArgs")，[`sqlalchemy.schema.SchemaItem`](#sqlalchemy.schema.SchemaItem "sqlalchemy.schema.SchemaItem")，[`sqlalchemy.sql.expression.TableClause`](selectable.html#sqlalchemy.sql.expression.TableClause "sqlalchemy.sql.expression.TableClause")
 
-    在数据库中表示一个表。plainplain
+    在数据库中表示一个表。
 
     例如。：
 

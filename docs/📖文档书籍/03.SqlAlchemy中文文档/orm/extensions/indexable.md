@@ -29,7 +29,7 @@ typed column. 在简单的情况下，它可以被视为[`Column`](core_metadata
 
 将`Person`作为包含主键和 JSON 数据字段的模型。虽然此字段可能包含任何数量的编码元素，但我们希望单独将名为`name`的元素称为专用属性，其行为与独立列相同：
 
-    from sqlalchemy import Column, JSON, Integerplainplainplainplainplainplainplainplainplainplain
+    from sqlalchemy import Column, JSON, Integerplain
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.ext.indexable import index_property
 
@@ -45,21 +45,21 @@ typed column. 在简单的情况下，它可以被视为[`Column`](core_metadata
 
 以上，现在，`name`属性的行为与映射列相似。我们可以编写一个新的`Person`并设置`name`：
 
-    >>> person = Person(name='Alchemist')plainplainplainplainplainplainplainplainplainplain
+    >>> person = Person(name='Alchemist')plain
 
 该值现在可以访问：
 
-    >>> person.nameplainplainplainplain
+    >>> person.nameplain
     'Alchemist'
 
 在幕后，JSON 字段被初始化为一个新的空字典并且字段被设置：
 
-    >>> person.dataplainplainplainplainplain
+    >>> person.data
     {"name": "Alchemist'}
 
 该领域是可变的：
 
-    >>> person.name = 'Renamed'plainplainplainplainplainplain
+    >>> person.name = 'Renamed'
     >>> person.name
     'Renamed'
     >>> person.data
@@ -69,7 +69,7 @@ typed column. 在简单的情况下，它可以被视为[`Column`](core_metadata
 
 删除也正常工作：
 
-    >>> del person.nameplainplainplainplain
+    >>> del person.nameplain
     >>> person.data
     {}
 
@@ -77,24 +77,24 @@ typed column. 在简单的情况下，它可以被视为[`Column`](core_metadata
 
 缺少的密钥会产生`AttributeError`：
 
-    >>> person = Person()plainplainplainplainplainplainplainplain
+    >>> person = Person()
     >>> person.name
     ...
     AttributeError: 'name'
 
 这些属性也可以在课堂上进行访问。下面，我们举例说明用于生成索引 SQL 标准的`Person.name`：
 
-    >>> from sqlalchemy.orm import Sessionplainplain
+    >>> from sqlalchemy.orm import Session
     >>> session = Session()
     >>> query = session.query(Person).filter(Person.name == 'Alchemist')
 
 上述查询等同于：
 
-    >>> query = session.query(Person).filter(Person.data['name'] == 'Alchemist')plainplainplainplainplain
+    >>> query = session.query(Person).filter(Person.data['name'] == 'Alchemist')
 
 可以链接多个[`index_property`](#sqlalchemy.ext.indexable.index_property "sqlalchemy.ext.indexable.index_property")对象以产生多级索引：
 
-    from sqlalchemy import Column, JSON, Integerplainplainplainplainplain
+    from sqlalchemy import Column, JSON, Integer
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.ext.indexable import index_property
 
@@ -113,11 +113,11 @@ typed column. 在简单的情况下，它可以被视为[`Column`](core_metadata
 
 以上，一个查询如：
 
-    q = session.query(Person).filter(Person.year == '1980')plainplainplainplain
+    q = session.query(Person).filter(Person.year == '1980')plain
 
 在 Postgresql 后端，上述查询将呈现为：
 
-    SELECT person.id, person.dataplainplainplain
+    SELECT person.id, person.data
     FROM person
     WHERE person.data -> %(data_1)s -> %(param_1)s = %(param_2)s
 
@@ -141,7 +141,7 @@ coercion of values or SQL expressions as they are accessed.
 下面是 Postgresql
 JSON 类型使用的一个常用方法，我们希望还包括自动转换加上`astext()`：
 
-    class pg_json_property(index_property):plainplainplainplainplainplainplainplainplain
+    class pg_json_property(index_property):
         def __init__(self, attr_name, index, cast_type):
             super(pg_json_property, self).__init__(attr_name, index)
             self.cast_type = cast_type
@@ -152,7 +152,7 @@ JSON 类型使用的一个常用方法，我们希望还包括自动转换加上
 
 上面的子类可以与 Postgresql 特定版本的[`postgresql.JSON`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.JSON "sqlalchemy.dialects.postgresql.JSON")一起使用：
 
-    from sqlalchemy import Column, Integerplainplainplain
+    from sqlalchemy import Column, Integer
     from sqlalchemy.ext.declarative import declarative_base
     from sqlalchemy.dialects.postgresql import JSON
 
@@ -168,11 +168,11 @@ JSON 类型使用的一个常用方法，我们希望还包括自动转换加上
 
 实例级别的`age`属性与之前一样；然而，在渲染 SQL 时，Postgresql 的`->>`运算符将用于索引访问，而不是`->`的常用索引操作符：
 
-    >>> query = session.query(Person).filter(Person.age < 20)plainplain
+    >>> query = session.query(Person).filter(Person.age < 20)
 
 上面的查询将呈现：
 
-    SELECT person.id, person.dataplainplainplainplainplainplain
+    SELECT person.id, person.data
     FROM person
     WHERE CAST(person.data ->> %(data_1)s AS INTEGER) < %(param_1)s
 
@@ -182,7 +182,7 @@ API 参考[¶](#api-reference "Permalink to this headline")
  *class*`sqlalchemy.ext.indexable.`{.descclassname}`index_property`{.descname}(*attr\_name*, *index*, *datatype=None*, *mutable=True*, *onebased=True*)[¶](#sqlalchemy.ext.indexable.index_property "Permalink to this definition")
 :   基础：[`sqlalchemy.ext.hybrid.hybrid_property`](hybrid.html#sqlalchemy.ext.hybrid.hybrid_property "sqlalchemy.ext.hybrid.hybrid_property")
 
-    属性生成器。生成的属性描述对应于[`Indexable`](core_type_api.html#sqlalchemy.types.Indexable "sqlalchemy.types.Indexable")列的对象属性。plainplainplainplainplainplain
+    属性生成器。生成的属性描述对应于[`Indexable`](core_type_api.html#sqlalchemy.types.Indexable "sqlalchemy.types.Indexable")列的对象属性。
 
     版本1.1中的新功能
 

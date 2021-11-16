@@ -90,16 +90,16 @@ Behavior](orm_session_state_management.html#session-referencing-behavior)。
 
 ### 新的 init\_scalar()事件在 ORM 级别[¶](#new-init-scalar-event-intercepts-default-values-at-orm-level "Permalink to this headline")处截取默认值
 
-对于非持久对象，首次访问尚未设置的属性时，ORM会生成`None`值：
+对于非持久对象，首次访问尚未设置的属性时，ORM 会生成`None`值：
 
-    >>> obj = MyObj()plainplain
+    >>> obj = MyObj()
     >>> obj.some_value
     None
 
 对于这个 Python 内部值来说，有一个用例与 Core 生成的默认值相对应，甚至在该对象被保存之前。为了适应这种用例，添加了一个新事件[`AttributeEvents.init_scalar()`](orm_events.html#sqlalchemy.orm.events.AttributeEvents.init_scalar "sqlalchemy.orm.events.AttributeEvents.init_scalar")。在[Attribute
 Instrumentation](orm_examples.html#examples-instrumentation)处的新示例`active_column_defaults.py`演示了一个示例用法，因此效果可以是：
 
-    >>> obj = MyObj()plainplainplain
+    >>> obj = MyObj()
     >>> obj.some_value
     "my default"
 
@@ -125,7 +125,7 @@ and JSON types now correctly specify
 
 现在，键入系统对 SQLAlchemy“可检查”对象在上下文中的传递进行了特定的检查，否则这些对象将作为文字值处理。任何可合法作为 SQL 值传递的 SQLAlchemy 内置对象都包含一个为该对象提供有效 SQL 表达式的方法`__clause_element__()`。对于不提供此功能的 SQLAlchemy 对象（如映射类，映射器和映射实例），会发出更多信息性错误消息，而不是让 DBAPI 接收对象并稍后失败。下面举例说明一个例子，其中基于字符串的属性`User.name`与`User()`的完整实例进行比较，而不是针对字符串值：
 
-    >>> some_user = User()plainplainplain
+    >>> some_user = User()
     >>> q = s.query(User).filter(User.name == some_user)
     ...
     sqlalchemy.exc.ArgumentError: Object <__main__.User object at 0x103167e90> is not legal as a SQL literal value
@@ -146,7 +146,7 @@ object, which is handled distinctly:
 
 [Indexable](orm_extensions_indexable.html)扩展是对混合属性功能的扩展，它允许构建引用“可索引”数据类型的特定元素（如数组或 JSON 字段）的属性：
 
-    class Person(Base):plainplain
+    class Person(Base):
         __tablename__ = 'person'
 
         id = Column(Integer, primary_key=True)
@@ -156,7 +156,7 @@ object, which is handled distinctly:
 
 以上，在初始化为空字典之后，`name`属性将从 JSON 列`data`读取/写入字段`"name"`：
 
-    >>> person = Person(name='foobar')plainplain
+    >>> person = Person(name='foobar')
     >>> person.name
     foobar
 
@@ -187,7 +187,7 @@ using from\_self(), count()](migration_10.html#migration-3177), the
 should no longer inappropriately add the “single inheritance” criteria
 when the query is against a subquery expression such as an exists:
 
-    class Widget(Base):plain
+    class Widget(Base):
         __tablename__ = 'widget'
         id = Column(Integer, primary_key=True)
         type = Column(String)
@@ -204,7 +204,7 @@ when the query is against a subquery expression such as an exists:
 
 生产：
 
-    SELECT EXISTS (SELECT 1plainplain
+    SELECT EXISTS (SELECT 1
     FROM widget
     WHERE widget.data = :data_1 AND widget.type IN (:type_1)) AS anon_1
 
@@ -282,13 +282,13 @@ MySQL 的一个常见情况是当事务内发生死锁时，SAVEPOINT 被取消�
 
 上述计划将提高：
 
-    FlushError: New instance <User at 0x7f0287eca4d0> with identity keyplain
+    FlushError: New instance <User at 0x7f0287eca4d0> with identity key
     (<class 'test.orm.test_transaction.User'>, ('u1',)) conflicts
     with persistent instance <User at 0x7f02889c70d0>
 
 这个错误是，当上面的异常被引发时，工作单元正在对原始对象进行操作，假设它是一个活动行，事实上该对象已经过期，并且经过测试发现它已经消失。修复程序现在测试这个条件，所以在我们看到的 SQL 日志中：
 
-    BEGIN (implicit)plain
+    BEGIN (implicit)
 
     INSERT INTO a (id) VALUES (?)
     (1,)
@@ -354,7 +354,7 @@ CASCADE 为配置的外键进行。这是使用[`orm.mapper.passive_deletes`(orm
 
 将发出 SQL 如下：
 
-    DELETE FROM a WHERE a.id = %(id)splain
+    DELETE FROM a WHERE a.id = %(id)s
     {'id': 1}
     COMMIT
 
@@ -366,7 +366,7 @@ CASCADE 为配置的外键进行。这是使用[`orm.mapper.passive_deletes`(orm
 
 以下映射总是可以没有问题：
 
-    class A(Base):plainplain
+    class A(Base):
         __tablename__ = 'a'
         id = Column(Integer, primary_key=True)
         b = relationship("B", foreign_keys="B.a_id", backref="a")
@@ -388,7 +388,7 @@ CASCADE 为配置的外键进行。这是使用[`orm.mapper.passive_deletes`(orm
 
 但是，如果以其他方式配置关系，则会发生错误：
 
-    class A(Base):
+    class A(Base):plain
         __tablename__ = 'a'
         id = Column(Integer, primary_key=True)
 
@@ -430,7 +430,7 @@ CASCADE 为配置的外键进行。这是使用[`orm.mapper.passive_deletes`(orm
 
 现在，`A.some_name.__doc__`的上述值现在符合：
 
-    >>> A.some_name.__doc__plainplainplain
+    >>> A.some_name.__doc__plain
     The name field
 
 但是，要实现这一点，混合属性的机制必然变得更加复杂。以前，混合类的级别访问器是一个简单的 pass-thru，也就是说，这个测试会成功：
@@ -439,7 +439,7 @@ CASCADE 为配置的外键进行。这是使用[`orm.mapper.passive_deletes`(orm
 
 通过改变，由`A.some_name`返回的表达式被封装在它自己的`QueryableAttribute`包装器中：
 
-    >>> A.some_nameplainplain
+    >>> A.some_name
     <sqlalchemy.orm.attributes.hybrid_propertyProxy object at 0x7fde03888230>
 
 大量的测试进入确保这个包装器正常工作，包括像[Custom Value
@@ -447,7 +447,7 @@ Object](http://techspot.zzzeek.org/2011/10/21/hybrids-and-value-agnostic-types/)
 
 作为这种变化的一部分，现在还从混合描述符本身传播`hybrid_property.info`集合，而不是从基础表达式传播。也就是说，访问`A.some_name.info`现在会返回您从`inspect(A).all_orm_descriptors['some_name'].info`获得的相同字典：
 
-    >>> A.some_name.info['foo'] = 'bar'
+    >>> A.some_name.info['foo'] = 'bar'plain
     >>> from sqlalchemy import inspect
     >>> inspect(A).all_orm_descriptors['some_name'].info
     {'foo': 'bar'}
@@ -462,7 +462,7 @@ Object](http://techspot.zzzeek.org/2011/10/21/hybrids-and-value-agnostic-types/)
 
 鉴于：
 
-    u1 = User(id=7, name='x')plainplain
+    u1 = User(id=7, name='x')
     u1.orders = [
         Order(description='o1', address=Address(id=1, email_address='a')),
         Order(description='o2', address=Address(id=1, email_address='b')),
@@ -498,12 +498,12 @@ a mapping of the classes `Parent` and
 
 在上面，我们创建了一个挂起的对象`some_object`，将它的外键操作为`Parent`来引用它，*然后*我们实际建立了关系。在错误修复之前，backref 不会被触发：
 
-    # before the fixplainplain
+    # before the fix
     assert some_object not in some_parent.items
 
 现在的修正是，当我们试图找到`some_object.parent`的前一个值时，我们忽略手动设置的父 ID，然后查找数据库提交的值。在这种情况下，它是 None，因为对象处于挂起状态，所以事件系统将`some_object.parent`记录为净更改：
 
-    # after the fix, backref fired off for some_object.parent = some_parentplainplain
+    # after the fix, backref fired off for some_object.parent = some_parent
     assert some_object in some_parent.items
 
 虽然不鼓励操纵由关系管理的外键属性，但对此用例的支持有限。为了允许加载进行而操纵外键的应用程序通常会利用[`Session.enable_relationship_loading()`](orm_session_api.html#sqlalchemy.orm.session.Session.enable_relationship_loading "sqlalchemy.orm.session.Session.enable_relationship_loading")和`RelationshipProperty.load_on_pending`特性，这些特性会导致关系发出延迟加载基于内存中不存在的外键值。无论这些功能是否在使用中，这种行为改善现在都将显而易见。
@@ -514,7 +514,7 @@ a mapping of the classes `Parent` and
 
 在最近的 SQLAlchemy 版本中，由多种形式的“多态”查询生成的 SQL 具有比以前更加“平坦”的形式，其中几个表的 JOIN 不再无条件地捆绑到子查询中。为了适应这种情况，现在，[`Query.correlate()`](orm_query.html#sqlalchemy.orm.query.Query.correlate "sqlalchemy.orm.query.Query.correlate")方法从这种多态选择中提取单个表并确保所有都是子查询的“关联”的一部分。假设映射文档中的`Person/Manager/Engineer->Company`设置，使用 with\_polymorphic：
 
-    sess.query(Person.name)plain
+    sess.query(Person.name)
                 .filter(
                     sess.query(Company.name).
                     filter(Company.company_id == Person.company_id).
@@ -522,7 +522,7 @@ a mapping of the classes `Parent` and
 
 上面的查询现在生成：
 
-    SELECT people.name AS people_nameplainplainplain
+    SELECT people.name AS people_name
     FROM people
     LEFT OUTER JOIN engineers ON people.person_id = engineers.person_id
     LEFT OUTER JOIN managers ON people.person_id = managers.person_id
@@ -618,7 +618,7 @@ dialect](#change-3631)
 
 上面的查询发出 SQL 如下所示：
 
-    SELECTplainplain
+    SELECT
         d.id AS d_id,
         c_1.id AS c_1_id, c_1.d_id AS c_1_d_id,
         b.id AS b_id, b.c_id AS b_c_id,
@@ -650,7 +650,7 @@ where they both refer to the same identity, the `C.d` element will still be load
 
 像下面这样的查询现在只会增加 SELECT 列表中缺少的那些列，而没有重复：
 
-    q = session.query(User.id, User.name.label('name')).\plainplainplain
+    q = session.query(User.id, User.name.label('name')).\
         distinct().\
         order_by(User.id, User.name, User.fullname)
 
@@ -662,7 +662,7 @@ where they both refer to the same identity, the `C.d` element will still be load
 
 以前，它会产生：
 
-    SELECT DISTINCT user.id AS a_id, user.name AS name, user.name AS a_name,plainplain
+    SELECT DISTINCT user.id AS a_id, user.name AS name, user.name AS a_name,
       user.fullname AS a_fullname
     FROM a ORDER BY user.id, user.name, user.fullname
 
@@ -688,7 +688,7 @@ Tracking](orm_extensions_mutable.html)扩展中，以补充现有的[`MutableDic
 为了帮助防止在加载一系列对象之后发生不需要的延迟加载，可以应用新的“lazy
 ='raise'”策略和相应的加载程序选项[`orm.raiseload()`](orm_loading_relationships.html#sqlalchemy.orm.raiseload "sqlalchemy.orm.raiseload")关系属性，当访问非热切加载的属性以进行读取时，会导致该属性引发`InvalidRequestError`：
 
-    >>> from sqlalchemy.orm import raiseloadplainplainplain
+    >>> from sqlalchemy.orm import raiseloadplain
     >>> a1 = s.query(A).options(raiseload(A.bs)).first()
     >>> a1.bs
     Traceback (most recent call last):
@@ -720,7 +720,7 @@ INSERT 将现在将 CTE 呈现在整个语句的顶部，而不是像 1.0 中那
 
 下面是一个在一个语句中呈现 UPDATE，INSERT 和 SELECT 全部的例子：
 
-    >>> from sqlalchemy import table, column, select, literal, existsplainplainplain
+    >>> from sqlalchemy import table, column, select, literal, exists
     >>> orders = table(
     ...     'orders',
     ...     column('region'),
@@ -790,7 +790,7 @@ ROW”为 0，无对于 UNBOUNDED。
 目前已知 LATERAL 关键字仅受 Postgresql
 9.3 及更高版本支持，但因为它是 SQL 关键字添加到 Core 的标准支持的一部分。[`Select.lateral()`](core_selectable.html#sqlalchemy.sql.expression.Select.lateral "sqlalchemy.sql.expression.Select.lateral")的实现采用了特殊的逻辑，而不仅仅是呈现 LATERAL 关键字，以允许从相同的 FROM 子句派生的表与相关的可选择的关联。横向相关性：
 
-    >>> from sqlalchemy import table, column, select, trueplainplainplain
+    >>> from sqlalchemy import table, column, select, true
     >>> people = table('people', column('people_id'), column('age'), column('name'))
     >>> books = table('books', column('book_id'), column('owner_id'))
     >>> subq = select([books.c.book_id]).\
@@ -825,7 +825,7 @@ ROW”为 0，无对于 UNBOUNDED。
 
 假设`people`具有列`people_id`，则上述语句将呈现为：
 
-    SELECT alias.people_id FROMplainplainplain
+    SELECT alias.people_id FROM
     people AS alias TABLESAMPLE bernoulli(:bernoulli_1)
     REPEATABLE (random())
 
@@ -837,7 +837,7 @@ SQLAlchemy 一直具有为单列整数主键启用后端数据库的“自动增
 
 改变的是，该功能不再为*复合*主键自动开启；以前，一个表格定义如：
 
-    Table(plain
+    Table(
         'some_table', metadata,
         Column('x', Integer, primary_key=True),
         Column('y', Integer, primary_key=True)
@@ -845,7 +845,7 @@ SQLAlchemy 一直具有为单列整数主键启用后端数据库的“自动增
 
 将“自动增量”语义应用于`'x'`列，仅仅是因为它首先在主键列的列表中。为了禁用此功能，必须在所有列上关闭`autoincrement`：
 
-    # old wayplainplain
+    # old way
     Table(
         'some_table', metadata,
         Column('x', Integer, primary_key=True, autoincrement=False),
@@ -875,7 +875,7 @@ set up; given a table such as:
 
 一个 INSERT 发出没有值的表将产生异常：
 
-    CompileError: Column 'b.x' is marked as a member of the primaryplainplainplainplain
+    CompileError: Column 'b.x' is marked as a member of the primaryplain
     key for table 'b', but has no Python-side or server-side default
     generator indicated, nor does it indicate 'autoincrement=True',
     and no explicit value is passed.  Primary key columns may not
@@ -887,7 +887,7 @@ set up; given a table such as:
 
 对于从服务器端默认或不常见的主键值（如触发器）接收主键值的列，可以使用[`FetchedValue`](core_defaults.html#sqlalchemy.schema.FetchedValue "sqlalchemy.schema.FetchedValue")指示存在值生成器：
 
-    Table(plainplainplainplain
+    Table(plain
         'b', metadata,
         Column('x', Integer, primary_key=True, server_default=FetchedValue()),
         Column('y', Integer, primary_key=True, server_default=FetchedValue())
@@ -916,7 +916,7 @@ New operators [`ColumnOperators.is_distinct_from()`](core_sqlelement.html#sqlalc
 and [`ColumnOperators.isnot_distinct_from()`](core_sqlelement.html#sqlalchemy.sql.operators.ColumnOperators.isnot_distinct_from "sqlalchemy.sql.operators.ColumnOperators.isnot_distinct_from")
 allow the IS DISTINCT FROM and IS NOT DISTINCT FROM sql operation:
 
-    >>> print column('x').is_distinct_from(None)plainplainplainplain
+    >>> print column('x').is_distinct_from(None)plain
     x IS DISTINCT FROM NULL
 
 处理提供了 NULL，True 和 False：
@@ -942,7 +942,7 @@ available at the Core and ORM level, instructs the compiler to render
 
 该标志也适用于 ORM 级别：
 
-    q = session.query(MyClass).outerjoin(MyOtherClass, full=True)plain
+    q = session.query(MyClass).outerjoin(MyOtherClass, full=True)
 
 [＃1957 T0\>](http://www.sqlalchemy.org/trac/ticket/1957)
 
@@ -996,7 +996,7 @@ remarks
 
 此更改的另一方面是匹配列的规则也已被修改，以便更加充分地依赖编译 SQL 结构的“位置”匹配。给出如下的声明：
 
-    ua = users.alias('ua')plainplainplain
+    ua = users.alias('ua')
     stmt = select([users.c.user_id, ua.c.user_id])
 
 上述声明将编译为：
@@ -1060,7 +1060,7 @@ object now accomodates single negative integer indexes like a regular
 Python sequence, both in the pure Python and C-extension version.
 以前，负值只能在切片中使用：
 
-    >>> from sqlalchemy import create_engineplainplain
+    >>> from sqlalchemy import create_engine
     >>> e = create_engine("sqlite://")
     >>> row = e.execute("select 1, 2, 3").first()
     >>> row[-1], row[-2], row[1], row[-2:2]
@@ -1137,13 +1137,13 @@ Python sequence, both in the pure Python and C-extension version.
 与其他人一样，SQLite 缺乏能力驱动的问题现在已得到增强，可用于所有支持的后端。我们引用的查询是 SELECT 语句的 UNION，它们本身包含行限制或排序功能，其中包括 LIMIT，OFFSET 和/或 ORDER
 BY：
 
-    (SELECT x FROM table1 ORDER BY y LIMIT 1) UNIONplainplain
+    (SELECT x FROM table1 ORDER BY y LIMIT 1) UNION
     (SELECT x FROM table2 ORDER BY y LIMIT 2)
 
 上面的查询需要在每个子选择内部进行括号，以便正确地对子结果进行分组。在 SQLAlchemy
 Core 中生成上述语句如下所示：
 
-    stmt1 = select([table1.c.x]).order_by(table1.c.y).limit(1)
+    stmt1 = select([table1.c.x]).order_by(table1.c.y).limit(1)plain
     stmt2 = select([table1.c.x]).order_by(table2.c.y).limit(2)
 
     stmt = union(stmt1, stmt2)
@@ -1164,7 +1164,7 @@ fail on Oracle**.
 
 此解决方法适用于所有 SQLAlchemy 版本。在 ORM 中，它看起来像：
 
-    stmt1 = session.query(Model1).order_by(Model1.y).limit(1).subquery().select()plainplain
+    stmt1 = session.query(Model1).order_by(Model1.y).limit(1).subquery().select()
     stmt2 = session.query(Model2).order_by(Model2.y).limit(1).subquery().select()
 
     stmt = session.query(Model1).from_statement(stmt1.union(stmt2))
@@ -1224,7 +1224,7 @@ cases:
 如果该属性根本没有设置，那么列级别的默认值*将*触发并且/或者 SQL
 NULL 按预期插入，就像以前的行为一样。下面说明两个变体：
 
-    obj = MyObject(json_value=None)plainplain
+    obj = MyObject(json_value=None)
     session.add(obj)
     session.commit()   # *will not* fire off column defaults, will insert JSON 'null'
 
@@ -1267,7 +1267,7 @@ itself has been moved to Core in a new class [`types.ARRAY`](core_type_basics.ht
 数组是 SQL 标准的一部分，也有几个面向数组的函数，如`array_agg()`和`unnest()`。为了支持这些结构不仅适用于 PostgreSQL，而且还适用于未来其他具有阵列能力的后端，例如 DB2，SQL 表达式的大部分数组逻辑现在位于 Core 中。[`types.ARRAY`](core_type_basics.html#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")类型still
 **仅适用于 Postgresql**，但它可以直接使用，支持特殊的数组用例，例如索引访问，以及支持 ANY 和所有：
 
-    mytable = Table("mytable", metadata,plainplain
+    mytable = Table("mytable", metadata,
             Column("data", ARRAY(Integer, dimensions=2))
         )
 
@@ -1303,13 +1303,13 @@ and [`sql.expression.all_()`](core_sqlelement.html#sqlalchemy.sql.expression.all
 使用新的[`types.ARRAY`](core_type_basics.html#sqlalchemy.types.ARRAY "sqlalchemy.types.ARRAY")类型，我们还可以为返回数组的`array_agg()`
 SQL 函数实现预先键入的函数，该函数现在可以使用[`array_agg`](core_functions.html#sqlalchemy.sql.functions.array_agg "sqlalchemy.sql.functions.array_agg")
 
-    from sqlalchemy import funcplainplain
+    from sqlalchemy import func
     stmt = select([func.array_agg(table.c.value)])
 
 用于聚合 ORDER
 BY 的 Postgresql 元素也通过[`postgresql.aggregate_order_by`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.aggregate_order_by "sqlalchemy.dialects.postgresql.aggregate_order_by")添加：
 
-    from sqlalchemy.dialects.postgresql import aggregate_order_byplainplainplain
+    from sqlalchemy.dialects.postgresql import aggregate_order_by
     expr = func.array_agg(aggregate_order_by(table.c.a, table.c.b.desc()))
     stmt = select([expr])
 
@@ -1319,7 +1319,7 @@ BY 的 Postgresql 元素也通过[`postgresql.aggregate_order_by`](dialects_post
 
 PG 方言本身也提供一个[`postgresql.array_agg()`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.array_agg "sqlalchemy.dialects.postgresql.array_agg")包装来确保[`postgresql.ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型：
 
-    from sqlalchemy.dialects.postgresql import array_aggplain
+    from sqlalchemy.dialects.postgresql import array_agg
     stmt = select([array_agg(table.c.value).contains('foo')])
 
 Additionally, functions like `percentile_cont()`,
@@ -1329,7 +1329,7 @@ via `WITHIN GROUP (ORDER BY <expr>)` are now
 available via the [`FunctionElement.within_group()`](core_functions.html#sqlalchemy.sql.functions.FunctionElement.within_group "sqlalchemy.sql.functions.FunctionElement.within_group")
 modifier:
 
-    from sqlalchemy import funcplain
+    from sqlalchemy import func
     stmt = select([
         department.c.id,
         func.percentile_cont(0.5).within_group(
@@ -1339,7 +1339,7 @@ modifier:
 
 上面的语句会产生 SQL 类似于：
 
-    SELECT department.id, percentile_cont(0.5)plainplainplainplain
+    SELECT department.id, percentile_cont(0.5)plain
     WITHIN GROUP (ORDER BY department.salary DESC)
 
 现在为这些函数提供了正确返回类型的占位符，它们包括[`percentile_cont`](core_functions.html#sqlalchemy.sql.functions.percentile_cont "sqlalchemy.sql.functions.percentile_cont")，[`percentile_disc`](core_functions.html#sqlalchemy.sql.functions.percentile_disc "sqlalchemy.sql.functions.percentile_disc")，[`rank`](core_functions.html#sqlalchemy.sql.functions.rank "sqlalchemy.sql.functions.rank")，[`dense_rank`](core_functions.html#sqlalchemy.sql.functions.dense_rank "sqlalchemy.sql.functions.dense_rank")
@@ -1353,7 +1353,7 @@ modifier:
 [`SchemaType`](core_type_basics.html#sqlalchemy.types.SchemaType "sqlalchemy.types.SchemaType")类型包括[`Enum`](core_type_basics.html#sqlalchemy.types.Enum "sqlalchemy.types.Enum")和[`Boolean`](core_type_basics.html#sqlalchemy.types.Boolean "sqlalchemy.types.Boolean")等类型，除了与数据库类型相对应外，还会生成 CHECK 约束或 Postgresql
 ENUM 一个新的 CREATE TYPE 语句的情况下，现在将自动与[`TypeDecorator`](core_custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")配方一起工作。以前，[`postgresql.ENUM`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ENUM "sqlalchemy.dialects.postgresql.ENUM")的[`TypeDecorator`](core_custom_types.html#sqlalchemy.types.TypeDecorator "sqlalchemy.types.TypeDecorator")必须如下所示：
 
-    # old wayplainplainplain
+    # old way
     class MyEnum(TypeDecorator, SchemaType):
         impl = postgresql.ENUM('one', 'two', 'three', name='myenum')
 
@@ -1383,7 +1383,7 @@ ENUM 一个新的 CREATE TYPE 语句的情况下，现在将自动与[`TypeDecor
 
 在每次请求时，[`Session`](orm_session_api.html#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")可以设置为每次引用不同的模式：
 
-    session = Session()plainplain
+    session = Session()
     session.connection(execution_options={
         "schema_translate_map": {"per_user": "account_one"}})
 
@@ -1400,7 +1400,7 @@ ENUM 一个新的 CREATE TYPE 语句的情况下，现在将自动与[`TypeDecor
 
 在 Core SQL 构造上调用`str()`现在会在比以前更多的情况下生成一个字符串，支持默认 SQL 中通常不存在的各种 SQL 构造，例如 RETURNING，数组索引和非标准数据类型：
 
-    >>> from sqlalchemy import table, columnplainplainplain
+    >>> from sqlalchemy import table, columnplain
     t>>> t = table('x', column('a'), column('b'))
     >>> print(t.insert().returning(t.c.a, t.c.b))
     INSERT INTO x (a, b) VALUES (:a, :b) RETURNING x.a, x.b
@@ -1433,7 +1433,7 @@ dialect](#change-3081)
 
 然后，我们将一个表上的字符串“id”列与另一个表上的整数“id”列相等的映射：
 
-    class Person(Base):plainplain
+    class Person(Base):
         __tablename__ = 'person'
         id = Column(StringAsInt, primary_key=True)
 
@@ -1471,12 +1471,12 @@ dialect](#change-3081)
 
 随着更改，即使在将列换出为绑定参数之后，[`type_coerce()`](core_sqlelement.html#sqlalchemy.sql.expression.type_coerce "sqlalchemy.sql.expression.type_coerce")函数也会维护一个包装，现在查询如下所示：
 
-    SELECT pets.id AS pets_id, pets.person_id AS pets_person_idplainplain
+    SELECT pets.id AS pets_id, pets.person_id AS pets_person_id
     FROM pets
     WHERE pets.person_id = CAST(%(param_1)s AS INTEGER)
     {'param_1': 5}
 
-在我们的主要联接中的外部 CAST 仍然生效的情况下，根据[`type_coerce()`](core_sqlelement.html#sqlalchemy.sql.expression.type_coerce "sqlalchemy.sql.expression.type_coerce")函数的意图删除了在`StringAsInt`定制类型的一部分中的不必要的CAST。
+在我们的主要联接中的外部 CAST 仍然生效的情况下，根据[`type_coerce()`](core_sqlelement.html#sqlalchemy.sql.expression.type_coerce "sqlalchemy.sql.expression.type_coerce")函数的意图删除了在`StringAsInt`定制类型的一部分中的不必要的 CAST。
 
 [＃3531 T0\>](http://www.sqlalchemy.org/trac/ticket/3531)
 
@@ -1578,7 +1578,7 @@ the SQL type assigned to the expression returned by indexed access, e.g.
 
 这包括：
 
--   分配给[`ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")的索引访问的SQL类型考虑了配置的维数。具有三个维度的[`ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")将返回一个具有少于一个维度的[`ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型的 SQL 表达式。给定一个类型为`ARRAY（Integer， dimensions = 3）`的列，我们现在可以执行下面的表达式：
+-   分配给[`ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")的索引访问的 SQL 类型考虑了配置的维数。具有三个维度的[`ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")将返回一个具有少于一个维度的[`ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型的 SQL 表达式。给定一个类型为`ARRAY（Integer， dimensions = 3）`的列，我们现在可以执行下面的表达式：
 
         int_expr = col[5][6][7]   # returns an Integer expression object
 
@@ -1593,7 +1593,7 @@ the SQL type assigned to the expression returned by indexed access, e.g.
     modifier is used.
     这意味着无论 JSON 结构的索引访问最终是指字符串，列表，数字还是其他 JSON 结构，Postgresql 始终认为它本身是 JSON，除非它明确地被转换为不同的形式。像[`ARRAY`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.ARRAY "sqlalchemy.dialects.postgresql.ARRAY")类型一样，这意味着现在可以直接生成具有多级索引访问的 JSON 表达式：
 
-        json_expr = json_col['key1']['attr1'][5]plainplain
+        json_expr = json_col['key1']['attr1'][5]
 
 -   The “textual” type that is returned by indexed access of
     [`HSTORE`](dialects_postgresql.html#sqlalchemy.dialects.postgresql.HSTORE "sqlalchemy.dialects.postgresql.HSTORE")
@@ -1633,7 +1633,7 @@ other without the “astext” aspect.
 
 现在需要改变为：
 
-    expr = json_col['somekey'].astext.cast(Integer)plainplain
+    expr = json_col['somekey'].astext.cast(Integer)
 
 ### 带有 ENUM 的 ARRAY 现在会为 ENUM [¶](#array-with-enum-will-now-emit-create-type-for-the-enum "Permalink to this headline")发出 CREATE TYPE
 
@@ -1718,11 +1718,11 @@ Core 和 ORM 中的新参数[`GenerativeSelect.with_for_update.skip_locked`](cor
 
 -   SELECT FOR UPDATE SKIP LOCKED：
 
-        stmt = select([table]).with_for_update(skip_locked=True)plainplain
+        stmt = select([table]).with_for_update(skip_locked=True)
 
 -   选择关键共享：
 
-        stmt = select([table]).with_for_update(read=True, key_share=True)plainplain
+        stmt = select([table]).with_for_update(read=True, key_share=True)
 
 方言的改进和改变 - MySQL [¶](#dialect-improvements-and-changes-mysql "Permalink to this headline")
 --------------------------------------------------------------------------------------------------
@@ -1745,7 +1745,7 @@ The MySQL dialect now accepts the value “AUTOCOMMIT” for the
 and [`Connection.execution_options.isolation_level`(core_connections.html#sqlalchemy.engine.Connection.execution_options.params.isolation_level "sqlalchemy.engine.Connection.execution_options")
 parameters:
 
-    connection = engine.connect()plainplain
+    connection = engine.connect()
     connection = connection.execution_options(
         isolation_level="AUTOCOMMIT"
     )
@@ -1778,7 +1778,7 @@ MySQL 方言具有这样的行为，如果 InnoDB 表上的组合主键在不是
 
 这种解决方法已被删除，并替换为仅在主键中声明 AUTO\_INCREMENT 列*first*的更好系统：
 
-    CREATE TABLE some_table (plain
+    CREATE TABLE some_table (
         x INTEGER NOT NULL,
         y INTEGER NOT NULL AUTO_INCREMENT,
         PRIMARY KEY (y, x)
@@ -1855,7 +1855,7 @@ SQLite 后端现在利用 SQLite 的“sqlite\_master”视图来从原始 DDL �
 
 ### 检查约束现在反映[¶](#id1 "Permalink to this headline")
 
-SQLite方言现在支持在`Table.constraints`内的方法[`Inspector.get_check_constraints()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_check_constraints "sqlalchemy.engine.reflection.Inspector.get_check_constraints")以及[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")反射内反映 CHECK 约束。采集。
+SQLite 方言现在支持在`Table.constraints`内的方法[`Inspector.get_check_constraints()`](core_reflection.html#sqlalchemy.engine.reflection.Inspector.get_check_constraints "sqlalchemy.engine.reflection.Inspector.get_check_constraints")以及[`Table`](core_metadata.html#sqlalchemy.schema.Table "sqlalchemy.schema.Table")反射内反映 CHECK 约束。采集。
 
 ### ON DELETE 和 ON UPDATE 外键关键短语现在反映[¶](#on-delete-and-on-update-foreign-key-phrases-now-reflect "Permalink to this headline")
 
@@ -1935,7 +1935,7 @@ aliasing to be turned off.
 
 传统的行为模式将尝试将符合模式的表名称变为别名：
 
-    >>> eng = create_engine("mssql+pymssql://mydsn", legacy_schema_aliasing=True)
+    >>> eng = create_engine("mssql+pymssql://mydsn", legacy_schema_aliasing=True)plain
     >>> print(account_table.select().compile(eng))
     SELECT account_1.id, account_1.info
     FROM customer_schema.account AS account_1

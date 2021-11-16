@@ -126,7 +126,7 @@ Session 和 sessionmaker()[¶](#session-and-sessionmaker "Permalink to this head
  *class*`sqlalchemy.orm.session.`{.descclassname}`Session`{.descname}(*bind=None*, *autoflush=True*, *expire\_on\_commit=True*, *\_enable\_transaction\_accounting=True*, *autocommit=False*, *twophase=False*, *weak\_identity\_map=True*, *binds=None*, *extension=None*, *info=None*, *query\_cls=\<class 'sqlalchemy.orm.query.Query'\>*)[¶](#sqlalchemy.orm.session.Session "Permalink to this definition")
 :   基础：`sqlalchemy.orm.session._SessionClassMethods`
 
-    管理ORM映射对象的持久性操作。plainplainplainplain
+    管理ORM映射对象的持久性操作。plain
 
     会话的使用范例在[*Using the Session*](session.html)中描述。
 
@@ -1046,7 +1046,7 @@ Session 和 sessionmaker()[¶](#session-and-sessionmaker "Permalink to this head
 *class* `sqlalchemy.orm.session。`{.descclassname} `SessionTransaction`{.descname} （ *session*，*parent = None*，*nested = False* ） [¶](#sqlalchemy.orm.session.SessionTransaction "Permalink to this definition")
 :   一个[`Session`](#sqlalchemy.orm.session.Session "sqlalchemy.orm.session.Session")级别的事务。
 
-    [`SessionTransaction`](#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")plainplainplain
+    [`SessionTransaction`](#sqlalchemy.orm.session.SessionTransaction "sqlalchemy.orm.session.SessionTransaction")
     is a mostly behind-the-scenes object not normally referenced
     directly by application code. 它在多个[`Connection`](core_connections.html#sqlalchemy.engine.Connection "sqlalchemy.engine.Connection")对象之间进行协调，为每个对象单独维护一个数据库事务，一次提交或回滚所有对象。它还提供可选的两阶段提交行为，可以增强此协调操作。
 
@@ -1127,7 +1127,7 @@ Session 和 sessionmaker()[¶](#session-and-sessionmaker "Permalink to this head
 `sqlalchemy.orm.session。 T0>  make_transient_to_detached  T1> （ T2> 实例 T3> ） T4> ¶< / T5>`{.descclassname}
 :   使给定的瞬态实例[detached](glossary.html#term-detached)。
 
-    注意plainplainplain
+    注意
 
     [`make_transient_to_detached()`](#sqlalchemy.orm.session.make_transient_to_detached "sqlalchemy.orm.session.make_transient_to_detached")仅是高级用例的一种特例函数。
 
@@ -1152,7 +1152,7 @@ Session 和 sessionmaker()[¶](#session-and-sessionmaker "Permalink to this head
 `sqlalchemy.orm.util。 T0>  was_deleted  T1> （ T2> 对象 T3> ） T4> ¶< / T5>`{.descclassname}
 :   如果给定对象在会话刷新中被删除，则返回 True。
 
-    这与对象是否持久或分离无关。plainplain
+    这与对象是否持久或分离无关。
 
     0.8.0版本中的新功能
 
@@ -1180,7 +1180,7 @@ Events*](events.html)中描述的那些函数。
  `sqlalchemy.orm.attributes.`{.descclassname}`del_attribute`{.descname}(*instance*, *key*)[¶](#sqlalchemy.orm.attributes.del_attribute "Permalink to this definition")
 :   删除属性的值，激发历史事件。
 
-    无论直接应用于该类的仪器如何，都可以使用该函数，即不需要描述符。自定义属性管理方案需要使用此方法来建立SQLAlchemy所理解的属性状态。plainplain
+    无论直接应用于该类的仪器如何，都可以使用该函数，即不需要描述符。自定义属性管理方案需要使用此方法来建立SQLAlchemy所理解的属性状态。
 
 `sqlalchemy.orm.attributes。`{.descclassname} `get_attribute`{.descname} （ *实例*，*键* ） T5\> [¶ T6\>](#sqlalchemy.orm.attributes.get_attribute "Permalink to this definition")
 :   获取属性的值，触发所需的可调用对象。
@@ -1217,7 +1217,7 @@ Events*](events.html)中描述的那些函数。
 `sqlalchemy.orm.attributes。`{.descclassname} `flag_modified`{.descname} （ *实例*，*键* ） T5\> [¶ T6\>](#sqlalchemy.orm.attributes.flag_modified "Permalink to this definition")
 :   将实例上的属性标记为“已修改”。
 
-    这将在实例上设置'修改'标志并为给定属性建立无条件更改事件。plainplain
+    这将在实例上设置'修改'标志并为给定属性建立无条件更改事件。
 
 `sqlalchemy.orm.attributes。 T0>  instance_state  T1> （ T2> ） T3> ¶ T4>`{.descclassname}
 :   为给定的映射对象返回[`InstanceState`](internals.html#sqlalchemy.orm.state.InstanceState "sqlalchemy.orm.state.InstanceState")。
@@ -1232,12 +1232,12 @@ Events*](events.html)中描述的那些函数。
  `sqlalchemy.orm.attributes.`{.descclassname}`set_attribute`{.descname}(*instance*, *key*, *value*)[¶](#sqlalchemy.orm.attributes.set_attribute "Permalink to this definition")
 :   设置属性的值，触发历史事件。
 
-    无论直接应用于该类的仪器如何，都可以使用该函数，即不需要描述符。自定义属性管理方案需要使用此方法来建立SQLAlchemy所理解的属性状态。plainplainplainplain
+    无论直接应用于该类的仪器如何，都可以使用该函数，即不需要描述符。自定义属性管理方案需要使用此方法来建立SQLAlchemy所理解的属性状态。plain
 
  `sqlalchemy.orm.attributes.`{.descclassname}`set_committed_value`{.descname}(*instance*, *key*, *value*)[¶](#sqlalchemy.orm.attributes.set_committed_value "Permalink to this definition")
 :   设置没有历史事件的属性的值。
 
-    取消任何以前的历史记录。该值应该是标量保持属性的标量值，或者任何集合保持属性的迭代值。plainplainplain
+    取消任何以前的历史记录。该值应该是标量保持属性的标量值，或者任何集合保持属性的迭代值。
 
     这与懒惰加载器关闭并从数据库加载其他数据时使用的基础方法相同。特别是，这种方法可以被应用程序代码使用，该代码通过单独的查询加载了附加属性或集合，然后可以将其附加到实例，就像它是其原始加载状态的一部分一样。
 
