@@ -110,7 +110,7 @@ def make_rename(sub_line):
 
 def rename_path_without_exclude(root_path, exclude_seq):
     """
-    获取指定目录下排除默写目录的子目录
+    获取指定目录下排除某些目录的子目录
     :param root_path: str,
     :param exclude_seq: iterable,
     :return:
@@ -226,7 +226,9 @@ def main():
     exclude_children = get_exclude_children(EXCLUDE_DIR)
     # 直接重命名给定子目录，而不是docs
     for path in ['💡科普', '🛠软件工具', '💻工作', '📌TODO', '💰投资理财']:
+    # for path in [r'Python\16.设计模式']:
         root = full_path(ROOT_PATH, path)
+        print(root)
         rename_path_without_exclude(root, exclude_children)
 
 
