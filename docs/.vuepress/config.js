@@ -207,6 +207,8 @@ module.exports = {
       //     avatar: 'monsterid'
       //   }
       // },
+
+      // [vuepress-theme-vdoing/02.使用Gitalk实现静态博客无后台评论系统.md at 84f56ad252ef39d4b8a0170eb00f19849ac08c90 · xugaoyi/vuepress-theme-vdoing](https://github.com/xugaoyi/vuepress-theme-vdoing/blob/84f56ad252ef39d4b8a0170eb00f19849ac08c90/docs/03.%E6%8A%80%E6%9C%AF/04.%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/02.%E4%BD%BF%E7%94%A8Gitalk%E5%AE%9E%E7%8E%B0%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%97%A0%E5%90%8E%E5%8F%B0%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F.md)
       {
         choosen: 'gitalk',
         options: {
@@ -217,8 +219,7 @@ module.exports = {
           admin: ['imoyao'], // 对仓库有写权限的人
           // distractionFreeMode: true,
           pagerDirection: 'last', // 'first'正序 | 'last'倒序
-          id:
-            '<%- (frontmatter.permalink || frontmatter.to.path).slice(-16) %>', //  页面的唯一标识,长度不能超过50
+          id: '<%- (frontmatter.permalink || frontmatter.to.path).slice(-16) %>', //  页面的唯一标识,长度不能超过50
           title: '「评论」<%- frontmatter.title %>', // GitHub issue 的标题
           labels: ['Gitalk', 'Comment'], // GitHub issue 的标签
           body:
@@ -231,7 +232,7 @@ module.exports = {
       {
         transformer: (timestamp, lang) => {
           const moment = require('moment') // https://momentjs.com/
-          return moment(timestamp).format('YYYY/MM/DD, hh:mm:ss')
+          return moment(timestamp).format('YYYY-MM-DD, hh:mm:ss')
         },
       },
     ],
