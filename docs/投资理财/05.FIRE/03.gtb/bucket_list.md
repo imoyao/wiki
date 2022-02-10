@@ -180,5 +180,4 @@ GTB 的核心其实就是基于任务管理和时间管理的效率思维，通�
 
 在实现 GTB 的过程中，我们会不断探求消费和储蓄的意义，直到某一刻，储蓄带来的幸福感超越了消费的物质幸福感本身。这个时候你会发现，对于财富的追求为的并不是财富所能产生的物质消费，而是财富带给自己的对于生活的自信、可靠和自由。
 
-[^1]:	详情见微信公众号「也谈钱」
-	https://mp.weixin.qq.com/s/lEQRj1CCzDIRM-Oq7hdb5wplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+[^1]:	[详情见微信公众号「也谈钱」](https://mp.weixin.qq.com/s/lEQRj1CCzDIRM-Oq7hdb5w)
