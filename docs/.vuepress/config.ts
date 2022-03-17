@@ -69,6 +69,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         text: '其他',
         items: [
           { text: 'Git 参考手册', link: '/git/reference/' },
+          { text: '提问的智慧', link: '/smart-questions/' },
         ],
       },
       {
@@ -274,7 +275,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       '@vuepress/last-updated', // "上次更新"时间格式
       {
         transformer: (timestamp, lang) => {
-          return dayjs(timestamp).format('YYYY/MM/DD, HH:mm:ss')
+          return dayjs(timestamp).format('YYYY-MM-DD, HH:mm:ss')
         },
       },
     ],
