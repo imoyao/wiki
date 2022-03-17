@@ -53,6 +53,16 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
               { text: 'PEP 系列', link: '/peps/index/' },
             ],
           },
+          {
+            text: '面试题',
+            items: [
+              { text: 'Python 面试题', link: '/python/interview/' },
+              { text: '2021 面试记录', link: '/interview-2021/' },
+              { text: '2020 面试记录', link: '/interview-2020/' },
+              { text: '2019 面试记录', link: '/interview-2019/' },
+              { text: '数据库索引原理', link: '/mysql/mysql-index/' },
+            ],
+          },
         ],
       },
       {
