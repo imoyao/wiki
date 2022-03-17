@@ -4,15 +4,7 @@
 path:
   - docs # 第一个成员必须是docs
   - Python
-  - TODO
-  - 工作
-  - 心理学
-  - 投资理财
-  - 文档书籍
-  - 方法论
-  - 科普
-  - 美食
-  - 软件工具
+  - 12.Python工匠系列
 
 # 要删除的字段 (数组)
 delete:
@@ -22,5 +14,5 @@ delete:
 data:
   # sidebar: true
   author:
-    name: imoyao
-    link: /
+    name: piglei
+    link: https://github.com/piglei/one-python-craftsman
