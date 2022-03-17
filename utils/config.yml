@@ -5,6 +5,7 @@ path:
   - docs # 第一个成员必须是docs
   - Python
   - 12.Python工匠系列
+#  - 04.更多
 
 # 要删除的字段 (数组)
 delete:
@@ -16,3 +17,7 @@ data:
   author:
     name: piglei
     link: https://github.com/piglei/one-python-craftsman
+  # author:
+  #   name: xugaoyi
+  #   link: https://github.com/xugaoyi
+
