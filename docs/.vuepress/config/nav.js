@@ -33,6 +33,7 @@ module.exports = [
     text: '其他',
     items: [
       { text: 'Git 参考手册', link: '/git/reference/' },
+      { text: '提问的智慧', link: '/smart-questions/' },
     ],
   },
   {
