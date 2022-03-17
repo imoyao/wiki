@@ -3,9 +3,16 @@
 # 需要批量处理的路径，docs文件夹内的文件夹  (数组，映射路径：path[0]/path[1]/path[2] ... )
 path:
   - docs # 第一个成员必须是docs
-  - 💻工作
-  - 01.🐍Python
-  - Python工匠系列
+  - Python
+  - TODO
+  - 工作
+  - 心理学
+  - 投资理财
+  - 文档书籍
+  - 方法论
+  - 科普
+  - 美食
+  - 软件工具
 
 # 要删除的字段 (数组)
 delete:
@@ -15,5 +22,5 @@ delete:
 data:
   # sidebar: true
   author:
-    name: piglei
-    link: https://github.com/piglei/one-python-craftsman
+    name: imoyao
+    link: /
