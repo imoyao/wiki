@@ -54,7 +54,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
             ],
           },
           {
-            text: '面试题',
+            text: '面试',
             items: [
               { text: 'Python 面试题', link: '/python/interview/' },
               { text: '2021 面试记录', link: '/interview-2021/' },
