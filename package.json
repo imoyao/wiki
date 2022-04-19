@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "lint-md": "^0.2.0",
+    "lint-md-cli": "^0.1.2",
     "npm": "^7.0.15",
     "vuepress-plugin-comment": "^0.7.3"
   }
