@@ -82,7 +82,8 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
             items: [
               { text: '德隆-三个知道', link: '/invest/3-knows/' },
               { text: '孔曼子-摊大饼理论', link: '/invest/decentralize/' },
-              { text: '躺赢之路', link: '/invest/road-to-win/' },
+              { text: '配置者说-躺赢之路', link: '/invest/road-to-win/' },
+              { text: '资水-建立自己的投资体系', link: '/invest/create-your-invest-system/' },
               { text: '反脆弱', link: '/invest/risk-control/' },
             ]
         },
