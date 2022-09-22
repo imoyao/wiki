@@ -67,17 +67,32 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         ],
       },
       {
+        text: '理财',
+        link: '/finance/',
+        items: [
+          {
+            text: '基金',
+            items: [
+              { text: '基金知识', link: '/funds/04a189/' },
+              { text: '基金经理', link: '/fund-mgr/30189744/' },
+            ]
+          },
+          { 
+            text: '细读经典', 
+            items: [
+              { text: '德隆-三个知道', link: '/invest/3-knows/' },
+              { text: '孔曼子-摊大饼理论', link: '/invest/decentralize/' },
+              { text: '躺赢之路', link: '/invest/road-to-win/' },
+              { text: '反脆弱', link: '/invest/risk-control/' },
+            ]
+        },
+        ],
+      },
+      {
         text: '其他',
         items: [
           { text: 'Git 参考手册', link: '/git/reference/' },
           { text: '提问的智慧', link: '/smart-questions/' },
-        ],
-      },
-      {
-        text: '理财',
-        items: [
-          { text: '基金知识', link: '/funds/04a189/' },
-          { text: '基金经理', link: '/fund-mgr/30189744/' },
         ],
       },
       {

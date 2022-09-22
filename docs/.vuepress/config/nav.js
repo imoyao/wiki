@@ -40,7 +40,16 @@ module.exports = [
     text: '理财',
     items: [
       { text: '基金知识', link: '/funds/04a189/' },
-      { text: '基金经理', link: '/mgr/635a97/' },
+      { text: '基金经理', link: '/fund-mgr/30189744/' },
+      { 
+        text: '细读经典', 
+        items: [
+          { text: '三个知道', link: '/invest/3-knows/' },
+          { text: '摊大饼理论', link: '/invest/decentralize/' },
+          { text: '躺赢之路', link: '/invest/road-to-win/' },
+          { text: '反脆弱', link: '/invest/risk-control/' },
+        ]
+    },
     ],
   },
   {
