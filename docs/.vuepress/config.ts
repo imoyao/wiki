@@ -208,7 +208,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         content: '别院牧志, imoyao, idealyard, 张牧志, 牧志, Python, 编程, Python开发',
       },
     ],
-    ['meta', { name: 'baidu-site-verification', content: 'd21148b4e4af8bc78f02e77d0fd45ec0' }], // 百度统计的站长验证（你可以去掉）
+    ['meta', { name: 'baidu-site-verification', content: 'code-17W2qEmqf4' }], // 百度统计的站长验证（你可以去掉）
     ['meta', { name: 'theme-color', content: '#11a8cd' }], // 移动浏览器主题颜色
     // [
     //   'script',
