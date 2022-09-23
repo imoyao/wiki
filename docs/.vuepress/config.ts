@@ -191,7 +191,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       // 页脚信息
       createYear: 2019, // 博客创建年份
       copyrightInfo:
-          'Evan Xu | <a href="https://github.com/xugaoyi/vuepress-theme-vdoing/blob/master/LICENSE" target="_blank">MIT License</a>', // 博客版权信息，支持a标签
+          'IMOYAO | <a href="https://masantu.com" target="_blank">别院牧志</a>', // 博客版权信息，支持a标签
     },
 
     // 自定义hmtl(广告)模块
