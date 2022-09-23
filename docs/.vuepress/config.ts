@@ -229,7 +229,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
     [
       'vuepress-plugin-baidu-tongji', // 百度统计
       {
-        hm: baiduCode,
+        hm: 'd21148b4e4af8bc78f02e77d0fd45ec0',
       },
     ],
 
