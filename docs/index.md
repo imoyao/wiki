@@ -12,7 +12,7 @@ features: # 可选的
     link: /python/  # 可选
     imgUrl: /img/python.png    # 可选
   - title: 理财
-    details: 财富给我自由
+    details: 享受生活，却不必被卡在社会的齿轮中运转
     link: /finance/
     imgUrl: /img/invest.png
   - title: 工具
