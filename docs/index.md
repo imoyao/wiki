@@ -7,11 +7,11 @@ tags: wiki
 categories: 
   - info
 features: # 可选的
-  - title: Python
+  - title: 🐍Python
     details: 人生苦短，我用 Python
     link: /python/  # 可选
     imgUrl: /img/python.png    # 可选
-  - title: 理财
+  - title: 💰理财
     details: 享受生活，却不必被卡在社会的齿轮中运转
     link: /finance/
     imgUrl: /img/invest.png
@@ -19,7 +19,7 @@ features: # 可选的
     details: 工欲善其事，必先利其器
     link: /tools/
     imgUrl: /img/other.png  
-  - title: TODO
+  - title: 📌TODO
     details: 人人都有松鼠癖
     link: /todo/
     imgUrl: /img/more.png
@@ -27,11 +27,11 @@ features: # 可选的
     details: 温故而知新
     link: /how/
     imgUrl: /img/forward.png
-  - title: 好书
+  - title: 📖阅读
     details: 好读书，不求甚解
     link: /books/
     imgUrl: /img/books.png
-  - title: 心理学
+  - title: 💞️心理学
     details: 人性的弱点
     link: /psychology/
     imgUrl: /img/idea.png
