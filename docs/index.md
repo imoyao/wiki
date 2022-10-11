@@ -15,7 +15,7 @@ features: # 可选的
     details: 享受生活，却不必被卡在社会的齿轮中运转
     link: /finance/
     imgUrl: /img/invest.png
-  - title: 工具
+  - title: 🛠️工具
     details: 工欲善其事，必先利其器
     link: /tools/
     imgUrl: /img/other.png  
@@ -23,7 +23,7 @@ features: # 可选的
     details: 人人都有松鼠癖
     link: /todo/
     imgUrl: /img/more.png
-  - title: 屠龙术
+  - title: 💡屠龙术
     details: 温故而知新
     link: /how/
     imgUrl: /img/forward.png
