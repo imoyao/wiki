@@ -74,7 +74,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
             text: '基金',
             items: [
               { text: '基金知识', link: '/funds/04a189/' },
-              { text: '基金经理', link: '/fund-mgr/30189744/' },
+              { text: '基金经理', link: '/fund-managers/' },
             ]
           },
           { 
