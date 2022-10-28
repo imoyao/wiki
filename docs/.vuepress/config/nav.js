@@ -47,7 +47,7 @@ module.exports = [
           { text: '三个知道', link: '/invest/3-knows/' },
           { text: '摊大饼理论', link: '/invest/decentralize/' },
           { text: '躺赢之路', link: '/invest/road-to-win/' },
-          { text: '反脆弱', link: '/invest/risk-control/' },
+          { text: '反脆弱', link: '/invest/antifragile /' },
         ]
     },
     ],
