@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "export NODE_OPTIONS=--openssl-legacy-provider && node --max_old_space_size=4096 ./node_modules/vuepress/cli.js build docs",
+    "localdev": "vuepress build docs",
     "build": "export NODE_OPTIONS=--openssl-legacy-provider && node --max_old_space_size=4096 ./node_modules/vuepress/cli.js build docs",
     "deploy": "bash deploy.sh",
     "lint-md": "lint-md docs/ -f",
