@@ -84,7 +84,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
               { text: '孔曼子-摊大饼理论', link: '/invest/decentralize/' },
               { text: '配置者说-躺赢之路', link: '/invest/road-to-win/' },
               { text: '资水-建立自己的投资体系', link: '/invest/create-your-invest-system/' },
-              { text: '反脆弱', link: '/invest/antifragile /' },
+              { text: '反脆弱', link: '/invest/antifragile/' },
             ]
         },
         ],
