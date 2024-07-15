@@ -2,6 +2,8 @@
 home: true
 # heroImage: /img/web.png
 title: 欢迎访问我的个人维基知识库
+# heroText: 深深别院，潜潜牧志
+# tagline: 你如今的气质里，藏着你走过的路🚶‍♂、读过的书📚和爱过的人💖
 date: 2020-05-23 12:27:56
 tags: wiki
 categories: 
@@ -35,6 +37,10 @@ features: # 可选的
     details: 人性的弱点
     link: /psychology/
     imgUrl: /img/idea.png
+  - title: 🧰工作
+    details: 先生存，后生活
+    link: /works/
+    imgUrl: /img/works.png
 
 # 文章列表显示方式: detailed 默认，显示详细版文章列表（包括作者、分类、标签、摘要、分页等）| simple => 显示简约版文章列表（仅标题和日期）| none 不显示文章列表
 # postList: detailed
