@@ -37,10 +37,10 @@ features: # 可选的
     details: 人性的弱点
     link: /psychology/
     imgUrl: /img/idea.png
-  - title: 🧰工作
-    details: 先生存，后生活
-    link: /works/
-    imgUrl: /img/works.png
+  # - title: 🧰工作
+  #   details: 先生存，后生活
+  #   link: /works/
+  #   imgUrl: /img/works.png
   - title: 🤟人间指南
     details: 你来人间一趟，你要看看太阳。和你的心上人，一起走在街上。
     link: /world/
