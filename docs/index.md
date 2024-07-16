@@ -41,6 +41,10 @@ features: # 可选的
     details: 先生存，后生活
     link: /works/
     imgUrl: /img/works.png
+  - title: 🤟人间指南
+    details: 你来人间一趟，你要看看太阳。和你的心上人，一起走在街上。
+    link: /world/
+    imgUrl: /img/world.png
 
 # 文章列表显示方式: detailed 默认，显示详细版文章列表（包括作者、分类、标签、摘要、分页等）| simple => 显示简约版文章列表（仅标题和日期）| none 不显示文章列表
 # postList: detailed
