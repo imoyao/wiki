@@ -31,6 +31,7 @@
     "yamljs": "^0.3.0"
   },
   "dependencies": {
+    "caniuse-lite": "^1.0.30001703",
     "lint-md": "^0.2.0",
     "lint-md-cli": "^0.1.2",
     "npm": "^7.0.15",
