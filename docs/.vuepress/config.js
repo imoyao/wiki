@@ -122,6 +122,10 @@ module.exports = {
     // }],
     // 全文搜索
     ['fulltext-search'],
+    // mermaid 语法流程图
+    [
+      'vuepress-plugin-mermaidjs'
+    ],
 
     [
       'thirdparty-search',
