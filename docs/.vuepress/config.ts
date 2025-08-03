@@ -211,6 +211,8 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
     ],
     ['meta', { name: 'baidu-site-verification', content: 'code-17W2qEmqf4' }], // 百度统计的站长验证（你可以去掉）
     ['meta', { name: 'theme-color', content: '#11a8cd' }], // 移动浏览器主题颜色
+    ['script', { src: 'https://registry.npmmirror.com/twikoo/1.6.44/files/dist/twikoo.min.js' }],
+
     // [
     //   'script',
     //   {
@@ -269,26 +271,31 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         },
       },
     ],
-    [
-      'vuepress-plugin-comment', // 评论
-      {
-        choosen: 'gitalk',
-        options: {
-          clientID: '5dd2493bd694060f4ccb',
-          clientSecret: 'a615756250d2dfeb50e9fbd306774d0563cf55d4',
-          repo: 'gitalk-comment', // GitHub 仓库
-          owner: 'imoyao', // GitHub仓库所有者
-          admin: ['imoyao'], // 对仓库有写权限的人
-          // distractionFreeMode: true,
-          pagerDirection: 'last', // 'first'正序 | 'last'倒序
-          id: '<%- (frontmatter.permalink || frontmatter.to.path).slice(-16) %>', //  页面的唯一标识,长度不能超过50
-          title: '「评论」<%- frontmatter.title %>', // GitHub issue 的标题
-          labels: ['Gitalk', 'Comment'], // GitHub issue 的标签
-          body:
-            '页面：<%- window.location.origin + (frontmatter.to.path || window.location.pathname) %>', // GitHub issue 的内容
-        },
-      },
-    ],
+    // Twikoo-评论
+    {
+        name: 'custom-plugins',
+        globalUIComponents: ["Twikoo"] // 2.x 版本 globalUIComponents 改名为 clientAppRootComponentFiles
+    }
+    // [
+    //   'vuepress-plugin-comment', // 评论
+    //   {
+    //     choosen: 'gitalk',
+    //     options: {
+    //       clientID: '5dd2493bd694060f4ccb',
+    //       clientSecret: 'a615756250d2dfeb50e9fbd306774d0563cf55d4',
+    //       repo: 'gitalk-comment', // GitHub 仓库
+    //       owner: 'imoyao', // GitHub仓库所有者
+    //       admin: ['imoyao'], // 对仓库有写权限的人
+    //       // distractionFreeMode: true,
+    //       pagerDirection: 'last', // 'first'正序 | 'last'倒序
+    //       id: '<%- (frontmatter.permalink || frontmatter.to.path).slice(-16) %>', //  页面的唯一标识,长度不能超过50
+    //       title: '「评论」<%- frontmatter.title %>', // GitHub issue 的标题
+    //       labels: ['Gitalk', 'Comment'], // GitHub issue 的标签
+    //       body:
+    //         '页面：<%- window.location.origin + (frontmatter.to.path || window.location.pathname) %>', // GitHub issue 的内容
+    //     },
+    //   },
+    // ],
     [
       '@vuepress/last-updated', // "上次更新"时间格式
       {
