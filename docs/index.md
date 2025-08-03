@@ -13,7 +13,7 @@ features: # 可选的
     details: 人生苦短，我用 Python
     link: /python/  # 可选
     imgUrl: /img/python.png    # 可选
-  - title: 💰理财
+  - title: 💰投资
     details: 享受生活，却不必被卡在社会的齿轮中运转
     link: /finance/
     imgUrl: /img/invest.png
