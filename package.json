@@ -16,7 +16,7 @@
     "vitepress-plugin-llms": "^1.7.3"
   },
   "dependencies": {
-    "vitepress-theme-teek": "^1.5.6",
+    "vitepress-theme-teek": "^1.5.7",
     "vue": "^3.5.16"
   }
 }
