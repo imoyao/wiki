@@ -70,7 +70,7 @@ export const teekConfig = defineTeekConfig({
     // 布局主题色配置
     themeColor: {
       disabled: false, // 禁用布局主题色切换
-      defaultColorName: "vp-default", // 布局默认主题色
+      defaultColorName: "vp-primary", // 布局默认主题色
       defaultSpread: false, // 是否将主题色扩散到其他元素（根据主题色计算其他元素需要的颜色）
       disableHelp: false, // 禁用帮助提示
       disabledInMobile: false, // 是否在移动端禁用
@@ -149,7 +149,7 @@ export const teekConfig = defineTeekConfig({
     showMore: true, // 是否显示更多按钮
     moreLabel: "阅读全文 >", // 更多按钮文字
     emptyLabel: "暂无文章", // 文章列表为空时的标签
-    coverImgMode: "default", // 文章封面图模式
+    coverImgMode: "small", // 文章封面图模式
     showCapture: false, // 是否在摘要位置显示文章部分文字，当为 true 且不使用 frontmatter.describe 和 <!-- more --> 时，会自动截取前 300 个字符作为摘要
     splitSeparator: false, // 文章信息（作者、创建时间、分类、标签等信息）是否添加 | 分隔符
     transition: true, // 是否开启过渡动画
@@ -205,6 +205,7 @@ export const teekConfig = defineTeekConfig({
     autoPage: false, // 是否自动翻页
     pageSpeed: 4000, // 翻页间隔时间，单位：毫秒。autoPage 为 true 时生效
     dateFormat: "yyyy-MM-dd hh:mm:ss", // 精选文章的日期格式
+    dateUTC: true, // 是否使用 UTC 时间
   },
   // 分类卡片配置
   category: {
@@ -348,6 +349,7 @@ export const teekConfig = defineTeekConfig({
   articleAnalyze: {
     showIcon: true, // 作者、日期、分类、标签、字数、阅读时长、浏览量等文章信息的图标是否显示
     dateFormat: "yyyy-MM-dd hh:mm:ss", // 文章日期格式，首页和文章页解析日期时使用
+    dateUTC: true, // 是否使用 UTC 时间
     showInfo: true, // 是否展示作者、日期、分类、标签、字数、阅读时长、浏览量等文章信息，分别作用于首页和文章页
     showAuthor: true, // 是否展示作者
     showCreateDate: true, // 是否展示创建日期
