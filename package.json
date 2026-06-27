@@ -2,10 +2,10 @@
   "name": "theme-vdoing-blog",
   "version": "1.0.0",
   "scripts": {
-    "dev": "export NODE_OPTIONS=--openssl-legacy-provider && node --max_old_space_size=4096 ./node_modules/vuepress/cli.js build docs",
+    "dev": "export NODE_OPTIONS=--openssl-legacy-provider && node --max_old_space_size=1024 ./node_modules/vuepress/cli.js build docs",
     "localbuild": "vuepress build docs",
     "localdev": "vuepress dev docs",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider && node --max_old_space_size=4096 ./node_modules/vuepress/cli.js build docs",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && node --max_old_space_size=1024 ./node_modules/vuepress/cli.js build docs",
     "deploy": "bash deploy.sh",
     "lint-md": "lint-md docs/ -f",
     "editFm": "node utils/editFrontmatter.js",
