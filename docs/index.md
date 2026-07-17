@@ -43,6 +43,7 @@ features: # 可选的
     link: /world/
     imgUrl: /img/world.png
 permalink: /pages/392d77
+comment: false
 ---
 
 > 时间花在哪里，你就会成为什么样的人。
