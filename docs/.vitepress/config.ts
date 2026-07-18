@@ -101,8 +101,19 @@ export default defineConfig({
     nav: [
       { text: "首页", link: "/" },
       {
+        text: "理财",
+        items: [
+          { text: "基金知识", link: "/funds/04a189/" },
+          { text: "基金经理", link: "/fund-managers/" },
+          { text: "德隆-三个知道", link: "/invest/3-knows/" },
+          { text: "孔曼子-摊大饼理论", link: "/invest/decentralize/" },
+          { text: "配置者说-躺赢之路", link: "/invest/road-to-win/" },
+          { text: "资水-建立自己的投资体系", link: "/invest/create-your-invest-system/" },
+          { text: "反脆弱", link: "/invest/antifragile/" },
+        ],
+      },
+      {
         text: "Python",
-        link: "/python/",
         items: [
           { text: "基础", items: [{ text: "全栈之路", link: "/python/fullstack/index/" }, { text: "😎Awesome资源", link: "/python/awesome/" }] },
           { text: "进阶", items: [{ text: "Python 工匠系列", link: "/pythonista/index/" }, { text: "高阶知识点", link: "/python/GIL/" }] },
@@ -119,19 +130,6 @@ export default defineConfig({
           { text: "2020 面试记录", link: "/interview-2020/" },
           { text: "2019 面试记录", link: "/interview-2019/" },
           { text: "数据库索引原理", link: "/mysql/mysql-index/" },
-        ],
-      },
-      {
-        text: "理财",
-        link: "/finance/",
-        items: [
-          { text: "基金知识", link: "/funds/04a189/" },
-          { text: "基金经理", link: "/fund-managers/" },
-          { text: "德隆-三个知道", link: "/invest/3-knows/" },
-          { text: "孔曼子-摊大饼理论", link: "/invest/decentralize/" },
-          { text: "配置者说-躺赢之路", link: "/invest/road-to-win/" },
-          { text: "资水-建立自己的投资体系", link: "/invest/create-your-invest-system/" },
-          { text: "反脆弱", link: "/invest/antifragile/" },
         ],
       },
       { text: "其他", items: [{ text: "Git 参考手册", link: "/git/reference/" }, { text: "提问的智慧", link: "/smart-questions/" }] },
