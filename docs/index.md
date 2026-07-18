@@ -1,10 +1,11 @@
 ---
 home: true
+layout: home
 title: 欢迎访问我的个人维基知识库
 date: 2020-05-23 20:27:56
 tags: wiki
 categories:
-  - info
+  - 首页
 features: # 可选的
   - title: 🐍Python
     details: 人生苦短，我用 Python
@@ -44,6 +45,9 @@ features: # 可选的
     imgUrl: /img/world.png
 permalink: /pages/392d77
 comment: false
+pageData: articleList  
+# 2. 设置首页显示的文章数量 (提高信息密度)
+pageSize: 10     
 ---
 
 > 时间花在哪里，你就会成为什么样的人。

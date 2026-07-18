@@ -4,6 +4,7 @@ import { defineTeekConfig } from "vitepress-theme-teek/config";
 export const teekConfig = defineTeekConfig({
   // 使用 VitePress 默认首页风格（features 卡片）
   teekHome: true,
+  themeSize: "small",
   vpHome: false,
 
   // 基础功能
@@ -92,9 +93,9 @@ export const teekConfig = defineTeekConfig({
   banner: {
     enabled: true, // 是否启用 Banner
     name: "别院牧志知识库", // Banner 标题，默认读取 vitepress 的 title 属性
-    bgStyle: "fullImg", // Banner 背景风格：pure 为纯色背景，partImg 为局部图片背景，fullImg 为全屏图片背景
+    bgStyle: "partImg", // Banner 背景风格：pure 为纯色背景，partImg 为局部图片背景，fullImg 为全屏图片背景
     pureBgColor: "#28282d", // Banner 背景色，bgStyle 为 pure 时生效
-    imgSrc: ["/img/bg1.jpg", "/img/bg2.png"], // Banner 图片链接。bgStyle 为 partImg 或 fullImg 时生效
+    imgSrc: ["/images/bg1.jpg", "/images/bg2.jpg"], // Banner 图片链接。bgStyle 为 partImg 或 fullImg 时生效
     imgInterval: 15000, // 当多张图片时（imgSrc 为数组），设置切换时间，单位：毫秒
     imgShuffle: true, // 图片是否随机切换，为 false 时按顺序切换，bgStyle 为 partImg 或 fullImg 时生效
     imgWaves: true, // 是否开启 Banner 图片波浪纹，bgStyle 为 fullImg 时生效
@@ -106,7 +107,7 @@ export const teekConfig = defineTeekConfig({
     descStyle: "types", // 描述信息风格：default 为纯文字渲染风格（如果 description 为数组，则取第一个），types 为文字打印风格，switch 为文字切换风格
     description: [
       "故事由我书写，旅程由你见证，传奇由她聆听",
-      "积跬步以至千里，致敬每个爱学习的你",
+      "深深别院，潜潜牧志",
       "投资理财 · Python开发 · 生活记录",
     ], // 描述信息
     switchTime: 4000, // 描述信息切换间隔时间，单位：毫秒。descStyle 为 switch 时生效
@@ -124,9 +125,14 @@ export const teekConfig = defineTeekConfig({
     hideBanner: false, // 开启壁纸模式后，是否隐藏 Banner
     hideMask: false, // 开启壁纸模式后，是否隐藏 Banner 或 bodyBgImage 的遮罩层，则确保 banner.mask 和 bodyBgImage.mask 为 true 才生效
   },
+  home: {
+    articleList: true,
+    pageSize: 8, // 首页文章列表每页显示数量
+  },
   // 文章配置
   post: {
     postStyle: "list", // 文章列表风格
+    pageSize: 8,
     excerptPosition: "top", // 文章摘要位置
     showMore: true, // 是否显示更多按钮
     moreLabel: "阅读全文 >", // 更多按钮文字
@@ -147,7 +153,7 @@ export const teekConfig = defineTeekConfig({
     layout: "prev, pager, next, jumper, ->, total", // 组件布局，子组件名用逗号分隔
     size: "default", // 分页大小
     background: false, // 是否为分页按钮添加背景色
-    hideOnSinglePage: false, // 只有一页时是否隐藏
+    hideOnSinglePage: true, // 只有一页时是否隐藏
   },
 
   // ==========================================
@@ -157,8 +163,27 @@ export const teekConfig = defineTeekConfig({
     "topArticle",    // 精选文章
     "category",      // 分类
     "tag",           // 标签
-    "friendLink",    // 友链
-    "docAnalysis",   // 站点分析
+  ],
+    // ==========================================
+  // 🎨 标签颜色池（莫兰迪色系：低饱和度、温柔高级）
+  // ==========================================
+  tagColor: [
+    // 1. 雾霾蓝 (Morandi Blue)
+    { border: "#B8C9D9", bg: "#EAEFF4", text: "#5B728A" },
+    // 2. 鼠尾草绿 (Morandi Green)
+    { border: "#C1D1BD", bg: "#EBEFEA", text: "#657A61" },
+    // 3. 干枯玫瑰粉 (Morandi Pink)
+    { border: "#DDBDB9", bg: "#F4EAE9", text: "#8A6B68" },
+    // 4. 香芋灰紫 (Morandi Purple)
+    { border: "#CBBDD9", bg: "#EFEAF2", text: "#76638A" },
+    // 5. 燕麦奶茶黄 (Morandi Yellow)
+    { border: "#D9CDB8", bg: "#F2EFEA", text: "#8A7A5B" },
+    // 6. 薄荷灰青 (Morandi Cyan)
+    { border: "#B8D6D3", bg: "#EAF2F1", text: "#5B827F" },
+    // 7. 陶土灰橘 (Morandi Orange)
+    { border: "#DBC2B4", bg: "#F2ECE8", text: "#8A6F5E" },
+    // 8. 浅卡其棕 (Morandi Brown)
+    { border: "#D4C8C1", bg: "#F0ECEA", text: "#7A6A60" },
   ],
 
   // 精选文章卡片
@@ -226,7 +251,7 @@ export const teekConfig = defineTeekConfig({
       mode: 'rewrite', 
     },
     
-    mdH1: false, // 自动 h1 标题 (关闭)
+    mdH1: true, // 自动 h1 标题 (开启)
     
     catalogue: true, // 目录页 (开启)
     catalogueOption: {}, 
