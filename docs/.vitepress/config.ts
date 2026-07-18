@@ -155,6 +155,12 @@ export default defineConfig({
 
   // Vite 插件
   vite: {
-    plugins: [llmstxt() as any],
-  },
+    plugins: [
+      llmstxt({
+        // 关闭生成包含全文的 llms-full.txt，只生成目录版的 llms.txt
+        full: false,
+        // 或者某些版本使用 generateFull: false
+      })
+    ]
+  }
 });

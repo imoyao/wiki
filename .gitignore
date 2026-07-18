@@ -28,4 +28,6 @@ coverage
 *.sln
 *.sw?
 
+.temp/*
+
 /**/.vitepress/cache/*
