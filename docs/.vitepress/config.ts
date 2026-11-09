@@ -11,7 +11,7 @@ export default defineConfig({
   title: "别院牧志知识库",
   description: description,
   cleanUrls: true, 
-  lastUpdated: true,
+  lastUpdated: false,
   lang: "zh-CN",
 
   // Head 配置 (SEO & 统计)
