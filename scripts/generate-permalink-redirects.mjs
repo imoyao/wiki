@@ -2,16 +2,16 @@
 /**
  * 从 VitePress 项目的 frontmatter permalink 生成 Cloudflare Pages 的 `_redirects`。
  *
- * 背景：VitePress 的 `cleanUrls: true` 让产物文件是 xxx.html，而 frontmatter 的
- * permalink 是 /xxx —— 两者不一致。permalink 插件在 dev 下靠中间件重写、在生产下
- * 靠改写默认主题 Layout 注入客户端路由来兜底；静态托管（Pages/Workers Assets）
- * 两样都没有，直接访问 permalink 就 404。本脚本在构建期把映射固化成服务端重写规则。
+ * ── 关键约束（2026-11-18 修正）─────────────────────────────────────────────
+ * Cloudflare Pages 会把任何 /foo.html 形式的 URL 308 规范化为 /foo。因此本脚本
+ * 生成的规则目标【绝不能写 .html】—— 否则会形成死循环：
+ *     /foo -> /foo.html (_redirects 200 重写) -> /foo (Pages 308) -> ... 无限循环
  *
- * 两种模式自适应（通过检查构建产物，不猜配置）：
- *  1. 未启用 rewrites：源 md 物理文件仍在原位，规则 /permalink -> /源路径.html
- *  2. 启用 rewrites（如 teek 的 createRewrites）：源文件被搬到 permalink 路径，
- *     规则 /permalink -> /permalink.html
- * 这样无论是否启用 A 方案，规则目标始终指向真实存在的物理文件。
+ * 启用 A 方案（teek createRewrites）后，permalink 的物理 .html 已真实存在，
+ * Pages 自身就会把 clean URL /foo 映射到 foo.html（与 / 映射到 index.html 同理），
+ * 无需任何规则。本脚本只为「permalink 物理文件不存在」的少数页面生成规则：
+ * 典型是文件名含空格导致 createRewrites 失效的页面，此时规则目标写源文件的
+ * clean 路径（不带 .html），由 Pages 自动映射到源 .html。
  *
  * 通用性：不写死任何项目路径或 permalink 列表，扫描任意 VitePress 项目的 docs 目录。
  * 通过 VitePress 配置文件读取 srcDir / cleanUrls / base，未读到时回退到约定值。
@@ -62,7 +62,6 @@ function detectConfig() {
     srcDir: pick('srcDir', 'docs'),
     cleanUrls: pick('cleanUrls', false) === true,
     base: pick('base', '/') || '/',
-    // 仅用于日志提示；目标路径的选择以产物实际文件为准
     rewritesHint: /\brewrites\s*:/.test(text) && /createRewrites/.test(text),
   }
 }
@@ -98,7 +97,6 @@ function walk(dir) {
 /** 读取 frontmatter 中的 permalink 字段（支持引号、行内注释）。 */
 function readPermalink(file) {
   const text = readFileSync(file, 'utf-8')
-  // frontmatter 必须从文件第一行 --- 开始
   if (!/^---\s*\r?\n/.test(text)) return null
   const end = text.indexOf('\n---', 3)
   if (end < 0) return null
@@ -107,11 +105,9 @@ function readPermalink(file) {
     const m = line.match(/^\s*permalink\s*:\s*(.+?)\s*$/)
     if (!m) continue
     let v = m[1].trim()
-    // 去引号
     if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
       v = v.slice(1, -1)
     }
-    // 去行内注释与查询串
     v = v.split(/\s+#/)[0].split('?')[0].trim()
     return v || null
   }
@@ -129,32 +125,31 @@ function encodePath(p) {
     .join('/')
 }
 
-/** 源 md 的物理路径（未启用 rewrites 时的目标）。返回 { raw, encoded }。 */
-function sourceToUrl(relPath) {
-  const base = relPath.replace(/\\/g, '/').replace(/\.md$/i, '')
-  return { raw: '/' + base + '.html', encoded: '/' + encodePath(base) + '.html' }
-}
-
-/** permalink 对应的物理路径（启用 rewrites 后的目标）。返回 { raw, encoded }。 */
-function permalinkToUrl(permalink) {
-  const base = permalink === '/' ? 'index' : permalink.replace(/^\/+|\/+$/g, '')
-  return { raw: '/' + base + '.html', encoded: '/' + encodePath(base) + '.html' }
+/** 清理成以 / 开头的 clean 路径（无尾斜杠、无 .html）。 */
+function cleanPath(raw) {
+  return '/' + raw.replace(/^\/+/, '').replace(/\/+$/, '')
 }
 
 /**
- * 选择重写目标：以构建产物中真实存在的物理文件为准。
- *  - rewrites 已把源搬到 permalink 路径 -> permalink.html 存在 -> 用它
- *  - 否则源文件仍在原位（如文件名含空格导致 createRewrites 失效）-> 用源 md 路径
- * 两条都不存在时（如尚未 build）回退到 permalink 路径，并发出告警。
- * 注意：existsSync 必须用未编码的 raw 路径，写入 _redirects 才用 encoded。
+ * 判断是否需要生成重写规则，并给出目标（clean 路径，绝不带 .html）。
+ *  - permalink 的物理 .html 已存在（A 方案成功）：Pages 自动映射 clean URL，无需规则。
+ *  - 否则源文件 .html 仍在原位（A 覆盖不到）-> 规则目标 = 源的 clean 路径。
+ *  - 两者都不存在（尚未 build）-> 回退到 permalink clean 路径并告警。
  */
 function resolveDest(permalink, relPath) {
-  const src = sourceToUrl(relPath)
-  const rewritten = permalinkToUrl(permalink)
-  if (existsSync(join(distDir, rewritten.raw.replace(/^\/+/, '')))) return { dest: rewritten.encoded, mode: 'rewritten' }
-  if (existsSync(join(distDir, src.raw.replace(/^\/+/, '')))) return { dest: src.encoded, mode: 'source' }
-  console.warn(`[permalink-redirects] 目标均不存在，回退到 permalink 路径: ${permalink} -> ${rewritten.encoded} (源 ${relPath})`)
-  return { dest: rewritten.encoded, mode: 'rewritten' }
+  const srcBase = cleanPath(relPath.replace(/\\/g, '/').replace(/\.md$/i, ''))
+  const permalinkBase = permalink === '/' ? '/' : cleanPath(permalink)
+  const srcHtml = srcBase === '/' ? '/index.html' : srcBase + '.html'
+  const permalinkHtml = permalinkBase === '/' ? '/index.html' : permalinkBase + '.html'
+
+  if (existsSync(join(distDir, permalinkHtml.replace(/^\/+/, '')))) {
+    return { needRule: false, reason: 'auto' }
+  }
+  if (existsSync(join(distDir, srcHtml.replace(/^\/+/, '')))) {
+    return { needRule: true, dest: encodePath(srcBase), reason: 'source' }
+  }
+  console.warn(`[permalink-redirects] 目标均不存在，回退到 permalink clean 路径: ${permalink} -> ${permalinkBase} (源 ${relPath})`)
+  return { needRule: true, dest: encodePath(permalinkBase), reason: 'fallback' }
 }
 
 // ---------- 生成规则 ----------
@@ -162,8 +157,9 @@ const files = walk(docsDir)
 const rules = []
 const seen = new Map()
 let skipped = 0
-let rewrittenCount = 0
-let srcCount = 0
+let autoCount = 0
+let sourceCount = 0
+let fallbackCount = 0
 
 for (const file of files) {
   const permalink = readPermalink(file)
@@ -174,44 +170,40 @@ for (const file of files) {
     continue
   }
   const relPath = relative(docsDir, file)
-  const { dest, mode } = resolveDest(permalink, relPath)
-  if (mode === 'rewritten') rewrittenCount++
-  else srcCount++
-
-  // 规范化 permalink：去尾部斜杠（根路径除外），避免 /archives 与 /archives/ 重复
-  const norm = permalink.length > 1 ? permalink.replace(/\/+$/, '') : permalink
-
-  if (seen.has(norm) && seen.get(norm) !== dest) {
-    skipped++
-    console.warn(`[permalink-redirects] permalink 冲突: ${norm} -> ${seen.get(norm)} / ${dest}（保留前者）`)
+  const r = resolveDest(permalink, relPath)
+  if (!r.needRule) {
+    autoCount++
     continue
   }
-  seen.set(norm, dest)
-  rules.push({ permalink: norm, dest, source: relative(repoRoot, file) })
+  if (r.reason === 'source') sourceCount++
+  else fallbackCount++
+
+  // 规范化 permalink：去尾部斜杠（根路径除外）
+  const norm = permalink.length > 1 ? permalink.replace(/\/+$/, '') : permalink
+
+  if (seen.has(norm) && seen.get(norm) !== r.dest) {
+    skipped++
+    console.warn(`[permalink-redirects] permalink 冲突: ${norm} -> ${seen.get(norm)} / ${r.dest}（保留前者）`)
+    continue
+  }
+  seen.set(norm, r.dest)
+  rules.push({ permalink: norm, dest: r.dest, source: relative(repoRoot, file) })
 }
 
 rules.sort((a, b) => a.permalink.localeCompare(b.permalink))
 
-// 每条 permalink 生成两种 source：无尾斜杠 + 带尾斜杠。
-// 站内链接（nav/侧边栏）用 /archives/，外链/爬虫常用 /archives，两种都要能命中。
-// 规则总数翻倍，1192 < Cloudflare Pages 的 2000 静态重定向上限。
-const emit = []
-for (const r of rules) {
-  if (r.permalink === '/') {
-    emit.push(`${r.permalink} ${r.dest} ${code}`)
-  } else {
-    emit.push(`${r.permalink} ${r.dest} ${code}`)
-    emit.push(`${r.permalink}/ ${r.dest} ${code}`)
-  }
-}
+// 只生成无尾斜杠的 source：Pages 自身会把 /foo/ 308 规范化到 /foo，
+// 额外生成 /foo/ 规则反而会在规范化前后制造混淆。目标一律是不带 .html 的 clean 路径。
+const emit = rules.map((r) => `${r.permalink} ${r.dest} ${code}`)
 if (emit.length > 2000) {
-  console.warn(`[permalink-redirects] 规则数 ${emit.length} 超过 Cloudflare Pages 静态重定向上限 2000，尾斜杠变体可能被截断`)
+  console.warn(`[permalink-redirects] 规则数 ${emit.length} 超过 Cloudflare Pages 静态重定向上限 2000`)
 }
 
 const lines = [
   '# 由 scripts/generate-permalink-redirects.mjs 自动生成，请勿手工编辑。',
-  `# 源: ${relative(repoRoot, cfg.file || '约定配置')} | srcDir: ${relative(repoRoot, docsDir)} | cleanUrls: ${cfg.cleanUrls} | rewritesHint: ${cfg.rewritesHint}`,
-  `# ${rules.length} 个 permalink（rewrites 目标 ${rewrittenCount} / 源路径目标 ${srcCount}），生成 ${emit.length} 条规则（含尾斜杠变体），跳过 ${skipped} 条。`,
+  '# 目标一律为 clean 路径（不带 .html）—— Pages 会把 /foo.html 308 到 /foo，规则写 .html 会造成循环。',
+  `# 源: ${relative(repoRoot, cfg.file || '约定配置')} | srcDir: ${relative(repoRoot, docsDir)} | rewritesHint: ${cfg.rewritesHint}`,
+  `# ${autoCount} 个 permalink 由 Pages 自动映射（无需规则）；${rules.length} 个需重写（源路径 ${sourceCount} / 回退 ${fallbackCount}），跳过 ${skipped} 条。`,
   '',
   ...emit,
   '',
@@ -223,5 +215,5 @@ if (dryRun) {
   console.log(content)
 } else {
   writeFileSync(outFile, content, 'utf-8')
-  console.log(`[permalink-redirects] 已写入 ${relative(repoRoot, outFile)}（${rules.length} 个 permalink -> ${emit.length} 条规则，rewrites 目标 ${rewrittenCount} / 源路径目标 ${srcCount}，跳过 ${skipped} 条）`)
+  console.log(`[permalink-redirects] 已写入 ${relative(repoRoot, outFile)}（${rules.length} 条规则；Pages 自动映射 ${autoCount} 条；源路径 ${sourceCount} / 回退 ${fallbackCount}；跳过 ${skipped} 条）`)
 }

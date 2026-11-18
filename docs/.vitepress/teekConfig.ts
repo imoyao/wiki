@@ -242,7 +242,10 @@ export const teekConfig = defineTeekConfig({
     sidebarOption: {
       // 自动侧边栏生成（对应 vdoing 的 sidebar: 'structuring'）
       // 排除不需要生成侧边栏的目录
-      exclude: ['/guide/', '/reference/', '/develop/']
+      exclude: ['/guide/', '/reference/', '/develop/'],
+      // 启用 rewrites 永久链接后，文件会被搬到 permalink 路径；侧边栏必须按
+      // rewrites 规则生成，否则按源路径生成会全部失效（表现为侧边栏消失）。
+      resolveRule: 'rewrites'
     }, 
     
     permalink: true, 
