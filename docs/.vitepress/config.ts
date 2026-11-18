@@ -1,6 +1,7 @@
 // .vitepress/config.ts
 import { defineConfig } from "vitepress";
 import llmstxt from "vitepress-plugin-llms";
+import { createRewrites } from "vitepress-theme-teek/config";
 import { teekConfig } from "./teekConfig";
 
 const description = "深深别院，潜潜牧志，一个 Python 开发者的个人wiki。之前主要研究代码，现在主要研究投资理财。";
@@ -13,6 +14,10 @@ export default defineConfig({
   cleanUrls: true, 
   lastUpdated: false,
   lang: "zh-CN",
+
+  // 永久链接：构建期把 md 物理重写到 permalink 路径（官方 createRewrites）。
+  // 排除 index.md，否则首页会被搬到 /pages/392d77 导致根路径 404。
+  rewrites: createRewrites({ srcDir: "docs", ignoreList: ["index.md"] }),
 
   // Head 配置 (SEO & 统计)
   head: [

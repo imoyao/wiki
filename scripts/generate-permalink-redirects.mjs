@@ -7,6 +7,12 @@
  * 靠改写默认主题 Layout 注入客户端路由来兜底；静态托管（Pages/Workers Assets）
  * 两样都没有，直接访问 permalink 就 404。本脚本在构建期把映射固化成服务端重写规则。
  *
+ * 两种模式自适应（通过检查构建产物，不猜配置）：
+ *  1. 未启用 rewrites：源 md 物理文件仍在原位，规则 /permalink -> /源路径.html
+ *  2. 启用 rewrites（如 teek 的 createRewrites）：源文件被搬到 permalink 路径，
+ *     规则 /permalink -> /permalink.html
+ * 这样无论是否启用 A 方案，规则目标始终指向真实存在的物理文件。
+ *
  * 通用性：不写死任何项目路径或 permalink 列表，扫描任意 VitePress 项目的 docs 目录。
  * 通过 VitePress 配置文件读取 srcDir / cleanUrls / base，未读到时回退到约定值。
  *
@@ -17,8 +23,8 @@
  *   --dry-run      只打印规则，不写文件
  */
 
-import { readdirSync, readFileSync, writeFileSync, existsSync, statSync } from 'node:fs'
-import { resolve, dirname, join, relative, basename } from 'node:path'
+import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs'
+import { resolve, dirname, join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -56,12 +62,15 @@ function detectConfig() {
     srcDir: pick('srcDir', 'docs'),
     cleanUrls: pick('cleanUrls', false) === true,
     base: pick('base', '/') || '/',
+    // 仅用于日志提示；目标路径的选择以产物实际文件为准
+    rewritesHint: /\brewrites\s*:/.test(text) && /createRewrites/.test(text),
   }
 }
 
 const cfg = detectConfig()
 const docsDir = resolve(repoRoot, getArg('docs', cfg.srcDir))
 const outFile = resolve(repoRoot, getArg('out', join(docsDir, '.vitepress/dist/_redirects')))
+const distDir = dirname(outFile)
 const code = getArg('code', '200')
 const dryRun = hasFlag('dry-run')
 
@@ -110,23 +119,42 @@ function readPermalink(file) {
 }
 
 /**
- * 把源 md 路径换算成产物的物理文件路径。
- * 注意：cleanUrls 只影响「链接长什么样」，不影响产物文件名 —— VitePress 始终
- * 生成 .html 文件。_redirects 是服务端重写，目标必须写物理路径。
- *   index.md              -> /index.html
- *   @pages/archivesPage.md -> /@pages/archivesPage.html
- *   foo/index.md          -> /foo/index.html
- *
  * _redirects 每行按空白切成 [source, destination, code] 三段，路径里的空格会
- * 破坏解析，因此逐段做 percent-encoding（保留 / 与非 ASCII，避免双重编码）。
+ * 破坏解析，因此逐段做 percent-encoding（只编码空白与括号，保留 / 与非 ASCII）。
  */
-function sourceToUrl(relPath) {
-  const p = relPath.replace(/\\/g, '/').replace(/\.md$/i, '')
-  const encoded = p
+function encodePath(p) {
+  return p
     .split('/')
     .map((seg) => seg.replace(/[ !()]/g, (ch) => encodeURIComponent(ch)))
     .join('/')
-  return '/' + encoded + '.html'
+}
+
+/** 源 md 的物理路径（未启用 rewrites 时的目标）。返回 { raw, encoded }。 */
+function sourceToUrl(relPath) {
+  const base = relPath.replace(/\\/g, '/').replace(/\.md$/i, '')
+  return { raw: '/' + base + '.html', encoded: '/' + encodePath(base) + '.html' }
+}
+
+/** permalink 对应的物理路径（启用 rewrites 后的目标）。返回 { raw, encoded }。 */
+function permalinkToUrl(permalink) {
+  const base = permalink === '/' ? 'index' : permalink.replace(/^\/+|\/+$/g, '')
+  return { raw: '/' + base + '.html', encoded: '/' + encodePath(base) + '.html' }
+}
+
+/**
+ * 选择重写目标：以构建产物中真实存在的物理文件为准。
+ *  - rewrites 已把源搬到 permalink 路径 -> permalink.html 存在 -> 用它
+ *  - 否则源文件仍在原位（如文件名含空格导致 createRewrites 失效）-> 用源 md 路径
+ * 两条都不存在时（如尚未 build）回退到 permalink 路径，并发出告警。
+ * 注意：existsSync 必须用未编码的 raw 路径，写入 _redirects 才用 encoded。
+ */
+function resolveDest(permalink, relPath) {
+  const src = sourceToUrl(relPath)
+  const rewritten = permalinkToUrl(permalink)
+  if (existsSync(join(distDir, rewritten.raw.replace(/^\/+/, '')))) return { dest: rewritten.encoded, mode: 'rewritten' }
+  if (existsSync(join(distDir, src.raw.replace(/^\/+/, '')))) return { dest: src.encoded, mode: 'source' }
+  console.warn(`[permalink-redirects] 目标均不存在，回退到 permalink 路径: ${permalink} -> ${rewritten.encoded} (源 ${relPath})`)
+  return { dest: rewritten.encoded, mode: 'rewritten' }
 }
 
 // ---------- 生成规则 ----------
@@ -134,6 +162,8 @@ const files = walk(docsDir)
 const rules = []
 const seen = new Map()
 let skipped = 0
+let rewrittenCount = 0
+let srcCount = 0
 
 for (const file of files) {
   const permalink = readPermalink(file)
@@ -143,7 +173,10 @@ for (const file of files) {
     console.warn(`[permalink-redirects] 跳过非绝对路径 permalink: ${permalink} (${relative(repoRoot, file)})`)
     continue
   }
-  const dest = sourceToUrl(relative(docsDir, file))
+  const relPath = relative(docsDir, file)
+  const { dest, mode } = resolveDest(permalink, relPath)
+  if (mode === 'rewritten') rewrittenCount++
+  else srcCount++
 
   // 规范化 permalink：去尾部斜杠（根路径除外），避免 /archives 与 /archives/ 重复
   const norm = permalink.length > 1 ? permalink.replace(/\/+$/, '') : permalink
@@ -159,12 +192,28 @@ for (const file of files) {
 
 rules.sort((a, b) => a.permalink.localeCompare(b.permalink))
 
+// 每条 permalink 生成两种 source：无尾斜杠 + 带尾斜杠。
+// 站内链接（nav/侧边栏）用 /archives/，外链/爬虫常用 /archives，两种都要能命中。
+// 规则总数翻倍，1192 < Cloudflare Pages 的 2000 静态重定向上限。
+const emit = []
+for (const r of rules) {
+  if (r.permalink === '/') {
+    emit.push(`${r.permalink} ${r.dest} ${code}`)
+  } else {
+    emit.push(`${r.permalink} ${r.dest} ${code}`)
+    emit.push(`${r.permalink}/ ${r.dest} ${code}`)
+  }
+}
+if (emit.length > 2000) {
+  console.warn(`[permalink-redirects] 规则数 ${emit.length} 超过 Cloudflare Pages 静态重定向上限 2000，尾斜杠变体可能被截断`)
+}
+
 const lines = [
   '# 由 scripts/generate-permalink-redirects.mjs 自动生成，请勿手工编辑。',
-  `# 源: ${relative(repoRoot, cfg.file || '约定配置')} | srcDir: ${relative(repoRoot, docsDir)} | cleanUrls: ${cfg.cleanUrls}`,
-  `# 共 ${rules.length} 条，跳过 ${skipped} 条。`,
+  `# 源: ${relative(repoRoot, cfg.file || '约定配置')} | srcDir: ${relative(repoRoot, docsDir)} | cleanUrls: ${cfg.cleanUrls} | rewritesHint: ${cfg.rewritesHint}`,
+  `# ${rules.length} 个 permalink（rewrites 目标 ${rewrittenCount} / 源路径目标 ${srcCount}），生成 ${emit.length} 条规则（含尾斜杠变体），跳过 ${skipped} 条。`,
   '',
-  ...rules.map((r) => `${r.permalink} ${r.dest} ${code}`),
+  ...emit,
   '',
 ]
 
@@ -174,5 +223,5 @@ if (dryRun) {
   console.log(content)
 } else {
   writeFileSync(outFile, content, 'utf-8')
-  console.log(`[permalink-redirects] 已写入 ${relative(repoRoot, outFile)}（${rules.length} 条，跳过 ${skipped} 条）`)
+  console.log(`[permalink-redirects] 已写入 ${relative(repoRoot, outFile)}（${rules.length} 个 permalink -> ${emit.length} 条规则，rewrites 目标 ${rewrittenCount} / 源路径目标 ${srcCount}，跳过 ${skipped} 条）`)
 }
